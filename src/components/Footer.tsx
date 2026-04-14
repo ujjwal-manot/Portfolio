@@ -12,11 +12,11 @@ export function Footer() {
 
                     <div className="flex items-center gap-6">
                         <Link
-                            href="mailto:rohan.katti@bennett.edu.in"
+                            href="mailto:rohankatti23@gmail.com"
                             className="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors group"
                         >
                             <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
-                            <span>rohan.katti@bennett.edu.in</span>
+                            <span>rohankatti23@gmail.com</span>
                         </Link>
 
                         <Link

@@ -6,10 +6,16 @@ export default function TeachingPage() {
         { name: "Analog and Digital Communications", level: "UG", color: "tag-amber" },
         { name: "Wireless Communications", level: "UG", color: "tag-primary" },
         { name: "Information Theory and Coding", level: "UG", color: "tag-purple" },
-        { name: "Advanced Digital Signal Processing", level: "PG", color: "tag-rose" },
+        { name: "Advanced Digital Signal Processing", level: "UG", color: "tag-rose" },
     ];
 
     const talks = [
+        {
+            title: "Optica Outreach Programme",
+            event: "Optica Outreach",
+            venue: "Om Public School",
+            date: "11 September 2025",
+        },
         {
             title: "Role of Photonic Technologies in Next-Generation Communication Systems",
             event: "International Day of Light Celebrations",
@@ -56,7 +62,7 @@ export default function TeachingPage() {
                 <div className="animate-fade-in-up">
                     <h1 className="text-3xl font-bold mb-2">Teaching</h1>
                     <p className="text-muted mb-12 max-w-2xl">
-                        I am committed to nurturing the next generation of engineers through rigorous coursework,
+                        I am committed to nurturing the next generation of engineers through innovative teaching methodologies,
                         hands-on projects, and active mentorship.
                     </p>
                 </div>
@@ -95,22 +101,6 @@ export default function TeachingPage() {
                             <div key={idx} className="flex items-center justify-between p-4 border border-border rounded-lg card-hover">
                                 <span className="font-medium text-sm">{course.name}</span>
                                 <span className={`tag text-xs ${course.color}`}>{course.level}</span>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Administrative Roles */}
-                <section className="mb-16">
-                    <h2 className="section-title">Service & Administration</h2>
-                    <div className="space-y-3">
-                        {responsibilities.map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-4 p-4 border border-border rounded-lg card-hover">
-                                <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${item.color}`}></div>
-                                <div>
-                                    <div className="font-semibold">{item.role}</div>
-                                    <p className="text-sm text-muted">{item.desc}</p>
-                                </div>
                             </div>
                         ))}
                     </div>

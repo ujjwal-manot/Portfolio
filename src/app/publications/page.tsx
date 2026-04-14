@@ -6,7 +6,7 @@ import { ExternalLink, FileText, BookOpen, Presentation, Search } from "lucide-r
 
 // Helper to create Google Scholar search link
 const scholarSearch = (title: string) =>
-    `https://scholar.google.com/scholar?q=${encodeURIComponent(`"${title}" author:"Rohan Katti"`)}`;
+    `https://scholar.google.com/scholar?q=${encodeURIComponent(`"${title}"`)}`;
 
 const patents = [
     {
@@ -26,6 +26,14 @@ const patents = [
 ];
 
 const journals = [
+    {
+        authors: "Siddharth Singh and Rohan Katti",
+        title: "Analysis of Photon Flux Dynamics in a Microring Resonator operating under Single-Photon Pulsed Excitation",
+        venue: "Physica Scripta",
+        year: "2026",
+        volume: "Accepted",
+        tags: ["Q2", "IF: 2.6"],
+    },
     {
         authors: "A. Dahiya, R. Katti, and L. G. Occhipinti",
         title: "Real-Time Hand Gesture Classification Using Infrared Sensor Arrays-Based Wearable Bracelet",

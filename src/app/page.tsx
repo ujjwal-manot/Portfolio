@@ -35,7 +35,7 @@ export default function Home() {
                         </div>
 
                         <p className="text-lg leading-relaxed mb-6">
-                            I am a faculty member at Bennett University specialising in
+                            I am a faculty at Bennett University specialising in
                             <strong className="text-primary"> Microwave Photonics</strong>,
                             <strong className="text-purple-600"> Silicon Photonics</strong>, and
                             <strong className="text-teal-600"> Photonic Integrated Circuits</strong>. My research centres on developing
@@ -45,7 +45,7 @@ export default function Home() {
 
                         <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                             <Link
-                                href="mailto:rohan.katti@bennett.edu.in"
+                                href="mailto:rohankatti23@gmail.com"
                                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-all hover-lift"
                             >
                                 <Mail className="h-4 w-4" />
@@ -99,6 +99,8 @@ export default function Home() {
                         <span className="tag tag-amber">Photonic Integrated Circuits</span>
                         <span className="tag tag-rose">All-Optical Computing</span>
                         <span className="tag tag-primary">5G/6G Technologies</span>
+                        <span className="tag tag-primary">Signal Processing on FPGAs</span>
+                        <span className="tag tag-purple">Quantum Computing</span>
                     </div>
                 </section>
 
@@ -108,7 +110,7 @@ export default function Home() {
                     <div className="space-y-4">
                         <div className="flex gap-4 p-4 rounded-lg bg-card border border-border card-hover accent-blue">
                             <span className="text-sm text-primary font-medium whitespace-nowrap">Sep 2025</span>
-                            <p><strong>Excellence in Teaching Award</strong>, Recognised for outstanding contributions to pedagogy at the School of Engineering, Bennett University.</p>
+                            <p><strong>Excellence in Teaching Award</strong>, Recognised for outstanding contributions to pedagogy at the School of Engineering and Applied Sciences, Bennett University.</p>
                         </div>
                         <div className="flex gap-4 p-4 rounded-lg bg-card border border-border card-hover accent-purple">
                             <span className="text-sm font-medium whitespace-nowrap" style={{ color: '#8b5cf6' }}>Mar 2024</span>

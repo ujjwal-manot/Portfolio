@@ -5,9 +5,9 @@ export default function ResearchPage() {
                 <div className="animate-fade-in-up">
                     <h1 className="text-3xl font-bold mb-2">Research</h1>
                     <p className="text-muted mb-12 max-w-2xl">
-                        My research programme focuses on evaluating the unique properties of light to develop
+                        My research focuses on evaluating the unique properties of light to develop
                         efficient, high-speed solutions for communication and computation. I am particularly
-                        interested in the intersection of photonics and applied electronics.
+                        interested in the intersection of photonics and applied electronics. I am also involved in exploring implementation of signal processing algorithms on FPGAs and quantum computing.
                     </p>
                 </div>
 
@@ -47,6 +47,18 @@ export default function ResearchPage() {
                                 functionalities on chip.
                             </p>
                         </div>
+                        <div className="p-6 border border-border rounded-xl card-hover accent-blue">
+                            <h3 className="font-semibold text-lg mb-3 text-primary">Signal processing implementation on FPGA</h3>
+                            <p className="text-muted text-sm leading-relaxed">
+                                Exploring the implementation of advanced signal processing algorithms on FPGA platforms.
+                            </p>
+                        </div>
+                        <div className="p-6 border border-border rounded-xl card-hover accent-purple">
+                            <h3 className="font-semibold text-lg mb-3" style={{ color: '#8b5cf6' }}>Quantum computing</h3>
+                            <p className="text-muted text-sm leading-relaxed">
+                                Implementing quantum computing concepts on FPGA.
+                            </p>
+                        </div>
                     </div>
                 </section>
 
@@ -76,22 +88,14 @@ export default function ResearchPage() {
                 {/* Research Metrics */}
                 <section className="mb-16">
                     <h2 className="section-title">Research Supervision</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
                         <div className="text-center p-5 border border-border rounded-xl card-hover">
                             <div className="text-2xl font-bold text-primary">3</div>
-                            <div className="text-sm text-muted mt-1">Current Projects</div>
+                            <div className="text-sm text-muted mt-1">Current B.Tech. Projects</div>
                         </div>
                         <div className="text-center p-5 border border-border rounded-xl card-hover">
                             <div className="text-2xl font-bold" style={{ color: '#8b5cf6' }}>7</div>
-                            <div className="text-sm text-muted mt-1">Projects Supervised</div>
-                        </div>
-                        <div className="text-center p-5 border border-border rounded-xl card-hover">
-                            <div className="text-2xl font-bold" style={{ color: '#14b8a6' }}>147</div>
-                            <div className="text-sm text-muted mt-1">Total Citations</div>
-                        </div>
-                        <div className="text-center p-5 border border-border rounded-xl card-hover">
-                            <div className="text-2xl font-bold" style={{ color: '#f59e0b' }}>5</div>
-                            <div className="text-sm text-muted mt-1">i10-index</div>
+                            <div className="text-sm text-muted mt-1">B.Tech. Projects Supervised</div>
                         </div>
                     </div>
                 </section>
@@ -103,18 +107,18 @@ export default function ResearchPage() {
                         <div className="p-5 border border-border rounded-xl card-hover">
                             <h3 className="font-semibold mb-4 text-primary">Photonics Design</h3>
                             <ul className="space-y-2 text-sm text-muted">
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>OptiSystem</li>
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full" style={{ background: '#8b5cf6' }}></span>RSoft FullWAVE, OptSim, OptSim Circuit</li>
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full" style={{ background: '#14b8a6' }}></span>Lumerical Interconnect</li>
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full" style={{ background: '#f59e0b' }}></span>MATLAB</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: 'var(--primary)' }}></span>OptiSystem</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: '#8b5cf6' }}></span>RSoft FullWAVE, OptSim, OptSim Circuit</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: '#14b8a6' }}></span>Lumerical Interconnect</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: '#f59e0b' }}></span>MATLAB</li>
                             </ul>
                         </div>
                         <div className="p-5 border border-border rounded-xl card-hover">
                             <h3 className="font-semibold mb-4" style={{ color: '#8b5cf6' }}>General Purpose</h3>
                             <ul className="space-y-2 text-sm text-muted">
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>LaTeX for academic writing</li>
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full" style={{ background: '#14b8a6' }}></span>TINA for circuit analysis</li>
-                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full" style={{ background: '#f59e0b' }}></span>Python for data analysis</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: 'var(--primary)' }}></span>LaTeX for academic writing</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: '#14b8a6' }}></span>TINA for circuit analysis</li>
+                                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 flex-shrink-0 rounded-full" style={{ background: '#f59e0b' }}></span>Python for data analysis</li>
                             </ul>
                         </div>
                     </div>

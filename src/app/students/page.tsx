@@ -18,8 +18,15 @@ export default function StudentsPage() {
             name: "Siddharth Singh",
             batch: "2020-24",
             project: "Quantum Analysis of Photonic Devices",
-            publications: 2,
+            publications: 3,
             color: "from-indigo-500 to-indigo-600",
+        },
+        {
+            name: "Anant Sharma",
+            batch: "2022-26",
+            project: "Design and Implementation of RISC V processor for DSP applications",
+            publications: 0,
+            color: "from-rose-500 to-rose-600",
         },
 
         {
@@ -80,7 +87,7 @@ export default function StudentsPage() {
                             <div className="text-sm text-muted mt-1">Projects Supervised</div>
                         </div>
                         <div className="text-center">
-                            <div className="text-4xl font-bold" style={{ color: '#14b8a6' }}>6</div>
+                            <div className="text-4xl font-bold" style={{ color: '#14b8a6' }}>4</div>
                             <div className="text-sm text-muted mt-1">Student Co-authored Papers</div>
                         </div>
                     </div>
@@ -88,7 +95,7 @@ export default function StudentsPage() {
 
                 {/* Current Students */}
                 <section className="mb-16">
-                    <h2 className="section-title">Current Research Students</h2>
+                    <h2 className="section-title">Student projects</h2>
                     <div className="grid md:grid-cols-2 gap-6">
                         {currentStudents.map((student, idx) => (
                             <div key={idx} className="p-6 border border-border rounded-2xl card-hover overflow-hidden relative">

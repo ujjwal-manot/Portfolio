@@ -22,10 +22,10 @@ export default function ContactPage() {
                                 <h3 className="font-semibold text-lg mb-1">Email</h3>
                                 <p className="text-muted mb-2">For all research and academic inquiries:</p>
                                 <Link
-                                    href="mailto:rohan.katti@bennett.edu.in"
-                                    className="text-primary hover:underline font-medium"
+                                    href="mailto:rohankatti23@gmail.com"
+                                    className="text-primary hover:underline font-medium block"
                                 >
-                                    rohan.katti@bennett.edu.in
+                                    rohankatti23@gmail.com
                                 </Link>
                             </div>
                         </div>
@@ -56,7 +56,6 @@ export default function ContactPage() {
                             <div>
                                 <h3 className="font-semibold text-lg mb-1">Office Location</h3>
                                 <p className="text-muted mb-1">
-                                    <strong>Room No:</strong> FX-404
                                 </p>
                                 <p className="text-muted leading-relaxed">
                                     Department of Electronics & Communication Engineering,<br />
