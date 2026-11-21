@@ -14,3 +14,4 @@ console/dist/
 *.result.xml
 summary.json.lock
 third_party/
+results.xml
