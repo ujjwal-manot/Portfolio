@@ -1,98 +1,90 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.045 MB sources in 3 modules, into 0.063 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.014 s (elab=0.001, cvt=0.007, bld=0.000); cpu 0.011 s on 1 threads; allocated 22.938 MB
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.555 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo'
-ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
-python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
-g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o async_fifo
-rm Vtop__ALL.verilator_deplist.tmp
+make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264439
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795286809
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-     0.00ns INFO     cocotb.async_fifo                  r_clk runs 638 ppm off nominal
-2093591.60ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
-2093591.60ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-2093591.60ns INFO     cocotb.async_fifo                  r_clk runs 704 ppm off nominal
-2094400.10ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs 372 ppm off nominal
+2100659.87ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2100659.87ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+2100659.87ns INFO     cocotb.async_fifo                  r_clk runs 218 ppm off nominal
+2101342.37ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
                                                             assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
                                                         AssertionError: wrote past full: 17 words held in a 16-word FIFO
                                                         assert 17 <= 16
-                                                         +  where 17 = len(deque([498, 248, 432, 113, 357, 490, ...]))
-2094400.10ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-2094400.10ns INFO     cocotb.async_fifo                  r_clk runs 846 ppm off nominal
-2128828.60ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+                                                         +  where 17 = len(deque([162, 444, 446, 176, 470, 227, ...]))
+2101342.37ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+2101342.37ns INFO     cocotb.async_fifo                  r_clk runs 562 ppm off nominal
+2108131.87ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
                                                             assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
                                                         AssertionError: wrote past full: 17 words held in a 16-word FIFO
                                                         assert 17 <= 16
-                                                         +  where 17 = len(deque([257, 118, 55, 283, 163, 477, ...]))
-2128828.60ns INFO     cocotb.regression                  *************************************************************************************************
+                                                         +  where 17 = len(deque([160, 449, 145, 430, 379, 288, ...]))
+2108131.87ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2093591.60           1.70    1229630.85  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         808.50           0.00     840170.22  **
-                                                        ** test_async_fifo.similar_clocks            FAIL       34428.50           0.03    1292759.86  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2100659.87           1.66    1265005.88  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         682.50           0.00     886191.00  **
+                                                        ** test_async_fifo.similar_clocks            FAIL        6789.50           0.01    1180918.98  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2128828.60           1.73    1228152.32  **
+                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2108131.87           1.67    1262424.03  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264442
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795286812
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-     0.00ns INFO     cocotb.async_fifo                  r_clk runs -494 ppm off nominal
-2101868.64ns INFO     cocotb.async_fifo                  metastability injection delayed 67 pointer bits
-2101868.64ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
-2101868.64ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-2101868.64ns INFO     cocotb.async_fifo                  r_clk runs -952 ppm off nominal
-2102719.14ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs 728 ppm off nominal
+2100851.23ns INFO     cocotb.async_fifo                  metastability injection delayed 72 pointer bits
+2100851.23ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2100851.23ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+2100851.23ns INFO     cocotb.async_fifo                  r_clk runs -254 ppm off nominal
+2101638.73ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
                                                             assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
                                                         AssertionError: wrote past full: 17 words held in a 16-word FIFO
                                                         assert 17 <= 16
-                                                         +  where 17 = len(deque([35, 54, 132, 387, 435, 394, ...]))
-2102719.14ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-2102719.14ns INFO     cocotb.async_fifo                  r_clk runs -338 ppm off nominal
-2124271.64ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+                                                         +  where 17 = len(deque([220, 407, 194, 487, 339, 330, ...]))
+2101638.73ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+2101638.73ns INFO     cocotb.async_fifo                  r_clk runs 676 ppm off nominal
+2110574.23ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
                                                             assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
                                                         AssertionError: wrote past full: 17 words held in a 16-word FIFO
                                                         assert 17 <= 16
-                                                         +  where 17 = len(deque([117, 27, 121, 70, 294, 272, ...]))
-2124271.64ns INFO     cocotb.regression                  *************************************************************************************************
+                                                         +  where 17 = len(deque([185, 351, 6, 491, 184, 415, ...]))
+2110574.23ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2101868.64           6.16     341079.18  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         850.50           0.00     354311.37  **
-                                                        ** test_async_fifo.similar_clocks            FAIL       21552.50           0.05     410424.68  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2100851.23           5.51     381168.92  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         787.50           0.00     316923.22  **
+                                                        ** test_async_fifo.similar_clocks            FAIL        8935.50           0.02     390696.41  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2124271.64           6.22     341503.36  **
+                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2110574.23           5.54     380990.10  **
                                                         *************************************************************************************************
 F- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.414 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.527 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_skid_buffer_test_skid_buffer'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_skid_buffer_test_skid_buffer'
@@ -100,54 +92,46 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_f
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264450
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795286818
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_skid_buffer.random_backpressure (1/3)
-752111.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
-752111.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
-756141.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
-756141.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
-766172.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
-766172.00ns INFO     cocotb.regression                  **********************************************************************************************************
+752831.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
+752831.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
+756861.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
+756861.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
+766892.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
+766892.00ns INFO     cocotb.regression                  **********************************************************************************************************
                                                         ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **********************************************************************************************************
-                                                        ** test_skid_buffer.random_backpressure               PASS      752111.00           0.98     771269.55  **
-                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    2322837.53  **
-                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01    1132749.78  **
+                                                        ** test_skid_buffer.random_backpressure               PASS      752831.00           1.03     727814.94  **
+                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    1809992.96  **
+                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01     886552.25  **
                                                         **********************************************************************************************************
-                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 766172.00           0.99     776066.41  **
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 766892.00           1.05     730205.73  **
                                                         **********************************************************************************************************
 - :0: Verilog $finish
 .- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.096 MB sources in 6 modules, into 0.094 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.019 s (elab=0.001, cvt=0.010, bld=0.000); cpu 0.015 s on 1 threads; allocated 23.324 MB
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.387 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge'
-ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
-python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
-g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o fifo_bridge
-rm Vtop__ALL.verilator_deplist.tmp
+make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264453
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795286820
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
-261850.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
-261850.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
-521200.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
-521200.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
-901550.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
+255050.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
+255050.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+514400.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
+514400.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+894750.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 180, in cpu_pause_limit
                                                             lost = {pause: await adc_run(dut, 60, pause) for pause in range(14, 23)}
@@ -155,54 +139,54 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_f
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 165, in adc_run
                                                             assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
                                                         AssertionError: CPU got 60 samples, the bridge accepted 60
-                                                        assert [(253, 0), (253, 0), (241, 0), (218, 0), (185, 0), (148, 0), ...] == [(253, 0), (253, 0), (241, 0), (218, 0), (185, 0), (148, 0), ...]
-901550.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
-1583036.69ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
-1583036.69ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
-1584032.17ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+                                                        assert [(253, 0), (241, 0), (217, 0), (184, 0), (146, 0), (106, 0), ...] == [(253, 0), (241, 0), (217, 0), (184, 0), (146, 0), (106, 0), ...]
+894750.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+1576356.71ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
+1576356.71ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+1577390.30ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 191, in fast_source_slow_sink
                                                             await frames(dut, 20, 100, 100, 0.9, 0.7)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 0: got (44, 0), expected (240, False)
-                                                        assert (44, 0) == (240, 0)
-1584032.17ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
-1589641.38ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                        AssertionError: word 0: got (86, 0), expected (40, False)
+                                                        assert (86, 0) == (40, 0)
+1577390.30ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+1593062.27ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 195, in near_equal_clocks
                                                             await frames(dut, 37, 41, 200, 0.8, 0.8)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 101: got (174, 0), expected (198, False)
-                                                        assert (174, 0) == (198, 0)
-1589641.38ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        AssertionError: word 310: got (141, 0), expected (27, False)
+                                                        assert (141, 0) == (27, 0)
+1593062.27ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     PASS      261850.00           0.26    1012523.37  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.36     717259.92  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL      380350.00           0.53     719862.59  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      681486.69           1.29     528640.29  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL         995.49           0.00     495342.08  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        5609.21           0.01     687756.70  **
+                                                        ** test_fifo_bridge.reset_during_traffic     PASS      255050.00           0.26     997167.51  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.29     898634.79  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL      380350.00           0.40     957246.82  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      681606.71           0.92     744225.37  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        1033.59           0.00     558359.90  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL       15671.97           0.02     722863.53  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=3 FAIL=3 SKIP=0                       1589641.38           2.45     647612.95  **
+                                                        ** TESTS=6 PASS=3 FAIL=3 SKIP=0                       1593062.27           1.89     843912.24  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264456
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795286823
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
-256550.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
-256550.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
-515900.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
-515900.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
-896250.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
+265050.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
+265050.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+524400.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
+524400.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+841350.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 180, in cpu_pause_limit
                                                             lost = {pause: await adc_run(dut, 60, pause) for pause in range(14, 23)}
@@ -210,39 +194,39 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 165, in adc_run
                                                             assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
                                                         AssertionError: CPU got 60 samples, the bridge accepted 60
-                                                        assert [(235, 0), (209, 0), (175, 0), (136, 0), (96, 0), (59, 0), ...] == [(235, 0), (209, 0), (175, 0), (136, 0), (96, 0), (59, 0), ...]
-896250.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
-1577960.42ns INFO     cocotb.fifo_bridge                 metastability injection delayed 29 pointer bits
-1577960.42ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
-1577960.42ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
-1578971.61ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+                                                        assert [(106, 0), (146, 0), (184, 0), (217, 0), (241, 0), (253, 0), ...] == [(106, 0), (146, 0), (184, 0), (217, 0), (241, 0), (253, 0), ...]
+841350.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+1523034.34ns INFO     cocotb.fifo_bridge                 metastability injection delayed 29 pointer bits
+1523034.34ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
+1523034.34ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+1524225.98ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 191, in fast_source_slow_sink
                                                             await frames(dut, 20, 100, 100, 0.9, 0.7)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 0: got (167, 0), expected (15, False)
-                                                        assert (167, 0) == (15, 0)
-1578971.61ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
-1583084.76ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                        AssertionError: word 0: got (21, 0), expected (90, False)
+                                                        assert (21, 0) == (90, 0)
+1524225.98ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+1536126.19ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 195, in near_equal_clocks
                                                             await frames(dut, 37, 41, 200, 0.8, 0.8)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 65: got (145, 0), expected (101, False)
-                                                        assert (145, 0) == (101, 0)
-1583084.76ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        AssertionError: word 226: got (226, 0), expected (176, False)
+                                                        assert (226, 0) == (176, 0)
+1536126.19ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     PASS      256550.00           0.83     310052.42  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.73     353507.14  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL      380350.00           1.40     272250.11  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      681710.42           2.61     261016.80  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        1011.18           0.00     216171.49  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        4113.15           0.02     242248.68  **
+                                                        ** test_fifo_bridge.reset_during_traffic     PASS      265050.00           0.76     350271.35  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.81     318299.64  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL      316950.00           1.05     301604.80  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      681684.34           2.69     253727.38  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        1191.64           0.01     170302.72  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL       11900.21           0.06     207471.65  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=3 FAIL=3 SKIP=0                       1583084.76           5.60     282747.07  **
+                                                        ** TESTS=6 PASS=3 FAIL=3 SKIP=0                       1536126.19           5.38     285437.32  **
                                                         *************************************************************************************************
 F
 =================================== FAILURES ===================================
@@ -258,7 +242,7 @@ top = 'async_fifo'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Verilator object at 0x7f04e393e390>
+runner = <cocotb_tools.runner.Verilator object at 0x7fe5127bd700>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -285,7 +269,7 @@ top = 'async_fifo'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Icarus object at 0x7f04e393e3f0>, results = None
+runner = <cocotb_tools.runner.Icarus object at 0x7fe5125fa930>, results = None
 defines = {'METASTABLE': 1}, sim = 'icarus', waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -311,7 +295,7 @@ top = 'fifo_bridge'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/.../skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Verilator object at 0x7f04e39cd460>
+runner = <cocotb_tools.runner.Verilator object at 0x7fe51268af00>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -338,7 +322,7 @@ top = 'fifo_bridge'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/.../skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Icarus object at 0x7f04e39ccb90>, results = None
+runner = <cocotb_tools.runner.Icarus object at 0x7fe51268e120>, results = None
 defines = {'METASTABLE': 1}, sim = 'icarus', waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -357,4 +341,176 @@ FAILED tests/test_async_fifo.py::test_async_fifo - SystemExit: 1
 FAILED tests/test_async_fifo.py::test_async_fifo_metastable - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge_metastable - SystemExit: 1
-4 failed, 1 passed in 31.67s
+4 failed, 1 passed in 20.72s
+SBY 19:47:10 [fifo_rules_fifo_proof] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof'.
+SBY 19:47:10 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof/src/sync2.sv'.
+SBY 19:47:10 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof/src/reset_sync.sv'.
+SBY 19:47:10 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof/src/async_fifo.sv'.
+SBY 19:47:10 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof/src/skid_buffer.sv'.
+SBY 19:47:10 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof/src/fifo_bridge.sv'.
+SBY 19:47:10 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_proof/src/fifo_rules.sv'.
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: abc pdr
+SBY 19:47:10 [fifo_rules_fifo_proof] base: starting process "cd fifo_rules_fifo_proof/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 19:47:10 [fifo_rules_fifo_proof] base: finished (returncode=0)
+SBY 19:47:10 [fifo_rules_fifo_proof] prep: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_prep.log design_prep.ys"
+SBY 19:47:10 [fifo_rules_fifo_proof] prep: finished (returncode=0)
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_en like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [0] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [1] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [2] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [3] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [4] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [5] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [6] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [7] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [8] like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_clk like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\r_en like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\r_clk like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: Warning: Treating a total of 13 undriven bits in fifo_rules like $anyseq.
+SBY 19:47:10 [fifo_rules_fifo_proof] aig: finished (returncode=0)
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: Warning: The network has no constraints.
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 219. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 1 : 0 17                                                                1    17      0.01 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 2 : 0 11 26                                                             3    30      0.01 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 3 : 0 9 10 43 ~5                                                         3    49      0.02 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 22 22 ~9                                                      1    49      0.03 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 5 : 0 4 3 37 26 62 ~9                                                   6    80      0.05 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 9 9 14 54 ~18                                                  3    80      0.06 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 7 : 0 4 3 10 8 14 20 47 ~19                                              8    81      0.08 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 10 9 16 30 35 60 ~22                                          11    81      0.10 sec  T/O =  0  PRV =  0
+SBY 19:47:10 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 5 2 9 6 19 31 51 ~25                                           1    81      0.11 sec  T/O =  0  PRV =  0
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 5 2 8 6 18 33 35 55 ~25                                        6    81      0.14 sec  T/O =  0  PRV =  0
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 5 2 8 6 19 14 29 30 51 ~25                                    12    81      0.15 sec  T/O =  0  PRV =  0
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Block =   57  Oblig =   499  Clause =   316  Call =  2756 (sat=50.8%)  Cex =   0  Start =   3
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: SAT solving =     0.06 sec ( 39.97 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: unsat     =     0.01 sec (  4.40 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: sat       =     0.06 sec ( 35.57 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Generalize  =     0.04 sec ( 23.55 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Push clause =     0.02 sec ( 15.17 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Ternary sim =     0.00 sec (  2.33 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Containment =     0.00 sec (  0.15 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: CNF compute =     0.01 sec (  3.22 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Refinement  =     0.00 sec (  0.05 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: TOTAL       =     0.16 sec (100.00 %)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Output 4 of miter "model/design_aiger" was asserted in frame 11.  Time =     0.17 sec
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: finished (returncode=0)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Status returned by engine: FAIL
+SBY 19:47:11 [fifo_rules_fifo_proof] smt2: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-witness aiw2yw engine_0/trace.aiw model/design_aiger.ywa engine_0/trace_aiw.yw"
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Converting AIGER witness trace 'engine_0/trace.aiw' to Yosys witness trace 'engine_0/trace_aiw.yw'...
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Using Yosys witness AIGER map file 'model/design_aiger.ywa'
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: Converted 12 time steps.
+SBY 19:47:11 [fifo_rules_fifo_proof] smt2: finished (returncode=0)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: finished (returncode=0)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-smtbmc -s yices --noprogress --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc --yw engine_0/trace_aiw.yw model/design_smt2.smt2"
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Solver: yices
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 0..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 1..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 2..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 3..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 4..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 5..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 6..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 7..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 8..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 9..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 10..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Checking assertions in step 11..
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  BMC failed!
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Value for anyconst fifo_rules.pick (fifo_rules.sv:11.32-11.36): 0
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Assert failed in fifo_rules: fifo_rules.sv:37.25-37.40 (_witness_.check_assert_fifo_rules_sv_37_23)
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Status: FAILED
+SBY 19:47:11 [fifo_rules_fifo_proof] engine_0: finished (returncode=1)
+SBY 19:47:11 [fifo_rules_fifo_proof] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:47:11 [fifo_rules_fifo_proof] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:47:11 [fifo_rules_fifo_proof] summary: engine_0 (abc pdr) returned FAIL
+SBY 19:47:11 [fifo_rules_fifo_proof] summary: counterexample trace: fifo_rules_fifo_proof/engine_0/trace.vcd
+SBY 19:47:11 [fifo_rules_fifo_proof] summary:   failed assertion fifo_rules._witness_.check_assert_fifo_rules_sv_37_23 at fifo_rules.sv:37.25-37.40 step 11
+SBY 19:47:11 [fifo_rules_fifo_proof] DONE (FAIL, rc=2)
+SBY 19:47:11 The following tasks failed: ['fifo_proof']
+SBY 19:47:12 [fifo_rules_fifo_reach] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach'.
+SBY 19:47:12 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach/src/sync2.sv'.
+SBY 19:47:12 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach/src/reset_sync.sv'.
+SBY 19:47:12 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach/src/async_fifo.sv'.
+SBY 19:47:12 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach/src/skid_buffer.sv'.
+SBY 19:47:12 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach/src/fifo_bridge.sv'.
+SBY 19:47:12 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/formal/fifo_rules_fifo_reach/src/fifo_rules.sv'.
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: smtbmc yices
+SBY 19:47:12 [fifo_rules_fifo_reach] base: starting process "cd fifo_rules_fifo_reach/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 19:47:12 [fifo_rules_fifo_reach] base: finished (returncode=0)
+SBY 19:47:12 [fifo_rules_fifo_reach] prep: starting process "cd fifo_rules_fifo_reach/model; yosys -ql design_prep.log design_prep.ys"
+SBY 19:47:12 [fifo_rules_fifo_reach] prep: finished (returncode=0)
+SBY 19:47:12 [fifo_rules_fifo_reach] smt2: starting process "cd fifo_rules_fifo_reach/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 19:47:12 [fifo_rules_fifo_reach] smt2: finished (returncode=0)
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: starting process "cd fifo_rules_fifo_reach; yosys-smtbmc -s yices --presat --unroll -c --noprogress -t 40  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Solver: yices
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 6 at fifo_rules.dut.w_to_r: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_111)
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 9..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 11..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 12..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 13 at fifo_rules.dut.r_to_w: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_111)
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 14..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 15..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 16..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 17 at fifo_rules: fifo_rules.sv:39.5-39.40 (_witness_.check_cover_fifo_rules_sv_39_26)
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 18..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 19..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 20..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 21..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 22..
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 22 at fifo_rules: fifo_rules.sv:30.9-30.26 (_witness_.check_cover_fifo_rules_sv_30_17)
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Status: passed
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: finished (returncode=0)
+SBY 19:47:12 [fifo_rules_fifo_reach] engine_0: Status returned by engine: pass
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: engine_0 (smtbmc yices) returned pass
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace0.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules.dut.w_to_r._witness_.check_cover_sync2_sv_36_111 at sync2.sv:36.26-36.60 step 6
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace1.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules.dut.r_to_w._witness_.check_cover_sync2_sv_36_111 at sync2.sv:36.26-36.60 step 13
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace2.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules._witness_.check_cover_fifo_rules_sv_39_26 at fifo_rules.sv:39.5-39.40 step 17
+SBY 19:47:12 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace3.vcd
+SBY 19:47:12 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules._witness_.check_cover_fifo_rules_sv_30_17 at fifo_rules.sv:30.9-30.26 step 22
+SBY 19:47:12 [fifo_rules_fifo_reach] DONE (PASS, rc=0)

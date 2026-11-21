@@ -52,11 +52,13 @@ The MTBF is huge because both clocks are slow next to tau: even the 50 MHz side 
 
 All numbers come from `results/`; every log there is hashed in `results/summary.json` together with the sources and helpers that made it.
 
+The random tests take a new seed every run (printed at the top of each log, and replayable with `RANDOM_SEED=<seed>`), so counts such as the injected delays differ a little from run to run.
+
 | Check | Result | Where |
 |---|---|---|
-| async_fifo, random phase and 100 to 1000 ppm offset, with and without metastability injection; never over 16 words, runs empty | pass, metastability injection delayed 74, 130 and 247 pointer bits | `results/test_async_fifo.log` |
+| async_fifo, random phase and 100 to 1000 ppm offset, with and without metastability injection; never over 16 words, runs empty | pass, metastability injection delayed 75, 125 and 250 pointer bits | `results/test_async_fifo.log` |
 | skid_buffer: random stalls, full rate, registered `s_ready` | pass | `results/test_skid_buffer.log` |
-| fifo_bridge: frames both clock directions, resets mid-traffic (every other one with the bridge full), ADC feed, CPU pause | pass, metastability injection delayed 29, 49 and 87 pointer bits | `results/test_fifo_bridge.log` |
+| fifo_bridge: frames both clock directions, resets mid-traffic (every other one with the bridge full), ADC feed, CPU pause | pass, metastability injection delayed 32, 51 and 90 pointer bits | `results/test_fifo_bridge.log` |
 | Longest CPU pause with the ADC at 1 MS/s (18-word capacity), both runs | 18 us with 0 samples lost; samples lost from 19 us | `results/test_fifo_bridge.log` |
 | Formal proof, async_fifo (4 deep), synchronizers may land old or new: no overflow, full and empty never wrong, every word intact, Gray pointers move one bit | proved | `results/formal_fifo_proof.log` |
 | Formal proof, skid_buffer | proved | `results/formal_skid_proof.log` |

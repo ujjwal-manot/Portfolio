@@ -1,329 +1,326 @@
-SBY 17:25:34 [../build/formal_skid_proof] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_skid_proof'.
-SBY 17:25:34 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/sync2.sv'.
-SBY 17:25:34 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/reset_sync.sv'.
-SBY 17:25:34 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/async_fifo.sv'.
-SBY 17:25:34 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/skid_buffer.sv'.
-SBY 17:25:34 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/fifo_bridge.sv'.
-SBY 17:25:34 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/fifo_rules.sv'.
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: abc pdr
-SBY 17:25:34 [../build/formal_skid_proof] base: starting process "cd ../build/formal_skid_proof/src; yosys -ql ../model/design.log ../model/design.ys"
-SBY 17:25:34 [../build/formal_skid_proof] base: finished (returncode=0)
-SBY 17:25:34 [../build/formal_skid_proof] prep: starting process "cd ../build/formal_skid_proof/model; yosys -ql design_prep.log design_prep.ys"
-SBY 17:25:34 [../build/formal_skid_proof] prep: finished (returncode=0)
-SBY 17:25:34 [../build/formal_skid_proof] aig: starting process "cd ../build/formal_skid_proof/model; yosys -ql design_aiger.log design_aiger.ys"
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\clk like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_valid like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [0] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [1] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [2] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [3] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [4] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [5] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [6] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [7] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [8] like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\m_ready like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: Warning: Treating a total of 12 undriven bits in skid_rules like $anyseq.
-SBY 17:25:34 [../build/formal_skid_proof] aig: finished (returncode=0)
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: starting process "cd ../build/formal_skid_proof; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: Warning: The network has no constraints.
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 179. MonoCNF = no. SkipGen = no. SolveAll = no.
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 1 : 0 19                                                                1    20      0.00 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 2 : 0 5 19                                                              1    23      0.01 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 3 : 0 5 5 21 ~1                                                          3    27      0.01 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 4 : 0 3 3 7 18 ~2                                                        1    27      0.02 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 5 : 0 3 4 23 23 44 ~2                                                    7    68      0.04 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 5 : 0 3 4 29 29 63 ~2                                                    3    69      0.05 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 29 50 32 ~8                                                 4    69      0.06 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 40 38 96 ~11                                             5    96      0.11 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 57 55 130 ~11                                            4   104      0.13 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 68 66 156 ~11                                            4   106      0.15 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 67 62 90 47 ~48                                          1   106      0.17 sec  T/O =  0  PRV =  0
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: Proved output 0 in frame 8.
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 92 45 57 ~50                                       6   106      0.22 sec  T/O =  0  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 100 63 93 ~50                                      5   106      0.24 sec  T/O =  0  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 109 82 129 ~50                                     4   106      0.26 sec  T/O =  0  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 111 88 152 ~50                                     4   106      0.28 sec  T/O =  0  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 112 52 78 100 ~57                                  5   106      0.32 sec  T/O =  0  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 10 (retrying in next anytime pass).
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 112 52 78 115 ~57                                  1   106      0.33 sec  T/O =  1  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 106 46 77 67 67 ~55                                5   106      0.35 sec  T/O =  1  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 104 46 75 65 39 43 ~57                             3   106      0.38 sec  T/O =  1  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 76 61 36 22 42 ~57                          5   106      0.40 sec  T/O =  1  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 75 60 31 11 12 47 ~57                       3   106      0.41 sec  T/O =  1  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 51 ~58                       1   106      0.43 sec  T/O =  1  PRV =  1
-SBY 17:25:34 [../build/formal_skid_proof] engine_0: Proved output 3 in frame 15.
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 15 ~91                    1   106      0.45 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 17 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 18 ~87                  1   106      0.47 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 18 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 21 ~87                1   106      0.49 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 19 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 23 ~87              1   106      0.51 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 20 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 26 ~87            1   106      0.53 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 21 : 0 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 25 ~87          1   106      0.55 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 22 : ... 3 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 26 ~87      1   106      0.57 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 23 : ... 2 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 1 26 ~87      1   106      0.58 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 24 : ... 25 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 1 5 27 ~87      1   106      0.60 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 25 : ... 24 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 1 5 1 26 ~87       0   106      0.62 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 26 : ... 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 1 5 1 2 26 ~87        1   106      0.64 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 27 : ... 48 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 1 5 1 2 5 25 ~87      1   106      0.66 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 28 : ... 43 103 46 75 60 31 8 6 2 10 4 9 3 4 3 4 1 5 1 2 5 6 24 ~87       1   106      0.68 sec  T/O =  1  PRV =  2
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: Proved output 2 in frame 28.
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 29 : ... 75 60 31 8 6 2 10 4 9 3 4 3 4 1 5 1 2 5 6 0 -2 ~113      0   106      0.69 sec  T/O =  1  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 1 : 0 531 ~112                                                           0     0      0.04 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 2 : 0 3 528 ~112                                                         0     0      0.04 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 526 ~112                                                       0     0      0.04 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 501 ~112                                                    0     0      0.05 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 477 ~112                                                 0     0      0.05 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 429 ~112                                              0     0      0.05 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 386 ~112                                           0     0      0.06 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 283 ~112                                       0     0      0.06 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 46 237 ~112                                    0     0      0.07 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 67 101 186 ~112                                5    48      0.11 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 86 127 214 ~112                                5    67      0.15 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 91 135 223 ~112                                5    69      0.16 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 47 115 71 200 ~112                             4    69      0.23 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 47 131 88 235 ~112                             4    69      0.25 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 47 141 98 256 ~112                             4    69      0.27 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 47 122 44 102 184 ~112                         3    72      0.31 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 42 108 119 119 ~112                     4    72      0.37 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 42 111 125 131 ~112                     4    72      0.38 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 13 (retrying in next anytime pass).
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 42 111 125 131 ~112                     0    72      0.38 sec  T/O =  1  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 42 111 111 44 87 ~112                   0    72      0.42 sec  T/O =  1  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 14.
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 1 : 0 808 ~112                                                           0     0      0.06 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 2 : 0 3 804 ~112                                                         0     0      0.06 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 801 ~112                                                       0     0      0.06 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 776 ~112                                                    0     0      0.06 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 752 ~112                                                 0     0      0.07 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 704 ~112                                              0     0      0.07 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 661 ~112                                           0     0      0.07 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 558 ~112                                       0     0      0.08 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 47 511 ~112                                    0     0      0.09 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 47 122 389 ~112                                0     0      0.10 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 47 122 42 347 ~112                             0     0      0.11 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 47 122 42 111 236 ~112                         0     0      0.12 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 42 119 123 167 ~112                     4    56      0.17 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 42 119 134 190 ~112                     3    62      0.19 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 42 127 123 81 157 ~112                  5    72      0.26 sec  T/O =  0  PRV =  3
-SBY 17:25:35 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 42 140 132 99 189 ~112                  5    72      0.30 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 42 148 143 121 218 ~112                 5    72      0.33 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 42 154 155 145 246 ~112                 5    72      0.37 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 42 154 167 169 274 ~112                 4    72      0.40 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 94 137 61 277 ~112               4    72      0.49 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 94 150 83 309 ~112               4    72      0.52 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 94 165 106 341 ~112              4    72      0.55 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 94 181 124 373 ~112              5    72      0.58 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 94 199 141 405 ~112              5    72      0.61 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 94 205 148 422 ~112              5    72      0.63 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 57 137 298 ~112           1    72      0.70 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 3 2 25 24 48 43 103 47 122 24 118 58 132 57 137 95 212 ~112      2    72      0.76 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 17 (retrying in next anytime pass).
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 3 2 25 24 48 43 103 47 122 24 118 58 132 57 137 95 212 ~112      0    72      0.76 sec  T/O =  1  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 18 : ... 25 24 48 43 103 47 122 24 118 58 132 57 137 86 63 158 ~112       0    72      0.80 sec  T/O =  1  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 18.
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 1 : 0 1250 ~112                                                          0     0      0.11 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 2 : 0 3 1247 ~112                                                        0     0      0.11 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 1245 ~112                                                      0     0      0.11 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 1220 ~112                                                   0     0      0.11 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 1196 ~112                                                0     0      0.12 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 1148 ~112                                             0     0      0.12 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 1105 ~112                                          0     0      0.13 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 1002 ~112                                      0     0      0.13 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 47 955 ~112                                    0     0      0.14 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 47 122 833 ~112                                0     0      0.15 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 47 122 24 809 ~112                             0     0      0.16 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 47 122 24 118 691 ~112                         0     0      0.17 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 24 118 58 633 ~112                      0     0      0.19 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 501 ~112                  0     0      0.21 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 57 444 ~112               0     0      0.22 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 57 137 307 ~112           0     0      0.25 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 3 2 25 24 48 43 103 47 122 24 118 58 132 59 152 99 254 ~112      5    56      0.31 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 47 122 24 118 58 132 59 168 116 288 ~112       4    69      0.34 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 47 122 24 118 58 132 59 181 133 323 ~112       4    69      0.38 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 47 122 24 118 58 132 59 190 151 359 ~112       4    69      0.40 sec  T/O =  0  PRV =  3
-SBY 17:25:36 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 47 122 24 118 58 132 59 193 158 375 ~112       4    71      0.41 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 18 : ... 24 48 43 103 47 122 24 118 58 132 22 173 108 128 312 ~112        4    71      0.52 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 18 : ... 24 48 43 103 47 122 24 118 58 132 22 173 123 156 340 ~112        4    71      0.56 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 18 : ... 24 48 43 103 47 122 24 118 58 132 22 173 130 172 357 ~112        4    71      0.58 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 47 122 24 118 58 132 22 173 93 146 109 305 ~112        4    71      0.68 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 47 122 24 118 58 132 22 173 93 163 130 335 ~112        5    71      0.71 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 47 122 24 118 58 132 22 173 93 185 146 367 ~112        5    71      0.75 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 47 122 24 118 58 132 22 173 93 208 162 398 ~112        5    71      0.78 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 47 122 24 118 58 132 22 173 93 226 182 428 ~112        5    71      0.82 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 47 122 24 118 58 132 22 173 93 226 184 432 ~112        4    71      0.82 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 20 : ... 43 103 47 122 24 118 58 132 22 173 75 171 126 105 391 ~112       3    74      0.95 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 20 : ... 43 103 47 122 24 118 58 132 22 173 75 171 130 113 400 ~112       3    74      0.96 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 171 111 112 92 347 ~112       5    74      1.09 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 171 111 129 109 379 ~112      5    74      1.13 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 171 117 149 124 410 ~112      5    74      1.17 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 171 124 170 138 439 ~112      5    74      1.21 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 172 130 189 153 468 ~112      5    74      1.25 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 172 130 198 171 504 ~112      4    74      1.28 sec  T/O =  0  PRV =  3
-SBY 17:25:37 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 172 130 204 184 532 ~112      4    74      1.30 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 22 : ... 47 122 24 118 58 132 22 173 75 172 40 131 108 123 465 ~112       4    74      1.50 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 22 : ... 47 122 24 118 58 132 22 173 75 172 40 131 118 142 482 ~112       4    74      1.54 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 22 (retrying in next anytime pass).
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 22 : ... 47 122 24 118 58 132 22 173 75 172 40 131 118 142 482 ~112       0    74      1.54 sec  T/O =  1  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 23 : ... 122 24 118 58 132 22 173 75 172 40 131 94 119 57 371 ~156        0    74      1.67 sec  T/O =  1  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 23.
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 1 : 0 2000 ~156                                                          0     0      0.23 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 2 : 0 3 1996 ~156                                                        0     0      0.24 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 1993 ~156                                                      0     0      0.25 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 1968 ~156                                                   0     0      0.25 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 1944 ~156                                                0     0      0.26 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 1896 ~156                                             0     0      0.27 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 1853 ~156                                          0     0      0.27 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 1750 ~156                                      0     0      0.28 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 47 1703 ~156                                   0     0      0.29 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 47 122 1581 ~156                               0     0      0.30 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 47 122 24 1557 ~156                            0     0      0.32 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 47 122 24 118 1439 ~156                        0     0      0.33 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 47 122 24 118 58 1381 ~156                     0     0      0.35 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 1249 ~156                 0     0      0.37 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 22 1227 ~156              0     0      0.39 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 47 122 24 118 58 132 22 173 1054 ~156          0     0      0.42 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 17 : ... 3 2 25 24 48 43 103 47 122 24 118 58 132 22 173 75 979 ~156      0     0      0.45 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 18 : ... 25 24 48 43 103 47 122 24 118 58 132 22 173 75 172 807 ~156      0     0      0.48 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 19 : ... 24 48 43 103 47 122 24 118 58 132 22 173 75 172 40 767 ~156      0     0      0.52 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 20 : ... 43 103 47 122 24 118 58 132 22 173 75 172 40 131 636 ~156        0     0      0.55 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 21 : ... 103 47 122 24 118 58 132 22 173 75 172 40 131 94 542 ~156        0     0      0.59 sec  T/O =  0  PRV =  3
-SBY 17:25:38 [../build/formal_skid_proof] engine_0: 22 : ... 47 122 24 118 58 132 22 173 75 172 40 131 108 147 452 ~156       4    55      0.68 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 23 : ... 122 24 118 58 132 22 173 75 172 40 131 56 111 116 437 ~180       4    61      0.80 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 23 : ... 122 24 118 58 132 22 173 75 172 40 131 56 123 136 472 ~180       4    73      0.84 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 23 : ... 122 24 118 58 132 22 173 75 172 40 131 56 131 148 493 ~180       4    73      0.86 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 24 : ... 24 118 58 132 22 173 75 172 40 131 56 113 139 160 407 ~180       4    73      0.99 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 24 : ... 24 118 58 132 22 173 75 172 40 131 56 113 147 186 440 ~180       4    73      1.03 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 24 : ... 24 118 58 132 22 173 75 172 40 131 56 114 150 194 452 ~180       5    73      1.04 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 25 : ... 118 58 132 22 173 75 172 40 131 56 114 39 141 155 395 ~252       5    73      1.18 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 25 : ... 118 58 132 22 173 75 172 40 131 56 114 39 150 173 432 ~252       4    73      1.22 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 25 : ... 118 58 132 22 173 75 172 40 131 56 114 39 150 173 433 ~252       0    73      1.22 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 26 : ... 58 132 22 173 75 172 40 131 56 114 37 146 175 174 317 ~256       4    73      1.36 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 26 : ... 58 132 22 173 75 172 40 131 56 114 37 146 186 202 348 ~256       4    73      1.40 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 26 : ... 58 132 22 173 75 172 40 131 56 114 37 146 193 234 379 ~256       4    73      1.44 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 26 : ... 58 132 22 173 75 172 40 131 56 114 37 146 194 238 385 ~256       4    73      1.45 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 27 : ... 132 22 173 75 172 40 131 56 114 37 146 53 165 154 332 ~328       4    73      1.58 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 27 : ... 132 22 173 75 172 40 131 56 114 37 146 53 181 177 361 ~328       4    73      1.62 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 27 : ... 132 22 173 75 172 40 131 56 114 37 146 53 197 198 392 ~328       5    73      1.65 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 27 : ... 132 22 173 75 172 40 131 56 114 37 146 53 213 214 428 ~328       5    73      1.69 sec  T/O =  0  PRV =  3
-SBY 17:25:39 [../build/formal_skid_proof] engine_0: 27 : ... 132 22 173 75 172 40 131 56 114 37 146 53 215 216 433 ~328       5    73      1.70 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 28 : ... 22 173 75 172 40 131 56 114 37 146 44 185 167 266 264 ~328       5    74      1.85 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 28 : ... 22 173 75 172 40 131 56 114 37 146 44 185 177 296 293 ~328       4    74      1.89 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 28 : ... 22 173 75 172 40 131 56 114 37 146 44 185 191 326 321 ~328       4    74      1.93 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 28 : ... 22 173 75 172 40 131 56 114 37 146 44 185 203 350 349 ~328       4    74      1.97 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 29 : ... 173 75 172 40 131 56 114 37 146 44 185 22 177 212 351 ~400       4    74      2.17 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 29 : ... 173 75 172 40 131 56 114 37 146 44 185 22 185 229 387 ~400       4    74      2.21 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 30 : ... 75 172 40 131 56 114 37 146 44 185 22 184 114 156 378 ~400       5    74      2.38 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 30 : ... 75 172 40 131 56 114 37 146 44 185 22 184 122 187 409 ~400       4    74      2.42 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 30 : ... 75 172 40 131 56 114 37 146 44 185 22 184 125 202 426 ~400       4    74      2.44 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 185 154 245 ~472       5    74      2.61 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 207 169 277 ~472       5    74      2.65 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 220 182 314 ~472       5    74      2.68 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 231 202 349 ~472       5    74      2.72 sec  T/O =  0  PRV =  3
-SBY 17:25:40 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 240 225 383 ~472       4    74      2.76 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 255 247 414 ~472       4    74      2.80 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 31 : ... 172 40 131 56 114 37 146 44 185 22 183 67 260 255 426 ~472       4    74      2.81 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 32 : ... 40 131 56 114 37 146 44 185 22 183 30 200 250 241 226 ~492       5    74      2.99 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 32 : ... 40 131 56 114 37 146 44 185 22 183 30 200 257 272 258 ~492       4    74      3.03 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 32 : ... 40 131 56 114 37 146 44 185 22 183 30 200 261 288 275 ~492       4    74      3.05 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 33 : ... 131 56 114 37 146 44 185 22 183 30 200 64 241 211 199 ~568       5    74      3.22 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 33 : ... 131 56 114 37 146 44 185 22 183 30 200 64 254 229 234 ~568       5    74      3.26 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 33 : ... 131 56 114 37 146 44 185 22 183 30 200 64 269 246 268 ~568       5    74      3.29 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 33 : ... 131 56 114 37 146 44 185 22 183 30 200 64 276 261 300 ~568       4    74      3.32 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 34 : ... 56 114 37 146 44 185 22 183 30 200 38 238 248 207 98 ~620        5    74      3.48 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 34 : ... 56 114 37 146 44 185 22 183 30 200 38 238 263 235 126 ~620       4    74      3.52 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 34 : ... 56 114 37 146 44 185 22 183 30 200 38 238 272 266 157 ~620       4    74      3.56 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 34 : ... 56 114 37 146 44 185 22 183 30 200 38 238 280 296 187 ~620       4    74      3.60 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 34 : ... 56 114 37 146 44 185 22 183 30 200 38 238 283 301 191 ~620       4    74      3.61 sec  T/O =  0  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 34 (retrying in next anytime pass).
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 34 : ... 56 114 37 146 44 185 22 183 30 200 38 238 283 301 191 ~620       0    74      3.61 sec  T/O =  1  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: 35 : ... 114 37 146 44 185 22 183 30 200 38 237 117 202 157 89 ~724       0    74      3.74 sec  T/O =  1  PRV =  3
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 35.
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 17:25:41 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 1 : 0 670 ~742                                                           0     0      0.51 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 2 : 0 3 667 ~742                                                         0     0      0.52 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 3 : 0 3 1 666 ~742                                                       0     0      0.52 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 4 : 0 3 1 6 660 ~742                                                     0     0      0.52 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 5 : 0 3 1 6 4 656 ~742                                                   0     0      0.53 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 6 : 0 3 1 6 4 6 650 ~742                                                 0     0      0.53 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 7 : 0 3 1 6 4 6 3 647 ~742                                               0     0      0.53 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 8 : 0 3 1 6 4 6 3 4 643 ~742                                             0     0      0.54 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 9 : 0 3 1 6 4 6 3 4 2 641 ~742                                           0     0      0.54 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 10 : 0 3 1 6 4 6 3 4 2 6 635 ~742                                         0     0      0.54 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 11 : 0 3 1 6 4 6 3 4 2 6 2 633 ~742                                       0     0      0.55 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 12 : 0 3 1 6 4 6 3 4 2 6 2 5 628 ~742                                     0     0      0.55 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 13 : 0 3 1 6 4 6 3 4 2 6 2 5 3 625 ~742                                   0     0      0.55 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 14 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 621 ~742                                 0     0      0.56 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 15 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 619 ~742                               0     0      0.56 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 16 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 615 ~742                             0     0      0.57 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 17 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 614 ~742                           0     0      0.57 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 18 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 611 ~742                         0     0      0.58 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 19 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 609 ~742                       0     0      0.58 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 20 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 570 ~742                    0     0      0.59 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 21 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 550 ~742                 0     0      0.59 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 22 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 546 ~742               0     0      0.60 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 23 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 544 ~742             0     0      0.60 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 24 : 0 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 541 ~742           0     0      0.61 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 25 : ... 3 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 539 ~742       0     0      0.61 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 26 : ... 1 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 535 ~742       0     0      0.62 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 27 : ... 6 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 533 ~742       0     0      0.63 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 28 : ... 4 6 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 476 ~742      0     0      0.63 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 29 : ... 3 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 456 ~742       0     0      0.64 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 30 : ... 4 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 452 ~742       0     0      0.65 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 31 : ... 2 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 450 ~742       0     0      0.66 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 32 : ... 6 2 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 405 ~742      0     0      0.67 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 33 : ... 5 3 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 61 344 ~742       0     0      0.68 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 34 : ... 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 75 163 237 ~742       4    53      0.74 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 34 : ... 4 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 77 171 246 ~742       4    55      0.76 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 35 : ... 2 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 57 163 170 94 ~760      5    72      0.84 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 35 : ... 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 57 175 187 131 ~760       5    73      0.90 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 35 : ... 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 57 191 206 163 ~760       5    73      0.96 sec  T/O =  0  PRV =  3
-SBY 17:25:42 [../build/formal_skid_proof] engine_0: 35 : ... 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 57 207 225 196 ~760       5    73      1.00 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 35 : ... 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 57 222 247 227 ~760       4    73      1.04 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 35 : ... 4 1 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 57 223 249 231 ~760       4    73      1.04 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 36 : ... 3 2 39 20 4 2 3 2 4 2 57 20 4 2 45 22 153 155 108 101 ~902       5    74      1.16 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 4 2 3 2 4 2 57 20 4 2 45 22 135 105 126 72 -7 ~965       5    74      1.25 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 2 39 20 4 2 3 2 4 2 57 20 4 2 45 22 135 108 145 88 25 ~965       5    74      1.30 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 2 39 20 4 2 3 2 4 2 57 20 4 2 45 22 135 110 166 104 56 ~965      5    74      1.34 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 2 39 20 4 2 3 2 4 2 57 20 4 2 45 22 135 110 189 119 86 ~965      5    74      1.38 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 39 20 4 2 3 2 4 2 57 20 4 2 45 22 135 111 210 134 117 ~965       5    74      1.42 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 39 20 4 2 3 2 4 2 57 20 4 2 45 22 135 114 230 150 149 ~965       5    74      1.47 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 37 : ... 39 20 4 2 3 2 4 2 57 20 4 2 45 22 135 114 239 156 162 ~965       5    74      1.49 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 38 : ... 2 3 2 4 2 57 20 4 2 45 22 135 16 91 60 39 -66 ~1116       5    74      1.57 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 39 : ... 3 2 4 2 57 20 4 2 45 22 135 16 90 60 49 17 -39 ~1120      5    74      1.66 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 39 : ... 3 2 4 2 57 20 4 2 45 22 135 16 90 60 67 34 -7 ~1120      5    74      1.70 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 39 : ... 20 4 2 3 2 4 2 57 20 4 2 45 22 135 16 90 62 81 51 28 ~1120       5    74      1.74 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 39 : ... 20 4 2 3 2 4 2 57 20 4 2 45 22 135 16 90 70 89 67 61 ~1120       5    74      1.78 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 39 : ... 20 4 2 3 2 4 2 57 20 4 2 45 22 135 16 90 73 92 73 74 ~1120       5    74      1.80 sec  T/O =  0  PRV =  3
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Proved output 1 in frame 39.
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: 40 : ... 3 2 4 2 57 20 4 2 45 22 135 16 73 0 0 0 0 -63 ~1265       0    74      1.86 sec  T/O =  0  PRV =  4
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Block =  230  Oblig = 10956  Clause =  7419  Call =200590 (sat=83.9%)  Cex =   0  Start = 600
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: SAT solving =     6.03 sec ( 64.92 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: unsat     =     0.59 sec (  6.31 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: sat       =     5.45 sec ( 58.62 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Generalize  =     3.36 sec ( 36.12 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Push clause =     3.03 sec ( 32.66 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Ternary sim =     0.06 sec (  0.67 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Containment =     0.02 sec (  0.24 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: CNF compute =     0.29 sec (  3.07 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Refinement  =     0.00 sec (  0.00 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: TOTAL       =     9.29 sec (100.00 %)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Property proved.  Time =     9.30 sec
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Counter-example is not available.
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: finished (returncode=0)
-SBY 17:25:43 [../build/formal_skid_proof] engine_0: Status returned by engine: PASS
-SBY 17:25:43 [../build/formal_skid_proof] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:09 (9)
-SBY 17:25:43 [../build/formal_skid_proof] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:09 (9)
-SBY 17:25:43 [../build/formal_skid_proof] summary: engine_0 (abc pdr) returned PASS
-SBY 17:25:43 [../build/formal_skid_proof] summary: engine_0 did not produce any traces
-SBY 17:25:43 [../build/formal_skid_proof] DONE (PASS, rc=0)
+SBY 18:41:31 [../build/formal_skid_proof] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_skid_proof'.
+SBY 18:41:31 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/sync2.sv'.
+SBY 18:41:31 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/reset_sync.sv'.
+SBY 18:41:31 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/async_fifo.sv'.
+SBY 18:41:31 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/skid_buffer.sv'.
+SBY 18:41:31 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/fifo_bridge.sv'.
+SBY 18:41:31 [../build/formal_skid_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_skid_proof/src/fifo_rules.sv'.
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: abc pdr
+SBY 18:41:31 [../build/formal_skid_proof] base: starting process "cd ../build/formal_skid_proof/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 18:41:31 [../build/formal_skid_proof] base: finished (returncode=0)
+SBY 18:41:31 [../build/formal_skid_proof] prep: starting process "cd ../build/formal_skid_proof/model; yosys -ql design_prep.log design_prep.ys"
+SBY 18:41:31 [../build/formal_skid_proof] prep: finished (returncode=0)
+SBY 18:41:31 [../build/formal_skid_proof] aig: starting process "cd ../build/formal_skid_proof/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\clk like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_valid like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [0] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [1] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [2] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [3] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [4] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [5] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [6] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [7] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\s_data [8] like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating undriven bit skid_rules.\m_ready like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: Warning: Treating a total of 12 undriven bits in skid_rules like $anyseq.
+SBY 18:41:31 [../build/formal_skid_proof] aig: finished (returncode=0)
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: starting process "cd ../build/formal_skid_proof; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: Warning: The network has no constraints.
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 179. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 1 : 0 19                                                                1    20      0.01 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 2 : 0 5 19                                                              1    23      0.01 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 3 : 0 5 5 21 ~1                                                          3    27      0.02 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 4 : 0 3 3 7 18 ~2                                                        1    27      0.02 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 5 : 0 3 4 23 23 44 ~2                                                    7    68      0.05 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 5 : 0 3 4 29 29 63 ~2                                                    3    69      0.06 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 29 50 32 ~8                                                 4    69      0.07 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 40 38 96 ~11                                             5    96      0.12 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 57 55 130 ~11                                            4   104      0.14 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 68 66 156 ~11                                            4   106      0.16 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 67 62 90 47 ~48                                          1   106      0.19 sec  T/O =  0  PRV =  0
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: Proved output 0 in frame 8.
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 92 45 57 ~50                                       6   106      0.23 sec  T/O =  0  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 100 63 93 ~50                                      5   106      0.25 sec  T/O =  0  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 109 82 129 ~50                                     4   106      0.27 sec  T/O =  0  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 67 63 111 88 152 ~50                                     4   106      0.28 sec  T/O =  0  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 112 49 77 99 ~57                                   5   106      0.33 sec  T/O =  0  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 10 (retrying in next anytime pass).
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 112 49 77 114 ~57                                  1   106      0.33 sec  T/O =  1  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 106 45 75 66 67 ~55                                5   106      0.37 sec  T/O =  1  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 104 45 72 65 38 44 ~57                             3   106      0.40 sec  T/O =  1  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 45 73 61 37 25 42 ~57                          5   106      0.42 sec  T/O =  1  PRV =  1
+SBY 18:41:31 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 45 72 60 32 10 9 51 ~57                        1   106      0.44 sec  T/O =  1  PRV =  1
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 45 72 60 32 10 9 16 55 ~57                     3   106      0.46 sec  T/O =  1  PRV =  1
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 45 72 60 32 10 6 11 2 58 ~58                   1   106      0.48 sec  T/O =  1  PRV =  1
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Proved output 3 in frame 16.
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 17 : 0 3 2 25 24 48 43 103 45 72 60 32 10 6 11 2 9 24 ~94                 1   106      0.50 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 18 : 0 3 2 25 24 48 43 103 45 72 60 32 10 6 11 2 9 1 25 ~88               1   106      0.52 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 19 : 0 3 2 25 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 27 ~88             1   106      0.54 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 20 : 0 3 2 25 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 28 ~88           1   106      0.55 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 21 : ... 3 2 25 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 28 ~88       1   106      0.58 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 22 : ... 2 25 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 3 27 ~88       1   106      0.60 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 23 : ... 25 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 3 1 27 ~88       1   106      0.62 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 24 : ... 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 3 1 3 28 ~88        1   106      0.65 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 25 : ... 24 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 3 1 3 2 29 ~88      1   106      0.67 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 26 : ... 48 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 3 1 3 1 11 22 ~88      1   106      0.69 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 27 : ... 43 103 45 72 60 32 10 6 11 2 9 1 5 1 3 3 1 3 1 11 3 24 ~88       1   106      0.71 sec  T/O =  1  PRV =  2
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Proved output 2 in frame 27.
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 28 : ... 72 60 32 10 6 11 2 9 1 5 1 3 3 1 3 1 11 3 0 -2 ~114      0   106      0.73 sec  T/O =  1  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 1 : 0 525 ~114                                                           0     0      0.04 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 2 : 0 3 522 ~114                                                         0     0      0.05 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 520 ~114                                                       0     0      0.05 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 495 ~114                                                    0     0      0.05 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 471 ~114                                                 0     0      0.05 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 423 ~114                                              0     0      0.06 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 380 ~114                                           0     0      0.06 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 277 ~114                                       0     0      0.07 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 45 232 ~114                                    0     0      0.08 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 66 98 184 ~114                                 5    42      0.12 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 85 124 212 ~114                                5    61      0.16 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 93 136 225 ~114                                5    69      0.18 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 46 115 71 202 ~114                             4    69      0.25 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 46 131 88 235 ~114                             4    69      0.28 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 46 140 97 255 ~114                             4    69      0.29 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 46 121 44 103 181 ~114                         3    72      0.33 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 105 115 100 ~114                     4    72      0.39 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 13 (retrying in next anytime pass).
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 105 115 100 ~114                     0    72      0.39 sec  T/O =  1  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 42 105 106 30 70 ~114                   0    72      0.42 sec  T/O =  1  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 14.
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 1 : 0 765 ~114                                                           0     0      0.06 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 2 : 0 3 761 ~114                                                         0     0      0.06 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 758 ~114                                                       0     0      0.06 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 733 ~114                                                    0     0      0.06 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 709 ~114                                                 0     0      0.07 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 661 ~114                                              0     0      0.07 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 618 ~114                                           0     0      0.07 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 515 ~114                                       0     0      0.08 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 46 469 ~114                                    0     0      0.09 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 46 121 348 ~114                                0     0      0.10 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 46 121 42 306 ~114                             0     0      0.11 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 46 121 42 105 201 ~114                         0     0      0.12 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 109 120 137 ~114                     4    60      0.18 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 118 138 174 ~114                     4    70      0.21 sec  T/O =  0  PRV =  3
+SBY 18:41:32 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 120 142 184 ~114                     4    72      0.22 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 45 125 126 83 152 ~114                  5    72      0.32 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 52 139 134 97 180 ~114                  5    72      0.35 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 58 149 142 115 208 ~114                 5    72      0.38 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 60 155 154 139 237 ~114                 5    72      0.42 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 60 155 169 167 265 ~114                 4    72      0.46 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 60 155 169 169 269 ~114                 4    72      0.46 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 96 144 69 260 ~114               4    72      0.56 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 96 150 91 296 ~114               4    72      0.61 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 96 165 114 327 ~114              4    72      0.64 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 96 172 122 339 ~114              5    72      0.65 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 15 (retrying in next anytime pass).
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 96 172 122 339 ~114              0    72      0.65 sec  T/O =  1  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 46 121 42 119 92 149 121 60 280 ~114           0    72      0.72 sec  T/O =  1  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 16.
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 1 : 0 1278 ~114                                                          0     0      0.14 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 2 : 0 3 1275 ~114                                                        0     0      0.14 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 1273 ~114                                                      0     0      0.14 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 1248 ~114                                                   0     0      0.14 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 1224 ~114                                                0     0      0.15 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 1176 ~114                                             0     0      0.15 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 1133 ~114                                          0     0      0.16 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 1030 ~114                                      0     0      0.17 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 46 984 ~114                                    0     0      0.18 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 46 121 863 ~114                                0     0      0.19 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 46 121 42 821 ~114                             0     0      0.20 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 46 121 42 119 702 ~114                         0     0      0.21 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 119 92 610 ~114                      0     0      0.23 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 42 119 92 149 461 ~114                  0     0      0.25 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 92 165 137 372 ~114              5    55      0.31 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 92 181 153 405 ~114              5    69      0.34 sec  T/O =  0  PRV =  3
+SBY 18:41:33 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 46 121 42 119 60 132 156 97 317 ~114           5    71      0.41 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 46 121 42 119 60 132 26 163 161 262 ~114       4    71      0.51 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 46 121 42 119 60 132 26 172 179 299 ~114       4    71      0.54 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 46 121 42 119 60 132 26 172 193 342 ~114       3    71      0.57 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 46 121 42 119 60 132 26 172 196 352 ~114       3    71      0.58 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 18 : ... 24 48 43 103 46 121 42 119 60 132 26 171 166 177 255 ~114        4    71      0.69 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 18 : ... 24 48 43 103 46 121 42 119 60 132 26 171 169 197 279 ~114        4    71      0.72 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 46 121 42 119 60 132 26 171 63 166 164 264 ~114        4    71      0.83 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 46 121 42 119 60 132 26 171 63 175 175 305 ~114        4    71      0.86 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 46 121 42 119 60 132 26 171 63 191 194 337 ~114        4    71      0.89 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 46 121 42 119 60 132 26 171 63 205 214 370 ~114        4    71      0.92 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 19 : ... 48 43 103 46 121 42 119 60 132 26 171 63 207 219 382 ~114        4    71      0.93 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 20 : ... 43 103 46 121 42 119 60 132 26 171 63 173 161 140 326 ~114       3    74      1.06 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 20 : ... 43 103 46 121 42 119 60 132 26 171 63 174 167 151 339 ~114       5    74      1.08 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 88 143 157 294 ~114       5    74      1.20 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 88 163 173 326 ~114       5    74      1.24 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 88 185 189 358 ~114       5    74      1.28 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 88 198 207 393 ~114       5    74      1.31 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 88 207 225 430 ~114       4    74      1.34 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 88 208 227 435 ~114       4    74      1.35 sec  T/O =  0  PRV =  3
+SBY 18:41:34 [../build/formal_skid_proof] engine_0: 22 : ... 46 121 42 119 60 132 26 171 63 174 38 134 173 149 341 ~114       5    74      1.49 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 22 : ... 46 121 42 119 60 132 26 171 63 174 38 134 188 178 369 ~114       4    74      1.53 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 22 : ... 46 121 42 119 60 132 26 171 63 174 38 134 199 201 394 ~114       4    74      1.56 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 121 141 114 321 ~186      5    74      1.70 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 121 151 124 344 ~186      5    74      1.72 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 23 (retrying in next anytime pass).
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 121 151 124 344 ~186      0    74      1.72 sec  T/O =  1  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 24 : ... 42 119 60 132 26 171 63 174 36 132 99 121 102 86 261 ~186        0    74      1.81 sec  T/O =  1  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 24.
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 1 : 0 2036 ~186                                                          0     0      0.24 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 2 : 0 3 2032 ~186                                                        0     0      0.25 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 3 : 0 3 2 2029 ~186                                                      0     0      0.25 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 4 : 0 3 2 25 2004 ~186                                                   0     0      0.26 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 5 : 0 3 2 25 24 1980 ~186                                                0     0      0.26 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 6 : 0 3 2 25 24 48 1932 ~186                                             0     0      0.27 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 7 : 0 3 2 25 24 48 43 1889 ~186                                          0     0      0.28 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 8 : 0 3 2 25 24 48 43 103 1786 ~186                                      0     0      0.29 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 9 : 0 3 2 25 24 48 43 103 46 1740 ~186                                   0     0      0.30 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 10 : 0 3 2 25 24 48 43 103 46 121 1619 ~186                               0     0      0.31 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 11 : 0 3 2 25 24 48 43 103 46 121 42 1577 ~186                            0     0      0.32 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 12 : 0 3 2 25 24 48 43 103 46 121 42 119 1458 ~186                        0     0      0.34 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 13 : 0 3 2 25 24 48 43 103 46 121 42 119 60 1398 ~186                     0     0      0.36 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 14 : 0 3 2 25 24 48 43 103 46 121 42 119 60 132 1266 ~186                 0     0      0.38 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 15 : 0 3 2 25 24 48 43 103 46 121 42 119 60 132 26 1240 ~186              0     0      0.40 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 16 : 0 3 2 25 24 48 43 103 46 121 42 119 60 132 26 171 1069 ~186          0     0      0.43 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 17 : ... 2 25 24 48 43 103 46 121 42 119 60 132 26 171 63 1006 ~186       0     0      0.46 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 18 : ... 25 24 48 43 103 46 121 42 119 60 132 26 171 63 174 832 ~186      0     0      0.49 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 19 : ... 24 48 43 103 46 121 42 119 60 132 26 171 63 174 36 796 ~186      0     0      0.52 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 20 : ... 43 103 46 121 42 119 60 132 26 171 63 174 36 132 664 ~186        0     0      0.55 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 21 : ... 103 46 121 42 119 60 132 26 171 63 174 36 132 96 568 ~186        0     0      0.59 sec  T/O =  0  PRV =  3
+SBY 18:41:35 [../build/formal_skid_proof] engine_0: 22 : ... 46 121 42 119 60 132 26 171 63 174 36 132 96 121 447 ~186        0     0      0.63 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 96 137 119 378 ~186       5    47      0.71 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 96 153 136 411 ~186       5    59      0.75 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 96 167 156 444 ~186       4    71      0.78 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 96 181 176 476 ~186       5    71      0.82 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 23 : ... 121 42 119 60 132 26 171 63 174 36 132 96 189 184 496 ~186       5    73      0.84 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 24 : ... 42 119 60 132 26 171 63 174 36 132 56 115 139 160 411 ~186       5    73      0.99 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 24 : ... 42 119 60 132 26 171 63 174 36 132 56 115 146 190 442 ~186       4    73      1.04 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 24 : ... 42 119 60 132 26 171 63 174 36 132 56 115 150 206 459 ~186       4    73      1.06 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 25 : ... 119 60 132 26 171 63 174 36 132 56 115 34 141 156 400 ~258       4    73      1.21 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 25 : ... 119 60 132 26 171 63 174 36 132 56 115 34 149 172 433 ~258       4    73      1.25 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 26 : ... 60 132 26 171 63 174 36 132 56 115 34 148 176 175 320 ~258       4    73      1.38 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 26 : ... 60 132 26 171 63 174 36 132 56 115 34 148 184 205 351 ~258       4    73      1.42 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 26 : ... 60 132 26 171 63 174 36 132 56 115 34 148 199 234 379 ~258       4    73      1.47 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 26 : ... 60 132 26 171 63 174 36 132 56 115 34 148 200 237 384 ~258       4    73      1.47 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 27 : ... 132 26 171 63 174 36 132 56 115 34 148 70 166 156 335 ~326       4    73      1.61 sec  T/O =  0  PRV =  3
+SBY 18:41:36 [../build/formal_skid_proof] engine_0: 27 : ... 132 26 171 63 174 36 132 56 115 34 148 70 182 179 364 ~326       4    73      1.65 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 27 : ... 132 26 171 63 174 36 132 56 115 34 148 70 198 199 396 ~326       5    73      1.68 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 27 : ... 132 26 171 63 174 36 132 56 115 34 148 70 214 214 430 ~326       5    73      1.72 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 27 : ... 132 26 171 63 174 36 132 56 115 34 148 70 215 216 435 ~326       5    73      1.73 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 28 : ... 26 171 63 174 36 132 56 115 34 148 57 185 174 250 270 ~330       5    74      1.90 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 28 : ... 26 171 63 174 36 132 56 115 34 148 57 185 189 279 298 ~330       4    74      1.94 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 28 : ... 26 171 63 174 36 132 56 115 34 148 57 185 202 308 328 ~330       4    74      1.99 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 28 : ... 26 171 63 174 36 132 56 115 34 148 57 185 202 332 353 ~330       3    74      2.02 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 29 : ... 171 63 174 36 132 56 115 34 148 57 185 23 176 157 377 ~402       5    74      2.18 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 29 : ... 171 63 174 36 132 56 115 34 148 57 185 23 185 176 413 ~402       4    74      2.22 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 29 : ... 171 63 174 36 132 56 115 34 148 57 185 23 185 176 417 ~402       0    74      2.22 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 30 : ... 63 174 36 132 56 115 34 148 57 185 21 182 131 158 352 ~402       4    74      2.38 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 30 : ... 63 174 36 132 56 115 34 148 57 185 21 182 139 184 385 ~402       4    74      2.43 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 30 : ... 63 174 36 132 56 115 34 148 57 185 21 182 140 188 393 ~402       4    74      2.44 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 158 131 246 ~474      5    74      2.59 sec  T/O =  0  PRV =  3
+SBY 18:41:37 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 170 152 278 ~474      5    74      2.64 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 191 169 310 ~474      5    74      2.68 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 207 189 342 ~474      5    74      2.72 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 223 209 374 ~474      5    74      2.76 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 241 228 405 ~474      5    74      2.81 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 261 245 436 ~474      5    74      2.85 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 31 : ... 174 36 132 56 115 34 148 57 185 21 183 104 276 268 468 ~474      4    74      2.89 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 32 : ... 36 132 56 115 34 148 57 185 21 183 27 201 235 229 251 ~542       5    74      3.10 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 32 : ... 36 132 56 115 34 148 57 185 21 183 27 201 243 260 280 ~542       4    74      3.14 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 32 : ... 36 132 56 115 34 148 57 185 21 183 27 201 247 277 300 ~542       4    74      3.17 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 33 : ... 132 56 115 34 148 57 185 21 183 27 201 52 229 213 207 ~625       5    74      3.33 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 33 : ... 132 56 115 34 148 57 185 21 183 27 201 52 238 232 243 ~625       4    74      3.37 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 33 : ... 132 56 115 34 148 57 185 21 183 27 201 52 241 238 259 ~625       4    74      3.38 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 34 : ... 56 115 34 148 57 185 21 183 27 201 50 237 244 228 87 ~618        4    74      3.54 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 34 : ... 56 115 34 148 57 185 21 183 27 201 50 237 249 244 102 ~618       4    74      3.56 sec  T/O =  0  PRV =  3
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: Timing out on output 1 in frame 34 (retrying in next anytime pass).
+SBY 18:41:38 [../build/formal_skid_proof] engine_0: 34 : ... 56 115 34 148 57 185 21 183 27 201 50 237 249 244 102 ~618       0    74      3.56 sec  T/O =  1  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 35 : ... 115 34 148 57 185 21 183 27 201 50 237 126 175 159 57 ~654       0    74      3.69 sec  T/O =  1  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: All outputs solved or timed out in frame 35.
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 1 : 0 745 ~662                                                           0     0      0.48 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 2 : 0 3 742 ~662                                                         0     0      0.49 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 3 : 0 3 1 741 ~662                                                       0     0      0.49 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 4 : 0 3 1 6 735 ~662                                                     0     0      0.49 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 5 : 0 3 1 6 4 731 ~662                                                   0     0      0.50 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 6 : 0 3 1 6 4 6 725 ~662                                                 0     0      0.50 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 7 : 0 3 1 6 4 6 3 722 ~662                                               0     0      0.50 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 8 : 0 3 1 6 4 6 3 4 718 ~662                                             0     0      0.50 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 9 : 0 3 1 6 4 6 3 4 2 716 ~662                                           0     0      0.51 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 10 : 0 3 1 6 4 6 3 4 2 4 712 ~662                                         0     0      0.51 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 11 : 0 3 1 6 4 6 3 4 2 4 2 710 ~662                                       0     0      0.52 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 12 : 0 3 1 6 4 6 3 4 2 4 2 5 705 ~662                                     0     0      0.52 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 13 : 0 3 1 6 4 6 3 4 2 4 2 5 3 702 ~662                                   0     0      0.52 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 14 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 698 ~662                                 0     0      0.53 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 15 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 696 ~662                               0     0      0.53 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 16 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 692 ~662                             0     0      0.53 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 17 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 690 ~662                           0     0      0.54 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 18 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 686 ~662                         0     0      0.54 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 19 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 684 ~662                       0     0      0.55 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 20 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 644 ~662                    0     0      0.55 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 21 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 624 ~662                 0     0      0.55 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 22 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 620 ~662               0     0      0.56 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 23 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 618 ~662             0     0      0.57 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 24 : 0 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 615 ~662           0     0      0.57 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 25 : ... 3 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 613 ~662       0     0      0.58 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 26 : ... 1 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 609 ~662       0     0      0.58 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 27 : ... 6 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 607 ~662       0     0      0.59 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 28 : ... 4 6 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 550 ~662      0     0      0.60 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 29 : ... 3 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 530 ~662       0     0      0.60 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 30 : ... 4 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 526 ~662       0     0      0.61 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 31 : ... 2 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 524 ~662       0     0      0.62 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 32 : ... 4 2 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 446 ~662      0     0      0.63 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 33 : ... 5 3 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 95 351 ~662       0     0      0.64 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 34 : ... 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 106 182 227 ~662      4    51      0.70 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 34 : ... 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 113 212 259 ~662      4    71      0.74 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 34 : ... 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 121 244 288 ~662      4    71      0.79 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 34 : ... 4 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 122 248 296 ~662      4    73      0.80 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 35 : ... 2 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 59 212 179 95 ~750      5    73      0.90 sec  T/O =  0  PRV =  3
+SBY 18:41:39 [../build/formal_skid_proof] engine_0: 35 : ... 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 59 223 191 132 ~750       5    73      0.93 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 35 : ... 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 59 240 209 164 ~750       5    73      0.97 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 35 : ... 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 59 246 223 205 ~750       5    73      1.01 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 35 : ... 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 59 262 247 235 ~750       4    73      1.06 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 35 : ... 4 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 59 270 259 254 ~750       4    73      1.08 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 36 : ... 2 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 23 197 157 108 86 ~919      5    74      1.21 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 4 2 3 2 4 2 57 20 4 2 78 23 179 107 127 69 -29 ~972       5    74      1.32 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 4 2 40 20 4 2 3 2 4 2 57 20 4 2 78 23 179 107 148 85 3 ~972      5    74      1.36 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 2 40 20 4 2 3 2 4 2 57 20 4 2 78 23 179 111 167 101 34 ~972      5    74      1.40 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 2 40 20 4 2 3 2 4 2 57 20 4 2 78 23 179 114 189 115 63 ~972      5    74      1.45 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 2 40 20 4 2 3 2 4 2 57 20 4 2 78 23 179 114 209 131 95 ~972      5    74      1.50 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 40 20 4 2 3 2 4 2 57 20 4 2 78 23 179 114 231 147 127 ~972       5    74      1.54 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 37 : ... 40 20 4 2 3 2 4 2 57 20 4 2 78 23 179 114 242 155 144 ~972       5    74      1.57 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 38 : ... 2 3 2 4 2 57 20 4 2 78 23 179 14 91 57 38 -82 ~1122       5    74      1.68 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 39 : ... 3 2 4 2 57 20 4 2 78 23 179 14 90 57 48 17 -65 ~1131      5    74      1.78 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 39 : ... 3 2 4 2 57 20 4 2 78 23 179 14 90 57 66 34 -33 ~1131      5    74      1.82 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 39 : ... 20 4 2 3 2 4 2 57 20 4 2 78 23 179 14 90 60 79 51 2 ~1131        5    74      1.87 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 39 : ... 20 4 2 3 2 4 2 57 20 4 2 78 23 179 14 90 68 87 67 35 ~1131       5    74      1.92 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: 39 : ... 20 4 2 3 2 4 2 57 20 4 2 78 23 179 14 90 70 89 71 44 ~1131       5    74      1.93 sec  T/O =  0  PRV =  3
+SBY 18:41:40 [../build/formal_skid_proof] engine_0: Proved output 1 in frame 39.
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: 40 : ... 3 2 4 2 57 20 4 2 78 23 179 14 73 0 0 0 0 -93 ~1267       0    74      2.00 sec  T/O =  0  PRV =  4
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Block =  227  Oblig = 10867  Clause =  7331  Call =200480 (sat=84.0%)  Cex =   0  Start = 604
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: SAT solving =     6.22 sec ( 65.54 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: unsat     =     0.61 sec (  6.46 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: sat       =     5.61 sec ( 59.08 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Generalize  =     3.44 sec ( 36.27 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Push clause =     3.16 sec ( 33.27 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Ternary sim =     0.07 sec (  0.70 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Containment =     0.03 sec (  0.32 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: CNF compute =     0.30 sec (  3.17 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Refinement  =     0.00 sec (  0.00 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: TOTAL       =     9.49 sec (100.00 %)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Property proved.  Time =     9.50 sec
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Counter-example is not available.
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: finished (returncode=0)
+SBY 18:41:41 [../build/formal_skid_proof] engine_0: Status returned by engine: PASS
+SBY 18:41:41 [../build/formal_skid_proof] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:09 (9)
+SBY 18:41:41 [../build/formal_skid_proof] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:09 (9)
+SBY 18:41:41 [../build/formal_skid_proof] summary: engine_0 (abc pdr) returned PASS
+SBY 18:41:41 [../build/formal_skid_proof] summary: engine_0 did not produce any traces
+SBY 18:41:41 [../build/formal_skid_proof] DONE (PASS, rc=0)
