@@ -6,9 +6,9 @@ VDD vdd 0 dc {vsupply} ac 0
 VCM inp 0 0.6
 VIN in 0 dc 0.6 ac 1
 IB vdd ibias 10u
-XRIN in inn 0 rhigh w={w_rf} l={l_rf}
-XRF inn out 0 rhigh w={w_rf} l={l_rf}
-XCL out 0 cap_cmim w={w_cl} l={l_cl}
+XRIN in inn 0 rhigh w={w_rf} l={l_rf} mm_ok={mm}
+XRF inn out 0 rhigh w={w_rf} l={l_rf} mm_ok={mm}
+XCL out 0 cap_cmim w={w_cl} l={l_cl} mm_ok={mm}
 XOP inp inn out vdd 0 ibias opamp
 .control
 let band = 0

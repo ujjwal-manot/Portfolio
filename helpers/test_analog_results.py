@@ -1,10 +1,10 @@
-# Checks the opamp result reader names the worst corner for each spec, fails a corner that misses one or whose measurement failed, fails a corner whose output into the real ADC load has not settled to half an LSB, leaves swing unchecked at the 1.08 V supply (below the 1.16 V the opamp needs for it), counts Monte Carlo yield per spec and combined with its one-sided 95% lower bound, and passes the two-pole model only when its numbers match the arithmetic.
+# Checks the opamp result reader names the worst corner for each spec, fails a corner that misses one or whose measurement failed, fails a corner whose output into the real ADC load has not settled to half an LSB or whose offset and gain error together overrun the headroom chip.md leaves it, leaves swing unchecked at the 1.08 V supply (below the 1.16 V the opamp needs for it), counts Monte Carlo yield per spec and combined with its one-sided 95% lower bound, and passes the two-pole model only when its numbers match the arithmetic.
 import subprocess, sys
 from pathlib import Path
-from analog_results import corners, model, expected, montecarlo, lower_bound
+from analog_results import corners, model, expected, montecarlo, lower_bound, OPAMP_SHARE_V
 
 GOOD = ("loop a0_db 72 fc_hz 1.3e7 pm_deg 67 gbw_hz 2.8e7 ugf_hz 2.4e7\nstep supply_a 1.5e-4 rise_slew_v_per_s 2e7 fall_slew_v_per_s 1.7e7 rise_settle_s 6e-8 fall_settle_s 1.1e-7\n"
-        "noise band_v_rms 1e-4 total_v_rms 3.4e-4 psrr_1k_db 47 psrr_1m_db 24\nswing out_low_v 0.04 out_high_v 1.14 offset_v 0.001\nload sampled_v_rms 4.8e-4 settle_load_v 1e-6 error_at_50ns_v 1e-3 kick_v 0.06\n")
+        "noise band_v_rms 1e-4 total_v_rms 3.4e-4 psrr_1k_db 47 psrr_1m_db 24\nswing out_low_v 0.04 out_high_v 1.14 offset_v 0.001 gain_error 0.002\nload sampled_v_rms 4.8e-4 settle_load_v 1e-6 error_at_50ns_v 1e-3 kick_v 0.06\n")
 
 def write(tmp_path, name, text):
     (tmp_path / name).write_text(text)
@@ -20,7 +20,7 @@ def test_a_missed_spec_or_failed_measurement_fails(tmp_path):
     a = write(tmp_path, "corner_tt_27_nom.txt", GOOD)
     assert not corners([a, write(tmp_path, "corner_ss_125_lo.txt", GOOD.replace("pm_deg 67", "pm_deg 55"))])[0]
     assert not corners([a, write(tmp_path, "corner_ff_m40_hi.txt", GOOD.replace("rise_settle_s 6e-8", "rise_settle_s -1.00005e-06"))])[0]
-    assert not corners([a, write(tmp_path, "corner_fs_27_nom.txt", GOOD.replace("swing out_low_v 0.04 out_high_v 1.14 offset_v 0.001\n", ""))])[0]
+    assert not corners([a, write(tmp_path, "corner_fs_27_nom.txt", GOOD.replace("swing out_low_v 0.04 out_high_v 1.14 offset_v 0.001 gain_error 0.002\n", ""))])[0]
 
 def test_two_pole_model_must_match_arithmetic(tmp_path):
     e = expected()
@@ -52,10 +52,14 @@ def test_settling_into_the_real_dac_load_must_reach_half_an_lsb(tmp_path):
     assert corners([a])[0]
     assert not corners([a, write(tmp_path, "corner_ss_125_min.txt", GOOD.replace("settle_load_v 1e-6", "settle_load_v 2e-3"))])[0]
 
-def test_offset_must_leave_room_for_a_minus_half_dbfs_sine(tmp_path):
-    a = write(tmp_path, "corner_tt_27_nom.txt", GOOD.replace("offset_v 0.001", "offset_v -0.009"))
-    assert corners([a])[0]
-    assert not corners([a, write(tmp_path, "corner_ss_125_min.txt", GOOD.replace("offset_v 0.001", "offset_v -0.0105"))])[0]
+def test_offset_and_gain_error_together_must_fit_the_headroom_left_by_the_adc():
+    assert abs(OPAMP_SHARE_V - (0.4 * (1 - 10 ** (-1 / 20)) - (1 + 2 * 0.4 * 10 ** (-1 / 20) / 0.8) * 0.8 / 256)) < 1e-12
+
+def test_edge_error_counts_offset_through_noise_gain_and_gain_error_at_the_peak(tmp_path):
+    fits = write(tmp_path, "corner_tt_27_nom.txt", GOOD.replace("offset_v 0.001 gain_error 0.002", "offset_v -0.015 gain_error 0.02"))
+    assert corners([fits])[0]
+    over = write(tmp_path, "corner_ss_125_min.txt", GOOD.replace("offset_v 0.001 gain_error 0.002", "offset_v -0.015 gain_error -0.03"))
+    assert not corners([fits, over])[0]
 
 def test_yield_lower_bound_at_95_percent_confidence():
     assert abs(lower_bound(200, 200) - 0.05 ** (1 / 200)) < 1e-6

@@ -1,4 +1,4 @@
-// RV32I core with machine mode, 5 stages (IF ID EX MEM WB): forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000.
+// RV32I core with machine mode, 5 stages (IF ID EX MEM WB): forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000.
 module cpu (
   input  logic        clk, rst_n,
   output logic [31:0] imem_addr,
@@ -28,7 +28,7 @@ module cpu (
   logic [4:0]  m_rd, w_rd;
   logic [3:0]  m_cause, w_cause;
   logic [2:0]  ie;
-  logic        d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, mstatus_mie, mpie, stop_cycle, stop_instret, asleep;
+  logic        d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, mstatus_mie, mpie, stop_cycle, stop_instret, asleep, meip;
   logic [31:0] x [32];
 
   logic        btb_valid [16];
@@ -74,7 +74,7 @@ module cpu (
   wire        alt = e_instr[30];
 
   wire        mtip = mtime >= mtimecmp;
-  wire [2:0]  pending = ie & {s_tvalid, mtip, 1'b0};
+  wire [2:0]  pending = ie & {meip, mtip, 1'b0};
   logic [31:0] csr_old;
   logic        csr_known;
   always_comb begin
@@ -89,7 +89,7 @@ module cpu (
       12'h341: csr_old = mepc;
       12'h342: csr_old = mcause;
       12'h343: csr_old = mtval;
-      12'h344: csr_old = {20'b0, s_tvalid, 3'b0, mtip, 7'b0};
+      12'h344: csr_old = {20'b0, meip, 3'b0, mtip, 7'b0};
       12'hb00, 12'hc00: csr_old = mcycle[31:0];
       12'hb80, 12'hc80: csr_old = mcycle[63:32];
       12'hb02, 12'hc02: csr_old = minstret[31:0];
@@ -229,13 +229,14 @@ module cpu (
   always_ff @(posedge clk or negedge rst_n)
     if (!rst_n) begin
       pc <= 0;
-      {d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, asleep} <= '0;
+      {d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, asleep, meip} <= '0;
       {branches, mispredicts, mcycle, minstret, mtime} <= '0;
       mtimecmp <= '1;
       {mtvec, mscratch, mepc, mcause, mtval, ie, mstatus_mie, mpie, stop_cycle, stop_instret} <= '0;
       for (int i = 0; i < 16; i++) btb_valid[i] <= 1'b0;
     end else begin
       mtime <= mtime + 1;
+      meip <= s_tvalid;
       if (!stop_cycle && !(csr_write && (e_csr == 12'hb00 || e_csr == 12'hb80))) mcycle <= mcycle + 1;
       if (e_commit && !stop_instret && !(csr_write && (e_csr == 12'hb02 || e_csr == 12'hb82))) minstret <= minstret + 1;
       branches <= branches + 32'(e_commit && e_op == BRANCH);

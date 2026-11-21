@@ -31,6 +31,7 @@ Both clocks come in on pins from oscillators on the board; nothing on the chip m
 | VCM (mid-rail reference) | 0.6 V |
 | ADC reference | vref_lo = 0.2 V, vref_hi = 1.0 V |
 | 1 LSB | 3.125 mV |
+| Largest sensor signal | 0.357 V peak around 0.6 V (-1 dBFS); the 43.5 mV (13.9 LSB) left at each end of the ADC range is the budget for every offset and gain error between sensor and code |
 
 ## Block interfaces
 
@@ -51,6 +52,8 @@ Test setup: inverting amplifier, Rin = Rf = 20 k, `inp` at 0.6 V, 2.05 pF load. 
 | Phase margin (beta = 0.5 loop, all corners, Monte Carlo) | >= 60 deg |
 | Slew rate | >= 10 V/us |
 | Settling, 0.8 V step to 1.56 mV | <= 200 ns |
+| Error at the -1 dBFS peak: 2 x input offset (noise gain 2) + gain error x 0.357 V | <= 37.6 mV (the 43.5 mV headroom less the ADC's allowed 1 LSB offset and 2 LSB full-scale gain error, scaled to the peak) |
+| Settling into the ADC's real capacitor DAC, through its switches | <= 1.56 mV at the end of the 200 ns sample |
 | Supply current | <= 500 uA |
 
 Requirement the opamp puts on `bandgap_ldo` (measured in `projects/opamp/results/corners.log`): at 1.08 V the output stops short of 1.0 V at the hot corners, at 1.16 V it reaches it at every corner. So the analog rail must stay at or above 1.16 V: with a 1.2 V target, regulation error plus load-step droop must stay under 40 mV, which is tighter than the 50 mV droop pick in `plan.md`.
@@ -133,13 +136,18 @@ module cpu (
   input  logic        s_tlast,
   output logic        retire_valid,
   output logic [31:0] retire_pc, retire_instr, retire_rd_data,
-  output logic [4:0]  retire_rd
+  output logic [4:0]  retire_rd,
+  output logic        retire_intr, sleep,
+  output logic [3:0]  retire_cause
 );
 ```
 
 - RV32I, 5 stages (IF, ID, EX, MEM, WB), with forwarding, a load-use stall and a 2-bit branch predictor with a 16-entry BTB.
 - Instruction and data memory are outside the core and read in the same cycle (combinational).
-- `retire_*` reports every finished instruction, so a testbench can check each one against `helpers/cpu_model.py`.
+- `retire_*` reports every finished instruction, so a testbench can check each one against `helpers/cpu_model.py`. `retire_intr` marks the slot of an interrupt taken in place of the instruction at `retire_pc`, with its cause in `retire_cause`.
+- Machine mode only: Zicsr and the machine CSRs (mstatus, misa, mie, mip, mtvec with vectored interrupts, mscratch, mepc, mcause, mtval, mcycle, minstret, mcountinhibit, the ID registers reading 0), traps for illegal instructions, ecall, ebreak and misaligned loads, stores and jump targets, mret.
+- Interrupts: timer (cause 7, mtime >= mtimecmp) and external (cause 11, high while a stream sample waits). Traps and interrupts are taken in EX, where instructions commit.
+- `wfi` holds the pipeline and raises `sleep` until an enabled interrupt is pending; `sleep` is there for a clock gate around the core (mtime keeps counting).
 
 Memory map:
 
@@ -147,10 +155,12 @@ Memory map:
 |---|---|---|
 | 0x0000_0000 .. 0x0000_FFFF | instruction and data RAM (64 KB) | RAM |
 | 0x1000_0000 | stream: bit 31 = valid, bit 8 = last, bits 7..0 = data; reading pops the word when valid | |
-| 0x1000_0010 | cycle counter | |
-| 0x1000_0014 | retired instruction counter | |
+| 0x1000_0010 | mcycle, low word | |
+| 0x1000_0014 | minstret, low word | |
 | 0x1000_0018 | branch counter | |
 | 0x1000_001C | mispredict counter | |
+| 0x1000_0020 / 0x1000_0024 | mtime low / high (counts every clock from reset) | |
+| 0x1000_0028 / 0x1000_002C | mtimecmp low / high (all ones after reset) | mtimecmp low / high |
 | 0x1000_0100 | | test result: 1 = pass, any other value = fail code |
 
 Firmware flips each code back with `code ^ 0xFF`, because the opamp inverts.

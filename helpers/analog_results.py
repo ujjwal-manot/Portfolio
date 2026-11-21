@@ -1,10 +1,12 @@
-# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and an input offset small enough that, through the loop's noise gain of 2 and on top of the ADC's own 1 LSB, a -0.5 dBFS sine still fits the 0.2 to 1.0 V range; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) with the one-sided 95% lower bound on the combined yield and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
+# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and the opamp's error at the peak of the largest sensor signal chip.md allows (-1 dBFS, 0.357 V), twice its input offset (noise gain 2) plus its gain error times that peak, within the headroom left once the ADC's own allowed offset (1 LSB) and gain error (2 LSB over full scale, scaled to the peak) are taken out; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) with the one-sided 95% lower bound on the combined yield and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
 import cmath, math, sys
 from pathlib import Path
 
+LSB, PEAK = 0.8 / 256, 0.4 * 10 ** (-1 / 20)
+OPAMP_SHARE_V = (0.4 - PEAK) - (1 + 2 * PEAK / 0.8) * LSB
 SPECS = {"a0_db": (">=", 66), "gbw_hz": (">=", 20e6), "pm_deg": (">=", 60), "slew_v_per_s": (">=", 10e6), "settle_s": ("<=", 200e-9),
          "supply_a": ("<=", 500e-6), "settle_load_v": ("<=", 0.8 / 256 / 2),
-         "abs_offset_v": ("<=", (0.4 * (1 - 10 ** (-0.5 / 20)) - 0.8 / 256) / 2), "out_low_v": ("<=", 0.2), "out_high_v": (">=", 1.0)}
+         "edge_error_v": ("<=", OPAMP_SHARE_V), "out_low_v": ("<=", 0.2), "out_high_v": (">=", 1.0)}
 REPORT = ("band_v_rms", "total_v_rms", "psrr_1k_db", "psrr_1m_db", "sampled_v_rms", "error_at_50ns_v", "kick_v")
 SWING, NO_SWING_AT, YIELD = ("out_low_v", "out_high_v"), "_lo", 0.99
 A0, BETA, P1, P2 = 1e4, 0.5, 1 / (2 * math.pi * 1e6 * 10e-12), 1 / (2 * math.pi * 1e4 * 159.2e-15)
@@ -22,8 +24,8 @@ def measured(r):
     m = {k: r[k] for k in keys if k in r}
     if {"rise_slew_v_per_s", "fall_slew_v_per_s"} <= r.keys():
         m["slew_v_per_s"] = min(r["rise_slew_v_per_s"], r["fall_slew_v_per_s"])
-    if "offset_v" in r:
-        m["abs_offset_v"] = abs(r["offset_v"])
+    if {"offset_v", "gain_error"} <= r.keys():
+        m["edge_error_v"] = 2 * abs(r["offset_v"]) + abs(r["gain_error"]) * PEAK
     if {"rise_settle_s", "fall_settle_s"} <= r.keys() and min(r["rise_settle_s"], r["fall_settle_s"]) > 0:
         m["settle_s"] = max(r["rise_settle_s"], r["fall_settle_s"])
     return m | {k: r[k] for k in REPORT if k in r}

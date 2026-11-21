@@ -1,4 +1,4 @@
-# opamp commands: make charts | sizing | check_model | corners | mc | broken | review | all
+# opamp commands: make charts | sizing | check_model | corners | mc | mc_hot | broken | review | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -8,6 +8,7 @@ SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 CHARTS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,build/charts/$(c)_$(t)/charts.txt))
 CORNERS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,$(foreach v,lo min nom hi,build/corners/$(c)_$(t)_$(v)/result.txt)))
 MC := $(foreach n,$(shell seq 1 200),build/mc/$(n)/result.txt)
+MC_HOT := $(foreach n,$(shell seq 1 100),build/mc_hot/$(n)/result.txt)
 TESTS := loop step noise swing load
 DAC := $(ROOT)/projects/adc/design/cap_dac.cir $(ROOT)/projects/adc/design/cap_dac_sizes.inc
 PASSIVE_tt := typ
@@ -20,7 +21,7 @@ VOLT_min := 1.16
 VOLT_nom := 1.2
 VOLT_hi := 1.32
 
-all: charts sizing check_model corners mc broken review
+all: charts sizing check_model corners mc mc_hot broken review
 
 charts: $(CHARTS)
 	mkdir -p results
@@ -44,6 +45,10 @@ corners: $(CORNERS)
 mc: $(MC)
 	for f in $(MC); do cp $$f results/mc_$$(basename $$(dirname $$f)).txt; done
 	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mc_*.txt > results/mc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) mc $$c results/mc.log results/mc_*.txt
+
+mc_hot: $(MC_HOT)
+	for f in $(MC_HOT); do cp $$f results/mchot_$$(basename $$(dirname $$f)).txt; done
+	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mchot_*.txt > results/mc_hot.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) mc_hot $$c results/mc_hot.log results/mchot_*.txt
 
 broken: build/sizes.inc
 	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests $$d; \
@@ -92,6 +97,14 @@ build/mc/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/load.
 	cd $(@D) && for t in loop step swing load; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
 	cat $(@D)/loop.txt $(@D)/step.txt $(@D)/swing.txt $(@D)/load.txt > $@
 
+build/mc_hot/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) design/opamp.cir build/sizes.inc
+	mkdir -p $(@D)
+	cp tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) build/sizes.inc $(@D)
+	cp design/opamp.cir $(@D)/dut.cir
+	printf '.lib cornerMOSlv.lib mos_ff_mismatch\n.lib cornerRES.lib res_bcs_mismatch\n.lib cornerCAP.lib cap_bcs_mismatch\n.temp 125\n.param vsupply=1.32\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
+	cd $(@D) && for t in loop step swing load; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
+	cat $(@D)/loop.txt $(@D)/step.txt $(@D)/swing.txt $(@D)/load.txt > $@
+
 build/charts/%/charts.txt: tests/charts.cir
 	mkdir -p $(@D)
 	cp $< $(@D)
@@ -99,5 +112,5 @@ build/charts/%/charts.txt: tests/charts.cir
 	rm -f $@
 	cd $(@D) && $(RUN) ngspice -b charts.cir > ngspice.log 2>&1
 
-.PHONY: all charts sizing check_model corners mc broken review
+.PHONY: all charts sizing check_model corners mc mc_hot broken review
 .DELETE_ON_ERROR:
