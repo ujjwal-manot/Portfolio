@@ -1,4 +1,4 @@
-* Sweeps the input of the real inverting loop from 0 to 1.2 V and writes the output range over which the output stays within half an LSB (1.5625 mV) of the loop's own straight line (through the mid-scale output, with the slope measured between inputs of 0.25 and 0.95 V, so gain error from resistor mismatch is not counted as clipping), searching each half of the sweep on its own (a range that never leaves the band runs to the end of the sweep), plus the input-referred offset (half the output error at mid-scale, noise gain 2) and the closed-loop gain error (output slope between inputs of 0.25 and 0.95 V, about the -1 dBFS peaks, against the ideal -1), to swing.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+* Sweeps the input of the real inverting loop from 0 to 1.2 V and writes the output range over which the output stays within half an LSB (1.5625 mV) of the loop's own straight line (through the mid-scale output, with the slope measured between inputs of 0.24 and 0.96 V, so gain error from resistor mismatch is not counted as clipping), searching each half of the sweep on its own (a range that never leaves the band runs to the end of the sweep), plus the input-referred offset (half the output error at mid-scale, noise gain 2) and the closed-loop gain error (output slope between inputs of 0.24 and 0.96 V, just outside the -1 dBFS peaks of 0.243 and 0.957 V, against the ideal -1), to swing.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -18,9 +18,9 @@ let top = 0
 let bottom = 0
 dc VIN 0 1.2 1m
 meas dc mid find v(out) at=0.6
-meas dc top find v(out) at=0.25
-meas dc bottom find v(out) at=0.95
-let slope = (top - bottom) / 0.7
+meas dc top find v(out) at=0.24
+meas dc bottom find v(out) at=0.96
+let slope = (top - bottom) / 0.72
 let gain_error = slope - 1
 let err = abs(v(out) - mid - slope * (0.6 - v(in)))
 meas dc hi when err=1.5625m cross=last from=0 to=0.6

@@ -5,8 +5,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import run
-from cpu_model import Cpu
-from lockstep import check, hex_file
+from lockstep import Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -31,20 +30,18 @@ async def feed(dut, codes):
 async def interrupts(dut):
     rng = random.Random(4)
     codes = [rng.randrange(256) for _ in range(SAMPLES)]
-    model = Cpu((BUILD / "interrupts.bin").read_bytes(), io_read=lambda addr: int(dut.retire_rd_data.value))
+    lock = Lockstep(dut, (BUILD / "interrupts.bin").read_bytes(), "interrupts")
     cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
     dut.s_tvalid.value = 0
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
     cocotb.start_soon(feed(dut, codes))
-    retired, asleep, taken, total = 0, 0, {7: 0, 11: 0}, None
+    asleep, total = 0, None
     for cycle in range(100000):
         await RisingEdge(dut.clk)
         await ReadOnly()
-        if dut.retire_intr.value:
-            taken[int(dut.retire_cause.value)] += 1
-        retired = check(dut, model, retired, "interrupts")
+        lock.tick(cycle)
         asleep += int(dut.sleep.value)
         if int(dut.dmem_wstrb.value):
             addr, data = int(dut.dmem_addr.value), int(dut.dmem_wdata.value)
@@ -54,9 +51,10 @@ async def interrupts(dut):
                 break
     else:
         raise AssertionError("firmware never finished")
-    dut._log.info(f"{retired} instructions in {cycle} cycles, {asleep} asleep, interrupts taken {taken}")
+    dut._log.info(f"{lock.retired} instructions in {cycle} cycles, {asleep} asleep, interrupts taken {lock.taken}, {lock.both} taken with both pending")
     assert total == sum(codes), f"firmware summed {total}, samples sum to {sum(codes)}"
-    assert taken[11] == SAMPLES and taken[7] >= 8, f"interrupts taken {taken}"
+    assert lock.taken[11] == SAMPLES and lock.taken[7] >= 8, f"interrupts taken {lock.taken}"
+    assert lock.both > 0, "the timer and the stream were never pending together, so priority went untested"
     assert asleep > 0, "the core never slept in wfi"
 
 def test_interrupts():

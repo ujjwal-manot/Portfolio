@@ -1,4 +1,4 @@
-// Interrupt workout: counts in a loop until 4 timer interrupts (one every 300 cycles) have been taken, then sleeps in wfi until 8 timer interrupts and 16 stream samples (one external interrupt each) have arrived, then writes the sum of the samples to 0x1000_0104 and 1 (pass) to 0x1000_0100.
+// Interrupt workout: reads mcycle with mcountinhibit set and cleared, counts in a loop until 4 timer interrupts (one every 300 cycles) have been taken, then keeps interrupts off for 400 loop turns (so the timer and a stream sample are both pending when they come back on), then sleeps in wfi until 8 timer interrupts and 16 stream samples (one external interrupt each) have arrived, reading mip in every handler; then writes the sum of the samples to 0x1000_0104 and 1 (pass) to 0x1000_0100.
 .equ PERIOD, 300
 .section .text.start
 .globl _start
@@ -6,6 +6,12 @@ _start:
   la t0, handler
   csrw mtvec, t0
   li s0, 0x10000000
+  csrsi mcountinhibit, 1
+  csrr a3, mcycle
+  nop
+  csrr a4, mcycle
+  csrci mcountinhibit, 1
+  csrr a5, mcycle
   lw t0, 0x20(s0)
   addi t0, t0, PERIOD
   sw t0, 0x28(s0)
@@ -21,6 +27,12 @@ work:
   addi s4, s4, 1
   li t0, 4
   blt s1, t0, work
+  csrci mstatus, 8
+  li t0, 400
+hold:
+  addi t0, t0, -1
+  bnez t0, hold
+  csrsi mstatus, 8
 sleep:
   wfi
   li t0, 8
@@ -35,6 +47,7 @@ sleep:
 
 handler:
   csrr a0, mcause
+  csrr a2, mip
   bgez a0, fail
   andi a0, a0, 31
   li a1, 7

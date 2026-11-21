@@ -1,0 +1,12 @@
+Expected failure: , model ['
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -89,7 +89,7 @@
+       12'h341: csr_old = mepc;
+       12'h342: csr_old = mcause;
+       12'h343: csr_old = mtval;
+-      12'h344: csr_old = {20'b0, meip, 3'b0, mtip, 7'b0};
++      12'h344: csr_old = {20'b0, mtip, 3'b0, meip, 7'b0};
+       12'hb00, 12'hc00: csr_old = mcycle[31:0];
+       12'hb80, 12'hc80: csr_old = mcycle[63:32];
+       12'hb02, 12'hc02: csr_old = minstret[31:0];

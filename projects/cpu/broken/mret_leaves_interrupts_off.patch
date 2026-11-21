@@ -1,4 +1,4 @@
-Expected failure: firmware never finished
+Expected failure: was due at cycle
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
 @@ -261,7 +261,7 @@

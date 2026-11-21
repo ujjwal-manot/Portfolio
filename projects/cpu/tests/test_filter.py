@@ -5,8 +5,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import build, run
-from cpu_model import Cpu
-from lockstep import check, hex_file
+from lockstep import Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -43,7 +42,7 @@ async def feed(dut, codes, gap):
 
 async def filter_run(dut, gap):
     codes, sym = samples(), symbols()
-    model = Cpu((BUILD / "filter.bin").read_bytes(), io_read=lambda addr: int(dut.retire_rd_data.value))
+    lock = Lockstep(dut, (BUILD / "filter.bin").read_bytes(), "filter")
     memory = {}
     cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
     dut.s_tvalid.value = 0
@@ -51,11 +50,10 @@ async def filter_run(dut, gap):
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
     cocotb.start_soon(feed(dut, codes, gap))
-    retired = 0
     for cycle in range(200000):
         await RisingEdge(dut.clk)
         await ReadOnly()
-        retired = check(dut, model, retired, "filter")
+        lock.tick(cycle)
         strobe, addr, data = int(dut.dmem_wstrb.value), int(dut.dmem_addr.value), int(dut.dmem_wdata.value)
         for b in range(4):
             if strobe >> b & 1:
@@ -69,7 +67,7 @@ async def filter_run(dut, gap):
     assert [memory.get(sym["out"] + i) for i in range(64 * FRAMES)] == ys, "filter outputs differ from the reference"
     assert [word(sym["events"] + 4 * f) for f in range(FRAMES)] == events
     frame_cycles = [word(sym["frame_cycles"] + 4 * f) for f in range(FRAMES)]
-    dut._log.info(f"gap {gap}: events {events}, frame cycles {frame_cycles}, {retired} instructions in {cycle} cycles, IPC {retired / cycle:.3f}")
+    dut._log.info(f"gap {gap}: events {events}, frame cycles {frame_cycles}, {lock.retired} instructions in {cycle} cycles, IPC {lock.retired / cycle:.3f}")
     return frame_cycles
 
 @cocotb.test()

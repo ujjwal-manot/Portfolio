@@ -1,0 +1,12 @@
+Expected failure: cpu took interrupt 7
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -170,7 +170,7 @@
+   end
+   wire        wake = pending != 0;
+   wire        e_irq = e_valid && mstatus_mie && wake;
+-  wire [3:0]  irq_cause = pending[2] ? 4'd11 : 4'd7;
++  wire [3:0]  irq_cause = pending[1] ? 4'd7 : 4'd11;
+   wire        e_trap = e_valid && (e_irq || e_exception);
+   wire        e_hold = asleep && !wake && e_valid;
+   wire        e_commit = e_valid && !e_trap && !e_hold;

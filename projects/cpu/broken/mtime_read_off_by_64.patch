@@ -1,0 +1,12 @@
+Expected failure: , model ['
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -195,7 +195,7 @@
+       8'h14:   io_data = minstret[31:0];
+       8'h18:   io_data = branches;
+       8'h1c:   io_data = mispredicts;
+-      8'h20:   io_data = mtime[31:0];
++      8'h20:   io_data = mtime[31:0] + 64;
+       8'h24:   io_data = mtime[63:32];
+       8'h28:   io_data = mtimecmp[31:0];
+       8'h2c:   io_data = mtimecmp[63:32];

@@ -1,4 +1,4 @@
-# Runs every rv32ui test and every rv32mi machine-mode test (but breakpoint and pmpaddr, which test the optional debug triggers and PMP this cpu leaves out) on the cpu in lockstep with cpu_model.py: each retired instruction must match, and the test must report pass.
+# Runs every rv32ui test and every rv32mi machine-mode test (but breakpoint and pmpaddr, which test the optional debug triggers and PMP this cpu leaves out) on the cpu in lockstep with cpu_model.py (tests/lockstep.py: instructions, stores and interrupts), and the test must report pass.
 import os
 from pathlib import Path
 import pytest
@@ -6,8 +6,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, RisingEdge, ReadOnly
 from cocotb_run import build, run
-from cpu_model import Cpu
-from lockstep import check, hex_file
+from lockstep import Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -19,21 +18,20 @@ RESULT = 0x10000100
 @cocotb.test()
 async def lockstep(dut):
     name = os.environ["PROGRAM"]
-    model = Cpu((BUILD / f"{name}.bin").read_bytes(), io_read=lambda addr: int(dut.retire_rd_data.value))
+    lock = Lockstep(dut, (BUILD / f"{name}.bin").read_bytes(), name)
     cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
     dut.s_tvalid.value = 0
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
-    retired = 0
     for cycle in range(100000):
         await RisingEdge(dut.clk)
         await ReadOnly()
-        retired = check(dut, model, retired, name)
+        lock.tick(cycle)
         if int(dut.dmem_wstrb.value) and int(dut.dmem_addr.value) == RESULT:
             code = int(dut.dmem_wdata.value)
             assert code == 1, f"{name} failed test case {code >> 1}"
-            dut._log.info(f"{name}: pass, {retired} instructions in {cycle} cycles")
+            dut._log.info(f"{name}: pass, {lock.retired} instructions in {cycle} cycles")
             return
     raise AssertionError(f"{name}: no result after 100000 cycles")
 

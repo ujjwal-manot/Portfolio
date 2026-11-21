@@ -1,4 +1,4 @@
-# Reference RV32I model with machine mode (Zicsr, the machine CSRs Spike has with --priv=m and no PMP or triggers, mcountinhibit stopping mcycle and minstret, traps for illegal instructions, ecall, ebreak and misaligned accesses and jump targets, mret, wfi as a hint, and interrupts taken when the caller says the hardware took one): runs one retired instruction per step, carrying on into the handler when an instruction traps, and reports what it retired, for lockstep checks against the cpu and Spike.
+# Reference RV32I model with machine mode (Zicsr, the machine CSRs Spike has with --priv=m and no PMP or triggers, mcountinhibit stopping mcycle and minstret, traps for illegal instructions, ecall, ebreak and misaligned accesses and jump targets, mret, wfi as a hint, and interrupts taken when the caller says the hardware took one): runs one retired instruction per step, carrying on into the handler when an instruction traps, and reports what it retired, for lockstep checks against the cpu and Spike; Timed adds the cpu's clocked parts for lockstep against the RTL, given now, the cycle the next instruction spends in EX: mcycle with its writes and mcountinhibit, mtime, mtimecmp from its own stores, mip from those and the registered stream valid, every IO-page read by address (the stream as the testbench records it at the edge that ends the read, since it changes on falling edges; but the branch and mispredict counters, which belong to the pipeline), and due(), the interrupt the hardware must take at now, external before timer.
 M = 0xFFFFFFFF
 MSTATUS, MISA, MIE, MTVEC, MSCRATCH, MEPC, MCAUSE, MTVAL, MIP = 0x300, 0x301, 0x304, 0x305, 0x340, 0x341, 0x342, 0x343, 0x344
 MCYCLE, MINSTRET, MCYCLEH, MINSTRETH, MCOUNTINHIBIT = 0xB00, 0xB02, 0xB80, 0xB82, 0x320
@@ -17,6 +17,8 @@ class Trap(Exception):
 
 
 class Cpu:
+    COUNTED = ((1, (MCYCLE, MCYCLEH)), (4, (MINSTRET, MINSTRETH)))
+
     def __init__(self, image, base=0, size=0x10000, io_read=lambda addr: 0, ids=None):
         self.ram = bytearray(size)
         self.ram[:len(image)] = image
@@ -30,6 +32,9 @@ class Cpu:
         if 0 <= off < len(self.ram):
             return int.from_bytes(self.ram[off:off + n], "little")
         return self.io_read(addr & ~3) >> (8 * (addr & 3)) & ((1 << 8 * n) - 1)
+
+    def io_write(self, addr, data):
+        pass
 
     def counter(self, low, high):
         return self.csr[high] << 32 | self.csr[low]
@@ -76,7 +81,7 @@ class Cpu:
             except Trap as t:
                 self.enter(t.cause, t.tval, pc)
                 continue
-            for bit, (low, high) in ((1, (MCYCLE, MCYCLEH)), (4, (MINSTRET, MINSTRETH))):
+            for bit, (low, high) in self.COUNTED:
                 if not self.wrote_counter.get(low) and not self.csr[MCOUNTINHIBIT] & bit:
                     self.set_counter(low, high, self.counter(low, high) + 1)
             return result
@@ -119,6 +124,8 @@ class Cpu:
             off = addr - self.base
             if 0 <= off < len(self.ram):
                 self.ram[off:off + n] = data.to_bytes(n, "little")
+            else:
+                self.io_write(addr, data)
             store = (addr, data, n)
         elif op == 0x13 and (f3 not in (1, 5) or f7 in (0, 0x20) and not (f3 == 1 and f7)) or op == 0x33 and (f7 == 0 or f7 == 0x20 and f3 in (0, 5)):
             y = b if op == 0x33 else imm_i & M
@@ -160,3 +167,54 @@ class Cpu:
         self.x[rd] = value = value & M if rd else 0
         self.pc = nxt & M
         return pc, i, rd, value, store
+
+
+class Timed(Cpu):
+    COUNTED = ((4, (MINSTRET, MINSTRETH)),)
+
+    def __init__(self, image, other_io=lambda addr: 0, **kw):
+        super().__init__(image, io_read=lambda addr: self.io(addr, self.now + 1), **kw)
+        self.now, self.stream, self.other_io = 0, {}, other_io
+        self.cycle_base, self.cycle_from, self.compare = 0, -1, [(-1, M, M)]
+
+    def mcycle(self, t):
+        return self.cycle_base + (t - self.cycle_from) * (not self.csr[MCOUNTINHIBIT] & 1) & (1 << 64) - 1
+
+    def mtimecmp(self, t):
+        entry = [c for c in self.compare if c[0] <= t][-1]
+        return entry[2] << 32 | entry[1]
+
+    def mip(self, t):
+        return self.stream.get(t, (0, 0, 0))[0] << 11 | (t + 1 >= self.mtimecmp(t)) << 7
+
+    def due(self):
+        pending = self.mip(self.now) & self.csr[MIE] if self.csr[MSTATUS] & 8 else 0
+        return 11 if pending >> 11 & 1 else 7 if pending >> 7 & 1 else None
+
+    def read_csr(self, addr):
+        addr = SHADOW.get(addr, addr)
+        if addr in (MCYCLE, MCYCLEH):
+            return self.mcycle(self.now) >> (32 if addr == MCYCLEH else 0) & M
+        return self.mip(self.now) if addr == MIP else super().read_csr(addr)
+
+    def write_csr(self, addr, value):
+        before = self.mcycle(self.now) + (not self.csr[MCOUNTINHIBIT] & 1)
+        super().write_csr(addr, value)
+        old, value = self.mcycle(self.now), value & M
+        if addr in (MCOUNTINHIBIT, MCYCLE, MCYCLEH):
+            self.cycle_base = {MCOUNTINHIBIT: before, MCYCLE: old >> 32 << 32 | value, MCYCLEH: value << 32 | old & M}[addr]
+            self.cycle_from = self.now + 1
+
+    def io(self, addr, t):
+        valid, last, data = self.stream.get(t + 1, (0, 0, 0))
+        instret = self.counter(MINSTRET, MINSTRETH) + (not self.csr[MCOUNTINHIBIT] & 4)
+        page = {0x00: valid << 31 | last << 8 | data, 0x10: self.mcycle(t) & M, 0x14: instret & M,
+                0x20: (t + 1) & M, 0x24: (t + 1) >> 32, 0x28: self.mtimecmp(t) & M, 0x2C: self.mtimecmp(t) >> 32}
+        if addr >> 28 != 1:
+            return 0
+        return self.other_io(addr) if addr & 0xFF in (0x18, 0x1C) else page.get(addr & 0xFF, 0)
+
+    def io_write(self, addr, data):
+        low, high = self.compare[-1][1:]
+        if addr in (0x10000028, 0x1000002C):
+            self.compare.append((self.now + 2, data if addr & 4 == 0 else low, data if addr & 4 else high))
