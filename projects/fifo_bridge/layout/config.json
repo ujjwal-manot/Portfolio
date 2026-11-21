@@ -1,12 +1,20 @@
 {
-  "//": "LibreLane flow for fifo_bridge on IHP SG13G2: synthesis, floorplan at 40% utilization, placement, clock trees for both clocks, routing up to Metal5, extraction, three-corner timing with the constraints in fifo_bridge.sdc, DRC, LVS and IR drop.",
+  "//": "LibreLane flow for fifo_bridge on IHP SG13G2, starting from the cell netlist make timing maps (the one eqy, cdc_check and the gate runs also check), so it only elaborates it: floorplan at 40% utilization, placement, clock trees for both clocks with a buffer at least every 50 um of clock wire (without it the s_clk root buffer drove 16 branches against the liberty fanout limit of 8), the four assign lines in that netlist kept as warnings (they only give a second name to the top bit the binary and Gray pointers share, no logic), routing up to Metal5, extraction, three-corner timing with the constraints in fifo_bridge.sdc, DRC, LVS and IR drop.",
   "DESIGN_NAME": "fifo_bridge",
-  "VERILOG_FILES": ["dir::../design/sync2.sv", "dir::../design/reset_sync.sv", "dir::../design/async_fifo.sv", "dir::../design/skid_buffer.sv", "dir::../design/fifo_bridge.sv"],
-  "CLOCK_PORT": ["s_clk", "m_clk"],
+  "VERILOG_FILES": [
+    "dir::../build/fifo_bridge_cells.v"
+  ],
+  "CLOCK_PORT": [
+    "s_clk",
+    "m_clk"
+  ],
   "CLOCK_PERIOD": 20,
   "PNR_SDC_FILE": "dir::fifo_bridge.sdc",
   "SIGNOFF_SDC_FILE": "dir::fifo_bridge.sdc",
   "FP_SIZING": "relative",
   "FP_CORE_UTIL": 40,
-  "RT_MAX_LAYER": "Metal5"
+  "RT_MAX_LAYER": "Metal5",
+  "SYNTH_ELABORATE_ONLY": true,
+  "CTS_DISTANCE_BETWEEN_BUFFERS": 50,
+  "ERROR_ON_NL_ASSIGN_STATEMENTS": false
 }

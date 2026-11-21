@@ -78,4 +78,4 @@ async def clock_to_output_matches_sta(dut):
 def test_gates(netlist, corner):
     cells, sdf, flags = (ROUTED, BUILD / f"routed_{corner}_sim.sdf", {"ROUTED": 1}) if netlist == "routed" else (BUILD / "fifo_bridge_cells.v", BUILD / f"fifo_bridge_{corner}_sim.sdf", {})
     run("fifo_bridge", [cells, fine("sg13g2_udp.v"), fine("sg13g2_stdcell.v"), HERE / "sdf.v"], __file__, sim="icarus", waves=True,
-        defines={"SDF": f'"{sdf}"', corner.upper(): 1, **flags}, build_args=["-gspecify", "-ginterconnect", "-Tmax", "-s", "sdf"])
+        defines={"SDF": f'"{sdf}"', "TOP": "fifo_bridge", corner.upper(): 1, **flags}, build_args=["-gspecify", "-ginterconnect", "-Tmax", "-s", "sdf"])

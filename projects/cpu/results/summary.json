@@ -1,13 +1,13 @@
 {
  "broken_no_flush_after_mispredict": {
   "logs": {
-   "no_flush_after_mispredict.log": "cad2fdfd5315aafdad0ede5b93b575c1441c13ad184dbf322a41f7594cc36449"
+   "no_flush_after_mispredict.log": "8ac3f0acb81416fd0f773bf7c2cd4351ce8ee62289728f6c37f898a245d4e73f"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -25,18 +25,18 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:40:39",
+  "time": "2026-11-21 17:04:01",
   "values": {}
  },
  "broken_no_forwarding_from_mem": {
   "logs": {
-   "no_forwarding_from_mem.log": "a66e3c0f4273f87f2c4f5b233535392cf50dd2e9056692ac721c4b4536467380"
+   "no_forwarding_from_mem.log": "a5a0a6188486a88a09a760d3ec67e623c7cb06f74b23f4b70c4136298d2b202f"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -54,18 +54,18 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:40:45",
+  "time": "2026-11-21 17:04:08",
   "values": {}
  },
  "broken_no_load_use_stall": {
   "logs": {
-   "no_load_use_stall.log": "e4f16a46b9c9a88cab7025f94caa2ba92fd5e25e7ae190e5c8094b8f9cd1bb62"
+   "no_load_use_stall.log": "d56b4a6e3b3bd640b2018743aa4b33fd3804d9a81fb9bf583b31c54f24f3d17e"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -83,18 +83,18 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:41:00",
+  "time": "2026-11-21 17:04:25",
   "values": {}
  },
  "model_vs_spike": {
   "logs": {
-   "model_vs_spike.log": "a14ccdca0d360035a48059293d9c21ca30654137c73cbeed898701888c751df9"
+   "model_vs_spike.log": "517ed01918e4bcf8ca4330508f6542b708a978d05830b338e802fcacec3845f0"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -112,18 +112,18 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:39:31",
+  "time": "2026-11-21 17:02:58",
   "values": {}
  },
  "synth": {
   "logs": {
-   "synth.log": "7e56855c3d2f78fa732bdbf7263c12b8858e467f29044e5184c1654c3ed2e234"
+   "synth.log": "edd120c461cc40821330413fb2179aac3ead12957c9f7c6ea05b202a0ff43acb"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -141,18 +141,18 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:40:30",
+  "time": "2026-11-21 17:03:53",
   "values": {}
  },
  "test_filter": {
   "logs": {
-   "test_filter.log": "7356181d9c9d75ea1d7f50ed7b0923215df6d86431d1b4e109d70ef6a7bc7b0f"
+   "test_filter.log": "0647d67d33decd34cbd200958c769cba3450aaf7e8e490a70712590321d5694c"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -170,18 +170,18 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:40:19",
+  "time": "2026-11-21 17:03:42",
   "values": {}
  },
  "test_rv32ui": {
   "logs": {
-   "test_rv32ui.log": "88d3f2c25bd847c894dd07014d74f4583474335170a36fcd5b38937ae12b210c"
+   "test_rv32ui.log": "8784c882ae291c1b91b9106db767bd886e7bca94bf3d58a5bfbea0d7b15c1765"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -199,7 +199,7 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:40:12",
+  "time": "2026-11-21 17:03:34",
   "values": {}
  },
  "timing": {
@@ -210,7 +210,7 @@
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -228,7 +228,7 @@
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 13:40:32",
+  "time": "2026-11-21 17:03:55",
   "values": {}
  }
 }

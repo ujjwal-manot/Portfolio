@@ -97,3 +97,9 @@ def test_readme_numbers_must_sit_on_a_log_line_with_their_label(tmp_path):
         assert rules(tmp_path) == ["readme_claim"], wrong
     readme.write_text(good + "\n| Corner | Tau |\n|---|---|\n| tt | 71.1 ps |\n")
     assert rules(tmp_path) == ["readme_claim"]
+
+def test_a_makefile_branch_that_drops_an_exit_code_is_a_hidden_failure(tmp_path):
+    write(tmp_path, "Makefile", "# Runs the flow.\nall:\n\tif ./flow > out.log; then c=0; else c=$$?; fi\n")
+    assert rules(tmp_path) == []
+    write(tmp_path, "Makefile", "# Runs the flow.\nall:\n\tif ./flow > out.log; then :; else tail out.log; fi\n")
+    assert rules(tmp_path) == ["hidden_failure"]

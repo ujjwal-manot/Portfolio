@@ -146,7 +146,7 @@ def find_problems(root):
         if path.suffix == ".py":
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
-            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.match(r"\t-\S", l) or l.startswith(".IGNORE")]
+            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :", l) or re.match(r"\t-\S", l) or l.startswith(".IGNORE")]
     return problems
 
 

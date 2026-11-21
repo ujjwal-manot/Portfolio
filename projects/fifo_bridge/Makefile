@@ -34,14 +34,16 @@ timing:
 	  $(SAVE) timing_$$k $$c results/timing_$$k.log; done
 
 layout: timing
-	if (cd layout && $(RUN) librelane config.json --run-tag signoff --overwrite) > build/layout_flow.log 2>&1; then :; else tail -30 build/layout_flow.log; fi
-	if $(RUN) python3 layout/metrics.py $(LAYOUT)/metrics.json > results/layout.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) layout $$c results/layout.log
+	echo "flow did not finish" > results/layout.log
+	if (cd layout && $(RUN) librelane config.json --run-tag signoff --overwrite) > results/layout_flow.log 2>&1 && $(RUN) python3 layout/metrics.py $(LAYOUT)/metrics.json > results/layout.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) layout $$c results/layout_flow.log results/layout.log
 	for k in slow typ fast; do \
 	  if (cd timing && $(RUN) env CORNER=$$k $(ROUTED) sta -no_init -exit timing.tcl) > results/timing_routed_$$k.log 2>&1; then c=0; else c=$$?; fi; \
 	  python3 timing/sim_sdf.py $$(ls $(LAYOUT)/sdf/nom_$${k}_*/*.sdf) build/routed_$${k}_sim.sdf; \
 	  $(SAVE) timing_routed_$$k $$c results/timing_routed_$$k.log; done
 
 power: timing layout
+	if $(PYTEST) tests/test_sim_sdf.py > results/test_sim_sdf.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_sim_sdf $$c results/test_sim_sdf.log
 	if $(PYTEST) tests/test_gates.py > results/test_gates.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_gates $$c results/test_gates.log
 	for k in slow typ fast; do for n in mapped routed; do \
 	  d=$$(ls -d build/icarus_fifo_bridge_test_gates_*$${k^^}* | if [ $$n = routed ]; then grep ROUTED; else grep -v ROUTED; fi); \
