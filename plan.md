@@ -56,7 +56,7 @@ flagships   tensor_core and coherent_noc (digital), serdes_frontend and lc_vco (
 | CPU workload | a 64-sample frame every 64 us is 3200 cycles | 8-tap FIR + threshold under 3200 cycles per frame |
 | FIFO depth | 16 entries at 1 us each | CPU can pause 16 us without losing data |
 
-Why the opamp is inverting: in a unity-gain buffer, the opamp inputs would have to follow the signal from 0.2 V to 1.0 V. A first hand-run look at the thresholds (below, no log kept) suggests a PMOS input pair stops working near 0.6 V and an NMOS pair below about 0.45 V; the opamp project's transistor charts must confirm this with logs before the opamp is built. In the inverting setup the inputs stay at 0.6 V, so a normal two-stage Miller opamp works. The CPU undoes the flip with `code ^ 0xFF`.
+Why the opamp is inverting: in a unity-gain buffer, the opamp inputs would have to follow the signal from 0.2 V to 1.0 V. The transistor charts (`projects/opamp/results/charts.log`, tt, 27 C, L = 1 um, gm/Id = 14) give |Vgs| = 0.329 V for NMOS and 0.452 V for PMOS. A PMOS input pair at 0.6 V leaves its tail 1.2 - 0.6 - 0.452 = 0.148 V, about one saturation voltage (0.148 V in the same table), so it fails at the slow corners; an NMOS pair at 0.6 V leaves its tail 0.27 V. Neither pair could follow the whole 0.2 to 1.0 V swing on its own. In the inverting setup the inputs stay at 0.6 V, so an NMOS-input opamp works. The CPU undoes the flip with `code ^ 0xFF`.
 
 Every target in this plan that is not forced by arithmetic is my own pick. If a real design cannot reach one, I relax it and write down why.
 
@@ -66,11 +66,10 @@ Inside `iic-osic-tools:2026.10`, 21 Nov 2026:
 
 - PDK: `/foss/pdks/ihp-sg13g2`. MOS models `cornerMOSlv.lib` and `cornerMOShv.lib` (PSP103 OSDI), SiGe HBTs (`cornerHBT.lib`, npn13G2), resistors, MIM and MOM caps, MOS varactors, ESD and bond-pad models. KLayout cells for inductors, HBTs and guard rings. Standard cells at slow (1.08 V, 125 C), typical (1.2 V, 25 C) and fast (1.32 V, -40 C). IHP SRAM macros (`RM_IHPSG13_1P_*`). Layer colours in `sg13g2.lyp`.
 - Tools: `make check_tools` checks every tool and PDK file a built project uses and writes their versions to `setup/tools_found.txt`. The image also carries Xyce, Fault, FuseSoC, opencdc, openEMS, Palace, OpenVAF, spicebind, CVC, padring, Verible and slang; each joins the check when a project first uses it.
-The three transistor lines below were run by hand with no saved log, so they are not results under Rule 5; the opamp project's transistor charts redo them with logs.
+Transistor thresholds from `projects/opamp/results/charts.log` (tt, 27 C, 50 mV drain, the model's own value / the maximum-gm line extrapolated). An earlier hand run with no log gave 0.40, 0.23 and 0.20 V for NMOS; it was wrong and is dropped.
 
-- NMOS threshold (TT, 27 C): 0.40 V at L = 0.13 um, 0.23 V at 0.5 um, 0.20 V at 1 um
-- PMOS threshold: -0.41 V, -0.36 V, -0.35 V at the same lengths
-- NMOS current at W = 1 um, L = 0.13 um, Vgs = Vds = 1.2 V: 400.5 uA
+- NMOS threshold: 0.436/0.516 V at L = 0.13 um, 0.272/0.311 V at 0.5 um, 0.237/0.274 V at 1 um
+- PMOS threshold magnitude: 0.428/0.461 V, 0.362/0.382 V, 0.351/0.365 V at the same lengths
 
 ## Rules
 

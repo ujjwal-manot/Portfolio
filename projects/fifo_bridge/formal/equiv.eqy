@@ -1,4 +1,4 @@
-# Proves the mapped cell netlist from make timing does the same as the RTL, fragment by fragment between matching registers; flops with the same inputs and reset value are merged on both sides first, as synthesis does.
+# Proves the mapped cell netlist from make timing does the same as the RTL, fragment by fragment between matching registers; flops with the same inputs and reset value are merged on both sides first, as synthesis does, and each side's pointer registers are proved as one fragment because synthesis shares the top bit of the binary and Gray pointers, which only matches from reset.
 [gold]
 read_verilog -sv ../design/sync2.sv ../design/reset_sync.sv ../design/async_fifo.sv ../design/skid_buffer.sv ../design/fifo_bridge.sv
 prep -flatten -top fifo_bridge
@@ -13,6 +13,10 @@ prep -flatten -top fifo_bridge
 [script]
 opt_merge -share_all
 async2sync
+
+[partition *]
+merge fifo.r_*
+merge fifo.w_*
 
 [strategy sat]
 use sat

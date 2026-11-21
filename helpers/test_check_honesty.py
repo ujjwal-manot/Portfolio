@@ -45,17 +45,20 @@ def test_spice_title_is_its_one_comment(tmp_path):
     write(tmp_path, "a.sp", "title line\n* extra comment\nR1 a 0 1k\n")
     assert rules(tmp_path) == ["comments"]
 
-def test_result_goes_stale_when_a_source_changes_or_appears(tmp_path):
+def test_result_goes_stale_when_a_source_or_used_helper_changes(tmp_path):
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
     design = write(tmp_path, "proj/design/top.sv", "// Top.\nmodule top; endmodule\n")
+    write(tmp_path, "proj/tests/run.py", "# Runs.\nimport used\n")
+    used = write(tmp_path, "helpers/used.py", "# Used.\nx = 1\n")
     log = write(tmp_path, "proj/results/run.log", "ok")
     save(tmp_path / "proj/results/summary.json", "sim", True, [log], root=tmp_path)
     write(tmp_path, "proj/README.md", "notes")
+    write(tmp_path, "helpers/unrelated.py", "# Unrelated.\n")
     assert rules(tmp_path) == []
     design.write_text("// Top.\nmodule top(input a); endmodule\n")
     assert rules(tmp_path) == ["stale_result"]
     design.write_text("// Top.\nmodule top; endmodule\n")
-    write(tmp_path, "helpers/new.py", "# New.\n")
+    used.write_text("# Used.\nx = 2\n")
     assert rules(tmp_path) == ["stale_result"]
 
 def test_readme_numbers_must_come_from_their_logs(tmp_path):

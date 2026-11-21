@@ -1,0 +1,31 @@
+{
+ "charts": {
+  "logs": {
+   "charts.log": "fd37dfbb75042bf43718a5f5c859dbbf14d25024cf372c914ec4c4724b36185f",
+   "charts_ff_125.txt": "ecaa2ccc8b4cc292f4fa7a62a1709d48f551e7ba2c7c4ffd7bed3f9b0388d177",
+   "charts_ff_27.txt": "9f73544cd3fcbfd1593e0226da6a67827dd76e99ed024454b1fdecd62411ca29",
+   "charts_ff_m40.txt": "4e176f39d09a38b6a6608b7ab0dc8886ac7e2eecc34965fd09ee1efe2b47a042",
+   "charts_fs_125.txt": "6f78d6f969f93d28e2c8fef3b83b1b279faeb70623faea6027f2cd309a066fac",
+   "charts_fs_27.txt": "9ebbf4a493703dc2e794d130d1c3725d6968d2fdf0b01ff44af1bd690c8757db",
+   "charts_fs_m40.txt": "cf70bf365f33f02a7408ea2535d1ac5b6651023841c666c5ef90467de9f16dae",
+   "charts_sf_125.txt": "2b13c5318eafdedf9c096ef01e1047d8fe4568384ca35d51c58a851882c84868",
+   "charts_sf_27.txt": "96b0e3f9cb7e5bea7999abe00fb4d19a4f994886e31a19914f8f946d13643712",
+   "charts_sf_m40.txt": "bf4d82c0c5b4d58504d32778efc0e2e861a25fcedc8470ba1d9514739108f30e",
+   "charts_ss_125.txt": "550414145459735284a4ecdbbd60504e37c06282f1860cc09f34d35b946a3536",
+   "charts_ss_27.txt": "21462f43820c71c22a85a948159b7f4496d43e6bb6b38df822d5f0279f5ad83a",
+   "charts_ss_m40.txt": "41201a1f7c5a57d940bb604f2743fb896966a299822ecdcebca1a0eb3af88982",
+   "charts_tt_125.txt": "ff3d6f0f12f5afb2af268fe24239042eb9105f82334b3f59ca0e0da1edc036f9",
+   "charts_tt_27.txt": "3b38ceee3ad61bd7251963ada49463d9e4034d4809623833587d48182b41d4f8",
+   "charts_tt_m40.txt": "50b3cb17379cb99a21673bf93f613e6798ab483e0d493c3371709eed27cba65b"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/transistor_charts.py": "ce0b69a360dd4625237b78a7ee4f96c4d394be7c0609122cc7d1fa071317cde2",
+   "projects/opamp/Makefile": "3281b01c6cd950c86d4f1e2173074b6a1f071cf308dfb845747137416a4dd334",
+   "projects/opamp/tests/charts.cir": "832989bdb21d25063e2825a01a4fa3d1f47183e8ef762fc5c519444554104ea8"
+  },
+  "time": "2026-11-21 12:43:32",
+  "values": {}
+ }
+}

@@ -1,12 +1,20 @@
-# Records one check result in a summary.json, with the SHA-256 of every raw log behind it and of every source it was made from (the project's and helpers/ files that git tracks or would track, so ignored build byproducts never count).
-import hashlib, json, os, subprocess, sys, time
+# Records one check result in a summary.json, with the SHA-256 of every raw log behind it and of every source it was made from: the project's files that git tracks or would track (so ignored build byproducts never count), plus each helper those files name, directly or through another helper.
+import hashlib, json, os, re, subprocess, sys, time
 from pathlib import Path
 
 def sources(project, root):
     project = project if root in (project, *project.parents) else root
     dirs = [str(d.relative_to(root)) for d in (project, root / "helpers") if d.exists()]
     listed = subprocess.run(["git", "ls-files", "-co", "--exclude-standard", "--", *dirs], cwd=root, capture_output=True, text=True, check=True).stdout.splitlines()
-    keep = {root / n for n in listed if (root / n).is_file() and Path(n).name != "README.md" and "results" not in Path(n).parts}
+    files = {root / n for n in listed if (root / n).is_file() and Path(n).name != "README.md" and "results" not in Path(n).parts}
+    helpers = {f for f in files if project not in f.parents and project != root}
+    keep = files - helpers
+    while True:
+        text = "\n".join(f.read_bytes().decode(errors="ignore") for f in keep)
+        used = {h for h in helpers if re.search(rf"\b{re.escape(h.stem)}\b", text)}
+        if used <= keep:
+            break
+        keep |= used
     return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(keep)}
 
 def save(summary, check, passed, logs, values=None, root=None):
