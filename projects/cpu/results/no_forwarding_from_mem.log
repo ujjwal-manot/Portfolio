@@ -1,41 +1,32 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.070 MB sources in 3 modules, into 0.284 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.046 s (elab=0.003, cvt=0.035, bld=0.000); cpu 0.046 s on 1 threads; allocated 27.523 MB
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.547 MB
 make: Entering directory '/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_interrupts'
-ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
-python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
-g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o cpu_board
-rm Vtop__ALL.verilator_deplist.tmp
+make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_interrupts'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795295049
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795299548
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_interrupts.interrupts (1/1)
-   320.00ns WARNING  cocotb.regression                  test_interrupts.interrupts failed
+   380.00ns WARNING  cocotb.regression                  test_interrupts.interrupts failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/test_interrupts.py", line 47, in interrupts
-                                                            retired = check(dut, model, retired, "interrupts")
-                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                                          File "/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/lockstep.py", line 27, in check
-                                                            assert got == want, f"{name} instruction {retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in want]}"
-                                                        AssertionError: interrupts instruction 9: cpu ['0x24', '0x88028293', '0x5', '0xc63'], model ['0x24', '0x88028293', '0x5', '0x880']
-                                                        assert (36, 2281865875, 5, 3171) == (36, 2281865875, 5, 2176)
-   320.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                          File "/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/test_interrupts.py", line 44, in interrupts
+                                                            lock.tick(cycle)
+                                                          File "/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/lockstep.py", line 39, in tick
+                                                            assert seen == want, f"{self.name} instruction {self.retired} at {pc:#x}: cpu stored {[hex(x) for x in seen]}, model {[hex(x) for x in want]}"
+                                                        AssertionError: interrupts instruction 12 at 0x30: cpu stored ['0xf', '0x10000028', '0xd'], model ['0xf', '0x10000028', '0x139']
+                                                        assert (15, 268435496, 13) == (15, 268435496, 313)
+   380.00ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test_interrupts.interrupts     FAIL         320.00           0.00     192732.07  **
+                                                        ** test_interrupts.interrupts     FAIL         380.00           0.00     109289.30  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0                320.00           0.00      91354.26  **
+                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0                380.00           0.01      26884.80  **
                                                         **************************************************************************************
 - :0: Verilog $finish
 F
@@ -45,7 +36,7 @@ _______________________________ test_interrupts ________________________________
     def test_interrupts():
 >       run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])
 
-tests/test_interrupts.py:63: 
+tests/test_interrupts.py:61: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'cpu_board'
@@ -53,7 +44,7 @@ sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/no_forwarding_from
 test_file = '/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/test_interrupts.py'
 parameters = {}
 plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/interrupts.hex']
-runner = <cocotb_tools.runner.Verilator object at 0x7f6f19d79fa0>
+runner = <cocotb_tools.runner.Verilator object at 0x7fc38a6123f0>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -71,4 +62,4 @@ ERROR    Verilator:runner.py:674 ERROR: Failed 1 of 1 tests.
 =========================== short test summary info ============================
 FAILED tests/test_interrupts.py::test_interrupts - SystemExit: 1
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-1 failed in 9.46s
+1 failed in 2.97s

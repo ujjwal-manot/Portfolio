@@ -33,7 +33,7 @@ All numbers come from `results/`; every log there is hashed in `results/summary.
 |---|---|---|
 | Model against Spike, rv32ui and rv32mi | 55 passed | `results/model_vs_spike.log` |
 | Core against the model, rv32ui and rv32mi | 55 passed | `results/test_isa.log` |
-| Interrupt firmware: timer every 300 cycles, 16 stream samples at random gaps | 1480 instructions in 4257 cycles, 2554 asleep; interrupts taken {7: 14, 11: 16} | `results/test_interrupts.log` |
+| Interrupt firmware: timer every 300 cycles, 16 stream samples at random gaps, a window with interrupts off | 2329 instructions in 5087 cycles, 2520 asleep; interrupts taken {7: 16, 11: 16}; 1 taken with both pending | `results/test_interrupts.log` |
 | Filter firmware at full stream rate, each frame within 3200 cycles | frame cycles 2183 2181 2181 2181; IPC 0.969 | `results/test_filter.log` |
 | Filter firmware with a gappy stream | IPC 0.867 | `results/test_filter.log` |
 | Timing at the slow corner, 50 MHz | worst setup slack 3.72 ns, worst hold slack 0.289 ns | `results/timing.log` |

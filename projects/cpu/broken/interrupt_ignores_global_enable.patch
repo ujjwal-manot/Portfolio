@@ -1,4 +1,4 @@
-Expected failure: that the model has disabled
+Expected failure: the model has None due
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
 @@ -169,7 +169,7 @@
