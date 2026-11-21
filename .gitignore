@@ -1,13 +1,13 @@
-# build outputs
+# Build outputs and big waveforms; small raw logs under results/ are kept.
 sim_build/
 build/
 runs/
 __pycache__/
 *.pyc
 node_modules/
-ui/dist/
-# large waveforms (small raw logs under results/ ARE committed)
+console/dist/
 *.vcd
 *.fst
 *.fsdb
 .spiceinit
+*.raw

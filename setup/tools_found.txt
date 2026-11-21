@@ -1,0 +1,16 @@
+image 2026.10, pdk /foss/pdks/ihp-sg13g2 (a49358cc0b20635fcb53c0940505e3563763fc7a)
+ngspice-47
+Icarus Verilog version 14.0 (devel) (s20260301-579-g15d870a5-dirty)
+Verilator 5.052 2026-09-05 rev v5.052
+Yosys 0.70 (git sha1 28ba3cb92, Release, GNU /usr/bin/c++ 13.3.0)
+SBY v0.70-dirty
+OpenSTA 3.1.0
+OpenROAD 26Q4-407-geb14e40b7 
+LibreLane v3.1.0.dev3
+magic 8.3.685
+KLayout 0.30.12
+Netgen 1.5.324 compiled on Thu Oct 15 02:24:51 PM CEST 2026
+XSCHEM V3.4.8RC
+riscv64-unknown-elf-gcc () 16.1.0
+Spike RISC-V ISA Simulator 1.1.1-dev
+cocotb 2.1.0 pyuvm 5.0.0 numpy 2.5.4 scipy 1.18.1
