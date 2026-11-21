@@ -1,32 +1,66 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.219 MB
+- Verilator: Built from 0.045 MB sources in 3 modules, into 0.065 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.015 s (elab=0.001, cvt=0.008, bld=0.000); cpu 0.011 s on 1 threads; allocated 22.988 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_async_fifo_test_async_fifo'
-make: Nothing to be done for 'default'.
+ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
+python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o async_fifo
+rm Vtop__ALL.verilator_deplist.tmp
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_async_fifo_test_async_fifo'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795242157
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795246074
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-2001638.50ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
-2001638.50ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-4003188.50ns INFO     cocotb.regression                  test_async_fifo.fast_writer_slow_reader passed
-4003188.50ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-6757425.00ns INFO     cocotb.regression                  test_async_fifo.similar_clocks passed
-6757425.00ns INFO     cocotb.regression                  *************************************************************************************************
+2001512.50ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2001512.50ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+4003062.50ns INFO     cocotb.regression                  test_async_fifo.fast_writer_slow_reader passed
+4003062.50ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+6750657.00ns INFO     cocotb.regression                  test_async_fifo.similar_clocks passed
+6750657.00ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2001638.50           1.74    1151844.01  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   PASS     2001550.00           1.97    1017717.61  **
-                                                        ** test_async_fifo.similar_clocks            PASS     2754236.50           2.22    1241057.55  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2001512.50           1.53    1304107.62  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   PASS     2001550.00           2.06     972790.21  **
+                                                        ** test_async_fifo.similar_clocks            PASS     2747594.50           2.39    1149099.41  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                       6757425.00           5.93    1140386.35  **
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                       6750657.00           5.99    1127924.83  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
+.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795246081
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
+2001386.50ns INFO     cocotb.async_fifo                  metastability injection delayed 5428 pointer bits
+2001386.50ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2001386.50ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+4002936.50ns INFO     cocotb.async_fifo                  metastability injection delayed 10680 pointer bits
+4002936.50ns INFO     cocotb.regression                  test_async_fifo.fast_writer_slow_reader passed
+4002936.50ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+6757173.00ns INFO     cocotb.async_fifo                  metastability injection delayed 19867 pointer bits
+6757173.00ns INFO     cocotb.regression                  test_async_fifo.similar_clocks passed
+6757173.00ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *************************************************************************************************
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2001386.50           5.16     387783.38  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   PASS     2001550.00           5.52     362756.86  **
+                                                        ** test_async_fifo.similar_clocks            PASS     2754236.50           6.85     401936.78  **
+                                                        *************************************************************************************************
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                       6757173.00          17.53     385409.83  **
+                                                        *************************************************************************************************
 .
-1 passed in 7.80s
+2 passed in 30.35s

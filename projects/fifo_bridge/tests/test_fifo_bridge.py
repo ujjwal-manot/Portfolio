@@ -1,4 +1,4 @@
-# Sends 64-sample frames through fifo_bridge in both clock directions, with and without metastability injection, and checks reset, data, tlast and AXI-Stream stability.
+# Sends 64-sample frames through fifo_bridge between clocks with random phase and 350 ppm offset, with and without metastability injection, and checks reset, data, tlast and AXI-Stream stability.
 import os
 import random
 from collections import deque
@@ -13,8 +13,9 @@ METASTABLE = os.getenv("METASTABLE") == "1"
 SOURCES = [DESIGN / f for f in ("sync2.sv", "reset_sync.sv", "async_fifo.sv", "skid_buffer.sv", "fifo_bridge.sv")]
 
 async def frames(dut, s_period, m_period, count, s_rate, m_rate):
-    cocotb.start_soon(Clock(dut.s_clk, s_period, "ns").start())
-    cocotb.start_soon(Clock(dut.m_clk, m_period, "ns").start())
+    cocotb.start_soon(Clock(dut.s_clk, s_period * 1000, "ps").start())
+    await Timer(random.randrange(1, m_period * 1000), "ps")
+    cocotb.start_soon(Clock(dut.m_clk, m_period * 1000 + m_period * 350 // 2000 * 2, "ps").start())
     dut.s_tvalid.value = dut.m_tready.value = 0
     dut.rst_n.value = 0
     await Timer(3 * max(s_period, m_period) + 7, "ns")
@@ -85,4 +86,4 @@ def test_fifo_bridge():
     run("fifo_bridge", SOURCES, __file__)
 
 def test_fifo_bridge_metastable():
-    run("fifo_bridge", SOURCES, __file__, defines={"METASTABLE": 1})
+    run("fifo_bridge", SOURCES, __file__, defines={"METASTABLE": 1}, sim="icarus")

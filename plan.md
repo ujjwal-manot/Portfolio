@@ -152,13 +152,13 @@ Each README has a design review: what was tried, what failed, the numbers, and w
 ### fifo_bridge (core): a clock-crossing block you could ship
 - Design: Gray-code async FIFO (16 deep, 8 data bits + last), two-flop synchronizers in their own module, skid buffer with a registered `tready`, top-level bridge.
 - Reset crossing done right: one reset input, a reset synchronizer per clock (asserts at once, releases on its own clock), and `tready` held low until the write side is out of reset. The textbook version accepts a word in the first cycles after reset and loses it; a test shows that.
-- Metastability injection: the synchronizer has a simulation mode where each changing bit randomly lands one cycle late, the way a real flop can resolve. Traffic must still lose nothing. A copy that sends a binary pointer passes plain simulation but must fail under injection.
+- Metastability injection: the synchronizer has a simulation mode where each bit that changed just before the clock edge randomly lands one cycle late, the way a real flop can resolve. Traffic must still lose nothing. The design review covers two findings from building it: a simpler injection model fails a correct FIFO by inventing values real hardware cannot produce, and a binary pointer survives injection in this FIFO because full and empty are equality tests and each side moves one word per cycle; it would break as soon as the pointer is used as a fill level.
 - Synchronizer MTBF from transistor physics: ngspice sweeps data-to-clock timing on the real IHP flop netlist, `mtbf.py` fits the resolution time constant and window from the ngspice output, and the report gives MTBF for 2 and 3 flops at 10 and 50 MHz at each corner.
 - Tests: cocotb random traffic in both clock directions, 80k+ words, zero loss, duplication or reordering, AXI stability while stalled, checks that the FIFO really filled and emptied.
 - Formal: full proofs of the FIFO and the skid buffer, a 40-step bounded check of the joined bridge, the Gray one-bit proof, covers proving each rule is reached.
 - Signoff: as above, plus a skew limit on the Gray bus in the timing constraints.
 - Depth sizing: the README works out the minimum depth for a burst length and clock ratio; the tests show the measured limit matches.
-- Broken copies: drop the word at the end of each memory lap, full check that inverts only the top Gray bit, output data that changes while stalled; plus the binary pointer under injection.
+- Broken copies: drop the word at the end of each memory lap, full check that inverts only the top Gray bit, output data that changes while stalled, and `full` reset low (the textbook reset value, which lets the bridge handshake while in reset).
 
 ### cpu (core): a core verified against the ISA
 - Design: 5-stage RV32I with forwarding, load-use stall, branch flush, 2-bit predictor with a 16-entry BTB, performance counters, memory-mapped stream input.

@@ -70,4 +70,4 @@ def test_async_fifo():
     run("async_fifo", [DESIGN / "sync2.sv", DESIGN / "async_fifo.sv"], __file__)
 
 def test_async_fifo_metastable():
-    run("async_fifo", [DESIGN / "sync2.sv", DESIGN / "async_fifo.sv"], __file__, defines={"METASTABLE": 1})
+    run("async_fifo", [DESIGN / "sync2.sv", DESIGN / "async_fifo.sv"], __file__, defines={"METASTABLE": 1}, sim="icarus")

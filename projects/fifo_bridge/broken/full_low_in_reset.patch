@@ -1,0 +1,11 @@
+--- a/design/async_fifo.sv
++++ b/design/async_fifo.sv
+@@ -26,7 +26,7 @@
+   always_ff @(posedge w_clk or negedge w_rst_n)
+     if (!w_rst_n) begin
+       {w_bin, w_gray} <= '0;
+-      w_full <= 1'b1;
++      w_full <= 1'b0;
+     end else begin
+       {w_bin, w_gray} <= {w_bin_next, w_gray_next};
+       w_full <= w_gray_next == {~r_gray_w[A:A-1], r_gray_w[A-2:0]};

@@ -1,20 +1,24 @@
-// Moves an 8-bit AXI-Stream with tlast from s_clk to m_clk: async_fifo across the clocks, skid_buffer on the output.
+// Moves an 8-bit AXI-Stream with tlast from s_clk to m_clk: one reset released per clock by reset_sync, async_fifo across the clocks, skid_buffer on the output.
 module fifo_bridge #(
   parameter int DEPTH_LOG2 = 4
 ) (
-  input  logic       s_clk, s_rst_n,
+  input  logic       rst_n,
+  input  logic       s_clk,
   input  logic       s_tvalid,
   output logic       s_tready,
   input  logic [7:0] s_tdata,
   input  logic       s_tlast,
-  input  logic       m_clk, m_rst_n,
+  input  logic       m_clk,
   output logic       m_tvalid,
   input  logic       m_tready,
   output logic [7:0] m_tdata,
   output logic       m_tlast
 );
-  logic       full, empty, take;
+  logic       full, empty, take, s_rst_n, m_rst_n;
   logic [8:0] fifo_out;
+
+  reset_sync s_reset (.clk(s_clk), .rst_n_in(rst_n), .rst_n(s_rst_n));
+  reset_sync m_reset (.clk(m_clk), .rst_n_in(rst_n), .rst_n(m_rst_n));
 
   assign s_tready = !full;
 
