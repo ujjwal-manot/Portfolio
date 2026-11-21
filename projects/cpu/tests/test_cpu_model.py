@@ -1,11 +1,13 @@
-# Runs every rv32ui test on Spike and on cpu_model.py; the two must retire the same instructions with the same results.
+# Runs every rv32ui test and every rv32mi machine-mode test on Spike (configured like the cpu: machine mode only, no PMP, no debug triggers, so the breakpoint and pmpaddr tests, which test those optional extensions, are left out) and on cpu_model.py; the two must retire the same instructions with the same results.
 import re, subprocess
 from pathlib import Path
 import pytest
 from cpu_model import Cpu
 
-BUILD = Path(__file__).resolve().parents[1] / "build" / "rv32ui"
-NAMES = sorted(p.stem.removesuffix("_spike") for p in BUILD.glob("*_spike.elf"))
+BUILD = Path(__file__).resolve().parents[1] / "build"
+SKIP = {"breakpoint_spike", "pmpaddr_spike"}
+NAMES = sorted(f"{p.parent.name}/{p.stem.removesuffix('_spike')}" for s in ("rv32ui", "rv32mi") for p in (BUILD / s).glob("*_spike.elf") if p.stem not in SKIP)
+SPIKE = ["spike", "--isa=rv32i_zicsr_zicntr", "--priv=m", "--pmpregions=0", "--triggers=0", "-m0x80000000:0x10000", "-l", "--log-commits"]
 COMMIT = re.compile(r"^core\s+0: 3 0x([0-9a-f]+) \(0x([0-9a-f]+)\)(?: x(\d+)\s+0x([0-9a-f]+))?(?: mem 0x([0-9a-f]+))?", re.M)
 
 def tohost(name):
@@ -13,7 +15,7 @@ def tohost(name):
     return int(re.search(r"^([0-9a-f]+) . tohost$", symbols, re.M).group(1), 16)
 
 def spike(name):
-    run = subprocess.run(["spike", "--isa=rv32i", "-m0x80000000:0x10000", "-l", "--log-commits", BUILD / f"{name}_spike.elf"],
+    run = subprocess.run(SPIKE + [BUILD / f"{name}_spike.elf"],
                          capture_output=True, text=True, timeout=60)
     assert run.returncode == 0, f"{name}: Spike says the test failed ({run.returncode})"
     trace = []
@@ -26,7 +28,7 @@ def spike(name):
     raise AssertionError(f"{name}: Spike never wrote the result")
 
 def model(name):
-    cpu = Cpu((BUILD / f"{name}_spike.bin").read_bytes(), base=0x80000000)
+    cpu = Cpu((BUILD / f"{name}_spike.bin").read_bytes(), base=0x80000000, ids={0xF12: 5})
     trace = []
     for _ in range(20000):
         pc, instr, rd, value, store = cpu.step()
@@ -37,7 +39,7 @@ def model(name):
     raise AssertionError(f"{name}: model never wrote the result")
 
 def test_found_the_tests():
-    assert len(NAMES) >= 38, f"only {len(NAMES)} rv32ui tests built"
+    assert len(NAMES) >= 54, f"only {len(NAMES)} tests built"
 
 @pytest.mark.parametrize("name", NAMES)
 def test_model_matches_spike(name):
