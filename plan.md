@@ -73,7 +73,7 @@ chip.md              whole-chip spec
 Makefile             make check_tools | make tools | make all | make compare | make honesty | make console
 setup/               start_tools.sh, run.sh, check_tools.sh, get_tools.sh, tool_versions.txt
 helpers/             save_result.py, check_honesty.py, cocotb_run.py, cpu_model.py, transistor_charts.py,
-                     opamp_results.py, adc_spectrum.py, number_formats.py, eye_diagram.py
+                     opamp_sizing.py, opamp_results.py, adc_spectrum.py, mtbf.py, number_formats.py, eye_diagram.py
 projects/
   fifo_bridge/       async FIFO + skid buffer
   cpu/               5-stage RV32I
@@ -123,40 +123,59 @@ Each README has a short design review: what was tried, what failed, the numbers,
 
 ## Core projects
 
-### fifo_bridge
-- Design: Gray-code async FIFO (16 deep, 9 bits = 8 data + last), skid buffer with a registered `tready`, top-level bridge.
-- Tests: cocotb random traffic in both clock directions, 80k+ words, zero loss, duplication or reordering, AXI stability while stalled, and checks that the FIFO really filled and emptied.
-- Formal: SymbiYosys full proofs (PDR) of the FIFO and the skid buffer: no overflow or underflow, every word intact, full and empty never wrong in the dangerous direction, outputs hold while stalled. A bounded check of the joined bridge. Covers prove each rule is reached.
-- Signoff: as above, with the clock-crossing check as the main event.
-- `SIM=vcs` and `SIM=xcelium` targets are written but untested (no licence).
-- Broken copies: drop the word at the end of each memory lap, full check that inverts only the top Gray bit, output data that changes while stalled.
+The four core blocks are small on purpose, but each one is taken past the textbook version to the questions a product team actually asks: will it fail in silicon, how do we know, what did it cost, and what was the alternative.
 
-### cpu
-- Design: 5-stage RV32I with forwarding, load-use stall, branch flush, 2-bit branch predictor with a 16-entry BTB, performance counters, memory-mapped stream input.
-- Tests:
-  - `cpu_model.py` checked instruction by instruction against Spike on all 40 rv32ui tests.
-  - The same 40 tests on the cpu, every retired instruction checked in lockstep against the model.
-  - The filter firmware, timed with the cpu's own counters, outputs checked against a Python reference.
-- Signoff: as above, with Fault scan insertion and ATPG.
-- Layout: LibreLane RTL to GDS on IHP. Area, fmax and power after routing.
+### fifo_bridge: a clock-crossing block you could ship
+- Design: Gray-code async FIFO (16 deep, 8 data bits + last), skid buffer with a registered `tready`, top-level bridge.
+- Reset crossing done right: each side gets a reset synchronizer (asserts at once, releases on its own clock), and a reset on either side clears both pointers safely. This is the problem the clock-crossing tool flags on the plain textbook FIFO.
+- Metastability injection: the two-flop synchronizer has a simulation mode that randomly makes each captured bit resolve to the old or the new value, the way a real flop can. The cocotb traffic must still lose nothing. A copy that sends a binary pointer instead of Gray passes plain simulation but must fail under injection, which shows why the tests need it.
+- Synchronizer MTBF from transistor physics: ngspice sweeps data-to-clock timing on the real IHP flop netlist from the standard-cell library, `mtbf.py` fits the resolution time constant tau and the window T0 from the ngspice output, and the report gives MTBF for 2 and 3 flops at 10 and 50 MHz at each corner.
+- Tests: cocotb random traffic in both clock directions, 80k+ words, zero loss, duplication or reordering, AXI stability while stalled, and checks that the FIFO really filled and emptied.
+- Formal: full proofs (PDR) of the FIFO and the skid buffer, a 40-step bounded check of the joined bridge, and covers proving each rule is reached (the deepest at step 32).
+- Signoff: clock and reset crossing check with opencdc (it must see every crossing and recognize every synchronizer, not just report zero), a skew limit on the Gray bus in the timing constraints (bits must arrive within one destination period of each other), three-corner timing, power from simulation activity, eqy.
+- Depth sizing: the README works out the minimum depth for a given burst length and clock ratio, and the tests show the measured limit matches it.
+- Broken copies: drop the word at the end of each memory lap, full check that inverts only the top Gray bit, output data that changes while stalled, and (under injection) a binary pointer crossing.
+
+### cpu: a core verified against the ISA, not just a few tests
+- Design: 5-stage RV32I with forwarding, load-use stall, branch flush, 2-bit predictor with a 16-entry BTB, performance counters, memory-mapped stream input.
+- Machine mode: Zicsr, traps (illegal instruction, ecall, misaligned), timer and external interrupts, `wfi`. The filter firmware sleeps until a frame is ready instead of polling, and the power saving is measured.
+- Formal ISA check: an RVFI port and riscv-formal, so every instruction is proved against the RISC-V spec, plus its register, PC, causality and liveness checks.
+- Random programs: riscv-dv (its Python generator) writes random instruction streams, run in lockstep against the reference model, which is itself checked against Spike.
+- Compliance: rv32ui riscv-tests and riscv-arch-test.
+- Hardware and software together: one custom instruction (a multiply-accumulate on the custom-0 opcode) for the FIR. Measured cycles per frame and area, with and without it.
+- Measured trade-offs: CoreMark per MHz; BTB size (0, 4, 16, 64) against mispredictions and area; forwarding on and off against CPI.
+- Physical: LibreLane to GDS with IHP SRAM macros (1024 x 32) as instruction and data memory, full signoff checks, Fault scan insertion and ATPG coverage.
+- On a board: CoreMark and the filter on the Tang Nano 20K, results over UART.
 - Broken copies: no forwarding from MEM, missing load-use stall, no flush after a mispredict.
 
-### opamp
-- Design: two-stage Miller opamp sized from gm/Id charts, plus layout.
-- Tests: DC operating point; open-loop gain and GBW; closed loop at gain -1 into 2.05 pF with Tian phase margin, settling and slew; corners TT/SS/FF/SF/FS x temperature x supply +-10%, and 200 Monte Carlo runs.
-- Layout: KLayout DRC clean, Netgen LVS clean, post-layout extraction re-checked against the specs.
+### opamp: a sizing method you can trust, checked in its real load
+- Design: two-stage Miller opamp with a nulling resistor, plus layout with a common-centroid input pair, interdigitated mirrors and guard rings.
+- Sizing method: ngspice sweeps the real IHP transistors into gm/Id tables; `opamp_sizing.py` picks every W and L from the tables and the spec by arithmetic alone; ngspice then checks the result. The README reports predicted vs simulated values, so the method itself is tested.
+- In its real load: besides an ideal 2.05 pF cap, it is simulated driving the ADC's sampling switch and capacitor DAC, with the comparator's kickback.
+- Full spec set: gain, GBW, phase margin (Tian, in the real loop), slew, settling to half an LSB, output swing, input noise integrated over the ADC bandwidth against kT/C and the LSB, PSRR, CMRR, power.
+- Yield: corners (TT/SS/FF/SF/FS x temperature x supply +-10%) and 1000 Monte Carlo runs, giving the yield per spec, the combined yield and the worst corner.
+- Layout: DRC and LVS clean, extraction with Magic, pre- vs post-layout table.
+- A design-review comparison: Miller with a nulling resistor against indirect (cascode) compensation, measured settling, power and area.
 - An ideal two-pole model runs through the same scripts, to prove the measurement scripts are right.
 - Broken copies: phase margin under 20 deg, GBW/slew below spec, gain under 45 dB.
 
-### adc
-- Design: StrongARM comparator and binary capacitor DAC at transistor level, SAR logic + 64-sample framing in SystemVerilog, real-number model.
-- Tests: comparator delay, offset and noise; DAC settling; SAR logic in Verilator; mixed ngspice + digital simulation; coherent FFT (ENOB, SNDR, SFDR); histogram DNL/INL; offset and gain error.
+### adc: an architecture choice backed by energy numbers
+- Architecture study: conventional, monotonic and Vcm-based capacitor switching, compared on energy per conversion (from ngspice supply current), DAC area and linearity. The winner is chosen by those numbers.
+- Timing: asynchronous (self-timed) SAR logic against the 10 MHz synchronous version, compared on power, the clock it needs and the metastability rate.
+- Comparator: StrongARM latch; offset from Monte Carlo, noise from transient noise, kickback, and decision time vs input.
+- Full transistor-level FFT: coherent sine input, 128 points in quick mode and 1024 in full mode; ENOB, SNDR and SFDR at every corner; histogram DNL/INL; offset and gain error.
+- Where it stands: Walden and Schreier figures of merit, plotted on Murmann's published ADC survey (pinned revision) next to real published converters.
+- Layout: common-centroid MIM capacitor array and comparator, DRC/LVS clean, post-layout ENOB.
+- A real-number model fitted to the transistor results drives `whole_chip`.
 - An ideal 8-bit quantizer, run in Verilator, must score ENOB 8.0 +- 0.1.
 - Broken copies: +2 LSB comparator offset, 10% MSB cap mismatch, non-coherent test tone.
 
 ### whole_chip
 - The ADC model feeds the bridge, which feeds the cpu running the filter firmware, all in one Verilator run.
-- Checks: frames arrive intact, no overflow, the filter meets its cycle budget.
+- Checks: frames arrive intact, no overflow, the filter meets its cycle budget, the cpu sleeps between frames.
+
+### Continuous checking
+- A GitHub Actions workflow pulls the same image and runs the quick checks (unit tests, formal covers, broken copies, honesty check) on every push. The slow transistor runs stay local.
 
 ## Flagship projects
 
@@ -258,6 +277,9 @@ Tools already in `iic-osic-tools:2026.10` are used as the image ships them. Ever
 | Equivalence | eqy | image (0.70) |
 | Scan and test patterns | Fault | image (0.9.4) |
 | SRAM | IHP SRAM macros `RM_IHPSG13_1P_*` | image PDK |
+| ISA formal | riscv-formal | c992aa61fdfe |
+| Random programs | riscv-dv | f557b89ed688 |
+| ADC comparison | Murmann ADC survey | 00b4b855de5c (rev20260801) |
 | Clock crossings | opencdc | image |
 | CPU tests | riscv-tests | 3df703cd52d5 |
 | | riscv-arch-test | tag 3.10.0 |

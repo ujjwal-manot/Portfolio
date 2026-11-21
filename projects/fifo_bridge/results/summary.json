@@ -23,6 +23,14 @@
   "time": "2026-11-21 07:24:00",
   "values": {}
  },
+ "formal_bridge_check": {
+  "logs": {
+   "formal_bridge_check.log": "93b9c464c5f6e1380e8df9045910c5ece69aa779d05548be16a5298f06d7e71d"
+  },
+  "result": "pass",
+  "time": "2026-11-21 08:05:12",
+  "values": {}
+ },
  "formal_bridge_reach": {
   "logs": {
    "formal_bridge_reach.log": "1240afa10a63c2116bf384cc9beb86ab18c3b16fe5d514092e937888783cc1bf"
