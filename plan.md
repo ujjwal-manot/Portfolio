@@ -204,7 +204,7 @@ Each README has a design review: what was tried, what failed, the numbers, and w
 
 ### bandgap_ldo (core): the chip's own supply and reference
 - Design: bandgap reference on the 3.3 V supply using the process's PNP devices, with a start-up circuit and a trim network; capacitor-less LDO making 1.2 V from 3.3 V with a thick-oxide pass device, 0 to 20 mA.
-- Specs (my picks): reference temperature coefficient under 30 ppm/C from -40 to 125 C after trim; LDO PSRR better than 40 dB at 1 kHz and 20 dB at 1 MHz; regulation error plus droop on a 0 to 20 mA step in 100 ns under 40 mV, so the analog rail never drops below the 1.16 V the opamp needs (chip.md); stable across the whole load range with no external cap; quiescent current under 100 uA.
+- Specs: in chip.md (bandgap_ldo). My first picks were a 0 to 20 mA step in 100 ns with under 40 mV of droop and under 100 uA of quiescent current; chip.md explains why those were out of reach without an external capacitor and sets the targets from the analog rail's measured loads instead: rated 0 to 2 mA, the rail at or above 1.16 V through a 0.5 mA step and at or below 1.32 V after a 2 mA step, PSRR 40 dB at 1 kHz and 20 dB at 1 MHz, phase margin 45 deg at every load, 200 uA for bandgap and LDO together; reference tempco under 30 ppm/C from -40 to 125 C.
 - Studies: trim yield from Monte Carlo (how many trim bits are really needed); start-up from every supply ramp rate; stability across load with the loop gain measured by Tian's method.
 - Reliability: CVC confirms no thin-oxide device sees more than 1.32 V during start-up or any load step.
 - Layout: common-centroid PNP array and resistor matching, extracted re-check.

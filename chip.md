@@ -56,7 +56,7 @@ Test setup: inverting amplifier, Rin = Rf = 20 k, `inp` at 0.6 V, 2.05 pF load. 
 | Settling into the ADC's real capacitor DAC, through its switches | <= 1.56 mV at the end of the 200 ns sample |
 | Supply current | <= 500 uA |
 
-Requirement the opamp puts on `bandgap_ldo` (measured in `projects/opamp/results/corners.log`): at 1.08 V the output stops short of 1.0 V at the hot corners, at 1.16 V it reaches it at every corner. So the analog rail must stay at or above 1.16 V: with a 1.2 V target, regulation error plus load-step droop must stay under 40 mV, which is tighter than the 50 mV droop pick in `plan.md`.
+Requirement the opamp puts on `bandgap_ldo` (measured in `projects/opamp/results/corners.log`): at 1.08 V the output stops short of 1.0 V at the hot corners, at 1.16 V it reaches it at every corner. So the analog rail must stay at or above 1.16 V: with a 1.2 V target, regulation error plus load-step droop must stay under 40 mV, the bandgap_ldo section below takes this as its floor.
 
 ### adc
 
@@ -170,6 +170,29 @@ Firmware flips each code back with `code ^ 0xFF`, because the opamp inverts.
 | riscv-tests rv32ui | all pass, every retired instruction matches the model |
 | Clock | 50 MHz at the slow corner (1.08 V, 125 C) |
 | Filter (8-tap FIR + threshold per sample) | <= 3200 cycles per 64-sample frame |
+
+### bandgap_ldo
+
+```
+.subckt bandgap vref vg vdd vss trim3 trim2 trim1 trim0
+.subckt ldo vout fb vref vg vdd vss
+```
+
+Both run from the 3.3 V supply on thick-oxide devices. `vg` carries the bandgap's PTAT branch current to the LDO's bias mirrors; `fb` is tied to `vout` (unity gain).
+
+| Spec | Target |
+|---|---|
+| Bandgap tempco, -40 to 125 C, box method | <= 30 ppm/C at every corner, and in 99% of Monte Carlo runs |
+| LDO output | vref, about 1.206 V |
+| LDO rated load | 0 to 2 mA (the analog rail draws under 0.25 mA: the opamp's worst supply current is 0.225 mA in `projects/opamp/results/corners.log`) |
+| Rail through a 0 to 0.5 mA step in 100 ns (twice the opamp's worst current) | >= 1.16 V, the opamp's floor above |
+| Rail after a 2 mA step, and at start-up | <= 1.32 V, the thin-oxide limit |
+| Load regulation, 0 to 2 mA / line regulation, 3.0 to 3.6 V | <= 5 mV / <= 10 mV/V |
+| PSRR at 1 kHz / 1 MHz | >= 40 dB / >= 20 dB |
+| Phase margin, every load from 0 to 2 mA | >= 45 deg |
+| Bandgap and LDO current together | <= 200 uA |
+
+The first LDO pick in `plan.md` (0 to 20 mA in 100 ns with under 40 mV of droop, under 100 uA) is out of reach without an external capacitor: 40 mV on the 100 pF output is 4 pC, which a 20 mA ramp uses up in 6.3 ns, while the pass gate must swing about 0.5 V; and with a follower pass device the light-load output pole is its gm over the output capacitance, so the bleed current, not the compensation, sets how fast the loop can be at no load. Under 100 uA total the loop was either unstable at no load or let a 0.25 mA step pull the rail under 1.16 V. The targets above come from the loads the rail really has.
 
 ## Why these numbers
 
