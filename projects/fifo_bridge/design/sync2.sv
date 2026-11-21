@@ -1,4 +1,4 @@
-// Two-flop synchronizer; with METASTABLE defined (Icarus), a bit that changed in the 10 ns before the edge (half the fastest clock period, so one source change at most) randomly lands one cycle late.
+// Two-flop synchronizer; with METASTABLE defined (Icarus), a bit that changed 61.6 to 177.1 ps before the edge lands old or new at random, and one that changed later keeps its old value: the spread of the flip point of the extracted sg13g2_dfrbpq_1 over tt, ss and ff corners and both data edges, measured by make mtbf and checked against this file by mtbf/mtbf.py.
 module sync2 #(
   parameter int WIDTH = 1
 ) (
@@ -8,8 +8,10 @@ module sync2 #(
 );
   logic [WIDTH-1:0] meta;
 `ifdef METASTABLE
+  localparam real KEEP = 0.0616, TAKE = 0.1771;
   logic [WIDTH-1:0] late;
   int late_bits = 0;
+  realtime age;
   realtime changed [WIDTH];
   for (genvar i = 0; i < WIDTH; i++) begin : watch
     initial changed[i] = -1e9;
@@ -18,8 +20,11 @@ module sync2 #(
   always @(posedge clk or negedge rst_n)
     if (!rst_n) {q, meta} <= '0;
     else begin
-      for (int i = 0; i < WIDTH; i++) late[i] = $realtime - changed[i] < 10.0 && $urandom % 2;
-      late_bits += $countones(late);
+      for (int i = 0; i < WIDTH; i++) begin
+        age = $realtime - changed[i];
+        late[i] = age < KEEP || age < TAKE && $urandom % 2;
+        late_bits += age >= KEEP && late[i];
+      end
       {q, meta} <= {meta, d & ~late | meta & late};
     end
 `else

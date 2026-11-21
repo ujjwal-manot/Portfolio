@@ -46,7 +46,7 @@ module bridge_rules #(
   input logic       s_clk, m_clk, s_tvalid, s_tlast, m_tready,
   input logic [7:0] s_tdata
 );
-  logic       s_tready, m_tvalid, m_tlast, s_rst_n = 0, m_rst_n = 0, stalled = 0;
+  logic       s_tready, m_tvalid, m_tlast, rst_n = 0, stalled = 0;
   logic [7:0] m_tdata;
   logic [8:0] kept, held;
   logic [A+1:0] sent = 0, got = 0;
@@ -56,22 +56,21 @@ module bridge_rules #(
   fifo_bridge #(.DEPTH_LOG2(A)) dut (.*);
 
   always_ff @(posedge s_clk) begin
-    s_rst_n <= 1;
-    if (s_rst_n && s_tvalid && s_tready) begin
+    rst_n <= 1;
+    if (rst_n && s_tvalid && s_tready) begin
       sent <= sent + 1;
       if (sent == pick) kept <= {s_tlast, s_tdata};
     end
   end
 
   always_ff @(posedge m_clk) begin
-    m_rst_n <= 1;
     if (stalled) begin
       assert (m_tvalid && {m_tlast, m_tdata} == held);
       cover (got > 2);
     end
-    stalled <= m_rst_n && m_tvalid && !m_tready;
+    stalled <= m_tvalid && !m_tready;
     held <= {m_tlast, m_tdata};
-    if (m_rst_n && m_tvalid && m_tready) begin
+    if (m_tvalid && m_tready) begin
       got <= got + 1;
       if (got == pick) begin
         assert ({m_tlast, m_tdata} == kept);

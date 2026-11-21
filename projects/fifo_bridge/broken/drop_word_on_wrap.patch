@@ -1,11 +1,12 @@
+Expected failure: AssertionError: word 15: got 0x
 --- a/design/async_fifo.sv
 +++ b/design/async_fifo.sv
-@@ -29,7 +29,7 @@
-     end
+@@ -32,7 +32,7 @@
+     else {w_bin, w_gray, w_room} <= {w_bin_next, w_gray_next, w_gray_next != {~r_gray_w[A:A-1], r_gray_w[A-2:0]}};
  
    always_ff @(posedge w_clk)
 -    if (w_en & ~w_full) mem[w_bin[A-1:0]] <= w_data;
 +    if (w_en & ~w_full & w_bin[A-1:0] != '1) mem[w_bin[A-1:0]] <= w_data;
  
    always_ff @(posedge r_clk or negedge r_rst_n)
-     if (!r_rst_n) begin
+     if (!r_rst_n) {r_bin, r_gray, r_ready} <= '0;

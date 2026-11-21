@@ -1,6 +1,6 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.031 MB sources in 2 modules, into 0.054 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.017 s (elab=0.001, cvt=0.009, bld=0.000); cpu 0.016 s on 1 threads; allocated 22.922 MB
+- Verilator: Built from 0.045 MB sources in 3 modules, into 0.063 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.038 s (elab=0.001, cvt=0.022, bld=0.000); cpu 0.012 s on 1 threads; allocated 22.859 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo'
 ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
 ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
@@ -16,95 +16,83 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_f
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795242231
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795249394
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-2093345.50ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
-2093345.50ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-2094095.50ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs 100 ppm off nominal
+2090013.04ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2090013.04ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+2090013.04ns INFO     cocotb.async_fifo                  r_clk runs 200 ppm off nominal
+2090779.54ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 57, in fast_writer_slow_reader
-                                                            await traffic(dut, 21, 100, 20000, 0.9, 1.0)
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 44, in traffic
-                                                            assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 1: got 0x94, expected 0x6c
-                                                        assert 148 == 108
-2094095.50ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-2124702.00ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
+                                                            assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
+                                                        AssertionError: wrote past full: 17 words held in a 16-word FIFO
+                                                        assert 17 <= 16
+                                                         +  where 17 = len(deque([263, 22, 37, 43, 152, 139, ...]))
+2090779.54ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+2090779.54ns INFO     cocotb.async_fifo                  r_clk runs 984 ppm off nominal
+2117216.04ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 61, in similar_clocks
-                                                            await traffic(dut, 37, 41, 40000, 0.6, 0.6)
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 44, in traffic
-                                                            assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 453: got 0x1be, expected 0x15a
-                                                        assert 446 == 346
-2124702.00ns INFO     cocotb.regression                  *************************************************************************************************
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
+                                                            assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
+                                                        AssertionError: wrote past full: 17 words held in a 16-word FIFO
+                                                        assert 17 <= 16
+                                                         +  where 17 = len(deque([253, 301, 161, 284, 13, 114, ...]))
+2117216.04ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2093345.50           1.64    1274433.36  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         750.00           0.00     827657.44  **
-                                                        ** test_async_fifo.similar_clocks            FAIL       30606.50           0.02    1307173.10  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2090013.04           3.24     645912.22  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         766.50           0.00     463445.26  **
+                                                        ** test_async_fifo.similar_clocks            FAIL       26436.50           0.06     421167.82  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2124702.00           1.67    1271905.50  **
+                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2117216.04           3.31     639416.98  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
-F- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.064 MB sources in 4 modules, into 0.079 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.022 s (elab=0.001, cvt=0.012, bld=0.000); cpu 0.022 s on 1 threads; allocated 23.230 MB
-make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge'
-ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
-python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
-g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o fifo_bridge
-rm Vtop__ALL.verilator_deplist.tmp
-make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795242235
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795249400
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (1/3)
-680991.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
-680991.00ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (2/3)
-681842.00ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+     0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs -686 ppm off nominal
+2094703.16ns INFO     cocotb.async_fifo                  metastability injection delayed 90 pointer bits
+2094703.16ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2094703.16ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+2094703.16ns INFO     cocotb.async_fifo                  r_clk runs 856 ppm off nominal
+2095427.66ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 70, in fast_source_slow_sink
-                                                            await frames(dut, 20, 100, 100, 0.9, 0.7)
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 54, in frames
-                                                            assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 0: got (110, 0), expected (9, False)
-                                                        assert (110, 0) == (9, 0)
-681842.00ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (3/3)
-689243.50ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
+                                                            assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
+                                                        AssertionError: wrote past full: 17 words held in a 16-word FIFO
+                                                        assert 17 <= 16
+                                                         +  where 17 = len(deque([236, 384, 49, 177, 479, 355, ...]))
+2095427.66ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+2095427.66ns INFO     cocotb.async_fifo                  r_clk runs 598 ppm off nominal
+2109580.16ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 74, in near_equal_clocks
-                                                            await frames(dut, 37, 41, 200, 0.8, 0.8)
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 54, in frames
-                                                            assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 129: got (164, 0), expected (218, False)
-                                                        assert (164, 0) == (218, 0)
-689243.50ns INFO     cocotb.regression                  *************************************************************************************************
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py", line 37, in writer
+                                                            assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
+                                                        AssertionError: wrote past full: 17 words held in a 16-word FIFO
+                                                        assert 17 <= 16
+                                                         +  where 17 = len(deque([336, 320, 472, 303, 98, 275, ...]))
+2109580.16ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      680991.00           0.80     856037.37  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL         851.00           0.00     479142.12  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        7401.50           0.01     743576.33  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2094703.16          11.65     179745.30  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL         724.50           0.00     240709.83  **
+                                                        ** test_async_fifo.similar_clocks            FAIL       14152.50           0.04     380990.54  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                        689243.50           0.81     850909.19  **
+                                                        ** TESTS=3 PASS=1 FAIL=2 SKIP=0                       2109580.16          11.70     180323.60  **
                                                         *************************************************************************************************
-- :0: Verilog $finish
 F- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.030 MB sources in 2 modules, into 0.042 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.013 s (elab=0.000, cvt=0.007, bld=0.000); cpu 0.013 s on 1 threads; allocated 22.652 MB
+- Verilator: Walltime 0.029 s (elab=0.000, cvt=0.019, bld=0.000); cpu 0.009 s on 1 threads; allocated 22.789 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_skid_buffer_test_skid_buffer'
 ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
 ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
@@ -120,85 +108,233 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_f
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795242238
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795249420
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_skid_buffer.random_backpressure (1/3)
-752151.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
-752151.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
-756181.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
-756181.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
-766212.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
-766212.00ns INFO     cocotb.regression                  **********************************************************************************************************
+752331.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
+752331.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
+756361.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
+756361.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
+766392.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
+766392.00ns INFO     cocotb.regression                  **********************************************************************************************************
                                                         ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **********************************************************************************************************
-                                                        ** test_skid_buffer.random_backpressure               PASS      752151.00           0.92     813471.27  **
-                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    2337642.60  **
-                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01    1139569.62  **
+                                                        ** test_skid_buffer.random_backpressure               PASS      752331.00           1.97     382731.53  **
+                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    1028183.45  **
+                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01     938051.21  **
                                                         **********************************************************************************************************
-                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 766212.00           0.94     818255.81  **
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 766392.00           1.99     385936.75  **
                                                         **********************************************************************************************************
 - :0: Verilog $finish
-.
+.- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
+- Verilator: Built from 0.096 MB sources in 6 modules, into 0.094 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.024 s (elab=0.001, cvt=0.012, bld=0.000); cpu 0.014 s on 1 threads; allocated 23.289 MB
+make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge'
+ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
+python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o fifo_bridge
+rm Vtop__ALL.verilator_deplist.tmp
+make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795249429
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/4)
+243550.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
+243550.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (2/4)
+925164.23ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
+925164.23ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (3/4)
+926127.40ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 131, in fast_source_slow_sink
+                                                            await frames(dut, 20, 100, 100, 0.9, 0.7)
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 59, in frames
+                                                            assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
+                                                        AssertionError: word 0: got (216, 0), expected (6, False)
+                                                        assert (216, 0) == (6, 0)
+926127.40ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (4/4)
+937102.39ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 135, in near_equal_clocks
+                                                            await frames(dut, 37, 41, 200, 0.8, 0.8)
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 59, in frames
+                                                            assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
+                                                        AssertionError: word 205: got (35, 0), expected (242, False)
+                                                        assert (35, 0) == (242, 0)
+937102.39ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *************************************************************************************************
+                                                        ** test_fifo_bridge.reset_during_traffic     PASS      243550.00           0.44     550918.10  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      681614.23           1.32     516234.11  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL         963.17           0.00     370790.56  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL       10974.99           0.12      91951.91  **
+                                                        *************************************************************************************************
+                                                        ** TESTS=4 PASS=2 FAIL=2 SKIP=0                        937102.39           1.89     494891.00  **
+                                                        *************************************************************************************************
+- :0: Verilog $finish
+F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795249432
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/4)
+245950.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
+245950.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (2/4)
+927533.60ns INFO     cocotb.fifo_bridge                 metastability injection delayed 30 pointer bits
+927533.60ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
+927533.60ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (3/4)
+928621.00ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 131, in fast_source_slow_sink
+                                                            await frames(dut, 20, 100, 100, 0.9, 0.7)
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 59, in frames
+                                                            assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
+                                                        AssertionError: word 0: got (252, 0), expected (70, False)
+                                                        assert (252, 0) == (70, 0)
+928621.00ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (4/4)
+932801.19ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 135, in near_equal_clocks
+                                                            await frames(dut, 37, 41, 200, 0.8, 0.8)
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py", line 59, in frames
+                                                            assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
+                                                        AssertionError: word 63: got (76, 0), expected (183, True)
+                                                        assert (76, 0) == (183, 1)
+932801.19ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *************************************************************************************************
+                                                        ** test_fifo_bridge.reset_during_traffic     PASS      245950.00           1.49     164586.24  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      681583.60           4.53     150430.00  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        1087.40           0.01     149484.67  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        4180.19           0.03     162019.61  **
+                                                        *************************************************************************************************
+                                                        ** TESTS=4 PASS=2 FAIL=2 SKIP=0                        932801.19           6.07     153772.46  **
+                                                        *************************************************************************************************
+F
 =================================== FAILURES ===================================
 _______________________________ test_async_fifo ________________________________
 
     def test_async_fifo():
->       run("async_fifo", [DESIGN / "async_fifo.sv"], __file__)
+>       run("async_fifo", [DESIGN / "sync2.sv", DESIGN / "async_fifo.sv"], __file__)
 
-tests/test_async_fifo.py:64: 
+tests/test_async_fifo.py:75: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'async_fifo'
-sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv')]
+sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py'
-parameters = {}
+parameters = {}, plusargs = []
+runner = <cocotb_tools.runner.Verilator object at 0x7fd6fd0c2180>
+results = None, defines = {}, sim = None, waves = False
 
-    def run(top, sources, test_file, parameters={}):
-        sim = os.getenv("SIM", "verilator")
-        test_dir = Path(test_file).parent
-        build = test_dir.parent / "build" / f"{sim}_{top}_{Path(test_file).stem}"
-        runner = get_runner(sim)
-        runner.build(sources=sources, hdl_toplevel=top, build_dir=build, parameters=parameters, always=True, timescale=("1ns", "1ps"))
->       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, build_dir=build, test_dir=test_dir, parameters=parameters)
+    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False):
+        runner = runner or build(top, sources, test_file, parameters, defines, sim, waves)
+>       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=Path(test_file).parent, parameters=parameters,
+                    plusargs=plusargs, results_xml=results, waves=waves, extra_env={k: str(v) for k, v in defines.items()})
 E       SystemExit: 1
 
-../../../../helpers/cocotb_run.py:12: SystemExit
+../../../../helpers/cocotb_run.py:16: SystemExit
 ------------------------------ Captured log call -------------------------------
-INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo --top-module async_fifo --vpi --public-flat-rw --prefix Vtop -o async_fifo -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1ps /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo
+INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo --top-module async_fifo --vpi --public-flat-rw --prefix Vtop -o async_fifo -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo
 INFO     Verilator:runner.py:734 Running command make -j 4 -C /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo -f Vtop.mk VM_TRACE=0 in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo
 INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_async_fifo_test_async_fifo/async_fifo in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests
 ERROR    Verilator:runner.py:674 ERROR: Failed 2 of 3 tests.
+__________________________ test_async_fifo_metastable __________________________
+
+    def test_async_fifo_metastable():
+>       run("async_fifo", [DESIGN / "sync2.sv", DESIGN / "async_fifo.sv"], __file__, defines={"METASTABLE": 1}, sim="icarus")
+
+tests/test_async_fifo.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+top = 'async_fifo'
+sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv')]
+test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_async_fifo.py'
+parameters = {}, plusargs = []
+runner = <cocotb_tools.runner.Icarus object at 0x7fd6fbc16840>, results = None
+defines = {'METASTABLE': 1}, sim = 'icarus', waves = False
+
+    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False):
+        runner = runner or build(top, sources, test_file, parameters, defines, sim, waves)
+>       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=Path(test_file).parent, parameters=parameters,
+                    plusargs=plusargs, results_xml=results, waves=waves, extra_env={k: str(v) for k, v in defines.items()})
+E       SystemExit: 1
+
+../../../../helpers/cocotb_run.py:16: SystemExit
+------------------------------ Captured log call -------------------------------
+INFO     Icarus:runner.py:734 Running command iverilog -o /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_async_fifo_test_async_fifo_METASTABLE/sim.vvp -s async_fifo -g2012 -DMETASTABLE=1 -f /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_async_fifo_test_async_fifo_METASTABLE/cmds.f /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_async_fifo_test_async_fifo_METASTABLE
+INFO     Icarus:runner.py:734 Running command vvp -m /usr/local/lib/python3.12/dist-packages/cocotb/libs/libcocotbvpi_icarus.so /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_async_fifo_test_async_fifo_METASTABLE/sim.vvp -none in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests
+ERROR    Icarus:runner.py:674 ERROR: Failed 2 of 3 tests.
 _______________________________ test_fifo_bridge _______________________________
 
     def test_fifo_bridge():
->       run("fifo_bridge", [DESIGN / f for f in ("async_fifo.sv", "skid_buffer.sv", "fifo_bridge.sv")], __file__)
+>       run("fifo_bridge", SOURCES, __file__)
 
-tests/test_fifo_bridge.py:77: 
+tests/test_fifo_bridge.py:138: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'fifo_bridge'
-sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv'), PosixPath('/home/.../skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv')]
+sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/.../skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py'
-parameters = {}
+parameters = {}, plusargs = []
+runner = <cocotb_tools.runner.Verilator object at 0x7fd6fbca6a80>
+results = None, defines = {}, sim = None, waves = False
 
-    def run(top, sources, test_file, parameters={}):
-        sim = os.getenv("SIM", "verilator")
-        test_dir = Path(test_file).parent
-        build = test_dir.parent / "build" / f"{sim}_{top}_{Path(test_file).stem}"
-        runner = get_runner(sim)
-        runner.build(sources=sources, hdl_toplevel=top, build_dir=build, parameters=parameters, always=True, timescale=("1ns", "1ps"))
->       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, build_dir=build, test_dir=test_dir, parameters=parameters)
+    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False):
+        runner = runner or build(top, sources, test_file, parameters, defines, sim, waves)
+>       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=Path(test_file).parent, parameters=parameters,
+                    plusargs=plusargs, results_xml=results, waves=waves, extra_env={k: str(v) for k, v in defines.items()})
 E       SystemExit: 1
 
-../../../../helpers/cocotb_run.py:12: SystemExit
+../../../../helpers/cocotb_run.py:16: SystemExit
 ------------------------------ Captured log call -------------------------------
-INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge --top-module fifo_bridge --vpi --public-flat-rw --prefix Vtop -o fifo_bridge -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1ps /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/skid_buffer.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge
+INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge --top-module fifo_bridge --vpi --public-flat-rw --prefix Vtop -o fifo_bridge -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/reset_sync.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/skid_buffer.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge
 INFO     Verilator:runner.py:734 Running command make -j 4 -C /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge -f Vtop.mk VM_TRACE=0 in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge
 INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/verilator_fifo_bridge_test_fifo_bridge/fifo_bridge in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests
-ERROR    Verilator:runner.py:674 ERROR: Failed 2 of 3 tests.
+ERROR    Verilator:runner.py:674 ERROR: Failed 2 of 4 tests.
+_________________________ test_fifo_bridge_metastable __________________________
+
+    def test_fifo_bridge_metastable():
+>       run("fifo_bridge", SOURCES, __file__, defines={"METASTABLE": 1}, sim="icarus")
+
+tests/test_fifo_bridge.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+top = 'fifo_bridge'
+sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv'), PosixPath('/home/user/.../skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv')]
+test_file = '/home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests/test_fifo_bridge.py'
+parameters = {}, plusargs = []
+runner = <cocotb_tools.runner.Icarus object at 0x7fd6fbca55b0>, results = None
+defines = {'METASTABLE': 1}, sim = 'icarus', waves = False
+
+    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False):
+        runner = runner or build(top, sources, test_file, parameters, defines, sim, waves)
+>       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=Path(test_file).parent, parameters=parameters,
+                    plusargs=plusargs, results_xml=results, waves=waves, extra_env={k: str(v) for k, v in defines.items()})
+E       SystemExit: 1
+
+../../../../helpers/cocotb_run.py:16: SystemExit
+------------------------------ Captured log call -------------------------------
+INFO     Icarus:runner.py:734 Running command iverilog -o /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_fifo_bridge_test_fifo_bridge_METASTABLE/sim.vvp -s fifo_bridge -g2012 -DMETASTABLE=1 -f /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_fifo_bridge_test_fifo_bridge_METASTABLE/cmds.f /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/sync2.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/reset_sync.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/async_fifo.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/skid_buffer.sv /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/design/fifo_bridge.sv in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_fifo_bridge_test_fifo_bridge_METASTABLE
+INFO     Icarus:runner.py:734 Running command vvp -m /usr/local/lib/python3.12/dist-packages/cocotb/libs/libcocotbvpi_icarus.so /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/build/icarus_fifo_bridge_test_fifo_bridge_METASTABLE/sim.vvp -none in directory /home/user/Portfolio/projects/fifo_bridge/build/wrong_full_check/tests
+ERROR    Icarus:runner.py:674 ERROR: Failed 2 of 4 tests.
 =========================== short test summary info ============================
 FAILED tests/test_async_fifo.py::test_async_fifo - SystemExit: 1
+FAILED tests/test_async_fifo.py::test_async_fifo_metastable - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge - SystemExit: 1
-2 failed, 1 passed in 13.90s
+FAILED tests/test_fifo_bridge.py::test_fifo_bridge_metastable - SystemExit: 1
+4 failed, 1 passed in 81.68s (0:01:21)

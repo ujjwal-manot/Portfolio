@@ -21,12 +21,14 @@ bmc: abc bmc3
 cover: smtbmc yices
 
 [script]
-read -formal async_fifo.sv skid_buffer.sv fifo_bridge.sv fifo_rules.sv
+read -formal sync2.sv reset_sync.sv async_fifo.sv skid_buffer.sv fifo_bridge.sv fifo_rules.sv
 fifo: prep -top fifo_rules
 skid: prep -top skid_rules
 bridge: prep -top bridge_rules
 
 [files]
+../design/sync2.sv
+../design/reset_sync.sv
 ../design/async_fifo.sv
 ../design/skid_buffer.sv
 ../design/fifo_bridge.sv

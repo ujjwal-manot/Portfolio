@@ -1,3 +1,4 @@
+Expected failure: changed while m_tready was low
 --- a/design/skid_buffer.sv
 +++ b/design/skid_buffer.sv
 @@ -23,7 +23,7 @@

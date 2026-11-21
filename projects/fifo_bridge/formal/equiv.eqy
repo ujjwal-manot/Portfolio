@@ -1,0 +1,23 @@
+# Proves the mapped cell netlist from make timing does the same as the RTL, fragment by fragment between matching registers; flops with the same inputs and reset value are merged on both sides first, as synthesis does.
+[gold]
+read_verilog -sv ../design/sync2.sv ../design/reset_sync.sv ../design/async_fifo.sv ../design/skid_buffer.sv ../design/fifo_bridge.sv
+prep -flatten -top fifo_bridge
+memory_map
+opt_clean
+
+[gate]
+read_liberty -ignore_miss_func ../build/slow.lib
+read_verilog ../build/fifo_bridge_cells.v
+prep -flatten -top fifo_bridge
+
+[script]
+opt_merge -share_all
+async2sync
+
+[strategy sat]
+use sat
+depth 5
+
+[strategy pdr]
+use sby
+engine abc pdr

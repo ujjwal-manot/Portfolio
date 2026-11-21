@@ -1,4 +1,4 @@
-# Random traffic through async_fifo across unrelated clocks, with and without metastability injection; every word must come out once, in order.
+# Random traffic through async_fifo across unrelated clocks (random phase, random offset of 100 to 1000 ppm either way, as between two free-running oscillators), with and without metastability injection; every word must come out once, in order, the FIFO must never hold more than 16 words (DEPTH_LOG2 = 4), and it must run empty after data starts (the writer pauses halfway).
 import os
 import random
 from collections import deque
@@ -10,10 +10,14 @@ from cocotb_run import run
 
 DESIGN = Path(__file__).resolve().parents[1] / "design"
 METASTABLE = os.getenv("METASTABLE") == "1"
+DEPTH = 16
 
 async def traffic(dut, w_period, r_period, words, w_rate, r_rate):
+    ppm = random.choice((-1, 1)) * random.randrange(100, 1001, 2)
+    dut._log.info(f"r_clk runs {ppm} ppm off nominal")
     cocotb.start_soon(Clock(dut.w_clk, w_period, "ns").start())
-    cocotb.start_soon(Clock(dut.r_clk, r_period, "ns").start())
+    await Timer(random.randrange(1, r_period * 1000), "ps")
+    cocotb.start_soon(Clock(dut.r_clk, r_period * (1_000_000 + ppm), "fs").start())
     dut.w_en.value = dut.r_en.value = 0
     dut.w_rst_n.value = dut.r_rst_n.value = 0
     await Timer(3 * max(w_period, r_period), "ns")
@@ -30,7 +34,12 @@ async def traffic(dut, w_period, r_period, words, w_rate, r_rate):
             stats["full"] += int(dut.w_full.value)
             if en and not dut.w_full.value:
                 expected.append(data)
+                assert len(expected) <= DEPTH, f"wrote past full: {len(expected)} words held in a {DEPTH}-word FIFO"
                 sent += 1
+                if sent == words // 2:
+                    await FallingEdge(dut.w_clk)
+                    dut.w_en.value = 0
+                    await Timer(40 * max(w_period, r_period), "ns")
         await FallingEdge(dut.w_clk)
         dut.w_en.value = 0
 
@@ -39,7 +48,7 @@ async def traffic(dut, w_period, r_period, words, w_rate, r_rate):
         await FallingEdge(dut.r_clk)
         en = random.random() < r_rate
         dut.r_en.value = en
-        stats["empty"] += int(dut.r_empty.value)
+        stats["empty"] += int(dut.r_empty.value) and stats["read"] > 0
         if en and not dut.r_empty.value:
             assert expected, "FIFO says it has data but nothing was written"
             got, want = int(dut.r_data.value), expected.popleft()

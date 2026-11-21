@@ -1,4 +1,4 @@
-# Sends 64-sample frames through fifo_bridge between clocks with random phase and 350 ppm offset, with and without metastability injection, and checks reset, data, tlast and AXI-Stream stability.
+# Sends 64-sample frames through fifo_bridge between clocks with random phase and an exact 350 ppm offset, with and without metastability injection, resets it in the middle of traffic, and checks reset, data, tlast and AXI-Stream stability.
 import os
 import random
 from collections import deque
@@ -15,7 +15,7 @@ SOURCES = [DESIGN / f for f in ("sync2.sv", "reset_sync.sv", "async_fifo.sv", "s
 async def frames(dut, s_period, m_period, count, s_rate, m_rate):
     cocotb.start_soon(Clock(dut.s_clk, s_period * 1000, "ps").start())
     await Timer(random.randrange(1, m_period * 1000), "ps")
-    cocotb.start_soon(Clock(dut.m_clk, m_period * 1000 + m_period * 350 // 2000 * 2, "ps").start())
+    cocotb.start_soon(Clock(dut.m_clk, m_period * 1_000_350, "fs").start())
     dut.s_tvalid.value = dut.m_tready.value = 0
     dut.rst_n.value = 0
     await Timer(3 * max(s_period, m_period) + 7, "ns")
@@ -69,6 +69,58 @@ async def frames(dut, s_period, m_period, count, s_rate, m_rate):
         late = int(dut.fifo.w_to_r.late_bits.value) + int(dut.fifo.r_to_w.late_bits.value)
         dut._log.info(f"metastability injection delayed {late} pointer bits")
         assert late > 0, "injection never delayed a bit, so it was not tested"
+
+async def drive(dut, rate, send):
+    while True:
+        await FallingEdge(dut.s_clk)
+        dut.s_tvalid.value = random.random() < rate
+        dut.s_tdata.value, dut.s_tlast.value = send(), 0
+
+async def drain(dut, rate, got):
+    while True:
+        await FallingEdge(dut.m_clk)
+        dut.m_tready.value = random.random() < rate
+        await Timer(1, "ns")
+        if dut.m_tvalid.value and dut.m_tready.value:
+            got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
+
+@cocotb.test()
+async def reset_during_traffic(dut):
+    cocotb.start_soon(Clock(dut.s_clk, 100_000, "ps").start())
+    await Timer(random.randrange(1, 20_000), "ps")
+    cocotb.start_soon(Clock(dut.m_clk, 20_007_000, "fs").start())
+    dut.s_tvalid.value = dut.m_tready.value = 0
+    dut.rst_n.value = 0
+    await Timer(307, "ns")
+    dut.rst_n.value = 1
+    for _ in range(20):
+        got = []
+        tasks = [cocotb.start_soon(drive(dut, 0.9, lambda: random.getrandbits(8))), cocotb.start_soon(drain(dut, 0.3, got))]
+        await Timer(random.randrange(1, 4_000_000), "ps")
+        dut.rst_n.value = 0
+        for task in tasks:
+            task.cancel()
+        dut.s_tvalid.value = dut.m_tready.value = 0
+        await Timer(1, "ns")
+        assert not dut.s_tready.value and not dut.m_tvalid.value, "bridge handshakes right after reset asserts"
+        await Timer(random.randrange(1_000, 400_000), "ps")
+        assert not dut.s_tready.value and not dut.m_tvalid.value, "bridge handshakes while in reset"
+        dut.rst_n.value = 1
+        frame = [(random.getrandbits(8), int(i == 63)) for i in range(64)]
+        got = []
+        sink = cocotb.start_soon(drain(dut, 0.7, got))
+        for data, last in frame:
+            await FallingEdge(dut.s_clk)
+            dut.s_tvalid.value, dut.s_tdata.value, dut.s_tlast.value = 1, data, last
+            await Timer(1, "ns")
+            while not dut.s_tready.value:
+                await FallingEdge(dut.s_clk)
+                await Timer(1, "ns")
+        await FallingEdge(dut.s_clk)
+        dut.s_tvalid.value = 0
+        await Timer(3000, "ns")
+        sink.cancel()
+        assert got == frame, f"after reset got {len(got)} words, first {got[:3]}, expected the fresh 64-word frame"
 
 @cocotb.test()
 async def adc_clock_to_cpu_clock(dut):

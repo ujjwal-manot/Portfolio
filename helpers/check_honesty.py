@@ -1,6 +1,7 @@
-# Fails if the repo fakes results, hides failures, uses toy models, or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, hides failures, uses toy models, or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
+from save_result import sources
 
 SKIP = {".git", "node_modules", "build", "sim_build", "runs", "dist", "__pycache__", "third_party"}
 SPICE = {".sp", ".spice", ".cir"}
@@ -55,8 +56,13 @@ def python_problems(path, text):
                 yield "python_simulation", f"line {node.lineno} imports a circuit solver"
 
 
-def summary_problems(path):
+def summary_problems(path, root):
+    now = sources(path.resolve().parent.parent, root.resolve())
     for check, entry in json.loads(path.read_text()).items():
+        then = entry.get("sources", {})
+        changed = sorted(f for f in now.keys() | then.keys() if now.get(f) != then.get(f))
+        if changed:
+            yield "stale_result", f"{check} is older than {', '.join(changed[:3])}" + (f" and {len(changed) - 3} more" if len(changed) > 3 else "")
         if entry["result"] == "pass" and not entry["logs"]:
             yield "bad_log", f"{check} passes with no raw log"
         for log, digest in entry["logs"].items():
@@ -73,7 +79,7 @@ def find_problems(root):
     for path in files(root):
         rel = path.relative_to(root)
         if path.name == "summary.json":
-            problems += [(rule, rel, why) for rule, why in summary_problems(path)]
+            problems += [(rule, rel, why) for rule, why in summary_problems(path, root)]
             continue
         if "results" in rel.parts:
             continue

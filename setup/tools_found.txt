@@ -4,6 +4,7 @@ Icarus Verilog version 14.0 (devel) (s20260301-579-g15d870a5-dirty)
 Verilator 5.052 2026-09-05 rev v5.052
 Yosys 0.70 (git sha1 28ba3cb92, Release, GNU /usr/bin/c++ 13.3.0)
 SBY v0.70-dirty
+EQY v0.70-dirty
 OpenSTA 3.1.0
 OpenROAD 26Q4-407-geb14e40b7 
 LibreLane v3.1.0.dev3

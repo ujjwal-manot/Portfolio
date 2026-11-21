@@ -1,11 +1,12 @@
+Expected failure: AssertionError: bridge handshakes while in reset
 --- a/design/async_fifo.sv
 +++ b/design/async_fifo.sv
-@@ -26,7 +26,7 @@
+@@ -28,7 +28,7 @@
+   sync2 #(.WIDTH(A+1)) w_to_r (.clk(r_clk), .rst_n(r_rst_n), .d(w_gray), .q(w_gray_r));
+ 
    always_ff @(posedge w_clk or negedge w_rst_n)
-     if (!w_rst_n) begin
-       {w_bin, w_gray} <= '0;
--      w_full <= 1'b1;
-+      w_full <= 1'b0;
-     end else begin
-       {w_bin, w_gray} <= {w_bin_next, w_gray_next};
-       w_full <= w_gray_next == {~r_gray_w[A:A-1], r_gray_w[A-2:0]};
+-    if (!w_rst_n) {w_bin, w_gray, w_room} <= '0;
++    if (!w_rst_n) {w_bin, w_gray, w_room} <= {(2*A+2)'(0), 1'b1};
+     else {w_bin, w_gray, w_room} <= {w_bin_next, w_gray_next, w_gray_next != {~r_gray_w[A:A-1], r_gray_w[A-2:0]}};
+ 
+   always_ff @(posedge w_clk)

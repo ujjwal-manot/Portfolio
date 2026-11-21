@@ -1,0 +1,5 @@
+# Crossings cdc_check may accept in fifo_bridge: a pattern, a spaced colon, then why it is safe and which proof backs it.
+fifo.r_gray -> fifo.r_to_w.meta: * : Gray code, so one bit changes per read; proven by the FORMAL assertion in async_fifo.sv (make formal, fifo_proof); bit-to-bit skew bounded in timing.tcl
+fifo.w_gray -> fifo.w_to_r.meta: * : Gray code, so one bit changes per write; proven by the FORMAL assertion in async_fifo.sv (make formal, fifo_proof); bit-to-bit skew bounded in timing.tcl
+m_tdata on m_clk samples fifo.mem* through logic : a word is written at least two m_clk edges before the synchronized write pointer exposes it, so it is stable when read; every word arriving intact is proven in make formal (fifo_proof, bridge_check); path held under one m_clk period in timing.tcl
+out.skid on m_clk samples fifo.mem* through logic : same memory read as m_tdata, into the skid register; same proofs

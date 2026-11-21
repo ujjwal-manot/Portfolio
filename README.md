@@ -1,6 +1,8 @@
 # EdgeSense-130
 
-A chip design lab on the open IHP SG13G2 130 nm SiGe BiCMOS process, split evenly across three tracks. Everything is simulated, checked, signed off and laid out with open-source tools.
+A chip design lab on the open IHP SG13G2 130 nm SiGe BiCMOS process, split evenly across three tracks, built only with open-source tools.
+
+Built so far: fifo_bridge and cpu, both digital, simulated, mapped to IHP cells and timed; fifo_bridge is also formally checked. Neither is laid out yet. Everything else in the table below is planned in `plan.md` and not built yet.
 
 | Digital VLSI | Analog VLSI | Analog/mixed-signal |
 |---|---|---|
@@ -39,6 +41,6 @@ On Windows, run the same commands in WSL2. If you are already inside the iic-osi
 ## How results are kept honest
 
 - Every result in a project's `results/summary.json` lists the raw simulator logs behind it and their SHA-256 hashes. `make honesty` re-hashes them.
-- Each project carries three patches in `broken/` that break the design on purpose. Its tests must fail on all three.
+- Each project carries at least three patches in `broken/` that break the design on purpose. Its tests must fail on every one, and each patch names the failure message it must cause, so a copy that fails for some other reason does not count.
 - Only the real IHP models are used. Python never simulates a circuit.
 - Every behavioral model is checked against the transistor circuit it stands for before a system result uses it.

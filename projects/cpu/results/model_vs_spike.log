@@ -1,2 +1,9 @@
-.........................................
-41 passed in 3.76s
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/user/Portfolio/projects/cpu
+plugins: platformdirs-4.13.0, anyio-4.15.1, lambdalib-0.13.2
+collected 41 items
+
+tests/test_cpu_model.py .........................................
+
+============================== 41 passed in 4.12s ==============================

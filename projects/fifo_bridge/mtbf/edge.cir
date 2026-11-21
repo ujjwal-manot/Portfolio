@@ -1,0 +1,67 @@
+* Sends one data edge (corner and direction from corner.inc) into the extracted sg13g2_dfrbpq_1, driven and loaded by real cells, finds by bisection where capture flips, then records when Q last leaves a 10% band around its final level as the edge approaches that point from each side; run it from a folder holding corner.inc and dfrbpq_pex.spice.
+.include corner.inc
+.include sg13g2_stdcell.spice
+.include dfrbpq_pex.spice
+.param td=1.9n
+.csparam half={vsupply/2}
+.csparam vsupply={vsupply}
+.csparam rising={v1>v0}
+.options reltol=1e-7 abstol=1e-16 vntol=1e-10 method=gear maxord=2
+VDD vdd 0 {vsupply}
+VR rsrc 0 pulse(0 {vsupply} 0.5n 50p 50p 100n 200n)
+VC csrc 0 pwl(0 0 1n 0 1.05n {vsupply} 1.5n {vsupply} 1.55n 0 2n 0 2.05n {vsupply})
+VD dsrc 0 pulse({v0} {v1} {td} 50p 50p 100n 200n)
+XBC clk csrc vdd 0 sg13g2_buf_1
+XBD d dsrc vdd 0 sg13g2_buf_1
+XF1 vdd d q clk 0 rsrc dfrbpq_pex
+XF2 vdd q q2 clk 0 rsrc dfrbpq_pex
+.control
+let lo = 1.5n
+let hi = 2.5n
+let k = 0
+let mid = 0
+let gap = 0
+let t = 0
+let n = 0
+let miss = 0
+let side = 0
+let level = 0
+let tq = 0
+let tclk = 0
+let tdat = 0
+while k < 50
+  let mid = (lo + hi) / 2
+  alterparam td = $&mid
+  reset
+  tran 1p 6n
+  meas tran qend find v(q) at=5.9n
+  let miss = abs((qend > half) - rising)
+  if miss < 0.5
+    let lo = mid
+  else
+    let hi = mid
+  end
+  let k = k + 1
+end
+echo flip $&lo $&hi > edge.txt
+while side < 2
+  let n = 0
+  while n < 36
+    let gap = 100p * 10 ^ (-n / 3)
+    let t = lo - gap + side * (hi - lo + 2 * gap)
+    let level = vsupply * (0.1 + 0.8 * abs(rising - side))
+    let tq = -1
+    alterparam td = $&t
+    reset
+    tran 1p 6n
+    meas tran tclk when v(clk)=half rise=2
+    meas tran tq when v(q)=$&level cross=last
+    meas tran tdat when v(d)=half cross=1
+    echo $&side $&gap $&tq $&tclk $&tdat >> edge.txt
+    let n = n + 1
+  end
+  let side = side + 1
+end
+quit
+.endc
+.end

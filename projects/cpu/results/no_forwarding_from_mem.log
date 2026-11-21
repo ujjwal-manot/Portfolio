@@ -1,6 +1,6 @@
 .- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.058 MB sources in 3 modules, into 0.169 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.023 s (elab=0.002, cvt=0.015, bld=0.000); cpu 0.023 s on 1 threads; allocated 24.309 MB
+- Verilator: Walltime 0.041 s (elab=0.003, cvt=0.024, bld=0.000); cpu 0.028 s on 1 threads; allocated 24.324 MB
 make: Entering directory '/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu'
 ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
 ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
@@ -16,7 +16,7 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/no_forwarding_f
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795243808
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795248200
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
@@ -30,16 +30,16 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/no_forwarding_f
    320.00ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test_cpu.lockstep              FAIL         320.00           0.00     231178.13  **
+                                                        ** test_cpu.lockstep              FAIL         320.00           0.00     231723.87  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0                320.00           0.00     128716.85  **
+                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0                320.00           0.00     115083.37  **
                                                         **************************************************************************************
 - :0: Verilog $finish
 F
 =================================== FAILURES ===================================
 _______________________________ test_rv32ui[add] _______________________________
 
-runner = <cocotb_tools.runner.Verilator object at 0x7f838191dfd0>, name = 'add'
+runner = <cocotb_tools.runner.Verilator object at 0x7f4502603ad0>, name = 'add'
 
     @pytest.mark.parametrize("name", NAMES)
     def test_rv32ui(runner, name):
@@ -54,19 +54,19 @@ sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/no_forwarding_from
 test_file = '/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/test_cpu.py'
 parameters = {}
 plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/rv32ui/add.hex']
-runner = <cocotb_tools.runner.Verilator object at 0x7f838191dfd0>
+runner = <cocotb_tools.runner.Verilator object at 0x7f4502603ad0>
 results = '/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/add.result.xml'
+defines = {}, sim = None, waves = False
 
-    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None):
-        runner = runner or build(top, sources, test_file, parameters)
-        test_dir = Path(test_file).parent
->       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=test_dir, parameters=parameters,
-                    plusargs=plusargs, results_xml=results)
+    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False):
+        runner = runner or build(top, sources, test_file, parameters, defines, sim, waves)
+>       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=Path(test_file).parent, parameters=parameters,
+                    plusargs=plusargs, results_xml=results, waves=waves, extra_env={k: str(v) for k, v in defines.items()})
 E       SystemExit: 1
 
 ../../../../helpers/cocotb_run.py:16: SystemExit
 ------------------------------ Captured log setup ------------------------------
-INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu --top-module cpu_board --vpi --public-flat-rw --prefix Vtop -o cpu_board -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1ps /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/design/cpu.sv /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/cpu_board.sv in directory /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu
+INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu --top-module cpu_board --vpi --public-flat-rw --prefix Vtop -o cpu_board -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/design/cpu.sv /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests/cpu_board.sv in directory /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu
 INFO     Verilator:runner.py:734 Running command make -j 4 -C /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu -f Vtop.mk VM_TRACE=0 in directory /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu
 ------------------------------ Captured log call -------------------------------
 INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/verilator_cpu_board_test_cpu/cpu_board +program=/home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/build/rv32ui/add.hex in directory /home/user/Portfolio/projects/cpu/build/no_forwarding_from_mem/tests
@@ -74,4 +74,4 @@ ERROR    Verilator:runner.py:674 ERROR: Failed 1 of 1 tests.
 =========================== short test summary info ============================
 FAILED tests/test_cpu.py::test_rv32ui[add] - SystemExit: 1
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-1 failed, 1 passed in 6.80s
+1 failed, 1 passed in 15.56s

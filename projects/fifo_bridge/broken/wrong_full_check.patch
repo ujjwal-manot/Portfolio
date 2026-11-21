@@ -1,11 +1,12 @@
+Expected failure: AssertionError: wrote past full
 --- a/design/async_fifo.sv
 +++ b/design/async_fifo.sv
 @@ -29,7 +29,7 @@
-       w_full <= 1'b1;
-     end else begin
-       {w_bin, w_gray} <= {w_bin_next, w_gray_next};
--      w_full <= w_gray_next == {~r_gray_w[A:A-1], r_gray_w[A-2:0]};
-+      w_full <= w_gray_next == {~r_gray_w[A], r_gray_w[A-1:0]};
-     end
+ 
+   always_ff @(posedge w_clk or negedge w_rst_n)
+     if (!w_rst_n) {w_bin, w_gray, w_room} <= '0;
+-    else {w_bin, w_gray, w_room} <= {w_bin_next, w_gray_next, w_gray_next != {~r_gray_w[A:A-1], r_gray_w[A-2:0]}};
++    else {w_bin, w_gray, w_room} <= {w_bin_next, w_gray_next, w_gray_next != {~r_gray_w[A], r_gray_w[A-1:0]}};
  
    always_ff @(posedge w_clk)
+     if (w_en & ~w_full) mem[w_bin[A-1:0]] <= w_data;
