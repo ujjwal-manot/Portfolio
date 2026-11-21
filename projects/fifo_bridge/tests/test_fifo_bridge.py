@@ -1,4 +1,4 @@
-# Sends 64-sample frames through fifo_bridge between clocks with random phase and an exact 350 ppm offset, with and without metastability injection, resets it in the middle of traffic, feeds it like the ADC (a 50 kHz full-scale sine at 1 MS/s, samples dropped when not ready) and finds how long the CPU can pause before samples are lost.
+# Sends 64-sample frames through fifo_bridge between clocks with random phase and an exact 350 ppm offset, with and without metastability injection, resets it in the middle of traffic (every other reset with the bridge full, so both output registers hold a word), feeds it like the ADC (a 50 kHz full-scale sine at 1 MS/s, samples dropped when not ready) and finds how long the CPU can pause before samples are lost.
 import math
 import os
 import random
@@ -95,10 +95,15 @@ async def reset_during_traffic(dut):
     dut.rst_n.value = 0
     await Timer(307, "ns")
     dut.rst_n.value = 1
-    for _ in range(20):
+    for i in range(20):
         got = []
         tasks = [cocotb.start_soon(drive(dut, 0.9, lambda: random.getrandbits(8))), cocotb.start_soon(drain(dut, 0.3, got))]
         await Timer(random.randrange(1, 4_000_000), "ps")
+        if i % 2 == 0:
+            tasks[1].cancel()
+            dut.m_tready.value = 0
+            while dut.s_tready.value:
+                await FallingEdge(dut.s_clk)
         dut.rst_n.value = 0
         for task in tasks:
             task.cancel()
