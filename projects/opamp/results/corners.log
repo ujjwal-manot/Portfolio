@@ -1,0 +1,88 @@
+ff_125_hi a0_db=73.47 band_v_rms=8.845e-05 gbw_hz=2.963e+07 offset_v=0.001336 out_high_v=1.203 out_low_v=0.06699 pm_deg=64.72 psrr_1k_db=50.84 psrr_1m_db=24.17 settle_s=8.444e-08 slew_v_per_s=2.355e+07 supply_a=0.0002247 total_v_rms=0.0004654
+ff_125_lo a0_db=71.3 band_v_rms=8.732e-05 gbw_hz=2.892e+07 offset_v=0.0009451 out_high_v=0.9592 out_low_v=0.06727 pm_deg=64.63 psrr_1k_db=48.37 psrr_1m_db=23.94 settle_s=1.815e-07 slew_v_per_s=2.314e+07 supply_a=0.0002211 total_v_rms=0.0004543
+ff_125_min a0_db=72.27 band_v_rms=8.773e-05 gbw_hz=2.922e+07 offset_v=0.001088 out_high_v=1.053 out_low_v=0.06707 pm_deg=64.63 psrr_1k_db=49.42 psrr_1m_db=24.04 settle_s=8.699e-08 slew_v_per_s=2.336e+07 supply_a=0.0002228 total_v_rms=0.0004587
+ff_125_nom a0_db=72.62 band_v_rms=8.793e-05 gbw_hz=2.934e+07 offset_v=0.001154 out_high_v=1.098 out_low_v=0.06702 pm_deg=64.65 psrr_1k_db=49.81 psrr_1m_db=24.08 settle_s=8.971e-08 slew_v_per_s=2.342e+07 supply_a=0.0002233 total_v_rms=0.0004606
+ff_27_hi a0_db=77.43 band_v_rms=7.218e-05 gbw_hz=3.954e+07 offset_v=0.0005726 out_high_v=1.201 out_low_v=0.02393 pm_deg=63.64 psrr_1k_db=52.08 psrr_1m_db=26.57 settle_s=6.793e-08 slew_v_per_s=2.452e+07 supply_a=0.0002209 total_v_rms=0.0004072
+ff_27_lo a0_db=75.43 band_v_rms=7.132e-05 gbw_hz=3.843e+07 offset_v=0.0002392 out_high_v=0.9998 out_low_v=0.02394 pm_deg=63.56 psrr_1k_db=50.11 psrr_1m_db=26.32 settle_s=1.573e-07 slew_v_per_s=2.409e+07 supply_a=0.0002173 total_v_rms=0.0003986
+ff_27_min a0_db=76.21 band_v_rms=7.165e-05 gbw_hz=3.886e+07 offset_v=0.000359 out_high_v=1.087 out_low_v=0.0239 pm_deg=63.57 psrr_1k_db=50.82 psrr_1m_db=26.42 settle_s=7.517e-08 slew_v_per_s=2.433e+07 supply_a=0.0002186 total_v_rms=0.000402
+ff_27_nom a0_db=76.54 band_v_rms=7.179e-05 gbw_hz=3.904e+07 offset_v=0.0004153 out_high_v=1.13 out_low_v=0.02388 pm_deg=63.59 psrr_1k_db=51.15 psrr_1m_db=26.46 settle_s=7.48e-08 slew_v_per_s=2.44e+07 supply_a=0.0002192 total_v_rms=0.0004034
+ff_m40_hi a0_db=79.48 band_v_rms=6.059e-05 gbw_hz=4.909e+07 offset_v=0.0004669 out_high_v=1.201 out_low_v=0.01536 pm_deg=62.2 psrr_1k_db=53.19 psrr_1m_db=28.42 settle_s=6.031e-08 slew_v_per_s=2.456e+07 supply_a=0.0002201 total_v_rms=0.0003651
+ff_m40_lo a0_db=77.58 band_v_rms=5.994e-05 gbw_hz=4.745e+07 offset_v=0.0001747 out_high_v=1.02 out_low_v=0.0153 pm_deg=62.14 psrr_1k_db=51.31 psrr_1m_db=28.12 settle_s=1.098e-07 slew_v_per_s=2.428e+07 supply_a=0.000216 total_v_rms=0.000358
+ff_m40_min a0_db=78.32 band_v_rms=6.018e-05 gbw_hz=4.806e+07 offset_v=0.0002793 out_high_v=1.104 out_low_v=0.01532 pm_deg=62.16 psrr_1k_db=51.98 psrr_1m_db=28.23 settle_s=6.816e-08 slew_v_per_s=2.446e+07 supply_a=0.0002174 total_v_rms=0.0003608
+ff_m40_nom a0_db=78.64 band_v_rms=6.029e-05 gbw_hz=4.834e+07 offset_v=0.0003287 out_high_v=1.146 out_low_v=0.01533 pm_deg=62.16 psrr_1k_db=52.3 psrr_1m_db=28.28 settle_s=6.369e-08 slew_v_per_s=2.45e+07 supply_a=0.0002181 total_v_rms=0.000362
+fs_125_hi a0_db=74.89 band_v_rms=9.017e-05 gbw_hz=2.652e+07 offset_v=0.0009665 out_high_v=1.202 out_low_v=0.04135 pm_deg=65.67 psrr_1k_db=50.42 psrr_1m_db=23.15 settle_s=9.253e-08 slew_v_per_s=2.151e+07 supply_a=0.000217 total_v_rms=0.0004439
+fs_125_lo a0_db=69.4 band_v_rms=8.881e-05 gbw_hz=2.583e+07 offset_v=0.000532 out_high_v=0.9254 out_low_v=0.04266 pm_deg=65.56 psrr_1k_db=44.76 psrr_1m_db=22.85 settle_s=1.627e-07 slew_v_per_s=2.105e+07 supply_a=0.0002129 total_v_rms=0.0004326
+fs_125_min a0_db=73.29 band_v_rms=8.932e-05 gbw_hz=2.614e+07 offset_v=0.0007047 out_high_v=1.032 out_low_v=0.04175 pm_deg=65.57 psrr_1k_db=48.79 psrr_1m_db=23.02 settle_s=9.537e-08 slew_v_per_s=2.132e+07 supply_a=0.000215 total_v_rms=0.0004373
+fs_125_nom a0_db=73.84 band_v_rms=8.955e-05 gbw_hz=2.625e+07 offset_v=0.0007748 out_high_v=1.081 out_low_v=0.0416 pm_deg=65.59 psrr_1k_db=49.34 psrr_1m_db=23.06 settle_s=9.39e-08 slew_v_per_s=2.138e+07 supply_a=0.0002155 total_v_rms=0.0004392
+fs_27_hi a0_db=78.25 band_v_rms=7.354e-05 gbw_hz=3.524e+07 offset_v=0.000421 out_high_v=1.201 out_low_v=0.01795 pm_deg=64.73 psrr_1k_db=51.75 psrr_1m_db=25.54 settle_s=7.488e-08 slew_v_per_s=2.225e+07 supply_a=0.000214 total_v_rms=0.0003895
+fs_27_lo a0_db=76.06 band_v_rms=7.247e-05 gbw_hz=3.425e+07 offset_v=7.565e-05 out_high_v=0.9839 out_low_v=0.01798 pm_deg=64.65 psrr_1k_db=49.82 psrr_1m_db=25.29 settle_s=1.562e-07 slew_v_per_s=2.188e+07 supply_a=0.0002101 total_v_rms=0.000381
+fs_27_min a0_db=76.93 band_v_rms=7.287e-05 gbw_hz=3.463e+07 offset_v=0.0001993 out_high_v=1.077 out_low_v=0.01802 pm_deg=64.66 psrr_1k_db=50.53 psrr_1m_db=25.39 settle_s=7.672e-08 slew_v_per_s=2.209e+07 supply_a=0.0002116 total_v_rms=0.0003843
+fs_27_nom a0_db=77.29 band_v_rms=7.306e-05 gbw_hz=3.48e+07 offset_v=0.0002577 out_high_v=1.121 out_low_v=0.01802 pm_deg=64.68 psrr_1k_db=50.85 psrr_1m_db=25.43 settle_s=8.034e-08 slew_v_per_s=2.214e+07 supply_a=0.0002122 total_v_rms=0.0003858
+fs_m40_hi a0_db=80.28 band_v_rms=6.173e-05 gbw_hz=4.368e+07 offset_v=0.0003402 out_high_v=1.201 out_low_v=0.01218 pm_deg=63.65 psrr_1k_db=52.96 psrr_1m_db=27.38 settle_s=6.663e-08 slew_v_per_s=2.222e+07 supply_a=0.0002135 total_v_rms=0.0003505
+fs_m40_lo a0_db=78.26 band_v_rms=6.088e-05 gbw_hz=4.222e+07 offset_v=4.155e-05 out_high_v=1.011 out_low_v=0.01219 pm_deg=63.55 psrr_1k_db=51.2 psrr_1m_db=27.08 settle_s=1.221e-07 slew_v_per_s=2.201e+07 supply_a=0.0002092 total_v_rms=0.0003436
+fs_m40_min a0_db=79.03 band_v_rms=6.12e-05 gbw_hz=4.277e+07 offset_v=0.0001479 out_high_v=1.099 out_low_v=0.01216 pm_deg=63.58 psrr_1k_db=51.8 psrr_1m_db=27.2 settle_s=7.241e-08 slew_v_per_s=2.214e+07 supply_a=0.0002107 total_v_rms=0.0003463
+fs_m40_nom a0_db=79.37 band_v_rms=6.134e-05 gbw_hz=4.301e+07 offset_v=0.0001984 out_high_v=1.142 out_low_v=0.01217 pm_deg=63.59 psrr_1k_db=52.1 psrr_1m_db=27.25 settle_s=6.924e-08 slew_v_per_s=2.217e+07 supply_a=0.0002114 total_v_rms=0.0003475
+sf_125_hi a0_db=74.23 band_v_rms=9.358e-05 gbw_hz=2.574e+07 offset_v=0.0007723 out_high_v=1.202 out_low_v=0.05191 pm_deg=66.84 psrr_1k_db=50.2 psrr_1m_db=22.88 settle_s=9.559e-08 slew_v_per_s=2.104e+07 supply_a=0.000215 total_v_rms=0.0004494
+sf_125_lo a0_db=71.51 band_v_rms=9.223e-05 gbw_hz=2.514e+07 offset_v=0.0003452 out_high_v=0.9512 out_low_v=0.0524 pm_deg=66.75 psrr_1k_db=47.12 psrr_1m_db=22.65 settle_s=1.97e-07 slew_v_per_s=2.056e+07 supply_a=0.0002115 total_v_rms=0.0004387
+sf_125_min a0_db=72.94 band_v_rms=9.273e-05 gbw_hz=2.54e+07 offset_v=0.0005037 out_high_v=1.049 out_low_v=0.05208 pm_deg=66.76 psrr_1k_db=48.68 psrr_1m_db=22.76 settle_s=9.827e-08 slew_v_per_s=2.084e+07 supply_a=0.0002131 total_v_rms=0.000443
+sf_125_nom a0_db=73.32 band_v_rms=9.297e-05 gbw_hz=2.55e+07 offset_v=0.0005753 out_high_v=1.095 out_low_v=0.05201 pm_deg=66.77 psrr_1k_db=49.12 psrr_1m_db=22.79 settle_s=9.689e-08 slew_v_per_s=2.091e+07 supply_a=0.0002136 total_v_rms=0.0004448
+sf_27_hi a0_db=77.78 band_v_rms=7.65e-05 gbw_hz=3.404e+07 offset_v=0.0004417 out_high_v=1.201 out_low_v=0.0192 pm_deg=65.56 psrr_1k_db=51.62 psrr_1m_db=25.23 settle_s=7.729e-08 slew_v_per_s=2.158e+07 supply_a=0.0002119 total_v_rms=0.0003934
+sf_27_lo a0_db=75.74 band_v_rms=7.545e-05 gbw_hz=3.31e+07 offset_v=8.77e-05 out_high_v=0.9964 out_low_v=0.01916 pm_deg=65.49 psrr_1k_db=49.53 psrr_1m_db=24.98 settle_s=1.735e-07 slew_v_per_s=2.119e+07 supply_a=0.0002082 total_v_rms=0.0003851
+sf_27_min a0_db=76.54 band_v_rms=7.585e-05 gbw_hz=3.346e+07 offset_v=0.0002154 out_high_v=1.086 out_low_v=0.0192 pm_deg=65.5 psrr_1k_db=50.29 psrr_1m_db=25.08 settle_s=7.913e-08 slew_v_per_s=2.144e+07 supply_a=0.0002095 total_v_rms=0.0003884
+sf_27_nom a0_db=76.88 band_v_rms=7.603e-05 gbw_hz=3.362e+07 offset_v=0.0002753 out_high_v=1.129 out_low_v=0.01921 pm_deg=65.52 psrr_1k_db=50.64 psrr_1m_db=25.12 settle_s=8.093e-08 slew_v_per_s=2.149e+07 supply_a=0.0002101 total_v_rms=0.0003898
+sf_m40_hi a0_db=79.79 band_v_rms=6.429e-05 gbw_hz=4.208e+07 offset_v=0.0003585 out_high_v=1.201 out_low_v=0.01257 pm_deg=64.44 psrr_1k_db=52.78 psrr_1m_db=27.04 settle_s=6.89e-08 slew_v_per_s=2.141e+07 supply_a=0.000211 total_v_rms=0.000353
+sf_m40_lo a0_db=77.85 band_v_rms=6.346e-05 gbw_hz=4.07e+07 offset_v=5.03e-05 out_high_v=1.018 out_low_v=0.0126 pm_deg=64.37 psrr_1k_db=50.79 psrr_1m_db=26.75 settle_s=1.266e-07 slew_v_per_s=2.111e+07 supply_a=0.0002068 total_v_rms=0.0003463
+sf_m40_min a0_db=78.6 band_v_rms=6.378e-05 gbw_hz=4.121e+07 offset_v=0.0001611 out_high_v=1.104 out_low_v=0.01261 pm_deg=64.39 psrr_1k_db=51.5 psrr_1m_db=26.86 settle_s=7.289e-08 slew_v_per_s=2.13e+07 supply_a=0.0002083 total_v_rms=0.0003489
+sf_m40_nom a0_db=78.92 band_v_rms=6.392e-05 gbw_hz=4.144e+07 offset_v=0.0002133 out_high_v=1.146 out_low_v=0.0126 pm_deg=64.4 psrr_1k_db=51.84 psrr_1m_db=26.91 settle_s=7.077e-08 slew_v_per_s=2.134e+07 supply_a=0.000209 total_v_rms=0.0003501
+ss_125_hi a0_db=75.21 band_v_rms=9.523e-05 gbw_hz=2.323e+07 offset_v=0.0005196 out_high_v=1.201 out_low_v=0.03338 pm_deg=67.63 psrr_1k_db=49.74 psrr_1m_db=21.95 settle_s=1.035e-07 slew_v_per_s=1.927e+07 supply_a=0.0002088 total_v_rms=0.0004306
+ss_125_lo a0_db=66.14 band_v_rms=9.361e-05 gbw_hz=2.261e+07 offset_v=-4.35e-06 out_high_v=0.9097 out_low_v=0.03608 pm_deg=67.55 psrr_1k_db=40.57 psrr_1m_db=21.57 settle_s=1.764e-07 slew_v_per_s=1.877e+07 supply_a=0.0002047 total_v_rms=0.0004191
+ss_125_min a0_db=73.14 band_v_rms=9.424e-05 gbw_hz=2.291e+07 offset_v=0.0002323 out_high_v=1.024 out_low_v=0.03388 pm_deg=67.55 psrr_1k_db=47.57 psrr_1m_db=21.82 settle_s=1.066e-07 slew_v_per_s=1.907e+07 supply_a=0.0002067 total_v_rms=0.0004243
+ss_125_nom a0_db=74.03 band_v_rms=9.451e-05 gbw_hz=2.301e+07 offset_v=0.0003109 out_high_v=1.075 out_low_v=0.03367 pm_deg=67.57 psrr_1k_db=48.49 psrr_1m_db=21.86 settle_s=1.05e-07 slew_v_per_s=1.914e+07 supply_a=0.0002073 total_v_rms=0.0004261
+ss_27_hi a0_db=78.4 band_v_rms=7.778e-05 gbw_hz=3.063e+07 offset_v=0.0002935 out_high_v=1.201 out_low_v=0.0151 pm_deg=66.57 psrr_1k_db=51.3 psrr_1m_db=24.29 settle_s=8.437e-08 slew_v_per_s=1.965e+07 supply_a=0.0002061 total_v_rms=0.0003782
+ss_27_lo a0_db=76.03 band_v_rms=7.653e-05 gbw_hz=2.978e+07 offset_v=-7.27e-05 out_high_v=0.9777 out_low_v=0.0151 pm_deg=66.48 psrr_1k_db=49.1 psrr_1m_db=24.04 settle_s=1.699e-07 slew_v_per_s=1.933e+07 supply_a=0.0002021 total_v_rms=0.0003701
+ss_27_min a0_db=77.07 band_v_rms=7.7e-05 gbw_hz=3.011e+07 offset_v=5.93e-05 out_high_v=1.074 out_low_v=0.01504 pm_deg=66.5 psrr_1k_db=50.02 psrr_1m_db=24.14 settle_s=8.641e-08 slew_v_per_s=1.953e+07 supply_a=0.0002036 total_v_rms=0.0003733
+ss_27_nom a0_db=77.44 band_v_rms=7.722e-05 gbw_hz=3.025e+07 offset_v=0.0001212 out_high_v=1.119 out_low_v=0.01505 pm_deg=66.52 psrr_1k_db=50.36 psrr_1m_db=24.18 settle_s=8.556e-08 slew_v_per_s=1.958e+07 supply_a=0.0002043 total_v_rms=0.0003747
+ss_m40_hi a0_db=80.42 band_v_rms=6.535e-05 gbw_hz=3.784e+07 offset_v=0.0002338 out_high_v=1.2 out_low_v=0.01023 pm_deg=65.8 psrr_1k_db=52.56 psrr_1m_db=26.1 settle_s=7.548e-08 slew_v_per_s=1.947e+07 supply_a=0.0002053 total_v_rms=0.0003409
+ss_m40_lo a0_db=78.41 band_v_rms=6.432e-05 gbw_hz=3.66e+07 offset_v=-8.03e-05 out_high_v=1.008 out_low_v=0.01025 pm_deg=65.71 psrr_1k_db=50.71 psrr_1m_db=25.81 settle_s=1.372e-07 slew_v_per_s=1.925e+07 supply_a=0.000201 total_v_rms=0.0003341
+ss_m40_min a0_db=79.16 band_v_rms=6.471e-05 gbw_hz=3.706e+07 offset_v=3.2e-05 out_high_v=1.098 out_low_v=0.01025 pm_deg=65.74 psrr_1k_db=51.35 psrr_1m_db=25.92 settle_s=7.702e-08 slew_v_per_s=1.939e+07 supply_a=0.0002025 total_v_rms=0.0003368
+ss_m40_nom a0_db=79.5 band_v_rms=6.488e-05 gbw_hz=3.727e+07 offset_v=8.52e-05 out_high_v=1.141 out_low_v=0.01024 pm_deg=65.75 psrr_1k_db=51.66 psrr_1m_db=25.97 settle_s=7.63e-08 slew_v_per_s=1.942e+07 supply_a=0.0002032 total_v_rms=0.0003379
+tt_125_hi a0_db=74.58 band_v_rms=9.189e-05 gbw_hz=2.611e+07 offset_v=0.0008519 out_high_v=1.202 out_low_v=0.04596 pm_deg=66.26 psrr_1k_db=50.31 psrr_1m_db=23.01 settle_s=9.414e-08 slew_v_per_s=2.128e+07 supply_a=0.000216 total_v_rms=0.0004467
+tt_125_lo a0_db=70.85 band_v_rms=9.053e-05 gbw_hz=2.547e+07 offset_v=0.0004253 out_high_v=0.9388 out_low_v=0.04681 pm_deg=66.16 psrr_1k_db=46.34 psrr_1m_db=22.76 settle_s=1.782e-07 slew_v_per_s=2.082e+07 supply_a=0.0002122 total_v_rms=0.0004357
+tt_125_min a0_db=73.17 band_v_rms=9.104e-05 gbw_hz=2.575e+07 offset_v=0.000587 out_high_v=1.041 out_low_v=0.04627 pm_deg=66.17 psrr_1k_db=48.77 psrr_1m_db=22.88 settle_s=9.69e-08 slew_v_per_s=2.108e+07 supply_a=0.000214 total_v_rms=0.0004402
+tt_125_nom a0_db=73.61 band_v_rms=9.127e-05 gbw_hz=2.585e+07 offset_v=0.0006578 out_high_v=1.088 out_low_v=0.04616 pm_deg=66.19 psrr_1k_db=49.24 psrr_1m_db=22.92 settle_s=9.548e-08 slew_v_per_s=2.115e+07 supply_a=0.0002146 total_v_rms=0.000442
+tt_27_hi a0_db=78.01 band_v_rms=7.503e-05 gbw_hz=3.46e+07 offset_v=0.0004308 out_high_v=1.201 out_low_v=0.01851 pm_deg=65.15 psrr_1k_db=51.67 psrr_1m_db=25.38 settle_s=7.613e-08 slew_v_per_s=2.193e+07 supply_a=0.000213 total_v_rms=0.0003914
+tt_27_lo a0_db=75.9 band_v_rms=7.397e-05 gbw_hz=3.364e+07 offset_v=8.09e-05 out_high_v=0.99 out_low_v=0.01854 pm_deg=65.07 psrr_1k_db=49.68 psrr_1m_db=25.13 settle_s=1.664e-07 slew_v_per_s=2.155e+07 supply_a=0.0002091 total_v_rms=0.000383
+tt_27_min a0_db=76.73 band_v_rms=7.437e-05 gbw_hz=3.401e+07 offset_v=0.0002067 out_high_v=1.081 out_low_v=0.01845 pm_deg=65.09 psrr_1k_db=50.4 psrr_1m_db=25.23 settle_s=7.798e-08 slew_v_per_s=2.178e+07 supply_a=0.0002106 total_v_rms=0.0003863
+tt_27_nom a0_db=77.08 band_v_rms=7.455e-05 gbw_hz=3.417e+07 offset_v=0.0002658 out_high_v=1.125 out_low_v=0.01846 pm_deg=65.1 psrr_1k_db=50.74 psrr_1m_db=25.27 settle_s=8.077e-08 slew_v_per_s=2.183e+07 supply_a=0.0002112 total_v_rms=0.0003877
+tt_m40_hi a0_db=80.02 band_v_rms=6.303e-05 gbw_hz=4.281e+07 offset_v=0.0003491 out_high_v=1.201 out_low_v=0.01237 pm_deg=64.04 psrr_1k_db=52.86 psrr_1m_db=27.2 settle_s=6.78e-08 slew_v_per_s=2.182e+07 supply_a=0.0002122 total_v_rms=0.0003517
+tt_m40_lo a0_db=78.03 band_v_rms=6.218e-05 gbw_hz=4.14e+07 offset_v=4.535e-05 out_high_v=1.014 out_low_v=0.0124 pm_deg=63.96 psrr_1k_db=50.98 psrr_1m_db=26.91 settle_s=1.255e-07 slew_v_per_s=2.156e+07 supply_a=0.000208 total_v_rms=0.0003449
+tt_m40_min a0_db=78.79 band_v_rms=6.25e-05 gbw_hz=4.193e+07 offset_v=0.0001541 out_high_v=1.101 out_low_v=0.01238 pm_deg=63.98 psrr_1k_db=51.65 psrr_1m_db=27.02 settle_s=7.274e-08 slew_v_per_s=2.172e+07 supply_a=0.0002095 total_v_rms=0.0003476
+tt_m40_nom a0_db=79.13 band_v_rms=6.265e-05 gbw_hz=4.217e+07 offset_v=0.0002054 out_high_v=1.143 out_low_v=0.01236 pm_deg=64 psrr_1k_db=51.96 psrr_1m_db=27.07 settle_s=7.009e-08 slew_v_per_s=2.176e+07 supply_a=0.0002102 total_v_rms=0.0003487
+a0_db          worst 66.14 at ss_125_lo, spec >= 66: pass
+gbw_hz         worst 2.261e+07 at ss_125_lo, spec >= 2e+07: pass
+pm_deg         worst 62.14 at ff_m40_lo, spec >= 60: pass
+slew_v_per_s   worst 1.877e+07 at ss_125_lo, spec >= 1e+07: pass
+settle_s       worst 1.97e-07 at sf_125_lo, spec <= 2e-07: pass
+supply_a       worst 0.0002247 at ff_125_hi, spec <= 0.0005: pass
+out_low_v      worst 0.06707 at ff_125_min, spec <= 0.2: pass
+out_high_v     worst 1.024 at ss_125_min, spec >= 1: pass
+band_v_rms     worst 9.523e-05 at ss_125_hi
+total_v_rms    worst 0.0004654 at ff_125_hi
+psrr_1k_db     worst 40.57 at ss_125_lo
+psrr_1m_db     worst 21.57 at ss_125_lo
+swing at 1.08 V, not required: ff_125_lo out_low_v=0.06727 out_high_v=0.9592
+swing at 1.08 V, not required: ff_27_lo out_low_v=0.02394 out_high_v=0.9998
+swing at 1.08 V, not required: ff_m40_lo out_low_v=0.0153 out_high_v=1.02
+swing at 1.08 V, not required: fs_125_lo out_low_v=0.04266 out_high_v=0.9254
+swing at 1.08 V, not required: fs_27_lo out_low_v=0.01798 out_high_v=0.9839
+swing at 1.08 V, not required: fs_m40_lo out_low_v=0.01219 out_high_v=1.011
+swing at 1.08 V, not required: sf_125_lo out_low_v=0.0524 out_high_v=0.9512
+swing at 1.08 V, not required: sf_27_lo out_low_v=0.01916 out_high_v=0.9964
+swing at 1.08 V, not required: sf_m40_lo out_low_v=0.0126 out_high_v=1.018
+swing at 1.08 V, not required: ss_125_lo out_low_v=0.03608 out_high_v=0.9097
+swing at 1.08 V, not required: ss_27_lo out_low_v=0.0151 out_high_v=0.9777
+swing at 1.08 V, not required: ss_m40_lo out_low_v=0.01025 out_high_v=1.008
+swing at 1.08 V, not required: tt_125_lo out_low_v=0.04681 out_high_v=0.9388
+swing at 1.08 V, not required: tt_27_lo out_low_v=0.01854 out_high_v=0.99
+swing at 1.08 V, not required: tt_m40_lo out_low_v=0.0124 out_high_v=1.014
+every corner meets every spec

@@ -1,0 +1,17 @@
+broken_cascodes_removed a0_db=44.53 band_v_rms=7.917e-05 gbw_hz=3.08e+07 offset_v=0.01167 out_high_v=0.7248 out_low_v=0.5232 pm_deg=69.85 psrr_1k_db=17.63 psrr_1m_db=16.82 settle_s=9.029e-08 slew_v_per_s=1.523e+07 supply_a=0.0002134 total_v_rms=0.0003705
+a0_db          worst 44.53 at broken_cascodes_removed, spec >= 66: FAIL
+gbw_hz         worst 3.08e+07 at broken_cascodes_removed, spec >= 2e+07: pass
+pm_deg         worst 69.85 at broken_cascodes_removed, spec >= 60: pass
+slew_v_per_s   worst 1.523e+07 at broken_cascodes_removed, spec >= 1e+07: pass
+settle_s       worst 9.029e-08 at broken_cascodes_removed, spec <= 2e-07: pass
+supply_a       worst 0.0002134 at broken_cascodes_removed, spec <= 0.0005: pass
+out_low_v      worst 0.5232 at broken_cascodes_removed, spec <= 0.2: FAIL
+out_high_v     worst 0.7248 at broken_cascodes_removed, spec >= 1: FAIL
+band_v_rms     worst 7.917e-05 at broken_cascodes_removed
+total_v_rms    worst 0.0003705 at broken_cascodes_removed
+psrr_1k_db     worst 17.63 at broken_cascodes_removed
+psrr_1m_db     worst 16.82 at broken_cascodes_removed
+FAIL a0_db
+FAIL out_low_v
+FAIL out_high_v
+some corner misses a spec

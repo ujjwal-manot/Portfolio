@@ -1,0 +1,11 @@
+a0_db          yield 100.0% of 200 runs
+gbw_hz         yield 100.0% of 200 runs
+pm_deg         yield 100.0% of 200 runs
+slew_v_per_s   yield 100.0% of 200 runs
+settle_s       yield 100.0% of 200 runs
+supply_a       yield 100.0% of 200 runs
+out_low_v      yield 100.0% of 200 runs
+out_high_v     yield 100.0% of 200 runs
+combined       yield 100.0% of 200 runs
+offset_v       mean 0.0003751 sigma 0.002666 worst 0.008446
+combined yield meets 99%

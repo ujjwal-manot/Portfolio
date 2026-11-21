@@ -1,0 +1,3 @@
+loop a0_db 76.5879 fc_hz 1.58637E+07 pm_deg 65.3241 gbw_hz 3.42018E+07 ugf_hz 2.90801E+07
+step supply_a 0.000213102 rise_slew_v_per_s 2.47891E+07 fall_slew_v_per_s 2.17567E+07 rise_settle_s 8.06973E-08 fall_settle_s 7.7329E-08
+swing out_low_v 0.0186723 out_high_v 1.12402 offset_v 0.00161515

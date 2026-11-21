@@ -1,0 +1,22 @@
+review_opamp_indirect_ff_125_hi a0_db=70.72 band_v_rms=8.844e-05 gbw_hz=3.313e+07 offset_v=0.0015 out_high_v=1.203 out_low_v=0.132 pm_deg=82.63 psrr_1k_db=51.22 psrr_1m_db=44.3 settle_s=6.548e-08 slew_v_per_s=2.132e+07 supply_a=0.000175 total_v_rms=0.0008829
+review_opamp_indirect_ff_m40_lo a0_db=77.87 band_v_rms=5.994e-05 gbw_hz=5.264e+07 offset_v=0.0002557 out_high_v=1.041 out_low_v=0.0277 pm_deg=78.3 psrr_1k_db=51.59 psrr_1m_db=47.67 settle_s=7.647e-08 slew_v_per_s=2.383e+07 supply_a=0.0001644 total_v_rms=0.0008378
+review_opamp_indirect_sf_125_lo a0_db=71.09 band_v_rms=9.224e-05 gbw_hz=2.825e+07 offset_v=0.0005244 out_high_v=0.9971 out_low_v=0.09253 pm_deg=83.96 psrr_1k_db=48.21 psrr_1m_db=41.28 settle_s=1.285e-07 slew_v_per_s=2e+07 supply_a=0.0001634 total_v_rms=0.000924
+review_opamp_indirect_ss_125_lo a0_db=72.2 band_v_rms=9.366e-05 gbw_hz=2.542e+07 offset_v=0.0002323 out_high_v=0.9772 out_low_v=0.05664 pm_deg=84.91 psrr_1k_db=47.03 psrr_1m_db=39.74 settle_s=1.56e-07 slew_v_per_s=1.905e+07 supply_a=0.0001573 total_v_rms=0.0009098
+review_opamp_indirect_ss_125_min a0_db=73.61 band_v_rms=9.424e-05 gbw_hz=2.558e+07 offset_v=0.0003909 out_high_v=1.074 out_low_v=0.05647 pm_deg=85.26 psrr_1k_db=48.69 psrr_1m_db=41.04 settle_s=9.26e-08 slew_v_per_s=1.901e+07 supply_a=0.0001585 total_v_rms=0.0009621
+review_opamp_indirect_tt_27_nom a0_db=77.21 band_v_rms=7.456e-05 gbw_hz=3.785e+07 offset_v=0.000365 out_high_v=1.151 out_low_v=0.03256 pm_deg=82.3 psrr_1k_db=51.09 psrr_1m_db=45.49 settle_s=8.378e-08 slew_v_per_s=2.147e+07 supply_a=0.0001614 total_v_rms=0.0009405
+a0_db          worst 70.72 at review_opamp_indirect_ff_125_hi, spec >= 66: pass
+gbw_hz         worst 2.542e+07 at review_opamp_indirect_ss_125_lo, spec >= 2e+07: pass
+pm_deg         worst 78.3 at review_opamp_indirect_ff_m40_lo, spec >= 60: pass
+slew_v_per_s   worst 1.901e+07 at review_opamp_indirect_ss_125_min, spec >= 1e+07: pass
+settle_s       worst 1.56e-07 at review_opamp_indirect_ss_125_lo, spec <= 2e-07: pass
+supply_a       worst 0.000175 at review_opamp_indirect_ff_125_hi, spec <= 0.0005: pass
+out_low_v      worst 0.132 at review_opamp_indirect_ff_125_hi, spec <= 0.2: pass
+out_high_v     worst 1.074 at review_opamp_indirect_ss_125_min, spec >= 1: pass
+band_v_rms     worst 9.424e-05 at review_opamp_indirect_ss_125_min
+total_v_rms    worst 0.0009621 at review_opamp_indirect_ss_125_min
+psrr_1k_db     worst 47.03 at review_opamp_indirect_ss_125_lo
+psrr_1m_db     worst 39.74 at review_opamp_indirect_ss_125_lo
+swing at 1.08 V, not required: review_opamp_indirect_ff_m40_lo out_low_v=0.0277 out_high_v=1.041
+swing at 1.08 V, not required: review_opamp_indirect_sf_125_lo out_low_v=0.09253 out_high_v=0.9971
+swing at 1.08 V, not required: review_opamp_indirect_ss_125_lo out_low_v=0.05664 out_high_v=0.9772
+every corner meets every spec

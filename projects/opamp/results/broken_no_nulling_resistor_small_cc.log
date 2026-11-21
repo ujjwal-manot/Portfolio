@@ -1,0 +1,16 @@
+broken_no_nulling_resistor_small_cc a0_db=77.08 band_v_rms=7.455e-05 gbw_hz=2.37e+08 offset_v=0.0002658 out_high_v=1.125 out_low_v=0.01846 pm_deg=-1.351 psrr_1k_db=50.74 psrr_1m_db=41.8 settle_s=3.949e-07 slew_v_per_s=4.12e+07 supply_a=0.0002112 total_v_rms=0.00208
+a0_db          worst 77.08 at broken_no_nulling_resistor_small_cc, spec >= 66: pass
+gbw_hz         worst 2.37e+08 at broken_no_nulling_resistor_small_cc, spec >= 2e+07: pass
+pm_deg         worst -1.351 at broken_no_nulling_resistor_small_cc, spec >= 60: FAIL
+slew_v_per_s   worst 4.12e+07 at broken_no_nulling_resistor_small_cc, spec >= 1e+07: pass
+settle_s       worst 3.949e-07 at broken_no_nulling_resistor_small_cc, spec <= 2e-07: FAIL
+supply_a       worst 0.0002112 at broken_no_nulling_resistor_small_cc, spec <= 0.0005: pass
+out_low_v      worst 0.01846 at broken_no_nulling_resistor_small_cc, spec <= 0.2: pass
+out_high_v     worst 1.125 at broken_no_nulling_resistor_small_cc, spec >= 1: pass
+band_v_rms     worst 7.455e-05 at broken_no_nulling_resistor_small_cc
+total_v_rms    worst 0.00208 at broken_no_nulling_resistor_small_cc
+psrr_1k_db     worst 50.74 at broken_no_nulling_resistor_small_cc
+psrr_1m_db     worst 41.8 at broken_no_nulling_resistor_small_cc
+FAIL pm_deg
+FAIL settle_s
+some corner misses a spec
