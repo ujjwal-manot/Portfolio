@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, hides failures, uses toy models, or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, quotes README numbers its logs never show, hides failures, uses toy models, or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -73,11 +73,29 @@ def summary_problems(path, root):
                 yield "bad_log", f"{check}: {log} changed after the result was saved"
 
 
+def readme_problems(path):
+    for line in path.read_text().splitlines():
+        logs = re.findall(r"`(results/[^`]+)`", line)
+        if not line.startswith("|") or not logs:
+            continue
+        found = [p for pattern in logs for p in sorted(path.parent.glob(pattern))]
+        if not found:
+            yield "readme_claim", f"{', '.join(logs)} does not exist"
+            continue
+        text = "".join(p.read_text(errors="replace") for p in found)
+        claim = [c.strip() for c in line.strip().strip("|").split("|")][-2]
+        for number in re.findall(r"\d+(?:\.\d+)?", claim):
+            if number not in text:
+                yield "readme_claim", f"says {number} in '{claim}', which {', '.join(logs)} never shows"
+
+
 def find_problems(root):
     root = Path(root)
     problems = []
     for path in files(root):
         rel = path.relative_to(root)
+        if path.name == "README.md":
+            problems += [(rule, rel, why) for rule, why in readme_problems(path)]
         if path.name == "summary.json":
             problems += [(rule, rel, why) for rule, why in summary_problems(path, root)]
             continue

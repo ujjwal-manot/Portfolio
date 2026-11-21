@@ -1,4 +1,5 @@
-# Sends 64-sample frames through fifo_bridge between clocks with random phase and an exact 350 ppm offset, with and without metastability injection, resets it in the middle of traffic, and checks reset, data, tlast and AXI-Stream stability.
+# Sends 64-sample frames through fifo_bridge between clocks with random phase and an exact 350 ppm offset, with and without metastability injection, resets it in the middle of traffic, feeds it like the ADC (a 50 kHz full-scale sine at 1 MS/s, samples dropped when not ready) and finds how long the CPU can pause before samples are lost.
+import math
 import os
 import random
 from collections import deque
@@ -6,6 +7,7 @@ from pathlib import Path
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import FallingEdge, Timer
+import cocotb.utils
 from cocotb_run import run
 
 DESIGN = Path(__file__).resolve().parents[1] / "design"
@@ -121,6 +123,59 @@ async def reset_during_traffic(dut):
         await Timer(3000, "ns")
         sink.cancel()
         assert got == frame, f"after reset got {len(got)} words, first {got[:3]}, expected the fresh 64-word frame"
+
+async def adc(dut, count, accepted, dropped):
+    phase = random.random() * 2 * math.pi
+    for k in range(count):
+        for _ in range(9):
+            await FallingEdge(dut.s_clk)
+            dut.s_tvalid.value = 0
+        await FallingEdge(dut.s_clk)
+        sample = (round(127.5 + 127.5 * math.sin(2 * math.pi * 50e3 * k * 1e-6 + phase)), int(k % 64 == 63))
+        dut.s_tvalid.value, dut.s_tdata.value, dut.s_tlast.value = 1, *sample
+        await Timer(1, "ns")
+        (accepted if dut.s_tready.value else dropped).append(sample)
+    await FallingEdge(dut.s_clk)
+    dut.s_tvalid.value = 0
+
+async def cpu(dut, got, pause_at, pause_us):
+    while True:
+        await FallingEdge(dut.m_clk)
+        now = cocotb.utils.get_sim_time("us")
+        dut.m_tready.value = not pause_at <= now < pause_at + pause_us
+        await Timer(1, "ns")
+        if dut.m_tvalid.value and dut.m_tready.value:
+            got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
+
+async def adc_run(dut, count, pause_us):
+    dut.s_tvalid.value = dut.m_tready.value = 0
+    dut.rst_n.value = 0
+    await Timer(307, "ns")
+    dut.rst_n.value = 1
+    accepted, dropped, got = [], [], []
+    sink = cocotb.start_soon(cpu(dut, got, cocotb.utils.get_sim_time("us") + 20 + random.random(), pause_us))
+    await adc(dut, count, accepted, dropped)
+    await Timer(3, "us")
+    sink.cancel()
+    assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
+    return len(dropped)
+
+@cocotb.test()
+async def adc_samples_to_cpu(dut):
+    cocotb.start_soon(Clock(dut.s_clk, 100_000, "ps").start())
+    await Timer(random.randrange(1, 20_000), "ps")
+    cocotb.start_soon(Clock(dut.m_clk, 20_007_000, "fs").start())
+    assert await adc_run(dut, 256, 0) == 0, "the ADC lost samples with the CPU always ready"
+
+@cocotb.test()
+async def cpu_pause_limit(dut):
+    cocotb.start_soon(Clock(dut.s_clk, 100_000, "ps").start())
+    await Timer(random.randrange(1, 20_000), "ps")
+    cocotb.start_soon(Clock(dut.m_clk, 20_007_000, "fs").start())
+    lost = {pause: await adc_run(dut, 60, pause) for pause in range(14, 23)}
+    dut._log.info(f"samples lost per CPU pause in us: {lost}")
+    assert lost[16] == 0, "a 16 us CPU pause lost samples, but plan.md promises 16 us"
+    assert any(lost.values()), "no pause filled the bridge, so the depth limit was never reached"
 
 @cocotb.test()
 async def adc_clock_to_cpu_clock(dut):

@@ -1,4 +1,4 @@
-# Plants every kind of cheat in a scratch folder, including results older than their sources, and checks that check_honesty catches each one.
+# Plants every kind of cheat in a scratch folder, including results older than their sources and README numbers no log shows, and checks that check_honesty catches each one.
 import json, subprocess
 from check_honesty import find_problems
 from save_result import save
@@ -57,3 +57,13 @@ def test_result_goes_stale_when_a_source_changes_or_appears(tmp_path):
     design.write_text("// Top.\nmodule top; endmodule\n")
     write(tmp_path, "helpers/new.py", "# New.\n")
     assert rules(tmp_path) == ["stale_result"]
+
+def test_readme_numbers_must_come_from_their_logs(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    write(tmp_path, "proj/results/synth.log", "Chip area for module fifo_bridge: 16726.95\n")
+    readme = write(tmp_path, "proj/README.md", "| Check | Result | Where |\n|---|---|---|\n| Cells | 16726.95 um2 | `results/synth.log` |\n")
+    assert rules(tmp_path) == []
+    readme.write_text(readme.read_text().replace("16726.95", "15613"))
+    assert rules(tmp_path) == ["readme_claim"]
+    readme.write_text(readme.read_text().replace("synth.log", "timing.log"))
+    assert rules(tmp_path) == ["readme_claim"]

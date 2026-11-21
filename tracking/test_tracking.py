@@ -1,35 +1,35 @@
-# Tests the session logger and the branch decision rules from the career report.
-import csv, pytest
+# Tests the session logger and the per-track balance of hours and finished checks.
+import csv, subprocess, pytest
 from log_session import log
-from decide import decide
+from balance import split, behind, finished
+from save_result import save
 
-def sessions(energy):
-    return [{"project": p, "energy": str(e)} for p, e in energy.items()]
-
-def scores(each):
-    return [{"project": p, "endurance": s, "debugging": s, "interview": s, "sharing": s} for p, s in each.items()]
-
-def test_log_appends_rows_and_rejects_bad_input(tmp_path):
+def test_log_appends_rows_with_track_and_rejects_bad_input(tmp_path):
     f = tmp_path / "sessions.csv"
     log(f, "cpu", 2.5, 4, "yes", "no", "forwarding worked", "load-use bug")
     log(f, "adc", 1, 2, "no", "no", "fft", "corners")
     rows = list(csv.DictReader(f.open()))
-    assert [r["project"] for r in rows] == ["cpu", "adc"] and rows[0]["energy"] == "4"
+    assert [(r["project"], r["track"]) for r in rows] == [("cpu", "digital"), ("adc", "ams")] and rows[0]["energy"] == "4"
     for bad in [("gpu", 1, 3, "no", "no"), ("cpu", 1, 6, "no", "no"), ("cpu", 0, 3, "no", "no"), ("cpu", 1, 3, "maybe", "no")]:
         with pytest.raises(ValueError):
             log(f, *bad, "", "")
 
-def test_clear_winner_needs_15_percent():
-    branch, why = decide(sessions({"fifo_bridge": 5, "cpu": 5, "opamp": 3, "adc": 3}), scores({"fifo_bridge": 5, "cpu": 5, "opamp": 3, "adc": 3}))
-    assert branch == "digital" and "rule 1" in why[0]
-    branch, why = decide(sessions({"fifo_bridge": 3, "cpu": 3, "opamp": 5, "adc": 5}), scores({"fifo_bridge": 3, "cpu": 3, "opamp": 5, "adc": 5}))
-    assert branch == "analog" and "rule 1" in why[0]
+def test_whole_chip_hours_count_a_third_to_each_track():
+    totals = split([{"project": "opamp", "hours": "3"}, {"project": "whole_chip", "hours": "3"}], {"fifo_bridge": 4, "adc": 2})
+    assert totals == {"digital": (1.0, 4), "analog": (4.0, 0), "ams": (1.0, 2)}
 
-def test_close_scores_go_digital():
-    branch, why = decide(sessions({"fifo_bridge": 4, "cpu": 4, "opamp": 4, "adc": 4}), scores({"fifo_bridge": 4, "cpu": 4, "opamp": 4, "adc": 5}))
-    assert branch == "digital" and "rule 2" in why[0]
-    assert any("rule 4" in w for w in why)
+def test_a_track_more_than_10_percent_behind_the_leader_is_flagged():
+    assert behind({"digital": (10, 20), "analog": (9, 18), "ams": (9.5, 19)}) == []
+    assert behind({"digital": (10, 20), "analog": (8.9, 20), "ams": (10, 17)}) == [("analog", "hours"), ("ams", "checks")]
 
-def test_low_opamp_energy_rules_out_analog():
-    branch, why = decide(sessions({"fifo_bridge": 2, "cpu": 2, "opamp": 2, "adc": 5}), scores({"fifo_bridge": 2, "cpu": 2, "opamp": 5, "adc": 5}))
-    assert branch == "digital" and "rule 3" in why[0]
+def test_only_passing_checks_with_unchanged_sources_count(tmp_path):
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    p = tmp_path / "projects/opamp"
+    (p / "results").mkdir(parents=True)
+    (p / "opamp.cir").write_text("* opamp\n")
+    (p / "results/a.log").write_text("ok\n")
+    save(p / "results/summary.json", "ac", True, [p / "results/a.log"])
+    save(p / "results/summary.json", "noise", False, [p / "results/a.log"])
+    assert finished(p, tmp_path) == 1
+    (p / "opamp.cir").write_text("* opamp, changed\n")
+    assert finished(p, tmp_path) == 0

@@ -1,9 +1,10 @@
 # Appends one work session to sessions.csv: python3 log_session.py cpu 2.5 4 yes no "best moment" "worst moment"
 import csv, datetime, sys
 from pathlib import Path
+from balance import TRACK
 
-PROJECTS = ["fifo_bridge", "opamp", "cpu", "adc", "accelerator", "cache", "adc_10bit", "regulator", "pll"]
-FIELDS = ["date", "project", "hours", "energy", "lost_track_of_time", "extra_work", "best", "worst"]
+PROJECTS = [*TRACK, "whole_chip"]
+FIELDS = ["date", "project", "track", "hours", "energy", "lost_track_of_time", "extra_work", "best", "worst"]
 
 def log(path, project, hours, energy, lost_track, extra, best, worst):
     hours, energy = float(hours), int(energy)
@@ -15,7 +16,7 @@ def log(path, project, hours, energy, lost_track, extra, best, worst):
         out = csv.DictWriter(f, FIELDS)
         if new:
             out.writeheader()
-        out.writerow(dict(zip(FIELDS, [datetime.date.today(), project, hours, energy, lost_track, extra, best, worst])))
+        out.writerow(dict(zip(FIELDS, [datetime.date.today(), project, TRACK.get(project, "all"), hours, energy, lost_track, extra, best, worst])))
 
 if __name__ == "__main__":
     log(Path(__file__).parent / "sessions.csv", *sys.argv[1:])

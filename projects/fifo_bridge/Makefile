@@ -32,13 +32,16 @@ timing:
 
 power: timing
 	if $(PYTEST) tests/test_gates.py > results/test_gates.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_gates $$c results/test_gates.log
-	$(RUN) fst2vcd -f build/icarus_fifo_bridge_test_gates/fifo_bridge.fst -o build/gates.vcd > /dev/null
-	if (cd timing && $(RUN) sta -no_init -exit power.tcl) > results/power.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) power $$c results/power.log
+	for k in slow typ fast; do $(RUN) fst2vcd -f build/icarus_fifo_bridge_test_gates_*$${k^^}*/fifo_bridge.fst -o build/gates_$$k.vcd > /dev/null; \
+	  if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit power.tcl) > results/power_$$k.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) power_$$k $$c results/power_$$k.log; done
 
-cdc:
-	mkdir -p build results
+cdc: timing
 	$(RUN) yosys -q -p 'read_verilog -sv $(addprefix design/,sync2.sv reset_sync.sv async_fifo.sv skid_buffer.sv fifo_bridge.sv); prep -flatten -top fifo_bridge; memory_map; opt_clean; write_json build/cdc.json'
-	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc.json fifo_bridge cdc/waivers.txt s_tvalid=s_clk s_tdata=s_clk s_tlast=s_clk m_tready=m_clk > results/cdc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc $$c results/cdc.log
+	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_verilog build/fifo_bridge_cells.v; hierarchy -top fifo_bridge; write_json build/cdc_cells.json'
+	for n in cdc cdc_cells; do \
+	  if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/$$n.json fifo_bridge cdc/waivers.txt s_tvalid=s_clk s_tdata=s_clk s_tlast=s_clk m_tready=m_clk > results/$$n.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) $$n $$c results/$$n.log; done
 
 CORNER_tt := 1.2 27
 CORNER_ss := 1.08 125
@@ -56,7 +59,7 @@ equiv: timing
 
 build/mtbf/dfrbpq_pex.spice: mtbf/extract.tcl
 	mkdir -p build/mtbf results
-	if (cd mtbf && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc extract.tcl') > results/extract.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) extract $$c results/extract.log
+	(cd mtbf && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc extract.tcl') > results/extract.log 2>&1
 
 build/mtbf/%/edge.txt: mtbf/edge.cir build/mtbf/dfrbpq_pex.spice
 	mkdir -p $(@D)

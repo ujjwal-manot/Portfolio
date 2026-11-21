@@ -1,4 +1,4 @@
-// Two-flop synchronizer; with METASTABLE defined (Icarus), a bit that changed 61.6 to 177.1 ps before the edge lands old or new at random, and one that changed later keeps its old value: the spread of the flip point of the extracted sg13g2_dfrbpq_1 over tt, ss and ff corners and both data edges, measured by make mtbf and checked against this file by mtbf/mtbf.py.
+// Two-flop synchronizer; with METASTABLE defined (Icarus), a bit that changed 61.6 to 177.1 ps before the edge lands old or new at random, and one that changed later keeps its old value: the spread of the flip point of the extracted sg13g2_dfrbpq_1 over tt, ss and ff corners and both data edges, measured by make mtbf and checked against this file by mtbf/mtbf.py; under FORMAL any bit that changed since the last edge may land old or new, as the solver chooses.
 module sync2 #(
   parameter int WIDTH = 1
 ) (
@@ -27,6 +27,13 @@ module sync2 #(
       end
       {q, meta} <= {meta, d & ~late | meta & late};
     end
+`elsif FORMAL
+  logic [WIDTH-1:0] seen;
+  (* anyseq *) logic [WIDTH-1:0] pick;
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) {q, meta, seen} <= '0;
+    else {q, meta, seen} <= {meta, d & pick | seen & ~pick, d};
+  always_comb if (rst_n) cover (|((d ^ seen) & ~pick));
 `else
   always_ff @(posedge clk or negedge rst_n)
     if (!rst_n) {q, meta} <= '0;

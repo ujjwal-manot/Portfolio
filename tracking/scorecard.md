@@ -1,6 +1,6 @@
 # Scorecard
 
-Fill one row in `scores.csv` when you finish each project. Score each question 1 to 5. Energy is not typed in: `decide.py` takes the average energy from your sessions in `sessions.csv`.
+Fill one row in `scores.csv` when you finish each project. Score each question 1 to 5. Energy comes from your sessions in `sessions.csv`, not from this table.
 
 | Column | Question |
 |---|---|
@@ -17,9 +17,12 @@ python3 tracking/log_session.py cpu 2.5 4 yes no "forwarding finally worked" "lo
 
 Arguments: project, hours, energy 1 to 5, lost track of time (yes/no), did extra work nobody asked for (yes/no), best moment, worst moment.
 
-After the Semester 1 courses, run `python3 tracking/decide.py`. It applies the rules from the career report:
+Arguments for `whole_chip` work the same way; its hours count a third to each track.
 
-1. If digital (fifo_bridge + cpu) or analog (opamp + adc) is ahead by 15% or more, pick it.
-2. Otherwise pick digital and keep AMS verification as a bridge.
-3. If opamp energy is 2 or lower, analog is out regardless of the adc.
-4. If the adc is the top project, consider data converter design.
+Check the split at any time:
+
+```
+python3 tracking/balance.py
+```
+
+It prints hours and finished checks for digital, analog and AMS. A check counts as finished only if it passed and none of its sources changed since. It fails if any track is more than 10% behind the leader on either number, which is the signal to work on that track next.

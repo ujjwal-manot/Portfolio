@@ -5,6 +5,7 @@ dfflibmap -liberty ../build/slow.lib
 abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
 opt_clean -purge
 autoname
+rename -unescape t:sg13g2_*
 hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
 stat -liberty ../build/slow.lib
 write_verilog -noattr ../build/fifo_bridge_cells.v

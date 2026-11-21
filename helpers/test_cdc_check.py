@@ -1,17 +1,21 @@
-# Runs cdc_check on probe designs built by Yosys and checks it reports exactly the crossing problem each probe was written to have, and that waivers hide only what they match.
+# Runs cdc_check on probe designs built by Yosys, as RTL and mapped to IHP cells, and checks it reports exactly the crossing problem each probe was written to have, and that waivers hide only what they match.
 import subprocess, pytest
 from pathlib import Path
 from cdc_check import find
 
+LIB = "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib"
 PROBES = Path(__file__).resolve().parent.parent / "projects/fifo_bridge/cdc/probes"
 WANT = {"clean": [], "no_sync": ["logic_before_sync"], "logic_before_sync": ["logic_before_sync"], "meta_used": ["meta_fanout"],
-        "binary_bus": ["multibit"], "raw_reset": ["raw_reset"], "reset_from_a": ["reset_crossing"]}
+        "binary_bus": ["multibit"], "raw_reset": ["raw_reset"], "reset_from_a": ["reset_crossing"], "reset_sync_ok": []}
+
+MAP = {"rtl": "prep -flatten -top {}", "cells": f"read_liberty -lib {LIB}; synth -flatten -top {{}}; dfflibmap -liberty {LIB}; abc -liberty {LIB}; opt_clean; hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO"}
 
 @pytest.mark.parametrize("probe", sorted(WANT))
-def test_probe(probe, tmp_path):
+@pytest.mark.parametrize("level", sorted(MAP))
+def test_probe(probe, level, tmp_path):
     netlist = tmp_path / f"{probe}.json"
-    subprocess.run(["yosys", "-q", "-p", f"read_verilog -sv {PROBES / probe}.sv; prep -flatten -top {probe}; write_json {netlist}"], check=True)
-    ports = {"d": "b_clk" if probe in ("raw_reset", "reset_from_a") else "a_clk", "e": "a_clk"}
+    subprocess.run(["yosys", "-q", "-p", f"read_verilog -sv {PROBES / probe}.sv; {MAP[level].format(probe)}; write_json {netlist}"], check=True)
+    ports = {"d": "b_clk" if probe in ("raw_reset", "reset_from_a", "reset_sync_ok") else "a_clk", "e": "a_clk"}
     assert sorted({f[0] for f in find(netlist, probe, ports)}) == WANT[probe]
 
 def test_waivers_hide_only_what_they_match(tmp_path):

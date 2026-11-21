@@ -1,4 +1,4 @@
-# Top-level commands: make check_tools | self_test | all | honesty | compare | console
+# Top-level commands: make check_tools | self_test | all | honesty | balance | compare | console
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 RUN := setup/run.sh
@@ -17,10 +17,13 @@ all: self_test
 honesty:
 	$(RUN) python3 helpers/check_honesty.py
 
+balance:
+	$(RUN) python3 tracking/balance.py
+
 compare:
 	$(MAKE) -C compare_with_papers
 
 console:
 	$(MAKE) -C console
 
-.PHONY: check_tools self_test all honesty compare console
+.PHONY: check_tools self_test all honesty balance compare console

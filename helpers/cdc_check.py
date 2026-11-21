@@ -1,9 +1,10 @@
-# Reads a flattened Yosys JSON netlist and reports every clock domain crossing that is not a clean two-flop synchronizer, every multi-bit crossing, and every unsynchronized or foreign reset, minus waived crossings, and flags waivers that match nothing.
+# Reads a flattened Yosys JSON netlist, of RTL or of IHP SG13G2 cells, and reports every clock domain crossing that is not a clean two-flop synchronizer, every multi-bit crossing, and every unsynchronized or foreign reset, minus waived crossings, and flags waivers that match nothing.
 import fnmatch, json, re, sys
 from collections import defaultdict
 
-ASYNC = {"ARST", "SET", "CLR", "ALOAD", "AD"}
-PASS = {"$not", "$logic_not", "$_NOT_", "$buf", "$pos", "$_BUF_"}
+ASYNC = {"ARST", "SET", "CLR", "ALOAD", "AD", "RESET_B"}
+TIE = {"sg13g2_tiehi", "sg13g2_tielo"}
+PASS = {"$not", "$logic_not", "$_NOT_", "$buf", "$pos", "$_BUF_"} | {f"sg13g2_{c}_{n}" for c in ("inv", "buf") for n in (1, 2, 4, 8, 16)}
 
 def find(netlist, top, ports, waivers=()):
     m = json.load(open(netlist))["modules"][top]
@@ -50,7 +51,8 @@ def find(netlist, top, ports, waivers=()):
     def through(bit):
         while bit in driver and driver[bit][0] == "cell" and cells[driver[bit][1]]["type"] in PASS:
             bit = cells[driver[bit][1]]["connections"]["A"][0]
-        return driver.get(bit, ("const", bit))
+        src = driver.get(bit, ("const", bit))
+        return ("const", cells[src[1]]["type"]) if src[0] == "cell" and cells[src[1]]["type"] in TIE else src
 
     found, crossings = [], defaultdict(set)
     for f in sorted(flop):
