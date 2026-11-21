@@ -1,4 +1,4 @@
-# Checks the chart reader on made-up square-law devices whose threshold and gm/Id points are known exactly, and that it splits NMOS and PMOS columns by length and drain voltage.
+# Checks the chart reader on made-up square-law devices whose threshold and gm/Id points are known exactly, and that it splits NMOS and PMOS columns by length, drain voltage and source-to-bulk voltage.
 from transistor_charts import read, threshold, table
 
 VT, K = 0.4, 2e-3
@@ -29,7 +29,7 @@ def test_gm_over_id_points_land_where_square_law_puts_them():
 def test_reader_splits_devices_lengths_and_drain_voltages(tmp_path):
     line = lambda vg, n, p: " ".join(map(str, [vg, *n, *p]))
     f = tmp_path / "charts_tt_27.txt"
-    f.write_text("l 0.13u vds 0.05\n" + line(0.5, range(1, 10), range(11, 20)) + "\nl 2u vds 0.6\n" + line(0.6, range(21, 30), range(31, 40)) + "\n")
+    f.write_text("l 0.13u vds 0.05 vsb 0\n" + line(0.5, range(1, 10), range(11, 20)) + "\nl 2u vds 0.6 vsb 0.25\n" + line(0.6, range(21, 30), range(31, 40)) + "\n")
     data = read(f)
-    assert sorted(data) == [("n", 1.3e-07, 0.05), ("n", 2e-06, 0.6), ("p", 1.3e-07, 0.05), ("p", 2e-06, 0.6)]
-    assert data[("p", 2e-06, 0.6)][0] == {"vgs": 0.6, "ids": 31, "gm": 32, "gds": 33, "cgg": 34, "vth": 35, "vdss": 36, "fug": 37, "sid": 38, "sfl": 39}
+    assert sorted(data) == [("n", 1.3e-07, 0.05, 0.0), ("n", 2e-06, 0.6, 0.25), ("p", 1.3e-07, 0.05, 0.0), ("p", 2e-06, 0.6, 0.25)]
+    assert data[("p", 2e-06, 0.6, 0.25)][0] == {"vgs": 0.6, "ids": 31, "gm": 32, "gds": 33, "cgg": 34, "vth": 35, "vdss": 36, "fug": 37, "sid": 38, "sfl": 39}

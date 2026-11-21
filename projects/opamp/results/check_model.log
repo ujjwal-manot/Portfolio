@@ -1,0 +1,6 @@
+a0_db    measured 80 expected 80 ok
+fc_hz    measured 6.63155e+07 expected 6.63144e+07 ok
+pm_deg   measured 55.9068 expected 56.4562 ok
+gbw_hz   measured 1.59127e+08 expected 1.59127e+08 ok
+ugf_hz   measured 1.08083e+08 expected 1.08075e+08 ok
+two-pole model matches the arithmetic

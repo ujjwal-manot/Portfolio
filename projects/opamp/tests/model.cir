@@ -1,0 +1,10 @@
+* Ideal two-pole opamp (open-loop gain 10000, poles at 15.9 kHz and 100 MHz, buffered output) used only to prove the measurement testbenches return the loop gain, GBW and phase margin that arithmetic predicts for it.
+.subckt opamp inp inn out vdd vss ibias
+G1 0 n1 inp inn 1m
+R1 n1 0 1meg
+C1 n1 0 10p
+G2 0 n2 n1 0 1m
+R2 n2 0 10k
+C2 n2 0 159.2f
+E1 out 0 n2 0 1
+.ends opamp

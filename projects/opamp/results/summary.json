@@ -2,30 +2,83 @@
  "charts": {
   "logs": {
    "charts.log": "fd37dfbb75042bf43718a5f5c859dbbf14d25024cf372c914ec4c4724b36185f",
-   "charts_ff_125.txt": "ecaa2ccc8b4cc292f4fa7a62a1709d48f551e7ba2c7c4ffd7bed3f9b0388d177",
-   "charts_ff_27.txt": "9f73544cd3fcbfd1593e0226da6a67827dd76e99ed024454b1fdecd62411ca29",
-   "charts_ff_m40.txt": "4e176f39d09a38b6a6608b7ab0dc8886ac7e2eecc34965fd09ee1efe2b47a042",
-   "charts_fs_125.txt": "6f78d6f969f93d28e2c8fef3b83b1b279faeb70623faea6027f2cd309a066fac",
-   "charts_fs_27.txt": "9ebbf4a493703dc2e794d130d1c3725d6968d2fdf0b01ff44af1bd690c8757db",
-   "charts_fs_m40.txt": "cf70bf365f33f02a7408ea2535d1ac5b6651023841c666c5ef90467de9f16dae",
-   "charts_sf_125.txt": "2b13c5318eafdedf9c096ef01e1047d8fe4568384ca35d51c58a851882c84868",
-   "charts_sf_27.txt": "96b0e3f9cb7e5bea7999abe00fb4d19a4f994886e31a19914f8f946d13643712",
-   "charts_sf_m40.txt": "bf4d82c0c5b4d58504d32778efc0e2e861a25fcedc8470ba1d9514739108f30e",
-   "charts_ss_125.txt": "550414145459735284a4ecdbbd60504e37c06282f1860cc09f34d35b946a3536",
-   "charts_ss_27.txt": "21462f43820c71c22a85a948159b7f4496d43e6bb6b38df822d5f0279f5ad83a",
-   "charts_ss_m40.txt": "41201a1f7c5a57d940bb604f2743fb896966a299822ecdcebca1a0eb3af88982",
-   "charts_tt_125.txt": "ff3d6f0f12f5afb2af268fe24239042eb9105f82334b3f59ca0e0da1edc036f9",
-   "charts_tt_27.txt": "3b38ceee3ad61bd7251963ada49463d9e4034d4809623833587d48182b41d4f8",
-   "charts_tt_m40.txt": "50b3cb17379cb99a21673bf93f613e6798ab483e0d493c3371709eed27cba65b"
+   "charts_ff_125.txt": "731c1a5bd435db2f8464823883a48570fd4c80d4b9c68204f1828da82bb6d0fd",
+   "charts_ff_27.txt": "3a614cc67578a05ee595aedd7845f284aae6500a53bfbc4076a14d1ec04f1ea3",
+   "charts_ff_m40.txt": "43d71a01cb09c0ab2ff1f3a63c1025b9c16fa946918fd9ff7831aabb211b17ea",
+   "charts_fs_125.txt": "3085991498d07d9f86005b58f12e8b19ac877edec85c8c88215a63b537764b7c",
+   "charts_fs_27.txt": "d309fd3aab869882c29f2074fbc0b7f3938314bfec1eecdab4940f10bef6f74f",
+   "charts_fs_m40.txt": "ff1ad3b4fad9f24f8cfafbbe00fa11db0096aab36b02b44fc8f560c53f334e7d",
+   "charts_sf_125.txt": "3190fceec83572b60542914e31bb5771c2f9fcdb5897114377990464d71beb4b",
+   "charts_sf_27.txt": "e7e7b5a84b7dbfb97be4a68e62f131d9e790f3fc8fc731b9fd15bd04913ef00d",
+   "charts_sf_m40.txt": "dad5b09023b188692ffd1fc27a301c1fc5db853b07441fbc0041eafdb35104d4",
+   "charts_ss_125.txt": "eeae3059d7a26471cfb347b861afadde8fa6126b307a3a71bd229eb22fedc720",
+   "charts_ss_27.txt": "ad0c2b92403412edd7a7128454a42342a0f5589858ba4c6b0a7e2b699f750027",
+   "charts_ss_m40.txt": "4ebadee68bc07549d1c43930ca9782ba91efd80f8d39f97b1ae047b99ba4ba94",
+   "charts_tt_125.txt": "1324ca9948dc63fc6fd605a30f9ff9f42ee2e2ec9d6d49867b6914fa11c4a932",
+   "charts_tt_27.txt": "29e6f2e70f0c4f80f620d75869d6e153cb5dcd4bc9ed6459239ed9d028ec92e1",
+   "charts_tt_m40.txt": "a5ef4336d9fa8167704979830247e01ea0de71dc2c8d9ff866637c193c1c788f"
   },
   "result": "pass",
   "sources": {
+   "helpers/analog_results.py": "270d4f567ff2105753b9badc4ea06d9fddf6f042a6c0e20ad7d03aa5fc75be75",
+   "helpers/opamp_sizing.py": "562704802c2c933c6be964754d12299fe1cc009d8add694c5231a3c315149d4c",
    "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
-   "helpers/transistor_charts.py": "ce0b69a360dd4625237b78a7ee4f96c4d394be7c0609122cc7d1fa071317cde2",
-   "projects/opamp/Makefile": "3281b01c6cd950c86d4f1e2173074b6a1f071cf308dfb845747137416a4dd334",
-   "projects/opamp/tests/charts.cir": "832989bdb21d25063e2825a01a4fa3d1f47183e8ef762fc5c519444554104ea8"
+   "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
+   "projects/opamp/Makefile": "f17c0bbc96f04b535164e5749728ee2b3837d52f4d662770d78a1e44ed72de02",
+   "projects/opamp/design/opamp.cir": "c83693e5319eb0d40cc2ff70663f90c81c493025c96c496e4330e243f91ff1ae",
+   "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
+   "projects/opamp/tests/loop.cir": "a798a4f9186e3ec16d5770f45e43de6de94014c1af4fc26179a69553a2f8db42",
+   "projects/opamp/tests/model.cir": "9ef7ea9c496910d7cba1cbff77cf6575b7fd98a39f393141288f2f9cb46dcbdd",
+   "projects/opamp/tests/noise.cir": "d30d136cd0d49600fa697c4723d37bfb2d4e2eb7ea9b3e667ea7a922496ecb8c",
+   "projects/opamp/tests/step.cir": "c9284748d54b62bae4723212f47fdd51fc744da8a63fb3fbd4349c720ad02657",
+   "projects/opamp/tests/swing.cir": "efc814346b7f59bcb169737454dbd251a56e80b4829f2308d32c41f28cc64a81"
   },
-  "time": "2026-11-21 12:43:32",
+  "time": "2026-11-21 12:55:57",
+  "values": {}
+ },
+ "check_model": {
+  "logs": {
+   "check_model.log": "bb4660878ce73c83e62236a4451321ed9f3e5fc8c2fab8595681d10bae3d04f7",
+   "model.txt": "62901be0a265c8efb3bad675b37270dd6f2b0e5af15310bdbc2e503fab9625c0"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/analog_results.py": "270d4f567ff2105753b9badc4ea06d9fddf6f042a6c0e20ad7d03aa5fc75be75",
+   "helpers/opamp_sizing.py": "562704802c2c933c6be964754d12299fe1cc009d8add694c5231a3c315149d4c",
+   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
+   "projects/opamp/Makefile": "f17c0bbc96f04b535164e5749728ee2b3837d52f4d662770d78a1e44ed72de02",
+   "projects/opamp/design/opamp.cir": "c83693e5319eb0d40cc2ff70663f90c81c493025c96c496e4330e243f91ff1ae",
+   "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
+   "projects/opamp/tests/loop.cir": "a798a4f9186e3ec16d5770f45e43de6de94014c1af4fc26179a69553a2f8db42",
+   "projects/opamp/tests/model.cir": "9ef7ea9c496910d7cba1cbff77cf6575b7fd98a39f393141288f2f9cb46dcbdd",
+   "projects/opamp/tests/noise.cir": "d30d136cd0d49600fa697c4723d37bfb2d4e2eb7ea9b3e667ea7a922496ecb8c",
+   "projects/opamp/tests/step.cir": "c9284748d54b62bae4723212f47fdd51fc744da8a63fb3fbd4349c720ad02657",
+   "projects/opamp/tests/swing.cir": "efc814346b7f59bcb169737454dbd251a56e80b4829f2308d32c41f28cc64a81"
+  },
+  "time": "2026-11-21 12:56:01",
+  "values": {}
+ },
+ "sizing": {
+  "logs": {
+   "sizing.log": "16b55a32ecc4642b81e6b106f47cd2ebde4c7626ccaf1a867dba4f243a81f449"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/analog_results.py": "270d4f567ff2105753b9badc4ea06d9fddf6f042a6c0e20ad7d03aa5fc75be75",
+   "helpers/opamp_sizing.py": "562704802c2c933c6be964754d12299fe1cc009d8add694c5231a3c315149d4c",
+   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
+   "projects/opamp/Makefile": "f17c0bbc96f04b535164e5749728ee2b3837d52f4d662770d78a1e44ed72de02",
+   "projects/opamp/design/opamp.cir": "c83693e5319eb0d40cc2ff70663f90c81c493025c96c496e4330e243f91ff1ae",
+   "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
+   "projects/opamp/tests/loop.cir": "a798a4f9186e3ec16d5770f45e43de6de94014c1af4fc26179a69553a2f8db42",
+   "projects/opamp/tests/model.cir": "9ef7ea9c496910d7cba1cbff77cf6575b7fd98a39f393141288f2f9cb46dcbdd",
+   "projects/opamp/tests/noise.cir": "d30d136cd0d49600fa697c4723d37bfb2d4e2eb7ea9b3e667ea7a922496ecb8c",
+   "projects/opamp/tests/step.cir": "c9284748d54b62bae4723212f47fdd51fc744da8a63fb3fbd4349c720ad02657",
+   "projects/opamp/tests/swing.cir": "efc814346b7f59bcb169737454dbd251a56e80b4829f2308d32c41f28cc64a81"
+  },
+  "time": "2026-11-21 12:55:59",
   "values": {}
  }
 }

@@ -1,0 +1,55 @@
+* Steps the input of the real inverting loop from 1.0 to 0.2 V and back (output 0.2 to 1.0 V and back, a 0.8 V step each way, 1 ns edges), and writes the supply current with the output settled low and high (the larger), the 20 to 80% slew rate and the time to settle within half an LSB (1.5625 mV) of the final value for each direction to step.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+.include corner.inc
+.include sizes.inc
+.include dut.cir
+VDD vdd 0 {vsupply}
+VCM inp 0 0.6
+VIN in 0 pulse(1.0 0.2 50n 1n 1n 399n 1)
+IB vdd ibias 10u
+XRIN in inn 0 rhigh w={w_rf} l={l_rf}
+XRF inn out 0 rhigh w={w_rf} l={l_rf}
+XCL out 0 cap_cmim w={w_cl} l={l_cl}
+XOP inp inn out vdd 0 ibias opamp
+.control
+let idd = 0
+let idh = 0
+let lo = 0
+let hi = 0
+let dn = 0
+let r20 = 0
+let r80 = 0
+let f80 = 0
+let f20 = 0
+let ua = -1
+let ub = -1
+let da = -1
+let db = -1
+tran 0.1n 850n
+meas tran idd avg i(VDD) from=10n to=45n
+meas tran idh avg i(VDD) from=400n to=445n
+meas tran lo find v(out) at=45n
+meas tran hi find v(out) at=445n
+meas tran dn find v(out) at=845n
+let s20 = lo + 0.2 * (hi - lo)
+let s80 = lo + 0.8 * (hi - lo)
+meas tran r20 when v(out)=$&s20 rise=1
+meas tran r80 when v(out)=$&s80 rise=1
+meas tran f80 when v(out)=$&s80 fall=1
+meas tran f20 when v(out)=$&s20 fall=1
+let hb = hi - 1.5625m
+let ht = hi + 1.5625m
+let lb = dn - 1.5625m
+let lt = dn + 1.5625m
+meas tran ua when v(out)=$&hb cross=last from=50n to=445n
+meas tran ub when v(out)=$&ht cross=last from=50n to=445n
+meas tran da when v(out)=$&lt cross=last from=450n to=845n
+meas tran db when v(out)=$&lb cross=last from=450n to=845n
+let rise_settle = (ua > ub ? ua : ub) - 50n
+let fall_settle = (da > db ? da : db) - 450n
+let rise_slew = 0.6 * (hi - lo) / (r80 - r20)
+let fall_slew = 0.6 * (hi - lo) / (f20 - f80)
+let supply = (-idd > -idh ? -idd : -idh)
+echo step supply_a $&supply rise_slew_v_per_s $&rise_slew fall_slew_v_per_s $&fall_slew rise_settle_s $&rise_settle fall_settle_s $&fall_settle > step.txt
+quit
+.endc
+.end

@@ -1,0 +1,1 @@
+loop a0_db 80 fc_hz 6.63155E+07 pm_deg 55.9068 gbw_hz 1.59127E+08 ugf_hz 1.08083E+08
