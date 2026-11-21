@@ -1,0 +1,12 @@
+Expected failure: the core never slept in wfi
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -255,7 +255,7 @@
+       m_intr <= e_irq;
+       w_intr <= m_intr;
+       if (wake) asleep <= 1'b0;
+-      else if (e_commit && e_instr == WFI) asleep <= 1'b1;
++      else if (1'b0) asleep <= 1'b1;
+       if (e_trap) begin
+         {mepc, mcause, mtval} <= {e_pc, e_irq, 27'b0, trap_cause, e_irq ? 32'b0 : e_tval};
+         {mpie, mstatus_mie} <= {mstatus_mie, 1'b0};

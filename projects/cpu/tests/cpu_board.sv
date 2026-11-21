@@ -7,6 +7,8 @@ module cpu_board (
   output logic        retire_valid,
   output logic [31:0] retire_pc, retire_instr, retire_rd_data,
   output logic [4:0]  retire_rd,
+  output logic        retire_intr, sleep,
+  output logic [3:0]  retire_cause,
   output logic [31:0] dmem_addr, dmem_wdata,
   output logic [3:0]  dmem_wstrb
 );

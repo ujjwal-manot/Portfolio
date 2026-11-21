@@ -38,11 +38,7 @@ class Cpu:
         self.csr[low], self.csr[high] = value & M, value >> 32 & M
 
     def read_csr(self, addr):
-        if addr in SHADOW:
-            addr = SHADOW[addr]
-        if addr not in self.csr:
-            raise Trap(2)
-        return self.csr[addr]
+        return self.csr[SHADOW.get(addr, addr)]
 
     def write_csr(self, addr, value):
         if addr >> 10 == 3 or addr not in self.csr:
@@ -147,7 +143,9 @@ class Cpu:
             writes = f3 & 3 == 1 or rs1 != 0
             if writes and (addr >> 10 == 3 or addr not in self.csr and addr not in SHADOW):
                 raise Trap(2, i)
-            old = self.read_csr(addr) if rd or f3 & 3 != 1 else self.read_csr(addr) if addr in self.csr or addr in SHADOW else 0
+            if addr not in self.csr and addr not in SHADOW:
+                raise Trap(2, i)
+            old = self.read_csr(addr)
             if writes:
                 new = [0, src, old | src, old & ~src][f3 & 3]
                 self.write_csr(addr, new)

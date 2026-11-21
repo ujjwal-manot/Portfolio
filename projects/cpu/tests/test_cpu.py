@@ -1,4 +1,4 @@
-# Runs every rv32ui test on the cpu in lockstep with cpu_model.py: each retired instruction must match, and the test must report pass.
+# Runs every rv32ui test and every rv32mi machine-mode test (but breakpoint and pmpaddr, which test the optional debug triggers and PMP this cpu leaves out) on the cpu in lockstep with cpu_model.py: each retired instruction must match, and the test must report pass.
 import os
 from pathlib import Path
 import pytest
@@ -7,24 +7,19 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, RisingEdge, ReadOnly
 from cocotb_run import build, run
 from cpu_model import Cpu
+from lockstep import check, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
 SOURCES = [HERE.parent / "design" / "cpu.sv", HERE / "cpu_board.sv"]
-NAMES = sorted(p.stem for p in (BUILD / "rv32ui").glob("*.bin") if not p.stem.endswith("_spike"))
+SKIP = {"breakpoint", "pmpaddr"}
+NAMES = sorted(f"{s}/{p.stem}" for s in ("rv32ui", "rv32mi") for p in (BUILD / s).glob("*.bin") if not p.stem.endswith("_spike") and p.stem not in SKIP)
 RESULT = 0x10000100
-
-def hex_file(name):
-    image = (BUILD / "rv32ui" / f"{name}.bin").read_bytes()
-    path = BUILD / "rv32ui" / f"{name}.hex"
-    image += bytes(-len(image) % 4)
-    path.write_text("\n".join(f"{int.from_bytes(image[i:i + 4], 'little'):08x}" for i in range(0, len(image), 4)) + "\n")
-    return path
 
 @cocotb.test()
 async def lockstep(dut):
     name = os.environ["PROGRAM"]
-    model = Cpu((BUILD / "rv32ui" / f"{name}.bin").read_bytes())
+    model = Cpu((BUILD / f"{name}.bin").read_bytes(), io_read=lambda addr: int(dut.retire_rd_data.value))
     cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
     dut.s_tvalid.value = 0
     dut.rst_n.value = 0
@@ -34,11 +29,7 @@ async def lockstep(dut):
     for cycle in range(100000):
         await RisingEdge(dut.clk)
         await ReadOnly()
-        if dut.retire_valid.value:
-            got = tuple(int(s.value) for s in (dut.retire_pc, dut.retire_instr, dut.retire_rd, dut.retire_rd_data))
-            want = model.step()[:4]
-            assert got == want, f"{name} instruction {retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in want]}"
-            retired += 1
+        retired = check(dut, model, retired, name)
         if int(dut.dmem_wstrb.value) and int(dut.dmem_addr.value) == RESULT:
             code = int(dut.dmem_wdata.value)
             assert code == 1, f"{name} failed test case {code >> 1}"
@@ -51,9 +42,9 @@ def runner():
     return build("cpu_board", SOURCES, __file__)
 
 def test_found_the_tests():
-    assert len(NAMES) >= 38
+    assert len(NAMES) >= 52
 
 @pytest.mark.parametrize("name", NAMES)
-def test_rv32ui(runner, name):
+def test_isa(runner, name):
     os.environ["PROGRAM"] = name
-    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(name)}"], runner=runner, results=str(BUILD / f"{name}.result.xml"))
+    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / f'{name}.bin')}"], runner=runner, results=str(BUILD / f"{name}.result.xml"))

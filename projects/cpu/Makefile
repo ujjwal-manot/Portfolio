@@ -1,4 +1,4 @@
-# cpu commands: make firmware | model | test | filter | timing | broken | all
+# cpu commands: make firmware | model | test | interrupts | filter | timing | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -8,14 +8,19 @@ PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers SIM=$(SIM) python3 -m pytest -q 
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 LIB := /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_slow_1p08V_125C.lib
 RISCV_TESTS := 3df703cd52d5f0d8224e3c50bf03c6cb70efff98
+RISCV_TEST_ENV := 6de71edb142be36319e380ce782c3d1830c65d68
 
-all: model test filter timing broken
+all: model test interrupts filter timing broken
 
 build/riscv-tests/isa/rv32ui/add.S:
 	mkdir -p build/riscv-tests
 	cd build/riscv-tests && git init -q && git fetch -q --depth 1 https://github.com/riscv-software-src/riscv-tests.git $(RISCV_TESTS) && git checkout -q FETCH_HEAD
 
-firmware: build/riscv-tests/isa/rv32ui/add.S
+build/riscv-test-env/p/riscv_test.h:
+	mkdir -p build/riscv-test-env
+	cd build/riscv-test-env && git init -q && git fetch -q --depth 1 https://github.com/riscv/riscv-test-env.git $(RISCV_TEST_ENV) && git checkout -q FETCH_HEAD
+
+firmware: build/riscv-tests/isa/rv32ui/add.S build/riscv-test-env/p/riscv_test.h
 	$(RUN) firmware/build.sh
 
 model: firmware
@@ -24,7 +29,11 @@ model: firmware
 
 test: firmware
 	mkdir -p results
-	if $(PYTEST) tests/test_cpu.py > results/test_rv32ui.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_rv32ui $$c results/test_rv32ui.log
+	if $(PYTEST) tests/test_cpu.py > results/test_isa.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_isa $$c results/test_isa.log
+
+interrupts: firmware
+	mkdir -p results
+	if $(PYTEST) tests/test_interrupts.py > results/test_interrupts.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_interrupts $$c results/test_interrupts.log
 
 filter: firmware
 	mkdir -p results
@@ -39,8 +48,10 @@ timing:
 broken: firmware
 	mkdir -p results
 	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/$$n; mkdir -p $$d/build; cp -r design tests $$d; \
-	  cp build/filter.* $$d/build; ln -sfn $(CURDIR)/build/rv32ui $$d/build/rv32ui; patch -s -d $$d -p1 < $$p; \
-	  if (cd $$d && $(PYTEST) -x tests/test_cpu.py tests/test_filter.py) > results/$$n.log 2>&1; then c=1; else c=0; fi; \
+	  cp build/filter.* build/interrupts.* $$d/build; ln -sfn $(CURDIR)/build/rv32ui $$d/build/rv32ui; ln -sfn $(CURDIR)/build/rv32mi $$d/build/rv32mi; \
+	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); \
+	  if (cd $$d && $(PYTEST) -x tests/test_interrupts.py tests/test_cpu.py tests/test_filter.py) > results/$$n.log 2>&1; then c=1; \
+	  elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  $(SAVE) broken_$$n $$c results/$$n.log; done
 
-.PHONY: all firmware model test filter timing broken
+.PHONY: all firmware model test interrupts filter timing broken

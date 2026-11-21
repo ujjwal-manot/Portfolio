@@ -6,6 +6,7 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import build, run
 from cpu_model import Cpu
+from lockstep import check, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -54,11 +55,7 @@ async def filter_run(dut, gap):
     for cycle in range(200000):
         await RisingEdge(dut.clk)
         await ReadOnly()
-        if dut.retire_valid.value:
-            got = tuple(int(s.value) for s in (dut.retire_pc, dut.retire_instr, dut.retire_rd, dut.retire_rd_data))
-            want = model.step()[:4]
-            assert got == want, f"instruction {retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in want]}"
-            retired += 1
+        retired = check(dut, model, retired, "filter")
         strobe, addr, data = int(dut.dmem_wstrb.value), int(dut.dmem_addr.value), int(dut.dmem_wdata.value)
         for b in range(4):
             if strobe >> b & 1:
@@ -85,11 +82,4 @@ async def stream_with_gaps(dut):
     await filter_run(dut, 0.7)
 
 def test_filter():
-    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file()}"])
-
-def hex_file():
-    image = (BUILD / "filter.bin").read_bytes()
-    image += bytes(-len(image) % 4)
-    path = BUILD / "filter.hex"
-    path.write_text("\n".join(f"{int.from_bytes(image[i:i + 4], 'little'):08x}" for i in range(0, len(image), 4)) + "\n")
-    return path
+    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'filter.bin')}"])

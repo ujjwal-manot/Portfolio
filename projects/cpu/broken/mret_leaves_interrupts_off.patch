@@ -1,0 +1,12 @@
+Expected failure: , model ['
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -260,7 +260,7 @@
+         {mepc, mcause, mtval} <= {e_pc, e_irq, 27'b0, trap_cause, e_irq ? 32'b0 : e_tval};
+         {mpie, mstatus_mie} <= {mstatus_mie, 1'b0};
+       end
+-      if (e_commit && e_mret) {mpie, mstatus_mie} <= {1'b1, mpie};
++      if (e_commit && e_mret) {mpie, mstatus_mie} <= {1'b1, 1'b0};
+       if (csr_write)
+         case (e_csr)
+           12'h300: {mpie, mstatus_mie} <= {csr_new[7], csr_new[3]};

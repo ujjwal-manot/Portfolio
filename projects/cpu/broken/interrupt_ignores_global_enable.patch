@@ -1,0 +1,12 @@
+Expected failure: that the model has disabled
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -169,7 +169,7 @@
+     else e_exception = 1'b0;
+   end
+   wire        wake = pending != 0;
+-  wire        e_irq = e_valid && mstatus_mie && wake;
++  wire        e_irq = e_valid && wake;
+   wire [3:0]  irq_cause = pending[2] ? 4'd11 : 4'd7;
+   wire        e_trap = e_valid && (e_irq || e_exception);
+   wire        e_hold = asleep && !wake && e_valid;

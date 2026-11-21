@@ -1,0 +1,12 @@
+Expected failure: , model ['
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -257,7 +257,7 @@
+       if (wake) asleep <= 1'b0;
+       else if (e_commit && e_instr == WFI) asleep <= 1'b1;
+       if (e_trap) begin
+-        {mepc, mcause, mtval} <= {e_pc, e_irq, 27'b0, trap_cause, e_irq ? 32'b0 : e_tval};
++        {mepc, mcause, mtval} <= {e_pc + 4, e_irq, 27'b0, trap_cause, e_irq ? 32'b0 : e_tval};
+         {mpie, mstatus_mie} <= {mstatus_mie, 1'b0};
+       end
+       if (e_commit && e_mret) {mpie, mstatus_mie} <= {1'b1, mpie};

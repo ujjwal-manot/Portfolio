@@ -1,0 +1,63 @@
+# Runs firmware/interrupts.S on the cpu in lockstep with cpu_model.py while the timer fires every 300 cycles and 16 stream samples arrive after random gaps, each held until it is taken: the firmware must sum every sample, exactly one external interrupt must be taken per sample and at least 8 timer interrupts, and the core must spend cycles asleep in wfi.
+import random
+from pathlib import Path
+import cocotb
+from cocotb.clock import Clock
+from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
+from cocotb_run import run
+from cpu_model import Cpu
+from lockstep import check, hex_file
+
+HERE = Path(__file__).resolve().parent
+BUILD = HERE.parent / "build"
+SOURCES = [HERE.parent / "design" / "cpu.sv", HERE / "cpu_board.sv"]
+RESULT, SUM, SAMPLES = 0x10000100, 0x10000104, 16
+
+async def feed(dut, codes):
+    rng = random.Random(3)
+    for code in codes:
+        for _ in range(rng.randrange(50, 400)):
+            await FallingEdge(dut.clk)
+        dut.s_tvalid.value, dut.s_tdata.value, dut.s_tlast.value = 1, code, 0
+        while True:
+            await Timer(1, "ns")
+            ready = dut.s_tready.value
+            await FallingEdge(dut.clk)
+            if ready:
+                break
+        dut.s_tvalid.value = 0
+
+@cocotb.test()
+async def interrupts(dut):
+    rng = random.Random(4)
+    codes = [rng.randrange(256) for _ in range(SAMPLES)]
+    model = Cpu((BUILD / "interrupts.bin").read_bytes(), io_read=lambda addr: int(dut.retire_rd_data.value))
+    cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
+    dut.s_tvalid.value = 0
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 3)
+    dut.rst_n.value = 1
+    cocotb.start_soon(feed(dut, codes))
+    retired, asleep, taken, total = 0, 0, {7: 0, 11: 0}, None
+    for cycle in range(100000):
+        await RisingEdge(dut.clk)
+        await ReadOnly()
+        if dut.retire_intr.value:
+            taken[int(dut.retire_cause.value)] += 1
+        retired = check(dut, model, retired, "interrupts")
+        asleep += int(dut.sleep.value)
+        if int(dut.dmem_wstrb.value):
+            addr, data = int(dut.dmem_addr.value), int(dut.dmem_wdata.value)
+            total = data if addr == SUM else total
+            if addr == RESULT:
+                assert data == 1, f"firmware reports failure {data}"
+                break
+    else:
+        raise AssertionError("firmware never finished")
+    dut._log.info(f"{retired} instructions in {cycle} cycles, {asleep} asleep, interrupts taken {taken}")
+    assert total == sum(codes), f"firmware summed {total}, samples sum to {sum(codes)}"
+    assert taken[11] == SAMPLES and taken[7] >= 8, f"interrupts taken {taken}"
+    assert asleep > 0, "the core never slept in wfi"
+
+def test_interrupts():
+    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])
