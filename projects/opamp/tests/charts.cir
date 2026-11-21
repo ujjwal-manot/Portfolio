@@ -1,0 +1,48 @@
+* Steps one IHP low-voltage NMOS and one PMOS (W = 5 um, source and bulk at 0 V, PMOS biased with negated voltages) through gate voltage 0 to 1.2 V in 10 mV operating points at drain voltages 0.05 and 0.6 V, for lengths 0.13 to 2 um, writing current, gm, gds, cgg, vth, vdsat, unity-gain frequency and noise at each point to charts.txt; corner and temperature come from corner.inc in the run folder.
+.include corner.inc
+.param lval=0.13u vds=0.6
+VG g 0 0
+EP gp 0 g 0 -1
+VDN dn 0 {vds}
+VDP dp 0 {-vds}
+XN dn g 0 0 sg13_lv_nmos w=5u l={lval}
+XP dp gp 0 0 sg13_lv_pmos w=5u l={lval}
+.control
+let vg = 0
+foreach len 0.13u 0.18u 0.25u 0.5u 1u 2u
+  foreach v 0.05 0.6
+    alterparam lval=$len
+    alterparam vds=$v
+    reset
+    echo l $len vds $v >> charts.txt
+    let vg = 0
+    while vg < 1.205
+      alter VG $&vg
+      op
+      let n_ids = @n.xn.nsg13_lv_nmos[ids]
+      let n_gm = @n.xn.nsg13_lv_nmos[gm]
+      let n_gds = @n.xn.nsg13_lv_nmos[gds]
+      let n_cgg = @n.xn.nsg13_lv_nmos[cgg]
+      let n_vth = @n.xn.nsg13_lv_nmos[vth]
+      let n_vdss = @n.xn.nsg13_lv_nmos[vdss]
+      let n_fug = @n.xn.nsg13_lv_nmos[fug]
+      let n_sid = @n.xn.nsg13_lv_nmos[sid]
+      let n_sfl = @n.xn.nsg13_lv_nmos[sfl]
+      let p_ids = @n.xp.nsg13_lv_pmos[ids]
+      let p_gm = @n.xp.nsg13_lv_pmos[gm]
+      let p_gds = @n.xp.nsg13_lv_pmos[gds]
+      let p_cgg = @n.xp.nsg13_lv_pmos[cgg]
+      let p_vth = @n.xp.nsg13_lv_pmos[vth]
+      let p_vdss = @n.xp.nsg13_lv_pmos[vdss]
+      let p_fug = @n.xp.nsg13_lv_pmos[fug]
+      let p_sid = @n.xp.nsg13_lv_pmos[sid]
+      let p_sfl = @n.xp.nsg13_lv_pmos[sfl]
+      echo $&vg $&n_ids $&n_gm $&n_gds $&n_cgg $&n_vth $&n_vdss $&n_fug $&n_sid $&n_sfl $&p_ids $&p_gm $&p_gds $&p_cgg $&p_vth $&p_vdss $&p_fug $&p_sid $&p_sfl >> charts.txt
+      destroy all
+      let vg = vg + 0.01
+    end
+  end
+end
+quit
+.endc
+.end
