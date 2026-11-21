@@ -106,18 +106,13 @@
  },
  "model_vs_spike": {
   "logs": {
-   "model_vs_spike.log": "2fc0e2548e383534b5aab500d5065c3762e9104752d2f1071382bd6f2d03507a"
+   "model_vs_spike.log": "a14ccdca0d360035a48059293d9c21ca30654137c73cbeed898701888c751df9"
   },
   "result": "pass",
   "sources": {
-   "helpers/cdc_check.py": "5d98a37fdcb9adc62dbb5b13661511214858db83389a862e397c778c1708ebcd",
-   "helpers/check_honesty.py": "fa812e916a3e7ec43d9f3de1719d53a7e792619f02e685f0c6cf52bf0e0d294c",
-   "helpers/cocotb_run.py": "01187209c9163d1a340fa49e2a50b0e2cff82e74da89a658f3d9ba9a2dcc146a",
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "f275a87978c7abcc877526da516e7555f177dd0fb06dbf70b21461f7d4ae6efc",
-   "helpers/save_result.py": "b9ce0ad7387181b2e57df2cfeb34484bc4d5ce23594c416e7d511a9713b029cf",
-   "helpers/test_cdc_check.py": "262a930411f5e26b1305bffcba7dc7425e700b8cdda6a750f40520f1f635fa81",
-   "helpers/test_check_honesty.py": "6e1b46c9be9340498f0cc44a9c7937fb78fddddd392eb834c6548a498621c57d",
-   "helpers/test_save_result.py": "cb17afad1f3fc7ad0a463fd7d6d145b903f987a7778d13b7abf3565e583b5cab",
+   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
    "projects/cpu/Makefile": "533cdf502559f8e29983084f4fb2ef3207c2399eaf158ce8490f10d36e0b62f2",
    "projects/cpu/broken/no_flush_after_mispredict.patch": "459168d7ec644f7e93d3d3eca0c2f56eeddff2e830819b735fde7733c1b3c2ca",
    "projects/cpu/broken/no_forwarding_from_mem.patch": "0d53a59dca7922c0cc12b1c895c49ba4a41e58d472f4411c34af9b49a52825d7",
@@ -132,11 +127,10 @@
    "projects/cpu/tests/test_cpu.py": "b6e4bda18dfa356bda0a1b394840c13f547df9934aca2d8c39178523f74ff9aa",
    "projects/cpu/tests/test_cpu_model.py": "1d251a93ab0c435932b722ec6419a9b5069855360c8d89ffccb7bb4dac50f7e8",
    "projects/cpu/tests/test_filter.py": "15e6a8fc2d6d9dca566c8f0aac74f0b21e3874caf37697007a6ed778d107e658",
-   "projects/cpu/tests/test_filter.result.xml": "c4126d52ec1991795dae42728619f925c7004a016cc50352204da8629c4b5a07",
    "projects/cpu/timing/synth.ys": "aed34bab46c79387c2fc5444486fe6b184a354a2db7f2e0c11d946c3d047d925",
    "projects/cpu/timing/timing.tcl": "077c5292940ef8eaee5517c59b5449b5e79bed5e4e797af64eb1b5b7f3400f60"
   },
-  "time": "2026-11-21 09:01:20",
+  "time": "2026-11-21 13:39:31",
   "values": {}
  },
  "synth": {
