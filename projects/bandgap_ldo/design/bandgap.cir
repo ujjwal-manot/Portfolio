@@ -1,4 +1,4 @@
-* Bandgap reference on the 3.3 V supply, IHP SG13G2 thick-oxide devices and vertical PNPs: three equal PMOS mirror branches feed a 1x PNP (node a), R1 into an 8x PNP (node b) and R2 into a 1x PNP, the top of R2 split into 15 equal units so vref is one of 16 taps chosen by trim3..trim0 (3.3 V logic) through a four-level tree of thick-oxide pass switches that carry no DC current, a PMOS-input stage holds a and b equal through an NMOS (twice its load, so both see the same gate voltage at balance and the systematic offset cancels) that sinks the current of a diode-connected PMOS setting the mirror gate, so the branch current is VT ln 8 / R1 and vref = VBE + (R2/R1) VT ln 8; a start-up pulls the mirror gate down until the top tap rises; vg, the mirror gate, is brought out so other blocks can copy the PTAT branch current with a matching PMOS; every device carries mm_ok={mm}, sizes come from bandgap_sizes.inc.
+* Bandgap reference on the 3.3 V supply, IHP SG13G2 thick-oxide devices and vertical PNPs: three equal PMOS mirror branches feed a 1x PNP (node a), R1 into an 8x PNP (node b) and R2 into a 1x PNP, the top of R2 split into 15 equal units so vref is one of 16 taps chosen by trim3..trim0 (3.3 V logic) through a four-level tree of thick-oxide pass switches that carry no DC current, a PMOS-input stage holds a and b equal through an NMOS (twice its load, so both see the same gate voltage at balance and the systematic offset cancels) that sinks the current of a diode-connected PMOS setting the mirror gate, so the branch current is VT ln 8 / R1 and vref = VBE + (R2/R1) VT ln 8; a start-up pulls the mirror gate down until a copy of the branch current overpowers its weak pull-up (sensing current, not a voltage, so it cannot let go in a half-started state); vg, the mirror gate, is brought out so other blocks can copy the PTAT branch current with a matching PMOS; every device carries mm_ok={mm}, sizes come from bandgap_sizes.inc.
 .subckt bandgap vref vg vdd vss trim3 trim2 trim1 trim0
 XP1 a vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
 XP2 b vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
@@ -32,7 +32,9 @@ XB vg y vss vss sg13_hv_nmos w={w_ld} l={l_ld} m=2 mm_ok={mm}
 XBP vg vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
 XC y vss cap_cmim w={w_c} l={w_c} mm_ok={mm}
 XS1 st vss vdd vdd sg13_hv_pmos w={w_su} l={l_su} mm_ok={mm}
-XS2 st tap15 vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
+XS4 sd vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+XS5 sd sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
+XS2 st sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
 XS3 vg st vss vss sg13_hv_nmos w={w_sk} l={l_sk} mm_ok={mm}
 XI0 n0 trim0 vdd vss inv
 XI1 n1 trim1 vdd vss inv

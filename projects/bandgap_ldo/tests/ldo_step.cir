@@ -1,0 +1,29 @@
+* LDO load step with the bandgap at trim code 8: the load current (istep from step.inc) rises from 0 in 100 ns at 20 us and falls back in 100 ns at 40 us; writes the step size (read back through a 0 V sense source), vout before the step, its lowest point after the rise and its highest point after the fall, and vout settled at the end of the high load, to step.txt; supply and corner from corner.inc.
+.include corner.inc
+.include step.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+.include ldo_sizes.inc
+.include ldo.cir
+VDD vdd 0 {vsupply}
+X1 vref vg vdd 0 vdd 0 0 0 bandgap
+X2 vout vout vref vg vdd 0 ldo
+VSENSE vout vl 0
+ILOAD vl 0 pwl(0 0 20u 0 20.1u {istep} 40u {istep} 40.1u 0)
+.tran 1n 60u
+.control
+let before = 0
+let dip = 0
+let peak = 0
+let high = 0
+let istep = 0
+run
+meas tran before find v(vout) at=19.9u
+meas tran dip min v(vout) from=20u to=39u
+meas tran high find v(vout) at=39.9u
+meas tran peak max v(vout) from=40u to=59u
+let istep = vecmax(i(vsense))
+echo step istep_a $&istep before_v $&before dip_v $&dip high_v $&high peak_v $&peak > step.txt
+quit
+.endc
+.end

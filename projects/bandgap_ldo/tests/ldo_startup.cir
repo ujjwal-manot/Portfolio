@@ -1,0 +1,30 @@
+* Bandgap and LDO start-up with a 0.25 mA load: the supply ramps from 0 in {ramp} (from ramp.inc); writes the ramp, the final vout, the highest vout at any time (thin-oxide loads on the rail must never see more than 1.32 V) and the time from the end of the ramp until vout stays within 1% of its final value, to ldo_startup.txt; corner from corner.inc.
+.include corner.inc
+.include ramp.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+.include ldo_sizes.inc
+.include ldo.cir
+VDD vdd 0 pwl(0 0 {ramp} {vsupply})
+X1 vref vg vdd 0 vdd 0 0 0 bandgap
+X2 vout vout vref vg vdd 0 ldo
+ILOAD vout 0 0.25m
+.tran {(ramp + 200u) / 5000} {ramp + 200u}
+.control
+let final = 0
+let settle = -1
+let rampend = 0
+let top = 0
+run
+let n = length(v(vout)) - 1
+let final = v(vout)[n]
+let top = vecmax(v(vout))
+let lvl = vecmax(v(vdd)) * 0.9999
+meas tran rampend when v(vdd)=$&lvl rise=1
+let err = abs(v(vout) / final - 1)
+meas tran settled when err=0.01 cross=last
+let settle = settled - rampend
+echo ldo_startup ramp_s $&rampend final_v $&final top_v $&top settle_s $&settle > ldo_startup.txt
+quit
+.endc
+.end

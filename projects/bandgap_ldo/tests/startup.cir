@@ -4,7 +4,7 @@
 .include bandgap_sizes.inc
 .include bandgap.cir
 VDD vdd 0 pwl(0 0 {ramp} {vsupply})
-X1 vref vdd 0 vdd 0 0 0 bandgap
+X1 vref vg vdd 0 vdd 0 0 0 bandgap
 .tran {(ramp + 100u) / 5000} {ramp + 100u}
 .control
 let final = 0

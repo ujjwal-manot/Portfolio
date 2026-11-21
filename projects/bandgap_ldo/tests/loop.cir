@@ -1,0 +1,34 @@
+* LDO loop gain by Tian's method at a DC load current set in load.inc: the feedback wire from vout to fb is broken by a 0 V source Vi with a current source Ii into the fb side, one AC run drives Vi and gives the voltage ratio Tv = -v(vout)/v(x), the next drives Ii and gives the current ratio Ti (the share of Ii going back into the regulator's output over the share going into fb), and T = (Tv Ti - 1)/(Tv + Ti + 2), Tian's result, so loading on both sides of the break counts; writes the DC loop gain, the crossover frequency and the phase margin to loop.txt; corner from corner.inc, the regulator from ldo.cir and the bandgap.
+.include corner.inc
+.include load.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+.include ldo_sizes.inc
+.include ldo.cir
+VDD vdd 0 {vsupply}
+X1 vref vg vdd 0 vdd 0 0 0 bandgap
+X2 vout x vref vg vdd 0 ldo
+Vi vout x dc 0 ac 1
+Ii 0 x dc 0 ac 0
+ILOAD vout 0 {iload}
+.control
+let gain = 0
+let fc = 0
+let pm = 0
+ac dec 50 10 10g
+let tv = -v(vout) / v(x)
+alter vi acmag = 0
+alter ii acmag = 1
+ac dec 50 10 10g
+let ti = -i(vi) / (1 + i(vi))
+let t = (ac1.tv * ti - 1) / (ac1.tv + ti + 2)
+let mag = abs(t)
+let gain = 20 * log10(mag[0])
+meas ac fc when mag=1 fall=1
+let ph = 180 / pi * cph(t)
+meas ac phc find ph at=$&fc
+let pm = 180 + phc
+echo loop gain_db $&gain fc_hz $&fc pm_deg $&pm > loop.txt
+quit
+.endc
+.end

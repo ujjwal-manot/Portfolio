@@ -1,0 +1,12 @@
+* Ideal stand-in for the LDO for checking the loop-gain measurement: gain 1000 from (vref - fb) through poles at 1 kHz and 1 MHz to an output with 100 ohm in series, with fb loaded by 10 kohm, so the loop gain is 1000 (10k / 10.1k) / ((1 + s/2 pi 1k)(1 + s/2 pi 1M)) and its DC gain, crossover and phase margin are known exactly, with loading on both sides of the break.
+.subckt ldo vout fb vref vg vdd vss
+E1 n1 vss vref fb 1000
+R1 n1 n2 1k
+C1 n2 vss 159.1549n
+E2 n3 vss n2 vss 1
+R2 n3 n4 1k
+C2 n4 vss 159.1549p
+E3 n5 vss n4 vss 1
+R3 n5 vout 100
+RF fb vss 10k
+.ends ldo
