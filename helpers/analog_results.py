@@ -1,10 +1,11 @@
-# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
+# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and an input offset small enough that, through the loop's noise gain of 2 and on top of the ADC's own 1 LSB, a -0.5 dBFS sine still fits the 0.2 to 1.0 V range; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) with the one-sided 95% lower bound on the combined yield and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
 import cmath, math, sys
 from pathlib import Path
 
 SPECS = {"a0_db": (">=", 66), "gbw_hz": (">=", 20e6), "pm_deg": (">=", 60), "slew_v_per_s": (">=", 10e6), "settle_s": ("<=", 200e-9),
-         "supply_a": ("<=", 500e-6), "out_low_v": ("<=", 0.2), "out_high_v": (">=", 1.0)}
-REPORT = ("band_v_rms", "total_v_rms", "psrr_1k_db", "psrr_1m_db")
+         "supply_a": ("<=", 500e-6), "settle_load_v": ("<=", 0.8 / 256 / 2),
+         "abs_offset_v": ("<=", (0.4 * (1 - 10 ** (-0.5 / 20)) - 0.8 / 256) / 2), "out_low_v": ("<=", 0.2), "out_high_v": (">=", 1.0)}
+REPORT = ("band_v_rms", "total_v_rms", "psrr_1k_db", "psrr_1m_db", "sampled_v_rms", "error_at_50ns_v", "kick_v")
 SWING, NO_SWING_AT, YIELD = ("out_low_v", "out_high_v"), "_lo", 0.99
 A0, BETA, P1, P2 = 1e4, 0.5, 1 / (2 * math.pi * 1e6 * 10e-12), 1 / (2 * math.pi * 1e4 * 159.2e-15)
 TOLERANCE = {"a0_db": 0.1, "fc_hz": 0.02, "pm_deg": 1.0, "gbw_hz": 0.02, "ugf_hz": 0.02}
@@ -17,10 +18,12 @@ def parse(path):
     return out
 
 def measured(r):
-    keys = {"a0_db", "gbw_hz", "pm_deg", "supply_a", "out_low_v", "out_high_v", "offset_v"}
+    keys = {"a0_db", "gbw_hz", "pm_deg", "supply_a", "out_low_v", "out_high_v", "offset_v", "settle_load_v"}
     m = {k: r[k] for k in keys if k in r}
     if {"rise_slew_v_per_s", "fall_slew_v_per_s"} <= r.keys():
         m["slew_v_per_s"] = min(r["rise_slew_v_per_s"], r["fall_slew_v_per_s"])
+    if "offset_v" in r:
+        m["abs_offset_v"] = abs(r["offset_v"])
     if {"rise_settle_s", "fall_settle_s"} <= r.keys() and min(r["rise_settle_s"], r["fall_settle_s"]) > 0:
         m["settle_s"] = max(r["rise_settle_s"], r["fall_settle_s"])
     return m | {k: r[k] for k in REPORT if k in r}
@@ -50,6 +53,14 @@ def montecarlo(paths):
     yields["combined"] = sum(all(meets(m, spec) for spec in SPECS) for m in runs) / len(runs)
     offsets = [m["offset_v"] for m in runs if "offset_v" in m]
     return yields["combined"] >= YIELD, yields, offsets
+
+def lower_bound(passed, runs, confidence=0.95):
+    lo, hi = 0.0, 1.0
+    for _ in range(100):
+        p = (lo + hi) / 2
+        chance = sum(math.comb(runs, k) * p ** k * (1 - p) ** (runs - k) for k in range(passed, runs + 1))
+        lo, hi = (lo, p) if chance > 1 - confidence else (p, hi)
+    return lo
 
 def t(f):
     return A0 * BETA / ((1 + 1j * f / P1) * (1 + 1j * f / P2))
@@ -86,6 +97,7 @@ if __name__ == "__main__":
             mean = sum(offsets) / len(offsets)
             sigma = math.sqrt(sum((o - mean) ** 2 for o in offsets) / (len(offsets) - 1))
             print(f"offset_v       mean {mean:.4g} sigma {sigma:.4g} worst {max(offsets, key=abs):.4g}")
+        print(f"combined yield is at least {lower_bound(round(yields['combined'] * len(paths)), len(paths)):.1%} at 95% confidence")
         print(f"combined yield meets {YIELD:.0%}" if ok else f"combined yield below {YIELD:.0%}")
     else:
         for p in sorted(paths):

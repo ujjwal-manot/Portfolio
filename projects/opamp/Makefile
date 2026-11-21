@@ -8,7 +8,8 @@ SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 CHARTS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,build/charts/$(c)_$(t)/charts.txt))
 CORNERS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,$(foreach v,lo min nom hi,build/corners/$(c)_$(t)_$(v)/result.txt)))
 MC := $(foreach n,$(shell seq 1 200),build/mc/$(n)/result.txt)
-TESTS := loop step noise swing
+TESTS := loop step noise swing load
+DAC := $(ROOT)/projects/adc/design/cap_dac.cir $(ROOT)/projects/adc/design/cap_dac_sizes.inc
 PASSIVE_tt := typ
 PASSIVE_sf := typ
 PASSIVE_fs := typ
@@ -47,7 +48,7 @@ mc: $(MC)
 broken: build/sizes.inc
 	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests $$d; \
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); \
-	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) build/sizes.inc $$d; cp $$d/design/opamp.cir $$d/dut.cir; \
+	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc $$d; cp $$d/design/opamp.cir $$d/dut.cir; \
 	  printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp 27\n.param vsupply=1.2\n.param mm=0\n' > $$d/corner.inc; \
 	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > corner_tt_27_nom.txt); \
 	  cp $$d/corner_tt_27_nom.txt results/broken_$$n.txt; \
@@ -59,8 +60,8 @@ REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min
 
 review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
 	for v in opamp opamp_indirect; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
-	  cp tests/loop.cir tests/step.cir tests/noise.cir tests/swing.cir build/sizes.inc build/corners/$$c/corner.inc $$d; cp design/$$v.cir $$d/dut.cir; \
-	  (cd $$d && for t in loop step noise swing; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat loop.txt step.txt noise.txt swing.txt > result.txt); \
+	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc build/corners/$$c/corner.inc $$d; cp design/$$v.cir $$d/dut.cir; \
+	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt); \
 	  cp $$d/result.txt results/review_$${v}_$$c.txt; done; \
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $(REVIEW); do echo results/review_$${v}_$$c.txt; done) > results/review_$$v.log 2>&1; then c=0; else c=$$?; fi; echo "analog_results exit $$c" >> results/review_$$v.log; done
 	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; $(SAVE) review $$c results/review_opamp.log results/review_opamp_indirect.log results/review_*_*.txt
@@ -73,9 +74,9 @@ build/model/result.txt: tests/model.cir tests/loop.cir build/sizes.inc
 	cd $(@D) && $(RUN) ngspice -b loop.cir > loop.log 2>&1
 	cat $(@D)/loop.txt > $@
 
-build/corners/%/result.txt: $(addprefix tests/,$(addsuffix .cir,$(TESTS))) design/opamp.cir build/sizes.inc
+build/corners/%/result.txt: $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) design/opamp.cir build/sizes.inc
 	mkdir -p $(@D)
-	cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) build/sizes.inc $(@D)
+	cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc $(@D)
 	cp design/opamp.cir $(@D)/dut.cir
 	p=$(PASSIVE_$(word 1,$(subst _, ,$*))); \
 	  printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' \
@@ -83,13 +84,13 @@ build/corners/%/result.txt: $(addprefix tests/,$(addsuffix .cir,$(TESTS))) desig
 	cd $(@D) && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
 	cat $(addprefix $(@D)/,$(addsuffix .txt,$(TESTS))) > $@
 
-build/mc/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir design/opamp.cir build/sizes.inc
+build/mc/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) design/opamp.cir build/sizes.inc
 	mkdir -p $(@D)
-	cp tests/loop.cir tests/step.cir tests/swing.cir build/sizes.inc $(@D)
+	cp tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) build/sizes.inc $(@D)
 	cp design/opamp.cir $(@D)/dut.cir
 	printf '.lib cornerMOSlv.lib mos_tt_mismatch\n.lib cornerRES.lib res_typ_mismatch\n.lib cornerCAP.lib cap_typ_mismatch\n.temp 27\n.param vsupply=1.2\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
-	cd $(@D) && for t in loop step swing; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
-	cat $(@D)/loop.txt $(@D)/step.txt $(@D)/swing.txt > $@
+	cd $(@D) && for t in loop step swing load; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
+	cat $(@D)/loop.txt $(@D)/step.txt $(@D)/swing.txt $(@D)/load.txt > $@
 
 build/charts/%/charts.txt: tests/charts.cir
 	mkdir -p $(@D)
