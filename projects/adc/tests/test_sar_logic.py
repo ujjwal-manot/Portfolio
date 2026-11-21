@@ -1,4 +1,4 @@
-# Drives sar_logic with an ideal comparator and DAC: a coherent -0.5 dBFS sine converted 1024 times must score ENOB 8.0 +- 0.1, each sample takes 2 sampling cycles and 8 trials with the comparator clocked in the low half, m_tlast marks every 64th delivered sample, and a sample that finds the previous one still waiting is dropped and sets the sticky overflow flag without touching the waiting word.
+# Drives sar_logic with an ideal comparator and DAC: a coherent -0.5 dBFS sine converted 1024 times must score ENOB 8.0 +- 0.1, each sample takes 2 sampling cycles and 8 trials with the comparator clocked in the low half, m_tlast marks every 64th delivered sample, and a sample that finds the previous one still waiting is dropped and sets the sticky overflow flag without touching the waiting word; the conversion is also run on the IHP cell netlist (make logic first), recording the switching the power report reads.
 import math
 from pathlib import Path
 import cocotb
@@ -89,3 +89,8 @@ async def overflow_drops_new_samples_and_keeps_the_waiting_word(dut):
 
 def test_sar_logic():
     run("sar_logic", [DESIGN / "sar_logic.sv"], __file__)
+
+def test_sar_logic_cells():
+    cells = Path("/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog")
+    run("sar_logic", [DESIGN.parent / "build" / "sar_logic_cells.v", cells / "sg13g2_udp.v", cells / "sg13g2_stdcell.v"], __file__, sim="icarus", waves=True,
+        defines={"COCOTB_TEST_FILTER": "ideal_quantizer_scores_eight_bits"})

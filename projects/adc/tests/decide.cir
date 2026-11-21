@@ -1,5 +1,6 @@
-* Clocks the comparator at 50 MHz with differential inputs of 10 mV down to 1 uV around 0.6 V, both signs, and writes the time from the clk rising edge to the losing internal latch node falling through half supply, and the latched outp level, for each to decide.txt; corner, temperature and supply come from corner.inc.
+* Clocks the comparator at 50 MHz with differential inputs of 10 mV down to 1 uV around 0.6 V, both signs, and writes the time from the clk rising edge to the losing internal latch node falling through half supply, and the latched outp level, for each to decide.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature and supply come from corner.inc.
 .include corner.inc
+.option reltol=1e-5 vntol=1e-8
 .include comparator_sizes.inc
 .include dut.cir
 VDD vdd 0 {vsupply}

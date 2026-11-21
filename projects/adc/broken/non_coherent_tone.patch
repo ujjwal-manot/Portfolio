@@ -1,0 +1,13 @@
+Expected failure: enob below 7.5
+Run: convert CONVERT=build/convert/tt_27_nom/convert.txt
+--- a/tests/convert.cir
++++ b/tests/convert.cir
+@@ -11,7 +11,7 @@
+ VHI vref_hi 0 1.0
+ VLO vref_lo 0 0.2
+ VCM vcm 0 0.6
+-VIN vin 0 sin(0.6 {0.4 * 10 ** (-0.5 / 20)} {k_tone * 1e6 / n_samples} 0 0 0)
++VIN vin 0 sin(0.6 {0.4 * 10 ** (-0.5 / 20)} {(k_tone + 0.3) * 1e6 / n_samples} 0 0 0)
+ VCLK clk 0 pulse(0 {vsupply} 50n 50p 50p 49.95n 100n)
+ VRST rst 0 pwl(0 0 250n 0 251n {vsupply})
+ VRDY rdy 0 {vsupply}

@@ -1,0 +1,10 @@
+# Maps sar_logic onto IHP SG13G2 standard cells with the typical library (1.2 V, 25 C), for its power estimate.
+read_verilog -sv ../design/sar_logic.sv
+synth -flatten -top sar_logic
+dfflibmap -liberty ../build/typ.lib
+abc -liberty ../build/typ.lib
+opt_clean -purge
+rename -unescape t:sg13g2_*
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+stat -liberty ../build/typ.lib
+write_verilog -noattr ../build/sar_logic_cells.v

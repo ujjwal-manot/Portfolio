@@ -1,5 +1,6 @@
-* Finds the comparator's switching threshold by bisection (15 halvings of a +-20 mV range, about 1 uV) twice: once with the previous decision forced low by a -50 mV first clock, once forced high by +50 mV, and writes both thresholds, their mean (the offset) and their difference (the hysteresis the last decision leaves) to offset.txt; corner, temperature, supply and mismatch come from corner.inc.
+* Finds the comparator's switching threshold by bisection (15 halvings of a +-20 mV range, about 1 uV) twice: once with the previous decision forced low by a -50 mV first clock, once forced high by +50 mV, and writes both thresholds, their mean (the offset) and their difference (the hysteresis the last decision leaves) to offset.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
 .include corner.inc
+.option reltol=1e-5 vntol=1e-8
 .include comparator_sizes.inc
 .include dut.cir
 VDD vdd 0 {vsupply}

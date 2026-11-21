@@ -1,4 +1,4 @@
-# adc commands: make sar | decide | offset | levels | convert | all
+# adc commands: make sar | logic | decide | offset | levels | convert | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -24,11 +24,19 @@ CONVERT := $(foreach p,$(PROCESS),$(foreach t,$(TEMPS),build/convert/$(p)_$(t)_n
 COMPARATOR := design/comparator.cir design/comparator_sizes.inc
 DAC := design/cap_dac.cir design/cap_dac_sizes.inc
 
-all: sar decide offset levels convert
+all: sar logic decide offset levels convert broken
 
 sar:
 	mkdir -p results
-	if $(PYTEST) tests/test_sar_logic.py > results/test_sar_logic.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_sar_logic $$c results/test_sar_logic.log
+	if $(PYTEST) tests/test_sar_logic.py -k "not cells" > results/test_sar_logic.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_sar_logic $$c results/test_sar_logic.log
+
+logic:
+	mkdir -p build results
+	$(RUN) bash -c 'cp /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib build/typ.lib'
+	if (cd logic && $(RUN) yosys -s synth.ys) > results/logic_synth.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) logic_synth $$c results/logic_synth.log
+	if $(PYTEST) tests/test_sar_logic.py -k cells > results/test_sar_logic_cells.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_sar_logic_cells $$c results/test_sar_logic_cells.log
+	$(RUN) fst2vcd -f build/icarus_sar_logic_test_sar_logic_COCOTB_TEST_FILTER/sar_logic.fst -o build/sar_gates.vcd > /dev/null
+	if (cd logic && $(RUN) sta -no_init -exit power.tcl) > results/logic_power.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) logic_power $$c results/logic_power.log
 
 decide: $(DECIDE)
 	for f in $(DECIDE); do cp $$f results/decide_$$(basename $$(dirname $$f)).txt; done
@@ -92,5 +100,12 @@ build/convert/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_lo
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
 
-.PHONY: all sar decide offset levels convert
+broken: build/sar_logic.so
+	mkdir -p results
+	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
+	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
+	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" $$d/results/$${run%% *}.log; then c=0; else c=2; fi; \
+	  cp $$d/results/$${run%% *}.log results/broken_$$n.log; $(SAVE) broken_$$n $$c results/broken_$$n.log; done
+
+.PHONY: all sar logic decide offset levels convert broken
 .DELETE_ON_ERROR:

@@ -1,0 +1,17 @@
+Expected failure: dnl beyond +-0.5 LSB
+Run: levels LEVELS=build/levels/tt_27_nom/dac_levels.txt
+--- a/design/cap_dac.cir
++++ b/design/cap_dac.cir
+@@ -18,7 +18,11 @@
+ XBD top vin vref_hi vref_lo sl slb vss vdd vss dacbit0
+ .ends cap_dac
+ .subckt dacbit7 top vin hi lo sl slb d vdd vss
+-XU top b u128
++XU top b u64
++XU2 top b u32
++XU3 top b u16
++XU4 top b u2
++XU5 top b u1
+ XSW b vin hi lo sl slb d vdd vss switches w={w_sw_7}
+ .ends dacbit7
+ .subckt dacbit6 top vin hi lo sl slb d vdd vss
