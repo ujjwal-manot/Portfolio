@@ -73,20 +73,41 @@ def summary_problems(path, root):
                 yield "bad_log", f"{check}: {log} changed after the result was saved"
 
 
+NUMBER = re.compile(r"(?<![\w.])\d+(?:\.\d+)?(?:[eE][-+]?\d+)?(?![\w.])")
+
+
+def shown(claim, logged):
+    if claim in logged:
+        return True
+    mantissa, _, exponent = claim.lower().partition("e")
+    figures = len(mantissa.replace(".", "").lstrip("0"))
+    step = 10 ** (-len(mantissa.partition(".")[2]) + int(exponent or 0))
+    return figures >= 3 and any(abs(float(v) - float(claim)) <= step / 2 * (1 + 1e-9) for v in logged)
+
+
 def readme_problems(path):
+    where = False
     for line in path.read_text().splitlines():
+        if not line.startswith("|"):
+            where = False
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if cells[-1] == "Where":
+            where = True
+            continue
         logs = re.findall(r"`(results/[^`]+)`", line)
-        if not line.startswith("|") or not logs:
+        if not logs:
+            if where and not set(line) <= set("|-: "):
+                yield "readme_claim", f"row '{cells[0]}' names no log"
             continue
         found = [p for pattern in logs for p in sorted(path.parent.glob(pattern))]
         if not found:
             yield "readme_claim", f"{', '.join(logs)} does not exist"
             continue
-        text = "".join(p.read_text(errors="replace") for p in found)
-        claim = [c.strip() for c in line.strip().strip("|").split("|")][-2]
-        for number in re.findall(r"\d+(?:\.\d+)?", claim):
-            if number not in text:
-                yield "readme_claim", f"says {number} in '{claim}', which {', '.join(logs)} never shows"
+        logged = set(NUMBER.findall("".join(p.read_text(errors="replace") for p in found)))
+        for claim in (n for cell in cells[1:-1] for n in NUMBER.findall(cell)):
+            if not shown(claim, logged):
+                yield "readme_claim", f"says {claim} in row '{cells[0]}', which {', '.join(logs)} never shows"
 
 
 def find_problems(root):

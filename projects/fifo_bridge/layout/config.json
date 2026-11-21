@@ -1,0 +1,12 @@
+{
+  "//": "LibreLane flow for fifo_bridge on IHP SG13G2: synthesis, floorplan at 40% utilization, placement, clock trees for both clocks, routing up to Metal5, extraction, three-corner timing with the constraints in fifo_bridge.sdc, DRC, LVS and IR drop.",
+  "DESIGN_NAME": "fifo_bridge",
+  "VERILOG_FILES": ["dir::../design/sync2.sv", "dir::../design/reset_sync.sv", "dir::../design/async_fifo.sv", "dir::../design/skid_buffer.sv", "dir::../design/fifo_bridge.sv"],
+  "CLOCK_PORT": ["s_clk", "m_clk"],
+  "CLOCK_PERIOD": 20,
+  "PNR_SDC_FILE": "dir::fifo_bridge.sdc",
+  "SIGNOFF_SDC_FILE": "dir::fifo_bridge.sdc",
+  "FP_SIZING": "relative",
+  "FP_CORE_UTIL": 40,
+  "RT_MAX_LAYER": "Metal5"
+}

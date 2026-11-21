@@ -1,4 +1,4 @@
-# Tests that save_result records results with correct log hashes, hashes the project's git-visible sources plus only the helpers they use (directly or through another helper), and refuses results without logs.
+# Tests that save_result records results with correct log hashes, hashes the project's git-visible sources plus only the helpers they use (directly or through another helper), refuses results without logs, and keeps every entry when many checks save at once (make -j).
 import hashlib, json, subprocess, sys, pytest
 from pathlib import Path
 from save_result import save
@@ -44,3 +44,12 @@ def test_records_hash_of_every_source_and_used_helper(tmp_path):
     entry = json.loads((tmp_path / "proj/results/summary.json").read_text())["sim"]
     kept = ("helpers/deep.py", "helpers/used.py", "proj/design/a.sv", "proj/tests/t.py")
     assert entry["sources"] == {n: hashlib.sha256(files[n].encode()).hexdigest() for n in kept}
+
+def test_parallel_saves_keep_every_entry(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    log = tmp_path / "run.log"
+    log.write_text("ok\n")
+    script = Path(__file__).with_name("save_result.py")
+    runs = [subprocess.Popen([sys.executable, str(script), str(tmp_path / "summary.json"), f"check_{i}", "0", str(log)], cwd=tmp_path) for i in range(24)]
+    assert all(r.wait() == 0 for r in runs)
+    assert sorted(json.loads((tmp_path / "summary.json").read_text())) == sorted(f"check_{i}" for i in range(24))

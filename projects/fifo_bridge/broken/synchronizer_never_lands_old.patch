@@ -1,0 +1,12 @@
+Expected failure: Unreached cover statement at fifo_rules.dut.w_to_r: sync2.sv
+--- a/design/sync2.sv
++++ b/design/sync2.sv
+@@ -32,7 +32,7 @@
+   (* anyseq *) logic [WIDTH-1:0] pick;
+   always_ff @(posedge clk or negedge rst_n)
+     if (!rst_n) {q, meta, seen, changed, old} <= '0;
+-    else {q, meta, seen, changed, old} <= {meta, d & pick | seen & ~pick, d, d ^ seen, seen};
++    else {q, meta, seen, changed, old} <= {meta, d, d, d ^ seen, seen};
+   always_comb if (rst_n) cover (|(changed & ~(meta ^ old)));
+ `else
+   always_ff @(posedge clk or negedge rst_n)

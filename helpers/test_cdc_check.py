@@ -1,7 +1,7 @@
-# Runs cdc_check on probe designs built by Yosys, as RTL and mapped to IHP cells, and checks it reports exactly the crossing problem each probe was written to have, and that waivers hide only what they match.
+# Runs cdc_check on probe designs built by Yosys, as RTL and mapped to IHP cells, and checks it reports exactly the crossing problem each probe was written to have, that waivers hide only what they match, and that the fifo_bridge memory waiver names only the output stage.
 import subprocess, pytest
 from pathlib import Path
-from cdc_check import find
+from cdc_check import find, read_waivers, waived
 
 LIB = "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib"
 PROBES = Path(__file__).resolve().parent.parent / "projects/fifo_bridge/cdc/probes"
@@ -23,3 +23,9 @@ def test_waivers_hide_only_what_they_match(tmp_path):
     subprocess.run(["yosys", "-q", "-p", f"read_verilog -sv {PROBES}/binary_bus.sv; prep -flatten -top binary_bus; write_json {netlist}"], check=True)
     assert find(netlist, "binary_bus", {}, ["count -> meta: *"]) == []
     assert find(netlist, "binary_bus", {}, ["count -> meta: *", "nothing *"]) == [("unused_waiver", "nothing *")]
+
+def test_fifo_bridge_memory_waiver_covers_only_the_output_stage():
+    waivers = read_waivers(PROBES.parent / "waivers.txt")
+    assert waived("m_tdata on m_clk samples fifo.mem[0], fifo.mem[1] through logic", waivers)
+    assert waived("out.skid on m_clk samples fifo.mem[0] through logic", waivers)
+    assert not waived("fifo.r_ready on m_clk samples fifo.mem[0] through logic", waivers)

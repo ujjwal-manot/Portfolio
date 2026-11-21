@@ -6,6 +6,12 @@ ASYNC = {"ARST", "SET", "CLR", "ALOAD", "AD", "RESET_B"}
 TIE = {"sg13g2_tiehi", "sg13g2_tielo"}
 PASS = {"$not", "$logic_not", "$_NOT_", "$buf", "$pos", "$_BUF_"} | {f"sg13g2_{c}_{n}" for c in ("inv", "buf") for n in (1, 2, 4, 8, 16)}
 
+def read_waivers(path):
+    return [l.split(" : ")[0].strip() for l in open(path) if " : " in l]
+
+def waived(why, waivers):
+    return [w for w in waivers if fnmatch.fnmatch(why, w)]
+
 def find(netlist, top, ports, waivers=()):
     m = json.load(open(netlist))["modules"][top]
     driver, loads, name = {}, defaultdict(list), {}
@@ -86,13 +92,13 @@ def find(netlist, top, ports, waivers=()):
     for (src, dst), bits in sorted(crossings.items()):
         if len(bits) > 1:
             found.append(("multibit", f"{src} -> {dst}: {len(bits)} bits cross separately"))
-    used = {w for f in found for w in waivers if fnmatch.fnmatch(f[1], w)}
-    found = [f for f in dict.fromkeys(found) if not any(fnmatch.fnmatch(f[1], w) for w in used)]
+    used = {w for f in found for w in waived(f[1], waivers)}
+    found = [f for f in dict.fromkeys(found) if not waived(f[1], waivers)]
     return found + [("unused_waiver", w) for w in waivers if w not in used]
 
 if __name__ == "__main__":
     netlist, top, waiver_file, *pairs = sys.argv[1:]
-    waivers = [l.split(" : ")[0].strip() for l in open(waiver_file) if " : " in l]
+    waivers = read_waivers(waiver_file)
     found = find(netlist, top, dict(p.split("=") for p in pairs), waivers)
     for rule, why in found:
         print(f"{rule:18} {why}")

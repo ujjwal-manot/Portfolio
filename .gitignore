@@ -12,4 +12,5 @@ console/dist/
 .spiceinit
 *.raw
 *.result.xml
+summary.json.lock
 third_party/

@@ -70,3 +70,15 @@ def test_readme_numbers_must_come_from_their_logs(tmp_path):
     assert rules(tmp_path) == ["readme_claim"]
     readme.write_text(readme.read_text().replace("synth.log", "timing.log"))
     assert rules(tmp_path) == ["readme_claim"]
+
+def test_readme_numbers_must_match_whole_log_numbers(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    write(tmp_path, "proj/results/a.log", "Chip area 16708.809600\nworst setup slack 14.959187666363505 ns, hold 0.12318109032793956 ns\nTotal 1.89e-04 W\nworst bridge MTBF 10^51 years\ntau 133.8 ps\n")
+    good = "| Check | Area | Slack | Power | MTBF | Tau | Where |\n|---|---|---|---|---|---|---|\n| x | 16708.8 um2 | 14.96 ns | 1.89e-04 W | 10^51 years | 133.8 ps | `results/a.log` |\n"
+    readme = write(tmp_path, "proj/README.md", good)
+    assert rules(tmp_path) == []
+    for right, wrong in [("16708.8", "1670"), ("14.96", "14.9"), ("1.89e-04", "1.8e-04"), ("10^51", "10^5"), ("133.8", "13.8"), ("14.96", "0.12")]:
+        readme.write_text(good.replace(right, wrong))
+        assert rules(tmp_path) == ["readme_claim"], wrong
+    readme.write_text(good + "| y | 3.2 | 1 | 2 | 3 | 4 | none |\n")
+    assert rules(tmp_path) == ["readme_claim"]

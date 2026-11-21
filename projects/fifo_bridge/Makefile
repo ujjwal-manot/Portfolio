@@ -1,4 +1,4 @@
-# fifo_bridge commands: make test | formal | cdc | timing | equiv | power | mtbf | broken | all
+# fifo_bridge commands: make test | formal | cdc | timing | layout | equiv | power | mtbf | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -7,8 +7,10 @@ SIM ?= verilator
 PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers SIM=$(SIM) python3 -m pytest -q -s -p no:cacheprovider
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 LIB := /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell
+LAYOUT := layout/runs/signoff/final
+ROUTED := NETLIST=../$(LAYOUT)/nl/fifo_bridge.nl.v SPEF=../$(LAYOUT)/spef/nom/fifo_bridge.nom.spef
 
-all: test formal cdc timing equiv power mtbf broken
+all: test formal cdc timing layout equiv power mtbf broken
 
 test:
 	mkdir -p results
@@ -28,13 +30,25 @@ timing:
 	if (cd timing && $(RUN) yosys -s synth.ys) > results/synth.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) synth $$c results/synth.log
 	for k in slow typ fast; do \
 	  if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit timing.tcl) > results/timing_$$k.log 2>&1; then c=0; else c=$$?; fi; \
+	  python3 timing/sim_sdf.py build/fifo_bridge_$$k.sdf build/fifo_bridge_$${k}_sim.sdf; \
 	  $(SAVE) timing_$$k $$c results/timing_$$k.log; done
 
-power: timing
+layout: timing
+	if (cd layout && $(RUN) librelane config.json --run-tag signoff --overwrite) > build/layout_flow.log 2>&1; then :; else tail -30 build/layout_flow.log; fi
+	if $(RUN) python3 layout/metrics.py $(LAYOUT)/metrics.json > results/layout.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) layout $$c results/layout.log
+	for k in slow typ fast; do \
+	  if (cd timing && $(RUN) env CORNER=$$k $(ROUTED) sta -no_init -exit timing.tcl) > results/timing_routed_$$k.log 2>&1; then c=0; else c=$$?; fi; \
+	  python3 timing/sim_sdf.py $$(ls $(LAYOUT)/sdf/nom_$${k}_*/*.sdf) build/routed_$${k}_sim.sdf; \
+	  $(SAVE) timing_routed_$$k $$c results/timing_routed_$$k.log; done
+
+power: timing layout
 	if $(PYTEST) tests/test_gates.py > results/test_gates.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_gates $$c results/test_gates.log
-	for k in slow typ fast; do $(RUN) fst2vcd -f build/icarus_fifo_bridge_test_gates_*$${k^^}*/fifo_bridge.fst -o build/gates_$$k.vcd > /dev/null; \
-	  if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit power.tcl) > results/power_$$k.log 2>&1; then c=0; else c=$$?; fi; \
-	  $(SAVE) power_$$k $$c results/power_$$k.log; done
+	for k in slow typ fast; do for n in mapped routed; do \
+	  d=$$(ls -d build/icarus_fifo_bridge_test_gates_*$${k^^}* | if [ $$n = routed ]; then grep ROUTED; else grep -v ROUTED; fi); \
+	  $(RUN) fst2vcd -f $$d/fifo_bridge.fst -o build/gates_$${n}_$$k.vcd > /dev/null; \
+	  if [ $$n = routed ]; then w="$(ROUTED)"; else w=; fi; \
+	  if (cd timing && $(RUN) env CORNER=$$k VCD=../build/gates_$${n}_$$k.vcd $$w sta -no_init -exit power.tcl) > results/power_$${n}_$$k.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) power_$${n}_$$k $$c results/power_$${n}_$$k.log; done; done
 
 cdc: timing
 	$(RUN) yosys -q -p 'read_verilog -sv $(addprefix design/,sync2.sv reset_sync.sv async_fifo.sv skid_buffer.sv fifo_bridge.sv); prep -flatten -top fifo_bridge; memory_map; opt_clean; write_json build/cdc.json'
@@ -69,11 +83,12 @@ build/mtbf/%/edge.txt: mtbf/edge.cir build/mtbf/dfrbpq_pex.spice
 
 broken:
 	mkdir -p results
-	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/$$n; mkdir -p $$d; cp -r design tests $$d; \
-	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); \
-	  if (cd $$d && $(PYTEST) tests/test_async_fifo.py tests/test_skid_buffer.py tests/test_fifo_bridge.py) > results/$$n.log 2>&1; then c=1; \
-	  elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
+	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/$$n; mkdir -p $$d; cp -r design tests formal $$d; \
+	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); caught=0; \
+	  (cd $$d && $(PYTEST) tests/test_async_fifo.py tests/test_skid_buffer.py tests/test_fifo_bridge.py) > results/$$n.log 2>&1 || caught=1; \
+	  for t in fifo_proof fifo_reach; do (cd $$d/formal && $(RUN) sby -f fifo_rules.sby $$t) >> results/$$n.log 2>&1 || caught=1; done; \
+	  if [ $$caught = 0 ]; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  $(SAVE) broken_$$n $$c results/$$n.log; done
 
-.PHONY: all test formal cdc timing equiv power mtbf broken
+.PHONY: all test formal cdc timing layout equiv power mtbf broken
 .DELETE_ON_ERROR:

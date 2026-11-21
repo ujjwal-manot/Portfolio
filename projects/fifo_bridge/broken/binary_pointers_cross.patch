@@ -1,0 +1,15 @@
+Expected failure: Assert failed in fifo_rules.dut: async_fifo.sv
+--- a/design/async_fifo.sv
++++ b/design/async_fifo.sv
+@@ -20,9 +20,9 @@
+   assign r_empty = !r_ready;
+ 
+   wire [A:0] w_bin_next  = w_bin + (A+1)'(w_en && !w_full);
+-  wire [A:0] w_gray_next = (w_bin_next >> 1) ^ w_bin_next;
++  wire [A:0] w_gray_next = w_bin_next;
+   wire [A:0] r_bin_next  = r_bin + (A+1)'(r_en && !r_empty);
+-  wire [A:0] r_gray_next = (r_bin_next >> 1) ^ r_bin_next;
++  wire [A:0] r_gray_next = r_bin_next;
+ 
+   sync2 #(.WIDTH(A+1)) r_to_w (.clk(w_clk), .rst_n(w_rst_n), .d(r_gray), .q(r_gray_w));
+   sync2 #(.WIDTH(A+1)) w_to_r (.clk(r_clk), .rst_n(r_rst_n), .d(w_gray), .q(w_gray_r));
