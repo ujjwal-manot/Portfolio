@@ -1,4 +1,4 @@
-# opamp commands: make charts | sizing | check_model | corners | mc | all
+# opamp commands: make charts | sizing | check_model | corners | mc | broken | review | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -19,7 +19,7 @@ VOLT_min := 1.16
 VOLT_nom := 1.2
 VOLT_hi := 1.32
 
-all: charts sizing check_model corners mc
+all: charts sizing check_model corners mc broken review
 
 charts: $(CHARTS)
 	mkdir -p results
@@ -43,6 +43,27 @@ corners: $(CORNERS)
 mc: $(MC)
 	for f in $(MC); do cp $$f results/mc_$$(basename $$(dirname $$f)).txt; done
 	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mc_*.txt > results/mc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) mc $$c results/mc.log results/mc_*.txt
+
+broken: build/sizes.inc
+	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests $$d; \
+	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); \
+	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) build/sizes.inc $$d; cp $$d/design/opamp.cir $$d/dut.cir; \
+	  printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp 27\n.param vsupply=1.2\n.param mm=0\n' > $$d/corner.inc; \
+	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > corner_tt_27_nom.txt); \
+	  cp $$d/corner_tt_27_nom.txt results/broken_$$n.txt; \
+	  if $(PY) $(ROOT)/helpers/analog_results.py corners results/broken_$$n.txt > results/broken_$$n.log 2>&1; then c=1; \
+	  elif [ -n "$$want" ] && grep -qxF -- "$$want" results/broken_$$n.log; then c=0; else c=2; fi; \
+	  $(SAVE) broken_$$n $$c results/broken_$$n.log results/broken_$$n.txt; done
+
+REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min
+
+review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
+	for v in opamp opamp_miller; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
+	  cp tests/loop.cir tests/step.cir tests/swing.cir build/sizes.inc build/corners/$$c/corner.inc $$d; cp design/$$v.cir $$d/dut.cir; \
+	  (cd $$d && for t in loop step swing; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat loop.txt step.txt swing.txt > result.txt); \
+	  cp $$d/result.txt results/review_$${v}_$$c.txt; done; \
+	  if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $(REVIEW); do echo results/review_$${v}_$$c.txt; done) > results/review_$$v.log 2>&1; then :; fi; done
+	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; $(SAVE) review $$c results/review_opamp.log results/review_opamp_miller.log results/review_*_*.txt
 
 build/model/result.txt: tests/model.cir tests/loop.cir build/sizes.inc
 	mkdir -p $(@D)
@@ -77,5 +98,5 @@ build/charts/%/charts.txt: tests/charts.cir
 	rm -f $@
 	cd $(@D) && $(RUN) ngspice -b charts.cir > ngspice.log 2>&1
 
-.PHONY: all charts sizing check_model corners mc
+.PHONY: all charts sizing check_model corners mc broken review
 .DELETE_ON_ERROR:

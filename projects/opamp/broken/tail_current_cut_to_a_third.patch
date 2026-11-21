@@ -1,0 +1,12 @@
+Expected failure: FAIL slew_v_per_s
+--- a/design/opamp.cir
++++ b/design/opamp.cir
+@@ -7,7 +7,7 @@
+ XMBPC vbpc vbpc vdd vdd sg13_lv_pmos w={w_bpc} l={l_pu} ng={ng_bpc} m=1 mm_ok={mm}
+ XMBP2 vbnc vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m=1 mm_ok={mm}
+ XMBNC vbnc vbnc vss vss sg13_lv_nmos w={w_bnc} l={l_nu} ng={ng_bnc} m=1 mm_ok={mm}
+-XM5 t ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_tail} mm_ok={mm}
++XM5 t ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m=1 mm_ok={mm}
+ XM1 f1 inn t vss sg13_lv_nmos w={w_in} l={l_in} ng={ng_in} mm_ok={mm}
+ XM2 f2 inp t vss sg13_lv_nmos w={w_in} l={l_in} ng={ng_in} mm_ok={mm}
+ XM3 f1 vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m={m_fold} mm_ok={mm}

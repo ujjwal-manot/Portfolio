@@ -1,0 +1,10 @@
+Expected failure: FAIL pm_deg
+--- a/design/opamp.cir
++++ b/design/opamp.cir
+@@ -20,5 +20,5 @@
+ XM7 n2 x vss vss sg13_lv_nmos w={w_bot} l={l_bot} ng={ng_bot} mm_ok={mm}
+ XM8 out o1 vdd vdd sg13_lv_pmos w={w_out} l={l_out} ng={ng_out} mm_ok={mm}
+ XM9 out ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_sink} mm_ok={mm}
+-XCC n2 out cap_cmim w={w_cc} l={l_cc} mm_ok={mm}
++XCC o1 out cap_cmim w={w_cc/3} l={l_cc/3} mm_ok={mm}
+ .ends opamp

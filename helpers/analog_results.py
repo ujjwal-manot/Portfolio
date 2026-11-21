@@ -100,5 +100,8 @@ if __name__ == "__main__":
             m, name = measured(parse(p)), Path(p).stem.removeprefix("corner_")
             if name.endswith(NO_SWING_AT):
                 print(f"swing at 1.08 V, not required: {name} out_low_v={m.get('out_low_v', float('nan')):.4g} out_high_v={m.get('out_high_v', float('nan')):.4g}")
+        for spec, row in rows.items():
+            if spec in SPECS and not row[4]:
+                print(f"FAIL {spec}")
         print("every corner meets every spec" if ok else "some corner misses a spec")
     sys.exit(0 if ok else 1)

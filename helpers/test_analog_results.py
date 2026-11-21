@@ -1,4 +1,6 @@
 # Checks the opamp result reader names the worst corner for each spec, fails a corner that misses one or whose measurement failed, leaves swing unchecked at the 1.08 V supply (below the 1.16 V the opamp needs for it), counts Monte Carlo yield per spec and combined, and passes the two-pole model only when its numbers match the arithmetic.
+import subprocess, sys
+from pathlib import Path
 from analog_results import corners, model, expected, montecarlo
 
 GOOD = ("loop a0_db 72 fc_hz 1.3e7 pm_deg 67 gbw_hz 2.8e7 ugf_hz 2.4e7\nstep supply_a 1.5e-4 rise_slew_v_per_s 2e7 fall_slew_v_per_s 1.7e7 rise_settle_s 6e-8 fall_settle_s 1.1e-7\n"
@@ -39,3 +41,8 @@ def test_montecarlo_yield_per_spec_and_combined(tmp_path):
     assert yields["pm_deg"] == 0.99 and yields["combined"] == 0.99 and ok
     runs.append(write(tmp_path, "mc_100.txt", GOOD.replace("gbw_hz 2.8e7", "gbw_hz 1.9e7")))
     assert not montecarlo(runs)[0]
+
+def test_each_failed_spec_gets_a_line_naming_it(tmp_path):
+    bad = write(tmp_path, "corner_tt_27_nom.txt", GOOD.replace("pm_deg 67", "pm_deg 15").replace("a0_db 72", "a0_db 40"))
+    out = subprocess.run([sys.executable, str(Path(__file__).parent / "analog_results.py"), "corners", str(bad)], capture_output=True, text=True).stdout
+    assert "FAIL pm_deg" in out.splitlines() and "FAIL a0_db" in out.splitlines() and "FAIL gbw_hz" not in out.splitlines()

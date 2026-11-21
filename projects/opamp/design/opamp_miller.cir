@@ -1,0 +1,25 @@
+* Design-review alternative to opamp.cir: the same folded-cascode two-stage opamp with Miller compensation, the MIM capacitor from the output to the first-stage output through an rhigh nulling resistor, and the larger output stage that second-pole placement needs (sizes with the _m suffix in sizes.inc).
+.subckt opamp inp inn out vdd vss ibias
+XMB0 ibias ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_ref} mm_ok={mm}
+XMBN1 vbp ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m=1 mm_ok={mm}
+XMBP vbp vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m=1 mm_ok={mm}
+XMBN2 vbpc ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m=1 mm_ok={mm}
+XMBPC vbpc vbpc vdd vdd sg13_lv_pmos w={w_bpc} l={l_pu} ng={ng_bpc} m=1 mm_ok={mm}
+XMBP2 vbnc vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m=1 mm_ok={mm}
+XMBNC vbnc vbnc vss vss sg13_lv_nmos w={w_bnc} l={l_nu} ng={ng_bnc} m=1 mm_ok={mm}
+XM5 t ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_tail} mm_ok={mm}
+XM1 f1 inn t vss sg13_lv_nmos w={w_in} l={l_in} ng={ng_in} mm_ok={mm}
+XM2 f2 inp t vss sg13_lv_nmos w={w_in} l={l_in} ng={ng_in} mm_ok={mm}
+XM3 f1 vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m={m_fold} mm_ok={mm}
+XM4 f2 vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m={m_fold} mm_ok={mm}
+XM3C x vbpc f1 vdd sg13_lv_pmos w={w_pcas} l={l_pcas} ng={ng_pcas} mm_ok={mm}
+XM4C o1 vbpc f2 vdd sg13_lv_pmos w={w_pcas} l={l_pcas} ng={ng_pcas} mm_ok={mm}
+XM6C x vbnc n1 vss sg13_lv_nmos w={w_ncas} l={l_ncas} ng={ng_ncas} mm_ok={mm}
+XM7C o1 vbnc n2 vss sg13_lv_nmos w={w_ncas} l={l_ncas} ng={ng_ncas} mm_ok={mm}
+XM6 n1 x vss vss sg13_lv_nmos w={w_bot} l={l_bot} ng={ng_bot} mm_ok={mm}
+XM7 n2 x vss vss sg13_lv_nmos w={w_bot} l={l_bot} ng={ng_bot} mm_ok={mm}
+XM8 out o1 vdd vdd sg13_lv_pmos w={w_out_m} l={l_out} ng={ng_out_m} mm_ok={mm}
+XM9 out ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_sink_m} mm_ok={mm}
+XRZ o1 cz vss rhigh w={w_rz} l={l_rz} mm_ok={mm}
+XCC cz out cap_cmim w={w_cc_m} l={l_cc_m} mm_ok={mm}
+.ends opamp
