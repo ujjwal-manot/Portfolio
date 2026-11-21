@@ -1,0 +1,9 @@
+# Maps fifo_bridge onto IHP SG13G2 standard cells using the slow corner library (1.08 V, 125 C).
+read_verilog -sv ../design/async_fifo.sv ../design/skid_buffer.sv ../design/fifo_bridge.sv
+synth -flatten -top fifo_bridge
+dfflibmap -liberty ../build/slow.lib
+abc -liberty ../build/slow.lib
+opt_clean -purge
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+stat -liberty ../build/slow.lib
+write_verilog -noattr ../build/fifo_bridge_cells.v

@@ -1,0 +1,33 @@
+# Full proofs of async_fifo (4 deep) and skid_buffer, a bounded check of the joined bridge, and covers showing every rule is reached.
+[tasks]
+fifo_proof fifo prove
+skid_proof skid prove
+bridge_check bridge bmc
+fifo_reach fifo cover
+skid_reach skid cover
+bridge_reach bridge cover
+
+[options]
+prove: mode prove
+bmc: mode bmc
+bmc: depth 40
+cover: mode cover
+cover: depth 40
+multiclock on
+
+[engines]
+prove: abc pdr
+bmc: abc bmc3
+cover: smtbmc yices
+
+[script]
+read -formal async_fifo.sv skid_buffer.sv fifo_bridge.sv fifo_rules.sv
+fifo: prep -top fifo_rules
+skid: prep -top skid_rules
+bridge: prep -top bridge_rules
+
+[files]
+../design/async_fifo.sv
+../design/skid_buffer.sv
+../design/fifo_bridge.sv
+fifo_rules.sv

@@ -1,0 +1,243 @@
+OpenSTA 3.1.0 80fbbb2945 Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Startpoint: m_tready (input port clocked by m_clk)
+Endpoint: _801_ (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   4.00    4.00 v input external delay
+   0.00    4.00 v m_tready (in)
+   0.46    4.46 v _624_/Y (sg13g2_nand2b_1)
+   0.33    4.79 ^ _486_/X (sg13g2_mux2_1)
+   0.00    4.79 ^ _801_/D (sg13g2_dfrbpq_1)
+           4.79   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.00   20.00   clock network delay (ideal)
+   0.00   20.00   clock reconvergence pessimism
+          20.00 ^ _801_/CLK (sg13g2_dfrbpq_1)
+  -0.21   19.79   library setup time
+          19.79   data required time
+---------------------------------------------------------
+          19.79   data required time
+          -4.79   data arrival time
+---------------------------------------------------------
+          15.00   slack (MET)
+
+
+Startpoint: m_tready (input port clocked by m_clk)
+Endpoint: _802_ (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   4.00    4.00 v input external delay
+   0.00    4.00 v m_tready (in)
+   0.46    4.46 v _624_/Y (sg13g2_nand2b_1)
+   0.33    4.79 ^ _500_/X (sg13g2_mux2_1)
+   0.00    4.79 ^ _802_/D (sg13g2_dfrbpq_1)
+           4.79   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.00   20.00   clock network delay (ideal)
+   0.00   20.00   clock reconvergence pessimism
+          20.00 ^ _802_/CLK (sg13g2_dfrbpq_1)
+  -0.21   19.79   library setup time
+          19.79   data required time
+---------------------------------------------------------
+          19.79   data required time
+          -4.79   data arrival time
+---------------------------------------------------------
+          15.00   slack (MET)
+
+
+Startpoint: m_tready (input port clocked by m_clk)
+Endpoint: _803_ (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   4.00    4.00 v input external delay
+   0.00    4.00 v m_tready (in)
+   0.46    4.46 v _624_/Y (sg13g2_nand2b_1)
+   0.33    4.79 ^ _513_/X (sg13g2_mux2_1)
+   0.00    4.79 ^ _803_/D (sg13g2_dfrbpq_1)
+           4.79   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.00   20.00   clock network delay (ideal)
+   0.00   20.00   clock reconvergence pessimism
+          20.00 ^ _803_/CLK (sg13g2_dfrbpq_1)
+  -0.21   19.79   library setup time
+          19.79   data required time
+---------------------------------------------------------
+          19.79   data required time
+          -4.79   data arrival time
+---------------------------------------------------------
+          15.00   slack (MET)
+
+
+Startpoint: s_tvalid (input port clocked by s_clk)
+Endpoint: _812_ (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+  20.00   20.00 ^ input external delay
+   0.00   20.00 ^ s_tvalid (in)
+   0.23   20.23 v _577_/Y (sg13g2_nand3b_1)
+   0.96   21.19 ^ _623_/Y (sg13g2_nor3_1)
+   0.38   21.57 v _564_/Y (sg13g2_xnor2_1)
+   0.27   21.84 v _565_/X (sg13g2_mux2_1)
+   0.15   22.00 v _567_/Y (sg13g2_xnor2_1)
+   0.14   22.14 ^ _576_/Y (sg13g2_nor3_1)
+   0.00   22.14 ^ _812_/D (sg13g2_dfrbpq_1)
+          22.14   data arrival time
+
+ 100.00  100.00   clock s_clk (rise edge)
+   0.00  100.00   clock network delay (ideal)
+   0.00  100.00   clock reconvergence pessimism
+         100.00 ^ _812_/CLK (sg13g2_dfrbpq_1)
+  -0.23   99.77   library setup time
+          99.77   data required time
+---------------------------------------------------------
+          99.77   data required time
+         -22.14   data arrival time
+---------------------------------------------------------
+          77.63   slack (MET)
+
+
+Startpoint: s_tvalid (input port clocked by s_clk)
+Endpoint: _840_ (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+  20.00   20.00 ^ input external delay
+   0.00   20.00 ^ s_tvalid (in)
+   0.23   20.23 v _577_/Y (sg13g2_nand3b_1)
+   0.96   21.19 ^ _623_/Y (sg13g2_nor3_1)
+   0.43   21.62 ^ _564_/Y (sg13g2_xnor2_1)
+   0.28   21.89 ^ _565_/X (sg13g2_mux2_1)
+   0.00   21.89 ^ _840_/D (sg13g2_dfrbpq_1)
+          21.89   data arrival time
+
+ 100.00  100.00   clock s_clk (rise edge)
+   0.00  100.00   clock network delay (ideal)
+   0.00  100.00   clock reconvergence pessimism
+         100.00 ^ _840_/CLK (sg13g2_dfrbpq_1)
+  -0.22   99.78   library setup time
+          99.78   data required time
+---------------------------------------------------------
+          99.78   data required time
+         -21.89   data arrival time
+---------------------------------------------------------
+          77.89   slack (MET)
+
+
+Startpoint: s_tvalid (input port clocked by s_clk)
+Endpoint: _774_ (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+  20.00   20.00 ^ input external delay
+   0.00   20.00 ^ s_tvalid (in)
+   0.26   20.26 ^ _521_/Y (sg13g2_nor2b_1)
+   0.30   20.55 v _588_/Y (sg13g2_nand3b_1)
+   0.85   21.41 ^ _589_/Y (sg13g2_nor3_1)
+   0.45   21.86 v _427_/X (sg13g2_mux2_1)
+   0.00   21.86 v _774_/D (sg13g2_dfrbpq_1)
+          21.86   data arrival time
+
+ 100.00  100.00   clock s_clk (rise edge)
+   0.00  100.00   clock network delay (ideal)
+   0.00  100.00   clock reconvergence pessimism
+         100.00 ^ _774_/CLK (sg13g2_dfrbpq_1)
+  -0.20   99.80   library setup time
+          99.80   data required time
+---------------------------------------------------------
+          99.80   data required time
+         -21.86   data arrival time
+---------------------------------------------------------
+          77.94   slack (MET)
+
+
+Startpoint: _828_ (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: _818_ (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ _828_/CLK (sg13g2_dfrbpq_1)
+   0.23    0.23 v _828_/Q (sg13g2_dfrbpq_1)
+   0.00    0.23 v _818_/D (sg13g2_dfrbpq_1)
+           0.23   data arrival time
+
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+           0.00 ^ _818_/CLK (sg13g2_dfrbpq_1)
+  -0.06   -0.06   library hold time
+          -0.06   data required time
+---------------------------------------------------------
+          -0.06   data required time
+          -0.23   data arrival time
+---------------------------------------------------------
+           0.29   slack (MET)
+
+
+Startpoint: _813_ (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: _823_ (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ _813_/CLK (sg13g2_dfrbpq_1)
+   0.23    0.23 v _813_/Q (sg13g2_dfrbpq_1)
+   0.00    0.23 v _823_/D (sg13g2_dfrbpq_1)
+           0.23   data arrival time
+
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+           0.00 ^ _823_/CLK (sg13g2_dfrbpq_1)
+  -0.06   -0.06   library hold time
+          -0.06   data required time
+---------------------------------------------------------
+          -0.06   data required time
+          -0.23   data arrival time
+---------------------------------------------------------
+           0.29   slack (MET)
+
+
+worst setup slack 15.00037072332816 ns, worst hold slack 0.2886061112317151 ns

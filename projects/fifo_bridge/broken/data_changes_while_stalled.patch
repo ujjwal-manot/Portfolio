@@ -1,0 +1,11 @@
+--- a/design/skid_buffer.sv
++++ b/design/skid_buffer.sv
+@@ -23,7 +23,7 @@
+     end else if (s_valid && s_ready) skid_valid <= 1'b1;
+ 
+   always_ff @(posedge clk) begin
+-    if (m_ready || !m_valid) m_data <= skid_valid ? skid : s_data;
++    m_data <= skid_valid ? skid : s_data;
+     if (s_ready) skid <= s_data;
+   end
+ endmodule

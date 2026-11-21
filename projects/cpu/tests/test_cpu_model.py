@@ -1,0 +1,47 @@
+# Runs every rv32ui test on Spike and on cpu_model.py; the two must retire the same instructions with the same results.
+import re, subprocess
+from pathlib import Path
+import pytest
+from cpu_model import Cpu
+
+BUILD = Path(__file__).resolve().parents[1] / "build" / "rv32ui"
+NAMES = sorted(p.stem.removesuffix("_spike") for p in BUILD.glob("*_spike.elf"))
+COMMIT = re.compile(r"^core\s+0: 3 0x([0-9a-f]+) \(0x([0-9a-f]+)\)(?: x(\d+)\s+0x([0-9a-f]+))?(?: mem 0x([0-9a-f]+))?", re.M)
+
+def tohost(name):
+    symbols = subprocess.run(["riscv64-unknown-elf-nm", BUILD / f"{name}_spike.elf"], capture_output=True, text=True, check=True).stdout
+    return int(re.search(r"^([0-9a-f]+) . tohost$", symbols, re.M).group(1), 16)
+
+def spike(name):
+    run = subprocess.run(["spike", "--isa=rv32i", "-m0x80000000:0x10000", "-l", "--log-commits", BUILD / f"{name}_spike.elf"],
+                         capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, f"{name}: Spike says the test failed ({run.returncode})"
+    trace = []
+    for pc, instr, rd, value, mem in COMMIT.findall(run.stdout + run.stderr):
+        if int(pc, 16) < 0x80000000:
+            continue
+        trace.append((int(pc, 16), int(instr, 16), int(rd or 0), int(value or "0", 16)))
+        if mem and int(mem, 16) == tohost(name):
+            return trace
+    raise AssertionError(f"{name}: Spike never wrote the result")
+
+def model(name):
+    cpu = Cpu((BUILD / f"{name}_spike.bin").read_bytes(), base=0x80000000)
+    trace = []
+    for _ in range(20000):
+        pc, instr, rd, value, store = cpu.step()
+        trace.append((pc, instr, rd, value))
+        if store and store[0] == tohost(name):
+            assert store[1] == 1, f"{name}: model reports failure code {store[1]}"
+            return trace
+    raise AssertionError(f"{name}: model never wrote the result")
+
+def test_found_the_tests():
+    assert len(NAMES) >= 38, f"only {len(NAMES)} rv32ui tests built"
+
+@pytest.mark.parametrize("name", NAMES)
+def test_model_matches_spike(name):
+    want, got = spike(name), model(name)
+    for i, (w, g) in enumerate(zip(want, got)):
+        assert w == g, f"{name} instruction {i}: Spike {[hex(x) for x in w]}, model {[hex(x) for x in g]}"
+    assert len(want) == len(got)

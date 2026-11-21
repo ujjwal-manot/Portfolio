@@ -5,7 +5,7 @@ from pathlib import Path
 SKIP = {".git", "node_modules", "build", "sim_build", "runs", "dist", "__pycache__", "third_party"}
 SPICE = {".sp", ".spice", ".cir"}
 SLASH = {".sv", ".v", ".svh", ".c", ".h", ".ts", ".tsx", ".js", ".ld", ".S"}
-HASH = {".py", ".sh", ".tcl", ".sby", ".yml", ".yaml", ".mk"}
+HASH = {".py", ".sh", ".tcl", ".sby", ".ys", ".yml", ".yaml", ".mk"}
 RANDOM_CALLS = re.compile(r"^(np|numpy)\.random\.|^random\.")
 SIM_MODULES = ("scipy.integrate", "PySpice", "ahkab", "lcapy")
 SIM_NAMES = {"odeint", "solve_ivp", "lsim", "dlsim", "lti", "dlti"}

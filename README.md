@@ -22,7 +22,7 @@ On Windows, run the same commands in WSL2. If you are already inside the iic-osi
 | `projects/` | one folder per project: design, tests, broken copies, results |
 | `helpers/` | Python scripts that read simulator output and record results |
 | `compare_with_papers/` | runs published reference circuits and compares with their published numbers |
-| `console/` | 3D web view of the chip and every result |
+| `console/` | read-only viewer: schematics, layouts, waveforms, results and a 3D die |
 | `hardware/` | STM32 R-2R DAC and Tang Nano 20K FPGA builds |
 | `tracking/` | session log, scorecard and branch decision rules |
 | `setup/` | scripts to start and check the tool image |

@@ -1,0 +1,11 @@
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -149,7 +149,7 @@
+       mispredicts <= mispredicts + 32'(redirect);
+       if (redirect) begin
+         pc <= e_actual;
+-        {d_valid, e_valid} <= '0;
++        e_valid <= 1'b0;
+       end else if (stall) e_valid <= 1'b0;
+       else begin
+         pc <= f_taken ? btb_target[f_idx] : pc + 4;

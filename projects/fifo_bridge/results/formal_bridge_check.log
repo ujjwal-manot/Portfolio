@@ -1,0 +1,56 @@
+SBY  7:46:37 [../build/formal_bridge_check] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_bridge_check'.
+SBY  7:46:37 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/async_fifo.sv'.
+SBY  7:46:37 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/skid_buffer.sv'.
+SBY  7:46:37 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/fifo_bridge.sv'.
+SBY  7:46:37 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/fifo_rules.sv'.
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: smtbmc yices
+SBY  7:46:37 [../build/formal_bridge_check] base: starting process "cd ../build/formal_bridge_check/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY  7:46:37 [../build/formal_bridge_check] base: finished (returncode=0)
+SBY  7:46:37 [../build/formal_bridge_check] prep: starting process "cd ../build/formal_bridge_check/model; yosys -ql design_prep.log design_prep.ys"
+SBY  7:46:37 [../build/formal_bridge_check] prep: finished (returncode=0)
+SBY  7:46:37 [../build/formal_bridge_check] smt2: starting process "cd ../build/formal_bridge_check/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY  7:46:37 [../build/formal_bridge_check] smt2: finished (returncode=0)
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: starting process "cd ../build/formal_bridge_check; yosys-smtbmc -s yices --presat --unroll --noprogress -t 40  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Solver: yices
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 8..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 8..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 9..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 9..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 10..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 10..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 11..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 11..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 12..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 12..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 13..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 13..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assumptions in step 14..
+SBY  7:46:37 [../build/formal_bridge_check] engine_0: ##   0:00:00  Checking assertions in step 14..
+SBY  7:46:40 [../build/formal_bridge_check] engine_0: ##   0:00:03  Checking assumptions in step 15..
+SBY  7:46:40 [../build/formal_bridge_check] engine_0: ##   0:00:03  Checking assertions in step 15..
+SBY  7:46:48 [../build/formal_bridge_check] engine_0: ##   0:00:11  Checking assumptions in step 16..
+SBY  7:46:48 [../build/formal_bridge_check] engine_0: ##   0:00:11  Checking assertions in step 16..
+SBY  7:47:07 [../build/formal_bridge_check] engine_0: ##   0:00:30  Checking assumptions in step 17..
+SBY  7:47:07 [../build/formal_bridge_check] engine_0: ##   0:00:30  Checking assertions in step 17..
+SBY  7:48:07 [../build/formal_bridge_check] engine_0: ##   0:01:30  waiting for solver (1 minute)
+SBY  7:49:10 [../build/formal_bridge_check] engine_0: ##   0:02:33  Checking assumptions in step 18..
+SBY  7:49:10 [../build/formal_bridge_check] engine_0: ##   0:02:33  Checking assertions in step 18..
+SBY  7:50:10 [../build/formal_bridge_check] engine_0: ##   0:03:33  waiting for solver (1 minute)
+SBY ---- Keyboard interrupt or external termination signal ----
+SBY  7:50:46 [../build/formal_bridge_check] engine_0: terminating process

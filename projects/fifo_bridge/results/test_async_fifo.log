@@ -1,0 +1,32 @@
+- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.219 MB
+make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_async_fifo_test_async_fifo'
+make: Nothing to be done for 'default'.
+make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_async_fifo_test_async_fifo'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795242157
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
+2001638.50ns INFO     cocotb.regression                  test_async_fifo.slow_writer_fast_reader passed
+2001638.50ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+4003188.50ns INFO     cocotb.regression                  test_async_fifo.fast_writer_slow_reader passed
+4003188.50ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+6757425.00ns INFO     cocotb.regression                  test_async_fifo.similar_clocks passed
+6757425.00ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *************************************************************************************************
+                                                        ** test_async_fifo.slow_writer_fast_reader   PASS     2001638.50           1.74    1151844.01  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   PASS     2001550.00           1.97    1017717.61  **
+                                                        ** test_async_fifo.similar_clocks            PASS     2754236.50           2.22    1241057.55  **
+                                                        *************************************************************************************************
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                       6757425.00           5.93    1140386.35  **
+                                                        *************************************************************************************************
+- :0: Verilog $finish
+.
+1 passed in 7.80s

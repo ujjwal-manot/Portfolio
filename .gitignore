@@ -11,3 +11,5 @@ console/dist/
 *.fsdb
 .spiceinit
 *.raw
+*.result.xml
+third_party/
