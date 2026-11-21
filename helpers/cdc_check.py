@@ -1,4 +1,4 @@
-# Reads a flattened Yosys JSON netlist, of RTL or of IHP SG13G2 cells, and reports every clock domain crossing that is not a clean two-flop synchronizer, every multi-bit crossing, and every unsynchronized or foreign reset, minus waived crossings, and flags waivers that match nothing.
+# Reads a flattened Yosys JSON netlist, of RTL or of IHP SG13G2 cells, and reports every clock domain crossing that is not a clean two-flop synchronizer, every multi-bit crossing, and every unsynchronized or foreign reset, minus waived crossings, and flags waivers that match nothing; a flop's clock is the port its clock pin traces back to through buffers and inverters, buffers and inverters on a data path are wire, not logic, because one input cannot glitch, and a flop that reaches an output port through buffers alone is named after that port.
 import fnmatch, json, re, sys
 from collections import defaultdict
 
@@ -31,8 +31,23 @@ def find(netlist, top, ports, waivers=()):
                     loads[b].append((cell, pin))
     cells = m["cells"]
     flop = {n for n, c in cells.items() if "CLK" in c["connections"]}
-    clock = lambda f: name[cells[f]["connections"]["CLK"][0]]
-    reg = lambda f: re.sub(r"\[\d+\]$", "", name[cells[f]["connections"]["Q"][0]])
+    def clock(f):
+        kind, what = through(cells[f]["connections"]["CLK"][0])
+        return what if kind == "port" else name[cells[f]["connections"]["CLK"][0]]
+    outputs = {b: port for port, p in m["ports"].items() if p["direction"] == "output" for b in p["bits"]}
+
+    def port_of(bit, seen=()):
+        if bit in outputs:
+            return outputs[bit]
+        for cell, pin in loads[bit]:
+            if cells[cell]["type"] in PASS and cell not in seen:
+                out = cells[cell]["connections"]
+                found = port_of((out.get("X") or out["Y"])[0], (*seen, cell))
+                if found:
+                    return found
+        return None
+
+    reg = lambda f: port_of(cells[f]["connections"]["Q"][0]) or re.sub(r"\[\d+\]$", "", name[cells[f]["connections"]["Q"][0]])
 
     def domain(src):
         kind, what = src
@@ -45,6 +60,8 @@ def find(netlist, top, ports, waivers=()):
         kind, what = driver[bit]
         if kind == "port" or what in flop:
             return {driver[bit]}, 0
+        if cells[what]["type"] in PASS:
+            return cone(cells[what]["connections"]["A"][0], seen)
         out, depth = set(), 0
         for pin, bits in cells[what]["connections"].items():
             if cells[what]["port_directions"].get(pin) == "input":

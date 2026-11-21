@@ -29,3 +29,15 @@ def test_fifo_bridge_memory_waiver_covers_only_the_output_stage():
     assert waived("m_tdata on m_clk samples fifo.mem[0], fifo.mem[1] through logic", waivers)
     assert waived("out.skid on m_clk samples fifo.mem[0] through logic", waivers)
     assert not waived("fifo.r_ready on m_clk samples fifo.mem[0] through logic", waivers)
+
+def test_clock_buffers_and_repair_buffers_change_nothing(tmp_path):
+    netlist = tmp_path / "tree.json"
+    subprocess.run(["yosys", "-q", "-p", f"read_liberty -lib {LIB}; read_verilog {PROBES}/buffered_tree.v; hierarchy -top buffered_tree; write_json {netlist}"], check=True)
+    assert find(netlist, "buffered_tree", {"d": "a_clk"}) == []
+
+def test_a_flop_behind_an_output_buffer_is_named_after_its_port(tmp_path):
+    probe = (PROBES / "buffered_tree.v").read_text().replace(".D(meta), .Q(net7)", ".D(mix), .Q(net7)").replace("  wire net7;", "  wire net7, mix;\n  sg13g2_xor2_1 x (.A(meta), .B(src_buf), .X(mix));")
+    (tmp_path / "bad.v").write_text(probe)
+    netlist = tmp_path / "bad.json"
+    subprocess.run(["yosys", "-q", "-p", f"read_liberty -lib {LIB}; read_verilog {tmp_path}/bad.v; hierarchy -top buffered_tree; write_json {netlist}"], check=True)
+    assert ("logic_before_sync", "q on b_clk samples src through logic") in find(netlist, "buffered_tree", {"d": "a_clk"})

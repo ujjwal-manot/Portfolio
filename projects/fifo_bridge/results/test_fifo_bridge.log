@@ -1,78 +1,86 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.160 MB
+- Verilator: Built from 0.095 MB sources in 6 modules, into 0.094 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.017 s (elab=0.001, cvt=0.009, bld=0.000); cpu 0.014 s on 1 threads; allocated 23.277 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_fifo_bridge_test_fifo_bridge'
-make: Nothing to be done for 'default'.
+ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
+python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o fifo_bridge
+rm Vtop__ALL.verilator_deplist.tmp
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_fifo_bridge_test_fifo_bridge'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262997
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277922
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
-240350.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
-240350.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
-499700.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
-499700.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
-1070250.00ns INFO     cocotb.fifo_bridge                 samples lost per CPU pause in us: {14: 0, 15: 0, 16: 0, 17: 0, 18: 1, 19: 2, 20: 2, 21: 3, 22: 4}
-1070250.00ns INFO     cocotb.regression                  test_fifo_bridge.cpu_pause_limit passed
-1070250.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
-1711976.63ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
-1711976.63ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
-2620407.23ns INFO     cocotb.regression                  test_fifo_bridge.fast_source_slow_sink passed
-2620407.23ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
-3278282.48ns INFO     cocotb.regression                  test_fifo_bridge.near_equal_clocks passed
-3278282.48ns INFO     cocotb.regression                  *************************************************************************************************
+267550.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
+267550.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+526900.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
+526900.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+1097450.00ns INFO     cocotb.fifo_bridge                 samples lost per CPU pause in us: {14: 0, 15: 0, 16: 0, 17: 0, 18: 0, 19: 2, 20: 2, 21: 4, 22: 4}
+1097450.00ns INFO     cocotb.regression                  test_fifo_bridge.cpu_pause_limit passed
+1097450.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+1739151.66ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
+1739151.66ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+2660481.56ns INFO     cocotb.regression                  test_fifo_bridge.fast_source_slow_sink passed
+2660481.56ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+3314992.17ns INFO     cocotb.regression                  test_fifo_bridge.near_equal_clocks passed
+3314992.17ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     PASS      240350.00           0.27     887107.88  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.46     565807.86  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          PASS      570550.00           0.76     748763.13  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      641726.63           1.05     612024.62  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    PASS      908430.59           1.17     774185.21  **
-                                                        ** test_fifo_bridge.near_equal_clocks        PASS      657875.25           0.90     729052.34  **
+                                                        ** test_fifo_bridge.reset_during_traffic     PASS      267550.00           0.30     904415.73  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.30     855240.02  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          PASS      570550.00           0.65     884339.53  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      641701.66           0.82     785674.99  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    PASS      921329.90           0.94     984975.18  **
+                                                        ** test_fifo_bridge.near_equal_clocks        PASS      654510.61           0.81     806923.38  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=6 FAIL=0 SKIP=0                       3278282.48           4.62     709637.58  **
+                                                        ** TESTS=6 PASS=6 FAIL=0 SKIP=0                       3314992.17           3.81     869841.56  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 .     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795263004
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277928
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
-263650.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
-263650.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
-523000.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
-523000.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
-1093550.00ns INFO     cocotb.fifo_bridge                 samples lost per CPU pause in us: {14: 0, 15: 0, 16: 0, 17: 0, 18: 0, 19: 2, 20: 2, 21: 3, 22: 4}
-1093550.00ns INFO     cocotb.regression                  test_fifo_bridge.cpu_pause_limit passed
-1093550.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
-1735222.03ns INFO     cocotb.fifo_bridge                 metastability injection delayed 32 pointer bits
-1735222.03ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
-1735222.03ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
-2658565.40ns INFO     cocotb.fifo_bridge                 metastability injection delayed 58 pointer bits
-2658565.40ns INFO     cocotb.regression                  test_fifo_bridge.fast_source_slow_sink passed
-2658565.40ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
-3320194.90ns INFO     cocotb.fifo_bridge                 metastability injection delayed 92 pointer bits
-3320194.90ns INFO     cocotb.regression                  test_fifo_bridge.near_equal_clocks passed
-3320194.90ns INFO     cocotb.regression                  *************************************************************************************************
+255650.00ns INFO     cocotb.regression                  test_fifo_bridge.reset_during_traffic passed
+255650.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+515000.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
+515000.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+1085550.00ns INFO     cocotb.fifo_bridge                 samples lost per CPU pause in us: {14: 0, 15: 0, 16: 0, 17: 0, 18: 0, 19: 1, 20: 2, 21: 3, 22: 4}
+1085550.00ns INFO     cocotb.regression                  test_fifo_bridge.cpu_pause_limit passed
+1085550.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+1727299.81ns INFO     cocotb.fifo_bridge                 metastability injection delayed 29 pointer bits
+1727299.81ns INFO     cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock passed
+1727299.81ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+2659897.63ns INFO     cocotb.fifo_bridge                 metastability injection delayed 49 pointer bits
+2659897.63ns INFO     cocotb.regression                  test_fifo_bridge.fast_source_slow_sink passed
+2659897.63ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+3317503.34ns INFO     cocotb.fifo_bridge                 metastability injection delayed 87 pointer bits
+3317503.34ns INFO     cocotb.regression                  test_fifo_bridge.near_equal_clocks passed
+3317503.34ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     PASS      263650.00           1.09     242010.37  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           1.04     249515.59  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          PASS      570550.00           2.27     251349.65  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      641672.03           2.77     231912.91  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    PASS      923343.38           3.67     251498.63  **
-                                                        ** test_fifo_bridge.near_equal_clocks        PASS      661629.50           2.43     272003.45  **
+                                                        ** test_fifo_bridge.reset_during_traffic     PASS      255650.00           0.99     259334.08  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       PASS      259350.00           0.82     314396.24  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          PASS      570550.00           1.64     347287.15  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   PASS      641749.81           2.14     300299.71  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    PASS      932597.82           2.52     369552.79  **
+                                                        ** test_fifo_bridge.near_equal_clocks        PASS      657605.70           2.00     328066.75  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=6 FAIL=0 SKIP=0                       3320194.90          13.27     250126.38  **
+                                                        ** TESTS=6 PASS=6 FAIL=0 SKIP=0                       3317503.34          10.12     327776.02  **
                                                         *************************************************************************************************
 .
-2 passed in 21.37s
+2 passed in 23.67s

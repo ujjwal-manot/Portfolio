@@ -1,0 +1,29 @@
+{
+ "test_sar_logic": {
+  "logs": {
+   "test_sar_logic.log": "a9b0713c71eaa6131c48c3a4ab1ef9b593f130145f9703e603b7e5917c7b29f6"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/adc_results.py": "f8dee4970388d6a256f271cc3353450da1693b0e1527fd6ba89b7366947add9c",
+   "helpers/adc_spectrum.py": "5d2f6cb74c4f3c2c0529eae3b238dbfded0e032929bec4caa95dea823d3235cb",
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/save_result.py": "1bce0edd3cc99883e8f8130c16dac22226f1702577c7e0590a8814c092a174c9",
+   "projects/adc/Makefile": "1027f03e6994a1d7e2045add83251248c92f2c1634a6dc5fc630b24b1ef30bf4",
+   "projects/adc/design/cap_dac.cir": "c63e2113149d094e67edab26bd0c20e155f61c54983f19732b715172b802a7a0",
+   "projects/adc/design/cap_dac_sizes.inc": "83d6bf6f191aaa64439ddf9da40e9023d0a4ee5790ddd64fa03c3a2869596749",
+   "projects/adc/design/comparator.cir": "74c68e87f107176d85253900526915a09118bb9df6d8f59ad9d9bdbc1674cb43",
+   "projects/adc/design/comparator_sizes.inc": "6f6eabdb3fcad51df12550bf1ef0a1dabed816863d8abfbfe21405c0baf8e1b1",
+   "projects/adc/design/sar_logic.sv": "595252f93a6b775e3128199d437de5d618a81f5e297acbed6a20649b922d0423",
+   "projects/adc/logic/power.tcl": "03079e06eb67e416d4de3ae6d6791a63579ddad10aa18d3432b9875d98cb9a46",
+   "projects/adc/logic/synth.ys": "78421d1fe3108bfde94ff0a7bf6b1a90367c0854e64dc73982b30dca14d19302",
+   "projects/adc/tests/convert.cir": "8798fa06701e08d1a6ffe7fa41b4565445206198f534f8b5394be297b3e1739d",
+   "projects/adc/tests/dac_levels.cir": "598ffe9f683bd64d1784d0fd5dac69af0d19bc025aac32e41046a7074f21be52",
+   "projects/adc/tests/decide.cir": "cf47c26a1b23ed7313bf0b84617a6a11849daf3384e84d84f8aabca5598803e1",
+   "projects/adc/tests/offset.cir": "6066fae889f4ddddf9335ba389ecbdcc08a1e1be87a74ec89bbbc82a7fdb097c",
+   "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2"
+  },
+  "time": "2026-11-21 18:01:01",
+  "values": {}
+ }
+}

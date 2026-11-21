@@ -4,6 +4,18 @@ License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
 This is free software, and you are free to change and redistribute it
 under certain conditions; type `show_copying' for details. 
 This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+gray pointer s_clk to m_clk: 5 bits, skew 0.0444 ns, margin 19.9556 ns to one m_clk period
+gray pointer m_clk to s_clk: 5 bits, skew 0.0591 ns, margin 19.9409 ns to one m_clk period
+clock to output m_tvalid: rise 0.2439 ns, fall 0.2412 ns after the m_clk pin edge
+clock to output m_tlast: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[7]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[6]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[5]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[4]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[3]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[2]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[1]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
+clock to output m_tdata[0]: rise 0.2482 ns, fall 0.2441 ns after the m_clk pin edge
 Startpoint: m_reset_meta_sg13g2_dfrbpq_1_D
             (rising edge-triggered flip-flop clocked by m_clk)
 Endpoint: fifo_r_bin_next_sg13g2_dfrbpq_1_D
@@ -596,6 +608,4 @@ Path Type: min
            0.29   slack (MET)
 
 
-gray pointer s_clk to m_clk: 5 bits, skew 0.0427 ns, margin 19.9573 ns to one m_clk period
-gray pointer m_clk to s_clk: 5 bits, skew 0.0574 ns, margin 19.9426 ns to one m_clk period
-corner slow: worst setup slack 14.959187666363505 ns, worst hold slack 0.2886061112317151 ns
+corner slow: worst setup slack 14.9592 ns, worst hold slack 0.2886 ns

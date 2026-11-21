@@ -1,6 +1,6 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.383 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.344 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_skid_buffer_test_skid_buffer'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/verilator_skid_buffer_test_skid_buffer'
@@ -8,25 +8,25 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/verilat
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262989
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277908
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_skid_buffer.random_backpressure (1/3)
-747391.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
-747391.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
-751421.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
-751421.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
-761452.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
-761452.00ns INFO     cocotb.regression                  **********************************************************************************************************
+752311.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
+752311.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
+756341.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
+756341.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
+766372.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
+766372.00ns INFO     cocotb.regression                  **********************************************************************************************************
                                                         ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **********************************************************************************************************
-                                                        ** test_skid_buffer.random_backpressure               PASS      747391.00           1.14     655348.66  **
-                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    1578485.59  **
-                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01     726978.78  **
+                                                        ** test_skid_buffer.random_backpressure               PASS      752311.00           0.97     772511.66  **
+                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    1415690.70  **
+                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01     762193.27  **
                                                         **********************************************************************************************************
-                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 761452.00           1.16     656144.54  **
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 766372.00           0.99     772706.03  **
                                                         **********************************************************************************************************
 - :0: Verilog $finish
 .
-1 passed in 3.46s
+1 passed in 3.19s

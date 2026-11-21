@@ -1,0 +1,633 @@
+OpenSTA 3.1.0 80fbbb2945 Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+gray pointer s_clk to m_clk: 5 bits, skew 0.0353 ns, margin 19.9647 ns to one m_clk period
+gray pointer m_clk to s_clk: 5 bits, skew 0.0374 ns, margin 19.9626 ns to one m_clk period
+clock to output m_tvalid: rise 0.3043 ns, fall 0.3026 ns after the m_clk pin edge
+clock to output m_tlast: rise 0.3082 ns, fall 0.3056 ns after the m_clk pin edge
+clock to output m_tdata[7]: rise 0.3046 ns, fall 0.3025 ns after the m_clk pin edge
+clock to output m_tdata[6]: rise 0.3077 ns, fall 0.3052 ns after the m_clk pin edge
+clock to output m_tdata[5]: rise 0.3075 ns, fall 0.3050 ns after the m_clk pin edge
+clock to output m_tdata[4]: rise 0.3074 ns, fall 0.3052 ns after the m_clk pin edge
+clock to output m_tdata[3]: rise 0.3066 ns, fall 0.3042 ns after the m_clk pin edge
+clock to output m_tdata[2]: rise 0.3039 ns, fall 0.3020 ns after the m_clk pin edge
+clock to output m_tdata[1]: rise 0.3039 ns, fall 0.3015 ns after the m_clk pin edge
+clock to output m_tdata[0]: rise 0.3052 ns, fall 0.3030 ns after the m_clk pin edge
+Startpoint: m_reset_meta_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_r_bin_next_sg13g2_dfrbpq_1_D_4
+          (recovery check against rising-edge clock m_clk)
+Path Group: asynchronous
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.14    0.14   clock network delay (propagated)
+   0.00    0.14 ^ m_reset_meta_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.11    0.25 ^ m_reset_meta_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.14    0.39 ^ fanout88/X (sg13g2_buf_1)
+   0.19    0.57 ^ fanout86/X (sg13g2_buf_1)
+   0.01    0.58 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D_4/RESET_B (sg13g2_dfrbpq_1)
+           0.58   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.14   20.14   clock network delay (propagated)
+   0.00   20.14   clock reconvergence pessimism
+          20.14 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D_4/CLK (sg13g2_dfrbpq_1)
+  -0.12   20.03   library recovery time
+          20.03   data required time
+---------------------------------------------------------
+          20.03   data required time
+          -0.58   data arrival time
+---------------------------------------------------------
+          19.45   slack (MET)
+
+
+Startpoint: m_reset_meta_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_r_bin_next_sg13g2_dfrbpq_1_D
+          (recovery check against rising-edge clock m_clk)
+Path Group: asynchronous
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.14    0.14   clock network delay (propagated)
+   0.00    0.14 ^ m_reset_meta_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.11    0.25 ^ m_reset_meta_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.14    0.39 ^ fanout88/X (sg13g2_buf_1)
+   0.19    0.57 ^ fanout86/X (sg13g2_buf_1)
+   0.01    0.58 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D/RESET_B (sg13g2_dfrbpq_1)
+           0.58   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.14   20.14   clock network delay (propagated)
+   0.00   20.14   clock reconvergence pessimism
+          20.14 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+  -0.12   20.03   library recovery time
+          20.03   data required time
+---------------------------------------------------------
+          20.03   data required time
+          -0.58   data arrival time
+---------------------------------------------------------
+          19.45   slack (MET)
+
+
+Startpoint: m_reset_meta_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_r_bin_next_sg13g2_dfrbpq_1_D_1
+          (recovery check against rising-edge clock m_clk)
+Path Group: asynchronous
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.14    0.14   clock network delay (propagated)
+   0.00    0.14 ^ m_reset_meta_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.11    0.25 ^ m_reset_meta_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.14    0.39 ^ fanout88/X (sg13g2_buf_1)
+   0.19    0.57 ^ fanout86/X (sg13g2_buf_1)
+   0.01    0.58 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D_1/RESET_B (sg13g2_dfrbpq_1)
+           0.58   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.14   20.14   clock network delay (propagated)
+   0.00   20.14   clock reconvergence pessimism
+          20.14 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D_1/CLK (sg13g2_dfrbpq_1)
+  -0.12   20.03   library recovery time
+          20.03   data required time
+---------------------------------------------------------
+          20.03   data required time
+          -0.58   data arrival time
+---------------------------------------------------------
+          19.45   slack (MET)
+
+
+Startpoint: s_tdata_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_1_Y_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ s_tdata_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_1_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.12    0.12 v s_tdata_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_1_Y_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.04    0.15 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y_B_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.10    0.25 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.05    0.30 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.04    0.34 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y/Y (sg13g2_a21oi_1)
+   0.06    0.40 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y/Y (sg13g2_nand2b_1)
+   0.13    0.53 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.06    0.59 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B/Y (sg13g2_nand3_1)
+   0.03    0.62 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.00    0.62 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+           0.62   data arrival time
+
+  20.00   20.00   max_delay
+  -0.07   19.93   library setup time
+          19.93   data required time
+---------------------------------------------------------
+          19.93   data required time
+          -0.62   data arrival time
+---------------------------------------------------------
+          19.31   slack (MET)
+
+
+Startpoint: s_tlast_sg13g2_inv_1_A_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_8_Y_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: m_tlast_sg13g2_dfrbpq_1_Q
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ s_tlast_sg13g2_inv_1_A_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_8_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.12    0.12 v s_tlast_sg13g2_inv_1_A_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_8_Y_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.03    0.14 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y_B_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.08    0.23 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.06    0.28 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.05    0.33 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y/Y (sg13g2_a21oi_1)
+   0.05    0.38 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y/Y (sg13g2_nand2b_1)
+   0.14    0.52 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.06    0.58 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.03    0.62 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.00    0.62 v m_tlast_sg13g2_dfrbpq_1_Q/D (sg13g2_dfrbpq_1)
+           0.62   data arrival time
+
+  20.00   20.00   max_delay
+  -0.07   19.93   library setup time
+          19.93   data required time
+---------------------------------------------------------
+          19.93   data required time
+          -0.62   data arrival time
+---------------------------------------------------------
+          19.31   slack (MET)
+
+
+Startpoint: s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.12    0.12 v s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.03    0.15 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y_A_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.10    0.25 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.05    0.30 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.05    0.35 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y/Y (sg13g2_a21oi_1)
+   0.05    0.41 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y/Y (sg13g2_nand2b_1)
+   0.12    0.52 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.05    0.57 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.03    0.61 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.00    0.61 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_nand2_1_A_4_Y_sg13g2_nand2_1_B_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+           0.61   data arrival time
+
+  20.00   20.00   max_delay
+  -0.07   19.93   library setup time
+          19.93   data required time
+---------------------------------------------------------
+          19.93   data required time
+          -0.61   data arrival time
+---------------------------------------------------------
+          19.32   slack (MET)
+
+
+Startpoint: m_tready (input port clocked by m_clk)
+Endpoint: m_tlast_sg13g2_dfrbpq_1_Q
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+   4.00    4.00 ^ input external delay
+   0.01    4.01 ^ m_tready (in)
+   0.04    4.05 ^ input1/X (sg13g2_buf_1)
+   0.02    4.07 v m_tready_sg13g2_nor2b_1_A/Y (sg13g2_nor2b_1)
+   0.06    4.13 v m_tready_sg13g2_nor2b_1_A_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.11    4.25 v fanout60/X (sg13g2_buf_1)
+   0.05    4.30 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A/Y (sg13g2_inv_1)
+   0.08    4.37 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.13    4.50 ^ fanout56/X (sg13g2_buf_1)
+   0.10    4.60 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.03    4.62 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.00    4.62 ^ m_tlast_sg13g2_dfrbpq_1_Q/D (sg13g2_dfrbpq_1)
+           4.62   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.14   20.14   clock network delay (propagated)
+   0.00   20.14   clock reconvergence pessimism
+          20.14 ^ m_tlast_sg13g2_dfrbpq_1_Q/CLK (sg13g2_dfrbpq_1)
+  -0.08   20.06   library setup time
+          20.06   data required time
+---------------------------------------------------------
+          20.06   data required time
+          -4.62   data arrival time
+---------------------------------------------------------
+          15.44   slack (MET)
+
+
+Startpoint: m_tready (input port clocked by m_clk)
+Endpoint: fifo_r_ready_sg13g2_nand3_1_B_A_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+   4.00    4.00 ^ input external delay
+   0.01    4.01 ^ m_tready (in)
+   0.04    4.05 ^ input1/X (sg13g2_buf_1)
+   0.02    4.07 v m_tready_sg13g2_nor2b_1_A/Y (sg13g2_nor2b_1)
+   0.06    4.13 v m_tready_sg13g2_nor2b_1_A_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.11    4.25 v fanout60/X (sg13g2_buf_1)
+   0.05    4.30 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A/Y (sg13g2_inv_1)
+   0.08    4.37 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.13    4.50 ^ fanout56/X (sg13g2_buf_1)
+   0.09    4.59 v fifo_r_ready_sg13g2_nand3_1_B_A_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_A/Y (sg13g2_nand3_1)
+   0.03    4.62 ^ fifo_r_ready_sg13g2_nand3_1_B_A_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.00    4.62 ^ fifo_r_ready_sg13g2_nand3_1_B_A_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+           4.62   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.14   20.14   clock network delay (propagated)
+   0.00   20.14   clock reconvergence pessimism
+          20.14 ^ fifo_r_ready_sg13g2_nand3_1_B_A_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+  -0.08   20.06   library setup time
+          20.06   data required time
+---------------------------------------------------------
+          20.06   data required time
+          -4.62   data arrival time
+---------------------------------------------------------
+          15.44   slack (MET)
+
+
+Startpoint: m_tready (input port clocked by m_clk)
+Endpoint: fifo_r_ready_sg13g2_nand4_1_B_Y_sg13g2_nand2_1_A_B_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_B_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+   4.00    4.00 ^ input external delay
+   0.01    4.01 ^ m_tready (in)
+   0.04    4.05 ^ input1/X (sg13g2_buf_1)
+   0.02    4.07 v m_tready_sg13g2_nor2b_1_A/Y (sg13g2_nor2b_1)
+   0.06    4.13 v m_tready_sg13g2_nor2b_1_A_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.11    4.25 v fanout60/X (sg13g2_buf_1)
+   0.05    4.30 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A/Y (sg13g2_inv_1)
+   0.08    4.37 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.13    4.50 ^ fanout56/X (sg13g2_buf_1)
+   0.09    4.59 v fifo_r_ready_sg13g2_nand4_1_B_Y_sg13g2_nand2_1_A_B_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_B_Y_sg13g2_nand3_1_A/Y (sg13g2_nand3_1)
+   0.03    4.62 ^ fifo_r_ready_sg13g2_nand4_1_B_Y_sg13g2_nand2_1_A_B_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_B_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.00    4.62 ^ fifo_r_ready_sg13g2_nand4_1_B_Y_sg13g2_nand2_1_A_B_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_B_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+           4.62   data arrival time
+
+  20.00   20.00   clock m_clk (rise edge)
+   0.14   20.14   clock network delay (propagated)
+   0.00   20.14   clock reconvergence pessimism
+          20.14 ^ fifo_r_ready_sg13g2_nand4_1_B_Y_sg13g2_nand2_1_A_B_sg13g2_nand3_1_C_Y_sg13g2_nand3_1_B_Y_sg13g2_nand3_1_A_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+  -0.08   20.06   library setup time
+          20.06   data required time
+---------------------------------------------------------
+          20.06   data required time
+          -4.62   data arrival time
+---------------------------------------------------------
+          15.44   slack (MET)
+
+
+Startpoint: s_tvalid (input port clocked by s_clk)
+Endpoint: s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  20.00   20.00 ^ input external delay
+   0.01   20.01 ^ s_tvalid (in)
+   0.04   20.05 ^ input12/X (sg13g2_buf_1)
+   0.07   20.12 v s_tvalid_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.03   20.15 ^ s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_inv_1_A/Y (sg13g2_inv_1)
+   0.07   20.22 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_inv_1_A_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.26   20.49 ^ s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_B_sg13g2_nor2_1_A/Y (sg13g2_nor2_1)
+   0.19   20.68 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_Y_sg13g2_nand2_1_A_B_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.11   20.78 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_Y_sg13g2_nand2_1_A_B_sg13g2_nand2_1_B_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.10   20.88 v s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_A2_sg13g2_buf_1_X/X (sg13g2_buf_1)
+   0.13   21.01 v fanout28/X (sg13g2_buf_1)
+   0.08   21.10 ^ s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1/Y (sg13g2_o21ai_1)
+   0.00   21.10 ^ s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+          21.10   data arrival time
+
+ 100.00  100.00   clock s_clk (rise edge)
+   0.24  100.24   clock network delay (propagated)
+   0.00  100.24   clock reconvergence pessimism
+         100.24 ^ s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+  -0.09  100.16   library setup time
+         100.16   data required time
+---------------------------------------------------------
+         100.16   data required time
+         -21.10   data arrival time
+---------------------------------------------------------
+          79.06   slack (MET)
+
+
+Startpoint: s_tvalid (input port clocked by s_clk)
+Endpoint: s_tdata_sg13g2_inv_1_A_2_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  20.00   20.00 ^ input external delay
+   0.01   20.01 ^ s_tvalid (in)
+   0.04   20.05 ^ input12/X (sg13g2_buf_1)
+   0.07   20.12 v s_tvalid_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.03   20.15 ^ s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_inv_1_A/Y (sg13g2_inv_1)
+   0.07   20.22 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_inv_1_A_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.26   20.49 ^ s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_B_sg13g2_nor2_1_A/Y (sg13g2_nor2_1)
+   0.19   20.68 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_Y_sg13g2_nand2_1_A_B_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.11   20.78 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_Y_sg13g2_nand2_1_A_B_sg13g2_nand2_1_B_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.10   20.88 v s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_A2_sg13g2_buf_1_X/X (sg13g2_buf_1)
+   0.13   21.01 v fanout28/X (sg13g2_buf_1)
+   0.08   21.10 ^ s_tdata_sg13g2_inv_1_A_2_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1/Y (sg13g2_o21ai_1)
+   0.00   21.10 ^ s_tdata_sg13g2_inv_1_A_2_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+          21.10   data arrival time
+
+ 100.00  100.00   clock s_clk (rise edge)
+   0.24  100.24   clock network delay (propagated)
+   0.00  100.24   clock reconvergence pessimism
+         100.24 ^ s_tdata_sg13g2_inv_1_A_2_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+  -0.09  100.16   library setup time
+         100.16   data required time
+---------------------------------------------------------
+         100.16   data required time
+         -21.10   data arrival time
+---------------------------------------------------------
+          79.06   slack (MET)
+
+
+Startpoint: s_tvalid (input port clocked by s_clk)
+Endpoint: s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  20.00   20.00 ^ input external delay
+   0.01   20.01 ^ s_tvalid (in)
+   0.04   20.05 ^ input12/X (sg13g2_buf_1)
+   0.07   20.12 v s_tvalid_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.03   20.15 ^ s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_inv_1_A/Y (sg13g2_inv_1)
+   0.07   20.22 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_inv_1_A_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.26   20.49 ^ s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_B_sg13g2_nor2_1_A/Y (sg13g2_nor2_1)
+   0.19   20.68 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_Y_sg13g2_nand2_1_A_B_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.11   20.78 v s_tvalid_sg13g2_nand2_1_A_Y_sg13g2_nor3_1_C_Y_sg13g2_nand2_1_A_B_sg13g2_nand2_1_B_Y_sg13g2_buf_1_A/X (sg13g2_buf_1)
+   0.10   20.88 v s_tlast_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_A2_sg13g2_buf_1_X/X (sg13g2_buf_1)
+   0.13   21.01 v fanout28/X (sg13g2_buf_1)
+   0.07   21.09 ^ s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1/Y (sg13g2_o21ai_1)
+   0.00   21.09 ^ s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+          21.09   data arrival time
+
+ 100.00  100.00   clock s_clk (rise edge)
+   0.24  100.24   clock network delay (propagated)
+   0.00  100.24   clock reconvergence pessimism
+         100.24 ^ s_tdata_sg13g2_inv_1_A_7_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+  -0.08  100.16   library setup time
+         100.16   data required time
+---------------------------------------------------------
+         100.16   data required time
+         -21.09   data arrival time
+---------------------------------------------------------
+          79.07   slack (MET)
+
+
+Startpoint: s_tdata_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_1_Y_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ s_tdata_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_1_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.12    0.12 v s_tdata_sg13g2_inv_1_A_Y_sg13g2_o21ai_1_A1_1_Y_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.04    0.15 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y_B_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.10    0.25 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.05    0.30 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.04    0.34 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y/Y (sg13g2_a21oi_1)
+   0.06    0.40 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y/Y (sg13g2_nand2b_1)
+   0.13    0.53 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.06    0.59 ^ m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B/Y (sg13g2_nand3_1)
+   0.03    0.62 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_Y_sg13g2_nand2_1_A/Y (sg13g2_nand2_1)
+   0.00    0.62 v m_tlast_sg13g2_nand2_1_B_A_sg13g2_inv_1_A_Y_sg13g2_nand3_1_B_Y_sg13g2_nand2_1_A_Y_sg13g2_dfrbpq_1_D/D (sg13g2_dfrbpq_1)
+           0.62   data arrival time
+
+  20.00   20.00   max_delay
+  -0.07   19.93   library setup time
+          19.93   data required time
+---------------------------------------------------------
+          19.93   data required time
+          -0.62   data arrival time
+---------------------------------------------------------
+          19.31   slack (MET)
+
+
+Startpoint: s_tlast_sg13g2_inv_1_A_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_8_Y_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: m_tlast_sg13g2_dfrbpq_1_Q
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ s_tlast_sg13g2_inv_1_A_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_8_Y_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.12    0.12 v s_tlast_sg13g2_inv_1_A_Y_sg13g2_buf_1_A_X_sg13g2_o21ai_1_A1_8_Y_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.03    0.14 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y_B_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.08    0.23 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y_B_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.06    0.28 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y_A1_sg13g2_nand2_1_Y/Y (sg13g2_nand2_1)
+   0.05    0.33 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y_B_sg13g2_a21oi_1_Y/Y (sg13g2_a21oi_1)
+   0.05    0.38 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y_A_sg13g2_nand2b_1_Y/Y (sg13g2_nand2b_1)
+   0.14    0.52 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.06    0.58 ^ m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B_A_sg13g2_nand3_1_Y/Y (sg13g2_nand3_1)
+   0.03    0.62 v m_tlast_sg13g2_nand2_1_B_Y_sg13g2_nand2_1_B/Y (sg13g2_nand2_1)
+   0.00    0.62 v m_tlast_sg13g2_dfrbpq_1_Q/D (sg13g2_dfrbpq_1)
+           0.62   data arrival time
+
+  20.00   20.00   max_delay
+  -0.07   19.93   library setup time
+          19.93   data required time
+---------------------------------------------------------
+          19.93   data required time
+          -0.62   data arrival time
+---------------------------------------------------------
+          19.31   slack (MET)
+
+
+Startpoint: fifo_r_bin_next_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_r_to_w_meta_sg13g2_dfrbpq_1_Q
+          (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.14    0.14 ^ fifo_r_bin_next_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.00    0.14 ^ fifo_r_to_w_meta_sg13g2_dfrbpq_1_Q/D (sg13g2_dfrbpq_1)
+           0.14   data arrival time
+
+  20.00   20.00   max_delay
+  -0.09   19.91   library setup time
+          19.91   data required time
+---------------------------------------------------------
+          19.91   data required time
+          -0.14   data arrival time
+---------------------------------------------------------
+          19.78   slack (MET)
+
+
+Startpoint: fifo_r_gray_sg13g2_dfrbpq_1_Q_3
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_r_gray_sg13g2_dfrbpq_1_D_1
+          (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: path delay
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00 ^ fifo_r_gray_sg13g2_dfrbpq_1_Q_3/CLK (sg13g2_dfrbpq_1)
+   0.11    0.11 ^ fifo_r_gray_sg13g2_dfrbpq_1_Q_3/Q (sg13g2_dfrbpq_1)
+   0.00    0.11 ^ fifo_r_gray_sg13g2_dfrbpq_1_D_1/D (sg13g2_dfrbpq_1)
+           0.11   data arrival time
+
+  20.00   20.00   max_delay
+  -0.08   19.92   library setup time
+          19.92   data required time
+---------------------------------------------------------
+          19.92   data required time
+          -0.11   data arrival time
+---------------------------------------------------------
+          19.81   slack (MET)
+
+
+Startpoint: m_reset_meta_sg13g2_dfrbpq_1_D
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_w_to_r_meta_sg13g2_dfrbpq_1_D_3
+          (removal check against rising-edge clock m_clk)
+Path Group: asynchronous
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.14    0.14   clock network delay (propagated)
+   0.00    0.14 ^ m_reset_meta_sg13g2_dfrbpq_1_D/CLK (sg13g2_dfrbpq_1)
+   0.11    0.25 ^ m_reset_meta_sg13g2_dfrbpq_1_D/Q (sg13g2_dfrbpq_1)
+   0.12    0.36 ^ fanout88/X (sg13g2_buf_1)
+   0.00    0.36 ^ fifo_w_to_r_meta_sg13g2_dfrbpq_1_D_3/RESET_B (sg13g2_dfrbpq_1)
+           0.36   data arrival time
+
+   0.00    0.00   clock m_clk (rise edge)
+   0.15    0.15   clock network delay (propagated)
+   0.00    0.14   clock reconvergence pessimism
+           0.14 ^ fifo_w_to_r_meta_sg13g2_dfrbpq_1_D_3/CLK (sg13g2_dfrbpq_1)
+  -0.09    0.05   library removal time
+           0.05   data required time
+---------------------------------------------------------
+           0.05   data required time
+          -0.36   data arrival time
+---------------------------------------------------------
+           0.31   slack (MET)
+
+
+Startpoint: fifo_w_gray_sg13g2_dfrbpq_1_D_2
+            (rising edge-triggered flip-flop clocked by m_clk)
+Endpoint: fifo_w_to_r_meta_sg13g2_dfrbpq_1_D_1
+          (rising edge-triggered flip-flop clocked by m_clk)
+Path Group: m_clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock m_clk (rise edge)
+   0.14    0.14   clock network delay (propagated)
+   0.00    0.14 ^ fifo_w_gray_sg13g2_dfrbpq_1_D_2/CLK (sg13g2_dfrbpq_1)
+   0.11    0.25 v fifo_w_gray_sg13g2_dfrbpq_1_D_2/Q (sg13g2_dfrbpq_1)
+   0.00    0.25 v fifo_w_to_r_meta_sg13g2_dfrbpq_1_D_1/D (sg13g2_dfrbpq_1)
+           0.25   data arrival time
+
+   0.00    0.00   clock m_clk (rise edge)
+   0.15    0.15   clock network delay (propagated)
+   0.00    0.14   clock reconvergence pessimism
+           0.14 ^ fifo_w_to_r_meta_sg13g2_dfrbpq_1_D_1/CLK (sg13g2_dfrbpq_1)
+  -0.02    0.12   library hold time
+           0.12   data required time
+---------------------------------------------------------
+           0.12   data required time
+          -0.25   data arrival time
+---------------------------------------------------------
+           0.12   slack (MET)
+
+
+Startpoint: fifo_r_to_w_meta_sg13g2_dfrbpq_1_Q
+            (rising edge-triggered flip-flop clocked by s_clk)
+Endpoint: fifo_r_gray_w_sg13g2_dfrbpq_1_Q
+          (rising edge-triggered flip-flop clocked by s_clk)
+Path Group: s_clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock s_clk (rise edge)
+   0.24    0.24   clock network delay (propagated)
+   0.00    0.24 ^ fifo_r_to_w_meta_sg13g2_dfrbpq_1_Q/CLK (sg13g2_dfrbpq_1)
+   0.11    0.35 v fifo_r_to_w_meta_sg13g2_dfrbpq_1_Q/Q (sg13g2_dfrbpq_1)
+   0.00    0.35 v fifo_r_gray_w_sg13g2_dfrbpq_1_Q/D (sg13g2_dfrbpq_1)
+           0.35   data arrival time
+
+   0.00    0.00   clock s_clk (rise edge)
+   0.25    0.25   clock network delay (propagated)
+   0.00    0.25   clock reconvergence pessimism
+           0.25 ^ fifo_r_gray_w_sg13g2_dfrbpq_1_Q/CLK (sg13g2_dfrbpq_1)
+  -0.02    0.23   library hold time
+           0.23   data required time
+---------------------------------------------------------
+           0.23   data required time
+          -0.35   data arrival time
+---------------------------------------------------------
+           0.12   slack (MET)
+
+
+corner fast: worst setup slack 15.4410 ns, worst hold slack 0.1208 ns

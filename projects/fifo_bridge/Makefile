@@ -37,6 +37,8 @@ layout: timing
 	echo "flow did not finish" > results/layout.log
 	if (cd layout && $(RUN) librelane config.json --run-tag signoff --overwrite) > results/layout_flow.log 2>&1 && $(RUN) python3 layout/metrics.py $(LAYOUT)/metrics.json > results/layout.log 2>&1; then c=0; else c=$$?; fi; \
 	  $(SAVE) layout $$c results/layout_flow.log results/layout.log
+	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_verilog $(LAYOUT)/nl/fifo_bridge.nl.v; hierarchy -top fifo_bridge; write_json build/cdc_routed.json'
+	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_routed.json fifo_bridge cdc/waivers.txt s_tvalid=s_clk s_tdata=s_clk s_tlast=s_clk m_tready=m_clk > results/cdc_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_routed $$c results/cdc_routed.log
 	for k in slow typ fast; do \
 	  if (cd timing && $(RUN) env CORNER=$$k $(ROUTED) sta -no_init -exit timing.tcl) > results/timing_routed_$$k.log 2>&1; then c=0; else c=$$?; fi; \
 	  python3 timing/sim_sdf.py $$(ls $(LAYOUT)/sdf/nom_$${k}_*/*.sdf) build/routed_$${k}_sim.sdf; \
@@ -46,7 +48,7 @@ power: timing layout
 	if $(PYTEST) tests/test_sim_sdf.py > results/test_sim_sdf.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_sim_sdf $$c results/test_sim_sdf.log
 	if $(PYTEST) tests/test_gates.py > results/test_gates.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_gates $$c results/test_gates.log
 	for k in slow typ fast; do for n in mapped routed; do \
-	  d=$$(ls -d build/icarus_fifo_bridge_test_gates_*$${k^^}* | if [ $$n = routed ]; then grep ROUTED; else grep -v ROUTED; fi); \
+	  d=$$(ls -d build/icarus_fifo_bridge_test_gates_*TOP* | grep $${k^^} | if [ $$n = routed ]; then grep ROUTED; else grep -v ROUTED; fi); \
 	  $(RUN) fst2vcd -f $$d/fifo_bridge.fst -o build/gates_$${n}_$$k.vcd > /dev/null; \
 	  if [ $$n = routed ]; then w="$(ROUTED)"; else w=; fi; \
 	  if (cd timing && $(RUN) env CORNER=$$k VCD=../build/gates_$${n}_$$k.vcd $$w sta -no_init -exit power.tcl) > results/power_$${n}_$$k.log 2>&1; then c=0; else c=$$?; fi; \

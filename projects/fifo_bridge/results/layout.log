@@ -1,0 +1,22 @@
+magic__drc_error__count                            0
+klayout__drc_error__count                          0
+route__drc_errors                                  0
+design__lvs_error__count                           0
+antenna__violating__nets                           0
+design__max_slew_violation__count                  0
+design__max_cap_violation__count                   0
+design__max_fanout_violation__count                0
+design__die__area                                  50654.5
+design__core__area                                 41640.5
+design__instance__utilization                      0.5061
+design__instance__count__stdcell                   1369
+design__instance__count__class:sequential_cell     208
+design__instance__count__class:clock_buffer        66
+design__instance__count__class:timing_repair_buffer 113
+route__wirelength                                  38039
+power__total                                       0.000700108 (vectorless: LibreLane's default switching activity, not the simulated traffic)
+ir__drop__worst                                    0.00112 (vectorless: LibreLane's default switching activity, not the simulated traffic)
+nom_slow_1p08V_125C    setup slack 14.6224 ns, hold slack 0.2903 ns, clock skew 0.0140 ns
+nom_typ_1p20V_25C      setup slack 15.1477 ns, hold slack 0.1831 ns, clock skew 0.0115 ns
+nom_fast_1p32V_m40C    setup slack 15.4410 ns, hold slack 0.1208 ns, clock skew 0.0100 ns
+layout clean: no DRC, LVS, antenna or electrical violation, no negative slack
