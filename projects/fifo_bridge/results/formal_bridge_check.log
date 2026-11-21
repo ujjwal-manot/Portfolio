@@ -1,83 +1,85 @@
-SBY  7:50:49 [../build/formal_bridge_check] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_bridge_check'.
-SBY  7:50:49 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/async_fifo.sv'.
-SBY  7:50:49 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/skid_buffer.sv'.
-SBY  7:50:49 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/fifo_bridge.sv'.
-SBY  7:50:49 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/fifo_rules.sv'.
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: abc bmc3
-SBY  7:50:49 [../build/formal_bridge_check] base: starting process "cd ../build/formal_bridge_check/src; yosys -ql ../model/design.log ../model/design.ys"
-SBY  7:50:49 [../build/formal_bridge_check] base: finished (returncode=0)
-SBY  7:50:49 [../build/formal_bridge_check] prep: starting process "cd ../build/formal_bridge_check/model; yosys -ql design_prep.log design_prep.ys"
-SBY  7:50:49 [../build/formal_bridge_check] prep: finished (returncode=0)
-SBY  7:50:49 [../build/formal_bridge_check] aig: starting process "cd ../build/formal_bridge_check/model; yosys -ql design_aiger.log design_aiger.ys"
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tvalid like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tlast like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [0] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [1] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [2] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [3] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [4] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [5] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [6] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [7] like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_clk like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\m_tready like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\m_clk like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: Warning: Treating a total of 13 undriven bits in bridge_rules like $anyseq.
-SBY  7:50:49 [../build/formal_bridge_check] aig: finished (returncode=0)
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: starting process "cd ../build/formal_bridge_check; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; bmc3 -F 40 -v; write_cex -a engine_0/trace.aiw'"
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; bmc3 -F 40 -v; write_cex -a engine_0/trace.aiw"
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: Warning: The network has no constraints.
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: Running "bmc3". PI/PO/Reg = 128/4/207. And =   1180. Lev =    18. ObjNums =   927.
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: Params: FramesMax = 40. Start = 0. ConfLimit = 0. TimeOut = 0. SolveAll = 0.
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.01 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.01 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 2 + : Var =      16. Cla =       21. Conf =      0. Learn =      0.    0 MB   4 MB     0.01 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 3 + : Var =     280. Cla =      468. Conf =      0. Learn =      0.    0 MB   4 MB     0.01 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 4 + : Var =     517. Cla =     1009. Conf =      3. Learn =      2.    0 MB   4 MB     0.01 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 5 + : Var =     866. Cla =     1802. Conf =      8. Learn =      5.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 6 + : Var =    1135. Cla =     2483. Conf =     14. Learn =     10.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 7 + : Var =    1432. Cla =     3249. Conf =     40. Learn =     28.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 8 + : Var =    1775. Cla =     4091. Conf =     65. Learn =     46.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 9 + : Var =    2154. Cla =     5034. Conf =     90. Learn =     66.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 10 + : Var =    2545. Cla =     6075. Conf =    141. Learn =    110.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 11 + : Var =    2943. Cla =     7181. Conf =    201. Learn =    158.    0 MB   4 MB     0.02 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 12 + : Var =    3347. Cla =     8317. Conf =    949. Learn =    898.    0 MB   4 MB     0.03 sec
-SBY  7:50:49 [../build/formal_bridge_check] engine_0: 13 + : Var =    3751. Cla =     9472. Conf =   2233. Learn =   2169.    0 MB   4 MB     0.06 sec
-SBY  7:50:50 [../build/formal_bridge_check] engine_0: 14 + : Var =    4155. Cla =    10632. Conf =   6497. Learn =   6420.    0 MB   5 MB     0.15 sec
-SBY  7:50:50 [../build/formal_bridge_check] engine_0: 15 + : Var =    4559. Cla =    11803. Conf =  11805. Learn =   9781.    0 MB   6 MB     0.29 sec
-SBY  7:50:50 [../build/formal_bridge_check] engine_0: 16 + : Var =    4963. Cla =    12985. Conf =  26362. Learn =  15114.    0 MB   7 MB     0.73 sec
-SBY  7:50:51 [../build/formal_bridge_check] engine_0: 17 + : Var =    5367. Cla =    14172. Conf =  52219. Learn =  22112.    0 MB   8 MB     1.51 sec
-SBY  7:50:53 [../build/formal_bridge_check] engine_0: 18 + : Var =    5771. Cla =    15343. Conf = 103924. Learn =  24795.    0 MB  10 MB     3.20 sec
-SBY  7:50:55 [../build/formal_bridge_check] engine_0: 19 + : Var =    6175. Cla =    16530. Conf = 159749. Learn =  31919.    0 MB  12 MB     5.46 sec
-SBY  7:50:58 [../build/formal_bridge_check] engine_0: 20 + : Var =    6579. Cla =    17714. Conf = 240001. Learn =  32206.    0 MB  12 MB     8.82 sec
-SBY  7:51:02 [../build/formal_bridge_check] engine_0: 21 + : Var =    6983. Cla =    18901. Conf = 328978. Learn =  28907.    0 MB  12 MB    12.66 sec
-SBY  7:51:07 [../build/formal_bridge_check] engine_0: 22 + : Var =    7387. Cla =    20092. Conf = 433001. Learn =  43032.    0 MB  16 MB    17.67 sec
-SBY  7:51:14 [../build/formal_bridge_check] engine_0: 23 + : Var =    7791. Cla =    21286. Conf = 555908. Learn =  43704.    0 MB  15 MB    24.41 sec
-SBY  7:51:21 [../build/formal_bridge_check] engine_0: 24 + : Var =    8195. Cla =    22480. Conf = 669696. Learn =  56239.    0 MB  19 MB    31.75 sec
-SBY  7:51:34 [../build/formal_bridge_check] engine_0: 25 + : Var =    8599. Cla =    23674. Conf = 872115. Learn =  54283.    0 MB  17 MB    45.00 sec
-SBY  7:51:43 [../build/formal_bridge_check] engine_0: 26 + : Var =    9003. Cla =    24868. Conf = 975370. Learn =  78760.    0 MB  25 MB    53.32 sec
-SBY  7:51:58 [../build/formal_bridge_check] engine_0: 27 + : Var =    9407. Cla =    26062. Conf =1144275. Learn =  85227.    0 MB  26 MB    68.53 sec
-SBY  7:52:41 [../build/formal_bridge_check] engine_0: 28 + : Var =    9811. Cla =    27256. Conf =1586672. Learn =  84234.    0 MB  26 MB   112.04 sec
-SBY  7:53:34 [../build/formal_bridge_check] engine_0: 29 + : Var =   10215. Cla =    28450. Conf =2107856. Learn = 108507.    0 MB  33 MB   164.44 sec
-SBY  7:53:55 [../build/formal_bridge_check] engine_0: 30 + : Var =   10619. Cla =    29644. Conf =2293540. Learn = 105922.    0 MB  32 MB   185.78 sec
-SBY  7:54:34 [../build/formal_bridge_check] engine_0: 31 + : Var =   11023. Cla =    30838. Conf =2609620. Learn =  97298.    0 MB  29 MB   224.70 sec
-SBY  7:55:23 [../build/formal_bridge_check] engine_0: 32 + : Var =   11427. Cla =    32032. Conf =3012732. Learn = 149979.    0 MB  46 MB   273.95 sec
-SBY  7:56:46 [../build/formal_bridge_check] engine_0: 33 + : Var =   11831. Cla =    33226. Conf =3637613. Learn = 162632.    0 MB  50 MB   356.55 sec
-SBY  7:57:38 [../build/formal_bridge_check] engine_0: 34 + : Var =   12235. Cla =    34420. Conf =4005589. Learn = 124252.    0 MB  37 MB   408.19 sec
-SBY  7:58:24 [../build/formal_bridge_check] engine_0: 35 + : Var =   12639. Cla =    35614. Conf =4318537. Learn = 122056.    0 MB  37 MB   454.74 sec
-SBY  8:00:25 [../build/formal_bridge_check] engine_0: 36 + : Var =   13043. Cla =    36808. Conf =5061226. Learn = 206848.    0 MB  64 MB   575.98 sec
-SBY  8:02:15 [../build/formal_bridge_check] engine_0: 37 + : Var =   13447. Cla =    38002. Conf =5686327. Learn = 135156.    0 MB  43 MB   685.30 sec
-SBY  8:03:09 [../build/formal_bridge_check] engine_0: 38 + : Var =   13851. Cla =    39196. Conf =5940293. Learn = 212561.    0 MB  66 MB   739.33 sec
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: 39 + : Var =   14255. Cla =    40390. Conf =6363255. Learn = 195174.    0 MB  58 MB   824.70 sec
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 824.7 sec (100.0 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 114  Vars = 14255  Used = 14245 (99.93 %)
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: Buffs = 3979. Dups = 0.   Hash hits = 144.  Hash misses = 9506.  UniProps = 0.
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: No output asserted in 40 frames. Resource limit reached (conf limit 0). Time =   824.70 sec
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: Counter-example is not available.
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: finished (returncode=0)
-SBY  8:04:34 [../build/formal_bridge_check] engine_0: Status returned by engine: PASS
-SBY  8:04:34 [../build/formal_bridge_check] summary: Elapsed clock time [H:MM:SS (secs)]: 0:13:44 (824)
-SBY  8:04:34 [../build/formal_bridge_check] summary: Elapsed process time [H:MM:SS (secs)]: 0:13:38 (818)
-SBY  8:04:34 [../build/formal_bridge_check] summary: engine_0 (abc bmc3) returned PASS
-SBY  8:04:34 [../build/formal_bridge_check] summary: engine_0 did not produce any traces
-SBY  8:04:34 [../build/formal_bridge_check] DONE (PASS, rc=0)
+SBY 12:29:38 [../build/formal_bridge_check] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_bridge_check'.
+SBY 12:29:38 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/sync2.sv'.
+SBY 12:29:38 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/reset_sync.sv'.
+SBY 12:29:38 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/async_fifo.sv'.
+SBY 12:29:38 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/skid_buffer.sv'.
+SBY 12:29:38 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/fifo_bridge.sv'.
+SBY 12:29:38 [../build/formal_bridge_check] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_check/src/fifo_rules.sv'.
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: abc bmc3
+SBY 12:29:38 [../build/formal_bridge_check] base: starting process "cd ../build/formal_bridge_check/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 12:29:38 [../build/formal_bridge_check] base: finished (returncode=0)
+SBY 12:29:38 [../build/formal_bridge_check] prep: starting process "cd ../build/formal_bridge_check/model; yosys -ql design_prep.log design_prep.ys"
+SBY 12:29:38 [../build/formal_bridge_check] prep: finished (returncode=0)
+SBY 12:29:38 [../build/formal_bridge_check] aig: starting process "cd ../build/formal_bridge_check/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tvalid like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tlast like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [0] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [1] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [2] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [3] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [4] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [5] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [6] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_tdata [7] like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\s_clk like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\m_tready like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating undriven bit bridge_rules.\m_clk like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: Warning: Treating a total of 13 undriven bits in bridge_rules like $anyseq.
+SBY 12:29:38 [../build/formal_bridge_check] aig: finished (returncode=0)
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: starting process "cd ../build/formal_bridge_check; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; bmc3 -F 40 -v; write_cex -a engine_0/trace.aiw'"
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; bmc3 -F 40 -v; write_cex -a engine_0/trace.aiw"
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: Warning: The network has no constraints.
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: Running "bmc3". PI/PO/Reg = 144/6/233. And =   1339. Lev =    19. ObjNums =  1062.
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: Params: FramesMax = 40. Start = 0. ConfLimit = 0. TimeOut = 0. SolveAll = 0.
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 0 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.01 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 1 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 2 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 3 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 4 + : Var =       1. Cla =        0. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 5 + : Var =      28. Cla =       62. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 6 + : Var =      53. Cla =      131. Conf =      0. Learn =      0.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 7 + : Var =      95. Cla =      261. Conf =      4. Learn =      1.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 8 + : Var =     157. Cla =      460. Conf =      8. Learn =      2.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 9 + : Var =     297. Cla =      855. Conf =     17. Learn =      8.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 10 + : Var =    1464. Cla =     2925. Conf =     45. Learn =     24.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 11 + : Var =    1977. Cla =     4118. Conf =     66. Learn =     39.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 12 + : Var =    2680. Cla =     5482. Conf =     98. Learn =     65.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 13 + : Var =    3123. Cla =     6702. Conf =    154. Learn =    109.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 14 + : Var =    3577. Cla =     7952. Conf =    246. Learn =    187.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 15 + : Var =    4042. Cla =     9268. Conf =    337. Learn =    261.    0 MB   4 MB     0.02 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 16 + : Var =    4512. Cla =    10605. Conf =    507. Learn =    404.    0 MB   4 MB     0.03 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 17 + : Var =    4983. Cla =    11965. Conf =    667. Learn =    545.    0 MB   4 MB     0.03 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 18 + : Var =    5454. Cla =    13308. Conf =   1653. Learn =   1514.    0 MB   4 MB     0.05 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 19 + : Var =    5925. Cla =    14657. Conf =   3211. Learn =   3042.    0 MB   5 MB     0.09 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 20 + : Var =    6396. Cla =    16006. Conf =   8204. Learn =   8008.    0 MB   6 MB     0.23 sec
+SBY 12:29:38 [../build/formal_bridge_check] engine_0: 21 + : Var =    6867. Cla =    17366. Conf =  14347. Learn =   9705.    0 MB   6 MB     0.40 sec
+SBY 12:29:39 [../build/formal_bridge_check] engine_0: 22 + : Var =    7338. Cla =    18731. Conf =  26379. Learn =  15425.    0 MB   7 MB     0.78 sec
+SBY 12:29:40 [../build/formal_bridge_check] engine_0: 23 + : Var =    7809. Cla =    20100. Conf =  50412. Learn =  21771.    0 MB   8 MB     1.78 sec
+SBY 12:29:41 [../build/formal_bridge_check] engine_0: 24 + : Var =    8280. Cla =    21470. Conf =  98025. Learn =  29727.    0 MB  11 MB     3.40 sec
+SBY 12:29:43 [../build/formal_bridge_check] engine_0: 25 + : Var =    8751. Cla =    22853. Conf = 146517. Learn =  30040.    0 MB  11 MB     5.33 sec
+SBY 12:29:48 [../build/formal_bridge_check] engine_0: 26 + : Var =    9222. Cla =    24236. Conf = 253737. Learn =  36018.    0 MB  13 MB     9.86 sec
+SBY 12:29:53 [../build/formal_bridge_check] engine_0: 27 + : Var =    9693. Cla =    25620. Conf = 331207. Learn =  54611.    0 MB  18 MB    14.59 sec
+SBY 12:29:58 [../build/formal_bridge_check] engine_0: 28 + : Var =   10164. Cla =    27011. Conf = 411367. Learn =  55122.    0 MB  19 MB    19.82 sec
+SBY 12:30:04 [../build/formal_bridge_check] engine_0: 29 + : Var =   10635. Cla =    28402. Conf = 502706. Learn =  57337.    0 MB  19 MB    26.17 sec
+SBY 12:30:17 [../build/formal_bridge_check] engine_0: 30 + : Var =   11106. Cla =    29786. Conf = 658778. Learn =  62547.    0 MB  20 MB    38.70 sec
+SBY 12:30:49 [../build/formal_bridge_check] engine_0: 31 + : Var =   11577. Cla =    31170. Conf = 951245. Learn =  76371.    0 MB  26 MB    70.75 sec
+SBY 12:31:05 [../build/formal_bridge_check] engine_0: 32 + : Var =   12048. Cla =    32554. Conf =1101455. Learn =  85325.    0 MB  28 MB    87.18 sec
+SBY 12:31:32 [../build/formal_bridge_check] engine_0: 33 + : Var =   12519. Cla =    33945. Conf =1326270. Learn =  64742.    0 MB  20 MB   113.78 sec
+SBY 12:32:24 [../build/formal_bridge_check] engine_0: 34 + : Var =   12990. Cla =    35336. Conf =1740141. Learn =  88426.    0 MB  28 MB   165.95 sec
+SBY 12:33:44 [../build/formal_bridge_check] engine_0: 35 + : Var =   13461. Cla =    36727. Conf =2351846. Learn =  89231.    0 MB  29 MB   245.91 sec
+SBY 12:34:45 [../build/formal_bridge_check] engine_0: 36 + : Var =   13932. Cla =    38118. Conf =2776060. Learn = 144160.    0 MB  49 MB   306.80 sec
+SBY 12:35:41 [../build/formal_bridge_check] engine_0: 37 + : Var =   14403. Cla =    39509. Conf =3155456. Learn = 145019.    0 MB  49 MB   362.75 sec
+SBY 12:36:25 [../build/formal_bridge_check] engine_0: 38 + : Var =   14874. Cla =    40900. Conf =3377653. Learn = 128925.    0 MB  44 MB   407.34 sec
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: 39 + : Var =   15345. Cla =    42291. Conf =3848891. Learn = 110001.    0 MB  39 MB   497.42 sec
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: Runtime:  CNF = 0.0 sec (0.0 %)  UNSAT = 497.4 sec (100.0 %)  SAT = 0.0 sec (0.0 %)  UNDEC = 0.0 sec (0.0 %)
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: LStart(P) = 10000  LDelta(Q) = 2000  LRatio(R) = 80  ReduceDB = 84  Vars = 15345  Used = 15315 (99.80 %)
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: Buffs = 4649. Dups = 0.   Hash hits = 138.  Hash misses = 10272.  UniProps = 0.
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: No output asserted in 40 frames. Resource limit reached (conf limit 0). Time =   497.43 sec
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: Counter-example is not available.
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: finished (returncode=0)
+SBY 12:37:55 [../build/formal_bridge_check] engine_0: Status returned by engine: PASS
+SBY 12:37:55 [../build/formal_bridge_check] summary: Elapsed clock time [H:MM:SS (secs)]: 0:08:17 (497)
+SBY 12:37:55 [../build/formal_bridge_check] summary: Elapsed process time [H:MM:SS (secs)]: 0:08:06 (486)
+SBY 12:37:55 [../build/formal_bridge_check] summary: engine_0 (abc bmc3) returned PASS
+SBY 12:37:55 [../build/formal_bridge_check] summary: engine_0 did not produce any traces
+SBY 12:37:55 [../build/formal_bridge_check] DONE (PASS, rc=0)
