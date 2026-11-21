@@ -1,0 +1,78 @@
+* Bandgap reference on the 3.3 V supply, IHP SG13G2 thick-oxide devices and vertical PNPs: three equal PMOS mirror branches feed a 1x PNP (node a), R1 into an 8x PNP (node b) and R2 into a 1x PNP, the top of R2 split into 15 equal units so vref is one of 16 taps chosen by trim3..trim0 (3.3 V logic) through a four-level tree of thick-oxide pass switches that carry no DC current, a PMOS-input stage holds a and b equal through an NMOS (twice its load, so both see the same gate voltage at balance and the systematic offset cancels) that sinks the current of a diode-connected PMOS setting the mirror gate, so the branch current is VT ln 8 / R1 and vref = VBE + (R2/R1) VT ln 8; a start-up pulls the mirror gate down until the top tap rises; every device carries mm_ok={mm}, sizes come from bandgap_sizes.inc.
+.subckt bandgap vref vdd vss trim3 trim2 trim1 trim0
+XP1 a vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+XP2 b vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+XP3 tap15 vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+XQ1 vss vss a pnpMPA
+XR1 b e8 vss rppd w={w_r} l={l_r1} mm_ok={mm}
+XQ8 vss vss e8 pnpMPA m=8
+XR2 tap0 e3 vss rppd w={w_r} l={l_r2a} mm_ok={mm}
+XU0 tap1 tap0 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU1 tap2 tap1 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU2 tap3 tap2 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU3 tap4 tap3 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU4 tap5 tap4 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU5 tap6 tap5 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU6 tap7 tap6 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU7 tap8 tap7 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU8 tap9 tap8 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU9 tap10 tap9 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU10 tap11 tap10 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU11 tap12 tap11 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU12 tap13 tap12 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU13 tap14 tap13 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XU14 tap15 tap14 vss rppd w={w_r} l={l_unit} mm_ok={mm}
+XQ3 vss vss e3 pnpMPA
+XPT t vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+XA1 x a t vdd sg13_hv_pmos w={w_in} l={l_in} mm_ok={mm}
+XA2 y b t vdd sg13_hv_pmos w={w_in} l={l_in} mm_ok={mm}
+XA3 x x vss vss sg13_hv_nmos w={w_ld} l={l_ld} mm_ok={mm}
+XA4 y x vss vss sg13_hv_nmos w={w_ld} l={l_ld} mm_ok={mm}
+XB vg y vss vss sg13_hv_nmos w={w_ld} l={l_ld} m=2 mm_ok={mm}
+XBP vg vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+XC y vss cap_cmim w={w_c} l={w_c} mm_ok={mm}
+XS1 st vss vdd vdd sg13_hv_pmos w={w_su} l={l_su} mm_ok={mm}
+XS2 st tap15 vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
+XS3 vg st vss vss sg13_hv_nmos w={w_sk} l={l_sk} mm_ok={mm}
+XI0 n0 trim0 vdd vss inv
+XI1 n1 trim1 vdd vss inv
+XI2 n2 trim2 vdd vss inv
+XI3 n3 trim3 vdd vss inv
+XM1_0a m1_0 n0 tap0 vss pass
+XM1_0b m1_0 trim0 tap1 vss pass
+XM1_1a m1_1 n0 tap2 vss pass
+XM1_1b m1_1 trim0 tap3 vss pass
+XM1_2a m1_2 n0 tap4 vss pass
+XM1_2b m1_2 trim0 tap5 vss pass
+XM1_3a m1_3 n0 tap6 vss pass
+XM1_3b m1_3 trim0 tap7 vss pass
+XM1_4a m1_4 n0 tap8 vss pass
+XM1_4b m1_4 trim0 tap9 vss pass
+XM1_5a m1_5 n0 tap10 vss pass
+XM1_5b m1_5 trim0 tap11 vss pass
+XM1_6a m1_6 n0 tap12 vss pass
+XM1_6b m1_6 trim0 tap13 vss pass
+XM1_7a m1_7 n0 tap14 vss pass
+XM1_7b m1_7 trim0 tap15 vss pass
+XM2_0a m2_0 n1 m1_0 vss pass
+XM2_0b m2_0 trim1 m1_1 vss pass
+XM2_1a m2_1 n1 m1_2 vss pass
+XM2_1b m2_1 trim1 m1_3 vss pass
+XM2_2a m2_2 n1 m1_4 vss pass
+XM2_2b m2_2 trim1 m1_5 vss pass
+XM2_3a m2_3 n1 m1_6 vss pass
+XM2_3b m2_3 trim1 m1_7 vss pass
+XM3_0a m3_0 n2 m2_0 vss pass
+XM3_0b m3_0 trim2 m2_1 vss pass
+XM3_1a m3_1 n2 m2_2 vss pass
+XM3_1b m3_1 trim2 m2_3 vss pass
+XM4a vref n3 m3_0 vss pass
+XM4b vref trim3 m3_1 vss pass
+.ends bandgap
+.subckt pass d g s vss
+XN d g s vss sg13_hv_nmos w={w_sw} l={l_sw} mm_ok={mm}
+.ends pass
+.subckt inv y a vdd vss
+XP y a vdd vdd sg13_hv_pmos w={w_ip} l={l_sw} mm_ok={mm}
+XN y a vss vss sg13_hv_nmos w={w_sw} l={l_sw} mm_ok={mm}
+.ends inv

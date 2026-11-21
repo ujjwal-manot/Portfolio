@@ -1,0 +1,16 @@
+* Characterizes the PDK vertical PNP (pnpMPA, default 2 um2 emitter) wired as a diode, base and collector at ground: VBE of one device and of eight in parallel, each branch fed 5 uA (so the eight run at a ratio of 8 in current density, as in the bandgap), from -40 to 125 C, to pnp.txt, the numbers the bandgap is sized from.
+.lib cornerHBT.lib hbt_typ
+IE 0 e 5u
+XQ1 0 0 e pnpMPA
+IE8 0 e8 5u
+XQ8 0 0 e8 pnpMPA m=8
+.control
+echo "temp_c vbe_1_v vbe_8_v" > pnp.txt
+foreach t -40 -20 0 27 50 75 100 125
+  set temp = $t
+  op
+  echo "$t $&v(e) $&v(e8)" >> pnp.txt
+end
+quit
+.endc
+.end

@@ -75,7 +75,7 @@ build/model/result.txt: tests/model.cir tests/loop.cir build/sizes.inc
 	mkdir -p $(@D)
 	cp tests/loop.cir build/sizes.inc $(@D)
 	cp tests/model.cir $(@D)/dut.cir
-	printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp 27\n.param vsupply=1.2\n' > $(@D)/corner.inc
+	printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp 27\n.param vsupply=1.2\n.param mm=0\n' > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b loop.cir > loop.log 2>&1
 	cat $(@D)/loop.txt > $@
 

@@ -1,0 +1,25 @@
+* Bandgap start-up: trim at code 8 (trim3 tied to the supply, the rest to ground), the supply ramps from 0 to its full value in {ramp} (from ramp.inc) and stays there; writes the ramp, the final vref and the time from the end of the ramp until vref stays within 1% of that final value to startup.txt, so a start-up circuit that fails, or hangs at some ramp rate, shows as a wrong final value or a missing settling time; corner from corner.inc, design from bandgap.cir and bandgap_sizes.inc.
+.include corner.inc
+.include ramp.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+VDD vdd 0 pwl(0 0 {ramp} {vsupply})
+X1 vref vdd 0 vdd 0 0 0 bandgap
+.tran {(ramp + 100u) / 5000} {ramp + 100u}
+.control
+let final = 0
+let settle = -1
+let rampend = 0
+run
+let n = length(v(vref)) - 1
+let final = v(vref)[n]
+let top = vecmax(v(vdd))
+let lvl = top * 0.9999
+meas tran rampend when v(vdd)=$&lvl rise=1
+let err = abs(v(vref) / final - 1)
+meas tran settled when err=0.01 cross=last
+let settle = settled - rampend
+echo startup ramp_s $&rampend final_v $&final settle_s $&settle > startup.txt
+quit
+.endc
+.end
