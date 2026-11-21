@@ -1611,6 +1611,38 @@ Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_p
 2.24.12. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2836, asynchronously reset by !\rst_n
 
+2.24.12.1. Executed ABC.
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Oct 15 2026 14:24:00)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.12.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
 2.24.13. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2839, asynchronously reset by !\rst_n
 
@@ -1644,10 +1676,7 @@ Found matching posedge clock domain: \clk, enabled by $memory\x$wren[27][0][0]$y
 2.24.23. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $memory\x$wren[26][0][0]$y$3745
 
-2.24.24. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[25][0][0]$y$3739
-
-2.24.24.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: UC Berkeley, ABC 1.01 (compiled Oct 15 2026 14:24:00)
@@ -1672,52 +1701,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.24.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.25. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[24][0][0]$y$3733
-
-2.24.26. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[23][0][0]$y$3723
-
-2.24.26.1. Executed ABC.
-Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: UC Berkeley, ABC 1.01 (compiled Oct 15 2026 14:24:00)
-ABC: abc 01> empty
-ABC: abc 01> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.26.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:        internal signals:        0
-ABC RESULTS:           input signals:        4
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1741,14 +1732,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1772,14 +1763,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1803,14 +1794,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1834,14 +1825,173 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 07> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.23.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.23.1. Executed ABC.
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 13> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.23.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.23.1. Executed ABC.
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 19> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.23.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.23.1. Executed ABC.
+Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 25> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.23.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:        4
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.23.1. Executed ABC.
+Extracted 33 gates and 69 wires to a netlist network with 36 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 31> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.23.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       15
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:               NOR cells:       15
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:        internal signals:       29
+ABC RESULTS:           input signals:       36
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1865,14 +2015,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1896,14 +2046,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1927,14 +2077,14 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.23.1. Executed ABC.
 Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -1958,15 +2108,18 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.23.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        3
 ABC RESULTS:        internal signals:        0
 ABC RESULTS:           input signals:        4
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
-Extracted 33 gates and 69 wires to a netlist network with 36 inputs and 4 outputs.
+2.24.24. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[25][0][0]$y$3739
+
+2.24.24.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 55> source <abc-temp-dir>/abc.script
@@ -1989,19 +2142,168 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       15
-ABC RESULTS:            ANDNOT cells:        2
-ABC RESULTS:              NAND cells:        2
-ABC RESULTS:               NOR cells:       15
-ABC RESULTS:                OR cells:        2
-ABC RESULTS:        internal signals:       29
-ABC RESULTS:           input signals:       36
-ABC RESULTS:          output signals:        4
+2.24.24.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
-Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+2.24.24.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 37> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.24.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.25. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[24][0][0]$y$3733
+
+2.24.26. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[23][0][0]$y$3723
+
+2.24.27. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[22][0][0]$y$3717
+
+2.24.28. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[21][0][0]$y$3711
+
+2.24.29. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[20][0][0]$y$3705
+
+2.24.30. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[19][0][0]$y$3697
+
+2.24.31. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[18][0][0]$y$3691
+
+2.24.32. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[17][0][0]$y$3685
+
+2.24.32.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 07> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.32.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.32.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 43> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.32.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.32.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 49> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.32.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.32.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 61> source <abc-temp-dir>/abc.script
@@ -2024,15 +2326,16 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:        internal signals:        0
-ABC RESULTS:           input signals:        4
+2.24.32.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
-Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+2.24.32.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 67> source <abc-temp-dir>/abc.script
@@ -2055,15 +2358,51 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:        internal signals:        0
-ABC RESULTS:           input signals:        4
-ABC RESULTS:          output signals:        3
+2.24.32.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
-Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+2.24.32.1. Executed ABC.
+Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 55> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.32.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.33. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[16][0][0]$y$3679
+
+2.24.33.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 73> source <abc-temp-dir>/abc.script
@@ -2086,15 +2425,121 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:        internal signals:        0
-ABC RESULTS:           input signals:        4
+2.24.33.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.33.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 61> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.33.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
-Extracted 3 gates and 7 wires to a netlist network with 4 inputs and 3 outputs.
+2.24.34. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[15][0][0]$y$3667
+
+2.24.35. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[14][0][0]$y$3661
+
+2.24.35.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 67> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.35.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.35.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 13> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.35.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.36. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[13][0][0]$y$3655
+
+2.24.36.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 79> source <abc-temp-dir>/abc.script
@@ -2117,14 +2562,123 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:        internal signals:        0
-ABC RESULTS:           input signals:        4
+2.24.36.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.36.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 19> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.36.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.37. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[12][0][0]$y$3649
+
+2.24.38. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[11][0][0]$y$3641
+
+2.24.39. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[10][0][0]$y$3635
+
+2.24.39.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 25> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.39.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.39.1. Executed ABC.
+Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 73> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.39.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.40. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[9][0][0]$y$3629
+
+2.24.40.1. Executed ABC.
 Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -2148,7 +2702,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.40.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        2
 ABC RESULTS:               MUX cells:       62
 ABC RESULTS:        internal signals:        1
@@ -2156,7 +2710,144 @@ ABC RESULTS:           input signals:       67
 ABC RESULTS:          output signals:       63
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.40.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 79> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.40.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.41. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[8][0][0]$y$3623
+
+2.24.42. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[7][0][0]$y$3611
+
+2.24.42.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 31> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.42.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.42.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 85> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.42.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.43. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[6][0][0]$y$3605
+
+2.24.43.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 91> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.43.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.43.1. Executed ABC.
 Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -2180,7 +2871,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.43.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        2
 ABC RESULTS:               MUX cells:        2
 ABC RESULTS:        internal signals:        1
@@ -2188,7 +2879,80 @@ ABC RESULTS:           input signals:        7
 ABC RESULTS:          output signals:        3
 Removing temp directory.
 
-2.24.26.1. Executed ABC.
+2.24.44. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[5][0][0]$y$3599
+
+2.24.45. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[4][0][0]$y$3593
+
+2.24.46. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $memory\x$wren[3][0][0]$y$3583
+
+2.24.46.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 37> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.46.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.46.1. Executed ABC.
+Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 97> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.46.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.46.1. Executed ABC.
 Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -2212,7 +2976,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.26.2. Re-integrating ABC results.
+2.24.46.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        2
 ABC RESULTS:               MUX cells:       62
 ABC RESULTS:        internal signals:        1
@@ -2220,65 +2984,37 @@ ABC RESULTS:           input signals:       67
 ABC RESULTS:          output signals:       63
 Removing temp directory.
 
-2.24.27. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[22][0][0]$y$3717
+2.24.46.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 103> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
 
-2.24.28. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[21][0][0]$y$3711
-
-2.24.29. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[20][0][0]$y$3705
-
-2.24.30. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[19][0][0]$y$3697
-
-2.24.31. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[18][0][0]$y$3691
-
-2.24.32. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[17][0][0]$y$3685
-
-2.24.33. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[16][0][0]$y$3679
-
-2.24.34. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[15][0][0]$y$3667
-
-2.24.35. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[14][0][0]$y$3661
-
-2.24.36. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[13][0][0]$y$3655
-
-2.24.37. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[12][0][0]$y$3649
-
-2.24.38. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[11][0][0]$y$3641
-
-2.24.39. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[10][0][0]$y$3635
-
-2.24.40. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[9][0][0]$y$3629
-
-2.24.41. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[8][0][0]$y$3623
-
-2.24.42. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[7][0][0]$y$3611
-
-2.24.43. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[6][0][0]$y$3605
-
-2.24.44. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[5][0][0]$y$3599
-
-2.24.45. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[4][0][0]$y$3593
-
-2.24.46. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $memory\x$wren[3][0][0]$y$3583
+2.24.46.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
 
 2.24.47. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $memory\x$wren[2][0][0]$y$3575
@@ -2295,11 +3031,340 @@ Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_p
 2.24.51. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$3127
 
+2.24.51.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 109> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.51.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.51.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 103> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.51.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
 2.24.52. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$3110
 
+2.24.52.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 43> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.52.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.52.1. Executed ABC.
+Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 109> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.52.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+
+2.24.52.1. Executed ABC.
+Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 115> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.52.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        2
+ABC RESULTS:               MUX cells:       62
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       67
+ABC RESULTS:          output signals:       63
+Removing temp directory.
+
+2.24.52.1. Executed ABC.
+Extracted 6 gates and 15 wires to a netlist network with 9 inputs and 5 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 115> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.52.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        4
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+2.24.52.1. Executed ABC.
+Extracted 40 gates and 77 wires to a netlist network with 37 inputs and 8 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 49> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.52.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       18
+ABC RESULTS:            ANDNOT cells:        3
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:               NOR cells:       13
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:        internal signals:       32
+ABC RESULTS:           input signals:       37
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+2.24.52.1. Executed ABC.
+Extracted 18 gates and 30 wires to a netlist network with 12 inputs and 8 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 121> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.52.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:        2
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOT cells:        2
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:        internal signals:       10
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
 2.24.53. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$3084
+
+2.24.53.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 55> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.53.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.53.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 61> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.53.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
 
 2.24.54. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$3067
@@ -2322,11 +3387,239 @@ Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_p
 2.24.60. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2959
 
+2.24.60.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 67> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.60.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
 2.24.61. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2948
 
+2.24.61.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 121> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.61.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.61.1. Executed ABC.
+Extracted 52 gates and 107 wires to a netlist network with 55 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 127> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.61.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       25
+ABC RESULTS:            ANDNOT cells:        3
+ABC RESULTS:              NAND cells:        3
+ABC RESULTS:               NOR cells:       21
+ABC RESULTS:                OR cells:        4
+ABC RESULTS:        internal signals:       48
+ABC RESULTS:           input signals:       55
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
 2.24.62. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2942
+
+2.24.62.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 73> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.62.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.62.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 133> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.62.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.62.1. Executed ABC.
+Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 127> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.62.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+2.24.62.1. Executed ABC.
+Extracted 16 gates and 29 wires to a netlist network with 13 inputs and 7 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 139> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.62.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        9
+ABC RESULTS:                OR cells:        3
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:        internal signals:        9
+ABC RESULTS:           input signals:       13
+ABC RESULTS:          output signals:        7
+Removing temp directory.
 
 2.24.63. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2931
@@ -2358,1047 +3651,8 @@ Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_p
 2.24.72. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2884
 
-2.24.73. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2881
-
-2.24.74. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2870
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 07> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 103> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 07> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 109> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 115> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        8
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 121> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 127> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 133> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 139> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 13> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 145> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 151> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 19> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        8
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 157> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 25> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 163> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 31> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 37> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 169> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 175> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 5 gates and 13 wires to a netlist network with 8 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 43> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        3
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        8
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 181> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 49> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 55> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 187> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 61> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 4 gates and 11 wires to a netlist network with 7 inputs and 3 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 193> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        7
-ABC RESULTS:          output signals:        3
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 64 gates and 131 wires to a netlist network with 67 inputs and 63 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 199> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        2
-ABC RESULTS:               MUX cells:       62
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       67
-ABC RESULTS:          output signals:       63
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 6 gates and 15 wires to a netlist network with 9 inputs and 5 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 67> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        4
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        5
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 40 gates and 77 wires to a netlist network with 37 inputs and 8 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 73> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       18
-ABC RESULTS:            ANDNOT cells:        3
-ABC RESULTS:               MUX cells:        1
-ABC RESULTS:               NOR cells:       13
-ABC RESULTS:               NOT cells:        3
-ABC RESULTS:        internal signals:       32
-ABC RESULTS:           input signals:       37
-ABC RESULTS:          output signals:        8
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 18 gates and 30 wires to a netlist network with 12 inputs and 8 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 205> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:            ANDNOT cells:        1
-ABC RESULTS:               MUX cells:        2
-ABC RESULTS:              NAND cells:        1
-ABC RESULTS:               NOT cells:        2
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:             ORNOT cells:        1
-ABC RESULTS:              XNOR cells:        1
-ABC RESULTS:        internal signals:       10
-ABC RESULTS:           input signals:       12
-ABC RESULTS:          output signals:        8
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 211> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
+2.24.72.1. Executed ABC.
+Extracted 275 gates and 433 wires to a netlist network with 157 inputs and 151 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 79> source <abc-temp-dir>/abc.script
@@ -3421,270 +3675,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 217> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 85> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 52 gates and 107 wires to a netlist network with 55 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 223> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       25
-ABC RESULTS:            ANDNOT cells:        3
-ABC RESULTS:              NAND cells:        3
-ABC RESULTS:               NOR cells:       21
-ABC RESULTS:                OR cells:        4
-ABC RESULTS:        internal signals:       48
-ABC RESULTS:           input signals:       55
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 91> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 97> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 10 gates and 19 wires to a netlist network with 9 inputs and 4 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 103> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        6
-ABC RESULTS:           input signals:        9
-ABC RESULTS:          output signals:        4
-Removing temp directory.
-
-2.24.74.1. Executed ABC.
-Extracted 16 gates and 29 wires to a netlist network with 13 inputs and 7 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 109> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.74.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        9
-ABC RESULTS:                OR cells:        3
-ABC RESULTS:             ORNOT cells:        1
-ABC RESULTS:        internal signals:        9
-ABC RESULTS:           input signals:       13
-ABC RESULTS:          output signals:        7
-Removing temp directory.
-
-2.24.75. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2867
-
-2.24.75.1. Executed ABC.
-Extracted 275 gates and 433 wires to a netlist network with 157 inputs and 151 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 229> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.75.2. Re-integrating ABC results.
+2.24.72.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:      115
 ABC RESULTS:               MUX cells:       30
 ABC RESULTS:               NOR cells:        1
@@ -3695,105 +3686,8 @@ ABC RESULTS:           input signals:      157
 ABC RESULTS:          output signals:      151
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
+2.24.72.1. Executed ABC.
 Extracted 12 gates and 22 wires to a netlist network with 10 inputs and 5 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 115> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.75.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:               NOR cells:        1
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        7
-ABC RESULTS:           input signals:       10
-ABC RESULTS:          output signals:        5
-Removing temp directory.
-
-2.24.75.1. Executed ABC.
-Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 121> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.75.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       85
-ABC RESULTS:               NOR cells:        2
-ABC RESULTS:        internal signals:        2
-ABC RESULTS:           input signals:       63
-ABC RESULTS:          output signals:       87
-Removing temp directory.
-
-2.24.75.1. Executed ABC.
-Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 127> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.75.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       85
-ABC RESULTS:               NOR cells:        2
-ABC RESULTS:        internal signals:        2
-ABC RESULTS:           input signals:       63
-ABC RESULTS:          output signals:       87
-Removing temp directory.
-
-2.24.75.1. Executed ABC.
-Extracted 87 gates and 149 wires to a netlist network with 62 inputs and 86 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 133> source <abc-temp-dir>/abc.script
@@ -3816,16 +3710,17 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       85
+2.24.72.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
 ABC RESULTS:               NOR cells:        1
-ABC RESULTS:        internal signals:        1
-ABC RESULTS:           input signals:       62
-ABC RESULTS:          output signals:       86
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        7
+ABC RESULTS:           input signals:       10
+ABC RESULTS:          output signals:        5
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
-Extracted 87 gates and 149 wires to a netlist network with 62 inputs and 86 outputs.
+2.24.72.1. Executed ABC.
+Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 139> source <abc-temp-dir>/abc.script
@@ -3848,7 +3743,71 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.72.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       85
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       63
+ABC RESULTS:          output signals:       87
+Removing temp directory.
+
+2.24.72.1. Executed ABC.
+Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 145> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.72.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       85
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       63
+ABC RESULTS:          output signals:       87
+Removing temp directory.
+
+2.24.72.1. Executed ABC.
+Extracted 87 gates and 149 wires to a netlist network with 62 inputs and 86 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 151> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.72.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
 ABC RESULTS:               NOR cells:        1
 ABC RESULTS:        internal signals:        1
@@ -3856,7 +3815,10 @@ ABC RESULTS:           input signals:       62
 ABC RESULTS:          output signals:       86
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
+2.24.73. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2881
+
+2.24.73.1. Executed ABC.
 Extracted 87 gates and 149 wires to a netlist network with 62 inputs and 86 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -3880,7 +3842,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.73.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
 ABC RESULTS:               NOR cells:        1
 ABC RESULTS:        internal signals:        1
@@ -3888,41 +3850,8 @@ ABC RESULTS:           input signals:       62
 ABC RESULTS:          output signals:       86
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
-Extracted 12 gates and 22 wires to a netlist network with 10 inputs and 5 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 151> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.75.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:        7
-ABC RESULTS:               NOR cells:        1
-ABC RESULTS:                OR cells:        1
-ABC RESULTS:        internal signals:        7
-ABC RESULTS:           input signals:       10
-ABC RESULTS:          output signals:        5
-Removing temp directory.
-
-2.24.75.1. Executed ABC.
-Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+2.24.73.1. Executed ABC.
+Extracted 87 gates and 149 wires to a netlist network with 62 inputs and 86 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 157> source <abc-temp-dir>/abc.script
@@ -3945,16 +3874,16 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.73.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
-ABC RESULTS:               NOR cells:        2
-ABC RESULTS:        internal signals:        2
-ABC RESULTS:           input signals:       63
-ABC RESULTS:          output signals:       87
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:       62
+ABC RESULTS:          output signals:       86
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
-Extracted 177 gates and 325 wires to a netlist network with 147 inputs and 104 outputs.
+2.24.73.1. Executed ABC.
+Extracted 12 gates and 22 wires to a netlist network with 10 inputs and 5 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 163> source <abc-temp-dir>/abc.script
@@ -3977,27 +3906,20 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       32
-ABC RESULTS:            ANDNOT cells:        1
-ABC RESULTS:               MUX cells:       35
-ABC RESULTS:              NAND cells:        7
-ABC RESULTS:               NOR cells:        8
-ABC RESULTS:               NOT cells:        5
-ABC RESULTS:                OR cells:        5
-ABC RESULTS:             ORNOT cells:        4
-ABC RESULTS:              XNOR cells:        3
-ABC RESULTS:               XOR cells:       51
-ABC RESULTS:        internal signals:       74
-ABC RESULTS:           input signals:      147
-ABC RESULTS:          output signals:      104
+2.24.73.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        7
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:        internal signals:        7
+ABC RESULTS:           input signals:       10
+ABC RESULTS:          output signals:        5
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
+2.24.73.1. Executed ABC.
 Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 13> source <abc-temp-dir>/abc.script
+ABC: abc 85> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4017,7 +3939,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.73.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
 ABC RESULTS:               NOR cells:        2
 ABC RESULTS:        internal signals:        2
@@ -4025,8 +3947,8 @@ ABC RESULTS:           input signals:       63
 ABC RESULTS:          output signals:       87
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
-Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+2.24.73.1. Executed ABC.
+Extracted 177 gates and 325 wires to a netlist network with 147 inputs and 104 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
 ABC: abc 169> source <abc-temp-dir>/abc.script
@@ -4049,7 +3971,47 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.73.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       32
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:               MUX cells:       35
+ABC RESULTS:              NAND cells:        7
+ABC RESULTS:               NOR cells:        8
+ABC RESULTS:               NOT cells:        5
+ABC RESULTS:                OR cells:        5
+ABC RESULTS:             ORNOT cells:        4
+ABC RESULTS:              XNOR cells:        3
+ABC RESULTS:               XOR cells:       51
+ABC RESULTS:        internal signals:       74
+ABC RESULTS:           input signals:      147
+ABC RESULTS:          output signals:      104
+Removing temp directory.
+
+2.24.73.1. Executed ABC.
+Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 91> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.73.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
 ABC RESULTS:               NOR cells:        2
 ABC RESULTS:        internal signals:        2
@@ -4057,7 +4019,42 @@ ABC RESULTS:           input signals:       63
 ABC RESULTS:          output signals:       87
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
+2.24.73.1. Executed ABC.
+Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 151> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.73.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       85
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       63
+ABC RESULTS:          output signals:       87
+Removing temp directory.
+
+2.24.74. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2870
+
+2.24.74.1. Executed ABC.
 Extracted 12 gates and 22 wires to a netlist network with 10 inputs and 5 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -4081,7 +4078,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.74.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        7
 ABC RESULTS:               NOR cells:        1
 ABC RESULTS:                OR cells:        1
@@ -4090,7 +4087,25 @@ ABC RESULTS:           input signals:       10
 ABC RESULTS:          output signals:        5
 Removing temp directory.
 
-2.24.75.1. Executed ABC.
+2.24.75. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2867
+
+2.24.76. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2864
+
+2.24.77. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2861
+
+2.24.78. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2850
+
+2.24.79. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2818
+
+2.24.80. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2815
+
+2.24.80.1. Executed ABC.
 Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -4114,62 +4129,13 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.75.2. Re-integrating ABC results.
+2.24.80.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
 ABC RESULTS:               NOR cells:        2
 ABC RESULTS:        internal signals:        2
 ABC RESULTS:           input signals:       63
 ABC RESULTS:          output signals:       87
 Removing temp directory.
-
-2.24.76. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2864
-
-2.24.76.1. Executed ABC.
-Extracted 93 gates and 162 wires to a netlist network with 69 inputs and 89 outputs.
-Running ABC script: <abc-temp-dir>/abc.script
-ABC: empty
-ABC: abc 19> source <abc-temp-dir>/abc.script
-ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_library <abc-temp-dir>/stdcells.genlib 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &fraig -x 
-ABC: + &put 
-ABC: + scorr 
-ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
-ABC: + dc2 
-ABC: + dretime 
-ABC: + strash 
-ABC: + &get -n 
-ABC: + &dch -f 
-ABC: + &nf 
-ABC: + &put 
-ABC: + write_blif <abc-temp-dir>/output.blif 
-ABC: 
-ABC: YOSYS_ABC_DONE 
-
-2.24.76.2. Re-integrating ABC results.
-ABC RESULTS:               AND cells:       86
-ABC RESULTS:               MUX cells:        1
-ABC RESULTS:               NOR cells:        3
-ABC RESULTS:              XNOR cells:        1
-ABC RESULTS:        internal signals:        4
-ABC RESULTS:           input signals:       69
-ABC RESULTS:          output signals:       89
-Removing temp directory.
-
-2.24.77. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2861
-
-2.24.78. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2850
-
-2.24.79. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2818
-
-2.24.80. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2815
 
 2.24.81. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_patterns_logic$2812
@@ -4180,14 +4146,11 @@ Found matching posedge clock domain: \clk, enabled by $auto$simple.cc:210:make_p
 2.24.83. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
 Found matching posedge clock domain: \clk, enabled by $logic_and$../design/cpu.sv:173$296_Y
 
-2.24.84. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
-Found matching posedge clock domain: \clk
-
-2.24.84.1. Executed ABC.
-Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+2.24.83.1. Executed ABC.
+Extracted 93 gates and 162 wires to a netlist network with 69 inputs and 89 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 25> source <abc-temp-dir>/abc.script
+ABC: abc 157> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4207,7 +4170,41 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.84.2. Re-integrating ABC results.
+2.24.83.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       86
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:               NOR cells:        3
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:        internal signals:        4
+ABC RESULTS:           input signals:       69
+ABC RESULTS:          output signals:       89
+Removing temp directory.
+
+2.24.83.1. Executed ABC.
+Extracted 89 gates and 152 wires to a netlist network with 63 inputs and 87 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: empty
+ABC: abc 97> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+2.24.83.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:       85
 ABC RESULTS:               NOR cells:        2
 ABC RESULTS:        internal signals:        2
@@ -4215,7 +4212,7 @@ ABC RESULTS:           input signals:       63
 ABC RESULTS:          output signals:       87
 Removing temp directory.
 
-2.24.84.1. Executed ABC.
+2.24.83.1. Executed ABC.
 Extracted 12 gates and 22 wires to a netlist network with 10 inputs and 5 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
@@ -4239,7 +4236,7 @@ ABC: + write_blif <abc-temp-dir>/output.blif
 ABC: 
 ABC: YOSYS_ABC_DONE 
 
-2.24.84.2. Re-integrating ABC results.
+2.24.83.2. Re-integrating ABC results.
 ABC RESULTS:               AND cells:        7
 ABC RESULTS:               NOR cells:        1
 ABC RESULTS:                OR cells:        1
@@ -4248,11 +4245,14 @@ ABC RESULTS:           input signals:       10
 ABC RESULTS:          output signals:        5
 Removing temp directory.
 
+2.24.84. Extracting gate netlist of module `\cpu' to `<abc-temp-dir>/input.blif'..
+Found matching posedge clock domain: \clk
+
 2.24.84.1. Executed ABC.
 Extracted 12 gates and 22 wires to a netlist network with 10 inputs and 5 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 235> source <abc-temp-dir>/abc.script
+ABC: abc 103> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4323,7 +4323,7 @@ Removing temp directory.
 Extracted 92 gates and 158 wires to a netlist network with 66 inputs and 90 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 241> source <abc-temp-dir>/abc.script
+ABC: abc 163> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4356,7 +4356,7 @@ Removing temp directory.
 Extracted 87 gates and 149 wires to a netlist network with 62 inputs and 86 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 247> source <abc-temp-dir>/abc.script
+ABC: abc 109> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4388,7 +4388,7 @@ Removing temp directory.
 Extracted 90 gates and 154 wires to a netlist network with 64 inputs and 88 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 31> source <abc-temp-dir>/abc.script
+ABC: abc 169> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4421,7 +4421,7 @@ Removing temp directory.
 Extracted 2282 gates and 3788 wires to a netlist network with 1505 inputs and 593 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 253> source <abc-temp-dir>/abc.script
+ABC: abc 115> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4461,7 +4461,7 @@ Removing temp directory.
 Extracted 1975 gates and 2622 wires to a netlist network with 645 inputs and 262 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 37> source <abc-temp-dir>/abc.script
+ABC: abc 175> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -4889,6 +4889,6 @@ Removed 0 unused cells and 14215 unused wires.
 Dumping module `\cpu'.
 
 Warnings: 4 unique messages, 4 total
-End of script. Logfile hash: ffd32162fe, time: 8.71s, user: 2.68s, system: 0.14s, MEM: 95.76 MB peak
+End of script. Logfile hash: 0fdfb640a1, time: 8.40s, user: 2.31s, system: 0.24s, MEM: 95.93 MB peak
 Yosys 0.70 (git sha1 28ba3cb92, Release, GNU /usr/bin/c++ 13.3.0)
-Time spent: 77% 2x abc (6 sec), 6% 23x opt_clean (0 sec), ...
+Time spent: 80% 2x abc (6 sec), 5% 23x opt_clean (0 sec), ...
