@@ -43,27 +43,72 @@
   },
   "result": "pass",
   "sources": {
-   "helpers/analog_results.py": "270d4f567ff2105753b9badc4ea06d9fddf6f042a6c0e20ad7d03aa5fc75be75",
-   "helpers/opamp_sizing.py": "562704802c2c933c6be964754d12299fe1cc009d8add694c5231a3c315149d4c",
+   "helpers/analog_results.py": "591303693cfe32c4035707a7b099ac6fd2a4ef6450b0b02ccdfbc747016a3645",
+   "helpers/opamp_sizing.py": "3c8a1ae58516e5c6760069e1614e13ee50cd640df4df2971f3d358294c0e2bc4",
    "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
    "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
-   "projects/opamp/Makefile": "f17c0bbc96f04b535164e5749728ee2b3837d52f4d662770d78a1e44ed72de02",
-   "projects/opamp/design/opamp.cir": "c83693e5319eb0d40cc2ff70663f90c81c493025c96c496e4330e243f91ff1ae",
+   "projects/opamp/Makefile": "7963a5de983d71a3c446880fe51df5876cabae526d7518ac77a77b08af249d72",
+   "projects/opamp/design/opamp.cir": "801a2ddb23a3645caa9d5a65e5cecb4ea4b334a9f758553e9d5294a5e7ec7f41",
    "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
    "projects/opamp/tests/loop.cir": "a798a4f9186e3ec16d5770f45e43de6de94014c1af4fc26179a69553a2f8db42",
    "projects/opamp/tests/model.cir": "9ef7ea9c496910d7cba1cbff77cf6575b7fd98a39f393141288f2f9cb46dcbdd",
    "projects/opamp/tests/noise.cir": "d30d136cd0d49600fa697c4723d37bfb2d4e2eb7ea9b3e667ea7a922496ecb8c",
    "projects/opamp/tests/step.cir": "c9284748d54b62bae4723212f47fdd51fc744da8a63fb3fbd4349c720ad02657",
-   "projects/opamp/tests/swing.cir": "efc814346b7f59bcb169737454dbd251a56e80b4829f2308d32c41f28cc64a81"
+   "projects/opamp/tests/swing.cir": "c34253dd41669f6cc384ac2b3d70f2c37839c0cb9c48cd1ea3085a004cbee529"
   },
-  "time": "2026-11-21 12:56:01",
+  "time": "2026-11-21 13:03:21",
   "values": {}
  },
- "sizing": {
+ "corners": {
   "logs": {
-   "sizing.log": "16b55a32ecc4642b81e6b106f47cd2ebde4c7626ccaf1a867dba4f243a81f449"
+   "corner_ff_125_hi.txt": "d2866e3beb2c5c1aba6d0e7f527736ee0ad7d894786264fd3736a834c59d1434",
+   "corner_ff_125_lo.txt": "6f3837789d67512e9d08adf7b95752a680d51a795d2315b1d231cd6fc8ed4fbf",
+   "corner_ff_125_nom.txt": "5a1fe978ae9763d459759e9b93b2e3bb7226459898c185c206943df47b61d9fb",
+   "corner_ff_27_hi.txt": "335db21c1a1f3ea4b1ba8be31cc6edb6f82fd059994737f6da9cf0f17105c5aa",
+   "corner_ff_27_lo.txt": "2141355c171337af7806ebc3e987a474254ddef5b7ed6bee2f0c08fed34ba2fd",
+   "corner_ff_27_nom.txt": "51545685d74d99499639a2d7c10b4fb7b43e6922435858d5da049b8e930cf44c",
+   "corner_ff_m40_hi.txt": "683e767102f8db1d150529b6d7a12253f73abe1fa8af103975b408fa09a6cb69",
+   "corner_ff_m40_lo.txt": "736aabecb13bb430c98f652f3ea20a63f24601362c8da7770cad072ca4263a87",
+   "corner_ff_m40_nom.txt": "a40a6753e82220afba1d547434f2d627200bb082af95441f2db51890f121dec9",
+   "corner_fs_125_hi.txt": "3b93c8a8b62da6b0955d34e7a2540bbc8b41f0d5035464fc06321b2acb4ef135",
+   "corner_fs_125_lo.txt": "464505b3353930f356f02a0f5b6a36308b7834d3bc5a27cdea9b09b03fabb209",
+   "corner_fs_125_nom.txt": "20fb11f9fff62735dc3b255bf1e27a2555594e68897c60150adc94b8dd7de095",
+   "corner_fs_27_hi.txt": "7250d9a6a3017c3545b2149431edcfd2cf8d0f68f2fbf2f603e588d0887fa632",
+   "corner_fs_27_lo.txt": "46e8f6dc240d3349c92ca271c77e0bbdd3cd9ccd3acbeeccd8ccc9f82113cd59",
+   "corner_fs_27_nom.txt": "fba9769e507582b279dfbc692ef035715b36ec4bd90aaa918824c0f5a0a82cd6",
+   "corner_fs_m40_hi.txt": "9f06a11c811424e6efa7212ad43d920498b2cadd60279c177a3263ef81e9e679",
+   "corner_fs_m40_lo.txt": "f013253f6dcb84ba3c4695041b1ef2a3100c1f3459c3130d9c8f4e18fa3a9f2d",
+   "corner_fs_m40_nom.txt": "9b4fa074169781fa02d5981dd726a3da1575e48c4749af1d6cd39c88472a0415",
+   "corner_sf_125_hi.txt": "64a16ead99147ce63997d684dea0ce8c16b3de7a43e7b1cacfe9f01247078b21",
+   "corner_sf_125_lo.txt": "3ab0dbeffdb9de9c3cce0243c1f6922be178073fb974d91314d5a8db9d01b37a",
+   "corner_sf_125_nom.txt": "99ca822315301c4c0aec29105ff05e9b03640c57f4e026a71dd74ad41444f00b",
+   "corner_sf_27_hi.txt": "e8bde3a6325ba5d7674bc4ab793fcd8b579914f6fbafd20253bc5b55d9ab99e7",
+   "corner_sf_27_lo.txt": "04be98d7a80b43ad72f6fba6ebc1705b77321094ab16d7465ed0ccd91cb62159",
+   "corner_sf_27_nom.txt": "1d242b93afb0f82bc1059a08c4aa89bb9e6c58bde840903bbb40a65c648b77a0",
+   "corner_sf_m40_hi.txt": "f7a096918daf1564d40e0f859366b36dbbc9edbe237e4ebfc888f16213e0aacf",
+   "corner_sf_m40_lo.txt": "e5898475e20b333a88a08a38a293c1aa32e3079fe8c5e00252f6f74f5897744f",
+   "corner_sf_m40_nom.txt": "e955844bffcd9a98b9cb1ebbabb8cf3b5fe3a5c814faaa16fc61437a8b206a2b",
+   "corner_ss_125_hi.txt": "939add659d2c73986ee76e90326b80e1a9426a8e0bd2f60a39c173243fa92f70",
+   "corner_ss_125_lo.txt": "cdb05453abee21a48a8252f34877a1d4e54f1c877e313374f6c573bbc3637a9d",
+   "corner_ss_125_nom.txt": "cca4144eeaa25df7caa493c82549615e3d69579988e310e91db49ea50128c4ee",
+   "corner_ss_27_hi.txt": "cba363f1f414dc7e899ad4a8c1e558c89063360740233e1a9fbf5d7bf44873de",
+   "corner_ss_27_lo.txt": "8656b4f4e0ab64748eb0e616a4503f1a481b7394e0f750fe779a6b2133d17298",
+   "corner_ss_27_nom.txt": "838052cc289fdead40751c749558f54e62ffa2696013e044ae195871ed616d1f",
+   "corner_ss_m40_hi.txt": "e6e2e57eed2a305f9510c411277c2894943593e0af88f9614a755d16ca91c250",
+   "corner_ss_m40_lo.txt": "af2f7abc21dfa479cbb824cd938cba80bb651db709b042fbc028449b4c7f2019",
+   "corner_ss_m40_nom.txt": "5fa08c02f6b432f1e0e9ef702ace9f96cca0ba211c86b610879891ad07625cd5",
+   "corner_tt_125_hi.txt": "8967778a58d05643f5643d2125e804295584642d30f80d5c6cedc3672e8bc836",
+   "corner_tt_125_lo.txt": "c76ddfce0c293886614961febd4c426bcdf42ba25b88fccdea26e5627656c208",
+   "corner_tt_125_nom.txt": "f7fc4c6b5b784407d9c8dc1af785de7817f1e71f7956b92284aad64b94cba3a5",
+   "corner_tt_27_hi.txt": "6e5905e84bd8f7631c64b9b7def89a122afd5c2b4e24c4f76764d8ff06abd1b6",
+   "corner_tt_27_lo.txt": "c327e2323f83566a884f00de698f29e8d5479e324c33ef59424b0af705f74c77",
+   "corner_tt_27_nom.txt": "6e1e1a80404fc13ce35d083b2f753268426c498d8c7716cbe068c3561f28952f",
+   "corner_tt_m40_hi.txt": "e22e08afa33c11d9292bb8288e736151264ec52da225db930149b157829bbe14",
+   "corner_tt_m40_lo.txt": "58bd5b54e3109237dd21bbd9703aa6b2e2aa029f1dfc05971541b0d3457d8b67",
+   "corner_tt_m40_nom.txt": "15ef6c348d3760729564a2be5d8416815201c11e4be08b057894a0c97af2bf73",
+   "corners.log": "af20e39ecd34f23164603061f0e5472cb2ad6ee49479342dc936288d9c2af784"
   },
-  "result": "pass",
+  "result": "fail",
   "sources": {
    "helpers/analog_results.py": "270d4f567ff2105753b9badc4ea06d9fddf6f042a6c0e20ad7d03aa5fc75be75",
    "helpers/opamp_sizing.py": "562704802c2c933c6be964754d12299fe1cc009d8add694c5231a3c315149d4c",
@@ -78,7 +123,29 @@
    "projects/opamp/tests/step.cir": "c9284748d54b62bae4723212f47fdd51fc744da8a63fb3fbd4349c720ad02657",
    "projects/opamp/tests/swing.cir": "efc814346b7f59bcb169737454dbd251a56e80b4829f2308d32c41f28cc64a81"
   },
-  "time": "2026-11-21 12:55:59",
+  "time": "2026-11-21 12:58:20",
+  "values": {}
+ },
+ "sizing": {
+  "logs": {
+   "sizing.log": "1a2a626d712e94a907bb1a70f418088653a814c5c75c6c58384e0264dc8c4aeb"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/analog_results.py": "591303693cfe32c4035707a7b099ac6fd2a4ef6450b0b02ccdfbc747016a3645",
+   "helpers/opamp_sizing.py": "3c8a1ae58516e5c6760069e1614e13ee50cd640df4df2971f3d358294c0e2bc4",
+   "helpers/save_result.py": "3918cad27ae8a874b15246c7b76f8dfcc2ac11f8a60d6f49fc657820f0d457d7",
+   "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
+   "projects/opamp/Makefile": "7963a5de983d71a3c446880fe51df5876cabae526d7518ac77a77b08af249d72",
+   "projects/opamp/design/opamp.cir": "801a2ddb23a3645caa9d5a65e5cecb4ea4b334a9f758553e9d5294a5e7ec7f41",
+   "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
+   "projects/opamp/tests/loop.cir": "a798a4f9186e3ec16d5770f45e43de6de94014c1af4fc26179a69553a2f8db42",
+   "projects/opamp/tests/model.cir": "9ef7ea9c496910d7cba1cbff77cf6575b7fd98a39f393141288f2f9cb46dcbdd",
+   "projects/opamp/tests/noise.cir": "d30d136cd0d49600fa697c4723d37bfb2d4e2eb7ea9b3e667ea7a922496ecb8c",
+   "projects/opamp/tests/step.cir": "c9284748d54b62bae4723212f47fdd51fc744da8a63fb3fbd4349c720ad02657",
+   "projects/opamp/tests/swing.cir": "c34253dd41669f6cc384ac2b3d70f2c37839c0cb9c48cd1ea3085a004cbee529"
+  },
+  "time": "2026-11-21 13:03:19",
   "values": {}
  }
 }

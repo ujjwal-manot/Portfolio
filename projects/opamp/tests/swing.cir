@@ -1,4 +1,4 @@
-* Sweeps the input of the real inverting loop from 0 to 1.2 V and writes the output range over which the output stays within half an LSB (1.5625 mV) of 1.2 V minus the input, after removing the error at mid-scale, to swing.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+* Sweeps the input of the real inverting loop from 0 to 1.2 V and writes the output range over which the output stays within half an LSB (1.5625 mV) of 1.2 V minus the input, after removing the error at mid-scale, searching each half of the sweep on its own (a range that never leaves the band runs to the end of the sweep), plus the input-referred offset (half the output error at mid-scale, noise gain 2), to swing.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -12,16 +12,17 @@ XCL out 0 cap_cmim w={w_cl} l={l_cl}
 XOP inp inn out vdd 0 ibias opamp
 .control
 let mid = 0
-let lo = -1
-let hi = -1
+let lo = 1.2
+let hi = 0
 dc VIN 0 1.2 1m
 meas dc mid find v(out) at=0.6
 let err = abs(v(out) - mid - (0.6 - v(in)))
-meas dc hi when err=1.5625m cross=1
-meas dc lo when err=1.5625m cross=last
+meas dc hi when err=1.5625m cross=last from=0 to=0.6
+meas dc lo when err=1.5625m cross=1 from=0.6 to=1.2
 let out_high = mid + 0.6 - hi
 let out_low = mid + 0.6 - lo
-echo swing out_low_v $&out_low out_high_v $&out_high > swing.txt
+let offset = (mid - 0.6) / 2
+echo swing out_low_v $&out_low out_high_v $&out_high offset_v $&offset > swing.txt
 quit
 .endc
 .end

@@ -1,10 +1,11 @@
-# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
+# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
 import cmath, math, sys
 from pathlib import Path
 
 SPECS = {"a0_db": (">=", 66), "gbw_hz": (">=", 20e6), "pm_deg": (">=", 60), "slew_v_per_s": (">=", 10e6), "settle_s": ("<=", 200e-9),
          "supply_a": ("<=", 500e-6), "out_low_v": ("<=", 0.2), "out_high_v": (">=", 1.0)}
 REPORT = ("band_v_rms", "total_v_rms", "psrr_1k_db", "psrr_1m_db")
+SWING, NO_SWING_AT, YIELD = ("out_low_v", "out_high_v"), "_lo", 0.99
 A0, BETA, P1, P2 = 1e4, 0.5, 1 / (2 * math.pi * 1e6 * 10e-12), 1 / (2 * math.pi * 1e4 * 159.2e-15)
 TOLERANCE = {"a0_db": 0.1, "fc_hz": 0.02, "pm_deg": 1.0, "gbw_hz": 0.02, "ugf_hz": 0.02}
 
@@ -16,7 +17,7 @@ def parse(path):
     return out
 
 def measured(r):
-    keys = {"a0_db", "gbw_hz", "pm_deg", "supply_a", "out_low_v", "out_high_v"}
+    keys = {"a0_db", "gbw_hz", "pm_deg", "supply_a", "out_low_v", "out_high_v", "offset_v"}
     m = {k: r[k] for k in keys if k in r}
     if {"rise_slew_v_per_s", "fall_slew_v_per_s"} <= r.keys():
         m["slew_v_per_s"] = min(r["rise_slew_v_per_s"], r["fall_slew_v_per_s"])
@@ -28,8 +29,9 @@ def corners(paths):
     data = {Path(p).stem.removeprefix("corner_"): measured(parse(p)) for p in paths}
     ok, rows = True, {}
     for spec, (op, limit) in SPECS.items():
-        missing = [c for c, m in data.items() if spec not in m or math.isnan(m[spec])]
-        values = [(m[spec], c) for c, m in data.items() if c not in missing]
+        checked = {c: m for c, m in data.items() if not (spec in SWING and c.endswith(NO_SWING_AT))}
+        missing = [c for c, m in checked.items() if spec not in m or math.isnan(m[spec])]
+        values = [(m[spec], c) for c, m in checked.items() if c not in missing]
         worst = min(values) if op == ">=" else max(values)
         passed = not missing and (worst[0] >= limit if op == ">=" else worst[0] <= limit)
         rows[spec] = (*worst, limit, op, passed, missing)
@@ -37,6 +39,17 @@ def corners(paths):
     for key in REPORT:
         rows[key] = max((m[key], c) for c, m in data.items()) if "psrr" not in key else min((m[key], c) for c, m in data.items())
     return ok, rows
+
+def meets(m, spec):
+    op, limit = SPECS[spec]
+    return spec in m and (m[spec] >= limit if op == ">=" else m[spec] <= limit)
+
+def montecarlo(paths):
+    runs = [measured(parse(p)) for p in paths]
+    yields = {spec: sum(meets(m, spec) for m in runs) / len(runs) for spec in SPECS}
+    yields["combined"] = sum(all(meets(m, spec) for spec in SPECS) for m in runs) / len(runs)
+    offsets = [m["offset_v"] for m in runs if "offset_v" in m]
+    return yields["combined"] >= YIELD, yields, offsets
 
 def t(f):
     return A0 * BETA / ((1 + 1j * f / P1) * (1 + 1j * f / P2))
@@ -65,6 +78,15 @@ if __name__ == "__main__":
         for k, (g, w, p) in rows.items():
             print(f"{k:8} measured {g:.6g} expected {w:.6g} {'ok' if p else 'MISMATCH'}")
         print("two-pole model matches the arithmetic" if ok else "two-pole model does not match the arithmetic")
+    elif mode == "mc":
+        ok, yields, offsets = montecarlo(paths)
+        for spec, y in yields.items():
+            print(f"{spec:14} yield {y:.1%} of {len(paths)} runs")
+        if offsets:
+            mean = sum(offsets) / len(offsets)
+            sigma = math.sqrt(sum((o - mean) ** 2 for o in offsets) / (len(offsets) - 1))
+            print(f"offset_v       mean {mean:.4g} sigma {sigma:.4g} worst {max(offsets, key=abs):.4g}")
+        print(f"combined yield meets {YIELD:.0%}" if ok else f"combined yield below {YIELD:.0%}")
     else:
         for p in sorted(paths):
             m = measured(parse(p))
@@ -74,5 +96,9 @@ if __name__ == "__main__":
             print(f"{spec:14} worst {value:.4g} at {corner}, spec {op} {limit:g}: {'pass' if passed else 'FAIL'}{' (measurement failed at ' + ', '.join(missing) + ')' if missing else ''}")
         for key in REPORT:
             print(f"{key:14} worst {rows[key][0]:.4g} at {rows[key][1]}")
+        for p in sorted(paths):
+            m, name = measured(parse(p)), Path(p).stem.removeprefix("corner_")
+            if name.endswith(NO_SWING_AT):
+                print(f"swing at 1.08 V, not required: {name} out_low_v={m.get('out_low_v', float('nan')):.4g} out_high_v={m.get('out_high_v', float('nan')):.4g}")
         print("every corner meets every spec" if ok else "some corner misses a spec")
     sys.exit(0 if ok else 1)
