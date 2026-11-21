@@ -1,76 +1,68 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.045 MB sources in 3 modules, into 0.063 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.025 s (elab=0.001, cvt=0.018, bld=0.000); cpu 0.013 s on 1 threads; allocated 22.988 MB
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.262 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_async_fifo_test_async_fifo'
-ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
-python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
-g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o async_fifo
-rm Vtop__ALL.verilator_deplist.tmp
+make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_async_fifo_test_async_fifo'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262681
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264335
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-     0.00ns INFO     cocotb.async_fifo                  r_clk runs 572 ppm off nominal
-  2110.63ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs 920 ppm off nominal
+  2083.84ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 68, in slow_writer_fast_reader
                                                             await traffic(dut, 100, 21, 20000, 1.0, 0.3)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 55, in traffic
                                                             assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 15: got 0x0, expected 0x1d4
-                                                        assert 0 == 468
-  2110.63ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-  2110.63ns INFO     cocotb.async_fifo                  r_clk runs 504 ppm off nominal
-  4301.38ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+                                                        AssertionError: word 15: got 0x0, expected 0x1e6
+                                                        assert 0 == 486
+  2083.84ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+  2083.84ns INFO     cocotb.async_fifo                  r_clk runs -518 ppm off nominal
+  4289.85ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 72, in fast_writer_slow_reader
                                                             await traffic(dut, 21, 100, 20000, 0.9, 1.0)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 55, in traffic
                                                             assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 15: got 0x0, expected 0x14d
-                                                        assert 0 == 333
-  4301.38ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-  4301.38ns INFO     cocotb.async_fifo                  r_clk runs -866 ppm off nominal
-  5699.22ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+                                                        AssertionError: word 15: got 0x0, expected 0xd7
+                                                        assert 0 == 215
+  4289.85ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+  4289.85ns INFO     cocotb.async_fifo                  r_clk runs 280 ppm off nominal
+  6072.00ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 76, in similar_clocks
                                                             await traffic(dut, 37, 41, 40000, 0.6, 0.6)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 55, in traffic
                                                             assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 15: got 0x0, expected 0xe0
-                                                        assert 0 == 224
-  5699.22ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        AssertionError: word 15: got 0x0, expected 0x122
+                                                        assert 0 == 290
+  6072.00ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2110.63           0.00     614632.05  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2190.76           0.00     642753.98  **
-                                                        ** test_async_fifo.similar_clocks            FAIL        1397.84           0.00     632454.33  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2083.84           0.00     754607.39  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2206.01           0.00     749312.27  **
+                                                        ** test_async_fifo.similar_clocks            FAIL        1782.16           0.00     727068.40  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          5699.22           0.01     401505.78  **
+                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          6072.00           0.01     476564.17  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262683
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264337
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-     0.00ns INFO     cocotb.async_fifo                  r_clk runs 688 ppm off nominal
-  2265.18ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs -1000 ppm off nominal
+  2233.86ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 68, in slow_writer_fast_reader
                                                             await traffic(dut, 100, 21, 20000, 1.0, 0.3)
@@ -86,9 +78,9 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  2265.18ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-  2265.18ns INFO     cocotb.async_fifo                  r_clk runs 850 ppm off nominal
-  4501.41ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+  2233.86ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+  2233.86ns INFO     cocotb.async_fifo                  r_clk runs -860 ppm off nominal
+  4404.98ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 72, in fast_writer_slow_reader
                                                             await traffic(dut, 21, 100, 20000, 0.9, 1.0)
@@ -104,9 +96,9 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  4501.41ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-  4501.41ns INFO     cocotb.async_fifo                  r_clk runs 908 ppm off nominal
-  6275.21ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+  4404.98ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+  4404.98ns INFO     cocotb.async_fifo                  r_clk runs 340 ppm off nominal
+  6460.92ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 76, in similar_clocks
                                                             await traffic(dut, 37, 41, 40000, 0.6, 0.6)
@@ -122,18 +114,18 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  6275.21ns INFO     cocotb.regression                  *************************************************************************************************
+  6460.92ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2265.18           0.01     230810.15  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2236.23           0.01     243676.58  **
-                                                        ** test_async_fifo.similar_clocks            FAIL        1773.80           0.01     259871.12  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2233.86           0.02     147019.50  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2171.12           0.01     348948.18  **
+                                                        ** test_async_fifo.similar_clocks            FAIL        2055.94           0.01     392250.13  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          6275.21           0.03     199271.46  **
+                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          6460.92           0.03     207547.89  **
                                                         *************************************************************************************************
 F- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.003 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.457 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.539 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_skid_buffer_test_skid_buffer'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_skid_buffer_test_skid_buffer'
@@ -141,125 +133,117 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_wo
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262684
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264337
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_skid_buffer.random_backpressure (1/3)
-751231.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
-751231.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
-755261.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
-755261.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
-765292.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
-765292.00ns INFO     cocotb.regression                  **********************************************************************************************************
+751171.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
+751171.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
+755201.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
+755201.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
+765232.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
+765232.00ns INFO     cocotb.regression                  **********************************************************************************************************
                                                         ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **********************************************************************************************************
-                                                        ** test_skid_buffer.random_backpressure               PASS      751231.00           1.14     657757.08  **
-                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    2278268.77  **
-                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01    1176091.95  **
+                                                        ** test_skid_buffer.random_backpressure               PASS      751171.00           0.99     756074.16  **
+                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    2235514.51  **
+                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.02     573758.78  **
                                                         **********************************************************************************************************
-                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 765292.00           1.15     662993.42  **
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 765232.00           1.02     753721.14  **
                                                         **********************************************************************************************************
 - :0: Verilog $finish
 .- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.096 MB sources in 6 modules, into 0.095 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.017 s (elab=0.001, cvt=0.009, bld=0.000); cpu 0.013 s on 1 threads; allocated 23.312 MB
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.418 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_fifo_bridge_test_fifo_bridge'
-ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
-python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
-ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
-g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o fifo_bridge
-rm Vtop__ALL.verilator_deplist.tmp
+make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_fifo_bridge_test_fifo_bridge'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262689
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264339
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
- 11250.00ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
+ 13150.00ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 125, in reset_during_traffic
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 130, in reset_during_traffic
                                                             assert got == frame, f"after reset got {len(got)} words, first {got[:3]}, expected the fresh 64-word frame"
-                                                        AssertionError: after reset got 64 words, first [(77, 0), (9, 0), (157, 0)], expected the fresh 64-word frame
-                                                        assert [(77, 0), (9, 0), (157, 0), (10, 0), (168, 0), (174, 0), ...] == [(77, 0), (9, 0), (157, 0), (10, 0), (168, 0), (174, 0), ...]
- 11250.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
-270600.00ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
+                                                        AssertionError: after reset got 64 words, first [(159, 0), (216, 0), (236, 0)], expected the fresh 64-word frame
+                                                        assert [(159, 0), (216, 0), (236, 0), (61, 0), (13, 0), (120, 0), ...] == [(159, 0), (216, 0), (236, 0), (61, 0), (13, 0), (120, 0), ...]
+ 13150.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+272500.00ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 168, in adc_samples_to_cpu
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 173, in adc_samples_to_cpu
                                                             assert await adc_run(dut, 256, 0) == 0, "the ADC lost samples with the CPU always ready"
                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 160, in adc_run
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 165, in adc_run
                                                             assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
                                                         AssertionError: CPU got 256 samples, the bridge accepted 256
-                                                        assert [(177, 0), (138, 0), (99, 0), (62, 0), (31, 0), (10, 0), ...] == [(177, 0), (138, 0), (99, 0), (62, 0), (31, 0), (10, 0), ...]
-270600.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
-333950.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
+                                                        assert [(142, 0), (180, 0), (214, 0), (239, 0), (252, 0), (254, 0), ...] == [(142, 0), (180, 0), (214, 0), (239, 0), (252, 0), (254, 0), ...]
+272500.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+335850.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 175, in cpu_pause_limit
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 180, in cpu_pause_limit
                                                             lost = {pause: await adc_run(dut, 60, pause) for pause in range(14, 23)}
                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 160, in adc_run
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 165, in adc_run
                                                             assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
                                                         AssertionError: CPU got 60 samples, the bridge accepted 60
-                                                        assert [(0, 0), (8, 0), (28, 0), (57, 0), (94, 0), (133, 0), ...] == [(0, 0), (8, 0), (28, 0), (57, 0), (94, 0), (133, 0), ...]
-333950.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
-336270.74ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
+                                                        assert [(9, 0), (29, 0), (59, 0), (96, 0), (135, 0), (174, 0), ...] == [(9, 0), (29, 0), (59, 0), (96, 0), (135, 0), (174, 0), ...]
+335850.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+338121.40ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 182, in adc_clock_to_cpu_clock
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 187, in adc_clock_to_cpu_clock
                                                             await frames(dut, 100, 20, 100, 1.0, 0.5)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 15: got (0, 0), expected (67, False)
-                                                        assert (0, 0) == (67, 0)
-336270.74ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
-340000.83ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+                                                        AssertionError: word 15: got (0, 0), expected (89, False)
+                                                        assert (0, 0) == (89, 0)
+338121.40ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+341309.13ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 186, in fast_source_slow_sink
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 191, in fast_source_slow_sink
                                                             await frames(dut, 20, 100, 100, 0.9, 0.7)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 15: got (0, 0), expected (167, False)
-                                                        assert (0, 0) == (167, 0)
-340000.83ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
-341292.12ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                        AssertionError: word 15: got (0, 0), expected (6, False)
+                                                        assert (0, 0) == (6, 0)
+341309.13ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+342744.27ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 190, in near_equal_clocks
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 195, in near_equal_clocks
                                                             await frames(dut, 37, 41, 200, 0.8, 0.8)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 15: got (0, 0), expected (7, False)
-                                                        assert (0, 0) == (7, 0)
-341292.12ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        AssertionError: word 15: got (0, 0), expected (32, False)
+                                                        assert (0, 0) == (32, 0)
+342744.27ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     FAIL       11250.00           0.01     828968.84  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL      259350.00           0.29     888797.64  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       63350.00           0.07     887084.73  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2320.74           0.01     410667.99  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        3730.09           0.00     773345.43  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1291.29           0.00     376430.91  **
+                                                        ** test_fifo_bridge.reset_during_traffic     FAIL       13150.00           0.01    1006428.98  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL      259350.00           0.25    1020997.35  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       63350.00           0.06    1005102.43  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2271.40           0.00     469920.78  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        3187.73           0.00     759295.98  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1435.14           0.00     399150.18  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                        341292.12           0.40     850554.81  **
+                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                        342744.27           0.35     975470.32  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262690
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264340
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
-  3078.74ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
+  2576.42ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 87, in drain
                                                             got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
@@ -273,10 +257,10 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  3078.74ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
- 19449.85ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
+  2576.42ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+ 18948.65ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 148, in cpu
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 153, in cpu
                                                             got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
                                                                         ^^^^^^^^^^^^^^^^^^^^^^
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 924, in __int__
@@ -288,10 +272,10 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 19449.85ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
- 35839.31ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
+ 18948.65ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+ 35332.22ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 148, in cpu
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 153, in cpu
                                                             got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
                                                                         ^^^^^^^^^^^^^^^^^^^^^^
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 924, in __int__
@@ -303,10 +287,10 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 35839.31ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
- 38123.22ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
+ 35332.22ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+ 37607.16ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 182, in adc_clock_to_cpu_clock
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 187, in adc_clock_to_cpu_clock
                                                             await frames(dut, 100, 20, 100, 1.0, 0.5)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 57, in frames
                                                             word = (1, int(dut.m_tdata.value), int(dut.m_tlast.value))
@@ -320,10 +304,10 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 38123.22ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
- 41048.80ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+ 37607.16ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+ 40763.91ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 186, in fast_source_slow_sink
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 191, in fast_source_slow_sink
                                                             await frames(dut, 20, 100, 100, 0.9, 0.7)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 57, in frames
                                                             word = (1, int(dut.m_tdata.value), int(dut.m_tlast.value))
@@ -337,10 +321,10 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 41048.80ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
- 42269.95ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+ 40763.91ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+ 41869.22ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 190, in near_equal_clocks
+                                                          File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 195, in near_equal_clocks
                                                             await frames(dut, 37, 41, 200, 0.8, 0.8)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 57, in frames
                                                             word = (1, int(dut.m_tdata.value), int(dut.m_tlast.value))
@@ -354,17 +338,17 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 42269.95ns INFO     cocotb.regression                  *************************************************************************************************
+ 41869.22ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     FAIL        3078.74           0.01     227223.75  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL       16371.11           0.07     230207.50  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       16389.45           0.07     235837.58  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2283.91           0.01     172530.56  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        2925.58           0.01     222373.28  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1221.15           0.01     154318.12  **
+                                                        ** test_fifo_bridge.reset_during_traffic     FAIL        2576.42           0.01     311124.43  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL       16372.22           0.05     360115.51  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       16383.58           0.05     328379.44  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2274.94           0.01     246279.86  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        3156.75           0.01     340095.92  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1105.31           0.01     148352.95  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                         42269.95           0.20     210716.44  **
+                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                         41869.22           0.14     301642.76  **
                                                         *************************************************************************************************
 F
 =================================== FAILURES ===================================
@@ -380,7 +364,7 @@ top = 'async_fifo'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Verilator object at 0x7fe19d8f77d0>
+runner = <cocotb_tools.runner.Verilator object at 0x7f49574974d0>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -407,7 +391,7 @@ top = 'async_fifo'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Icarus object at 0x7fe19d6d9100>, results = None
+runner = <cocotb_tools.runner.Icarus object at 0x7f49573c2930>, results = None
 defines = {'METASTABLE': 1}, sim = 'icarus', waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -426,14 +410,14 @@ _______________________________ test_fifo_bridge _______________________________
     def test_fifo_bridge():
 >       run("fifo_bridge", SOURCES, __file__)
 
-tests/test_fifo_bridge.py:193: 
+tests/test_fifo_bridge.py:198: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'fifo_bridge'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user...skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Verilator object at 0x7fe19d76d070>
+runner = <cocotb_tools.runner.Verilator object at 0x7f4957305b20>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -453,14 +437,14 @@ _________________________ test_fifo_bridge_metastable __________________________
     def test_fifo_bridge_metastable():
 >       run("fifo_bridge", SOURCES, __file__, defines={"METASTABLE": 1}, sim="icarus")
 
-tests/test_fifo_bridge.py:196: 
+tests/test_fifo_bridge.py:201: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'fifo_bridge'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user...skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Icarus object at 0x7fe19d76d400>, results = None
+runner = <cocotb_tools.runner.Icarus object at 0x7f4957305f70>, results = None
 defines = {'METASTABLE': 1}, sim = 'icarus', waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -479,4 +463,4 @@ FAILED tests/test_async_fifo.py::test_async_fifo - SystemExit: 1
 FAILED tests/test_async_fifo.py::test_async_fifo_metastable - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge_metastable - SystemExit: 1
-4 failed, 1 passed in 22.38s
+4 failed, 1 passed in 6.57s

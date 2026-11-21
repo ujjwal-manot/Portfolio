@@ -178,7 +178,7 @@
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262585
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264277
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -392,9 +392,9 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_si
 259350.00ns INFO     cocotb.regression                  *********************************************************************************************
                                                         ** TEST                                 STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *********************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu   PASS      259350.00           1.86     139439.22  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu   PASS      259350.00           1.74     148786.91  **
                                                         *********************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                    259350.00           1.86     139390.98  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                    259350.00           1.74     148710.74  **
                                                         *********************************************************************************************
 sdf:15295: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_sim.sdf:15339: TIMINGCHECK not supported.
@@ -580,7 +580,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262589
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264281
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -796,9 +796,9 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_b259350.00ns INFO     cocotb.reg
 259350.00ns INFO     cocotb.regression                  *********************************************************************************************
                                                         ** TEST                                 STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *********************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu   PASS      259350.00           2.25     115308.50  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu   PASS      259350.00           1.84     141317.83  **
                                                         *********************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                    259350.00           2.25     115269.86  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                    259350.00           1.84     141224.97  **
                                                         *********************************************************************************************
 ridge/build/fifo_bridge_typ_sim.sdf:15373: TIMINGCHECK not supported.
 FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_bridge_test_gates_SDF_TYP/fifo_bridge.fst opened for output.
@@ -982,7 +982,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795262592
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795264284
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -1196,13 +1196,13 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_si
 259350.00ns INFO     cocotb.regression                  *********************************************************************************************
                                                         ** TEST                                 STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *********************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu   PASS      259350.00           2.04     127061.25  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu   PASS      259350.00           1.90     136635.20  **
                                                         *********************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                    259350.00           2.04     127027.16  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                    259350.00           1.90     136547.63  **
                                                         *********************************************************************************************
 sdf:15295: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_sim.sdf:15339: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_sim.sdf:15373: TIMINGCHECK not supported.
 FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_bridge_test_gates_FAST_SDF/fifo_bridge.fst opened for output.
 .
-3 passed in 11.30s
+3 passed in 10.82s
