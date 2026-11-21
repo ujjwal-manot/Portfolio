@@ -1,301 +1,60 @@
-.- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.002 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.348 MB
-make: Entering directory '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_cpu'
-make: Nothing to be done for 'default'.
-make: Leaving directory '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_cpu'
+- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
+- Verilator: Built from 0.070 MB sources in 3 modules, into 0.284 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.047 s (elab=0.003, cvt=0.035, bld=0.000); cpu 0.047 s on 1 threads; allocated 27.508 MB
+make: Entering directory '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts'
+ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /foss/tools/verilator/share/verilator/include/verilated_dpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /foss/tools/verilator/share/verilator/include/verilated_vpi.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /foss/tools/verilator/share/verilator/include/verilated_threads.cpp
+python3 /foss/tools/verilator/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__0.cpp Vtop__Dpi.cpp Vtop___024root__Slow.cpp Vtop___024root__0__Slow.cpp Vtop__Syms__Slow.cpp > Vtop__ALL.cpp
+ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+g++ -fuse-ld=mold   -rdynamic verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic -ldl   -o cpu_board
+rm Vtop__ALL.verilator_deplist.tmp
+make: Leaving directory '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277052
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795295061
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  9880.00ns INFO     cocotb.cpu_board                   add: pass, 427 instructions in 491 cycles
-  9880.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  9880.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        9880.00           0.02     411343.83  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               9880.00           0.02     400833.52  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277054
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  4700.00ns INFO     cocotb.cpu_board                   addi: pass, 204 instructions in 232 cycles
-  4700.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  4700.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        4700.00           0.01     548081.75  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               4700.00           0.01     523081.41  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277054
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
- 10280.00ns INFO     cocotb.cpu_board                   and: pass, 447 instructions in 511 cycles
- 10280.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
- 10280.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS       10280.00           0.02     537848.41  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0              10280.00           0.02     525660.95  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277055
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  3820.00ns INFO     cocotb.cpu_board                   andi: pass, 160 instructions in 188 cycles
-  3820.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  3820.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        3820.00           0.01     524021.16  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               3820.00           0.01     478481.49  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277056
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-   540.00ns INFO     cocotb.cpu_board                   auipc: pass, 20 instructions in 24 cycles
-   540.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-   540.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS         540.00           0.00     191774.51  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                540.00           0.00     146852.26  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277057
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  6720.00ns INFO     cocotb.cpu_board                   beq: pass, 253 instructions in 333 cycles
-  6720.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  6720.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        6720.00           0.02     388621.53  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               6720.00           0.02     370694.97  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277058
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  7440.00ns INFO     cocotb.cpu_board                   bge: pass, 271 instructions in 369 cycles
-  7440.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  7440.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        7440.00           0.02     343663.29  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               7440.00           0.02     328717.75  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277059
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  7940.00ns INFO     cocotb.cpu_board                   bgeu: pass, 296 instructions in 394 cycles
-  7940.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  7940.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        7940.00           0.01     613990.32  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               7940.00           0.01     596241.04  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277059
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  6720.00ns INFO     cocotb.cpu_board                   blt: pass, 253 instructions in 333 cycles
-  6720.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  6720.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        6720.00           0.01     587061.02  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               6720.00           0.01     568419.52  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277060
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  7220.00ns INFO     cocotb.cpu_board                   bltu: pass, 278 instructions in 358 cycles
-  7220.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  7220.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        7220.00           0.02     409318.14  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               7220.00           0.02     395897.15  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277061
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  6800.00ns INFO     cocotb.cpu_board                   bne: pass, 253 instructions in 337 cycles
-  6800.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  6800.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        6800.00           0.02     452528.95  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               6800.00           0.02     436819.57  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277062
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-   560.00ns INFO     cocotb.cpu_board                   jal: pass, 17 instructions in 25 cycles
-   560.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-   560.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS         560.00           0.00     250165.29  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                560.00           0.00     202497.88  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277062
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  2280.00ns INFO     cocotb.cpu_board                   jalr: pass, 77 instructions in 111 cycles
-  2280.00ns INFO     cocotb.regression                  test_cpu.lockstep passed
-  2280.00ns INFO     cocotb.regression                  **************************************************************************************
-                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
-                                                        **************************************************************************************
-                                                        ** test_cpu.lockstep              PASS        2280.00           0.00     555064.06  **
-                                                        **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               2280.00           0.00     502158.95  **
-                                                        **************************************************************************************
-- :0: Verilog $finish
-.     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
-     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795277063
-     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
-     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
-     0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_cpu.lockstep (1/1)
-  1420.00ns WARNING  cocotb.regression                  test_cpu.lockstep failed
+     0.00ns INFO     cocotb.regression                  running test_interrupts.interrupts (1/1)
+   220.00ns WARNING  cocotb.regression                  test_interrupts.interrupts failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/test_cpu.py", line 40, in lockstep
+                                                          File "/home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/test_interrupts.py", line 47, in interrupts
+                                                            retired = check(dut, model, retired, "interrupts")
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                          File "/home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/lockstep.py", line 27, in check
                                                             assert got == want, f"{name} instruction {retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in want]}"
-                                                        AssertionError: lb instruction 65: cpu ['0x104', '0x70313', '0x6', '0xf'], model ['0x104', '0x70313', '0x6', '0xfffffff0']
-                                                        assert (260, 459539, 6, 15) == (260, 459539, 6, 4294967280)
-  1420.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        AssertionError: interrupts instruction 5: cpu ['0x14', '0x12c28293', '0x5', '0x1a0'], model ['0x14', '0x12c28293', '0x5', '0x133']
+                                                        assert (20, 314737299, 5, 416) == (20, 314737299, 5, 307)
+   220.00ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test_cpu.lockstep              FAIL        1420.00           0.00     436867.83  **
+                                                        ** test_interrupts.interrupts     FAIL         220.00           0.00     107939.91  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0               1420.00           0.00     324798.30  **
+                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0                220.00           0.00      51935.42  **
                                                         **************************************************************************************
 - :0: Verilog $finish
 F
 =================================== FAILURES ===================================
-_______________________________ test_rv32ui[lb] ________________________________
+_______________________________ test_interrupts ________________________________
 
-runner = <cocotb_tools.runner.Verilator object at 0x7f839e79e210>, name = 'lb'
+    def test_interrupts():
+>       run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])
 
-    @pytest.mark.parametrize("name", NAMES)
-    def test_rv32ui(runner, name):
-        os.environ["PROGRAM"] = name
->       run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(name)}"], runner=runner, results=str(BUILD / f"{name}.result.xml"))
-
-tests/test_cpu.py:59: 
+tests/test_interrupts.py:63: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'cpu_board'
 sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/no_load_use_stall/design/cpu.sv'), PosixPath('/home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/cpu_board.sv')]
-test_file = '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/test_cpu.py'
+test_file = '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/test_interrupts.py'
 parameters = {}
-plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/rv32ui/lb.hex']
-runner = <cocotb_tools.runner.Verilator object at 0x7f839e79e210>
-results = '/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/lb.result.xml'
-defines = {}, sim = None, waves = False, build_args = []
+plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/interrupts.hex']
+runner = <cocotb_tools.runner.Verilator object at 0x7fc03d107530>
+results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
         runner = runner or build(top, sources, test_file, parameters, defines, sim, waves, build_args)
@@ -305,9 +64,11 @@ E       SystemExit: 1
 
 ../../../../helpers/cocotb_run.py:16: SystemExit
 ------------------------------ Captured log call -------------------------------
-INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_cpu/cpu_board +program=/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/rv32ui/lb.hex in directory /home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests
+INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts --top-module cpu_board --vpi --public-flat-rw --prefix Vtop -o cpu_board -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/cpu/build/no_load_use_stall/design/cpu.sv /home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests/cpu_board.sv in directory /home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts
+INFO     Verilator:runner.py:734 Running command make -j 4 -C /home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts -f Vtop.mk VM_TRACE=0 in directory /home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts
+INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/verilator_cpu_board_test_interrupts/cpu_board +program=/home/user/Portfolio/projects/cpu/build/no_load_use_stall/build/interrupts.hex in directory /home/user/Portfolio/projects/cpu/build/no_load_use_stall/tests
 ERROR    Verilator:runner.py:674 ERROR: Failed 1 of 1 tests.
 =========================== short test summary info ============================
-FAILED tests/test_cpu.py::test_rv32ui[lb] - SystemExit: 1
+FAILED tests/test_interrupts.py::test_interrupts - SystemExit: 1
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-1 failed, 14 passed in 12.47s
+1 failed in 8.75s

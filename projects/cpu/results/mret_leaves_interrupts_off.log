@@ -1,0 +1,62 @@
+- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.383 MB
+make: Entering directory '/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts'
+make: Nothing to be done for 'default'.
+make: Leaving directory '/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795295017
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running test_interrupts.interrupts (1/1)
+2000040.00ns WARNING  cocotb.regression                  test_interrupts.interrupts failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/tests/test_interrupts.py", line 56, in interrupts
+                                                            raise AssertionError("firmware never finished")
+                                                        AssertionError: firmware never finished
+2000040.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** test_interrupts.interrupts     FAIL     2000040.00           6.19     323326.21  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0            2000040.00           6.19     323227.26  **
+                                                        **************************************************************************************
+- :0: Verilog $finish
+F
+=================================== FAILURES ===================================
+_______________________________ test_interrupts ________________________________
+
+    def test_interrupts():
+>       run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])
+
+tests/test_interrupts.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+top = 'cpu_board'
+sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/design/cpu.sv'), PosixPath('/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/tests/cpu_board.sv')]
+test_file = '/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/tests/test_interrupts.py'
+parameters = {}
+plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/interrupts.hex']
+runner = <cocotb_tools.runner.Verilator object at 0x7f751a92ec90>
+results = None, defines = {}, sim = None, waves = False, build_args = []
+
+    def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
+        runner = runner or build(top, sources, test_file, parameters, defines, sim, waves, build_args)
+>       runner.test(test_module=Path(test_file).stem, hdl_toplevel=top, test_dir=Path(test_file).parent, parameters=parameters,
+                    plusargs=plusargs, results_xml=results, waves=waves, extra_env={k: str(v) for k, v in defines.items()})
+E       SystemExit: 1
+
+../../../../helpers/cocotb_run.py:16: SystemExit
+------------------------------ Captured log call -------------------------------
+INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts --top-module cpu_board --vpi --public-flat-rw --prefix Vtop -o cpu_board -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/design/cpu.sv /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/tests/cpu_board.sv in directory /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts
+INFO     Verilator:runner.py:734 Running command make -j 4 -C /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts -f Vtop.mk VM_TRACE=0 in directory /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts
+INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/verilator_cpu_board_test_interrupts/cpu_board +program=/home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/build/interrupts.hex in directory /home/user/Portfolio/projects/cpu/build/mret_leaves_interrupts_off/tests
+ERROR    Verilator:runner.py:674 ERROR: Failed 1 of 1 tests.
+=========================== short test summary info ============================
+FAILED tests/test_interrupts.py::test_interrupts - SystemExit: 1
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 8.40s
