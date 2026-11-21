@@ -1,0 +1,13 @@
+# build outputs
+sim_build/
+build/
+runs/
+__pycache__/
+*.pyc
+node_modules/
+ui/dist/
+# large waveforms (small raw logs under results/ ARE committed)
+*.vcd
+*.fst
+*.fsdb
+.spiceinit
