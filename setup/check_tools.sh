@@ -12,6 +12,9 @@ for f in libs.tech/ngspice/models/cornerMOSlv.lib libs.tech/ngspice/osdi/psp103.
          libs.ref/sg13g2_stdcell/verilog/sg13g2_udp.v libs.tech/magic/ihp-sg13g2.magicrc; do
   [ -f "$p/$f" ] || { echo "MISSING file: $p/$f"; missing=1; }
 done
+for d in $(awk '/<<.EOF.$/ {f = 1; next} /^EOF$/ {f = 0} f {print $1}' "$(dirname "$0")/get_tools.sh"); do
+  [ -d "$(dirname "$0")/../third_party/$d" ] || { echo "MISSING extra: third_party/$d (run make tools)"; missing=1; }
+done
 [ $missing = 0 ] || exit 1
 echo "image $IIC_OSIC_TOOLS_VERSION, pdk $p ($(cat $p/COMMIT 2>/dev/null))"
 ngspice -v 2>&1 | grep -m1 -o 'ngspice-[0-9]*'
@@ -29,4 +32,5 @@ netgen -batch quit </dev/null 2>&1 | grep -m1 Netgen
 timeout 10 xschem -x -q --version </dev/null 2>&1 | head -1
 riscv64-unknown-elf-gcc --version | head -1
 spike --help 2>&1 | head -1
+echo "extras: $(ls "$(dirname "$0")/../third_party" | grep -vc tar.xz) in third_party/"
 python3 -c "import cocotb, pyuvm, numpy, scipy; print('cocotb', cocotb.__version__, 'pyuvm', pyuvm.__version__, 'numpy', numpy.__version__, 'scipy', scipy.__version__)"

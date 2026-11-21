@@ -14,4 +14,5 @@ Netgen 1.5.324 compiled on Thu Oct 15 02:24:51 PM CEST 2026
 XSCHEM V3.4.8RC
 riscv64-unknown-elf-gcc () 16.1.0
 Spike RISC-V ISA Simulator 1.1.1-dev
+extras: 21 in third_party/
 cocotb 2.1.0 pyuvm 5.0.0 numpy 2.5.4 scipy 1.18.1

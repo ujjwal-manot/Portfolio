@@ -1,5 +1,5 @@
 #!/bin/bash
-# Fetches every pinned extra from plan.md into third_party/ at its exact tag or commit (skipping ones already there at that pin), and stops on any that cannot be fetched.
+# Fetches every pinned extra from plan.md into third_party/ at its exact tag or commit, and the two binary releases checked against the SHA-256 recorded on their first download; stops on anything that cannot be fetched or does not match.
 set -eo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p third_party
@@ -29,12 +29,13 @@ openfpgaloader https://github.com/trabucayre/openFPGALoader v1.2.0
 libopencm3 https://github.com/libopencm3/libopencm3 a3977e14519e
 openocd https://github.com/openocd-org/openocd v0.12.0
 EOF
-while read -r name url; do
+while read -r name sum url; do
   f=third_party/$(basename "$url")
-  [ -f "$f" ] || curl -fsSL -o "$f.part" "$url" && { [ -f "$f" ] || mv "$f.part" "$f"; }
-  [ -d "third_party/$name" ] || { mkdir -p "third_party/$name" && tar -xJf "$f" -C "third_party/$name" --strip-components=1; }
-  echo "$name $(basename "$url") sha256 $(sha256sum "$f" | cut -c1-64)"
+  [ -f "$f" ] || { curl -fsSL -o "$f.part" "$url"; mv "$f.part" "$f"; }
+  echo "$sum  $f" | sha256sum -c --quiet
+  [ -d "third_party/$name" ] || { mkdir -p "third_party/$name"; tar -xJf "$f" -C "third_party/$name" --strip-components=1; }
+  echo "$name $(basename "$url") sha256 ok"
 done <<'EOF'
-arm-gnu-toolchain https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz
-node https://nodejs.org/dist/v24.11.1/node-v24.11.1-linux-x64.tar.xz
+arm-gnu-toolchain 8f6903f8ceb084d9227b9ef991490413014d991874a1e34074443c2a72b14dbd https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz
+node 60e3b0a8500819514aca603487c254298cd776de0698d3cd08f11dba5b8289a8 https://nodejs.org/dist/v24.11.1/node-v24.11.1-linux-x64.tar.xz
 EOF

@@ -379,14 +379,13 @@ Each project README ends with "things to try": three changes to make yourself. L
 
 Work goes in rounds. Each round finishes one project in every track, so the split stays at a third each. A project is finished when all of its files pass, its three broken copies are caught, its signoff checks are logged, the honesty check passes, and it is committed.
 
-0. Done: setup, helpers, honesty check, tracking, `chip.md`; cpu tests, timing and broken copies.
-1. `make tools`: fetch and check every pinned extra; replace `decide.py` with `balance.py`.
-2. Round 1: fifo_bridge (digital), transistor charts and opamp (analog), adc (AMS).
-3. Round 2: cpu upgrades and layout (digital), bandgap_ldo (analog), power_manager (AMS).
-4. Round 3: whole_chip, console, compare_with_papers.
-5. Round 4: tensor_core (digital), serdes_frontend (analog), serdes_link (AMS).
-6. Round 5: coherent_noc (digital), lc_vco (analog), frac_n_pll (AMS).
-7. Hardware, Tiny Tapeout preparation, and a fresh-clone check that every result reproduces.
+0. Done: setup, helpers, honesty check, tracking, `chip.md`; cpu tests, timing and broken copies; `make tools` (all 21 pinned extras fetched and checked) and `balance.py`.
+1. Round 1: fifo_bridge (digital), transistor charts and opamp (analog), adc (AMS).
+2. Round 2: cpu upgrades and layout (digital), bandgap_ldo (analog), power_manager (AMS).
+3. Round 3: whole_chip, console, compare_with_papers.
+4. Round 4: tensor_core (digital), serdes_frontend (analog), serdes_link (AMS).
+5. Round 5: coherent_noc (digital), lc_vco (analog), frac_n_pll (AMS).
+6. Hardware, Tiny Tapeout preparation, and a fresh-clone check that every result reproduces.
 
 ## Risks
 

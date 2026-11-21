@@ -1,8 +1,11 @@
-# Top-level commands: make check_tools | self_test | all | honesty | balance | compare | console
+# Top-level commands: make tools | check_tools | self_test | all | honesty | balance | compare | console
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 RUN := setup/run.sh
 PROJECTS := $(wildcard projects/*)
+
+tools:
+	bash setup/get_tools.sh
 
 check_tools:
 	$(RUN) setup/check_tools.sh | tee setup/tools_found.txt
@@ -26,4 +29,4 @@ compare:
 console:
 	$(MAKE) -C console
 
-.PHONY: check_tools self_test all honesty balance compare console
+.PHONY: tools check_tools self_test all honesty balance compare console
