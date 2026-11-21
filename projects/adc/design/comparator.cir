@@ -1,0 +1,28 @@
+* StrongARM latch comparator on IHP SG13G2 low-voltage devices: resets (all four internal nodes pulled to vdd) while clk is low, decides while clk is high, and two inverters (equal load on both latch nodes whatever the last decision was) drive a NOR SR latch that holds the decision through the next reset, so outp high means inp was above inn at the last rising clk; every device carries mm_ok={mm} so Monte Carlo runs can switch on local mismatch; sizes come from the w_/l_ parameters in comparator_sizes.inc.
+.subckt comparator inp inn clk outp outn vdd vss
+XMT t clk vss vss sg13_lv_nmos w={w_tail} l={l_min} mm_ok={mm}
+XM1 dn inp t vss sg13_lv_nmos w={w_in} l={l_in} ng={ng_in} mm_ok={mm}
+XM2 dp inn t vss sg13_lv_nmos w={w_in} l={l_in} ng={ng_in} mm_ok={mm}
+XM3 an ap dn vss sg13_lv_nmos w={w_nx} l={l_min} mm_ok={mm}
+XM4 ap an dp vss sg13_lv_nmos w={w_nx} l={l_min} mm_ok={mm}
+XM5 an ap vdd vdd sg13_lv_pmos w={w_px} l={l_min} mm_ok={mm}
+XM6 ap an vdd vdd sg13_lv_pmos w={w_px} l={l_min} mm_ok={mm}
+XR1 an clk vdd vdd sg13_lv_pmos w={w_rst} l={l_min} mm_ok={mm}
+XR2 ap clk vdd vdd sg13_lv_pmos w={w_rst} l={l_min} mm_ok={mm}
+XR3 dn clk vdd vdd sg13_lv_pmos w={w_rst} l={l_min} mm_ok={mm}
+XR4 dp clk vdd vdd sg13_lv_pmos w={w_rst} l={l_min} mm_ok={mm}
+XIN bn an vdd vss inv
+XIP bp ap vdd vss inv
+XLP outp bp outn vdd vss nor2
+XLN outn bn outp vdd vss nor2
+.ends comparator
+.subckt inv y a vdd vss
+XP y a vdd vdd sg13_lv_pmos w={w_gate_p} l={l_min} mm_ok={mm}
+XN y a vss vss sg13_lv_nmos w={w_gate_n} l={l_min} mm_ok={mm}
+.ends inv
+.subckt nor2 y a b vdd vss
+XPA m a vdd vdd sg13_lv_pmos w={w_gate_p} l={l_min} mm_ok={mm}
+XPB y b m vdd sg13_lv_pmos w={w_gate_p} l={l_min} mm_ok={mm}
+XNA y a vss vss sg13_lv_nmos w={w_gate_n} l={l_min} mm_ok={mm}
+XNB y b vss vss sg13_lv_nmos w={w_gate_n} l={l_min} mm_ok={mm}
+.ends nor2

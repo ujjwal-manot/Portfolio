@@ -1,0 +1,32 @@
+* Clocks the comparator at 50 MHz with differential inputs of 10 mV down to 1 uV around 0.6 V, both signs, and writes the time from the clk rising edge to the losing internal latch node falling through half supply, and the latched outp level, for each to decide.txt; corner, temperature and supply come from corner.inc.
+.include corner.inc
+.include comparator_sizes.inc
+.include dut.cir
+VDD vdd 0 {vsupply}
+VH half 0 {vsupply/2}
+VCLK clk 0 pulse(0 {vsupply} 5n 50p 50p 9.95n 20n)
+VP inp 0 0.6
+VN inn 0 0.6
+XC inp inn clk outp outn vdd 0 comparator
+CLP outp 0 5f
+CLN outn 0 5f
+.control
+echo "dv_v t_decide_s outp_v" > decide.txt
+foreach d 10e-3 1e-3 100e-6 10e-6 1e-6 -1e-6 -10e-6 -100e-6 -1e-3 -10e-3
+  let up = 0.6 + $d / 2
+  let down = 0.6 - $d / 2
+  alter VP dc = up
+  alter VN dc = down
+  tran 5p 40n
+  meas tran tc when v(clk)=v(half) rise=2
+  if $d > 0
+    meas tran td when v(xc.an)=v(half) fall=1 td=25n
+  else
+    meas tran td when v(xc.ap)=v(half) fall=1 td=25n
+  end
+  meas tran op find v(outp) at=39n
+  let dt = td - tc
+  echo "$d $&dt $&op" >> decide.txt
+end
+.endc
+.end

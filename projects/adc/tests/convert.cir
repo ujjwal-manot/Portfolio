@@ -1,0 +1,30 @@
+* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), and writes time, m_tvalid, the eight m_tdata bits, samp and vin every 50 ns to convert.txt; corner, temperature, supply and mismatch come from corner.inc.
+.include corner.inc
+.include tone.inc
+.include comparator_sizes.inc
+.include cap_dac_sizes.inc
+.include comparator.cir
+.include cap_dac.cir
+.option interp
+VDD vdd 0 {vsupply}
+VHI vref_hi 0 1.0
+VLO vref_lo 0 0.2
+VCM vcm 0 0.6
+VIN vin 0 sin(0.6 {0.4 * 10 ** (-0.5 / 20)} {k_tone * 1e6 / n_samples} 0 0 0)
+VCLK clk 0 pulse(0 {vsupply} 50n 50p 50p 49.95n 100n)
+VRST rst 0 pwl(0 0 250n 0 251n {vsupply})
+VRDY rdy 0 {vsupply}
+AIN [clk rst cmp rdy] [dclk drst dcmp drdy] tobits
+.model tobits adc_bridge(in_low={vsupply / 3} in_high={2 * vsupply / 3})
+ASAR [dclk drst dcmp drdy] [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dvalid t7 t6 t5 t4 t3 t2 t1 t0 dlast dovf] null sar
+.model sar d_cosim simulation="./sar_logic.so"
+AOUT [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dvalid t7 t6 t5 t4 t3 t2 t1 t0] [samp cclk a7 a6 a5 a4 a3 a2 a1 a0 valid b7 b6 b5 b4 b3 b2 b1 b0] tovolts
+.model tovolts dac_bridge(out_low=0 out_high={vsupply} t_rise=50p t_fall=50p)
+XDAC top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 vdd 0 cap_dac
+XCMP vcm top cclk cmp cmpn vdd 0 comparator
+.tran 50n {(n_samples + 3) * 1u + 300n}
+.control
+run
+wrdata convert.txt v(valid) v(b7) v(b6) v(b5) v(b4) v(b3) v(b2) v(b1) v(b0) v(samp) v(vin)
+.endc
+.end

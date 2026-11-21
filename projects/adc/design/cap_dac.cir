@@ -1,0 +1,106 @@
+* 8-bit charge-redistribution DAC with bottom-plate sampling on IHP SG13G2: 256 unit MIM capacitors of 2.26 um square (7.95 fF from the PDK's 1.5 fF/um2 plus 40 aF/um edge), each its own instance so each draws its own mismatch, grouped 128, 64 ... 1 plus one dummy unit; while samp is high the top plate is held at vcm and every bottom plate follows vin through a transmission gate, the bottom plates letting go about 0.2 ns after the top plate (four inverters) so the sampled charge does not depend on vin; afterwards bottom plate k goes to vref_hi when dk is 1 and to vref_lo when it is 0, and the dummy always to vref_lo; every device carries mm_ok={mm}; switch widths come from w_sw_* in cap_dac_sizes.inc.
+.subckt cap_dac top vin vcm vref_hi vref_lo samp d7 d6 d5 d4 d3 d2 d1 d0 vdd vss
+XS1 s1 samp vdd vss dinv
+XS2 s2 s1 vdd vss dinv
+XS3 s3 s2 vdd vss dinv
+XS4 sl s3 vdd vss dinv
+XSB sb samp vdd vss dinv
+XLB slb sl vdd vss dinv
+XTOP top vcm samp sb vdd vss tgate w={w_sw_top}
+XB7 top vin vref_hi vref_lo sl slb d7 vdd vss dacbit7
+XB6 top vin vref_hi vref_lo sl slb d6 vdd vss dacbit6
+XB5 top vin vref_hi vref_lo sl slb d5 vdd vss dacbit5
+XB4 top vin vref_hi vref_lo sl slb d4 vdd vss dacbit4
+XB3 top vin vref_hi vref_lo sl slb d3 vdd vss dacbit3
+XB2 top vin vref_hi vref_lo sl slb d2 vdd vss dacbit2
+XB1 top vin vref_hi vref_lo sl slb d1 vdd vss dacbit1
+XB0 top vin vref_hi vref_lo sl slb d0 vdd vss dacbit0
+XBD top vin vref_hi vref_lo sl slb vss vdd vss dacbit0
+.ends cap_dac
+.subckt dacbit7 top vin hi lo sl slb d vdd vss
+XU top b u128
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_7}
+.ends dacbit7
+.subckt dacbit6 top vin hi lo sl slb d vdd vss
+XU top b u64
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_6}
+.ends dacbit6
+.subckt dacbit5 top vin hi lo sl slb d vdd vss
+XU top b u32
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_5}
+.ends dacbit5
+.subckt dacbit4 top vin hi lo sl slb d vdd vss
+XU top b u16
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_4}
+.ends dacbit4
+.subckt dacbit3 top vin hi lo sl slb d vdd vss
+XU top b u8
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_small}
+.ends dacbit3
+.subckt dacbit2 top vin hi lo sl slb d vdd vss
+XU top b u4
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_small}
+.ends dacbit2
+.subckt dacbit1 top vin hi lo sl slb d vdd vss
+XU top b u2
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_small}
+.ends dacbit1
+.subckt dacbit0 top vin hi lo sl slb d vdd vss
+XU top b u1
+XSW b vin hi lo sl slb d vdd vss switches w={w_sw_small}
+.ends dacbit0
+.subckt switches b vin hi lo sl slb d vdd vss w=1u
+XDB db d vdd vss dinv
+XHN hn sl db vdd vss dnor
+XLN ln sl d vdd vss dnor
+XHB hb hn vdd vss dinv
+XLB lb ln vdd vss dinv
+XIN b vin sl slb vdd vss tgate w={w}
+XHI b hi hn hb vdd vss tgate w={w}
+XLO b lo ln lb vdd vss tgate w={w}
+.ends switches
+.subckt tgate a b on off vdd vss w=1u
+XN a on b vss sg13_lv_nmos w={w} l={l_sw} mm_ok={mm}
+XP a off b vdd sg13_lv_pmos w={2*w} l={l_sw} mm_ok={mm}
+.ends tgate
+.subckt dinv y a vdd vss
+XP y a vdd vdd sg13_lv_pmos w={w_logic_p} l={l_sw} mm_ok={mm}
+XN y a vss vss sg13_lv_nmos w={w_logic_n} l={l_sw} mm_ok={mm}
+.ends dinv
+.subckt dnor y a b vdd vss
+XPA m a vdd vdd sg13_lv_pmos w={2*w_logic_p} l={l_sw} mm_ok={mm}
+XPB y b m vdd sg13_lv_pmos w={2*w_logic_p} l={l_sw} mm_ok={mm}
+XNA y a vss vss sg13_lv_nmos w={w_logic_n} l={l_sw} mm_ok={mm}
+XNB y b vss vss sg13_lv_nmos w={w_logic_n} l={l_sw} mm_ok={mm}
+.ends dnor
+.subckt u1 t b
+XC t b cap_cmim w={w_unit} l={w_unit} mm_ok={mm}
+.ends u1
+.subckt u2 t b
+XA t b u1
+XB t b u1
+.ends u2
+.subckt u4 t b
+XA t b u2
+XB t b u2
+.ends u4
+.subckt u8 t b
+XA t b u4
+XB t b u4
+.ends u8
+.subckt u16 t b
+XA t b u8
+XB t b u8
+.ends u16
+.subckt u32 t b
+XA t b u16
+XB t b u16
+.ends u32
+.subckt u64 t b
+XA t b u32
+XB t b u32
+.ends u64
+.subckt u128 t b
+XA t b u64
+XB t b u64
+.ends u128
