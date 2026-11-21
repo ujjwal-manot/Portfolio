@@ -1,4 +1,5 @@
-# Sends 64-sample frames through fifo_bridge in both clock directions and checks data, tlast and AXI-Stream stability.
+# Sends 64-sample frames through fifo_bridge in both clock directions, with and without metastability injection, and checks reset, data, tlast and AXI-Stream stability.
+import os
 import random
 from collections import deque
 from pathlib import Path
@@ -8,14 +9,17 @@ from cocotb.triggers import FallingEdge, Timer
 from cocotb_run import run
 
 DESIGN = Path(__file__).resolve().parents[1] / "design"
+METASTABLE = os.getenv("METASTABLE") == "1"
+SOURCES = [DESIGN / f for f in ("sync2.sv", "reset_sync.sv", "async_fifo.sv", "skid_buffer.sv", "fifo_bridge.sv")]
 
 async def frames(dut, s_period, m_period, count, s_rate, m_rate):
     cocotb.start_soon(Clock(dut.s_clk, s_period, "ns").start())
     cocotb.start_soon(Clock(dut.m_clk, m_period, "ns").start())
     dut.s_tvalid.value = dut.m_tready.value = 0
-    dut.s_rst_n.value = dut.m_rst_n.value = 0
-    await Timer(3 * max(s_period, m_period), "ns")
-    dut.s_rst_n.value = dut.m_rst_n.value = 1
+    dut.rst_n.value = 0
+    await Timer(3 * max(s_period, m_period) + 7, "ns")
+    assert not dut.s_tready.value and not dut.m_tvalid.value, "bridge handshakes while in reset"
+    dut.rst_n.value = 1
     words = [(random.getrandbits(8), i % 64 == 63) for i in range(64 * count)]
     expected = deque()
 
@@ -60,6 +64,10 @@ async def frames(dut, s_period, m_period, count, s_rate, m_rate):
     await Timer(10 * max(s_period, m_period), "ns")
     assert not expected and not dut.m_tvalid.value, "words left inside the bridge"
     assert stalled > 0, "m_tready never stalled a valid word, so stability was not tested"
+    if METASTABLE:
+        late = int(dut.fifo.w_to_r.late_bits.value) + int(dut.fifo.r_to_w.late_bits.value)
+        dut._log.info(f"metastability injection delayed {late} pointer bits")
+        assert late > 0, "injection never delayed a bit, so it was not tested"
 
 @cocotb.test()
 async def adc_clock_to_cpu_clock(dut):
@@ -74,4 +82,7 @@ async def near_equal_clocks(dut):
     await frames(dut, 37, 41, 200, 0.8, 0.8)
 
 def test_fifo_bridge():
-    run("fifo_bridge", [DESIGN / f for f in ("async_fifo.sv", "skid_buffer.sv", "fifo_bridge.sv")], __file__)
+    run("fifo_bridge", SOURCES, __file__)
+
+def test_fifo_bridge_metastable():
+    run("fifo_bridge", SOURCES, __file__, defines={"METASTABLE": 1})
