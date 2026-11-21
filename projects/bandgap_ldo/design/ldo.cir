@@ -1,0 +1,14 @@
+* LDO without an external capacitor making vref (1.2 V) from the 3.3 V supply on IHP SG13G2 thick-oxide devices: an NMOS source follower is the pass device (its own source feedback bootstraps most of its gate capacitance and keeps the output impedance low), driven directly by an NMOS-input error amplifier whose PMOS load lets the gate reach the 2.5 V it needs at 20 mA; a high output simply turns the follower off, so the loop cannot latch; a small NMOS bleed keeps the follower on at no load, a capacitor from the output to the amplifier mirror node lets a dip pull the PMOS load harder onto the gate, and an on-chip MIM capacitor decouples the output; bias currents are copies of the bandgap's PTAT branch through vg; every device carries mm_ok={mm}, sizes come from ldo_sizes.inc.
+.subckt ldo vout fb vref vg vdd vss
+XPB nb vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m={m_bias} mm_ok={mm}
+XNB nb nb vss vss sg13_hv_nmos w={w_nb} l={l_nb} m=1 mm_ok={mm}
+XBL vout nb vss vss sg13_hv_nmos w={w_nb} l={l_nb} m={m_bleed} mm_ok={mm}
+XT t nb vss vss sg13_hv_nmos w={w_nb} l={l_nb} m={m_amp} mm_ok={mm}
+XE1 d vref t vss sg13_hv_nmos w={w_ein} l={l_ein} mm_ok={mm}
+XE2 g fb t vss sg13_hv_nmos w={w_ein} l={l_ein} mm_ok={mm}
+XE3 d d vdd vdd sg13_hv_pmos w={w_eld} l={l_eld} mm_ok={mm}
+XE4 g d vdd vdd sg13_hv_pmos w={w_eld} l={l_eld} mm_ok={mm}
+XN vdd g vout vss sg13_hv_nmos w={w_pass} l={l_pass} ng={ng_pass} mm_ok={mm}
+XCL vout vss cap_cmim w={w_cl} l={w_cl} mm_ok={mm}
+XCF vout d cap_cmim w={w_cf} l={w_cf} mm_ok={mm}
+.ends ldo

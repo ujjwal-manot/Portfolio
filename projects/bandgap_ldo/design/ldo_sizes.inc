@@ -1,0 +1,2 @@
+* LDO sizes: the bias branch copies the bandgap branch (m_bias), NMOS mirrors scale it for the bleed (m_bleed) and the amplifier tail (m_amp); the pass follower carries 20 mA at about 2.45 V on its gate; the output capacitor is 100 pF of MIM, and w_cf sizes the capacitor from the output to the amplifier mirror node that speeds the gate up on a step.
+.param m_bias=1 m_bleed=6 m_amp=4 w_nb=4u l_nb=4u w_ein=20u l_ein=2u w_eld=8u l_eld=4u w_pass=600u l_pass=0.45u ng_pass=60 w_cl=258u w_cf=37u

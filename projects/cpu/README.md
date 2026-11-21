@@ -49,7 +49,7 @@ Each copy below has one bug put in on purpose and must fail with the message on 
 | no forwarding from MEM | lockstep mismatch | `results/no_forwarding_from_mem.log` |
 | no load-use stall | lockstep mismatch | `results/no_load_use_stall.log` |
 | mepc points past the trapped instruction | lockstep mismatch | `results/mepc_skips_trapped_instruction.log` |
-| interrupts taken with mstatus.MIE clear | the core took an interrupt the model has disabled | `results/interrupt_ignores_global_enable.log` |
+| interrupts taken with mstatus.MIE clear | the core took an interrupt when the model had none due | `results/interrupt_ignores_global_enable.log` |
 | mret leaves MIE clear | an interrupt was due but the core retired an instruction | `results/mret_leaves_interrupts_off.log` |
 | interrupt priority inverted | the core took the timer interrupt while the model had the external one due | `results/interrupt_priority_inverted.log` |
 | mip reads with MEIP and MTIP swapped | lockstep mismatch on the handler's mip read | `results/mip_bits_swapped.log` |
