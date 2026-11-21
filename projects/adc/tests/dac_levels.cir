@@ -1,4 +1,4 @@
-* Measures the capacitor DAC's level error at every code the way a conversion sees it: for each of the 256 codes (eight pulse sources, each with twice the period of the last, count in binary, 300 ns per code) vin is set to that code's ideal level, sampled for 150 ns, then the bottom plates switch to the code, and the top plate's distance from vcm at the end of the step, which is the DAC's error at that code (measured near vcm, as the comparator sees it), is written to dac_levels.txt, with the operating point solved in the sampling phase (samp high, so the top plate starts held at vcm instead of floating behind off switches, which fails to converge at the ff corner), solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
+* Measures the capacitor DAC's level error at every code the way a conversion sees it: for each of the 256 codes (eight pulse sources, each with twice the period of the last, count in binary, 300 ns per code) vin is set to that code's ideal level, sampled for 150 ns, then the bottom plates switch to the code, and the top plate's distance from vcm at the end of the step, which is the DAC's error at that code (measured near vcm, as the comparator sees it), is written to dac_levels.txt, starting without an operating point (uic: at the ff corner the floating top plate makes the operating point fail at this tolerance, and the first 150 ns sample sets every plate's charge anyway; at tt the levels match an operating-point start to 0.6 uV), solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
 .include corner.inc
 .option reltol=1e-5 vntol=1e-8
 .include cap_dac_sizes.inc
@@ -8,7 +8,7 @@ VDD vdd 0 {vsupply}
 VHI vref_hi 0 1.0
 VLO vref_lo 0 0.2
 VCM vcm 0 0.6
-VSAMP samp 0 dc {vsupply} pulse(0 {vsupply} {t0} 50p 50p {dwell / 2} {dwell})
+VSAMP samp 0 pulse(0 {vsupply} {t0} 50p 50p {dwell / 2} {dwell})
 V0 a0 0 pulse(0 {vsupply} {t0 + dwell} 50p 50p {dwell - 50p} {2 * dwell})
 V1 a1 0 pulse(0 {vsupply} {t0 + 2 * dwell} 50p 50p {2 * dwell - 50p} {4 * dwell})
 V2 a2 0 pulse(0 {vsupply} {t0 + 4 * dwell} 50p 50p {4 * dwell - 50p} {8 * dwell})
@@ -19,7 +19,7 @@ V6 a6 0 pulse(0 {vsupply} {t0 + 64 * dwell} 50p 50p {64 * dwell - 50p} {128 * dw
 V7 a7 0 pulse(0 {vsupply} {t0 + 128 * dwell} 50p 50p {128 * dwell - 50p} {256 * dwell})
 BVIN vin 0 v = 0.2 + 0.8 / 256 * (v(a0) + 2 * v(a1) + 4 * v(a2) + 8 * v(a3) + 16 * v(a4) + 32 * v(a5) + 64 * v(a6) + 128 * v(a7)) / {vsupply}
 XDAC top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 vdd 0 cap_dac
-.tran 1n {t0 + 256 * dwell}
+.tran 1n {t0 + 256 * dwell} uic
 .control
 run
 echo "code error_v" > dac_levels.txt

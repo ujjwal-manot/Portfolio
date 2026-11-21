@@ -1,4 +1,4 @@
-# fifo_bridge commands: make test | formal | cdc | timing | layout | equiv | power | mtbf | broken | all
+# fifo_bridge commands: make test | formal | cdc | timing | layout | equiv | mutants | power | mtbf | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -10,7 +10,7 @@ LIB := /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell
 LAYOUT := layout/runs/signoff/final
 ROUTED := NETLIST=../$(LAYOUT)/nl/fifo_bridge.nl.v SPEF=../$(LAYOUT)/spef/nom/fifo_bridge.nom.spef
 
-all: test formal cdc timing layout equiv power mtbf broken
+all: test formal cdc timing layout equiv mutants power mtbf broken
 
 test:
 	mkdir -p results
@@ -36,24 +36,35 @@ timing:
 layout: timing
 	echo "flow did not finish" > results/layout.log
 	if (cd layout && $(RUN) librelane config.json --run-tag signoff --overwrite) > results/layout_flow.log 2>&1 && $(RUN) python3 layout/metrics.py $(LAYOUT)/metrics.json > results/layout.log 2>&1; then c=0; else c=$$?; fi; \
-	  $(SAVE) layout $$c results/layout_flow.log results/layout.log
+	  (cd $(LAYOUT) && sha256sum nl/fifo_bridge.nl.v spef/*/*.spef) > results/routed_netlist.sha256; \
+	  $(SAVE) layout $$c results/layout_flow.log results/layout.log results/routed_netlist.sha256
 	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_verilog $(LAYOUT)/nl/fifo_bridge.nl.v; hierarchy -top fifo_bridge; write_json build/cdc_routed.json'
-	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_routed.json fifo_bridge cdc/waivers.txt s_tvalid=s_clk s_tdata=s_clk s_tlast=s_clk m_tready=m_clk > results/cdc_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_routed $$c results/cdc_routed.log
-	if (cd formal && $(RUN) eqy -f -d ../build/routed_equiv routed.eqy) > results/equiv_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) equiv_routed $$c results/equiv_routed.log
+	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_routed.json fifo_bridge cdc/waivers.txt s_tvalid=s_clk s_tdata=s_clk s_tlast=s_clk m_tready=m_clk > results/cdc_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_routed $$c results/cdc_routed.log results/routed_netlist.sha256
+	if (cd formal && $(RUN) eqy -f -d ../build/routed_equiv routed.eqy) > results/equiv_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) equiv_routed $$c results/equiv_routed.log results/routed_netlist.sha256
 	for k in slow typ fast; do \
 	  if (cd timing && $(RUN) env CORNER=$$k $(ROUTED) sta -no_init -exit timing.tcl) > results/timing_routed_$$k.log 2>&1; then c=0; else c=$$?; fi; \
 	  python3 timing/sim_sdf.py $$(ls $(LAYOUT)/sdf/nom_$${k}_*/*.sdf) build/routed_$${k}_sim.sdf; \
-	  $(SAVE) timing_routed_$$k $$c results/timing_routed_$$k.log; done
+	  $(SAVE) timing_routed_$$k $$c results/timing_routed_$$k.log results/routed_netlist.sha256; done
 
 power: timing layout
 	if $(PYTEST) tests/test_sim_sdf.py > results/test_sim_sdf.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_sim_sdf $$c results/test_sim_sdf.log
-	if $(PYTEST) tests/test_gates.py > results/test_gates.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_gates $$c results/test_gates.log
+	if $(PYTEST) tests/test_gates.py > results/test_gates.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_gates $$c results/test_gates.log results/routed_netlist.sha256
 	for k in slow typ fast; do for n in mapped routed; do \
 	  d=$$(ls -d build/icarus_fifo_bridge_test_gates_*TOP* | grep $${k^^} | if [ $$n = routed ]; then grep ROUTED; else grep -v ROUTED; fi); \
 	  $(RUN) fst2vcd -f $$d/fifo_bridge.fst -o build/gates_$${n}_$$k.vcd > /dev/null; \
 	  if [ $$n = routed ]; then w="$(ROUTED)"; else w=; fi; \
 	  if (cd timing && $(RUN) env CORNER=$$k VCD=../build/gates_$${n}_$$k.vcd $$w sta -no_init -exit power.tcl) > results/power_$${n}_$$k.log 2>&1; then c=0; else c=$$?; fi; \
-	  $(SAVE) power_$${n}_$$k $$c results/power_$${n}_$$k.log; done; done
+	  $(SAVE) power_$${n}_$$k $$c results/power_$${n}_$$k.log $$([ $$n = routed ] && echo results/routed_netlist.sha256); done; done
+
+mutants: equiv layout
+	sed '0,/sg13g2_xor2_1 /s//sg13g2_xnor2_1 /' build/fifo_bridge_cells.v > build/mutant_equiv.v
+	sed '0,/sg13g2_xor2_1 /s//sg13g2_xnor2_1 /' $(LAYOUT)/nl/fifo_bridge.nl.v > build/mutant_routed.v
+	sed 's#^read_verilog ../build/fifo_bridge_cells.v$$#read_verilog ../build/mutant_equiv.v#' formal/equiv.eqy > build/mutant_equiv.eqy
+	sed 's#^read_verilog ../layout/runs/signoff/final/nl/fifo_bridge.nl.v$$#read_verilog ../build/mutant_routed.v#' formal/routed.eqy > build/mutant_routed.eqy
+	for n in equiv routed; do diff build/mutant_$$n.eqy formal/$$n.eqy > /dev/null && exit 1; \
+	  if (cd formal && $(RUN) eqy -f -d ../build/mutant_$${n}_run ../build/mutant_$$n.eqy) > results/mutant_$$n.log 2>&1; then c=1; \
+	  elif grep -q "Failed to prove equivalence" results/mutant_$$n.log; then c=0; else c=2; fi; \
+	  $(SAVE) mutant_$$n $$c results/mutant_$$n.log; done
 
 cdc: timing
 	$(RUN) yosys -q -p 'read_verilog -sv $(addprefix design/,sync2.sv reset_sync.sv async_fifo.sv skid_buffer.sv fifo_bridge.sv); prep -flatten -top fifo_bridge; memory_map; opt_clean; write_json build/cdc.json'
@@ -95,5 +106,5 @@ broken:
 	  if [ $$caught = 0 ]; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  $(SAVE) broken_$$n $$c results/$$n.log; done
 
-.PHONY: all test formal cdc timing layout equiv power mtbf broken
+.PHONY: all test formal cdc timing layout equiv mutants power mtbf broken
 .DELETE_ON_ERROR:

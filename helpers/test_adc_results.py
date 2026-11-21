@@ -1,4 +1,4 @@
-# Checks the ADC result reader on made-up files: comparator decisions must have the right sign beyond the hysteresis and finish inside the budget, Monte Carlo offsets give their spread, DAC level errors give DNL and INL against chip.md's limits, and converted codes give ENOB from a coherent FFT.
+# Checks the ADC result reader on made-up files: comparator decisions must have the right sign beyond the hysteresis and finish inside the budget, Monte Carlo offsets give their spread, DAC level errors give DNL and INL against chip.md's limits, and converted codes give ENOB from a coherent FFT and an offset and gain error held to chip.md's +-1 and +-2 LSB.
 import math, pytest
 from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion
 
@@ -44,8 +44,16 @@ def conversion(tmp_path, codes, fin):
 
 def test_a_conversion_needs_the_full_record_and_a_coherent_tone(tmp_path):
     n, k = 128, 5
-    codes = [min(255, max(0, math.floor(127.5 + 3 + 120.8 * math.sin(2 * math.pi * k * i / n) + 0.5))) for i in range(n)]
+    codes = [min(255, max(0, math.floor(127.5 + 0.6 + 120.8 * math.sin(2 * math.pi * k * i / n) + 0.5))) for i in range(n)]
     r = check_conversion(*conversion(tmp_path, codes, k * 1e6 / n), 1.2, n)
-    assert r["problems"] == [] and abs(r["offset_lsb"] - 3) < 0.3 and r["enob"] > 7.5
+    assert r["problems"] == [] and abs(r["offset_lsb"] - 0.6) < 0.3 and r["enob"] > 7.5
     assert check_conversion(*conversion(tmp_path, codes[:-1], k * 1e6 / n), 1.2, n)["problems"]
     assert any("not coherent" in p for p in check_conversion(*conversion(tmp_path, codes, (k + 0.3) * 1e6 / n), 1.2, n)["problems"])
+
+def test_offset_and_gain_error_are_held_to_chip_md(tmp_path):
+    n, k = 128, 5
+    tone = lambda offset, amplitude: [min(255, max(0, math.floor(127.5 + offset + amplitude * math.sin(2 * math.pi * k * i / n) + 0.5))) for i in range(n)]
+    shifted = check_conversion(*conversion(tmp_path, tone(3, 120.8), k * 1e6 / n), 1.2, n)
+    assert any("offset" in p for p in shifted["problems"])
+    stretched = check_conversion(*conversion(tmp_path, tone(0, 124), k * 1e6 / n), 1.2, n)
+    assert any("gain error" in p for p in stretched["problems"]) and abs(stretched["gain_error_lsb"] - (124 / 120.83 - 1) * 256) < 0.5

@@ -1,11 +1,11 @@
-# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and gain from the tone, and power: python3 adc_results.py decide|offset|levels|convert ...
+# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: python3 adc_results.py decide|offset|levels|convert ...
 import math, statistics, sys
 import numpy as np
 from adc_spectrum import spectrum, coherent_bin
 
 LSB = 0.8 / 256
 SIGN_FROM, BUDGET = 50e-6, 50e-9
-LIMITS = {"dnl": 0.5, "inl": 1.0, "enob": 7.5}
+LIMITS = {"dnl": 0.5, "inl": 1.0, "enob": 7.5, "offset": 1.0, "gain_error": 2.0}
 
 def decisions(paths, supply):
     problems, worst = [], {}
@@ -51,8 +51,13 @@ def check_conversion(codes_path, measure_path, supply, n, fs=1e6):
     x = np.asarray(codes, float)
     amplitude = 2 * abs(np.sum(x * np.exp(-2j * np.pi * k * np.arange(n) / n))) / n
     r.update(offset_lsb=x.mean() - 127.5, gain=amplitude / (0.4 * 10 ** (-0.5 / 20) / LSB), power_w=sum(abs(float(m[q])) for q in ("p_vdd_w", "p_hi_w", "p_lo_w", "p_cm_w")))
+    r["gain_error_lsb"] = (r["gain"] - 1) * 256
     if r["enob"] < LIMITS["enob"]:
         problems.append(f"{codes_path}: enob below {LIMITS['enob']}")
+    if abs(r["offset_lsb"]) > LIMITS["offset"]:
+        problems.append(f"{codes_path}: offset beyond +-{LIMITS['offset']} LSB")
+    if abs(r["gain_error_lsb"]) > LIMITS["gain_error"]:
+        problems.append(f"{codes_path}: gain error beyond +-{LIMITS['gain_error']} LSB")
     r["problems"] = problems
     return r
 
@@ -75,7 +80,7 @@ if __name__ == "__main__":
         supply, n, path, measure = float(args[0]), int(args[1]), args[2], args[3]
         r = check_conversion(path, measure, supply, n)
         if "enob" in r:
-            print(f"{path}: {n} codes, enob {r['enob']:.3f} bits, sndr {r['sndr_db']:.2f} dB, sfdr {r['sfdr_db']:.2f} dB, offset {r['offset_lsb']:.2f} LSB, gain {r['gain']:.4f}, power {r['power_w']:.4g} W")
+            print(f"{path}: {n} codes, enob {r['enob']:.3f} bits, sndr {r['sndr_db']:.2f} dB, sfdr {r['sfdr_db']:.2f} dB, offset {r['offset_lsb']:.2f} LSB, gain {r['gain']:.4f} ({r['gain_error_lsb']:.2f} LSB over full scale), power {r['power_w']:.4g} W")
         fails = r["problems"]
     for f in fails:
         print("FAIL " + f)
