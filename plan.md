@@ -72,7 +72,7 @@ plan.md              this file
 chip.md              whole-chip spec
 Makefile             make check_tools | make tools | make all | make compare | make honesty | make console
 setup/               start_tools.sh, run.sh, check_tools.sh, get_tools.sh, tool_versions.txt
-helpers/             save_result.py, check_honesty.py, cocotb_run.py, cpu_model.py, transistor_charts.py,
+helpers/             save_result.py, check_honesty.py, cocotb_run.py, cpu_model.py, cdc_check.py, transistor_charts.py,
                      opamp_sizing.py, opamp_results.py, adc_spectrum.py, mtbf.py, number_formats.py, eye_diagram.py
 projects/
   fifo_bridge/       async FIFO + skid buffer
@@ -114,7 +114,7 @@ Each digital block (fifo_bridge, cpu, every digital flagship) gets these, each w
 |---|---|---|
 | Timing at three corners | Yosys mapping (with ABC buffering and sizing), OpenSTA on the slow, typical and fast IHP libraries | no negative setup slack at slow, no negative hold slack at fast |
 | Power | OpenSTA with switching activity read from a VCD written by the cocotb run | number reported per corner, with the activity source named |
-| Clock and reset crossings | opencdc and Verilator lint, plus a script that lists every flop fed from another clock or reset | fifo_bridge: every crossing is a Gray pointer through two flops; resets released synchronously |
+| Clock and reset crossings | `cdc_check.py` on the Yosys netlist, a formal proof that each Gray pointer changes at most one bit per cycle, and opencdc as a second opinion | every crossing lands on a two-flop chain with no logic in front of it, multi-bit crossings are proved Gray, every reset is released through a reset synchronizer; probe designs show what each checker catches and misses |
 | RTL vs netlist | eqy | equivalent |
 | Scan and test patterns | Fault: scan chain insertion, ATPG, coverage report | on cpu at least; coverage reported, not hidden |
 | Layout (where it applies) | LibreLane to GDS, KLayout DRC, Netgen LVS, OpenROAD timing after routing | clean, or the failures listed |
@@ -132,7 +132,7 @@ The four core blocks are small on purpose, but each one is taken past the textbo
 - Synchronizer MTBF from transistor physics: ngspice sweeps data-to-clock timing on the real IHP flop netlist from the standard-cell library, `mtbf.py` fits the resolution time constant tau and the window T0 from the ngspice output, and the report gives MTBF for 2 and 3 flops at 10 and 50 MHz at each corner.
 - Tests: cocotb random traffic in both clock directions, 80k+ words, zero loss, duplication or reordering, AXI stability while stalled, and checks that the FIFO really filled and emptied.
 - Formal: full proofs (PDR) of the FIFO and the skid buffer, a 40-step bounded check of the joined bridge, and covers proving each rule is reached (the deepest at step 32).
-- Signoff: clock and reset crossing check with opencdc (it must see every crossing and recognize every synchronizer, not just report zero), a skew limit on the Gray bus in the timing constraints (bits must arrive within one destination period of each other), three-corner timing, power from simulation activity, eqy.
+- Signoff: clock and reset crossing check with `cdc_check.py` on the netlist (each rule proved by a bad probe design it must catch), the formal Gray proof, and opencdc 0.4.1 as a second opinion with its measured blind spots written down (it misses crossings inside generate blocks and rejects multi-bit two-flop chains), a skew limit on the Gray bus in the timing constraints (bits must arrive within one destination period of each other), three-corner timing, power from simulation activity, eqy.
 - Depth sizing: the README works out the minimum depth for a given burst length and clock ratio, and the tests show the measured limit matches it.
 - Broken copies: drop the word at the end of each memory lap, full check that inverts only the top Gray bit, output data that changes while stalled, and (under injection) a binary pointer crossing.
 
@@ -181,7 +181,7 @@ The four core blocks are small on purpose, but each one is taken past the textbo
 
 Researched against current new-grad and junior postings at NVIDIA, AMD, Tesla and Intel. The common asks are: microarchitecture plus RTL, SystemVerilog/UVM and formal, computer arithmetic and low-precision formats, interconnects and caches, the full flow through synthesis and timing, and measured trade-offs instead of claims. Each flagship is built to hit several of these at once.
 
-`tracking/decide.py` picks the main track. Digital: tensor_core and coherent_cache go all the way to signed-off layout, noc and cpu_plus to formal and simulation. Analog: serdes and power go all the way to post-layout corners, adc_10bit to post-layout ENOB.
+Two flagships go all the way to signed-off layout; `tracking/decide.py` picks which, once the core projects and your scorecards are done. Digital: tensor_core and coherent_cache go all the way to signed-off layout, noc and cpu_plus to formal and simulation. Analog: serdes and power go all the way to post-layout corners, adc_10bit to post-layout ENOB.
 
 ### tensor_core (digital 1)
 - Design: 8x8 systolic array of fused multiply-add cells. Inputs BF16, FP8 E4M3 and E5M2, and OCP MX block formats (MXFP8 and MXFP4 with a shared E8M0 scale per 32 elements). FP32 accumulate, round to nearest even.
@@ -189,7 +189,7 @@ Researched against current new-grad and junior postings at NVIDIA, AMD, Tesla an
 - Dataflow study: weight-stationary vs output-stationary, both built, measured utilization on a real convolution layer and a GEMM, and a roofline write-up with the measured points on it.
 - Performance model: a cycle model in Python whose cycle counts must match the RTL within 2% on every workload.
 - Accuracy study: one real network layer in BF16, FP8 and MXFP4 against an FP32 run, error reported.
-- Layout: LibreLane to GDS, full signoff checks. A 4x4 version sized for a Tiny Tapeout IHP tile, ready to submit.
+- Layout: LibreLane to GDS, full signoff checks. A 4x4 version sized for a Tiny Tapeout IHP tile, prepared for the next IHP shuttle once its dates are announced; submitting costs money and is your call at that point.
 - Broken copies: rounding toward zero, FP8 subnormals flushed to zero, block scale applied one element late.
 
 ### coherent_cache (digital 2)
