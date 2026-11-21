@@ -76,6 +76,10 @@ def summary_problems(path, root):
 NUMBER = re.compile(r"(?<![\w.])\d+(?:\.\d+)?(?:[eE][-+]?\d+)?(?![\w.])")
 
 
+WORD = re.compile(r"[a-z][a-z0-9_]{2,}")
+COMMON = {"and", "the", "with", "for", "from", "per", "all", "one", "both", "than", "each", "every", "after", "over", "under", "pass"}
+
+
 def shown(claim, logged):
     if claim in logged:
         return True
@@ -85,29 +89,37 @@ def shown(claim, logged):
     return figures >= 3 and any(abs(float(v) - float(claim)) <= step / 2 * (1 + 1e-9) for v in logged)
 
 
+def labels(text):
+    return set(WORD.findall(text.lower())) - COMMON
+
+
 def readme_problems(path):
-    where = False
+    where = None
     for line in path.read_text().splitlines():
         if not line.startswith("|"):
-            where = False
+            where = None
             continue
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if cells[-1] == "Where":
-            where = True
+        if where is None:
+            where, spec = cells[-1] == "Where", cells[-1] in ("Value", "Target")
             continue
-        logs = re.findall(r"`(results/[^`]+)`", line)
-        if not logs:
-            if where and not set(line) <= set("|-: "):
-                yield "readme_claim", f"row '{cells[0]}' names no log"
+        if set(line) <= set("|-: "):
             continue
+        if not where:
+            if not spec and (path.parent / "results").is_dir() and any(NUMBER.search(c) for c in cells[1:]):
+                yield "readme_claim", f"row '{cells[0]}' quotes numbers in a table with no Where column"
+            continue
+        logs = re.findall(r"`(results/[^`]+)`", cells[-1])
         found = [p for pattern in logs for p in sorted(path.parent.glob(pattern))]
         if not found:
-            yield "readme_claim", f"{', '.join(logs)} does not exist"
+            yield "readme_claim", f"row '{cells[0]}' names no log" if not logs else f"{', '.join(logs)} does not exist"
             continue
-        logged = set(NUMBER.findall("".join(p.read_text(errors="replace") for p in found)))
-        for claim in (n for cell in cells[1:-1] for n in NUMBER.findall(cell)):
-            if not shown(claim, logged):
-                yield "readme_claim", f"says {claim} in row '{cells[0]}', which {', '.join(logs)} never shows"
+        lines = [(labels(l), set(NUMBER.findall(l))) for p in found for l in p.read_text(errors="replace").splitlines()]
+        for piece in (s for cell in cells[1:-1] for s in re.split(r"[,;]", cell)):
+            words = labels(piece) or labels(cells[0])
+            for claim in NUMBER.findall(piece):
+                if not any(words & w and shown(claim, n) for w, n in lines):
+                    yield "readme_claim", f"says {claim} in row '{cells[0]}', and no line of {', '.join(logs)} shows it next to {', '.join(sorted(words)) or 'a label'}"
 
 
 def find_problems(root):

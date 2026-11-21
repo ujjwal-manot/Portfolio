@@ -64,7 +64,7 @@ def test_result_goes_stale_when_a_source_or_used_helper_changes(tmp_path):
 def test_readme_numbers_must_come_from_their_logs(tmp_path):
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
     write(tmp_path, "proj/results/synth.log", "Chip area for module fifo_bridge: 16726.95\n")
-    readme = write(tmp_path, "proj/README.md", "| Check | Result | Where |\n|---|---|---|\n| Cells | 16726.95 um2 | `results/synth.log` |\n")
+    readme = write(tmp_path, "proj/README.md", "| Check | Result | Where |\n|---|---|---|\n| Cells | area 16726.95 um2 | `results/synth.log` |\n")
     assert rules(tmp_path) == []
     readme.write_text(readme.read_text().replace("16726.95", "15613"))
     assert rules(tmp_path) == ["readme_claim"]
@@ -74,11 +74,26 @@ def test_readme_numbers_must_come_from_their_logs(tmp_path):
 def test_readme_numbers_must_match_whole_log_numbers(tmp_path):
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
     write(tmp_path, "proj/results/a.log", "Chip area 16708.809600\nworst setup slack 14.959187666363505 ns, hold 0.12318109032793956 ns\nTotal 1.89e-04 W\nworst bridge MTBF 10^51 years\ntau 133.8 ps\n")
-    good = "| Check | Area | Slack | Power | MTBF | Tau | Where |\n|---|---|---|---|---|---|---|\n| x | 16708.8 um2 | 14.96 ns | 1.89e-04 W | 10^51 years | 133.8 ps | `results/a.log` |\n"
+    good = "| Check | Area | Slack | Power | MTBF | Tau | Where |\n|---|---|---|---|---|---|---|\n| x | area 16708.8 um2 | setup slack 14.96 ns | Total 1.89e-04 W | MTBF 10^51 years | tau 133.8 ps | `results/a.log` |\n"
     readme = write(tmp_path, "proj/README.md", good)
     assert rules(tmp_path) == []
     for right, wrong in [("16708.8", "1670"), ("14.96", "14.9"), ("1.89e-04", "1.8e-04"), ("10^51", "10^5"), ("133.8", "13.8"), ("14.96", "0.12")]:
         readme.write_text(good.replace(right, wrong))
         assert rules(tmp_path) == ["readme_claim"], wrong
     readme.write_text(good + "| y | 3.2 | 1 | 2 | 3 | 4 | none |\n")
+    assert rules(tmp_path) == ["readme_claim"]
+
+def test_readme_numbers_must_sit_on_a_log_line_with_their_label(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    write(tmp_path, "proj/results/synth.log", "   Number of cells:               1015\n     sg13g2_dfrbpq_1 flops          208\n   10 20 1 spare numbers\n")
+    write(tmp_path, "proj/results/pause.log", "longest pause with no lost sample: 17 us\n")
+    write(tmp_path, "proj/results/mtbf.log", "ss rise: tau 133.8 ps\n")
+    good = ("| Check | Result | Where |\n|---|---|---|\n| Cells | 1015 cells, 208 flops | `results/synth.log` |\n| Pause | longest pause 17 us | `results/pause.log` |\n\n"
+            "| Corner | Tau | Where |\n|---|---|---|\n| ss, rise | tau 133.8 ps | `results/mtbf.log` |\n\n| Item | Value |\n|---|---|\n| Clock | 10 MHz |\n")
+    readme = write(tmp_path, "proj/README.md", good)
+    assert rules(tmp_path) == []
+    for right, wrong in [("1015 cells, 208 flops", "10 cells, 20 flops"), ("pause 17 us", "pause 1 us"), ("133.8", "13.8")]:
+        readme.write_text(good.replace(right, wrong))
+        assert rules(tmp_path) == ["readme_claim"], wrong
+    readme.write_text(good + "\n| Corner | Tau |\n|---|---|\n| tt | 71.1 ps |\n")
     assert rules(tmp_path) == ["readme_claim"]

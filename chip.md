@@ -18,6 +18,11 @@ sensor ---> [opamp] ---> [adc] -------------------> [fifo_bridge] --------------
 
 The two clocks are unrelated. Resets are active low (`rst_n`), asserted asynchronously, released synchronously in each clock domain.
 
+Both clocks come in on pins from oscillators on the board; nothing on the chip makes them. `frac_n_pll` clocks only `serdes_link`. So their jitter is a property of the board, never measured here, and every timing check runs with zero jitter. What the chip needs from the board, worked out rather than measured:
+
+- clk_sys: the worst setup slack is about 15 ns of a 20 ns period, so cycle-to-cycle jitter far below that changes nothing.
+- clk_adc: sampling a full-scale 50 kHz sine with rms jitter s limits SNR to -20 log10(2 pi 50 kHz s). Keeping that above the 49.9 dB of an ideal 8-bit converter needs s below 10 ns rms; any crystal oscillator is thousands of times better.
+
 ## Signal levels
 
 | Signal | Value |
@@ -47,6 +52,8 @@ Test setup: inverting amplifier, Rin = Rf = 20 k, `inp` at 0.6 V, 2.05 pF load. 
 | Slew rate | >= 10 V/us |
 | Settling, 0.8 V step to 1.56 mV | <= 200 ns |
 | Supply current | <= 500 uA |
+
+Requirement the opamp puts on `bandgap_ldo` (measured in `projects/opamp/results/corners.log`): at 1.08 V the output stops short of 1.0 V at the hot corners, at 1.16 V it reaches it at every corner. So the analog rail must stay at or above 1.16 V: with a 1.2 V target, regulation error plus load-step droop must stay under 40 mV, which is tighter than the 50 mV droop pick in `plan.md`.
 
 ### adc
 
