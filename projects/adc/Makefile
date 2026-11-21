@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | convert | broken | all
+# adc commands: make sar | logic | decide | offset | levels | convert | broken | review | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -24,7 +24,7 @@ CONVERT := $(foreach p,$(PROCESS),$(foreach t,$(TEMPS),build/convert/$(p)_$(t)_n
 COMPARATOR := design/comparator.cir design/comparator_sizes.inc
 DAC := design/cap_dac.cir design/cap_dac_sizes.inc
 
-all: sar logic decide offset levels convert broken
+all: sar logic decide offset levels convert broken review
 
 sar:
 	mkdir -p results
@@ -40,7 +40,7 @@ logic:
 
 decide: $(DECIDE)
 	for f in $(DECIDE); do cp $$f results/decide_$$(basename $$(dirname $$f)).txt; done
-	if ($(foreach v,$(VOLTS),$(PY) $(ROOT)/helpers/adc_results.py decide $(VOLT_$(v)) results/decide_*_$(v).txt &&) true) > results/decide.log 2>&1; then c=0; else c=$$?; fi
+	if ($(foreach v,$(VOLTS),$(PY) $(ROOT)/helpers/adc_results.py decide $(VOLT_$(v)) results/decide_*_$(v).txt &&) true) > results/decide.log 2>&1; then c=0; else c=$$?; fi; \
 	$(SAVE) decide $$c results/decide.log results/decide_*.txt
 
 offset: $(OFFSET)
@@ -52,9 +52,9 @@ levels: $(LEVELS)
 	if $(PY) $(ROOT)/helpers/adc_results.py levels results/levels_*.txt > results/levels.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) levels $$c results/levels.log results/levels_*.txt
 
 convert: $(CONVERT)
-	for f in $(CONVERT); do cp $$f results/convert_$$(basename $$(dirname $$f)).txt; done
-	if for f in results/convert_*.txt; do $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(K) $$f || exit 1; done > results/convert.log 2>&1; then c=0; else c=$$?; fi
-	$(SAVE) convert $$c results/convert.log results/convert_*.txt
+	for f in $(CONVERT); do c=$$(basename $$(dirname $$f)); cp $$f results/convert_$$c.txt; cp $$(dirname $$f)/measure.txt results/measure_$$c.txt; done
+	if for f in $(CONVERT); do c=$$(basename $$(dirname $$f)); $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(N) results/convert_$$c.txt results/measure_$$c.txt || exit 1; done > results/convert.log 2>&1; then c=0; else c=$$?; fi; \
+	$(SAVE) convert $$c results/convert.log results/convert_*.txt results/measure_*.txt
 
 K := 5
 N := 128
@@ -107,5 +107,13 @@ broken: build/sar_logic.so
 	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" $$d/results/$${run%% *}.log; then c=0; else c=2; fi; \
 	  cp $$d/results/$${run%% *}.log results/broken_$$n.log; $(SAVE) broken_$$n $$c results/broken_$$n.log; done
 
-.PHONY: all sar logic decide offset levels convert broken
+review: build/sar_logic.so
+	mkdir -p results
+	for p in review/*.patch; do n=$$(basename $$p .patch); d=build/review/$$n; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
+	  patch -s -F0 -d $$d -p1 < $$p; run=$$(sed -n '2s/^Run: //p' $$p); log=$$d/results/$${run%% *}.log; \
+	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then ok=0; else ok=$$?; fi; \
+	  { sed -n 1p $$p; echo "make $$run exit $$ok"; cat $$log; } > results/review_$$n.log; \
+	  if [ -s $$log ]; then c=0; else c=1; fi; $(SAVE) review_$$n $$c results/review_$$n.log; done
+
+.PHONY: all sar logic decide offset levels convert broken review
 .DELETE_ON_ERROR:

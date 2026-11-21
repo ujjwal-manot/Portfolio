@@ -21,7 +21,7 @@ The two clocks are unrelated. Resets are active low (`rst_n`), asserted asynchro
 Both clocks come in on pins from oscillators on the board; nothing on the chip makes them. `frac_n_pll` clocks only `serdes_link`. So their jitter is a property of the board, never measured here, and every timing check runs with zero jitter. What the chip needs from the board, worked out rather than measured:
 
 - clk_sys: the worst setup slack is about 15 ns of a 20 ns period, so cycle-to-cycle jitter far below that changes nothing.
-- clk_adc: sampling a full-scale 50 kHz sine with rms jitter s limits SNR to -20 log10(2 pi 50 kHz s). Keeping that above the 49.9 dB of an ideal 8-bit converter needs s below 10 ns rms; any crystal oscillator is thousands of times better.
+- clk_adc: sampling a full-scale 50 kHz sine with rms jitter s limits SNR to -20 log10(2 pi 50 kHz s). Jitter alone equal to the 49.9 dB of an ideal 8-bit converter (s = 10 ns) would cost 3 dB of total SNR; for under 0.5 dB, the jitter noise must stay under 12% of the quantization noise, so its SNR must reach 59.1 dB and s must stay below 3.5 ns rms. That is the number the board oscillator has to meet.
 
 ## Signal levels
 

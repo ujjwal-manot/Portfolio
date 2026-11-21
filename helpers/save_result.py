@@ -1,4 +1,4 @@
-# Records one check result in a summary.json, with the SHA-256 of every raw log behind it and of every source it was made from: the project's files that git tracks or would track (so ignored build byproducts never count), plus each helper those files name, directly or through another helper; a lock file beside the summary lets parallel make jobs save without losing entries.
+# Records one check result in a summary.json, with the SHA-256 of every raw log behind it and of every source it was made from: the project's files that git tracks or would track (so ignored build byproducts never count), plus the files of other projects listed in its uses.txt, plus each helper those files name, directly or through another helper; a lock file beside the summary lets parallel make jobs save without losing entries.
 import fcntl, hashlib, json, os, re, subprocess, sys, time
 from pathlib import Path
 
@@ -9,6 +9,8 @@ def sources(project, root):
     files = {root / n for n in listed if (root / n).is_file() and Path(n).name != "README.md" and "results" not in Path(n).parts}
     helpers = {f for f in files if project not in f.parents and project != root}
     keep = files - helpers
+    uses = project / "uses.txt"
+    keep |= {root / line.strip() for line in (uses.read_text().splitlines() if uses.exists() else []) if line.strip()}
     while True:
         text = "\n".join(f.read_bytes().decode(errors="ignore") for f in keep)
         used = {h for h in helpers if re.search(rf"\b{re.escape(h.stem)}\b", text)}

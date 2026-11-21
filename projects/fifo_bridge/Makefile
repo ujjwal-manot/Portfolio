@@ -39,6 +39,7 @@ layout: timing
 	  $(SAVE) layout $$c results/layout_flow.log results/layout.log
 	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_verilog $(LAYOUT)/nl/fifo_bridge.nl.v; hierarchy -top fifo_bridge; write_json build/cdc_routed.json'
 	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_routed.json fifo_bridge cdc/waivers.txt s_tvalid=s_clk s_tdata=s_clk s_tlast=s_clk m_tready=m_clk > results/cdc_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_routed $$c results/cdc_routed.log
+	if (cd formal && $(RUN) eqy -f -d ../build/routed_equiv routed.eqy) > results/equiv_routed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) equiv_routed $$c results/equiv_routed.log
 	for k in slow typ fast; do \
 	  if (cd timing && $(RUN) env CORNER=$$k $(ROUTED) sta -no_init -exit timing.tcl) > results/timing_routed_$$k.log 2>&1; then c=0; else c=$$?; fi; \
 	  python3 timing/sim_sdf.py $$(ls $(LAYOUT)/sdf/nom_$${k}_*/*.sdf) build/routed_$${k}_sim.sdf; \

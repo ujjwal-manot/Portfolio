@@ -1,0 +1,8 @@
+Why: the comparator tail at 4 um, the first size tried, against the 0.5 um it has now
+Run: convert CONVERT=build/convert/tt_27_nom/convert.txt
+--- a/design/comparator_sizes.inc
++++ b/design/comparator_sizes.inc
+@@ -1,2 +1,2 @@
+ * Comparator device sizes: the input pair long enough to keep offset small next to the 3.125 mV LSB, a narrow tail (0.5 um) so the input pair integrates after the clock edge's kick on the DAC plate has settled (4 um gave a 5.5 LSB offset in the converter, 0.25 um left decisions hanging), everything else minimum length.
+-.param l_min=0.13u w_tail=0.5u w_in=4u l_in=0.26u ng_in=2 w_nx=1u w_px=1u w_rst=0.5u w_gate_n=0.5u w_gate_p=1u
++.param l_min=0.13u w_tail=4u w_in=4u l_in=0.26u ng_in=2 w_nx=1u w_px=1u w_rst=0.5u w_gate_n=0.5u w_gate_p=1u

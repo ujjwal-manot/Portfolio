@@ -1,4 +1,4 @@
-Expected failure: enob below 7.5
+Expected failure: is not coherent with
 Run: convert CONVERT=build/convert/tt_27_nom/convert.txt
 --- a/tests/convert.cir
 +++ b/tests/convert.cir

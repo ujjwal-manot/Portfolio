@@ -1,4 +1,4 @@
-* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), and writes time, m_tvalid, the eight m_tdata bits, samp and vin every 50 ns to convert.txt and the average power drawn from the supply and from vref_hi, vref_lo and vcm over the conversions, each integrated by the solver at every step into a 1 F capacitor (the transistor parts only; the SAR logic runs as a Verilator model) to power.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
+* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), and writes time, m_tvalid, the eight m_tdata bits, samp and vin every 50 ns to convert.txt and the average power drawn from the supply and from vref_hi, vref_lo and vcm over the conversions, with the input frequency measured between two rising crossings of vcm, each integrated by the solver at every step into a 1 F capacitor (the transistor parts only; the SAR logic runs as a Verilator model) to power.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
 .include corner.inc
 .option reltol=1e-5 vntol=1e-8
 .include tone.inc
@@ -48,7 +48,10 @@ let p_vdd = (v(e_vdd)[span] - e0) / window
 let p_hi = (v(e_hi)[span] - h0) / window
 let p_lo = (v(e_lo)[span] - l0) / window
 let p_cm = (v(e_cm)[span] - c0) / window
-echo "p_vdd_w $&p_vdd p_hi_w $&p_hi p_lo_w $&p_lo p_cm_w $&p_cm" > power.txt
+meas tran first when v(vin)=v(vcm) rise=1
+meas tran second when v(vin)=v(vcm) rise=2
+let fin = 1 / (second - first)
+echo "p_vdd_w $&p_vdd p_hi_w $&p_hi p_lo_w $&p_lo p_cm_w $&p_cm fin_hz $&fin" > measure.txt
 wrdata convert.txt v(valid) v(b7) v(b6) v(b5) v(b4) v(b3) v(b2) v(b1) v(b0) v(samp) v(vin)
 .endc
 .end

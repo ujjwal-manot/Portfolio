@@ -1,0 +1,2 @@
+projects/adc/design/cap_dac.cir
+projects/adc/design/cap_dac_sizes.inc

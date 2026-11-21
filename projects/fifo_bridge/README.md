@@ -29,7 +29,7 @@ Carries the ADC's 8-bit samples, with a frame-end flag, from the 10 MHz ADC cloc
 - `design/skid_buffer.sv`: a two-register output stage. Its `s_ready` comes straight from a flop, so a slow `m_tready` never reaches back into the FIFO in the same cycle, and it still moves one word per clock.
 - `design/fifo_bridge.sv`: joins them.
 
-One netlist runs through everything after synthesis: `timing/synth.ys` maps the RTL to IHP cells, and that same netlist is what eqy proves equal to the RTL, what the cell-level CDC check reads, what the timed gate runs simulate, and what LibreLane places and routes (it only elaborates it). The routed netlist is that netlist plus clock trees, buffers and split tie cells; LVS ties it to the layout, and it gets its own CDC check, timing and timed simulation.
+One netlist runs through everything after synthesis: `timing/synth.ys` maps the RTL to IHP cells, and that same netlist is what eqy proves equal to the RTL, what the cell-level CDC check reads, what the timed gate runs simulate, and what LibreLane places and routes (it only elaborates it). The routed netlist is that netlist plus clock trees, buffers and split tie cells; LVS ties it to the layout, `formal/routed.eqy` proves it equal to the mapped netlist, and it gets its own CDC check, timing and timed simulation.
 
 ## Metastability, measured
 
@@ -67,6 +67,7 @@ All numbers come from `results/`; every log there is hashed in `results/summary.
 | Clock crossings, routed netlist (clock trees and buffers in place), same rules and waivers | 0 unwaived crossing problems, 4 waivers | `results/cdc_routed.log` |
 | Cells, mapped at the slow corner | chip area 16708.8 um2, 1015 cells, 208 sg13g2_dfrbpq_1 flops | `results/synth.log` |
 | Cell netlist equals RTL (eqy) | Successfully proved designs equivalent | `results/equiv.log` |
+| Routed netlist equals the mapped netlist (eqy; a one-gate change in a copy fails it) | Successfully proved designs equivalent | `results/equiv_routed.log` |
 | Before layout: setup slack at slow, hold slack at fast | worst setup slack 14.9592 ns at slow; worst hold slack 0.1232 ns at fast | `results/timing_slow.log`, `results/timing_fast.log` |
 | Before layout: Gray pointer skew, worst | skew 0.0591 ns, margin 19.9409 ns to one m_clk period | `results/timing_slow.log` |
 | Layout (LibreLane): DRC, LVS, antenna, slew, capacitance and fanout | layout clean: no DRC, LVS, antenna or electrical violation | `results/layout.log` |
@@ -76,8 +77,12 @@ All numbers come from `results/`; every log there is hashed in `results/summary.
 | Icarus with conditional SDF arcs, one xor2 cell | merged: X rise after 0.1505 ns; as written: X rise after 0.1202 ns | `results/test_sim_sdf.log` |
 | Timed gate runs (ADC test plus a clock-to-output check against STA), mapped and routed, three corners | 6 passed | `results/test_gates.log` |
 | Clock to output, routed, slow, m_tvalid | routed slow m_tvalid rise: measured 0.7010 ns, STA 0.7018 ns | `results/test_gates.log` |
-| Power from the timed run, mapped netlist, slow / typical / fast | Total 1.89e-04, 2.26e-04, 2.75e-04 W | `results/power_mapped_*.log` |
-| Power from the timed run, routed netlist with clock trees and wires, slow / typical / fast | Total 3.12e-04, 3.86e-04, 4.83e-04 W | `results/power_routed_*.log` |
+| Power from the timed run, mapped netlist, slow | Total 1.89e-04 W | `results/power_mapped_slow.log` |
+| Power from the timed run, mapped netlist, typ | Total 2.26e-04 W | `results/power_mapped_typ.log` |
+| Power from the timed run, mapped netlist, fast | Total 2.75e-04 W | `results/power_mapped_fast.log` |
+| Power from the timed run, routed netlist with clock trees and wires, slow | Total 3.12e-04 W | `results/power_routed_slow.log` |
+| Power from the timed run, routed netlist with clock trees and wires, typ | Total 3.86e-04 W | `results/power_routed_typ.log` |
+| Power from the timed run, routed netlist with clock trees and wires, fast | Total 4.83e-04 W | `results/power_routed_fast.log` |
 | Metastability (above) | worst bridge MTBF 10^51 years | `results/mtbf.log` |
 
 ### Broken copies
@@ -86,7 +91,13 @@ All numbers come from `results/`; every log there is hashed in `results/summary.
 
 | Patch | What it breaks | Caught by | Where |
 |---|---|---|---|
-BROKEN_ROWS
+| `drop_word_on_wrap` | loses the word at the end of each memory lap | AssertionError: word 15: got 0x0 | `results/drop_word_on_wrap.log` |
+| `wrong_full_check` | full check inverts only the top Gray bit | AssertionError: wrote past full: 17 words held in a 16-word FIFO | `results/wrong_full_check.log` |
+| `data_changes_while_stalled` | output data moves while `m_tready` is low | changed while m_tready was low | `results/data_changes_while_stalled.log` |
+| `full_low_in_reset` | the FIFO takes words while in reset | AssertionError: bridge handshakes right after reset asserts | `results/full_low_in_reset.log` |
+| `skid_word_survives_reset` | the skid register keeps a word through reset | AssertionError: after reset got 65 words | `results/skid_word_survives_reset.log` |
+| `binary_pointers_cross` | pointers cross in binary instead of Gray | Assert failed in fifo_rules.dut: async_fifo.sv (the one-bit Gray rule); the simulation also wrote past full: 17 words held in a 16-word FIFO | `results/binary_pointers_cross.log` |
+| `synchronizer_never_lands_old` | the formal synchronizer always lands the new value | Unreached cover statement at fifo_rules.dut.w_to_r: sync2.sv | `results/synchronizer_never_lands_old.log` |
 
 ## Design review
 
@@ -106,7 +117,6 @@ BROKEN_ROWS
 - The interface budget (20% of each clock period for the neighbouring block) is a design choice, not a measurement.
 - Icarus skips the cell models' setup and hold checks in the timed gate runs; STA covers them.
 - `eqy` merges flops with identical inputs on both sides first (`opt_merge -share_all`), treats the asynchronous resets as synchronous (`async2sync`), and proves each side's pointer registers as one partition, because synthesis shares the top bit of the binary and Gray pointers, which only match from reset. A one-gate change in the read logic still fails it. A difference that shows only while reset is asserted would not be seen by `eqy`; the reset tests and broken copies cover that.
-- The routed netlist is not run through `eqy`; it is the proven netlist plus buffers, and LVS, routed STA, the routed CDC check and the routed timed simulation stand in for it.
 - The proofs use a 4-deep copy (`DEPTH_LOG2 = 2`) so the solver finishes; the logic does not change with depth, only the pointer width. The joined bridge is a bounded check, not a full proof.
 
 ## Run it

@@ -1,0 +1,22 @@
+# Proves the routed netlist from make layout does the same as the mapped netlist LibreLane started from (the one equiv.eqy proves equal to the RTL), fragment by fragment between matching registers: routing only adds clock trees, buffers and split tie cells, which the liberty functions turn back into wires and constants.
+[gold]
+read_liberty -ignore_miss_func ../build/slow.lib
+read_verilog ../build/fifo_bridge_cells.v
+prep -flatten -top fifo_bridge
+
+[gate]
+read_liberty -ignore_miss_func ../build/slow.lib
+read_verilog ../layout/runs/signoff/final/nl/fifo_bridge.nl.v
+prep -flatten -top fifo_bridge
+
+[script]
+opt_merge -share_all
+async2sync
+
+[strategy sat]
+use sat
+depth 5
+
+[strategy pdr]
+use sby
+engine abc pdr

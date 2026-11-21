@@ -2,9 +2,9 @@
 import math, sys
 import numpy as np
 
-def coherent_bin(fs, n, fin):
+def coherent_bin(fs, n, fin, tolerance=1e-6):
     k = fin * n / fs
-    if abs(k - round(k)) > 1e-6 or math.gcd(round(k), n) != 1 or not 0 < round(k) < n // 2:
+    if abs(k - round(k)) > tolerance or math.gcd(round(k), n) != 1 or not 0 < round(k) < n // 2:
         raise ValueError(f"tone {fin} Hz is not coherent with {n} samples at {fs} Hz (bin {k:.4f})")
     return round(k)
 
