@@ -1,7 +1,7 @@
 Expected failure: FAIL a0_db
 --- a/design/opamp.cir
 +++ b/design/opamp.cir
-@@ -8,17 +8,13 @@
+@@ -8,16 +8,12 @@
  XMBP2 vbnc vbp vdd vdd sg13_lv_pmos w={w_pu} l={l_pu} ng={ng_pu} m=1 mm_ok={mm}
  XMBNC vbnc vbnc vss vss sg13_lv_nmos w={w_bnc} l={l_nu} ng={ng_bnc} m=1 mm_ok={mm}
  XM5 t ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_tail} mm_ok={mm}
@@ -23,6 +23,4 @@ Expected failure: FAIL a0_db
 +XM7 o1 x vss vss sg13_lv_nmos w={w_bot} l={l_bot} ng={ng_bot} mm_ok={mm}
  XM8 out o1 vdd vdd sg13_lv_pmos w={w_out} l={l_out} ng={ng_out} mm_ok={mm}
  XM9 out ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_sink} mm_ok={mm}
--XCC n2 out cap_cmim w={w_cc} l={l_cc} mm_ok={mm}
-+XCC o1 out cap_cmim w={w_cc} l={l_cc} mm_ok={mm}
- .ends opamp
+ XRZ o1 cz vss rhigh w={w_rz} l={l_rz} mm_ok={mm}

@@ -58,12 +58,12 @@ broken: build/sizes.inc
 REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min
 
 review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
-	for v in opamp opamp_miller; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
-	  cp tests/loop.cir tests/step.cir tests/swing.cir build/sizes.inc build/corners/$$c/corner.inc $$d; cp design/$$v.cir $$d/dut.cir; \
-	  (cd $$d && for t in loop step swing; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat loop.txt step.txt swing.txt > result.txt); \
+	for v in opamp opamp_indirect; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
+	  cp tests/loop.cir tests/step.cir tests/noise.cir tests/swing.cir build/sizes.inc build/corners/$$c/corner.inc $$d; cp design/$$v.cir $$d/dut.cir; \
+	  (cd $$d && for t in loop step noise swing; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat loop.txt step.txt noise.txt swing.txt > result.txt); \
 	  cp $$d/result.txt results/review_$${v}_$$c.txt; done; \
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $(REVIEW); do echo results/review_$${v}_$$c.txt; done) > results/review_$$v.log 2>&1; then :; fi; done
-	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; $(SAVE) review $$c results/review_opamp.log results/review_opamp_miller.log results/review_*_*.txt
+	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; $(SAVE) review $$c results/review_opamp.log results/review_opamp_indirect.log results/review_*_*.txt
 
 build/model/result.txt: tests/model.cir tests/loop.cir build/sizes.inc
 	mkdir -p $(@D)

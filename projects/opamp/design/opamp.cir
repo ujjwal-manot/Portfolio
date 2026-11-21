@@ -1,4 +1,4 @@
-* Folded-cascode two-stage opamp on IHP SG13G2 low-voltage devices: NMOS input pair folded into PMOS cascodes over a low-voltage NMOS cascode mirror, PMOS common-source output, compensated by a MIM capacitor from the output to the source of the right NMOS cascode (indirect compensation: no right-half-plane zero, no nulling resistor), all biased from the 10 uA ibias sink, every device carrying mm_ok={mm} so Monte Carlo runs can switch on local mismatch; sizes come from sizes.inc, written by helpers/opamp_sizing.py.
+* Folded-cascode two-stage Miller opamp on IHP SG13G2 low-voltage devices: NMOS input pair folded into PMOS cascodes over a low-voltage NMOS cascode mirror, PMOS common-source output, MIM Miller capacitor with an rhigh nulling resistor, all biased from the 10 uA ibias sink, every device carrying mm_ok={mm} so Monte Carlo runs can switch on local mismatch; sizes come from sizes.inc, written by helpers/opamp_sizing.py.
 .subckt opamp inp inn out vdd vss ibias
 XMB0 ibias ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_ref} mm_ok={mm}
 XMBN1 vbp ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m=1 mm_ok={mm}
@@ -20,5 +20,6 @@ XM6 n1 x vss vss sg13_lv_nmos w={w_bot} l={l_bot} ng={ng_bot} mm_ok={mm}
 XM7 n2 x vss vss sg13_lv_nmos w={w_bot} l={l_bot} ng={ng_bot} mm_ok={mm}
 XM8 out o1 vdd vdd sg13_lv_pmos w={w_out} l={l_out} ng={ng_out} mm_ok={mm}
 XM9 out ibias vss vss sg13_lv_nmos w={w_nu} l={l_nu} ng={ng_nu} m={m_sink} mm_ok={mm}
-XCC n2 out cap_cmim w={w_cc} l={l_cc} mm_ok={mm}
+XRZ o1 cz vss rhigh w={w_rz} l={l_rz} mm_ok={mm}
+XCC cz out cap_cmim w={w_cc} l={l_cc} mm_ok={mm}
 .ends opamp
