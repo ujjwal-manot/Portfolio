@@ -16,12 +16,12 @@ module bb_cdr #(
   logic early, late;
   logic signed [15:0] vote, freq_next, phase_acc, phase_next;
 
-  assign early = (d_prev != d_curr) && (edge_mid == d_curr);
-  assign late  = (d_prev != d_curr) && (edge_mid == d_prev);
-  assign vote  = late ? 16'sd1 : (early ? -16'sd1 : 16'sd0);
+  assign early = (d_prev != d_curr) && (edge_mid == d_prev);
+  assign late  = (d_prev != d_curr) && (edge_mid == d_curr);
+  assign vote  = early ? 16'sd1 : (late ? -16'sd1 : 16'sd0);
 
   assign freq_next  = freq_acc + vote;
-  assign phase_next = phase_acc + (vote * KP) + (freq_next >>> KI_SHIFT);
+  assign phase_next = phase_acc + (vote * 16'(signed'(KP))) + (freq_next >>> KI_SHIFT);
   assign pi_code    = phase_acc[PI_BITS-1:0];
 
   always_ff @(posedge clk or negedge rst_n) begin
