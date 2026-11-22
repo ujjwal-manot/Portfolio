@@ -12,15 +12,16 @@ module dldo_ctrl #(
 );
   int next_count, next_drive;
   wire up = lo && !hi, down = hi && !lo;
+  wire far_up = far_lo && !far_hi, far_dn = far_hi && !far_lo;
 
   always_comb begin
     next_count = int'(count);
-    if (far_lo) next_count = next_count + BIG;
-    else if (far_hi) next_count = next_count - BIG;
+    if (far_up) next_count = next_count + BIG;
+    else if (far_dn) next_count = next_count - BIG;
     else if (up) next_count = next_count + 1;
     else if (down) next_count = next_count - 1;
     next_count = next_count > N ? N : next_count < 0 ? 0 : next_count;
-    next_drive = next_count + (far_lo ? PB : far_hi ? -PB : up ? P : down ? -P : 0);
+    next_drive = next_count + (far_up ? PB : far_dn ? -PB : up ? P : down ? -P : 0);
     next_drive = next_drive > N ? N : next_drive < 0 ? 0 : next_drive;
   end
 
