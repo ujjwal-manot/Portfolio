@@ -17,19 +17,48 @@ const PROJECT_TRACK: Record<string, TrackId> = Object.fromEntries(
   TRACKS.flatMap((t) => t.blocks.map((b) => [b.id, t.id]))
 );
 
+function parseCsvRow(line: string): string[] {
+  const fields: string[] = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQuotes) {
+      if (ch === '"' && line[i + 1] === '"') {
+        cur += '"';
+        i++;
+      } else if (ch === '"') {
+        inQuotes = false;
+      } else {
+        cur += ch;
+      }
+    } else if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === ",") {
+      fields.push(cur.trim());
+      cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  fields.push(cur.trim());
+  return fields;
+}
+
 export function parseSessionsCsv(csvText: string): Record<CoreTrack, number> {
   const hours: Record<CoreTrack, number> = { digital: 0, analog: 0, ams: 0 };
-  const lines = csvText.trim().split(/\r?\n/);
+  const clean = csvText.replace(/^\uFEFF/, "").trim();
+  const lines = clean.split(/\r?\n/);
   if (lines.length < 2) return hours;
-  const header = lines[0].split(",").map((s) => s.trim());
+  const header = parseCsvRow(lines[0]);
   const projIdx = header.indexOf("project");
   const hrsIdx = header.indexOf("hours");
   if (projIdx === -1 || hrsIdx === -1) return hours;
   for (const line of lines.slice(1)) {
     if (!line.trim()) continue;
-    const cols = line.split(",");
-    const proj = (cols[projIdx] ?? "").trim();
-    const h = Number.parseFloat((cols[hrsIdx] ?? "0").trim());
+    const cols = parseCsvRow(line);
+    const proj = cols[projIdx] ?? "";
+    const h = Number.parseFloat(cols[hrsIdx] ?? "0");
     if (!Number.isFinite(h) || h <= 0) continue;
     if (proj === "whole_chip") {
       hours.digital += h / 3;

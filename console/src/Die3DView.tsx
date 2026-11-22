@@ -20,6 +20,8 @@ const CHAIN_ORDER = ["opamp", "adc", "fifo_bridge", "cpu"];
 
 export function Die3DView({ summaries, reducedMotion, onSelectBlockLayout }: Die3DViewProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
+  const selectRef = useRef(onSelectBlockLayout);
+  selectRef.current = onSelectBlockLayout;
 
   useEffect(() => {
     const el = hostRef.current;
@@ -108,7 +110,7 @@ export function Die3DView({ summaries, reducedMotion, onSelectBlockLayout }: Die
       const hits = raycaster.intersectObjects(tileMeshes);
       if (hits.length > 0) {
         const id = hits[0].object.userData.blockId as string | undefined;
-        if (id) onSelectBlockLayout(id);
+        if (id) selectRef.current(id);
       }
     };
     renderer.domElement.addEventListener("click", handleClick);
@@ -140,7 +142,7 @@ export function Die3DView({ summaries, reducedMotion, onSelectBlockLayout }: Die
       renderer.domElement.removeEventListener("click", handleClick);
       renderer.dispose();
     };
-  }, [summaries, reducedMotion, onSelectBlockLayout]);
+  }, [summaries, reducedMotion]);
 
   return (
     <section className="results-card">

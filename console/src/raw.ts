@@ -62,8 +62,12 @@ export function parseNgspiceRaw(buffer: ArrayBuffer): RawWaveform {
 
   if (isBinary) {
     const dataOffset = binMarker !== -1 ? binMarker + "\nBinary:\n".length : binMarkerCr + "\r\nBinary:\r\n".length;
-    const view = new DataView(buffer, dataOffset);
     const stride = isComplex ? 16 : 8;
+    const requiredBytes = numPoints * numVars * stride;
+    if (buffer.byteLength - dataOffset < requiredBytes) {
+      throw new Error("truncated ngspice binary .raw payload");
+    }
+    const view = new DataView(buffer, dataOffset);
     let off = 0;
     for (let p = 0; p < numPoints; p++) {
       for (let v = 0; v < numVars; v++) {

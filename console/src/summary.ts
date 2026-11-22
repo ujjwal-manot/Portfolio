@@ -33,16 +33,19 @@ export function parseSummary(raw: unknown): CheckRow[] {
   }
   const rows: CheckRow[] = [];
   for (const [name, value] of Object.entries(raw as Record<string, RawEntry>)) {
-    if (!value || typeof value !== "object") continue;
+    if (!value || typeof value !== "object" || Array.isArray(value)) continue;
     const result = value.result === "pass" ? "pass" : "fail";
     const time = typeof value.time === "string" ? value.time : "";
     const logs: LogHash[] = [];
-    if (value.logs && typeof value.logs === "object") {
+    if (value.logs && typeof value.logs === "object" && !Array.isArray(value.logs)) {
       for (const [file, digest] of Object.entries(value.logs)) {
         if (typeof digest === "string") logs.push({ file, sha256: digest });
       }
     }
-    const sourceCount = value.sources && typeof value.sources === "object" ? Object.keys(value.sources).length : 0;
+    const sourceCount =
+      value.sources && typeof value.sources === "object" && !Array.isArray(value.sources)
+        ? Object.keys(value.sources).length
+        : 0;
     rows.push({ name, result, time, logs, sourceCount });
   }
   return rows.sort((a, b) => a.name.localeCompare(b.name));

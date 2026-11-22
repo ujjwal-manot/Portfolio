@@ -60,4 +60,23 @@ describe("parseNgspiceRaw", () => {
   it("rejects malformed payloads without Values or Binary", () => {
     expect(() => parseNgspiceRaw(toBuf("Title: bad\n"))).toThrow();
   });
+
+  it("rejects truncated binary .raw payloads with a descriptive error", () => {
+    const header = [
+      "Title: short",
+      "Plotname: Transient Analysis",
+      "Flags: real",
+      "No. Variables: 2",
+      "No. Points: 4",
+      "Variables:",
+      "\t0\ttime\ttime",
+      "\t1\tv(out)\tvoltage",
+      "Binary:",
+      "",
+    ].join("\n");
+    const hdrBytes = new TextEncoder().encode(header);
+    const shortBuf = new Uint8Array(hdrBytes.length + 8);
+    shortBuf.set(hdrBytes, 0);
+    expect(() => parseNgspiceRaw(shortBuf.buffer)).toThrow(/truncated/i);
+  });
 });

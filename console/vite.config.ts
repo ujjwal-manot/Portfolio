@@ -49,8 +49,9 @@ function readOnlyRepoPlugin(repoRoot: string): Plugin {
       res.end("forbidden");
       return;
     }
-    const target = path.resolve(repoRoot, rel.slice(1));
-    if (!target.startsWith(repoRoot) || !fs.existsSync(target) || !fs.statSync(target).isFile()) {
+    const resolvedRoot = path.resolve(repoRoot);
+    const target = path.resolve(resolvedRoot, rel.slice(1));
+    if (!target.startsWith(resolvedRoot + path.sep) || !fs.existsSync(target) || !fs.statSync(target).isFile()) {
       res.statusCode = 404;
       res.end("not found");
       return;

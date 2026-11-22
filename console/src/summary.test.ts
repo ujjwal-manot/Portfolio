@@ -28,4 +28,34 @@ describe("parseSummary", () => {
     expect(() => parseSummary([])).toThrow();
     expect(() => parseSummary(null)).toThrow();
   });
+
+  it("parses real repo summary.json files (cpu, fifo_bridge, opamp) without errors or duplicate log paths", () => {
+    const repoRoot = path.resolve(__dirname, "../..");
+    for (const block of ["cpu", "fifo_bridge", "opamp"]) {
+      const p = path.join(repoRoot, "projects", block, "results", "summary.json");
+      const raw = JSON.parse(fs.readFileSync(p, "utf8"));
+      const rows = parseSummary(raw);
+      expect(rows.length).toBeGreaterThan(0);
+      expect(blockStatus(rows)).toBe("pass");
+      for (const row of rows) {
+        expect(row.logs.length).toBeGreaterThan(0);
+        for (const log of row.logs) {
+          expect(log.sha256).toMatch(/^[0-9a-f]{64}$/);
+        }
+      }
+      const cmd = commandLogFromSummary(block, rows);
+      const uniquePaths = new Set(cmd.map((c) => c.path));
+      expect(uniquePaths.size).toBe(cmd.length);
+    }
+  });
+
+  it("ignores malformed array values inside summary entries", () => {
+    const rows = parseSummary({
+      bad_entry: ["not", "an", "object"],
+      weird_fields: { result: "pass", time: "2026-11-22", logs: ["a"], sources: ["b"] },
+    });
+    expect(rows).toHaveLength(1);
+    expect(rows[0].logs).toEqual([]);
+    expect(rows[0].sourceCount).toBe(0);
+  });
 });

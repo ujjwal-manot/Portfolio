@@ -1,5 +1,5 @@
 // Read-only EdgeSense-130 console shell wiring library tree, SG13G2 layer palette, Results/Broken-Copies, Schematic, Layout, Waveforms, 3D Die, Balance, SHA-256 command log, and status bar.
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { computeBalance, parseSessionsCsv, type CoreTrack } from "./balance";
 import { BalanceView } from "./BalanceView";
 import { ALL_BLOCKS, TRACKS, VIEWS, type ViewId } from "./catalog";
@@ -44,10 +44,14 @@ export function App() {
       .then(async (xml) => {
         if (!active) return;
         const parsed = parseLyp(xml);
-        const bytes = new TextEncoder().encode(xml);
-        const hashBuf = await crypto.subtle.digest("SHA-256", bytes);
-        const sha256 = Array.from(new Uint8Array(hashBuf), (b) => b.toString(16).padStart(2, "0")).join("");
         setLayers(parsed);
+        let sha256 = "unavailable (non-secure context)";
+        if (typeof crypto !== "undefined" && crypto.subtle) {
+          const bytes = new TextEncoder().encode(xml);
+          const hashBuf = await crypto.subtle.digest("SHA-256", bytes);
+          sha256 = Array.from(new Uint8Array(hashBuf), (b) => b.toString(16).padStart(2, "0")).join("");
+        }
+        if (!active) return;
         setSystemLog((prev) => [
           ...prev,
           { path: "console/public/sg13g2.lyp", sha256, note: `${parsed.length} layers` },
@@ -123,6 +127,11 @@ export function App() {
   const toggleLayer = (id: string) => {
     setLayers((prev) => prev.map((l) => (l.id === id ? { ...l, visible: !l.visible } : l)));
   };
+
+  const handleSelectBlockLayout = useCallback((id: string) => {
+    setSelectedBlock(id);
+    setSelectedView("layout");
+  }, []);
 
   const setAllLayers = (visible: boolean) => {
     setLayers((prev) => prev.map((l) => ({ ...l, visible })));
@@ -302,10 +311,7 @@ export function App() {
             <Die3DView
               summaries={summaries}
               reducedMotion={reducedMotion}
-              onSelectBlockLayout={(id) => {
-                setSelectedBlock(id);
-                setSelectedView("layout");
-              }}
+              onSelectBlockLayout={handleSelectBlockLayout}
             />
           )}
           {selectedView === "balance" && <BalanceView rows={balanceRows} />}
