@@ -1,0 +1,22 @@
+// Sipeed Tang Nano 20K (GW2AR-LV18QN88C8/I7) physical pin constraints for hardware/tang_nano/top.sv.
+IO_LOC "clk" 4;
+IO_PORT "clk" PULL_MODE=UP BANK_VCCIO=3.3;
+
+IO_LOC "btn1" 88;
+IO_PORT "btn1" PULL_MODE=DOWN BANK_VCCIO=3.3;
+
+IO_LOC "uart_tx" 69;
+IO_PORT "uart_tx" PULL_MODE=UP DRIVE=8 BANK_VCCIO=3.3;
+
+IO_LOC "led[0]" 15;
+IO_PORT "led[0]" DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "led[1]" 16;
+IO_PORT "led[1]" DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "led[2]" 17;
+IO_PORT "led[2]" DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "led[3]" 18;
+IO_PORT "led[3]" DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "led[4]" 19;
+IO_PORT "led[4]" DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "led[5]" 20;
+IO_PORT "led[5]" DRIVE=8 BANK_VCCIO=3.3;
