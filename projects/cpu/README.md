@@ -47,12 +47,12 @@ All numbers come from `results/`. Every log there is hashed in `results/summary.
 | Filter firmware with a gappy stream | IPC 0.867 | `results/test_filter.log` |
 | Filter firmware on the mapped netlist | outputs match, same frame cycles | `results/test_power.log` |
 | CDC, RTL and cell netlist | 0 problems, 0 waivers | `results/cdc.log`, `results/cdc_cells.log` |
-| Setup at 50 MHz, slow / typ / fast | 1.68 / 2.53 / 3.03 ns (the stream input, 16 ns into the cycle); between flops and macros 7.75 / 12.26 / 14.77 ns | `results/timing_*.log` |
-| Hold before layout, slow / typ / fast | -0.37 / -0.20 / -0.12 ns at the macro data inputs (open: no clock tree or hold repair yet; the layout run must close it) | `results/timing_*.log` |
-| Area after mapping | 814150 um2, of which the two macros are 522216 | `results/synth.log` |
-| Power, filter firmware at full rate, typical corner, zero delay | 12.5 mW: flops 8.5, macros 3.5 (code macro 3.3), logic 0.5 | `results/power.log` |
+| Setup at 50 MHz, slow / typ / fast (the worst path starts at the stream input, valid 16 ns into the cycle) | worst setup slack 1.68 / 2.53 / 3.03 ns; worst setup slack between flops and macros 7.75 / 12.26 / 14.77 ns | `results/timing_*.log` |
+| Hold before layout, slow / typ / fast (at the macro data inputs; open until the layout run adds the clock tree and hold repair) | worst hold slack -0.367 / -0.205 / -0.125 ns before layout | `results/timing_*.log` |
+| Area after mapping, cells and both macros | chip area 814150 um2 | `results/synth.log` |
+| Power in W, filter firmware at full rate, typical corner, zero delay | total 1.25e-02; sequential 8.53e-03; macro 3.52e-03, of which imem 3.26e-03; combinational 4.77e-04 | `results/power.log` |
 
-The timing rows are not signoff yet. Before layout the synchronized reset is one unbuffered net to about 3000 flops, so `timing.tcl` leaves out paths through it and says so. Hold is reported but not gated. The layout run (`layout/`) builds the reset and clock trees and must gate setup, hold, recovery and removal. The power figure leaves out glitches, because the gate run has no delays. An SDF-timed run is still to come.
+Each macro is 416.64 by 626.7 um in its LEF, 261108 um2, so the two take 522216 of the mapped area. The timing rows are not signoff yet. Before layout the synchronized reset is one unbuffered net to about 3000 flops, so `timing.tcl` leaves out paths through it and says so. Hold is reported but not gated. The layout run (`layout/`) builds the reset and clock trees and must gate setup, hold, recovery and removal. The power figure leaves out glitches, because the gate run has no delays. An SDF-timed run is still to come.
 
 ## Broken copies
 

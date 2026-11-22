@@ -1,6 +1,6 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.070 MB sources in 3 modules, into 0.286 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.072 s (elab=0.006, cvt=0.053, bld=0.000); cpu 0.060 s on 1 threads; allocated 27.629 MB
+- Verilator: Built from 0.099 MB sources in 4 modules, into 0.367 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.091 s (elab=0.004, cvt=0.073, bld=0.000); cpu 0.065 s on 1 threads; allocated 27.832 MB
 make: Entering directory '/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts'
 ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
 ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
@@ -16,25 +16,39 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/mip_bits_swappe
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795299478
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795317223
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
-     0.00ns INFO     cocotb.regression                  running test_interrupts.interrupts (1/1)
-  3580.00ns WARNING  cocotb.regression                  test_interrupts.interrupts failed
+     0.00ns INFO     cocotb.regression                  running test_interrupts.interrupts (1/2)
+  3620.00ns WARNING  cocotb.regression                  test_interrupts.interrupts failed
                                                         Traceback (most recent call last):
-                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/test_interrupts.py", line 44, in interrupts
+                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/test_interrupts.py", line 63, in interrupts
+                                                            await workout(dut, 0)
+                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/test_interrupts.py", line 45, in workout
                                                             lock.tick(cycle)
-                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/lockstep.py", line 35, in tick
+                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/lockstep.py", line 40, in tick
                                                             assert got == (pc, instr, rd, value), f"{self.name} instruction {self.retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in (pc, instr, rd, value)]}"
-                                                        AssertionError: interrupts instruction 167: cpu ['0xa4', '0x34402673', '0xc', '0x80'], model ['0xa4', '0x34402673', '0xc', '0x800']
-                                                        assert (164, 876619379, 12, 128) == (164, 876619379, 12, 2048)
-  3580.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        AssertionError: interrupts instruction 164: cpu ['0xe4', '0x34402673', '0xc', '0x80'], model ['0xe4', '0x34402673', '0xc', '0x800']
+                                                        assert (228, 876619379, 12, 128) == (228, 876619379, 12, 2048)
+  3620.00ns INFO     cocotb.regression                  running test_interrupts.timer_wraps (2/2)
+  7260.00ns WARNING  cocotb.regression                  test_interrupts.timer_wraps failed
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/test_interrupts.py", line 67, in timer_wraps
+                                                            await workout(dut, (1 << 32) - 2000)
+                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/test_interrupts.py", line 45, in workout
+                                                            lock.tick(cycle)
+                                                          File "/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/lockstep.py", line 40, in tick
+                                                            assert got == (pc, instr, rd, value), f"{self.name} instruction {self.retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in (pc, instr, rd, value)]}"
+                                                        AssertionError: interrupts instruction 164: cpu ['0xe4', '0x34402673', '0xc', '0x80'], model ['0xe4', '0x34402673', '0xc', '0x800']
+                                                        assert (228, 876619379, 12, 128) == (228, 876619379, 12, 2048)
+  7260.00ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test_interrupts.interrupts     FAIL        3580.00           0.02     152827.69  **
+                                                        ** test_interrupts.interrupts     FAIL        3620.00           0.03     123119.11  **
+                                                        ** test_interrupts.timer_wraps    FAIL        3640.00           0.02     160152.75  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0               3580.00           0.03     133136.09  **
+                                                        ** TESTS=2 PASS=0 FAIL=2 SKIP=0               7260.00           0.06     118096.28  **
                                                         **************************************************************************************
 - :0: Verilog $finish
 F
@@ -42,18 +56,19 @@ F
 _______________________________ test_interrupts ________________________________
 
     def test_interrupts():
->       run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])
+>       run("cpu_board", SOURCES, __file__, build_args=RANDOM_START, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}", *RANDOM_SEED])
 
-tests/test_interrupts.py:61: 
+tests/test_interrupts.py:70: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 top = 'cpu_board'
-sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/design/cpu.sv'), PosixPath('/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/cpu_board.sv')]
+sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/design/cpu.sv'), PosixPath('/home/user/Portfolio/...ridge/design/reset_sync.sv'), PosixPath('/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/cpu_board.sv')]
 test_file = '/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/test_interrupts.py'
 parameters = {}
-plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/interrupts.hex']
-runner = <cocotb_tools.runner.Verilator object at 0x7f30fa5a2600>
-results = None, defines = {}, sim = None, waves = False, build_args = []
+plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/interrupts.hex', '+verilator+rand+reset+2', '+verilator+seed+7']
+runner = <cocotb_tools.runner.Verilator object at 0x7fb7109f2690>
+results = None, defines = {}, sim = None, waves = False
+build_args = ['--x-initial', 'unique']
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
         runner = runner or build(top, sources, test_file, parameters, defines, sim, waves, build_args)
@@ -63,11 +78,11 @@ E       SystemExit: 1
 
 ../../../../helpers/cocotb_run.py:16: SystemExit
 ------------------------------ Captured log call -------------------------------
-INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts --top-module cpu_board --vpi --public-flat-rw --prefix Vtop -o cpu_board -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/design/cpu.sv /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/cpu_board.sv in directory /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts
+INFO     Verilator:runner.py:734 Running command /foss/tools/bin/verilator -cc --exe -Mdir /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts --top-module cpu_board --vpi --public-flat-rw --prefix Vtop -o cpu_board -LDFLAGS '-Wl,-rpath,/usr/local/lib/python3.12/dist-packages/cocotb/libs -L/usr/local/lib/python3.12/dist-packages/cocotb/libs -lcocotbvpi_verilator' --x-initial unique --timescale 1ns/1fs /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/design/cpu.sv /home/user/Portfolio/projects/fifo_bridge/design/reset_sync.sv /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests/cpu_board.sv in directory /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts
 INFO     Verilator:runner.py:734 Running command make -j 4 -C /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts -f Vtop.mk VM_TRACE=0 in directory /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts
-INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts/cpu_board +program=/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/interrupts.hex in directory /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests
-ERROR    Verilator:runner.py:674 ERROR: Failed 1 of 1 tests.
+INFO     Verilator:runner.py:734 Running command /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/verilator_cpu_board_test_interrupts/cpu_board +program=/home/user/Portfolio/projects/cpu/build/mip_bits_swapped/build/interrupts.hex +verilator+rand+reset+2 +verilator+seed+7 in directory /home/user/Portfolio/projects/cpu/build/mip_bits_swapped/tests
+ERROR    Verilator:runner.py:674 ERROR: Failed 2 of 2 tests.
 =========================== short test summary info ============================
 FAILED tests/test_interrupts.py::test_interrupts - SystemExit: 1
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-1 failed in 30.32s
+1 failed in 48.74s

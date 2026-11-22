@@ -1,0 +1,6 @@
+Warning: Replacing memory \x with list of registers. See ./design/cpu.sv:300
+Warning: Replacing memory \btb_valid with list of registers. See ./design/cpu.sv:239
+Warning: Replacing memory \btb_tag with list of registers. See ./design/cpu.sv:239
+Warning: Replacing memory \btb_target with list of registers. See ./design/cpu.sv:239
+Warning: Replacing memory \btb_count with list of registers. See ./design/cpu.sv:239
+0 unwaived crossing problems, 0 waivers
