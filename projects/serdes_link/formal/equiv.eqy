@@ -1,0 +1,23 @@
+# Proves the mapped IHP SG13G2 standard-cell netlist for dfe_lms (../build/dfe_lms_cells.v) formally equivalent to its RTL (../design/dfe_lms.sv) using EQY SAT and ABC PDR strategies.
+[gold]
+read_verilog -sv ../design/dfe_lms.sv
+prep -flatten -top dfe_lms
+memory_map
+opt_clean
+
+[gate]
+read_liberty -ignore_miss_func ../build/slow.lib
+read_verilog ../build/dfe_lms_cells.v
+prep -flatten -top dfe_lms
+
+[script]
+opt_merge -share_all
+async2sync
+
+[strategy sat]
+use sat
+depth 5
+
+[strategy pdr]
+use sby
+engine abc pdr

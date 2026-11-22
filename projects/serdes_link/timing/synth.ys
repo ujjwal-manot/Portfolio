@@ -1,0 +1,35 @@
+# Maps serdes_link digital RTL blocks (dfe_lms, bb_cdr, prbs, pam4_slicer) onto IHP SG13G2 standard cells using the slow corner library (1.08 V, 125 C), with buffering and sizing in ABC.
+read_verilog -sv ../design/dfe_lms.sv ../design/bb_cdr.sv ../design/prbs.sv ../design/pam4_slicer.sv
+synth -flatten -top dfe_lms
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+autoname
+rename -unescape t:sg13g2_*
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+stat -liberty ../build/slow.lib
+write_verilog -noattr ../build/dfe_lms_cells.v
+design -reset
+read_verilog -sv ../design/bb_cdr.sv
+synth -flatten -top bb_cdr
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+write_verilog -noattr ../build/bb_cdr_cells.v
+design -reset
+read_verilog -sv ../design/prbs.sv
+synth -flatten -top prbs
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+write_verilog -noattr ../build/prbs_cells.v
+design -reset
+read_verilog -sv ../design/pam4_slicer.sv
+synth -flatten -top pam4_slicer
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+write_verilog -noattr ../build/pam4_slicer_cells.v

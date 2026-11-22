@@ -1,0 +1,23 @@
+# Proves the mapped IHP SG13G2 standard-cell netlist for mash111 (../build/mash111_cells.v) formally equivalent to its RTL (../design/mash111.sv) using EQY SAT and ABC PDR strategies.
+[gold]
+read_verilog -sv ../design/mash111.sv
+prep -flatten -top mash111
+memory_map
+opt_clean
+
+[gate]
+read_liberty -ignore_miss_func ../build/slow.lib
+read_verilog ../build/mash111_cells.v
+prep -flatten -top mash111
+
+[script]
+opt_merge -share_all
+async2sync
+
+[strategy sat]
+use sat
+depth 5
+
+[strategy pdr]
+use sby
+engine abc pdr
