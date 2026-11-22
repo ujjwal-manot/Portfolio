@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/mesi_dir.sv
++++ b/design/mesi_dir.sv
+@@ -27,7 +27,7 @@
+   assign core_mask       = 4'b0001 << req_core;
+   assign other_sharers   = dir_sharers[req_addr] & ~core_mask;
+   assign next_sharers    = dir_sharers[req_addr] | core_mask;
+-  assign write_sharers   = core_mask;
++  assign write_sharers   = next_sharers;
+   assign next_read_state = (other_sharers != 4'b0000) ? ST_S : ((dir_state[req_addr] == ST_M) ? ST_M : ST_E);
+ 
+   always_ff @(posedge clk or negedge rst_n) begin

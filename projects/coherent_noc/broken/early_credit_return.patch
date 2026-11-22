@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/xy_router.sv
++++ b/design/xy_router.sv
+@@ -50,7 +50,7 @@
+         out_flit            <= in_flit;
+       end
+       for (int p = 0; p < 5; p++) begin
+-        cr[p][0] <= cr[p][0] + {3'b0, credit_ret_vc0[p]} - ((in_valid && has_credit && !in_vc && int'(out_port) == p) ? 4'd1 : 4'd0);
++        cr[p][0] <= cr[p][0] + {3'b0, credit_ret_vc0[p]};
+         cr[p][1] <= cr[p][1] + {3'b0, credit_ret_vc1[p]} - ((in_valid && has_credit &&  in_vc && int'(out_port) == p) ? 4'd1 : 4'd0);
+       end
+     end
