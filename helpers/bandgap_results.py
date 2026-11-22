@@ -1,8 +1,8 @@
-# Reads the bandgap testbench results: in corners mode every corner must hold a trimmed box tempco of 30 ppm/C or less from -40 to 125 C with its trim code inside the range (0 or 15 means the trim ran out); in mc mode the trimmed and untrimmed tempco yield (pass at 99% or more trimmed), the spread of vref before and after trim and the trim codes used; in startup mode every supply ramp must leave vref within 5% of the 1.2063 V target and settled within 50 us of the ramp's end: python3 bandgap_results.py corners|mc|startup files...
+# Reads the bandgap testbench results: in corners mode every corner must hold a trimmed box tempco of 30 ppm/C or less from -40 to 125 C with its trim code inside the range (0 or 15 means the trim ran out) and its trimmed vref within 0.75 of its measured trim step of 1.2063 V (rounding alone leaves half a step); in mc mode the trimmed and untrimmed tempco yield (pass at 99% or more trimmed), the spread of vref before and after trim and the trim codes used; in startup mode every supply ramp must leave vref within 5% of the 1.2063 V target and settled within 50 us of the ramp's end: python3 bandgap_results.py corners|mc|startup files...
 import math, sys
 from pathlib import Path
 
-TC, YIELD, TARGET, SETTLE = 30.0, 0.99, 1.2063, 50e-6
+TC, YIELD, TARGET, SETTLE, AIM = 30.0, 0.99, 1.2063, 50e-6, 0.75
 
 def parse(path):
     f = Path(path).read_text().split()
@@ -12,6 +12,8 @@ def corners(paths):
     rows = {Path(p).stem: parse(p) for p in paths}
     bad = [f"{c}: tempco {r['tc_ppm_per_c']:.3g} ppm/C over {TC:g}" for c, r in rows.items() if not r["tc_ppm_per_c"] <= TC]
     bad += [f"{c}: trim code {r['code']:g} at the end of its range" for c, r in rows.items() if r["code"] in (0, 15)]
+    bad += [f"{c}: trimmed vref {r['vref_v']:.5g} V is {abs(r['vref_v'] - TARGET) / abs(r['step_v']):.2f} trim steps from {TARGET:g} V, limit {AIM:g}"
+            for c, r in rows.items() if not abs(r["vref_v"] - TARGET) <= AIM * abs(r["step_v"])]
     return not bad, rows, bad
 
 def spread(values):

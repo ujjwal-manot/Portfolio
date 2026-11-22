@@ -1,0 +1,12 @@
+Expected failure: vref ends at
+Run: startup
+--- a/design/bandgap.cir	2026-11-22 13:09:06.458263625 +0000
++++ b/design/bandgap.cir	2026-11-22 13:09:06.464096571 +0000
+@@ -35,7 +35,6 @@
+ XS4 sd vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
+ XS5 sd sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
+ XS2 st sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
+-XS3 vg st vss vss sg13_hv_nmos w={w_sk} l={l_sk} mm_ok={mm}
+ XI0 n0 trim0 vdd vss inv
+ XI1 n1 trim1 vdd vss inv
+ XI2 n2 trim2 vdd vss inv

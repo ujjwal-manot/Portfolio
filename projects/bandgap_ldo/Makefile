@@ -1,4 +1,4 @@
-# bandgap_ldo commands: make pnp | corners | mc | startup | ldo_model | ldo | bleed_study | ldo_mc | all
+# bandgap_ldo commands: make pnp | corners | mc | startup | ldo_model | ldo | bleed_study | ldo_mc | broken | layout | post_layout | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -25,9 +25,12 @@ LDO_CORNERS := tt_3v3_27 $(foreach p,$(PROCESS),$(foreach v,3v0 3v6,$(foreach t,
 LDO_RESULTS := $(foreach c,$(LDO_CORNERS),build/ldo/$(c)/result.txt)
 STARTUP := $(foreach r,$(RAMPS),$(foreach c,$(PROCESS) tt_m40 tt_125,build/startup/$(c)_$(r)/startup.txt))
 
-all: pnp corners mc startup ldo_model ldo bleed_study ldo_mc
+all: pnp corners mc startup ldo_model ldo bleed_study ldo_mc broken layout post_layout
 LDO_MC := $(foreach k,ss ff,$(foreach n,$(shell seq 1 50),build/ldo_mc/$(k)_$(n)/mc.txt))
 STUDY_CORNERS := tt_3v3_27 ff_3v6_125 ss_3v0_125
+BLOCKS := bandgap ldo
+POST_BG := tt_3v3 ss_3v0 ff_3v6
+POST_LDO := tt_3v3_27 ss_3v0_125 ff_3v6_m40
 
 corner = printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' $(1) $(PASSIVE_$(1)) $(PASSIVE_$(1)) $(PASSIVE_$(1)) $(2) $(3)
 
@@ -118,5 +121,73 @@ ldo_mc: $(LDO_MC)
 	for f in $(LDO_MC); do cp $$f results/ldo_mc_$$(basename $$(dirname $$f)).txt; done
 	for k in ss ff; do if $(PY) $(ROOT)/helpers/ldo_results.py mc $$k results/ldo_mc_$${k}_*.txt > results/ldo_mc_$$k.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) ldo_mc_$$k $$c results/ldo_mc_$$k.log results/ldo_mc_$${k}_*.txt; done
 
-.PHONY: all pnp corners mc startup ldo_model ldo bleed_study ldo_mc
+broken:
+	rm -rf build/broken
+	mkdir -p results build/broken
+	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests study Makefile $$d; \
+	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
+	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" $$d/results/$${run%% *}.log; then c=0; else c=2; fi; \
+	  cp $$d/results/$${run%% *}.log results/broken_$$n.log; $(SAVE) broken_$$n $$c results/broken_$$n.log; done
+
+build/layout/%.cdl: design/%.cir $(BANDGAP) $(LDO) $(ROOT)/helpers/spice_flatten.py
+	mkdir -p build/layout
+	cat design/bandgap_sizes.inc design/ldo_sizes.inc > build/layout/sizes.inc
+	python3 $(ROOT)/helpers/spice_flatten.py $* build/layout/sizes.inc $< > $@
+
+build/layout/%.gds: build/layout/%.cdl layout/%.py $(ROOT)/helpers/hv_layout.py $(ROOT)/helpers/row_layout.py
+	$(RUN) env NETLIST=build/layout/$*.cdl OUT=build/layout klayout -b -r layout/$*.py > build/layout/generate_$*.log 2>&1
+
+layout: $(foreach b,$(BLOCKS),build/layout/$(b).gds)
+	rm -rf build/layout/checks
+	mkdir -p results build/layout/checks
+	for b in $(BLOCKS); do d=build/layout/checks/$$b; mkdir -p $$d; cp build/layout/$$b.gds build/layout/$$b.cdl $$d; \
+	  (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=$$b.gds --topcell=$$b --run_dir=drc --no_density" > drc.log 2>&1) || true; \
+	  (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=$$b.gds --netlist=$$b.cdl --topcell=$$b --run_dir=lvs --combine_devices --disable_tap_extraction" > lvs.log 2>&1) || true; \
+	  cp $$d/drc.log results/layout_drc_$$b.log; cp $$d/lvs.log results/layout_lvs_$$b.log; cp $$d/lvs/$${b}_extracted.cir results/layout_extracted_$$b.cir; cp build/layout/generate_$$b.log results/layout_generate_$$b.log; \
+	  if grep -q "DRC Check Passed" results/layout_drc_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_drc_$$b $$c results/layout_drc_$$b.log results/layout_generate_$$b.log; \
+	  if grep -q "PASS (netlists match)" results/layout_lvs_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_lvs_$$b $$c results/layout_lvs_$$b.log results/layout_extracted_$$b.cir; done
+
+build/layout/%_pex.spice: build/layout/%.gds layout/extract_%.tcl
+	cd build/layout && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc ../../layout/extract_$*.tcl' > extract_$*.log 2>&1
+
+build/layout/bandgap_post.cir: build/layout/bandgap_pex.spice build/layout/bandgap.cdl
+	sed '/^.ends$$/d' build/layout/bandgap_pex.spice > $@
+	grep '^Q' build/layout/bandgap.cdl | sed 's/^Q/XQ/' >> $@
+	printf '.ends\n.subckt bandgap vref vg vdd vss trim3 trim2 trim1 trim0\nX1 %s bandgap_pex\n.ends\n' "$$(sed -n 's/^.subckt bandgap_pex //p' build/layout/bandgap_pex.spice)" >> $@
+	[ $$(grep -c '^XQ' $@) -eq 3 ]
+
+build/layout/ldo_post.cir: build/layout/ldo_pex.spice
+	cat $< > $@
+	printf '.subckt ldo vout fb vref vg vdd vss\nX1 %s ldo_pex\n.ends\n' "$$(sed -n 's/^.subckt ldo_pex //p' $<)" >> $@
+
+build/post_layout/dc_%/dc.txt: tests/dc.cir design/bandgap_sizes.inc build/layout/bandgap_post.cir
+	mkdir -p $(@D)
+	cp tests/dc.cir design/bandgap_sizes.inc $(@D)
+	cp build/layout/bandgap_post.cir $(@D)/bandgap.cir
+	$(call corner,$(word 1,$(subst _, ,$*)),27,$(VOLT_$(word 2,$(subst _, ,$*)))) > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b dc.cir > dc.log 2>&1
+
+build/post_layout/ldo_%/result.txt: $(LDO_TESTS) design/bandgap_sizes.inc design/ldo_sizes.inc build/layout/bandgap_post.cir build/layout/ldo_post.cir
+	mkdir -p $(@D)
+	cp $(LDO_TESTS) design/bandgap_sizes.inc design/ldo_sizes.inc $(@D)
+	cp build/layout/bandgap_post.cir $(@D)/bandgap.cir; cp build/layout/ldo_post.cir $(@D)/ldo.cir
+	p=$$(echo $* | cut -d_ -f1); v=$$(echo $* | cut -d_ -f2 | tr v .); t=$$(echo $* | cut -d_ -f3 | sed 's/m/-/'); \
+	  q=typ; case $$p in ss) q=wcs;; ff) q=bcs;; esac; \
+	  printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' $$p $$q $$q $$q $$t $$v > $(@D)/corner.inc
+	cd $(@D) && echo ".param ramp=10n" > ramp.inc && $(RUN) ngspice -b ldo_dc.cir > ldo_dc.log 2>&1 && $(RUN) ngspice -b ldo_psrr.cir > ldo_psrr.log 2>&1 && $(RUN) ngspice -b ldo_startup.cir > ldo_startup.log 2>&1; \
+	  for s in 0p5m 2m; do echo ".param istep=$$(echo $$s | tr p .)" > step.inc; $(RUN) ngspice -b ldo_step.cir > step_$$s.log 2>&1; sed "s/^step /step_$$s /" step.txt > step_$$s.txt; done; \
+	  for l in 0 250u 1m 2m; do echo ".param iload=$$l" > load.inc; $(RUN) ngspice -b loop.cir > loop_$$l.log 2>&1; sed "s/^loop /loop_$$l /" loop.txt > loop_$$l.txt; done; \
+	  cat ldo_dc.txt psrr.txt step_0p5m.txt step_2m.txt loop_*.txt ldo_startup.txt > result.txt
+
+post_layout: $(foreach c,$(POST_BG),build/post_layout/dc_$(c)/dc.txt) $(foreach c,$(POST_LDO),build/post_layout/ldo_$(c)/result.txt)
+	mkdir -p results
+	cp build/layout/bandgap_post.cir results/bandgap_post.cir; cp build/layout/ldo_post.cir results/ldo_post.cir
+	for c in $(POST_BG); do cp build/post_layout/dc_$$c/dc.txt results/pexdc_$$c.txt; done
+	for c in $(POST_LDO); do cp build/post_layout/ldo_$$c/result.txt results/pexldo_$$c.txt; done
+	if { $(PY) $(ROOT)/helpers/bandgap_results.py corners $(foreach c,$(POST_BG),results/pexdc_$(c).txt) && \
+	  $(PY) $(ROOT)/helpers/ldo_results.py corners $(foreach c,$(POST_LDO),results/pexldo_$(c).txt); } > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) post_layout $$c results/post_layout.log results/pexdc_*.txt results/pexldo_*.txt results/bandgap_post.cir results/ldo_post.cir
+
+.PHONY: all pnp corners mc startup ldo_model ldo bleed_study ldo_mc broken layout post_layout
 .DELETE_ON_ERROR:
+.SECONDARY:

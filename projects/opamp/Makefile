@@ -1,4 +1,4 @@
-# opamp commands: make charts | sizing | check_model | corners | mc | mc_hot | broken | review | all
+# opamp commands: make charts | sizing | check_model | corners | mc | mc_hot | broken | review | layout | post_layout | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -21,7 +21,7 @@ VOLT_min := 1.16
 VOLT_nom := 1.2
 VOLT_hi := 1.32
 
-all: charts sizing check_model corners mc mc_hot broken review
+all: charts sizing check_model corners mc mc_hot broken review layout post_layout
 
 charts: $(CHARTS)
 	mkdir -p results
@@ -30,7 +30,7 @@ charts: $(CHARTS)
 
 sizing: build/sizes.inc
 
-build/sizes.inc: results/charts_tt_27.txt
+build/sizes.inc: results/charts_tt_27.txt $(ROOT)/helpers/opamp_sizing.py
 	mkdir -p build
 	if $(PY) $(ROOT)/helpers/opamp_sizing.py $< $@ > results/sizing.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) sizing $$c results/sizing.log
 
@@ -62,6 +62,33 @@ broken: build/sizes.inc
 	  $(SAVE) broken_$$n $$c results/broken_$$n.log results/broken_$$n.txt; done
 
 REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min
+
+build/layout/opamp.gds: layout/opamp.py $(ROOT)/helpers/row_layout.py design/opamp.cir build/sizes.inc
+	mkdir -p build/layout
+	$(RUN) env SIZES=build/sizes.inc OUT=build/layout klayout -b -r layout/opamp.py > build/layout/generate.log 2>&1
+
+layout: build/layout/opamp.gds
+	mkdir -p results
+	rm -rf build/layout/drc build/layout/lvs
+	cd build/layout && $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=opamp.gds --topcell=opamp --run_dir=drc --no_density' > drc.log 2>&1 || true
+	cd build/layout && $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=opamp.gds --netlist=opamp.cdl --topcell=opamp --run_dir=lvs --combine_devices --disable_tap_extraction' > lvs.log 2>&1 || true
+	cp build/layout/drc.log results/layout_drc.log; cp build/layout/lvs.log results/layout_lvs.log; cp build/layout/lvs/opamp_extracted.cir results/layout_extracted.cir
+	if grep -q "DRC Check Passed" results/layout_drc.log; then c=0; else c=1; fi; $(SAVE) layout_drc $$c results/layout_drc.log
+	if grep -q "PASS (netlists match)" results/layout_lvs.log; then c=0; else c=1; fi; $(SAVE) layout_lvs $$c results/layout_lvs.log results/layout_extracted.cir
+
+build/layout/opamp_pex.spice: build/layout/opamp.gds layout/extract.tcl
+	cd build/layout && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc ../../layout/extract.tcl' > extract.log 2>&1
+
+post_layout: build/layout/opamp_pex.spice build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
+	mkdir -p results
+	cp build/layout/opamp_pex.spice results/opamp_pex.spice
+	for c in $(REVIEW); do d=build/post_layout/$$c; mkdir -p $$d; \
+	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc build/corners/$$c/corner.inc build/layout/opamp_pex.spice $$d; \
+	  printf '.include opamp_pex.spice\n.subckt opamp inp inn out vdd vss ibias\nX1 %s opamp_pex\n.ends\n' "$$(sed -n 's/^.subckt opamp_pex //p' build/layout/opamp_pex.spice)" > $$d/dut.cir; \
+	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt); \
+	  cp $$d/result.txt results/post_layout_$$c.txt; done
+	if $(PY) $(ROOT)/helpers/analog_results.py corners $(foreach c,$(REVIEW),results/post_layout_$(c).txt) > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) post_layout $$c results/post_layout.log results/post_layout_*.txt results/opamp_pex.spice
 
 review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
 	for v in opamp opamp_indirect; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
@@ -112,5 +139,5 @@ build/charts/%/charts.txt: tests/charts.cir
 	rm -f $@
 	cd $(@D) && $(RUN) ngspice -b charts.cir > ngspice.log 2>&1
 
-.PHONY: all charts sizing check_model corners mc mc_hot broken review
+.PHONY: layout post_layout all charts sizing check_model corners mc mc_hot broken review
 .DELETE_ON_ERROR:

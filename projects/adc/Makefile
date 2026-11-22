@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | supplied | shunt_check | gear_check | broken | review | all
+# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | supplied | shunt_check | gear_check | broken | review | layout | post_layout | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -27,8 +27,10 @@ BANDGAP_LDO := $(foreach f,bandgap.cir bandgap_sizes.inc ldo.cir ldo_sizes.inc,$
 TRIMS := $(ROOT)/projects/bandgap_ldo/results/corners.log
 SUPPLIED_CORNERS := tt_27 ss_125 ff_m40
 SUPPLIED := $(foreach c,$(SUPPLIED_CORNERS),build/supplied/$(c)/convert.txt)
+LAYOUT_CORNERS := tt_27_nom ss_125_nom ff_m40_nom
+POST := $(foreach c,$(LAYOUT_CORNERS),build/post_layout/$(c)/convert.txt)
 
-all: sar logic decide offset levels uic_check convert supplied shunt_check gear_check broken review
+all: sar logic decide offset levels uic_check convert supplied shunt_check gear_check broken review layout post_layout
 
 sar:
 	mkdir -p results
@@ -163,5 +165,45 @@ gear_check: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_logic.so build/deci
 	if { for c in tt_27_nom tt_m40_nom tt_125_nom; do $(PY) $(ROOT)/helpers/adc_results.py top 1.2 results/gear_check_gear_$$c.txt results/gear_check_trapezoidal_$$c.txt || exit 1; done; \
 	  $(PY) $(ROOT)/helpers/adc_results.py decide_methods results/gear_check_decide_trapezoidal.txt results/gear_check_decide_gear.txt; } > results/gear_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) gear_check $$c results/gear_check.log results/gear_check_*.txt
 
-.PHONY: all sar logic decide offset levels uic_check convert shunt_check gear_check broken review
+build/layout/adc_core.cdl: layout/core.cir $(COMPARATOR) $(DAC) $(ROOT)/helpers/spice_flatten.py
+	mkdir -p build/layout
+	cat design/cap_dac_sizes.inc design/comparator_sizes.inc > build/layout/sizes.inc
+	python3 $(ROOT)/helpers/spice_flatten.py adc_core build/layout/sizes.inc design/cap_dac.cir design/comparator.cir layout/core.cir > $@
+
+build/layout/adc_core.gds: build/layout/adc_core.cdl layout/adc_core.py $(ROOT)/helpers/row_layout.py
+	$(RUN) env NETLIST=build/layout/adc_core.cdl OUT=build/layout klayout -b -r layout/adc_core.py > build/layout/generate.log 2>&1
+
+layout: build/layout/adc_core.gds
+	mkdir -p results
+	rm -rf build/layout/drc build/layout/lvs
+	cd build/layout && $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=adc_core.gds --topcell=adc_core --run_dir=drc --no_density' > drc.log 2>&1 || true
+	cd build/layout && $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=adc_core.gds --netlist=adc_core.cdl --topcell=adc_core --run_dir=lvs --combine_devices --disable_tap_extraction' > lvs.log 2>&1 || true
+	cp build/layout/drc.log results/layout_drc.log; cp build/layout/lvs.log results/layout_lvs.log; cp build/layout/lvs/adc_core_extracted.cir results/layout_extracted.cir; cp build/layout/generate.log results/layout_generate.log
+	if grep -q "DRC Check Passed" results/layout_drc.log; then c=0; else c=1; fi; $(SAVE) layout_drc $$c results/layout_drc.log results/layout_generate.log
+	if grep -q "PASS (netlists match)" results/layout_lvs.log; then c=0; else c=1; fi; $(SAVE) layout_lvs $$c results/layout_lvs.log results/layout_extracted.cir
+
+build/layout/adc_core_pex.spice: build/layout/adc_core.gds layout/extract.tcl
+	cd build/layout && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc ../../layout/extract.tcl' > extract.log 2>&1
+
+build/post_layout/%/convert.txt: tests/convert.cir build/layout/adc_core_pex.spice build/sar_logic.so
+	mkdir -p $(@D)
+	cp $^ $(@D)
+	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
+	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
+	printf '.include adc_core_pex.spice\n.subckt adc_core top vin vcm vref_hi vref_lo samp d7 d6 d5 d4 d3 d2 d1 d0 cclk cmp cmpn vdd vss\nX1 %s adc_core_pex\n.ends\n' \
+	  "$$(sed -n '/^.subckt adc_core_pex/,/^[^.+]/p' $(@D)/adc_core_pex.spice | grep -v '^[^.+]' | sed 's/^.subckt adc_core_pex //; s/^+ //' | tr '\n' ' ')" > $(@D)/core.cir
+	sed -i -e '/^.include comparator_sizes.inc$$/d' -e '/^.include cap_dac_sizes.inc$$/d' -e '/^.include comparator.cir$$/d' -e 's/^.include cap_dac.cir$$/.include core.cir/' -e '/^XCMP /d' \
+	  -e 's/^XDAC top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 vdd 0 cap_dac$$/XCORE top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 cclk cmp cmpn vdd 0 adc_core/' $(@D)/convert.cir
+	grep -q '^XCORE ' $(@D)/convert.cir
+	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+
+post_layout: $(POST) $(foreach c,$(LAYOUT_CORNERS),build/convert/$(c)/convert.txt)
+	mkdir -p results
+	cp build/layout/adc_core_pex.spice results/adc_core_pex.spice
+	for c in $(LAYOUT_CORNERS); do cp build/post_layout/$$c/convert.txt results/post_layout_$$c.txt; cp build/post_layout/$$c/measure.txt results/post_layout_measure_$$c.txt; done
+	if for c in $(LAYOUT_CORNERS); do echo "schematic $$c:"; $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(N) build/convert/$$c/convert.txt build/convert/$$c/measure.txt || true; \
+	  echo "extracted layout $$c:"; $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(N) results/post_layout_$$c.txt results/post_layout_measure_$$c.txt || exit 1; done > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) post_layout $$c results/post_layout.log results/post_layout_*.txt results/adc_core_pex.spice
+
+.PHONY: all sar logic decide offset levels uic_check convert shunt_check gear_check broken review layout post_layout
 .DELETE_ON_ERROR:
