@@ -1,0 +1,12 @@
+Why: the bleed as an rppd resistor from the output (about 110 uA at 1.2 V, nearly flat with temperature) in place of the PTAT NMOS copy, to see what a flat bleed buys in current and costs in margin
+--- a/design/ldo.cir
++++ b/design/ldo.cir
+@@ -2,7 +2,7 @@
+ .subckt ldo vout fb vref vg vdd vss
+ XPB nb vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m={m_bias} mm_ok={mm}
+ XNB nb nb vss vss sg13_hv_nmos w={w_nb} l={l_nb} m=1 mm_ok={mm}
+-XBL vout nbf vss vss sg13_hv_nmos w={w_nb} l={l_nb} m={m_bleed} mm_ok={mm}
++XBL vout vss vss rppd w=1u l=42u mm_ok={mm}
+ XT t nbf vss vss sg13_hv_nmos w={w_nb} l={l_nb} m={m_amp} mm_ok={mm}
+ XE1 d vf t vss sg13_hv_nmos w={w_ein} l={l_ein} mm_ok={mm}
+ XE2 g fb t vss sg13_hv_nmos w={w_ein} l={l_ein} mm_ok={mm}

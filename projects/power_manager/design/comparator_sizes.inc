@@ -1,0 +1,2 @@
+* Window comparator sizes for the digital LDO, the ADC's StrongARM latch (projects/adc/design/comparator.cir) resized for offset rather than speed: the loop gives it 10 ns to decide where the ADC gave it a fraction of that, so the input pair is 8 um by 2 um (16 times the ADC's gate area, a quarter of its offset) and the cross-coupled pair twice as wide; the tail stays narrow so the pair integrates before the latch fires.
+.param l_min=0.13u w_tail=0.5u w_in=8u l_in=2u ng_in=2 w_nx=2u w_px=2u w_rst=0.5u w_gate_n=0.5u w_gate_p=1u

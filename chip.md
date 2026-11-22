@@ -200,9 +200,9 @@ Both run from the 3.3 V supply on thick-oxide devices. `vg` carries the bandgap'
 | Load regulation, 0 to 2 mA / line regulation, 3.0 to 3.6 V | <= 5 mV / <= 10 mV/V |
 | PSRR at 1 kHz / 1 MHz | >= 40 dB / >= 20 dB |
 | Phase margin, every load from 0 to 2 mA | >= 45 deg |
-| Bandgap and LDO current together | <= 200 uA |
+| Bandgap and LDO current together | <= 200 uA at 27 C and below; above that it may grow with absolute temperature (265 uA at 125 C), since every bias is a copy of the bandgap's PTAT current |
 
-The first LDO pick in `plan.md` (0 to 20 mA in 100 ns with under 40 mV of droop, under 100 uA) is out of reach without an external capacitor: 40 mV on the 100 pF output is 4 pC, which a 20 mA ramp uses up in 6.3 ns, while the pass gate must swing about 0.5 V; and with a follower pass device the light-load output pole is its gm over the output capacitance, so the bleed current, not the compensation, sets how fast the loop can be at no load. Under 100 uA total the loop was either unstable at no load or let a 0.25 mA step pull the rail under 1.16 V. The targets above come from the loads the rail really has.
+The first LDO pick in `plan.md` (0 to 20 mA in 100 ns with under 40 mV of droop, under 100 uA) is out of reach without an external capacitor: 40 mV on the 100 pF output is 4 pC, which a 20 mA ramp uses up in 6.3 ns, while the pass gate must swing about 0.5 V; and with a follower pass device the light-load output pole is its gm over the output capacitance, so the bleed current, not the compensation, sets how fast the loop can be at no load. Under 100 uA total the loop was either unstable at no load or let a 0.25 mA step pull the rail under 1.16 V. The targets above come from the loads the rail really has. The current limit was first a flat 200 uA, met only at 27 C: with PTAT bias the total reached 246 uA at ff 125 C. A flat bleed (an rppd resistor from the output) cut that to 201 uA but dropped the no-load phase margin to 43 deg, because at fixed current a follower's gm falls as temperature rises (`make bleed_study` keeps both runs). The design keeps the PTAT bleed, which holds gm and the light-load pole over temperature, so the limit now states what that costs.
 
 ### power_manager
 

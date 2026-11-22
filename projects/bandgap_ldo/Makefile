@@ -1,4 +1,4 @@
-# bandgap_ldo commands: make pnp | corners | mc | startup | ldo_model | ldo | all
+# bandgap_ldo commands: make pnp | corners | mc | startup | ldo_model | ldo | bleed_study | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -25,7 +25,8 @@ LDO_CORNERS := tt_3v3_27 $(foreach p,$(PROCESS),$(foreach v,3v0 3v6,$(foreach t,
 LDO_RESULTS := $(foreach c,$(LDO_CORNERS),build/ldo/$(c)/result.txt)
 STARTUP := $(foreach r,$(RAMPS),$(foreach c,$(PROCESS) tt_m40 tt_125,build/startup/$(c)_$(r)/startup.txt))
 
-all: pnp corners mc startup ldo_model ldo
+all: pnp corners mc startup ldo_model ldo bleed_study
+STUDY_CORNERS := tt_3v3_27 ff_3v6_125 ss_3v0_125
 
 corner = printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' $(1) $(PASSIVE_$(1)) $(PASSIVE_$(1)) $(PASSIVE_$(1)) $(2) $(3)
 
@@ -96,5 +97,13 @@ build/ldo/%/result.txt: $(LDO_TESTS) $(BANDGAP) $(LDO)
 	  for l in 0 250u 1m 2m; do echo ".param iload=$$l" > load.inc; $(RUN) ngspice -b loop.cir > loop_$$l.log 2>&1; sed "s/^loop /loop_$$l /" loop.txt > loop_$$l.txt; done; \
 	  cat ldo_dc.txt psrr.txt step_0p5m.txt step_2m.txt loop_*.txt ldo_startup.txt > result.txt
 
-.PHONY: all pnp corners mc startup ldo_model ldo
+bleed_study: ldo
+	mkdir -p build/study results
+	cp -r design tests Makefile build/study
+	patch -s -F0 -d build/study -p1 < study/resistor_bleed.patch
+	$(MAKE) -C build/study $(foreach c,$(STUDY_CORNERS),build/ldo/$(c)/result.txt) > build/study/make.log 2>&1
+	for c in $(STUDY_CORNERS); do cp build/study/build/ldo/$$c/result.txt results/bleed_study_$$c.txt; done
+	if $(PY) $(ROOT)/helpers/ldo_results.py study $(foreach c,$(STUDY_CORNERS),results/ldo_$(c).txt) $(foreach c,$(STUDY_CORNERS),results/bleed_study_$(c).txt) > results/bleed_study.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) bleed_study $$c results/bleed_study.log results/bleed_study_*.txt
+
+.PHONY: all pnp corners mc startup ldo_model ldo bleed_study
 .DELETE_ON_ERROR:

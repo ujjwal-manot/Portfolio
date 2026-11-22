@@ -1,0 +1,2 @@
+projects/adc/design/comparator.cir
+projects/adc/tests/offset.cir
