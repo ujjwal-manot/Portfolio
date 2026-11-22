@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/wptr_full.v
++++ b/wptr_full.v
+@@ -18,7 +18,7 @@
+   assign waddr     = wbin[ADDRSIZE-1:0];
+   assign wbinnext  = wbin + (winc & ~wfull);
+   assign wgraynext = (wbinnext >> 1) ^ wbinnext;
+-  assign wfull_val = (wgraynext == {~wq2_rptr[ADDRSIZE:ADDRSIZE-1], wq2_rptr[ADDRSIZE-2:0]});
++  assign wfull_val = (wgraynext == {~wq2_rptr[ADDRSIZE], wq2_rptr[ADDRSIZE-1:0]});
+ 
+   always @(posedge wclk or negedge wrst_n)
+     if (!wrst_n) wfull <= 1'b0;
