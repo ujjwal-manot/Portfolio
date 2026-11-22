@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -54,7 +54,7 @@
+@@ -55,7 +55,7 @@
      endcase
    wire d_uses_rs1 = !(d_op == LUI || d_op == AUIPC || d_op == JAL);
    wire d_uses_rs2 = d_op == BRANCH || d_op == STORE || d_op == OP;

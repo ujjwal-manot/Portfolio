@@ -1,7 +1,8 @@
-// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM).
+// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM); imem_en is low when the fetch address repeats (a stall or sleep without a redirect), so the code memory need not read again and holds its last word.
 module cpu (
   input  logic        clk, rst_n,
   output logic [31:0] imem_addr,
+  output logic        imem_en,
   input  logic [31:0] imem_data,
   output logic [31:0] dmem_addr, dmem_wdata,
   output logic [3:0]  dmem_wstrb,
@@ -214,6 +215,7 @@ module cpu (
   end
   wire [31:0] pc_next = redirect ? new_pc : e_hold || stall ? pc : f_taken ? btb_target[f_idx] : pc + 4;
   assign imem_addr  = run ? pc_next : 32'b0;
+  assign imem_en    = redirect || !(e_hold || stall);
   assign dmem_addr  = e_addr;
   assign dmem_read  = e_commit && e_op == LOAD;
   assign dmem_wdata = e_f3 == 3'd0 ? {4{b[7:0]}} : e_f3 == 3'd1 ? {2{b[15:0]}} : b;

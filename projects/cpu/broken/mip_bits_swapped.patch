@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -90,7 +90,7 @@
+@@ -91,7 +91,7 @@
        12'h341: csr_old = mepc;
        12'h342: csr_old = mcause;
        12'h343: csr_old = mtval;

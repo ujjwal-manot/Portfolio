@@ -1,0 +1,2 @@
+* Digital LDO sizes: each switch is 1 um by 0.45 um of thick-oxide PMOS, 115 to 335 uA from 3.0 to 3.6 V into the rail across ss 125 C to ff -40 C, so 128 of them carry the 12 mA the cpu may draw at the weakest corner; the rail's decoupling is 2 nF of thin-oxide NMOS capacitors, 1600 of 10 by 10 um at 1.24 to 1.27 pF each from 0.9 to 1.2 V (measured); the divider and ladder are strings of identical rppd units, 1 by 20 um (about 5.2 kOhm), 52 kOhm on the rail and 1.05 MOhm on the reference.
+.param w_sw=1u l_sw=0.45u w_dc=10u l_dc=10u m_dc=1600 w_r=1u l_r=20u

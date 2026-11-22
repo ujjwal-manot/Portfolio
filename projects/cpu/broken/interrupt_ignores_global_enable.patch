@@ -1,7 +1,7 @@
 Expected failure: the model has None due
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -170,7 +170,7 @@
+@@ -171,7 +171,7 @@
      else e_exception = 1'b0;
    end
    wire        wake = pending != 0;

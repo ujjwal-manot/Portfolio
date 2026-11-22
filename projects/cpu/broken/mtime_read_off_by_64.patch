@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -196,7 +196,7 @@
+@@ -197,7 +197,7 @@
        8'h14:   io_data = minstret[31:0];
        8'h18:   io_data = branches;
        8'h1c:   io_data = mispredicts;

@@ -1,0 +1,12 @@
+Expected failure: , model ['
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -215,7 +215,7 @@
+   end
+   wire [31:0] pc_next = redirect ? new_pc : e_hold || stall ? pc : f_taken ? btb_target[f_idx] : pc + 4;
+   assign imem_addr  = run ? pc_next : 32'b0;
+-  assign imem_en    = redirect || !(e_hold || stall);
++  assign imem_en    = !(e_hold || stall);
+   assign dmem_addr  = e_addr;
+   assign dmem_read  = e_commit && e_op == LOAD;
+   assign dmem_wdata = e_f3 == 3'd0 ? {4{b[7:0]}} : e_f3 == 3'd1 ? {2{b[15:0]}} : b;

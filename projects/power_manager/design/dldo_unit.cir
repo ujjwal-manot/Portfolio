@@ -1,0 +1,5 @@
+* One switch unit of the digital LDO: a level shifter (shifter_hv.cir) turns the controller's 1.2 V on signal into a 0 to vin gate swing for a 1 um thick-oxide PMOS that sources current from the 3.3 V input into the regulated rail; 128 of these make the array; sizes come from dldo_sizes.inc.
+.subckt dldo_unit on out vin vdd vss
+XL on g vin vdd vss shifter_hv
+XS out g vin vin sg13_hv_pmos w={w_sw} l={l_sw} mm_ok={mm}
+.ends dldo_unit

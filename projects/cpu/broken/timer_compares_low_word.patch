@@ -1,7 +1,7 @@
 Expected failure: test_interrupts.timer_wraps failed
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -74,7 +74,7 @@
+@@ -75,7 +75,7 @@
    wire [31:0] y = e_op == OP ? b : e_imm;
    wire        alt = e_instr[30];
  

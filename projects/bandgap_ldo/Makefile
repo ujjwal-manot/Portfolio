@@ -1,4 +1,4 @@
-# bandgap_ldo commands: make pnp | corners | mc | startup | ldo_model | ldo | bleed_study | all
+# bandgap_ldo commands: make pnp | corners | mc | startup | ldo_model | ldo | bleed_study | ldo_mc | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -25,7 +25,8 @@ LDO_CORNERS := tt_3v3_27 $(foreach p,$(PROCESS),$(foreach v,3v0 3v6,$(foreach t,
 LDO_RESULTS := $(foreach c,$(LDO_CORNERS),build/ldo/$(c)/result.txt)
 STARTUP := $(foreach r,$(RAMPS),$(foreach c,$(PROCESS) tt_m40 tt_125,build/startup/$(c)_$(r)/startup.txt))
 
-all: pnp corners mc startup ldo_model ldo bleed_study
+all: pnp corners mc startup ldo_model ldo bleed_study ldo_mc
+LDO_MC := $(foreach k,ss ff,$(foreach n,$(shell seq 1 50),build/ldo_mc/$(k)_$(n)/mc.txt))
 STUDY_CORNERS := tt_3v3_27 ff_3v6_125 ss_3v0_125
 
 corner = printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' $(1) $(PASSIVE_$(1)) $(PASSIVE_$(1)) $(PASSIVE_$(1)) $(2) $(3)
@@ -105,5 +106,17 @@ bleed_study: ldo
 	for c in $(STUDY_CORNERS); do cp build/study/build/ldo/$$c/result.txt results/bleed_study_$$c.txt; done
 	if $(PY) $(ROOT)/helpers/ldo_results.py study $(foreach c,$(STUDY_CORNERS),results/ldo_$(c).txt) $(foreach c,$(STUDY_CORNERS),results/bleed_study_$(c).txt) > results/bleed_study.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) bleed_study $$c results/bleed_study.log results/bleed_study_*.txt
 
-.PHONY: all pnp corners mc startup ldo_model ldo bleed_study
+build/ldo_mc/%/mc.txt: tests/ldo_mc.cir $(BANDGAP) $(LDO)
+	mkdir -p $(@D)
+	cp $^ $(@D)
+	k=$$(echo $* | cut -d_ -f1); n=$$(echo $* | cut -d_ -f2); q=wcs; v=3.0; if [ $$k = ff ]; then q=bcs; v=3.6; fi; \
+	  printf '.lib cornerMOShv.lib mos_%s_mismatch\n.lib cornerHBT.lib hbt_%s_mismatch\n.lib cornerRES.lib res_%s_mismatch\n.lib cornerCAP.lib cap_%s_mismatch\n.temp 125\n.param vsupply=%s\n.param mm=1\n.option seed=%s\n' $$k $$q $$q $$q $$v $$n > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b ldo_mc.cir > mc.log 2>&1
+
+ldo_mc: $(LDO_MC)
+	mkdir -p results
+	for f in $(LDO_MC); do cp $$f results/ldo_mc_$$(basename $$(dirname $$f)).txt; done
+	for k in ss ff; do if $(PY) $(ROOT)/helpers/ldo_results.py mc $$k results/ldo_mc_$${k}_*.txt > results/ldo_mc_$$k.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) ldo_mc_$$k $$c results/ldo_mc_$$k.log results/ldo_mc_$${k}_*.txt; done
+
+.PHONY: all pnp corners mc startup ldo_model ldo bleed_study ldo_mc
 .DELETE_ON_ERROR:

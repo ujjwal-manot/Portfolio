@@ -1,6 +1,6 @@
 # Checks the LDO result reader on made-up files: a corner fails on any missed limit (load and line regulation, quiescent current, the rail under 1.16 V on a 0.5 mA step, over 1.32 V after a 2 mA step or at start-up, phase margin under 45 deg at any load, supply rejection, start-up value and time), and the loop-gain measurement passes only when it reproduces the ideal two-pole loop's arithmetic.
 import cmath, math
-from ldo_results import corner, model, expected, summary
+from ldo_results import corner, model, expected, summary, monte_carlo
 
 GOOD = """ldo_dc vout_v 1.2065 vout_2ma_v 1.2058 load_reg_v 0.0007 line_v_per_v 0.0044 iq_a 0.00016
 psrr psrr_1k_db 47 psrr_1m_db 37
@@ -41,3 +41,10 @@ def test_current_limit_scales_with_absolute_temperature(tmp_path):
 
 def test_study_summary_takes_current_dip_and_no_load_margin(tmp_path):
     assert summary(write(tmp_path, "ldo_tt_3v3_27.txt", GOOD)) == (0.00016, 1.176, 47.0)
+
+def test_monte_carlo_counts_passes_and_gives_the_yield_bound(tmp_path):
+    runs = [write(tmp_path, f"ldo_mc_ss_{n}.txt", f"mc code 9 vout27_v 1.206 iq_a 0.0002 dip_v {1.165 if n else 1.159} pm_deg {49 if n != 1 else 44}\n") for n in range(10)]
+    r = monte_carlo(runs, "ss")
+    assert (r["passed"], r["runs"]) == (8, 10) and 0.4 < r["lower"] < 0.8
+    hot = [write(tmp_path, f"ldo_mc_ff_{n}.txt", f"mc code 9 vout27_v 1.206 iq_a {0.00026 if n else 0.00027} dip_v 1.18 pm_deg 48\n") for n in range(10)]
+    assert monte_carlo(hot, "ff")["passed"] == 9

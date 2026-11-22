@@ -1,4 +1,4 @@
-# power_manager commands: make speed | ctrl | shifter | all
+# power_manager commands: make speed | ctrl | shifter | cmp_offset | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -14,8 +14,10 @@ TEMP_27 := 27
 PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3 -m pytest -q -s -p no:cacheprovider
 SHIFTER_CORNERS := tt_27_1v2_3v3 $(foreach p,ss ff sf fs,$(foreach t,m40 125,$(foreach v,1v08_3v6 1v32_3v0,$(p)_$(t)_$(v))))
 SHIFTER := $(foreach c,$(SHIFTER_CORNERS),build/shifter/$(c)/shifter.txt)
+ADC := $(ROOT)/projects/adc
+CMP_OFFSET := $(foreach n,$(shell seq 1 100),build/cmp_offset/$(n)/offset.txt)
 
-all: speed ctrl shifter
+all: speed ctrl shifter cmp_offset
 
 build/speed/%/speed.txt: tests/speed.cir
 	mkdir -p $(@D)
@@ -45,4 +47,16 @@ shifter: $(SHIFTER)
 	for c in $(SHIFTER_CORNERS); do cp build/shifter/$$c/shifter.txt results/shifter_$$c.txt; done
 	if $(PY) $(ROOT)/helpers/power_results.py shifter $(foreach c,$(SHIFTER_CORNERS),results/shifter_$(c).txt) > results/shifter.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) shifter $$c results/shifter.log results/shifter_*.txt
 
-.PHONY: all speed ctrl shifter
+build/cmp_offset/%/offset.txt: $(ADC)/tests/offset.cir $(ADC)/design/comparator.cir design/comparator_sizes.inc
+	mkdir -p $(@D)
+	cp $(ADC)/tests/offset.cir design/comparator_sizes.inc $(@D)
+	cp $(ADC)/design/comparator.cir $(@D)/dut.cir
+	printf '.lib cornerMOSlv.lib mos_tt_mismatch\n.temp 27\n.param vsupply=1.2\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b offset.cir > offset.log 2>&1
+
+cmp_offset: $(CMP_OFFSET)
+	mkdir -p results
+	for n in $$(seq 1 100); do cp build/cmp_offset/$$n/offset.txt results/cmp_offset_$$n.txt; done
+	if $(PY) $(ROOT)/helpers/adc_results.py offset results/cmp_offset_*.txt > results/cmp_offset.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cmp_offset $$c results/cmp_offset.log results/cmp_offset_*.txt
+
+.PHONY: all speed ctrl shifter cmp_offset

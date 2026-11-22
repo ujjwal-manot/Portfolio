@@ -1,4 +1,4 @@
-// Test board for the cpu: 64 KB RAM loaded from +program=<hex file>, synchronous like an SRAM macro: addresses and writes are taken at a clock edge and read data comes out in the following cycle.
+// Test board for the cpu: 64 KB RAM loaded from +program=<hex file>, synchronous like an SRAM macro: addresses and writes are taken at a clock edge and read data comes out in the following cycle, and the code side keeps its last word on a cycle where imem_en is low.
 module cpu_board (
   input  logic        clk, rst_n,
   input  logic        s_tvalid, s_tlast,
@@ -14,6 +14,7 @@ module cpu_board (
 );
   logic [31:0] ram [16384];
   logic [31:0] imem_addr, imem_data, dmem_rdata;
+  logic        imem_en;
   logic        dmem_read;
   string       image;
 
@@ -24,7 +25,8 @@ module cpu_board (
   assign dmem_rdata = ram[da];
 
   always_ff @(posedge clk) begin
-    {ia, da} <= {imem_addr[15:2], dmem_addr[15:2]};
+    if (imem_en) ia <= imem_addr[15:2];
+    da <= dmem_addr[15:2];
     if (dmem_addr[31:16] == 0)
       for (int b = 0; b < 4; b++)
         if (dmem_wstrb[b]) ram[dmem_addr[15:2]][8*b +: 8] <= dmem_wdata[8*b +: 8];
