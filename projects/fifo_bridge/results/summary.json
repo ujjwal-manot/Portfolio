@@ -885,20 +885,22 @@
  "mtbf": {
   "logs": {
    "extract.log": "3e438fdb37ae742eb8317095525094b3beb811561e2be8c288517bbbe6a68f47",
-   "mtbf.log": "ff9d62f600ec8c7f2b052d9828fc7f4b923027f21975e8efc79ae3d5aaf62cb7",
+   "mtbf.log": "b7b74b59ffca9458b38acfca180fcffe2b5a7ff5b967a80dbe0842bc733e0b76",
    "mtbf_ff_fall.txt": "6bcd255f31dbb29039cccb1f0da94f81422e3cfc2648cc765fb61f118616febd",
    "mtbf_ff_rise.txt": "126e1578e43466686bf3040eb238c38eca2f232a1ef745f77a54ed357011fa57",
+   "mtbf_sc_fall.txt": "11f34df9b6cea19a8e87b92d65d940e2cc4ef77e609cdb884c72307e11f40940",
+   "mtbf_sc_rise.txt": "6320775079a3f02749f2f65eabc38bd69cc803453ce36b850395cab3cc6bdb4a",
    "mtbf_ss_fall.txt": "57403ad739c049de1fba05e47b85b33e0bc5f058f0f1fefb59b49916f0d42aa4",
    "mtbf_ss_rise.txt": "2cf2d54ba8f1c5d5f3d6b020c07df6796b57f969c698ed60f26d8a0897e327c6",
    "mtbf_tt_fall.txt": "1787e7b69b0cf734135393d852356be93088c14549485b289999747bd8f1b321",
    "mtbf_tt_rise.txt": "06769a8df65811511108669537aec76d9fe6d65d3fede9b66cfe2243e5c7eb4e"
   },
-  "result": "pass",
+  "result": "fail",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "3da217d49aeffb7cb1d9c98f0384f92dc882113494b783c96b1d2b0ece5670b3",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -930,7 +932,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -941,9 +943,11 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:24:38",
+  "time": "2026-11-22 19:01:57",
   "values": {}
  },
  "mutant_equiv": {

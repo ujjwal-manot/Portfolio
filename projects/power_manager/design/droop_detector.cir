@@ -1,0 +1,292 @@
+* Droop detector: on every rising clk edge the edge runs down two chains of IHP inv_1 cells, a reference chain of 64 on the fixed vdd_mem rail (each loaded by the next stage and one spare inv_1 input) and a measuring chain of 80 on vdd_cpu (each loaded by the next stage and one capture flop); the reference chain's end, through a buf_8, clocks 80 dfrbpq_1 flops on vdd_mem that capture every measuring tap, so the code (how many taps the edge passed, tap k reached when q_k equals 1 for even k and 0 for odd k) is the ratio of the two rails' gate delays and falls as vdd_cpu sags; the flops sit on vdd_mem so the code lands in the clock logic's domain without a level shifter.
+.subckt droop_detector clk q1 q2 q3 q4 q5 q6 q7 q8 q9 q10 q11 q12 q13 q14 q15 q16 q17 q18 q19 q20 q21 q22 q23 q24 q25 q26 q27 q28 q29 q30 q31 q32 q33 q34 q35 q36 q37 q38 q39 q40 q41 q42 q43 q44 q45 q46 q47 q48 q49 q50 q51 q52 q53 q54 q55 q56 q57 q58 q59 q60 q61 q62 q63 q64 q65 q66 q67 q68 q69 q70 q71 q72 q73 q74 q75 q76 q77 q78 q79 q80 vdd_cpu vdd_mem vss
+XR1 r1 clk vdd_mem vss sg13g2_inv_1
+XRL1 rl1 r1 vdd_mem vss sg13g2_inv_1
+XR2 r2 r1 vdd_mem vss sg13g2_inv_1
+XRL2 rl2 r2 vdd_mem vss sg13g2_inv_1
+XR3 r3 r2 vdd_mem vss sg13g2_inv_1
+XRL3 rl3 r3 vdd_mem vss sg13g2_inv_1
+XR4 r4 r3 vdd_mem vss sg13g2_inv_1
+XRL4 rl4 r4 vdd_mem vss sg13g2_inv_1
+XR5 r5 r4 vdd_mem vss sg13g2_inv_1
+XRL5 rl5 r5 vdd_mem vss sg13g2_inv_1
+XR6 r6 r5 vdd_mem vss sg13g2_inv_1
+XRL6 rl6 r6 vdd_mem vss sg13g2_inv_1
+XR7 r7 r6 vdd_mem vss sg13g2_inv_1
+XRL7 rl7 r7 vdd_mem vss sg13g2_inv_1
+XR8 r8 r7 vdd_mem vss sg13g2_inv_1
+XRL8 rl8 r8 vdd_mem vss sg13g2_inv_1
+XR9 r9 r8 vdd_mem vss sg13g2_inv_1
+XRL9 rl9 r9 vdd_mem vss sg13g2_inv_1
+XR10 r10 r9 vdd_mem vss sg13g2_inv_1
+XRL10 rl10 r10 vdd_mem vss sg13g2_inv_1
+XR11 r11 r10 vdd_mem vss sg13g2_inv_1
+XRL11 rl11 r11 vdd_mem vss sg13g2_inv_1
+XR12 r12 r11 vdd_mem vss sg13g2_inv_1
+XRL12 rl12 r12 vdd_mem vss sg13g2_inv_1
+XR13 r13 r12 vdd_mem vss sg13g2_inv_1
+XRL13 rl13 r13 vdd_mem vss sg13g2_inv_1
+XR14 r14 r13 vdd_mem vss sg13g2_inv_1
+XRL14 rl14 r14 vdd_mem vss sg13g2_inv_1
+XR15 r15 r14 vdd_mem vss sg13g2_inv_1
+XRL15 rl15 r15 vdd_mem vss sg13g2_inv_1
+XR16 r16 r15 vdd_mem vss sg13g2_inv_1
+XRL16 rl16 r16 vdd_mem vss sg13g2_inv_1
+XR17 r17 r16 vdd_mem vss sg13g2_inv_1
+XRL17 rl17 r17 vdd_mem vss sg13g2_inv_1
+XR18 r18 r17 vdd_mem vss sg13g2_inv_1
+XRL18 rl18 r18 vdd_mem vss sg13g2_inv_1
+XR19 r19 r18 vdd_mem vss sg13g2_inv_1
+XRL19 rl19 r19 vdd_mem vss sg13g2_inv_1
+XR20 r20 r19 vdd_mem vss sg13g2_inv_1
+XRL20 rl20 r20 vdd_mem vss sg13g2_inv_1
+XR21 r21 r20 vdd_mem vss sg13g2_inv_1
+XRL21 rl21 r21 vdd_mem vss sg13g2_inv_1
+XR22 r22 r21 vdd_mem vss sg13g2_inv_1
+XRL22 rl22 r22 vdd_mem vss sg13g2_inv_1
+XR23 r23 r22 vdd_mem vss sg13g2_inv_1
+XRL23 rl23 r23 vdd_mem vss sg13g2_inv_1
+XR24 r24 r23 vdd_mem vss sg13g2_inv_1
+XRL24 rl24 r24 vdd_mem vss sg13g2_inv_1
+XR25 r25 r24 vdd_mem vss sg13g2_inv_1
+XRL25 rl25 r25 vdd_mem vss sg13g2_inv_1
+XR26 r26 r25 vdd_mem vss sg13g2_inv_1
+XRL26 rl26 r26 vdd_mem vss sg13g2_inv_1
+XR27 r27 r26 vdd_mem vss sg13g2_inv_1
+XRL27 rl27 r27 vdd_mem vss sg13g2_inv_1
+XR28 r28 r27 vdd_mem vss sg13g2_inv_1
+XRL28 rl28 r28 vdd_mem vss sg13g2_inv_1
+XR29 r29 r28 vdd_mem vss sg13g2_inv_1
+XRL29 rl29 r29 vdd_mem vss sg13g2_inv_1
+XR30 r30 r29 vdd_mem vss sg13g2_inv_1
+XRL30 rl30 r30 vdd_mem vss sg13g2_inv_1
+XR31 r31 r30 vdd_mem vss sg13g2_inv_1
+XRL31 rl31 r31 vdd_mem vss sg13g2_inv_1
+XR32 r32 r31 vdd_mem vss sg13g2_inv_1
+XRL32 rl32 r32 vdd_mem vss sg13g2_inv_1
+XR33 r33 r32 vdd_mem vss sg13g2_inv_1
+XRL33 rl33 r33 vdd_mem vss sg13g2_inv_1
+XR34 r34 r33 vdd_mem vss sg13g2_inv_1
+XRL34 rl34 r34 vdd_mem vss sg13g2_inv_1
+XR35 r35 r34 vdd_mem vss sg13g2_inv_1
+XRL35 rl35 r35 vdd_mem vss sg13g2_inv_1
+XR36 r36 r35 vdd_mem vss sg13g2_inv_1
+XRL36 rl36 r36 vdd_mem vss sg13g2_inv_1
+XR37 r37 r36 vdd_mem vss sg13g2_inv_1
+XRL37 rl37 r37 vdd_mem vss sg13g2_inv_1
+XR38 r38 r37 vdd_mem vss sg13g2_inv_1
+XRL38 rl38 r38 vdd_mem vss sg13g2_inv_1
+XR39 r39 r38 vdd_mem vss sg13g2_inv_1
+XRL39 rl39 r39 vdd_mem vss sg13g2_inv_1
+XR40 r40 r39 vdd_mem vss sg13g2_inv_1
+XRL40 rl40 r40 vdd_mem vss sg13g2_inv_1
+XR41 r41 r40 vdd_mem vss sg13g2_inv_1
+XRL41 rl41 r41 vdd_mem vss sg13g2_inv_1
+XR42 r42 r41 vdd_mem vss sg13g2_inv_1
+XRL42 rl42 r42 vdd_mem vss sg13g2_inv_1
+XR43 r43 r42 vdd_mem vss sg13g2_inv_1
+XRL43 rl43 r43 vdd_mem vss sg13g2_inv_1
+XR44 r44 r43 vdd_mem vss sg13g2_inv_1
+XRL44 rl44 r44 vdd_mem vss sg13g2_inv_1
+XR45 r45 r44 vdd_mem vss sg13g2_inv_1
+XRL45 rl45 r45 vdd_mem vss sg13g2_inv_1
+XR46 r46 r45 vdd_mem vss sg13g2_inv_1
+XRL46 rl46 r46 vdd_mem vss sg13g2_inv_1
+XR47 r47 r46 vdd_mem vss sg13g2_inv_1
+XRL47 rl47 r47 vdd_mem vss sg13g2_inv_1
+XR48 r48 r47 vdd_mem vss sg13g2_inv_1
+XRL48 rl48 r48 vdd_mem vss sg13g2_inv_1
+XR49 r49 r48 vdd_mem vss sg13g2_inv_1
+XRL49 rl49 r49 vdd_mem vss sg13g2_inv_1
+XR50 r50 r49 vdd_mem vss sg13g2_inv_1
+XRL50 rl50 r50 vdd_mem vss sg13g2_inv_1
+XR51 r51 r50 vdd_mem vss sg13g2_inv_1
+XRL51 rl51 r51 vdd_mem vss sg13g2_inv_1
+XR52 r52 r51 vdd_mem vss sg13g2_inv_1
+XRL52 rl52 r52 vdd_mem vss sg13g2_inv_1
+XR53 r53 r52 vdd_mem vss sg13g2_inv_1
+XRL53 rl53 r53 vdd_mem vss sg13g2_inv_1
+XR54 r54 r53 vdd_mem vss sg13g2_inv_1
+XRL54 rl54 r54 vdd_mem vss sg13g2_inv_1
+XR55 r55 r54 vdd_mem vss sg13g2_inv_1
+XRL55 rl55 r55 vdd_mem vss sg13g2_inv_1
+XR56 r56 r55 vdd_mem vss sg13g2_inv_1
+XRL56 rl56 r56 vdd_mem vss sg13g2_inv_1
+XR57 r57 r56 vdd_mem vss sg13g2_inv_1
+XRL57 rl57 r57 vdd_mem vss sg13g2_inv_1
+XR58 r58 r57 vdd_mem vss sg13g2_inv_1
+XRL58 rl58 r58 vdd_mem vss sg13g2_inv_1
+XR59 r59 r58 vdd_mem vss sg13g2_inv_1
+XRL59 rl59 r59 vdd_mem vss sg13g2_inv_1
+XR60 r60 r59 vdd_mem vss sg13g2_inv_1
+XRL60 rl60 r60 vdd_mem vss sg13g2_inv_1
+XR61 r61 r60 vdd_mem vss sg13g2_inv_1
+XRL61 rl61 r61 vdd_mem vss sg13g2_inv_1
+XR62 r62 r61 vdd_mem vss sg13g2_inv_1
+XRL62 rl62 r62 vdd_mem vss sg13g2_inv_1
+XR63 r63 r62 vdd_mem vss sg13g2_inv_1
+XRL63 rl63 r63 vdd_mem vss sg13g2_inv_1
+XR64 r64 r63 vdd_mem vss sg13g2_inv_1
+XRL64 rl64 r64 vdd_mem vss sg13g2_inv_1
+XCB cap r64 vdd_mem vss sg13g2_buf_8
+XM1 t1 clk vdd_cpu vss sg13g2_inv_1
+XF1 q1 cap t1 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM2 t2 t1 vdd_cpu vss sg13g2_inv_1
+XF2 q2 cap t2 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM3 t3 t2 vdd_cpu vss sg13g2_inv_1
+XF3 q3 cap t3 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM4 t4 t3 vdd_cpu vss sg13g2_inv_1
+XF4 q4 cap t4 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM5 t5 t4 vdd_cpu vss sg13g2_inv_1
+XF5 q5 cap t5 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM6 t6 t5 vdd_cpu vss sg13g2_inv_1
+XF6 q6 cap t6 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM7 t7 t6 vdd_cpu vss sg13g2_inv_1
+XF7 q7 cap t7 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM8 t8 t7 vdd_cpu vss sg13g2_inv_1
+XF8 q8 cap t8 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM9 t9 t8 vdd_cpu vss sg13g2_inv_1
+XF9 q9 cap t9 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM10 t10 t9 vdd_cpu vss sg13g2_inv_1
+XF10 q10 cap t10 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM11 t11 t10 vdd_cpu vss sg13g2_inv_1
+XF11 q11 cap t11 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM12 t12 t11 vdd_cpu vss sg13g2_inv_1
+XF12 q12 cap t12 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM13 t13 t12 vdd_cpu vss sg13g2_inv_1
+XF13 q13 cap t13 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM14 t14 t13 vdd_cpu vss sg13g2_inv_1
+XF14 q14 cap t14 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM15 t15 t14 vdd_cpu vss sg13g2_inv_1
+XF15 q15 cap t15 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM16 t16 t15 vdd_cpu vss sg13g2_inv_1
+XF16 q16 cap t16 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM17 t17 t16 vdd_cpu vss sg13g2_inv_1
+XF17 q17 cap t17 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM18 t18 t17 vdd_cpu vss sg13g2_inv_1
+XF18 q18 cap t18 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM19 t19 t18 vdd_cpu vss sg13g2_inv_1
+XF19 q19 cap t19 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM20 t20 t19 vdd_cpu vss sg13g2_inv_1
+XF20 q20 cap t20 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM21 t21 t20 vdd_cpu vss sg13g2_inv_1
+XF21 q21 cap t21 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM22 t22 t21 vdd_cpu vss sg13g2_inv_1
+XF22 q22 cap t22 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM23 t23 t22 vdd_cpu vss sg13g2_inv_1
+XF23 q23 cap t23 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM24 t24 t23 vdd_cpu vss sg13g2_inv_1
+XF24 q24 cap t24 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM25 t25 t24 vdd_cpu vss sg13g2_inv_1
+XF25 q25 cap t25 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM26 t26 t25 vdd_cpu vss sg13g2_inv_1
+XF26 q26 cap t26 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM27 t27 t26 vdd_cpu vss sg13g2_inv_1
+XF27 q27 cap t27 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM28 t28 t27 vdd_cpu vss sg13g2_inv_1
+XF28 q28 cap t28 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM29 t29 t28 vdd_cpu vss sg13g2_inv_1
+XF29 q29 cap t29 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM30 t30 t29 vdd_cpu vss sg13g2_inv_1
+XF30 q30 cap t30 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM31 t31 t30 vdd_cpu vss sg13g2_inv_1
+XF31 q31 cap t31 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM32 t32 t31 vdd_cpu vss sg13g2_inv_1
+XF32 q32 cap t32 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM33 t33 t32 vdd_cpu vss sg13g2_inv_1
+XF33 q33 cap t33 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM34 t34 t33 vdd_cpu vss sg13g2_inv_1
+XF34 q34 cap t34 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM35 t35 t34 vdd_cpu vss sg13g2_inv_1
+XF35 q35 cap t35 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM36 t36 t35 vdd_cpu vss sg13g2_inv_1
+XF36 q36 cap t36 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM37 t37 t36 vdd_cpu vss sg13g2_inv_1
+XF37 q37 cap t37 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM38 t38 t37 vdd_cpu vss sg13g2_inv_1
+XF38 q38 cap t38 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM39 t39 t38 vdd_cpu vss sg13g2_inv_1
+XF39 q39 cap t39 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM40 t40 t39 vdd_cpu vss sg13g2_inv_1
+XF40 q40 cap t40 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM41 t41 t40 vdd_cpu vss sg13g2_inv_1
+XF41 q41 cap t41 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM42 t42 t41 vdd_cpu vss sg13g2_inv_1
+XF42 q42 cap t42 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM43 t43 t42 vdd_cpu vss sg13g2_inv_1
+XF43 q43 cap t43 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM44 t44 t43 vdd_cpu vss sg13g2_inv_1
+XF44 q44 cap t44 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM45 t45 t44 vdd_cpu vss sg13g2_inv_1
+XF45 q45 cap t45 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM46 t46 t45 vdd_cpu vss sg13g2_inv_1
+XF46 q46 cap t46 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM47 t47 t46 vdd_cpu vss sg13g2_inv_1
+XF47 q47 cap t47 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM48 t48 t47 vdd_cpu vss sg13g2_inv_1
+XF48 q48 cap t48 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM49 t49 t48 vdd_cpu vss sg13g2_inv_1
+XF49 q49 cap t49 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM50 t50 t49 vdd_cpu vss sg13g2_inv_1
+XF50 q50 cap t50 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM51 t51 t50 vdd_cpu vss sg13g2_inv_1
+XF51 q51 cap t51 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM52 t52 t51 vdd_cpu vss sg13g2_inv_1
+XF52 q52 cap t52 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM53 t53 t52 vdd_cpu vss sg13g2_inv_1
+XF53 q53 cap t53 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM54 t54 t53 vdd_cpu vss sg13g2_inv_1
+XF54 q54 cap t54 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM55 t55 t54 vdd_cpu vss sg13g2_inv_1
+XF55 q55 cap t55 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM56 t56 t55 vdd_cpu vss sg13g2_inv_1
+XF56 q56 cap t56 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM57 t57 t56 vdd_cpu vss sg13g2_inv_1
+XF57 q57 cap t57 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM58 t58 t57 vdd_cpu vss sg13g2_inv_1
+XF58 q58 cap t58 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM59 t59 t58 vdd_cpu vss sg13g2_inv_1
+XF59 q59 cap t59 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM60 t60 t59 vdd_cpu vss sg13g2_inv_1
+XF60 q60 cap t60 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM61 t61 t60 vdd_cpu vss sg13g2_inv_1
+XF61 q61 cap t61 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM62 t62 t61 vdd_cpu vss sg13g2_inv_1
+XF62 q62 cap t62 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM63 t63 t62 vdd_cpu vss sg13g2_inv_1
+XF63 q63 cap t63 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM64 t64 t63 vdd_cpu vss sg13g2_inv_1
+XF64 q64 cap t64 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM65 t65 t64 vdd_cpu vss sg13g2_inv_1
+XF65 q65 cap t65 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM66 t66 t65 vdd_cpu vss sg13g2_inv_1
+XF66 q66 cap t66 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM67 t67 t66 vdd_cpu vss sg13g2_inv_1
+XF67 q67 cap t67 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM68 t68 t67 vdd_cpu vss sg13g2_inv_1
+XF68 q68 cap t68 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM69 t69 t68 vdd_cpu vss sg13g2_inv_1
+XF69 q69 cap t69 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM70 t70 t69 vdd_cpu vss sg13g2_inv_1
+XF70 q70 cap t70 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM71 t71 t70 vdd_cpu vss sg13g2_inv_1
+XF71 q71 cap t71 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM72 t72 t71 vdd_cpu vss sg13g2_inv_1
+XF72 q72 cap t72 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM73 t73 t72 vdd_cpu vss sg13g2_inv_1
+XF73 q73 cap t73 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM74 t74 t73 vdd_cpu vss sg13g2_inv_1
+XF74 q74 cap t74 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM75 t75 t74 vdd_cpu vss sg13g2_inv_1
+XF75 q75 cap t75 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM76 t76 t75 vdd_cpu vss sg13g2_inv_1
+XF76 q76 cap t76 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM77 t77 t76 vdd_cpu vss sg13g2_inv_1
+XF77 q77 cap t77 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM78 t78 t77 vdd_cpu vss sg13g2_inv_1
+XF78 q78 cap t78 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM79 t79 t78 vdd_cpu vss sg13g2_inv_1
+XF79 q79 cap t79 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+XM80 t80 t79 vdd_cpu vss sg13g2_inv_1
+XF80 q80 cap t80 vdd_mem vdd_mem vss sg13g2_dfrbpq_1
+.ends droop_detector
