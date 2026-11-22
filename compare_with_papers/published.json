@@ -1,0 +1,1233 @@
+{
+  "sg13g2_process_spec": {
+    "lv_nmos": [
+      {
+        "parameter": "VTN10x013",
+        "published": {
+          "min": 0.43,
+          "target": 0.5,
+          "max": 0.55
+        },
+        "units": "V",
+        "conditions": "W/L = 10/0.13 um, VDS = +0.05 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C (Sec 1.2 p. 6)",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.1, p. 7; Attachment A.a1, p. 22",
+        "quote": "Threshold Voltage Short Channel Device | VTN10x013 | V | 0.43 | 0.50 | 0.55 | A.a1 | WxL = 10 x 0.13 um^2"
+      },
+      {
+        "parameter": "VTN10x10",
+        "published": {
+          "min": 0.16,
+          "target": 0.2,
+          "max": 0.24
+        },
+        "units": "V",
+        "conditions": "W/L = 10/10 um, VDS = +0.05 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.1, p. 7; Attachment A.a1, p. 22",
+        "quote": "Threshold Voltage Long Channel Device | VTN10x10 | V | 0.16 | 0.20 | 0.24 | A.a1 | WxL = 10 x 10 um^2"
+      },
+      {
+        "parameter": "VTN015x013",
+        "published": {
+          "min": 0.4,
+          "target": 0.54,
+          "max": 0.68
+        },
+        "units": "V",
+        "conditions": "W/L = 0.15/0.13 um, VDS = +0.05 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.1, p. 7; Attachment A.a1, p. 22",
+        "quote": "Threshold Voltage Small Channel Device | VTN015x013 | V | 0.4 | 0.54 | 0.68 | A.a1 | WxL = 0.15 x 0.13 um^2"
+      },
+      {
+        "parameter": "IDSN013",
+        "published": {
+          "min": 380,
+          "target": 480,
+          "max": 600
+        },
+        "units": "uA/um",
+        "conditions": "W/L = 10/0.13 um, VDS = VGS = +1.2 V, VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.1, p. 7; Attachment A.b1, p. 22",
+        "quote": "Saturation Current Short Channel Device | IDSN013 | uA/um | 380 | 480 | 600 | A.b1 | WxL = 10 x 0.13 um^2"
+      },
+      {
+        "parameter": "IOFFN013",
+        "published": {
+          "min": null,
+          "target": -10,
+          "max": -9
+        },
+        "units": "LOG10(A/um)",
+        "conditions": "W/L = 10/0.13 um, VDS = +1.2 V, VGS = VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.1, p. 7; Attachment A.c1, p. 22",
+        "quote": "Off-Current Short Channel Device | IOFFN013 | LOG10 (A/um) | (blank) | -10 | -9 | A.c1 | WxL = 10 x 0.13 um^2"
+      }
+    ],
+    "lv_pmos": [
+      {
+        "parameter": "VTP10x013",
+        "published": {
+          "min": -0.53,
+          "target": -0.47,
+          "max": -0.41
+        },
+        "units": "V",
+        "conditions": "W/L = 10/0.13 um, VDS = -0.05 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.2, p. 8; Attachment A.a1, p. 22",
+        "quote": "Threshold Voltage Short Channel Device | VTP10x013 | V | -0.53 | -0.47 | -0.41 | A.a1 | WxL = 10 x 0.13 um^2"
+      },
+      {
+        "parameter": "VTP10x10",
+        "published": {
+          "min": -0.41,
+          "target": -0.36,
+          "max": -0.31
+        },
+        "units": "V",
+        "conditions": "W/L = 10/10 um, VDS = -0.05 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.2, p. 8; Attachment A.a1, p. 22",
+        "quote": "Threshold Voltage Long Channel Device | VTP10x10 | V | -0.41 | -0.36 | -0.31 | A.a1 | WxL = 10 x 10 um^2"
+      },
+      {
+        "parameter": "VTP015x013",
+        "published": {
+          "min": -0.58,
+          "target": -0.48,
+          "max": -0.38
+        },
+        "units": "V",
+        "conditions": "W/L = 0.15/0.13 um, VDS = -0.05 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.2, p. 8; Attachment A.a1, p. 22",
+        "quote": "Threshold Voltage Small Channel Device | VTP015x013 | V | -0.58 | -0.48 | -0.38 | A.a1 | WxL = 0.15 x 0.13 um^2"
+      },
+      {
+        "parameter": "IDSP013",
+        "published": {
+          "min": -270,
+          "target": -215,
+          "max": -170
+        },
+        "units": "uA/um",
+        "conditions": "W/L = 10/0.13 um, VDS = VGS = -1.2 V, VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.2, p. 8; Attachment A.b1, p. 22",
+        "quote": "Saturation Current Short Channel Device | IDSP013 | uA/um | -270 | -215 | -170 | A.b1 | WxL = 10 x 0.13 um^2"
+      },
+      {
+        "parameter": "IOFFP013",
+        "published": {
+          "min": null,
+          "target": -10.3,
+          "max": -9.3
+        },
+        "units": "LOG10(A/um)",
+        "conditions": "W/L = 10/0.13 um, VDS = -1.2 V, VGS = VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.2, p. 8; Attachment A.c1, p. 22",
+        "quote": "Off-Current Short Channel Device | IOFFP013 | LOG10 (A/um) | (blank) | -10.3 | -9,3 | A.c1 | WxL = 10 x 0.13 um^2"
+      }
+    ],
+    "hv_nmos": [
+      {
+        "parameter": "VTNHV10x045",
+        "published": {
+          "min": 0.63,
+          "target": 0.7,
+          "max": 0.77
+        },
+        "units": "V",
+        "conditions": "W/L = 10/0.45 um, VDS = +0.1 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.4, p. 9; Attachment A.a2, p. 22",
+        "quote": "Threshold Voltage Short Channel Device | VTNHV10x045 | V | 0.63 | 0.70 | 0.77 | A.a2 | WxL = 10 x 0.45 um^2"
+      },
+      {
+        "parameter": "VTNHV10x10",
+        "published": {
+          "min": 0.65,
+          "target": 0.69,
+          "max": 0.73
+        },
+        "units": "V",
+        "conditions": "W/L = 10/10 um, VDS = +0.1 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.4, p. 9; Attachment A.a2, p. 22",
+        "quote": "Threshold Voltage Long Channel Device | VTNHV10x10 | V | 0.65 | 0.69 | 0.73 | A.a2 | WxL = 10 x 10 um^2"
+      },
+      {
+        "parameter": "VTNHV030x045",
+        "published": {
+          "min": 0.59,
+          "target": 0.67,
+          "max": 0.75
+        },
+        "units": "V",
+        "conditions": "W/L = 0.30/0.45 um, VDS = +0.1 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.4, p. 9; Attachment A.a2, p. 22",
+        "quote": "Threshold Voltage Small Channel Device | VTNHV030x045 | V | 0.59 | 0.67 | 0.75 | A.a2 | WxL = 0.30 x 0.45 um^2"
+      },
+      {
+        "parameter": "IDSNHV045",
+        "published": {
+          "min": 480,
+          "target": 560,
+          "max": 640
+        },
+        "units": "uA/um",
+        "conditions": "W/L = 10/0.45 um, VDS = VGS = +3.3 V, VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.4, p. 9; Attachment A.b2, p. 22",
+        "quote": "Saturation Current Short Channel Device | IDSNHV045 | uA/um | 480 | 560 | 640 | A.b2 | WxL = 10 x 0.45 um^2"
+      },
+      {
+        "parameter": "IOFFNHV045",
+        "published": {
+          "min": null,
+          "target": -12.5,
+          "max": -11.0
+        },
+        "units": "LOG10(A/um)",
+        "conditions": "W/L = 10/0.45 um, VDS = +3.3 V, VGS = VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.4, p. 9; Attachment A.c2, p. 22",
+        "quote": "Off-Current Short Channel Device | IOFFNHV045 | LOG10 (A/um) | (blank) | -12.5 | -11.0 | A.c2 | WxL = 10 x 0.45 um^2"
+      }
+    ],
+    "hv_pmos": [
+      {
+        "parameter": "VTPHV10x04",
+        "published": {
+          "min": -0.71,
+          "target": -0.65,
+          "max": -0.59
+        },
+        "units": "V",
+        "conditions": "W/L = 10/0.4 um, VDS = -0.1 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.5, p. 9; Attachment A.a2, p. 22",
+        "quote": "Threshold Voltage Short Channel Device | VTPHV10x04 | V | -0.71 | -0.65 | -0.59 | A.a2 | WxL = 10 x 0.4 um^2"
+      },
+      {
+        "parameter": "VTPHV10x10",
+        "published": {
+          "min": -0.78,
+          "target": -0.7,
+          "max": -0.64
+        },
+        "units": "V",
+        "conditions": "W/L = 10/10 um, VDS = -0.1 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.5, p. 9; Attachment A.a2, p. 22",
+        "quote": "Threshold Voltage Long Channel Device | VTPHV10x10 | V | -0.78 | -0.70 | -0.64 | A.a2 | WxL = 10 x 10 um^2"
+      },
+      {
+        "parameter": "VTPHV03x04",
+        "published": {
+          "min": -0.71,
+          "target": -0.64,
+          "max": -0.57
+        },
+        "units": "V",
+        "conditions": "W/L = 0.3/0.4 um, VDS = -0.1 V, VBS = 0 V, extrapolated from max slope VT = Vo - VDS/2, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.5, p. 9; Attachment A.a2, p. 22",
+        "quote": "Threshold Voltage Small Channel Device | VTPHV03x04 | V | -0.71 | -0.64 | -0.57 | A.a2 | WxL = 0.3 x 0.4 um^2"
+      },
+      {
+        "parameter": "IDSPHV04",
+        "published": {
+          "min": -290,
+          "target": -240,
+          "max": -190
+        },
+        "units": "uA/um",
+        "conditions": "W/L = 10/0.4 um, VDS = VGS = -3.3 V, VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.5, p. 9; Attachment A.b2, p. 22",
+        "quote": "Saturation Current Short Channel Device | IDSPHV04 | uA/um | -290 | -240 | -190 | A.b2 | WxL = 10 x 0.4 um^2"
+      },
+      {
+        "parameter": "IOFFPHV04",
+        "published": {
+          "min": null,
+          "target": -12.5,
+          "max": -11.5
+        },
+        "units": "LOG10(A/um)",
+        "conditions": "W/L = 10/0.4 um, VDS = -3.3 V, VGS = VBS = 0 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.5, p. 9; Attachment A.c2, p. 22",
+        "quote": "Off-Current Short Channel Device | IOFFPHV04 | LOG10 (A/um) | (blank) | -12.5 | -11.5 | A.c2 | WxL = 10 x 0.4 um^2"
+      }
+    ],
+    "gm_over_id": {
+      "parameter": "gm/Id",
+      "published": null,
+      "units": "1/V",
+      "conditions": "Not present in document",
+      "document": "IHP SG13G2 open source Process Specification",
+      "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+      "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+      "location": "Sections 2.1-2.6, pp. 7-10",
+      "quote": "Not printed anywhere in SG13G2_os_process_spec.pdf Rev. 1.2; only Vth, Idsat, Ioff, DIBL, SS, BVDSS, Leff, Weff, Cmiller, Cjunction, and junction breakdown appear for MOS devices."
+    },
+    "rppd": [
+      {
+        "parameter": "RSRPPD",
+        "published": {
+          "min": 235,
+          "target": 260,
+          "max": 285
+        },
+        "units": "Ohm/sq",
+        "conditions": "Unsalicided p-doped gate poly, voltage across two series test resistors = 0.5 V, T0 = 27 C (width >= 2 um recommended)",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11; Attachment A.i, p. 23",
+        "quote": "Sheet Resistance | RSRPPD | Ohm | 235 | 260 | 285 | A.i"
+      },
+      {
+        "parameter": "DWRPPD",
+        "published": {
+          "min": -24,
+          "target": 6,
+          "max": 36
+        },
+        "units": "nm",
+        "conditions": "Extracted from R1 and RN parallel stripe test structures at 0.5 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11; Attachment A.i, p. 23",
+        "quote": "Line Width Delta | DWRPPD | nm | -24 | 6 | 36 | A.i"
+      },
+      {
+        "parameter": "TC1NRPPD",
+        "published": {
+          "min": null,
+          "target": 170,
+          "max": null
+        },
+        "units": "ppm/K",
+        "conditions": "Temperature range -40 C to 125 C, T0 = 300 K",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11; Attachment A.af, p. 24",
+        "quote": "Temperature Coefficients | TC1NRPPD | ppm/K | (blank) | 170 | (blank) | A.af"
+      },
+      {
+        "parameter": "TC2NRPPD",
+        "published": {
+          "min": null,
+          "target": 0.4,
+          "max": null
+        },
+        "units": "ppm/K^2",
+        "conditions": "Temperature range -40 C to 125 C, T0 = 300 K",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11; Attachment A.af, p. 24",
+        "quote": "Temperature Coefficients | TC2NRPPD | ppm/K^2 | (blank) | 0.4 | (blank) | A.af"
+      },
+      {
+        "parameter": "MATRPPD",
+        "published": {
+          "min": null,
+          "target": 15,
+          "max": null
+        },
+        "units": "nm",
+        "conditions": "Least square fit sigma(dR/R) = k * A^(-0.5)",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11; Attachment A.ac, p. 24",
+        "quote": "Matching Coefficient | MATRPPD | nm | (blank) | 15 | (blank) | A.ac"
+      },
+      {
+        "parameter": "RCRPPD",
+        "published": {
+          "min": null,
+          "target": 35,
+          "max": null
+        },
+        "units": "Ohm*um",
+        "conditions": "Salicide to GatPoly contact resistance contribution 2*RC2POLY/W",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11; Attachment A.ae, p. 24",
+        "quote": "Metal-to-Body-Resistance | RCRPPD | Ohm*um | (blank) | 35 | (blank) | A.ae"
+      },
+      {
+        "parameter": "TC3NRPPD",
+        "published": {
+          "min": null,
+          "target": -950,
+          "max": null
+        },
+        "units": "ppm/K",
+        "conditions": "Information parameter, -40 C to 125 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11",
+        "quote": "Temperature Coefficient Metal-toBody-Resistance | TC3NRPPD | ppm/K | (blank) | -950 | (blank)"
+      },
+      {
+        "parameter": "IMRPPD",
+        "published": {
+          "min": null,
+          "target": null,
+          "max": 1.2
+        },
+        "units": "mA/um",
+        "conditions": "11 years @ 105 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.8, p. 11",
+        "quote": "Max. Current Density | IMRPPD | mA/um | (blank) | (blank) | 1.2 | 11 years @105 C"
+      }
+    ],
+    "rhigh": [
+      {
+        "parameter": "RSRHIGH",
+        "published": {
+          "min": 1160,
+          "target": 1360,
+          "max": 1560
+        },
+        "units": "Ohm/sq",
+        "conditions": "Unsalicided partially compensated gate poly, 0.5 V across series test structures, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12; Attachment A.i, p. 23",
+        "quote": "Sheet Resistance | RSRHIGH | Ohm | 1160 | 1360 | 1560 | A.i"
+      },
+      {
+        "parameter": "DWRHIGH",
+        "published": {
+          "min": -80,
+          "target": -40,
+          "max": 0
+        },
+        "units": "nm",
+        "conditions": "Extracted from R1 and RN parallel stripe test structures at 0.5 V, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12; Attachment A.i, p. 23",
+        "quote": "Line Width Delta | DWRHIGH | nm | -80 | -40 | 0 | A.i"
+      },
+      {
+        "parameter": "TC1NRHIGH",
+        "published": {
+          "min": null,
+          "target": -2300,
+          "max": null
+        },
+        "units": "ppm/K",
+        "conditions": "Temperature range -40 C to 125 C, T0 = 300 K",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12; Attachment A.af, p. 24",
+        "quote": "Temperature Coefficients | TC1NRHIGH | ppm/K | (blank) | -2300 | (blank) | A.af"
+      },
+      {
+        "parameter": "TC2NRHIGH",
+        "published": {
+          "min": null,
+          "target": 2.1,
+          "max": null
+        },
+        "units": "ppm/K^2",
+        "conditions": "Temperature range -40 C to 125 C, T0 = 300 K",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12; Attachment A.af, p. 24",
+        "quote": "Temperature Coefficients | TC2NRHIGH | ppm/K^2 | (blank) | 2.1 | (blank) | A.af"
+      },
+      {
+        "parameter": "MATRHIGH",
+        "published": {
+          "min": null,
+          "target": 48,
+          "max": null
+        },
+        "units": "nm",
+        "conditions": "Least square fit sigma(dR/R) = k * A^(-0.5)",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12; Attachment A.ac, p. 24",
+        "quote": "Matching Coefficient | MATRHIGH | nm | (blank) | 48 | (blank) | A.ac"
+      },
+      {
+        "parameter": "RCRHIGH",
+        "published": {
+          "min": null,
+          "target": 80,
+          "max": null
+        },
+        "units": "Ohm*um",
+        "conditions": "Salicide to GatPoly contact resistance contribution 2*RC2POLY/W",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12; Attachment A.ae, p. 24",
+        "quote": "Metal-to-Body-Resistance | RCRHIGH | Ohm*um | (blank) | 80 | (blank) | A.ae"
+      },
+      {
+        "parameter": "IMRHIGH",
+        "published": {
+          "min": null,
+          "target": null,
+          "max": 0.6
+        },
+        "units": "mA/um",
+        "conditions": "11 years @ 105 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.9, p. 12",
+        "quote": "Max. Current Density | IMRHIGH | mA/um | (blank) | (blank) | 0.6 | 11 years @105 C"
+      }
+    ],
+    "mim_capacitor": [
+      {
+        "parameter": "CMIMA",
+        "published": {
+          "min": 1.35,
+          "target": 1.5,
+          "max": 1.65
+        },
+        "units": "fF/um^2",
+        "conditions": "V = 0 V, f = 100 kHz, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.k, p. 23",
+        "quote": "Specific Area Capacitance | CMIMA | fF/um^2 | 1.35 | 1.5 | 1.65 | A.k"
+      },
+      {
+        "parameter": "CMIMP",
+        "published": {
+          "min": null,
+          "target": 40,
+          "max": null
+        },
+        "units": "aF/um",
+        "conditions": "V = 0 V, f = 100 kHz, T0 = 27 C",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.l, p. 23",
+        "quote": "Specific Capacitance MIM Perimeter | CMIMP | aF/um | (blank) | 40 | (blank) | A.l"
+      },
+      {
+        "parameter": "BVMIM",
+        "published": {
+          "min": 15,
+          "target": 23,
+          "max": null
+        },
+        "units": "V",
+        "conditions": "VBOTTOM = 0 V, JBVMIM = 1 pA/um^2 forced into top plate",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.y, p. 24",
+        "quote": "Breakdown Voltage | BVMIM | V | 15 | 23 | (blank) | A.y"
+      },
+      {
+        "parameter": "VCMIM1",
+        "published": {
+          "min": null,
+          "target": -26,
+          "max": null
+        },
+        "units": "ppm/V",
+        "conditions": "T = 300 K, f = 1 MHz, VMIM = -10 V to +10 V at lower electrode, top grounded",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.ah, p. 24",
+        "quote": "Voltage Coefficients | VCMIM1 | ppm/V | (blank) | -26 | (blank) | A.ah"
+      },
+      {
+        "parameter": "VCMIM2",
+        "published": {
+          "min": null,
+          "target": 5,
+          "max": null
+        },
+        "units": "ppm/V^2",
+        "conditions": "T = 300 K, f = 1 MHz, VMIM = -10 V to +10 V at lower electrode, top grounded",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.ah, p. 24",
+        "quote": "Voltage Coefficients | VCMIM2 | ppm/V^2 | (blank) | 5 | (blank) | A.ah"
+      },
+      {
+        "parameter": "TCMIM1",
+        "published": {
+          "min": null,
+          "target": 3.6,
+          "max": null
+        },
+        "units": "ppm/K",
+        "conditions": "VMIM = 0 V, f = 1 MHz, -40 C to 125 C, T0 = 300 K",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.ad, p. 24",
+        "quote": "Temperature Coefficient | TCMIM1 | ppm/K | (blank) | 3.6 | (blank) | A.ad"
+      },
+      {
+        "parameter": "TCMIM2",
+        "published": {
+          "min": null,
+          "target": 0.002,
+          "max": null
+        },
+        "units": "ppm/K^2",
+        "conditions": "VMIM = 0 V, f = 1 MHz, -40 C to 125 C, T0 = 300 K",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13; Attachment A.ad, p. 24",
+        "quote": "Temperature Coefficient | TCMIM2 | ppm/K^2 | (blank) | 0.002 | (blank) | A.ad"
+      },
+      {
+        "parameter": "KCMIM",
+        "published": null,
+        "units": "nm",
+        "conditions": "Table row present with empty Min/Target/Max cells",
+        "document": "IHP SG13G2 open source Process Specification",
+        "revision": "Rev. 1.2 (2023_12_20), IHP-Open-PDK commit e73adb4045731ddec21634146d536380057f6a26",
+        "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/blob/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf",
+        "location": "Section 2.12, p. 13",
+        "quote": "Matching Coefficient | KCMIM | nm | (blank) | (blank) | (blank)"
+      }
+    ]
+  },
+  "jku_5t_ota": {
+    "devices": [
+      {
+        "name": "M1",
+        "model": "sg13_lv_nmos",
+        "w_um": 2.0,
+        "l_um": 5.0,
+        "ng": 1,
+        "m": 1,
+        "role": "differential input pair",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M1 l=5u w=2u ng=1 m=1 model=sg13_lv_nmos"
+      },
+      {
+        "name": "M2",
+        "model": "sg13_lv_nmos",
+        "w_um": 2.0,
+        "l_um": 5.0,
+        "ng": 1,
+        "m": 1,
+        "role": "differential input pair",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M2 l=5u w=2u ng=1 m=1 model=sg13_lv_nmos"
+      },
+      {
+        "name": "M3",
+        "model": "sg13_lv_pmos",
+        "w_um": 1.5,
+        "l_um": 5.0,
+        "ng": 1,
+        "m": 1,
+        "role": "PMOS active load mirror",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M3 l=5u w=1.5u ng=1 m=1 model=sg13_lv_pmos"
+      },
+      {
+        "name": "M4",
+        "model": "sg13_lv_pmos",
+        "w_um": 1.5,
+        "l_um": 5.0,
+        "ng": 1,
+        "m": 1,
+        "role": "PMOS active load mirror",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M4 l=5u w=1.5u ng=1 m=1 model=sg13_lv_pmos"
+      },
+      {
+        "name": "M5",
+        "model": "sg13_lv_nmos",
+        "w_um": 0.5,
+        "l_um": 5.0,
+        "ng": 1,
+        "m": 1,
+        "role": "tail current source",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M5 l=5u w=0.5u ng=1 m=1 model=sg13_lv_nmos"
+      },
+      {
+        "name": "M6",
+        "model": "sg13_lv_nmos",
+        "w_um": 2.5,
+        "l_um": 5.0,
+        "ng": 5,
+        "m": 1,
+        "role": "diode-connected bias mirror (5:1 ratio to M5 from 20 uA ibias)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M6 l=5u w=2.5u ng=5 m=1 model=sg13_lv_nmos"
+      },
+      {
+        "name": "M7,M9,M10,M12",
+        "model": "sg13_lv_nmos",
+        "w_um": 0.5,
+        "l_um": 0.13,
+        "ng": 1,
+        "m": 1,
+        "role": "enable / power-down switches and inverter NMOS",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M7/M9/M10/M12 l=0.13u w=0.5u ng=1 m=1 model=sg13_lv_nmos"
+      },
+      {
+        "name": "M8,M11,M13",
+        "model": "sg13_lv_pmos",
+        "w_um": 1.5,
+        "l_um": 0.13,
+        "ng": 1,
+        "m": 1,
+        "role": "enable / power-down switches and inverter PMOS",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/xschem/ota-5t.sch",
+        "location": "xschem/ota-5t.sch",
+        "quote": "name=M8/M11/M13 l=0.13u w=1.5u ng=1 m=1 model=sg13_lv_pmos"
+      }
+    ],
+    "simulated_specs": [
+      {
+        "parameter": "gain",
+        "published": {
+          "min": 0.987,
+          "typ": 1.0,
+          "max": 1.007,
+          "min_limit": 0.97,
+          "max_limit": 1.03
+        },
+        "units": "V/V",
+        "conditions": "Unity-gain buffer, schematic ngspice CACE, vdd = 1.45/1.5/1.55 V, ibias = 20 uA, cload = 50 fF, vin = 0.7/0.8/0.9 V, temp = -40/27/130 C, corners ss/sf/tt/fs/ff",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md, CACE Summary table row 1",
+        "quote": "| Output voltage ratio | ngspice | gain | 0.97 V/V | 0.987 V/V | any | 1.000 V/V | 1.03 V/V | 1.007 V/V | Pass |"
+      },
+      {
+        "parameter": "bw",
+        "published": {
+          "min": 15550400.0,
+          "typ": 26912100.0,
+          "max": 34052200.0,
+          "min_limit": 10000000.0,
+          "max_limit": null
+        },
+        "units": "Hz",
+        "conditions": "Closed-loop -3 dB bandwidth, schematic ngspice CACE, vdd = 1.45/1.5/1.55 V, ibias = 20 uA, cload = 50 fF, vin = 0.7/0.8/0.9 V, temp = -40/27/130 C, corners ss/sf/tt/fs/ff",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md, CACE Summary table row 2",
+        "quote": "| Bandwidth | ngspice | bw | 10e6 Hz | 15550400.000 Hz | any | 26912100.000 Hz | any | 34052200.000 Hz | Pass |"
+      },
+      {
+        "parameter": "gain_mc",
+        "published": {
+          "min": 0.994,
+          "typ": 1.0,
+          "max": 1.005,
+          "min_limit": null,
+          "max_limit": null
+        },
+        "units": "V/V",
+        "conditions": "100-iteration Monte Carlo (tt_mismatch), vdd = 1.5 V, ibias = 20 uA, cload = 50 fF, vin = 0.8 V, temp = 27 C",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md, CACE Summary table row 3",
+        "quote": "| Output voltage ratio (MC) | ngspice | gain_mc | any | 0.994 V/V | any | 1.000 V/V | any | 1.005 V/V | Pass |"
+      },
+      {
+        "parameter": "bw_mc",
+        "published": {
+          "min": 26633900.0,
+          "typ": 26917750.0,
+          "max": 27266300.0,
+          "min_limit": 10000000.0,
+          "max_limit": null
+        },
+        "units": "Hz",
+        "conditions": "100-iteration Monte Carlo (tt_mismatch), vdd = 1.5 V, ibias = 20 uA, cload = 50 fF, vin = 0.8 V, temp = 27 C",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md, CACE Summary table row 4",
+        "quote": "| Bandwidth (MC) | ngspice | bw_mc | 10e6 Hz | 26633900.000 Hz | any | 26917750.000 Hz | any | 27266300.000 Hz | Pass |"
+      },
+      {
+        "parameter": "noise",
+        "published": {
+          "min": 0.308,
+          "typ": 0.371,
+          "max": 0.454,
+          "min_limit": null,
+          "max_limit": 1.0
+        },
+        "units": "mV rms",
+        "conditions": "Total output rms noise, schematic ngspice CACE, vdd = 1.45/1.5/1.55 V, ibias = 20 uA, cload = 50 fF, vin = 0.7/0.8/0.9 V, temp = -40/27/130 C, corners ss/sf/tt/fs/ff",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md, CACE Summary table row 5",
+        "quote": "| Output noise | ngspice | noise | any | 0.308 mV | any | 0.371 mV | 1 mV | 0.454 mV | Pass |"
+      },
+      {
+        "parameter": "tsettle",
+        "published": {
+          "min": 0.137,
+          "typ": 0.144,
+          "max": 0.156,
+          "min_limit": null,
+          "max_limit": 10.0
+        },
+        "units": "us",
+        "conditions": "Output settling time, schematic ngspice CACE, vdd = 1.45/1.5/1.55 V, ibias = 20 uA, cload = 50 fF, vin = 0.7/0.8/0.9 V, temp = -40/27/130 C, corners ss/sf/tt/fs/ff",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md, CACE Summary table row 6",
+        "quote": "| Settling time | ngspice | tsettle | any | 0.137 us | any | 0.144 us | 10 us | 0.156 us | Pass |"
+      },
+      {
+        "parameter": "open_loop_dc_gain_and_phase_margin",
+        "published": null,
+        "units": "dB / deg",
+        "conditions": "Not tabulated in CACE summary (only closed-loop voltage buffer metrics are tabulated)",
+        "document": "JKU Analog Integrated Circuit Design (Harald Pretl, ihp-sg13g2 tutorial)",
+        "revision": "commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (2026-10-06, last ihp-sg13g2 commit before c58954487c migrated to sg13cmos5l)",
+        "url": "https://github.com/iic-jku/analog-circuit-design/blob/c2d03d2bd7106e29303d6d184fe96c2eebbed24f/cace/_docs/ota-5t_schematic.md",
+        "location": "cace/_docs/ota-5t_schematic.md",
+        "quote": "CACE Summary for ota-5t reports only gain, bw, gain_mc, bw_mc, noise, and tsettle; open-loop A0 and phase margin are not published in the summary table."
+      }
+    ]
+  },
+  "cummings_snug2002_fifo1": {
+    "document": "Simulation and Synthesis Techniques for Asynchronous FIFO Design (FIFO Style #1)",
+    "author": "Clifford E. Cummings, Sunburst Design, Inc.",
+    "revision": "SNUG San Jose 2002, Rev 1.3 (Nov 2005)",
+    "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+    "catalog_url": "https://www.paradigm-works.com/technical-library",
+    "location": "Sections 5.1-5.6 (Examples 1-6: fifo1, fifomem, sync_r2w, sync_w2r, rptr_empty, wptr_full)",
+    "quote": "Simulation and Synthesis Techniques for Asynchronous FIFO Design (recommended), SNUG San Jose 2002, Rev 1.3 Nov 2005; Sunburst Design URL redirects to Paradigm Works Technical Library.",
+    "modules": [
+      {
+        "module": "fifo1",
+        "parameters": [
+          "DSIZE = 8",
+          "ASIZE = 4"
+        ],
+        "ports": {
+          "outputs": [
+            "rdata[DSIZE-1:0]",
+            "wfull",
+            "rempty"
+          ],
+          "inputs": [
+            "wdata[DSIZE-1:0]",
+            "winc",
+            "wclk",
+            "wrst_n",
+            "rinc",
+            "rclk",
+            "rrst_n"
+          ]
+        },
+        "internal_wires": [
+          "waddr[ASIZE-1:0]",
+          "raddr[ASIZE-1:0]",
+          "wptr[ASIZE:0]",
+          "rptr[ASIZE:0]",
+          "wq2_rptr[ASIZE:0]",
+          "rq2_wptr[ASIZE:0]"
+        ],
+        "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+        "location": "Example 1: Top-level Verilog code for the FIFO style #1 design",
+        "quote": "module fifo1 #(parameter DSIZE = 8, parameter ASIZE = 4) (output [DSIZE-1:0] rdata, output wfull, output rempty, input [DSIZE-1:0] wdata, input winc, wclk, wrst_n, input rinc, rclk, rrst_n);"
+      },
+      {
+        "module": "fifomem",
+        "parameters": [
+          "DATASIZE = 8",
+          "ADDRSIZE = 4"
+        ],
+        "ports": {
+          "outputs": [
+            "rdata[DATASIZE-1:0]"
+          ],
+          "inputs": [
+            "wdata[DATASIZE-1:0]",
+            "waddr[ADDRSIZE-1:0]",
+            "raddr[ADDRSIZE-1:0]",
+            "wclken",
+            "wfull",
+            "wclk"
+          ]
+        },
+        "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+        "location": "Example 2: Verilog RTL code for the FIFO buffer memory array",
+        "quote": "module fifomem #(parameter DATASIZE = 8, parameter ADDRSIZE = 4) (output [DATASIZE-1:0] rdata, input [DATASIZE-1:0] wdata, input [ADDRSIZE-1:0] waddr, raddr, input wclken, wfull, wclk);"
+      },
+      {
+        "module": "sync_r2w",
+        "parameters": [
+          "ADDRSIZE = 4"
+        ],
+        "ports": {
+          "outputs": [
+            "wq2_rptr[ADDRSIZE:0]"
+          ],
+          "inputs": [
+            "rptr[ADDRSIZE:0]",
+            "wclk",
+            "wrst_n"
+          ]
+        },
+        "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+        "location": "Example 3: Read-domain to write-domain synchronizer",
+        "quote": "module sync_r2w #(parameter ADDRSIZE = 4) (output reg [ADDRSIZE:0] wq2_rptr, input [ADDRSIZE:0] rptr, input wclk, wrst_n);"
+      },
+      {
+        "module": "sync_w2r",
+        "parameters": [
+          "ADDRSIZE = 4"
+        ],
+        "ports": {
+          "outputs": [
+            "rq2_wptr[ADDRSIZE:0]"
+          ],
+          "inputs": [
+            "wptr[ADDRSIZE:0]",
+            "rclk",
+            "rrst_n"
+          ]
+        },
+        "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+        "location": "Example 4: Write-domain to read-domain synchronizer",
+        "quote": "module sync_w2r #(parameter ADDRSIZE = 4) (output reg [ADDRSIZE:0] rq2_wptr, input [ADDRSIZE:0] wptr, input rclk, rrst_n);"
+      },
+      {
+        "module": "rptr_empty",
+        "parameters": [
+          "ADDRSIZE = 4"
+        ],
+        "ports": {
+          "outputs": [
+            "rempty",
+            "raddr[ADDRSIZE-1:0]",
+            "rptr[ADDRSIZE:0]"
+          ],
+          "inputs": [
+            "rq2_wptr[ADDRSIZE:0]",
+            "rinc",
+            "rclk",
+            "rrst_n"
+          ]
+        },
+        "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+        "location": "Example 5: Read pointer and empty generation logic",
+        "quote": "module rptr_empty #(parameter ADDRSIZE = 4) (output reg rempty, output [ADDRSIZE-1:0] raddr, output reg [ADDRSIZE:0] rptr, input [ADDRSIZE:0] rq2_wptr, input rinc, rclk, rrst_n);"
+      },
+      {
+        "module": "wptr_full",
+        "parameters": [
+          "ADDRSIZE = 4"
+        ],
+        "ports": {
+          "outputs": [
+            "wfull",
+            "waddr[ADDRSIZE-1:0]",
+            "wptr[ADDRSIZE:0]"
+          ],
+          "inputs": [
+            "wq2_rptr[ADDRSIZE:0]",
+            "winc",
+            "wclk",
+            "wrst_n"
+          ]
+        },
+        "url": "http://www.sunburst-design.com/papers/CummingsSNUG2002SJ_FIFO1.pdf",
+        "location": "Example 6: Write pointer and full generation logic",
+        "quote": "module wptr_full #(parameter ADDRSIZE = 4) (output reg wfull, output [ADDRSIZE-1:0] waddr, output reg [ADDRSIZE:0] wptr, input [ADDRSIZE:0] wq2_rptr, input winc, wclk, wrst_n);"
+      }
+    ]
+  },
+  "librelane_reference_block": {
+    "ihp_pdk_librelane_dir": {
+      "published": null,
+      "units": "cells / um^2 / MHz",
+      "conditions": "IHP-Open-PDK ihp-sg13g2/libs.tech/librelane/ contains PDK flow configuration only, no bundled RTL reference block",
+      "document": "IHP-Open-PDK libs.tech/librelane",
+      "revision": "commit e73adb4045731ddec21634146d536380057f6a26",
+      "url": "https://github.com/IHP-GmbH/IHP-Open-PDK/tree/e73adb4045731ddec21634146d536380057f6a26/ihp-sg13g2/libs.tech/librelane",
+      "location": "ihp-sg13g2/libs.tech/librelane/",
+      "quote": "Contains config.tcl, openrcx/, sg13g2_io/, sg13g2_stdcell/ only; no RTL design or published cell/area/fmax metrics."
+    },
+    "ihp_sg13_librelane_template": {
+      "design": "chip_top / chip_core (counter + two RM_IHPSG13_1P_1024x32_c2_bm_bist macros)",
+      "cells": {
+        "published": null,
+        "units": "count",
+        "conditions": "Not published in repo",
+        "url": "https://github.com/IHP-GmbH/ihp-sg13-librelane-template/blob/2c7d3b39580f9d165306a008608b8fb28c616a02/README.md",
+        "location": "README.md and librelane/config.yaml",
+        "quote": "No post-synthesis or post-route cell count is published in the template repository."
+      },
+      "area": {
+        "published": null,
+        "configured_die_area_um": [
+          0,
+          0,
+          1600,
+          1600
+        ],
+        "configured_core_area_um": [
+          365,
+          365,
+          1235,
+          1235
+        ],
+        "units": "um^2",
+        "conditions": "Floorplan constraint only, not measured routed standard-cell area",
+        "url": "https://github.com/IHP-GmbH/ihp-sg13-librelane-template/blob/2c7d3b39580f9d165306a008608b8fb28c616a02/librelane/config.yaml",
+        "location": "librelane/config.yaml",
+        "quote": "DIE_AREA: [0, 0, 1600, 1600] / CORE_AREA: [365, 365, 1235, 1235]"
+      },
+      "fmax": {
+        "published": null,
+        "configured_clock_period_ns": 20,
+        "units": "MHz",
+        "conditions": "Target clock constraint (50 MHz), not measured Fmax",
+        "url": "https://github.com/IHP-GmbH/ihp-sg13-librelane-template/blob/2c7d3b39580f9d165306a008608b8fb28c616a02/librelane/config.yaml",
+        "location": "librelane/config.yaml",
+        "quote": "CLOCK_PORT: clk_PAD / CLOCK_PERIOD: 20"
+      },
+      "document": "IHP-GmbH/ihp-sg13-librelane-template",
+      "revision": "commit 2c7d3b39580f9d165306a008608b8fb28c616a02 (2026-10-17)",
+      "url": "https://github.com/IHP-GmbH/ihp-sg13-librelane-template/tree/2c7d3b39580f9d165306a008608b8fb28c616a02",
+      "location": "README.md and librelane/config.yaml",
+      "quote": "As an example, a counter is implemented. CLOCK_PERIOD: 20; DIE_AREA: [0, 0, 1600, 1600]; CORE_AREA: [365, 365, 1235, 1235]."
+    },
+    "librelane_spm_example": {
+      "design": "spm (32-bit serial-parallel multiplier)",
+      "cells": {
+        "published": null,
+        "units": "count",
+        "conditions": "Not published for ihp-sg13g2",
+        "url": "https://github.com/librelane/librelane/blob/8494d4fea0ddd9bee12ea5e42a38b59438c2b128/librelane/examples/spm/config.yaml",
+        "location": "librelane/examples/spm/config.yaml",
+        "quote": "No cells, area, or fmax numbers for ihp-sg13g2 are published in librelane."
+      },
+      "area": {
+        "published": null,
+        "units": "um^2",
+        "conditions": "Not published for ihp-sg13g2",
+        "url": "https://github.com/librelane/librelane/blob/8494d4fea0ddd9bee12ea5e42a38b59438c2b128/librelane/examples/spm/config.yaml",
+        "location": "librelane/examples/spm/config.yaml",
+        "quote": "No cells, area, or fmax numbers for ihp-sg13g2 are published in librelane."
+      },
+      "fmax": {
+        "published": null,
+        "configured_clock_period_ns": 10,
+        "units": "MHz",
+        "conditions": "Default CLOCK_PERIOD constraint (100 MHz), no ihp-sg13g2 override or measured Fmax published",
+        "url": "https://github.com/librelane/librelane/blob/8494d4fea0ddd9bee12ea5e42a38b59438c2b128/librelane/examples/spm/config.yaml",
+        "location": "librelane/examples/spm/config.yaml",
+        "quote": "DESIGN_NAME: spm / CLOCK_PERIOD: 10 / CLOCK_PORT: clk"
+      },
+      "document": "librelane/librelane examples/spm",
+      "revision": "commit 8494d4fea0ddd9bee12ea5e42a38b59438c2b128 (2026-11-03)",
+      "url": "https://github.com/librelane/librelane/tree/8494d4fea0ddd9bee12ea5e42a38b59438c2b128/librelane/examples/spm",
+      "location": "librelane/examples/spm/config.yaml",
+      "quote": "DESIGN_NAME: spm; CLOCK_PERIOD: 10; CLOCK_PORT: clk; technology overrides exist only for sky130* and gf180mcu*."
+    }
+  },
+  "murmann_adc_survey_8bit_sar_1_to_100_msps": {
+    "document": "B. Murmann, ADC Performance Survey 1997-2026",
+    "revision": "rev20260801, commit 00b4b855de5c",
+    "url": "https://github.com/bmurmann/ADC-survey/blob/00b4b855de5c/xls/ADCsurvey_rev20260801.xlsx",
+    "location": "xls/ADCsurvey_rev20260801.xlsx (ISSCC and VLSI sheets)",
+    "quote": "Filtered to ARCHITECTURE == 'SAR', 8-bit Nyquist resolution in title, and 1e6 <= fs <= 100e6 Hz (excludes oversampled noise-shaping/MASH SAR designs that mention an internal 8-bit sub-ADC in their abstract).",
+    "rows": [
+      {
+        "sheet": "ISSCC",
+        "row": 207,
+        "year": 2010,
+        "paper_id": "21.6",
+        "architecture": "SAR",
+        "technology_um": 0.09,
+        "title": "A 30fJ/Conversion-Step 8b 0-to-10MS/s Asynchronous SAR ADC in 90nm CMOS",
+        "authors": "P. Harpe, C. Zhou, X. Wang, G. Dolmans, H. de Groot",
+        "doi": "10.1109/ISSCC.2010.5433967",
+        "published": {
+          "vsup1_v": 1.0,
+          "area_mm2": 0.07,
+          "sndr_lf_db": null,
+          "fin_hf_hz": 5120000.0,
+          "sndr_hf_db": 48.4,
+          "power_w": 6.9e-05,
+          "fs_hz": 10240000.0,
+          "osr": 1.0,
+          "fsnyq_hz": 10240000.0,
+          "fomw_lf_fj_per_step": null,
+          "fomw_hf_fj_per_step": 31.355717459161184,
+          "foms_lf_db": null,
+          "foms_hf_db": 157.10420870238576
+        },
+        "units": "P in W, fs in Hz, SNDR and FOMS in dB, FOMW in fJ/conv-step",
+        "conditions": "Measured Nyquist SAR ADC (SAR), tech = 0.09 um, VSUP1 = 1 V, fin_hf = 5120000 Hz",
+        "document": "B. Murmann, ADC Performance Survey 1997-2026",
+        "revision": "rev20260801, commit 00b4b855de5c",
+        "url": "https://github.com/bmurmann/ADC-survey/blob/00b4b855de5c/xls/ADCsurvey_rev20260801.xlsx",
+        "location": "Sheet ISSCC, row 207 (columns A-AH)",
+        "quote": "ISSCC 2010 21.6 | P. Harpe, C. Zhou, X. Wang, G. Dolmans, H. de Groot | A 30fJ/Conversion-Step 8b 0-to-10MS/s Asynchronous SAR ADC in 90nm CMOS | P=6.8999999999999997E-5 W | fs=10240000 Hz | SNDR_hf=48.4 dB | FOMW_hf=31.355717459161184 fJ/conv-step | FOMS_hf=157.10420870238576 dB"
+      },
+      {
+        "sheet": "VLSI",
+        "row": 113,
+        "year": 2011,
+        "paper_id": "25.2",
+        "architecture": "SAR",
+        "technology_um": 0.09,
+        "title": "A 1-V, 8b, 40MS/s, 113\u00b5W Charge-Recycling SAR ADC with a 14\u00b5W Asynchronous Controller",
+        "authors": "J.-H. Tsai, Y.-J. Chen, M.-H. Shen and P.-C. Huang",
+        "doi": "N/A",
+        "published": {
+          "vsup1_v": null,
+          "area_mm2": 0.05500000000000001,
+          "sndr_lf_db": null,
+          "fin_hf_hz": 20000000.0,
+          "sndr_hf_db": 44.501999999999995,
+          "power_w": 0.000113,
+          "fs_hz": 40000000.0,
+          "osr": 1.0,
+          "fsnyq_hz": 40000000.0,
+          "fomw_lf_fj_per_step": null,
+          "fomw_hf_fj_per_step": 20.592329696027196,
+          "foms_lf_db": null,
+          "foms_hf_db": 156.9815155218056
+        },
+        "units": "P in W, fs in Hz, SNDR and FOMS in dB, FOMW in fJ/conv-step",
+        "conditions": "Measured Nyquist SAR ADC (SAR), tech = 0.09 um, VSUP1 = None V, fin_hf = 20000000 Hz",
+        "document": "B. Murmann, ADC Performance Survey 1997-2026",
+        "revision": "rev20260801, commit 00b4b855de5c",
+        "url": "https://github.com/bmurmann/ADC-survey/blob/00b4b855de5c/xls/ADCsurvey_rev20260801.xlsx",
+        "location": "Sheet VLSI, row 113 (columns A-AH)",
+        "quote": "VLSI 2011 25.2 | J.-H. Tsai, Y.-J. Chen, M.-H. Shen and P.-C. Huang | A 1-V, 8b, 40MS/s, 113\u00b5W Charge-Recycling SAR ADC with a 14\u00b5W Asynchronous Controller | P=1.13E-4 W | fs=40000000 Hz | SNDR_hf=44.501999999999995 dB | FOMW_hf=20.592329696027196 fJ/conv-step | FOMS_hf=156.98151552180559 dB"
+      },
+      {
+        "sheet": "VLSI",
+        "row": 283,
+        "year": 2025,
+        "paper_id": "C5-3",
+        "architecture": "SAR",
+        "technology_um": 0.065,
+        "title": "A 76.5-dB Dynamic-Range 8-bit 100-MS/s Variable-Range SAR ADC",
+        "authors": "Ritaro Takenaka, Sota Kano, and Tetsuya Iizuka",
+        "doi": "10.23919/VLSITechnologyandCir65189.2025.11075106",
+        "published": {
+          "vsup1_v": 1.0,
+          "area_mm2": 0.03,
+          "sndr_lf_db": null,
+          "fin_hf_hz": 49611000.0,
+          "sndr_hf_db": 48.7,
+          "power_w": 0.000599,
+          "fs_hz": 100000000.0,
+          "osr": 1.0,
+          "fsnyq_hz": 100000000.0,
+          "fomw_lf_fj_per_step": null,
+          "fomw_hf_fj_per_step": 26.927307876791666,
+          "foms_lf_db": null,
+          "foms_hf_db": 157.91543181946707
+        },
+        "units": "P in W, fs in Hz, SNDR and FOMS in dB, FOMW in fJ/conv-step",
+        "conditions": "Measured Nyquist SAR ADC (SAR), tech = 6.5000000000000002E-2 um, VSUP1 = 1 V, fin_hf = 49611000 Hz",
+        "document": "B. Murmann, ADC Performance Survey 1997-2026",
+        "revision": "rev20260801, commit 00b4b855de5c",
+        "url": "https://github.com/bmurmann/ADC-survey/blob/00b4b855de5c/xls/ADCsurvey_rev20260801.xlsx",
+        "location": "Sheet VLSI, row 283 (columns A-AH)",
+        "quote": "VLSI 2025 C5-3 | Ritaro Takenaka, Sota Kano, and Tetsuya Iizuka | A 76.5-dB Dynamic-Range 8-bit 100-MS/s Variable-Range SAR ADC | P=5.9900000000000003E-4 W | fs=100000000 Hz | SNDR_hf=48.7 dB | FOMW_hf=26.927307876791666 fJ/conv-step | FOMS_hf=157.91543181946707 dB"
+      }
+    ]
+  }
+}
