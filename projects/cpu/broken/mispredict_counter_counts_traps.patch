@@ -1,0 +1,12 @@
+Expected failure: , model ['
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -240,7 +240,7 @@
+       if (!stop_cycle && !(csr_write && (e_csr == 12'hb00 || e_csr == 12'hb80))) mcycle <= mcycle + 1;
+       if (e_commit && !stop_instret && !(csr_write && (e_csr == 12'hb02 || e_csr == 12'hb82))) minstret <= minstret + 1;
+       branches <= branches + 32'(e_commit && e_op == BRANCH);
+-      mispredicts <= mispredicts + 32'(mispredict);
++      mispredicts <= mispredicts + 32'(redirect);
+       if (redirect) begin
+         pc <= new_pc;
+         {d_valid, e_valid} <= '0;

@@ -1,4 +1,4 @@
-// Interrupt workout: reads mcycle with mcountinhibit set and cleared, counts in a loop until 4 timer interrupts (one every 300 cycles) have been taken, then keeps interrupts off for 400 loop turns (so the timer and a stream sample are both pending when they come back on), then sleeps in wfi until 8 timer interrupts and 16 stream samples (one external interrupt each) have arrived, reading mip in every handler; then writes the sum of the samples to 0x1000_0104 and 1 (pass) to 0x1000_0100.
+// Interrupt workout: reads mcycle with mcountinhibit set and cleared, counts in a loop until 4 timer interrupts (one every 300 cycles, mtimecmp moved on all 64 bits, writing the low word as all ones first) have been taken, keeps interrupts off three times for 400, 250 and 550 loop turns so the timer and a stream sample end up pending together, then sleeps in wfi until 8 timer interrupts and 16 stream samples (one external interrupt each, mip read in every handler) have arrived, reads the branch and mispredict counters, and writes the sum of the samples to 0x1000_0104 and 1 (pass) to 0x1000_0100.
 .equ PERIOD, 300
 .section .text.start
 .globl _start
@@ -12,10 +12,9 @@ _start:
   csrr a4, mcycle
   csrci mcountinhibit, 1
   csrr a5, mcycle
-  lw t0, 0x20(s0)
-  addi t0, t0, PERIOD
-  sw t0, 0x28(s0)
-  sw zero, 0x2c(s0)
+  lw s6, 0x24(s0)
+  lw s5, 0x20(s0)
+  jal ra, advance
   li t0, 0x880
   csrw mie, t0
   li s1, 0
@@ -27,12 +26,12 @@ work:
   addi s4, s4, 1
   li t0, 4
   blt s1, t0, work
-  csrci mstatus, 8
   li t0, 400
-hold:
-  addi t0, t0, -1
-  bnez t0, hold
-  csrsi mstatus, 8
+  jal ra, holdoff
+  li t0, 250
+  jal ra, holdoff
+  li t0, 550
+  jal ra, holdoff
 sleep:
   wfi
   li t0, 8
@@ -40,10 +39,30 @@ sleep:
   li t0, 16
   blt s2, t0, sleep
   csrci mstatus, 8
+  lw a6, 0x18(s0)
+  lw a7, 0x1c(s0)
   sw s3, 0x104(s0)
   li t0, 1
   sw t0, 0x100(s0)
 1: j 1b
+
+holdoff:
+  csrci mstatus, 8
+2: addi t0, t0, -1
+  bnez t0, 2b
+  csrsi mstatus, 8
+  ret
+
+advance:
+  addi a1, s5, PERIOD
+  sltu a0, a1, s5
+  add s6, s6, a0
+  mv s5, a1
+  li a0, -1
+  sw a0, 0x28(s0)
+  sw s6, 0x2c(s0)
+  sw s5, 0x28(s0)
+  ret
 
 handler:
   csrr a0, mcause
@@ -58,12 +77,12 @@ handler:
   addi s2, s2, 1
   mret
 timer:
-  lw a1, 0x28(s0)
-  addi a1, a1, PERIOD
-  sw a1, 0x28(s0)
+  mv s7, ra
+  jal ra, advance
+  mv ra, s7
   addi s1, s1, 1
   mret
 fail:
   li t0, 3
   sw t0, 0x100(s0)
-2: j 2b
+3: j 3b

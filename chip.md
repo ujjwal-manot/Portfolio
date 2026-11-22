@@ -165,6 +165,16 @@ Memory map:
 
 Firmware flips each code back with `code ^ 0xFF`, because the opamp inverts.
 
+Cycle timing (the contract `cpu_model.Timed` checks the RTL against; edges are rising clock edges counted from the first one after reset is released):
+- An instruction spends one cycle in EX, then one in MEM and one in WB; MEM and WB never stall.
+- mtime is k during the cycle after edge k. mcycle counts the same edges, except that a cycle with mcountinhibit.CY set adds nothing, and a CSR write sets the value seen from the next cycle on.
+- A store to mtimecmp takes effect two edges after its EX cycle (at the edge that ends its MEM cycle).
+- The timer interrupt is pending in any cycle where mtime >= mtimecmp, compared on all 64 bits.
+- The external interrupt is pending in a cycle if `s_tvalid` was high at the edge that started it (one register).
+- An interrupt is taken in place of the instruction in EX in any cycle where mstatus.MIE is set and an enabled interrupt is pending; external goes before timer. No instruction may commit in such a cycle.
+- A load from the stream address returns `s_tvalid`, `s_tlast` and `s_tdata` as they are at the edge that ends its MEM cycle; the counters at 0x1000_0010..1C give the count after every instruction up to and including the load itself.
+- The branch counter counts committed conditional branches. The mispredict counter counts committed instructions (all but mret) whose following fetched instruction was not the one that executes next.
+
 | Spec | Target |
 |---|---|
 | riscv-tests rv32ui | all pass, every retired instruction matches the model |

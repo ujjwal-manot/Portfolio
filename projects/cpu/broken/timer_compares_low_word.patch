@@ -1,0 +1,12 @@
+Expected failure: cpu took interrupt 7
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -73,7 +73,7 @@
+   wire [31:0] y = e_op == OP ? b : e_imm;
+   wire        alt = e_instr[30];
+ 
+-  wire        mtip = mtime >= mtimecmp;
++  wire        mtip = mtime[31:0] >= mtimecmp[31:0];
+   wire [2:0]  pending = ie & {meip, mtip, 1'b0};
+   logic [31:0] csr_old;
+   logic        csr_known;

@@ -1,4 +1,4 @@
-# Runs firmware/interrupts.S on the cpu in lockstep with cpu_model.py while the timer fires every 300 cycles and 16 stream samples arrive after random gaps, each held until it is taken: the firmware must sum every sample, exactly one external interrupt must be taken per sample and at least 8 timer interrupts, and the core must spend cycles asleep in wfi.
+# Runs firmware/interrupts.S on the cpu in lockstep with cpu_model.py while the timer fires every 300 cycles and 16 stream samples arrive after random gaps, each held until it is taken: the firmware must sum every sample, exactly one external interrupt must be taken per sample and at least 8 timer interrupts, at least twice with both pending, and the core must spend cycles asleep in wfi; a second run starts mtime 2000 cycles short of 2^32, so the timer works across the carry into its high word.
 import random
 from pathlib import Path
 import cocotb
@@ -26,16 +26,16 @@ async def feed(dut, codes):
                 break
         dut.s_tvalid.value = 0
 
-@cocotb.test()
-async def interrupts(dut):
+async def workout(dut, mtime0):
     rng = random.Random(4)
     codes = [rng.randrange(256) for _ in range(SAMPLES)]
-    lock = Lockstep(dut, (BUILD / "interrupts.bin").read_bytes(), "interrupts")
+    lock = Lockstep(dut, (BUILD / "interrupts.bin").read_bytes(), "interrupts", mtime0)
     cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
     dut.s_tvalid.value = 0
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
+    dut.core.mtime.value = mtime0
     cocotb.start_soon(feed(dut, codes))
     asleep, total = 0, None
     for cycle in range(100000):
@@ -54,8 +54,16 @@ async def interrupts(dut):
     dut._log.info(f"{lock.retired} instructions in {cycle} cycles, {asleep} asleep, interrupts taken {lock.taken}, {lock.both} taken with both pending")
     assert total == sum(codes), f"firmware summed {total}, samples sum to {sum(codes)}"
     assert lock.taken[11] == SAMPLES and lock.taken[7] >= 8, f"interrupts taken {lock.taken}"
-    assert lock.both > 0, "the timer and the stream were never pending together, so priority went untested"
+    assert lock.both >= 2, "the timer and the stream were pending together fewer than twice, so priority went barely tested"
     assert asleep > 0, "the core never slept in wfi"
+
+@cocotb.test()
+async def interrupts(dut):
+    await workout(dut, 0)
+
+@cocotb.test()
+async def timer_wraps(dut):
+    await workout(dut, (1 << 32) - 2000)
 
 def test_interrupts():
     run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])

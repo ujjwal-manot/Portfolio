@@ -1,4 +1,4 @@
-# Reference RV32I model with machine mode (Zicsr, the machine CSRs Spike has with --priv=m and no PMP or triggers, mcountinhibit stopping mcycle and minstret, traps for illegal instructions, ecall, ebreak and misaligned accesses and jump targets, mret, wfi as a hint, and interrupts taken when the caller says the hardware took one): runs one retired instruction per step, carrying on into the handler when an instruction traps, and reports what it retired, for lockstep checks against the cpu and Spike; Timed adds the cpu's clocked parts for lockstep against the RTL, given now, the cycle the next instruction spends in EX: mcycle with its writes and mcountinhibit, mtime, mtimecmp from its own stores, mip from those and the registered stream valid, every IO-page read by address (the stream as the testbench records it at the edge that ends the read, since it changes on falling edges; but the branch and mispredict counters, which belong to the pipeline), and due(), the interrupt the hardware must take at now, external before timer.
+# Reference RV32I model with machine mode (Zicsr, the machine CSRs Spike has with --priv=m and no PMP or triggers, mcountinhibit stopping mcycle and minstret, traps for illegal instructions, ecall, ebreak and misaligned accesses and jump targets, mret, wfi as a hint, and interrupts taken when the caller says the hardware took one): runs one retired instruction per step, carrying on into the handler when an instruction traps, and reports what it retired, for lockstep checks against the cpu and Spike; Timed adds the cpu's clocked parts for lockstep against the RTL, given now, the cycle the next instruction spends in EX: mcycle with its writes and mcountinhibit, mtime, mtimecmp from its own stores, mip from those and the registered stream valid, every IO-page read by address (the stream as the testbench records it at the edge that ends the read, since it changes on falling edges), the branch counter and the mispredict counter (given fetched_next, the pc the cpu fetched after each instruction), mtime from any start value, and due(), the interrupt the hardware must take at now, external before timer, all as chip.md's cycle timing states it.
 M = 0xFFFFFFFF
 MSTATUS, MISA, MIE, MTVEC, MSCRATCH, MEPC, MCAUSE, MTVAL, MIP = 0x300, 0x301, 0x304, 0x305, 0x340, 0x341, 0x342, 0x343, 0x344
 MCYCLE, MINSTRET, MCYCLEH, MINSTRETH, MCOUNTINHIBIT = 0xB00, 0xB02, 0xB80, 0xB82, 0x320
@@ -172,10 +172,20 @@ class Cpu:
 class Timed(Cpu):
     COUNTED = ((4, (MINSTRET, MINSTRETH)),)
 
-    def __init__(self, image, other_io=lambda addr: 0, **kw):
+    def __init__(self, image, mtime0=0, **kw):
         super().__init__(image, io_read=lambda addr: self.io(addr, self.now + 1), **kw)
-        self.now, self.stream, self.other_io = 0, {}, other_io
+        self.now, self.stream, self.mtime0, self.fetched_next = 0, {}, mtime0, None
         self.cycle_base, self.cycle_from, self.compare = 0, -1, [(-1, M, M)]
+        self.branches = self.mispredicts = 0
+
+    def mtime(self, t):
+        return t + 1 + self.mtime0
+
+    def step(self):
+        result = super().step()
+        self.branches += result[1] & 0x7F == 0x63
+        self.mispredicts += result[1] != 0x30200073 and self.fetched_next != self.pc
+        return result
 
     def mcycle(self, t):
         return self.cycle_base + (t - self.cycle_from) * (not self.csr[MCOUNTINHIBIT] & 1) & (1 << 64) - 1
@@ -185,7 +195,7 @@ class Timed(Cpu):
         return entry[2] << 32 | entry[1]
 
     def mip(self, t):
-        return self.stream.get(t, (0, 0, 0))[0] << 11 | (t + 1 >= self.mtimecmp(t)) << 7
+        return self.stream.get(t, (0, 0, 0))[0] << 11 | (self.mtime(t) >= self.mtimecmp(t)) << 7
 
     def due(self):
         pending = self.mip(self.now) & self.csr[MIE] if self.csr[MSTATUS] & 8 else 0
@@ -208,11 +218,10 @@ class Timed(Cpu):
     def io(self, addr, t):
         valid, last, data = self.stream.get(t + 1, (0, 0, 0))
         instret = self.counter(MINSTRET, MINSTRETH) + (not self.csr[MCOUNTINHIBIT] & 4)
-        page = {0x00: valid << 31 | last << 8 | data, 0x10: self.mcycle(t) & M, 0x14: instret & M,
-                0x20: (t + 1) & M, 0x24: (t + 1) >> 32, 0x28: self.mtimecmp(t) & M, 0x2C: self.mtimecmp(t) >> 32}
-        if addr >> 28 != 1:
-            return 0
-        return self.other_io(addr) if addr & 0xFF in (0x18, 0x1C) else page.get(addr & 0xFF, 0)
+        missed = self.mispredicts + (self.fetched_next != self.pc + 4)
+        page = {0x00: valid << 31 | last << 8 | data, 0x10: self.mcycle(t) & M, 0x14: instret & M, 0x18: self.branches & M, 0x1C: missed & M,
+                0x20: self.mtime(t) & M, 0x24: self.mtime(t) >> 32 & M, 0x28: self.mtimecmp(t) & M, 0x2C: self.mtimecmp(t) >> 32}
+        return page.get(addr & 0xFF, 0) if addr >> 28 == 1 else 0
 
     def io_write(self, addr, data):
         low, high = self.compare[-1][1:]
