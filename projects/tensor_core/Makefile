@@ -1,4 +1,4 @@
-# tensor_core commands: make softfloat | fma | all
+# tensor_core commands: make softfloat | fma | array | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -7,7 +7,7 @@ PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers SIM=verilator python3 -m pytest 
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 SOFTFLOAT := $(ROOT)/third_party/softfloat
 
-all: fma
+all: fma array
 
 build/softfloat/softfloat.so:
 	mkdir -p build/softfloat
@@ -21,4 +21,8 @@ fma: build/softfloat/softfloat.so
 	mkdir -p results
 	if $(PYTEST) tests/test_fma.py > results/test_fma.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_fma $$c results/test_fma.log
 
-.PHONY: all softfloat fma
+.PHONY: all softfloat fma array
+
+array: build/softfloat/softfloat.so
+	mkdir -p results
+	if $(PYTEST) tests/test_array.py > results/test_array.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_array $$c results/test_array.log
