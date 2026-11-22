@@ -482,3 +482,85 @@ SBY 17:48:35 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 
 SBY 17:48:35 [../build/formal_fifo_proof] engine_0: All outputs solved or timed out in frame 24.
 SBY 17:48:35 [../build/formal_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
 SBY 17:48:35 [../build/formal_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 1 : 0 3355 ~797                                                          0     0      1.39 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 2 : 0 3 3352 ~797                                                        0     0      1.42 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 3 : 0 3 2 3350 ~797                                                      0     0      1.46 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 4 : 0 3 2 2 3348 ~797                                                    0     0      1.48 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 5 : 0 3 2 2 1 3347 ~797                                                  0     0      1.51 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 6 : 0 3 2 2 1 7 3340 ~797                                                0     0      1.53 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 7 : 0 3 2 2 1 7 10 3330 ~797                                             0     0      1.55 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 8 : 0 3 2 2 1 7 10 12 3318 ~797                                          0     0      1.58 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 9 : 0 3 2 2 1 7 10 12 15 3303 ~797                                       0     0      1.61 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 10 : 0 3 2 2 1 7 10 12 15 23 3280 ~797                                    0     0      1.64 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 11 : 0 3 2 2 1 7 10 12 15 23 29 3251 ~797                                 0     0      1.67 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 12 : 0 3 2 2 1 7 10 12 15 23 29 35 3216 ~797                              0     0      1.75 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 13 : 0 3 2 2 1 7 10 12 15 23 29 35 10 3206 ~797                           0     0      1.80 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 14 : 0 3 2 2 1 7 10 12 15 23 29 35 10 5 3201 ~797                         0     0      1.85 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 15 : 0 3 2 2 1 7 10 12 15 23 29 35 10 5 3 3198 ~797                       0     0      1.89 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 16 : 0 3 2 2 1 7 10 12 15 23 29 35 10 5 3 5 3193 ~797                     0     0      1.94 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 17 : 0 3 2 2 1 7 10 12 15 23 29 35 10 5 3 5 4 3189 ~797                   0     0      1.98 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 18 : 0 3 2 2 1 7 10 12 15 23 29 35 10 5 3 5 4 47 3142 ~797                0     0      2.03 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 19 : 0 3 2 2 1 7 10 12 15 23 29 35 10 5 3 5 4 47 33 3109 ~797             0     0      2.07 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 20 : ... 3 2 2 1 7 10 12 15 23 29 35 10 5 3 5 4 47 33 434 2675 ~797       0     0      2.13 sec  T/O =  0  PRV =  5
+SBY 17:48:37 [../build/formal_fifo_proof] engine_0: 21 : ... 2 1 7 10 12 15 23 29 35 10 5 3 5 4 47 33 434 321 2354 ~797       0     0      2.22 sec  T/O =  0  PRV =  5
+SBY 17:48:38 [../build/formal_fifo_proof] engine_0: 22 : ... 7 10 12 15 23 29 35 10 5 3 5 4 47 33 434 321 536 1818 ~797       0     0      2.36 sec  T/O =  0  PRV =  5
+SBY 17:48:38 [../build/formal_fifo_proof] engine_0: 23 : ... 12 15 23 29 35 10 5 3 5 4 47 33 434 321 547 693 1167 ~797       17    32      2.69 sec  T/O =  0  PRV =  5
+SBY 17:48:38 [../build/formal_fifo_proof] engine_0: 23 : ... 12 15 23 29 35 10 5 3 5 4 47 33 434 321 547 725 1184 ~797       12    57      2.80 sec  T/O =  0  PRV =  5
+SBY 17:48:38 [../build/formal_fifo_proof] engine_0: 23 : ... 12 15 23 29 35 10 5 3 5 4 47 33 434 321 547 755 1214 ~797       12    63      2.90 sec  T/O =  0  PRV =  5
+SBY 17:48:38 [../build/formal_fifo_proof] engine_0: 23 : ... 12 15 23 29 35 10 5 3 5 4 47 33 434 321 547 769 1227 ~797       10    69      2.93 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 524 719 414 896 ~797       16    76      3.67 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 524 726 439 925 ~797       13    84      3.74 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 529 742 462 937 ~797       18    90      3.82 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 534 759 480 954 ~797       25    92      3.89 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 540 780 491 973 ~797       16    95      3.97 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 541 787 517 996 ~797       15   101      4.06 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 541 814 536 1001 ~797      26   102      4.13 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 541 826 555 1016 ~797      14   103      4.20 sec  T/O =  0  PRV =  5
+SBY 17:48:39 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 321 541 832 583 1033 ~797      12   103      4.27 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 434 322 541 832 610 1061 ~797      15   106      4.34 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 328 542 835 634 1084 ~797      17   107      4.41 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 328 542 836 662 1120 ~797      14   107      4.48 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 328 542 842 687 1147 ~797      11   108      4.55 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 856 699 1150 ~797      22   109      4.77 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 857 729 1179 ~797      30   111      4.87 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 858 760 1212 ~797      16   113      4.96 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 859 790 1246 ~797      15   113      5.03 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 859 822 1278 ~797      21   113      5.08 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 860 854 1310 ~797      14   113      5.15 sec  T/O =  0  PRV =  5
+SBY 17:48:40 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 861 879 1351 ~797      13   115      5.22 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 862 911 1383 ~797      11   115      5.29 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 863 941 1416 ~797      16   116      5.35 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 864 973 1444 ~797      20   117      5.42 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 865 1006 1473 ~797     13   117      5.51 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 866 1036 1503 ~797     14   117      5.60 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 867 1064 1538 ~797     14   117      5.68 sec  T/O =  0  PRV =  5
+SBY 17:48:41 [../build/formal_fifo_proof] engine_0: 24 : ... 15 23 29 35 10 5 3 5 4 47 33 435 334 560 867 1068 1547 ~797      5   117      5.71 sec  T/O =  0  PRV =  5
+SBY 17:48:42 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 328 1108 768 1091 ~801       16   118      7.01 sec  T/O =  0  PRV =  5
+SBY 17:48:42 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 328 1119 793 1110 ~801       26   118      7.07 sec  T/O =  0  PRV =  5
+SBY 17:48:42 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 334 1141 812 1119 ~801       15   118      7.14 sec  T/O =  0  PRV =  5
+SBY 17:48:42 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 334 1159 835 1132 ~801       26   118      7.21 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 334 1177 855 1143 ~801       15   118      7.29 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 336 1195 878 1154 ~801       26   118      7.37 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 479 338 1209 903 1163 ~801       15   119      7.45 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 485 356 1216 914 1170 ~801       22   119      7.54 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 485 358 1241 948 1173 ~801       36   119      7.64 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 491 368 1245 957 1182 ~801       43   119      7.69 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 492 389 1280 966 1182 ~801       37   119      7.80 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 492 397 1303 991 1182 ~801       49   121      7.90 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 492 397 1315 1030 1193 ~801      66   126      8.01 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 492 397 1315 1043 1212 ~801      64   126      8.06 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 495 407 1317 1062 1236 ~801      15   126      8.14 sec  T/O =  0  PRV =  5
+SBY 17:48:43 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 496 419 1353 1077 1236 ~801      41   126      8.22 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 497 423 1361 1101 1261 ~801      44   126      8.30 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 497 435 1377 1117 1263 ~801      26   126      8.36 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 503 444 1382 1136 1272 ~801      25   127      8.43 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 506 472 1413 1137 1272 ~801      37   127      8.53 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 506 476 1425 1159 1276 ~801      49   127      8.59 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 513 500 1437 1164 1289 ~801      28   127      8.69 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 513 506 1455 1201 1289 ~801      45   127      8.81 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 513 506 1455 1223 1308 ~801      43   127      8.90 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 514 524 1470 1236 1322 ~801      22   127      9.00 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 516 536 1492 1263 1322 ~801      35   127      9.13 sec  T/O =  0  PRV =  5
+SBY 17:48:44 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 516 538 1505 1293 1333 ~801      49   127      9.24 sec  T/O =  0  PRV =  5
+SBY 17:48:45 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 523 557 1512 1294 1333 ~801      22   128      9.30 sec  T/O =  0  PRV =  5
+SBY 17:48:45 [../build/formal_fifo_proof] engine_0: 25 : ... 29 35 10 5 3 5 4 47 33 433 317 524 564 1531 1323 1335 ~801      31   128      9.46 sec  T/O =  0  PRV =  5
