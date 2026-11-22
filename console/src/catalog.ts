@@ -1,6 +1,6 @@
 // Catalog of the three EdgeSense-130 tracks, their blocks, whole_chip, and console views.
 export type TrackId = "digital" | "analog" | "ams" | "integration";
-export type ViewId = "results" | "schematic" | "layout" | "waveforms" | "die3d";
+export type ViewId = "results" | "schematic" | "layout" | "waveforms" | "die3d" | "balance";
 
 export interface BlockEntry {
   id: string;
@@ -54,4 +54,5 @@ export const VIEWS: { id: ViewId; label: string }[] = [
   { id: "layout", label: "Layout" },
   { id: "waveforms", label: "Waveforms" },
   { id: "die3d", label: "3D Die" },
+  { id: "balance", label: "Balance" },
 ];

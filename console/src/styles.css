@@ -314,3 +314,52 @@ body,
   font: inherit;
   font-size: 10px;
 }
+
+.subhead {
+  margin: 14px 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.cmd-hint {
+  margin: 8px 0 12px;
+  padding: 6px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.cmd-hint code {
+  color: var(--text);
+}
+
+.cursor-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 11px;
+}
+
+.uplot-host,
+.die3d-host {
+  width: 100%;
+  min-height: 360px;
+  background: #050608;
+  border: 1px solid var(--border);
+}
+
+.svg-stage {
+  overflow: auto;
+  background: #050608;
+  border: 1px solid var(--border);
+  padding: 8px;
+}
+
+.err-text {
+  color: var(--fail);
+}

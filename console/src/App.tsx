@@ -1,8 +1,13 @@
-// Read-only EdgeSense-130 console shell: library tree, SG13G2 layer palette, dot-grid canvas with Results view, SHA-256 command log, and status bar.
+// Read-only EdgeSense-130 console shell wiring library tree, SG13G2 layer palette, Results/Broken-Copies, Schematic, Layout, Waveforms, 3D Die, Balance, SHA-256 command log, and status bar.
 import { useEffect, useMemo, useState } from "react";
+import { computeBalance, parseSessionsCsv, type CoreTrack } from "./balance";
+import { BalanceView } from "./BalanceView";
 import { ALL_BLOCKS, TRACKS, VIEWS, type ViewId } from "./catalog";
+import { Die3DView } from "./Die3DView";
 import { BlockIcon, EyeIcon, TrackIcon } from "./icons";
+import { LayoutView } from "./LayoutView";
 import { parseLyp, type LayerEntry } from "./lyp";
+import { SchematicView } from "./SchematicView";
 import {
   blockStatus,
   commandLogFromSummary,
@@ -10,8 +15,10 @@ import {
   type CheckRow,
   type CommandLogItem,
 } from "./summary";
+import { WaveformView } from "./WaveformView";
 
 type SummaryMap = Record<string, CheckRow[] | null>;
+type ManifestMap = Record<string, { raw: string[]; svg: string[] }>;
 
 function statusClass(status: string): string {
   return status === "not run" ? "not-run" : status;
@@ -21,10 +28,13 @@ export function App() {
   const [selectedBlock, setSelectedBlock] = useState<string>("cpu");
   const [selectedView, setSelectedView] = useState<ViewId>("results");
   const [summaries, setSummaries] = useState<SummaryMap>({});
+  const [manifest, setManifest] = useState<ManifestMap>({});
+  const [hours, setHours] = useState<Record<CoreTrack, number>>({ digital: 0, analog: 0, ams: 0 });
   const [layers, setLayers] = useState<LayerEntry[]>([]);
   const [layerFilter, setLayerFilter] = useState<string>("");
   const [cursor, setCursor] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState<number>(100);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
   const [systemLog, setSystemLog] = useState<CommandLogItem[]>([]);
 
   useEffect(() => {
@@ -46,6 +56,20 @@ export function App() {
       .catch(() => {
         if (active) setLayers([]);
       });
+
+    fetch("/repo/manifest")
+      .then((res) => (res.ok ? res.json() : {}))
+      .then((data: ManifestMap) => {
+        if (active) setManifest(data);
+      })
+      .catch(() => {});
+
+    fetch("/repo/tracking/sessions.csv")
+      .then((res) => (res.ok ? res.text() : ""))
+      .then((csv) => {
+        if (active && csv) setHours(parseSessionsCsv(csv));
+      })
+      .catch(() => {});
 
     Promise.all(
       ALL_BLOCKS.map(async (b) => {
@@ -75,14 +99,15 @@ export function App() {
   );
   const currentRows = summaries[currentBlock.id] ?? null;
   const currentStatus = blockStatus(currentRows);
+  const mainRows = useMemo(() => (currentRows ? currentRows.filter((r) => !r.name.startsWith("broken_")) : []), [currentRows]);
+  const brokenRows = useMemo(() => (currentRows ? currentRows.filter((r) => r.name.startsWith("broken_")) : []), [currentRows]);
+  const balanceRows = useMemo(() => computeBalance(hours, summaries), [hours, summaries]);
 
   const commandLog = useMemo(() => {
     const items: CommandLogItem[] = [...systemLog];
     for (const block of ALL_BLOCKS) {
       const rows = summaries[block.id];
-      if (rows && rows.length > 0) {
-        items.push(...commandLogFromSummary(block.id, rows));
-      }
+      if (rows && rows.length > 0) items.push(...commandLogFromSummary(block.id, rows));
     }
     return items;
   }, [summaries, systemLog]);
@@ -120,6 +145,13 @@ export function App() {
           ))}
         </nav>
         <div className="tabs">
+          <button
+            type="button"
+            className="small-btn"
+            onClick={() => setReducedMotion((m) => !m)}
+          >
+            {reducedMotion ? "Motion: Off" : "Motion: On"}
+          </button>
           <button type="button" className="small-btn" onClick={() => setZoom((z) => Math.max(25, z - 25))}>
             -
           </button>
@@ -178,7 +210,7 @@ export function App() {
             });
           }}
         >
-          {selectedView === "results" ? (
+          {selectedView === "results" && (
             <section className="results-card">
               <div className="results-head">
                 <div>
@@ -189,50 +221,94 @@ export function App() {
               {!currentRows ? (
                 <p>not run (no projects/{currentBlock.id}/results/summary.json found)</p>
               ) : (
-                <table className="results-table">
-                  <thead>
-                    <tr>
-                      <th>Check</th>
-                      <th>Result</th>
-                      <th>Time</th>
-                      <th>Logs and SHA-256</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentRows.map((row) => (
-                      <tr key={row.name}>
-                        <td>{row.name}</td>
-                        <td>
-                          <span className={`badge ${row.result}`}>{row.result}</span>
-                        </td>
-                        <td>{row.time}</td>
-                        <td>
-                          {row.logs.map((log) => (
-                            <div key={log.file} className="hash-line">
-                              <span className="hash-file">{log.file}</span>
-                              <span>{log.sha256}</span>
-                            </div>
-                          ))}
-                        </td>
+                <>
+                  <table className="results-table">
+                    <thead>
+                      <tr>
+                        <th>Check</th>
+                        <th>Result</th>
+                        <th>Time</th>
+                        <th>Logs and SHA-256</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {mainRows.map((row) => (
+                        <tr key={row.name}>
+                          <td>{row.name}</td>
+                          <td>
+                            <span className={`badge ${row.result}`}>{row.result}</span>
+                          </td>
+                          <td>{row.time}</td>
+                          <td>
+                            {row.logs.map((log) => (
+                              <div key={log.file} className="hash-line">
+                                <span className="hash-file">{log.file}</span>
+                                <span>{log.sha256}</span>
+                              </div>
+                            ))}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  {brokenRows.length > 0 && (
+                    <>
+                      <h3 className="subhead">Broken Copies Caught ({brokenRows.length})</h3>
+                      <table className="results-table">
+                        <thead>
+                          <tr>
+                            <th>Mutant</th>
+                            <th>Caught</th>
+                            <th>Time</th>
+                            <th>Log and SHA-256</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {brokenRows.map((row) => (
+                            <tr key={row.name}>
+                              <td>{row.name}</td>
+                              <td>
+                                <span className={`badge ${row.result}`}>{row.result}</span>
+                              </td>
+                              <td>{row.time}</td>
+                              <td>
+                                {row.logs.map((log) => (
+                                  <div key={log.file} className="hash-line">
+                                    <span className="hash-file">{log.file}</span>
+                                    <span>{log.sha256}</span>
+                                  </div>
+                                ))}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </>
+                  )}
+                </>
               )}
             </section>
-          ) : (
-            <section className="results-card">
-              <div className="results-head">
-                <strong>
-                  {currentBlock.id} / {selectedView}
-                </strong>
-                <span className={`badge ${statusClass(currentStatus)}`}>{currentStatus}</span>
-              </div>
-              <p>
-                Read-only v1 shell active for {currentBlock.id}. Results view is live; {selectedView} renderer connects once exported artifacts are logged in projects/{currentBlock.id}/results/.
-              </p>
-            </section>
           )}
+          {selectedView === "schematic" && (
+            <SchematicView block={currentBlock.id} svgFiles={manifest[currentBlock.id]?.svg ?? []} zoom={zoom} />
+          )}
+          {selectedView === "layout" && (
+            <LayoutView block={currentBlock.id} layers={layers} zoom={zoom} />
+          )}
+          {selectedView === "waveforms" && (
+            <WaveformView block={currentBlock.id} rawFiles={manifest[currentBlock.id]?.raw ?? []} />
+          )}
+          {selectedView === "die3d" && (
+            <Die3DView
+              summaries={summaries}
+              reducedMotion={reducedMotion}
+              onSelectBlockLayout={(id) => {
+                setSelectedBlock(id);
+                setSelectedView("layout");
+              }}
+            />
+          )}
+          {selectedView === "balance" && <BalanceView rows={balanceRows} />}
         </main>
 
         <aside className="pane right">
