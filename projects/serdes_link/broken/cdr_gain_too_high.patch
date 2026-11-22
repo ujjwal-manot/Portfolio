@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/bb_cdr.sv
++++ b/design/bb_cdr.sv
+@@ -21,7 +21,7 @@
+   assign vote  = early ? 16'sd1 : (late ? -16'sd1 : 16'sd0);
+ 
+   assign freq_next  = freq_acc + vote;
+-  assign phase_next = phase_acc + (vote * 16'(signed'(KP))) + (freq_next >>> KI_SHIFT);
++  assign phase_next = phase_acc + (vote <<< 5) + (freq_next >>> KI_SHIFT);
+   assign pi_code    = phase_acc[PI_BITS-1:0];
+ 
+   always_ff @(posedge clk or negedge rst_n) begin

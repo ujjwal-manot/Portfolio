@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/pam4_slicer.sv
++++ b/design/pam4_slicer.sv
+@@ -14,7 +14,7 @@
+   logic [1:0] sym_next;
+ 
+   always_comb begin
+-    if (sample_in < T_LOW)       sym_next = 2'b00;
++    if (sample_in < T_HIGH)      sym_next = 2'b00;
+     else if (sample_in < T_MID)  sym_next = 2'b01;
+     else if (sample_in < T_HIGH) sym_next = 2'b11;
+     else                         sym_next = 2'b10;
