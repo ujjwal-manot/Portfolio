@@ -1,6 +1,7 @@
 // Drives an 8-bit R-2R DAC on Nucleo-H753ZI PF0..PF7, reads back the analog output on PA3 (ADC1_INP15) with DWT-paced timing, and streams static ramp (R) and coherent 1024-sample sine (S) frames over ST-LINK USART3 (PD8/PD9, 115200 8N1).
 #include <stdint.h>
 #include <libopencm3/cm3/dwt.h>
+#include <libopencm3/cm3/scs.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
@@ -130,6 +131,8 @@ static void uart_put_u32(uint32_t val) {
 }
 
 static void peripherals_init(void) {
+    SCS_DEMCR |= SCS_DEMCR_TRCENA;
+    DWT_LAR = 0xC5ACCE55U;
     dwt_enable_cycle_counter();
     rcc_periph_clock_enable(RCC_GPIOA);
     rcc_periph_clock_enable(RCC_GPIOD);

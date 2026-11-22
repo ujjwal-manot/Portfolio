@@ -93,13 +93,13 @@ module top (
   end
 
   always_ff @(posedge clk) begin
-    if (!dmem_is_uart) begin
+    if (dmem_addr[31:16] == 16'h0000) begin
       if (dmem_wstrb[0]) dmem[dmem_addr[11:2]][7:0]   <= dmem_wdata[7:0];
       if (dmem_wstrb[1]) dmem[dmem_addr[11:2]][15:8]  <= dmem_wdata[15:8];
       if (dmem_wstrb[2]) dmem[dmem_addr[11:2]][23:16] <= dmem_wdata[23:16];
       if (dmem_wstrb[3]) dmem[dmem_addr[11:2]][31:24] <= dmem_wdata[31:24];
-      dmem_ram_q <= dmem[dmem_addr[11:2]];
     end
+    dmem_ram_q    <= dmem[dmem_addr[11:2]];
     uart_read_q   <= dmem_read && dmem_is_uart;
     uart_status_q <= {31'b0, uart_busy};
   end
