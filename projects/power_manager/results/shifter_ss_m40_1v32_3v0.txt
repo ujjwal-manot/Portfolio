@@ -1,0 +1,1 @@
+shifter lo_v -1.58184E-07 hi_v 3 t_on_s 7.554E-11 t_off_s 5.2989E-10 i_vin_on_a -5.9796E-12 i_vin_off_a -5.98156E-12 i_logic_a -1.39297E-12

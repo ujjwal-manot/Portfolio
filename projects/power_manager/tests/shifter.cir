@@ -1,0 +1,31 @@
+* Level shifter testbench: the input switches between 0 and the logic rail every 20 ns (the controller's clock) with 100 ps edges, the output drives the gate of one switch unit (a 1 um thick-oxide PMOS from its own copy of vin into a 1.0 V rail, so the vin current measured is the shifter's alone); written to shifter.txt: the output's lowest and highest level, the delays from the input's 50% point to the output crossing half of vin on both edges, and the supply current from vin and from the logic rail once settled in each state; corner, temperature, logic supply (vdd_v) and input supply (vin_v) come from corner.inc.
+.include corner.inc
+.include shifter_hv_sizes.inc
+.include shifter_hv.cir
+.param mm=0
+VDD vdd 0 {vdd_v}
+VIN vin 0 {vin_v}
+VR rail 0 1.0
+VA a 0 pulse(0 {vdd_v} 5n 100p 100p 19.9n 40n)
+XL a outn vin vdd 0 shifter_hv
+VSW vsw 0 {vin_v}
+XS rail outn vsw vsw sg13_hv_pmos w=1u l=0.45u
+.tran 10p 85n
+.control
+run
+let hv = v(vin)[0] / 2
+let ha = v(vdd)[0] / 2
+meas tran a_up when v(a)=$&ha rise=2
+meas tran o_down when v(outn)=$&hv fall=2
+meas tran a_dn when v(a)=$&ha fall=2
+meas tran o_up when v(outn)=$&hv rise=2
+meas tran lo_v min v(outn) from=60n to=64n
+meas tran hi_v max v(outn) from=80n to=84n
+meas tran i_on avg i(VIN) from=60n to=64n
+meas tran i_off avg i(VIN) from=80n to=84n
+meas tran i_logic avg i(VDD) from=60n to=64n
+let t_on = o_down - a_up
+let t_off = o_up - a_dn
+echo "shifter lo_v $&lo_v hi_v $&hi_v t_on_s $&t_on t_off_s $&t_off i_vin_on_a $&i_on i_vin_off_a $&i_off i_logic_a $&i_logic" > shifter.txt
+.endc
+.end

@@ -1,4 +1,4 @@
-# power_manager commands: make speed | all
+# power_manager commands: make speed | ctrl | shifter | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -10,8 +10,12 @@ SPEED := $(foreach c,$(SPEED_CORNERS),build/speed/$(c)/speed.txt)
 TEMP_25 := 25
 TEMP_125 := 125
 TEMP_m40 := -40
+TEMP_27 := 27
+PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3 -m pytest -q -s -p no:cacheprovider
+SHIFTER_CORNERS := tt_27_1v2_3v3 $(foreach p,ss ff sf fs,$(foreach t,m40 125,$(foreach v,1v08_3v6 1v32_3v0,$(p)_$(t)_$(v))))
+SHIFTER := $(foreach c,$(SHIFTER_CORNERS),build/shifter/$(c)/shifter.txt)
 
-all: speed
+all: speed ctrl shifter
 
 build/speed/%/speed.txt: tests/speed.cir
 	mkdir -p $(@D)
@@ -26,4 +30,19 @@ speed: $(SPEED) tests/fo4.v tests/fo4.tcl
 	for c in $(SPEED_CORNERS); do cp build/speed/$$c/speed.txt results/speed_$$c.txt; done
 	if $(PY) $(ROOT)/helpers/speed_results.py results/speed_*.txt results/fo4_*.txt > results/speed.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) speed $$c results/speed.log results/speed_*.txt results/fo4_*.txt
 
-.PHONY: all speed
+ctrl:
+	mkdir -p results
+	if $(PYTEST) tests/test_dldo_ctrl.py > results/test_dldo_ctrl.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_dldo_ctrl $$c results/test_dldo_ctrl.log
+
+build/shifter/%/shifter.txt: tests/shifter.cir design/shifter_hv.cir design/shifter_hv_sizes.inc
+	mkdir -p $(@D)
+	cp $^ $(@D)
+	set -- $(subst _, ,$*); printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerMOShv.lib mos_%s\n.temp %s\n.param vdd_v=%s vin_v=%s\n' $$1 $$1 $(TEMP_$(word 2,$(subst _, ,$*))) $$(echo $$3 | tr v .) $$(echo $$4 | tr v .) > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b shifter.cir > shifter.log 2>&1
+
+shifter: $(SHIFTER)
+	mkdir -p results
+	for c in $(SHIFTER_CORNERS); do cp build/shifter/$$c/shifter.txt results/shifter_$$c.txt; done
+	if $(PY) $(ROOT)/helpers/power_results.py shifter $(foreach c,$(SHIFTER_CORNERS),results/shifter_$(c).txt) > results/shifter.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) shifter $$c results/shifter.log results/shifter_*.txt
+
+.PHONY: all speed ctrl shifter

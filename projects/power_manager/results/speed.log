@@ -1,0 +1,37 @@
+inv_s: transistors at tt 25 C 1.20 V 78.2 ps, library typ 68.6 ps (+14.1%)
+nand_s: transistors at tt 25 C 1.20 V 106.3 ps, library typ 95.6 ps (+11.1%)
+nor_s: transistors at tt 25 C 1.20 V 123.3 ps, library typ 117.8 ps (+4.7%)
+slow/typ ratio, inv_s: transistors differ from the library by +0.77%
+slow/typ ratio, nand_s: transistors differ from the library by +2.45%
+slow/typ ratio, nor_s: transistors differ from the library by +0.78%
+fast/typ ratio, inv_s: transistors differ from the library by -1.90%
+fast/typ ratio, nand_s: transistors differ from the library by -3.21%
+fast/typ ratio, nor_s: transistors differ from the library by -1.12%
+vdd 0.80 V: worst slow-corner delay 3.489 x the slow library point
+vdd 0.82 V: worst slow-corner delay 3.062 x the slow library point
+vdd 0.84 V: worst slow-corner delay 2.712 x the slow library point
+vdd 0.86 V: worst slow-corner delay 2.422 x the slow library point
+vdd 0.88 V: worst slow-corner delay 2.179 x the slow library point
+vdd 0.90 V: worst slow-corner delay 1.973 x the slow library point
+vdd 0.92 V: worst slow-corner delay 1.798 x the slow library point
+vdd 0.94 V: worst slow-corner delay 1.648 x the slow library point
+vdd 0.96 V: worst slow-corner delay 1.518 x the slow library point
+vdd 0.98 V: worst slow-corner delay 1.404 x the slow library point
+vdd 1.00 V: worst slow-corner delay 1.305 x the slow library point
+vdd 1.02 V: worst slow-corner delay 1.218 x the slow library point
+vdd 1.04 V: worst slow-corner delay 1.140 x the slow library point
+vdd 1.06 V: worst slow-corner delay 1.074 x the slow library point
+vdd 1.08 V: worst slow-corner delay 1.016 x the slow library point
+vdd 1.10 V: worst slow-corner delay 0.964 x the slow library point
+vdd 1.12 V: worst slow-corner delay 0.925 x the slow library point
+vdd 1.14 V: worst slow-corner delay 0.892 x the slow library point
+vdd 1.16 V: worst slow-corner delay 0.861 x the slow library point
+vdd 1.18 V: worst slow-corner delay 0.832 x the slow library point
+vdd 1.20 V: worst slow-corner delay 0.806 x the slow library point
+vdd 1.22 V: worst slow-corner delay 0.781 x the slow library point
+vdd 1.24 V: worst slow-corner delay 0.758 x the slow library point
+vdd 1.26 V: worst slow-corner delay 0.736 x the slow library point
+vdd 1.28 V: worst slow-corner delay 0.716 x the slow library point
+vdd 1.30 V: worst slow-corner delay 0.697 x the slow library point
+vdd 1.32 V: worst slow-corner delay 0.680 x the slow library point
+every check passes

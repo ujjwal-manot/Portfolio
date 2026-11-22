@@ -1,0 +1,9 @@
+* Level shifter from the 1.2 V logic rail (vdd) to the 3.3 V input (vin) for one switch gate, on IHP SG13G2 thick-oxide devices: two NMOS pull-downs driven by the input and its inverse (a thin-oxide inverter on vdd) fight two cross-coupled PMOS loads, so the NMOS must be strong enough with only vdd on its gate to flip the weak PMOS at every corner; outn goes to vss when in is high, which turns the switch PMOS on; no static current flows once it has flipped; every device carries mm_ok={mm}, sizes come from shifter_hv_sizes.inc.
+.subckt shifter_hv in outn vin vdd vss
+XIP inb in vdd vdd sg13_lv_pmos w={w_ip} l=0.13u mm_ok={mm}
+XIN inb in vss vss sg13_lv_nmos w={w_in} l=0.13u mm_ok={mm}
+XN1 outp inb vss vss sg13_hv_nmos w={w_n} l={l_n} mm_ok={mm}
+XN2 outn in vss vss sg13_hv_nmos w={w_n} l={l_n} mm_ok={mm}
+XP1 outp outn vin vin sg13_hv_pmos w={w_p} l={l_p} mm_ok={mm}
+XP2 outn outp vin vin sg13_hv_pmos w={w_p} l={l_p} mm_ok={mm}
+.ends shifter_hv

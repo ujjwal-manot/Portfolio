@@ -1,0 +1,18 @@
+shifter_tt_27_1v2_3v3: low -6e-08 V, high 3.3 V, on 93 ps, off 555 ps, vin current 7.13e-12 A
+shifter_ss_m40_1v08_3v6: low -4.5e-08 V, high 3.6 V, on 179 ps, off 761 ps, vin current 7.21e-12 A
+shifter_ss_m40_1v32_3v0: low -1.58e-07 V, high 3 V, on 76 ps, off 530 ps, vin current 5.98e-12 A
+shifter_ss_125_1v08_3v6: low -1.24e-08 V, high 3.6 V, on 210 ps, off 924 ps, vin current 5.11e-11 A
+shifter_ss_125_1v32_3v0: low -6.4e-09 V, high 3 V, on 93 ps, off 757 ps, vin current 4.11e-11 A
+shifter_ff_m40_1v08_3v6: low -6.44e-08 V, high 3.6 V, on 97 ps, off 455 ps, vin current 8.1e-12 A
+shifter_ff_m40_1v32_3v0: low -2e-07 V, high 3 V, on 57 ps, off 400 ps, vin current 6.27e-12 A
+shifter_ff_125_1v08_3v6: low 4.82e-08 V, high 3.6 V, on 124 ps, off 612 ps, vin current 6.66e-10 A
+shifter_ff_125_1v32_3v0: low 2.58e-08 V, high 3 V, on 70 ps, off 581 ps, vin current 5.2e-10 A
+shifter_sf_m40_1v08_3v6: low -2.65e-07 V, high 3.6 V, on 161 ps, off 621 ps, vin current 7.41e-12 A
+shifter_sf_m40_1v32_3v0: low -5.8e-08 V, high 3 V, on 71 ps, off 451 ps, vin current 6.04e-12 A
+shifter_sf_125_1v08_3v6: low -6.35e-09 V, high 3.6 V, on 192 ps, off 776 ps, vin current 1.01e-10 A
+shifter_sf_125_1v32_3v0: low 1.88e-08 V, high 3 V, on 88 ps, off 652 ps, vin current 8.02e-11 A
+shifter_fs_m40_1v08_3v6: low -2.08e-07 V, high 3.6 V, on 105 ps, off 555 ps, vin current 7.23e-12 A
+shifter_fs_m40_1v32_3v0: low -2.34e-07 V, high 3 V, on 60 ps, off 470 ps, vin current 6.02e-12 A
+shifter_fs_125_1v08_3v6: low -4.69e-09 V, high 3.6 V, on 134 ps, off 725 ps, vin current 3.23e-10 A
+shifter_fs_125_1v32_3v0: low 8.51e-09 V, high 3 V, on 73 ps, off 672 ps, vin current 2.54e-10 A
+every check passes

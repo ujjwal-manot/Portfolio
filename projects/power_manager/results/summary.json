@@ -1,0 +1,104 @@
+{
+ "shifter": {
+  "logs": {
+   "shifter.log": "6a6dcda1f9129eab4c43856ec8b6e256b9a5ea3ec1435602ea0c094a252ee42f",
+   "shifter_ff_125_1v08_3v6.txt": "78b1b37dc9ca2e4c18a71c56f8268175aa13df1bd4e2bd549464cdee674b0c7a",
+   "shifter_ff_125_1v32_3v0.txt": "4fcbee3c3e988755b07c80f8a4bc79b870e95b5fdc79bc130730e772dc24ef4a",
+   "shifter_ff_m40_1v08_3v6.txt": "f60cd947d0af5b5f6a3c4b83e784b6b36606ef2f653c453c3991d3b6516e5c40",
+   "shifter_ff_m40_1v32_3v0.txt": "cb69737bff7fe1bce88856841e4e527729708fae7f12f93452752ef7fa0ae8cc",
+   "shifter_fs_125_1v08_3v6.txt": "3829bb3ec5f07f7380b67ba934136ae2e481e41c7c3e512860be3d7b1ce9f4a8",
+   "shifter_fs_125_1v32_3v0.txt": "a871621288d10c0e25d1107da3f7d708181e72a6adbb8236a5ee23ad23afa8b3",
+   "shifter_fs_m40_1v08_3v6.txt": "85d1228b418320095687a75205e3cffd5fea900d0ef7a2584c18e1fb5762fd56",
+   "shifter_fs_m40_1v32_3v0.txt": "1bbcfe5dc55091cd7252add8d8b3da662ca3dbcc441878221aa0e50b5270e1f4",
+   "shifter_sf_125_1v08_3v6.txt": "604faae9e6fb13299e79fcfb3fe033bc22f2dcfa255310688a7b540bc59b47e2",
+   "shifter_sf_125_1v32_3v0.txt": "b3cc3974dcc9e006c1ec76713838b20a23c8c85a1f041880f6d2451510a4bf7b",
+   "shifter_sf_m40_1v08_3v6.txt": "1e0b7c02888e0e35cef9b8b8e2eae24e038200cfb668baeccdc6fc1574af8c6a",
+   "shifter_sf_m40_1v32_3v0.txt": "15e201775865cae92e090aa177e07e665c63b587c5254f61b9129c6cde8757ae",
+   "shifter_ss_125_1v08_3v6.txt": "b6d6ba2bbf991a0f98d64e3f9fd6dc56198ec86e58978c87a8e62e51de0ce0e0",
+   "shifter_ss_125_1v32_3v0.txt": "18a06bfbe2650c915787c6f021a688f80a64f9db33b1b62ee1e2be215fbabf62",
+   "shifter_ss_m40_1v08_3v6.txt": "47cde9e5edbafcddca2aa169f984913f105cf3f1484037772c03a36ea0fbf91c",
+   "shifter_ss_m40_1v32_3v0.txt": "f85e3900f4f0eb601796b92df30bfdce10791e3597bfda3bbc987f62adb94941",
+   "shifter_tt_27_1v2_3v3.txt": "f662b656a3f60ede98270a6606a2ed8cd7f22453191a176f0ba759c6c3023b78"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/power_results.py": "f0bdd401dcb65fb41522837e8eb2d6b23b262f09386e9a726e5ffb862322e3d3",
+   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
+   "helpers/speed_results.py": "847a01fc849e998e22347653fd8474e34a1a97231d5ed14583b502cfe3e184af",
+   "projects/power_manager/Makefile": "9d21382ee2759c51e451c03f7313ccca7963efaf44f6c82c24d2a304f4cd4900",
+   "projects/power_manager/cells/extract.tcl": "de2f2f14facc714a8bbcc09dcdf093b14fcc37c46312925d4649eb4056e5ee73",
+   "projects/power_manager/design/dldo_ctrl.sv": "b08120dc014af86de5b2aa04ff6770376ef407e8963762228780085edea49279",
+   "projects/power_manager/design/shifter_hv.cir": "6dfe64590e30be11abf5fe3da6188637d007d13bdc1f6609057747d50dc98a64",
+   "projects/power_manager/design/shifter_hv_sizes.inc": "c831c5a008ea58dd53af9f6b4273d6fcbbd7a2ba569f97c47eddd299cdd4ebe1",
+   "projects/power_manager/tests/arc.cir": "c4a2a5567c98cd6b6a3b88fbc2dee195bfed51ddbe0173e5c5525edf57a821f8",
+   "projects/power_manager/tests/bitcell.cir": "cc4b136457f9a726d3ce2c8d8e3d13039d2bf6ec3bec9f636006613735c13d37",
+   "projects/power_manager/tests/fo4.tcl": "7f588f5b56c31e5fa57611ba10f6499f6f90ae306bae3e94b47600633bdc8e4a",
+   "projects/power_manager/tests/fo4.v": "0bc6bee0e8ae5f541ceec0e0a447216255281b422fa5e781b92814e1589cbb7a",
+   "projects/power_manager/tests/shifter.cir": "236fd9253ac9b10c9c6cf200a59ddb29a96b338d09c3cc40e43d8dfd5325f44d",
+   "projects/power_manager/tests/speed.cir": "ed52a49b74d922e727ddac1569f8f78321ebea72002d7d5aa5c7449061c8c6fb",
+   "projects/power_manager/tests/test_dldo_ctrl.py": "64ee2ab8b73e06124e44060391be891fe5273863a459bdfaa4d915271166ff4d"
+  },
+  "time": "2026-11-22 04:13:05",
+  "values": {}
+ },
+ "speed": {
+  "logs": {
+   "fo4_fast.txt": "b7bdf6ec6ca7df9f81bddb4cc4045912cc5be11c70136fc244d3ecb36ba7d449",
+   "fo4_slow.txt": "810dc49e75d0692f3dcf7ff8a804f9da74ca24ecdc96384e2c116d8e27aeeae3",
+   "fo4_typ.txt": "b5f37274233284a0f196defd371e88906b838ffed365afb7881616868918801b",
+   "speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec",
+   "speed_ff_125.txt": "027bfa3340c26c23f758bbaad619804652cb9528fa799c7f72072e6078c00eb5",
+   "speed_ff_m40.txt": "2623044a06736e955bd4819b8d492bef6d413d3727881757251c1faa6e31ee14",
+   "speed_ss_125.txt": "46c37a8a486b2ace8b8299d38bb326fcbdccbbc7c559e5cf937e7215619df09c",
+   "speed_ss_m40.txt": "7af3200272b7dfa940bfec7417db82a5300bddc84accb28b20aaf7fa2e9a16dc",
+   "speed_tt_25.txt": "0c38eaca2ccdc4e4acac5366f77b3b0f2b4db08569bb0568f7f818bf66f7edfc"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
+   "helpers/speed_results.py": "847a01fc849e998e22347653fd8474e34a1a97231d5ed14583b502cfe3e184af",
+   "projects/power_manager/Makefile": "716a9fcc6524447a2672210ff3f11d5f125032f4f464efb584d1b7dd94181de1",
+   "projects/power_manager/cells/extract.tcl": "de2f2f14facc714a8bbcc09dcdf093b14fcc37c46312925d4649eb4056e5ee73",
+   "projects/power_manager/design/dldo_ctrl.sv": "b08120dc014af86de5b2aa04ff6770376ef407e8963762228780085edea49279",
+   "projects/power_manager/design/shifter_hv.cir": "6dfe64590e30be11abf5fe3da6188637d007d13bdc1f6609057747d50dc98a64",
+   "projects/power_manager/design/shifter_hv_sizes.inc": "c831c5a008ea58dd53af9f6b4273d6fcbbd7a2ba569f97c47eddd299cdd4ebe1",
+   "projects/power_manager/tests/arc.cir": "c4a2a5567c98cd6b6a3b88fbc2dee195bfed51ddbe0173e5c5525edf57a821f8",
+   "projects/power_manager/tests/bitcell.cir": "cc4b136457f9a726d3ce2c8d8e3d13039d2bf6ec3bec9f636006613735c13d37",
+   "projects/power_manager/tests/fo4.tcl": "7f588f5b56c31e5fa57611ba10f6499f6f90ae306bae3e94b47600633bdc8e4a",
+   "projects/power_manager/tests/fo4.v": "0bc6bee0e8ae5f541ceec0e0a447216255281b422fa5e781b92814e1589cbb7a",
+   "projects/power_manager/tests/shifter.cir": "236fd9253ac9b10c9c6cf200a59ddb29a96b338d09c3cc40e43d8dfd5325f44d",
+   "projects/power_manager/tests/speed.cir": "ed52a49b74d922e727ddac1569f8f78321ebea72002d7d5aa5c7449061c8c6fb",
+   "projects/power_manager/tests/test_dldo_ctrl.py": "64ee2ab8b73e06124e44060391be891fe5273863a459bdfaa4d915271166ff4d"
+  },
+  "time": "2026-11-22 04:11:26",
+  "values": {}
+ },
+ "test_dldo_ctrl": {
+  "logs": {
+   "test_dldo_ctrl.log": "09459b84d01855063452c5d210d725804952fe2eb6c270ee78af53b4520d6e7c"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/power_results.py": "f0bdd401dcb65fb41522837e8eb2d6b23b262f09386e9a726e5ffb862322e3d3",
+   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
+   "helpers/speed_results.py": "847a01fc849e998e22347653fd8474e34a1a97231d5ed14583b502cfe3e184af",
+   "projects/power_manager/Makefile": "9d21382ee2759c51e451c03f7313ccca7963efaf44f6c82c24d2a304f4cd4900",
+   "projects/power_manager/cells/extract.tcl": "de2f2f14facc714a8bbcc09dcdf093b14fcc37c46312925d4649eb4056e5ee73",
+   "projects/power_manager/design/dldo_ctrl.sv": "b08120dc014af86de5b2aa04ff6770376ef407e8963762228780085edea49279",
+   "projects/power_manager/design/shifter_hv.cir": "6dfe64590e30be11abf5fe3da6188637d007d13bdc1f6609057747d50dc98a64",
+   "projects/power_manager/design/shifter_hv_sizes.inc": "c831c5a008ea58dd53af9f6b4273d6fcbbd7a2ba569f97c47eddd299cdd4ebe1",
+   "projects/power_manager/tests/arc.cir": "c4a2a5567c98cd6b6a3b88fbc2dee195bfed51ddbe0173e5c5525edf57a821f8",
+   "projects/power_manager/tests/bitcell.cir": "cc4b136457f9a726d3ce2c8d8e3d13039d2bf6ec3bec9f636006613735c13d37",
+   "projects/power_manager/tests/fo4.tcl": "7f588f5b56c31e5fa57611ba10f6499f6f90ae306bae3e94b47600633bdc8e4a",
+   "projects/power_manager/tests/fo4.v": "0bc6bee0e8ae5f541ceec0e0a447216255281b422fa5e781b92814e1589cbb7a",
+   "projects/power_manager/tests/shifter.cir": "236fd9253ac9b10c9c6cf200a59ddb29a96b338d09c3cc40e43d8dfd5325f44d",
+   "projects/power_manager/tests/speed.cir": "ed52a49b74d922e727ddac1569f8f78321ebea72002d7d5aa5c7449061c8c6fb",
+   "projects/power_manager/tests/test_dldo_ctrl.py": "64ee2ab8b73e06124e44060391be891fe5273863a459bdfaa4d915271166ff4d"
+  },
+  "time": "2026-11-22 04:12:21",
+  "values": {}
+ }
+}

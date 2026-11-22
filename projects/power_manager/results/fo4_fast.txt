@@ -1,0 +1,1 @@
+fast inv_s 4.6927e-11 nand_s 6.7542e-11 nor_s 7.8233e-11
