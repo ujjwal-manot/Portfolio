@@ -1,7 +1,7 @@
 Expected failure: cpu stored
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -215,7 +215,7 @@
+@@ -217,7 +217,7 @@
    assign dmem_addr  = e_addr;
    assign dmem_read  = e_commit && e_op == LOAD;
    assign dmem_wdata = e_f3 == 3'd0 ? {4{b[7:0]}} : e_f3 == 3'd1 ? {2{b[15:0]}} : b;

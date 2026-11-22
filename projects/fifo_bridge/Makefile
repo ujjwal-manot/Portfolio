@@ -57,8 +57,8 @@ power: timing layout
 	  $(SAVE) power_$${n}_$$k $$c results/power_$${n}_$$k.log $$([ $$n = routed ] && echo results/routed_netlist.sha256); done; done
 
 mutants: equiv layout
-	sed '0,/sg13g2_xor2_1 /s//sg13g2_xnor2_1 /' build/fifo_bridge_cells.v > build/mutant_equiv.v
-	sed '0,/sg13g2_xor2_1 /s//sg13g2_xnor2_1 /' $(LAYOUT)/nl/fifo_bridge.nl.v > build/mutant_routed.v
+	perl -pe 'if (!$$d && s/sg13g2_xor2_1 /sg13g2_xnor2_1 /) { $$m = $$d = 1 } if ($$m && s/\.X\(/.Y(/) { $$m = 0 }' build/fifo_bridge_cells.v > build/mutant_equiv.v
+	perl -pe 'if (!$$d && s/sg13g2_xor2_1 /sg13g2_xnor2_1 /) { $$m = $$d = 1 } if ($$m && s/\.X\(/.Y(/) { $$m = 0 }' $(LAYOUT)/nl/fifo_bridge.nl.v > build/mutant_routed.v
 	sed 's#^read_verilog ../build/fifo_bridge_cells.v$$#read_verilog ../build/mutant_equiv.v#' formal/equiv.eqy > build/mutant_equiv.eqy
 	sed 's#^read_verilog ../layout/runs/signoff/final/nl/fifo_bridge.nl.v$$#read_verilog ../build/mutant_routed.v#' formal/routed.eqy > build/mutant_routed.eqy
 	for n in equiv routed; do diff build/mutant_$$n.eqy formal/$$n.eqy > /dev/null && exit 1; \

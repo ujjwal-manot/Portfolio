@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -244,7 +244,7 @@
+@@ -246,7 +246,7 @@
        mispredicts <= mispredicts + 32'(mispredict);
        if (redirect) begin
          pc <= pc_next;

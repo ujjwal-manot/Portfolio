@@ -1,4 +1,4 @@
-// RV32I core with machine mode, 5 stages (IF ID EX MEM WB): forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM).
+// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM).
 module cpu (
   input  logic        clk, rst_n,
   output logic [31:0] imem_addr,
@@ -30,6 +30,8 @@ module cpu (
   logic [2:0]  ie;
   logic        d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, mstatus_mie, mpie, stop_cycle, stop_instret, asleep, meip;
   logic [31:0] x [32];
+  logic        run;
+  reset_sync reset_release (.clk, .rst_n_in(rst_n), .rst_n(run));
 
   logic        btb_valid [16];
   logic [25:0] btb_tag [16];
@@ -52,8 +54,8 @@ module cpu (
     endcase
   wire d_uses_rs1 = !(d_op == LUI || d_op == AUIPC || d_op == JAL);
   wire d_uses_rs2 = d_op == BRANCH || d_op == STORE || d_op == OP;
-  wire [31:0] d_a = w_valid && w_rd != 0 && w_rd == d_rs1 ? w_value : x[d_rs1];
-  wire [31:0] d_b = w_valid && w_rd != 0 && w_rd == d_rs2 ? w_value : x[d_rs2];
+  wire [31:0] d_a = d_rs1 == 0 ? 32'b0 : w_valid && w_rd == d_rs1 ? w_value : x[d_rs1];
+  wire [31:0] d_b = d_rs2 == 0 ? 32'b0 : w_valid && w_rd == d_rs2 ? w_value : x[d_rs2];
 
   wire [6:0]  e_op = e_instr[6:0];
   wire [2:0]  e_f3 = e_instr[14:12];
@@ -211,7 +213,7 @@ module cpu (
     if (!m_load) m_value = m_data;
   end
   wire [31:0] pc_next = redirect ? new_pc : e_hold || stall ? pc : f_taken ? btb_target[f_idx] : pc + 4;
-  assign imem_addr  = rst_n ? pc_next : 32'b0;
+  assign imem_addr  = run ? pc_next : 32'b0;
   assign dmem_addr  = e_addr;
   assign dmem_read  = e_commit && e_op == LOAD;
   assign dmem_wdata = e_f3 == 3'd0 ? {4{b[7:0]}} : e_f3 == 3'd1 ? {2{b[15:0]}} : b;
@@ -227,8 +229,8 @@ module cpu (
   assign retire_cause   = w_cause;
   assign sleep          = asleep;
 
-  always_ff @(posedge clk or negedge rst_n)
-    if (!rst_n) begin
+  always_ff @(posedge clk or negedge run)
+    if (!run) begin
       pc <= 0;
       {d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, asleep, meip} <= '0;
       {branches, mispredicts, mcycle, minstret, mtime} <= '0;
@@ -291,11 +293,11 @@ module cpu (
       end
     end
 
-  always_ff @(posedge clk or negedge rst_n)
-    if (!rst_n) begin
+  always_ff @(posedge clk or negedge run)
+    if (!run) begin
       {d_pc, d_instr, d_next, e_pc, e_instr, e_next, e_imm, e_a, e_b} <= '0;
       {m_pc, m_instr, m_rd, m_data, m_store, m_cause, m_addr, w_pc, w_instr, w_rd, w_value, w_cause} <= '0;
-      for (int i = 0; i < 32; i++) x[i] <= '0;
+      for (int i = 1; i < 32; i++) x[i] <= '0;
     end else begin
       if (!redirect && !stall && !e_hold) begin
         {d_pc, d_instr} <= {pc, imem_data};

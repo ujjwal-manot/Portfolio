@@ -9,7 +9,7 @@ from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
-SOURCES = [HERE.parent / "design" / "cpu.sv", HERE / "cpu_board.sv"]
+SOURCES = [HERE.parent / "design" / "cpu.sv", HERE.parent.parent / "fifo_bridge" / "design" / "reset_sync.sv", HERE / "cpu_board.sv"]
 RESULT, FRAMES, BUDGET = 0x10000100, 4, 3200
 
 def symbols():
@@ -49,6 +49,7 @@ async def filter_run(dut, gap):
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 2)
     cocotb.start_soon(feed(dut, codes, gap))
     for cycle in range(200000):
         await RisingEdge(dut.clk)

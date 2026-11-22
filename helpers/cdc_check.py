@@ -1,9 +1,10 @@
-# Reads a flattened Yosys JSON netlist, of RTL or of IHP SG13G2 cells, and reports every clock domain crossing that is not a clean two-flop synchronizer, every multi-bit crossing, and every unsynchronized or foreign reset, minus waived crossings, and flags waivers that match nothing; a flop's clock is the port its clock pin traces back to through buffers and inverters, buffers and inverters on a data path are wire, not logic, because one input cannot glitch, and a flop that reaches an output port through buffers alone is named after that port.
+# Reads a flattened Yosys JSON netlist, of RTL or of IHP SG13G2 cells, and reports every clock domain crossing that is not a clean two-flop synchronizer, every multi-bit crossing, and every unsynchronized or foreign reset, minus waived crossings, and flags waivers that match nothing; a flop's clock is the port its clock pin (CLK, or A_CLK on an SRAM macro, which counts as a register) traces back to through buffers and inverters, buffers and inverters on a data path are wire, not logic, because one input cannot glitch, and a flop that reaches an output port through buffers alone is named after that port.
 import fnmatch, json, re, sys
 from collections import defaultdict
 
 ASYNC = {"ARST", "SET", "CLR", "ALOAD", "AD", "RESET_B"}
 TIE = {"sg13g2_tiehi", "sg13g2_tielo"}
+CLOCKS = {"CLK", "A_CLK"}
 PASS = {"$not", "$logic_not", "$_NOT_", "$buf", "$pos", "$_BUF_"} | {f"sg13g2_{c}_{n}" for c in ("inv", "buf") for n in (1, 2, 4, 8, 16)}
 
 def read_waivers(path):
@@ -30,10 +31,11 @@ def find(netlist, top, ports, waivers=()):
                 elif b not in ("0", "1", "x", "z"):
                     loads[b].append((cell, pin))
     cells = m["cells"]
-    flop = {n for n, c in cells.items() if "CLK" in c["connections"]}
+    clk_pin = lambda f: next(p for p in CLOCKS if p in cells[f]["connections"])
+    flop = {n for n, c in cells.items() if CLOCKS & c["connections"].keys()}
     def clock(f):
-        kind, what = through(cells[f]["connections"]["CLK"][0])
-        return what if kind == "port" else name[cells[f]["connections"]["CLK"][0]]
+        kind, what = through(cells[f]["connections"][clk_pin(f)][0])
+        return what if kind == "port" else name[cells[f]["connections"][clk_pin(f)][0]]
     outputs = {b: port for port, p in m["ports"].items() if p["direction"] == "output" for b in p["bits"]}
 
     def port_of(bit, seen=()):
@@ -47,7 +49,7 @@ def find(netlist, top, ports, waivers=()):
                     return found
         return None
 
-    reg = lambda f: port_of(cells[f]["connections"]["Q"][0]) or re.sub(r"\[\d+\]$", "", name[cells[f]["connections"]["Q"][0]])
+    reg = lambda f: f if "Q" not in cells[f]["connections"] else port_of(cells[f]["connections"]["Q"][0]) or re.sub(r"\[\d+\]$", "", name[cells[f]["connections"]["Q"][0]])
 
     def domain(src):
         kind, what = src
@@ -81,7 +83,7 @@ def find(netlist, top, ports, waivers=()):
     for f in sorted(flop):
         here, c = clock(f), cells[f]["connections"]
         for pin, bits in c.items():
-            if pin in ASYNC | {"CLK"} or cells[f]["port_directions"].get(pin) != "input":
+            if pin in ASYNC | CLOCKS or cells[f]["port_directions"].get(pin) != "input":
                 continue
             for bit in bits:
                 sources, depth = cone(bit, set())

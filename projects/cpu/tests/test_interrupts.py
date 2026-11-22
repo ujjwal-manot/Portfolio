@@ -9,7 +9,7 @@ from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
-SOURCES = [HERE.parent / "design" / "cpu.sv", HERE / "cpu_board.sv"]
+SOURCES = [HERE.parent / "design" / "cpu.sv", HERE.parent.parent / "fifo_bridge" / "design" / "reset_sync.sv", HERE / "cpu_board.sv"]
 RESULT, SUM, SAMPLES = 0x10000100, 0x10000104, 16
 
 async def feed(dut, codes):
@@ -35,6 +35,7 @@ async def workout(dut, mtime0):
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 2)
     dut.core.mtime.value = mtime0
     cocotb.start_soon(feed(dut, codes))
     asleep, total = 0, None

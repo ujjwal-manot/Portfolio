@@ -1,0 +1,68 @@
+{
+  "//": "LibreLane flow for cpu_top (the cpu and its two IHP SRAM macros) on IHP SG13G2, starting from the cell netlist make timing maps: a 1.2 x 1.2 mm die with the code and data macros side by side along the bottom edge, placement, a 50 MHz clock tree, the resizer's buffer tree for the reset net and hold repair, routing up to Metal5, extraction, three-corner timing with cpu.sdc (the macros' fast corner is -55 C, the nearest IHP ships to the cells' -40 C), DRC, LVS and IR drop.",
+  "DESIGN_NAME": "cpu_top",
+  "VERILOG_FILES": [
+    "dir::../build/cpu_cells.v"
+  ],
+  "SYNTH_ELABORATE_ONLY": true,
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 20,
+  "PNR_SDC_FILE": "dir::cpu.sdc",
+  "SIGNOFF_SDC_FILE": "dir::cpu.sdc",
+  "FP_SIZING": "absolute",
+  "DIE_AREA": [
+    0,
+    0,
+    1200,
+    1200
+  ],
+  "RT_MAX_LAYER": "Metal5",
+  "PL_MACRO_HALO": "15 15",
+  "MACROS": {
+    "RM_IHPSG13_1P_2048x32_c2_bm_bist": {
+      "gds": [
+        "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/gds/RM_IHPSG13_1P_2048x32_c2_bm_bist.gds"
+      ],
+      "lef": [
+        "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/lef/RM_IHPSG13_1P_2048x32_c2_bm_bist.lef"
+      ],
+      "lib": {
+        "*_typ_1p20V_25C": [
+          "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/lib/RM_IHPSG13_1P_2048x32_c2_bm_bist_typ_1p20V_25C.lib"
+        ],
+        "*_slow_1p08V_125C": [
+          "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/lib/RM_IHPSG13_1P_2048x32_c2_bm_bist_slow_1p08V_125C.lib"
+        ],
+        "*_fast_1p32V_m40C": [
+          "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/lib/RM_IHPSG13_1P_2048x32_c2_bm_bist_fast_1p32V_m55C.lib"
+        ]
+      },
+      "instances": {
+        "imem": {
+          "location": [
+            60,
+            60
+          ],
+          "orientation": "N"
+        },
+        "dmem": {
+          "location": [
+            560,
+            60
+          ],
+          "orientation": "N"
+        }
+      },
+      "vh": [
+        "dir::sram_blackbox.v"
+      ]
+    }
+  },
+  "PDN_MACRO_CONNECTIONS": [
+    "imem VDD VSS VDD! VSS!",
+    "imem VDD VSS VDDARRAY! VSS!",
+    "dmem VDD VSS VDD! VSS!",
+    "dmem VDD VSS VDDARRAY! VSS!"
+  ],
+  "ERROR_ON_NL_ASSIGN_STATEMENTS": false
+}

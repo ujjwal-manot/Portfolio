@@ -1,4 +1,4 @@
-# Runs cdc_check on probe designs built by Yosys, as RTL and mapped to IHP cells, and checks it reports exactly the crossing problem each probe was written to have, that waivers hide only what they match, and that the fifo_bridge memory waiver names only the output stage.
+# Runs cdc_check on probe designs built by Yosys, as RTL and mapped to IHP cells, and checks it reports exactly the crossing problem each probe was written to have, that waivers hide only what they match, that the fifo_bridge memory waiver names only the output stage, and that an SRAM macro counts as a register on the clock at its A_CLK pin.
 import subprocess, pytest
 from pathlib import Path
 from cdc_check import find, read_waivers, waived
@@ -41,3 +41,24 @@ def test_a_flop_behind_an_output_buffer_is_named_after_its_port(tmp_path):
     netlist = tmp_path / "bad.json"
     subprocess.run(["yosys", "-q", "-p", f"read_liberty -lib {LIB}; read_verilog {tmp_path}/bad.v; hierarchy -top buffered_tree; write_json {netlist}"], check=True)
     assert ("logic_before_sync", "q on b_clk samples src through logic") in find(netlist, "buffered_tree", {"d": "a_clk"})
+
+SRAM = "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/lib/RM_IHPSG13_1P_2048x32_c2_bm_bist_typ_1p20V_25C.lib"
+
+@pytest.mark.parametrize("macro_clk, want", [("a_clk", []), ("b_clk", ["logic_before_sync"])])
+def test_an_sram_macro_is_a_register_on_its_own_clock(macro_clk, want, tmp_path):
+    probe = f"""module macro (input a_clk, b_clk, rst_n, d, output q);
+  wire addr, dout;
+  sg13g2_dfrbpq_1 f1 (.CLK(a_clk), .D(d), .RESET_B(1'b1), .Q(addr));
+  RM_IHPSG13_1P_2048x32_c2_bm_bist mem (.A_CLK({macro_clk}), .A_MEN(1'b1), .A_WEN(1'b0), .A_REN(1'b1), .A_ADDR({{10'b0, addr}}), .A_DIN(32'b0), .A_DLY(1'b1),
+    .A_DOUT({{dout_hi, dout}}), .A_BM(32'b0), .A_BIST_CLK(1'b0), .A_BIST_EN(1'b0), .A_BIST_MEN(1'b0), .A_BIST_WEN(1'b0), .A_BIST_REN(1'b0),
+    .A_BIST_ADDR(11'b0), .A_BIST_DIN(32'b0), .A_BIST_BM(32'b0));
+  wire [30:0] dout_hi;
+  wire mix;
+  sg13g2_xor2_1 x (.A(dout), .B(addr), .X(mix));
+  sg13g2_dfrbpq_1 f2 (.CLK(a_clk), .D(mix), .RESET_B(1'b1), .Q(q));
+endmodule
+"""
+    (tmp_path / "macro.v").write_text(probe)
+    netlist = tmp_path / "macro.json"
+    subprocess.run(["yosys", "-q", "-p", f"read_liberty -lib {LIB}; read_liberty -lib {SRAM}; read_verilog {tmp_path}/macro.v; hierarchy -top macro; write_json {netlist}"], check=True)
+    assert sorted({f[0] for f in find(netlist, "macro", {"d": "a_clk", "rst_n": "a_clk"})}) == want

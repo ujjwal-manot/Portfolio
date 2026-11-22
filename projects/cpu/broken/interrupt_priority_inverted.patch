@@ -1,7 +1,7 @@
 Expected failure: cpu took interrupt 7
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -169,7 +169,7 @@
+@@ -171,7 +171,7 @@
    end
    wire        wake = pending != 0;
    wire        e_irq = e_valid && mstatus_mie && wake;

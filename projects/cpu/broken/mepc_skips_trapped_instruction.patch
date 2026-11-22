@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -259,7 +259,7 @@
+@@ -261,7 +261,7 @@
        if (wake) asleep <= 1'b0;
        else if (e_commit && e_instr == WFI) asleep <= 1'b1;
        if (e_trap) begin

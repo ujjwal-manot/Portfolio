@@ -1,0 +1,13 @@
+Expected failure: released straight from input rst_n
+Run: cdc
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -31,7 +31,7 @@
+   logic        d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, mstatus_mie, mpie, stop_cycle, stop_instret, asleep, meip;
+   logic [31:0] x [32];
+   logic        run;
+-  reset_sync reset_release (.clk, .rst_n_in(rst_n), .rst_n(run));
++  assign run = rst_n;
+ 
+   logic        btb_valid [16];
+   logic [25:0] btb_tag [16];

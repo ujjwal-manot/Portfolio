@@ -1,1 +1,2 @@
 projects/fifo_bridge/timing/timing.tcl
+projects/fifo_bridge/design/reset_sync.sv

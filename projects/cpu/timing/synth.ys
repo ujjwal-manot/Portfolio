@@ -1,6 +1,6 @@
 # Maps the cpu and its glue to the two SRAM macros (cpu_top) onto IHP SG13G2 standard cells using the slow corner library (1.08 V, 125 C), the macros staying as black boxes from their own liberty.
 read_liberty -lib /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_sram/lib/RM_IHPSG13_1P_2048x32_c2_bm_bist_slow_1p08V_125C.lib
-read_verilog -sv ../design/cpu.sv cpu_top.v
+read_verilog -sv ../design/cpu.sv ../../fifo_bridge/design/reset_sync.sv cpu_top.v
 synth -flatten -top cpu_top
 dfflibmap -liberty ../build/slow.lib
 abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p

@@ -10,7 +10,7 @@ from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
-SOURCES = [HERE.parent / "design" / "cpu.sv", HERE / "cpu_board.sv"]
+SOURCES = [HERE.parent / "design" / "cpu.sv", HERE.parent.parent / "fifo_bridge" / "design" / "reset_sync.sv", HERE / "cpu_board.sv"]
 SKIP = {"breakpoint", "pmpaddr"}
 NAMES = sorted(f"{s}/{p.stem}" for s in ("rv32ui", "rv32mi") for p in (BUILD / s).glob("*.bin") if not p.stem.endswith("_spike") and p.stem not in SKIP)
 RESULT = 0x10000100
@@ -24,6 +24,7 @@ async def lockstep(dut):
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 3)
     dut.rst_n.value = 1
+    await ClockCycles(dut.clk, 2)
     for cycle in range(100000):
         await RisingEdge(dut.clk)
         await ReadOnly()

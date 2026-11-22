@@ -1,0 +1,1 @@
+# Crossings cdc_check may accept in the cpu, in the RTL and the cell netlist: a pattern, a spaced colon, then why it is safe; there are none, since the cpu has one clock and its reset is released through reset_sync.
