@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/d2d_replay.sv
++++ b/design/d2d_replay.sv
+@@ -48,7 +48,7 @@
+         wptr               <= wptr + 4'd1;
+       end
+       if (nak_valid) begin
+-        rptr       <= {aptr[3], ack_seq};
++        rptr       <= {aptr[3], ack_seq} + 4'd1;
+         link_valid <= 1'b0;
+       end else if (has_pending) begin
+         link_valid <= 1'b1;
