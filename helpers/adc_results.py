@@ -1,4 +1,4 @@
-# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: two DAC level runs that must agree to 0.01 LSB at every code (same): python3 adc_results.py decide|offset|levels|same|convert ...
+# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate under two integration methods within 0.1 LSB while converting (top) and comparator decision times under both within 5% (decide_methods): python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert ...
 import math, statistics, sys
 import numpy as np
 from adc_spectrum import spectrum, coherent_bin
@@ -43,6 +43,17 @@ def same_codes(path_a, path_b, supply):
     a, b = codes_from_run(path_a, supply), codes_from_run(path_b, supply)
     differ = sum(x != y for x, y in zip(a, b)) + abs(len(a) - len(b))
     return differ == 0, differ
+
+def top_difference(path_a, path_b, supply):
+    load = lambda p: [[float(v) for v in l.split()][1::2] for l in open(p) if l.strip()]
+    a, b = load(path_a), load(path_b)
+    gaps = [abs(x[11] - y[11]) for x, y in zip(a, b) if x[9] < supply / 2 and y[9] < supply / 2]
+    return max(gaps) / LSB, len(gaps)
+
+def decide_difference(path_a, path_b):
+    load = lambda p: {l.split()[0]: float(l.split()[1]) for l in open(p).readlines()[1:] if len(l.split()) == 3}
+    a, b = load(path_a), load(path_b)
+    return max(abs(b[k] / a[k] - 1) for k in a if k in b)
 
 def codes_from_run(path, supply):
     rows = [[float(v) for v in l.split()][1::2] for l in open(path) if l.strip()]
@@ -95,6 +106,14 @@ if __name__ == "__main__":
         ok, differ = same_codes(args[1], args[2], float(args[0]))
         print(f"{args[1]} and {args[2]}: {differ} codes differ")
         fails = [] if ok else [f"{differ} codes differ between the two conversions"]
+    elif mode == "top":
+        worst, points = top_difference(args[1], args[2], float(args[0]))
+        print(f"{args[1]} and {args[2]}: the top plate differs by at most {worst:.4g} LSB over {points} points while converting")
+        fails = [] if worst <= 0.1 else [f"top plate differs by {worst:.4g} LSB, more than 0.1"]
+    elif mode == "decide_methods":
+        worst = decide_difference(args[0], args[1])
+        print(f"{args[0]} and {args[1]}: decision times differ by at most {worst:.2%}")
+        fails = [] if worst <= 0.05 else [f"decision times differ by {worst:.2%}, more than 5%"]
     elif mode == "convert":
         supply, n, path, measure = float(args[0]), int(args[1]), args[2], args[3]
         r = check_conversion(path, measure, supply, n)

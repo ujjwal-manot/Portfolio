@@ -1,6 +1,6 @@
 # Checks the ADC result reader on made-up files: comparator decisions must have the right sign beyond the hysteresis and finish inside the budget, Monte Carlo offsets give their spread, DAC level errors give DNL and INL against chip.md's limits, two DAC level runs agree to a hundredth of an LSB, two conversions give the same codes, and converted codes give ENOB from a coherent FFT and an offset and gain error held to chip.md's +-1 and +-2 LSB.
 import math, pytest
-from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion, same, same_codes
+from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion, same, same_codes, top_difference, decide_difference
 
 def write(tmp_path, name, text):
     path = tmp_path / name
@@ -70,3 +70,21 @@ def test_two_conversions_must_give_the_same_codes(tmp_path):
     a = write(tmp_path, "a.txt", a)
     assert same_codes(a, b, 1.2) == (True, 0)
     assert same_codes(a, c, 1.2) == (False, 1)
+
+def run_with_top(tmp_path, name, tops, samp_high=(0,)):
+    rows = []
+    for t, top in enumerate(tops):
+        values = [0] * 9 + [1.2 if t in samp_high else 0, 0.6, top, 0.6, 1e-9 * t]
+        rows.append(" ".join(f"{t * 5e-8} {v}" for v in values))
+    return write(tmp_path, name, "\n".join(rows) + "\n")
+
+def test_top_plate_difference_is_taken_in_lsb_while_converting(tmp_path):
+    gear = run_with_top(tmp_path, "g.txt", [0.9, 0.600, 0.601, 0.602])
+    trap = run_with_top(tmp_path, "t.txt", [0.1, 0.600, 0.6011, 0.602, 0.7])
+    worst, points = top_difference(gear, trap, 1.2)
+    assert points == 3 and abs(worst - 0.0001 / 0.003125) < 1e-6
+
+def test_decision_times_are_compared_row_by_row(tmp_path):
+    a = write(tmp_path, "a.txt", "dv_v t_decide_s outp_v\n1e-3 3.0e-10 1.2\n-1e-3 3.2e-10 0\n")
+    b = write(tmp_path, "b.txt", "dv_v t_decide_s outp_v\n1e-3 3.3e-10 1.2\n-1e-3 3.2e-10 0\n")
+    assert abs(decide_difference(a, b) - 0.1) < 1e-9

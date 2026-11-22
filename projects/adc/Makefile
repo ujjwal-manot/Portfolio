@@ -131,13 +131,16 @@ shunt_check: build/convert/tt_27_nom/convert.txt
 	cp build/convert/tt_27_nom/convert.txt results/shunt_check_with.txt; cp build/shunt_check/convert.txt results/shunt_check_without.txt
 	if $(PY) $(ROOT)/helpers/adc_results.py same_codes 1.2 results/shunt_check_with.txt results/shunt_check_without.txt > results/shunt_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) shunt_check $$c results/shunt_check.log results/shunt_check_*.txt
 
-gear_check: build/convert/ff_27_nom/convert.txt
-	mkdir -p build/gear_check results
-	cp build/convert/ff_27_nom/*.cir build/convert/ff_27_nom/*.inc build/sar_logic.so build/gear_check
-	sed -i 's/^.option interp rshunt=1e13 method=gear$$/.option interp rshunt=1e13/' build/gear_check/convert.cir
-	cd build/gear_check && $(RUN) ngspice -b convert.cir > convert.log 2>&1
-	cp build/convert/ff_27_nom/convert.txt results/gear_check_gear.txt; cp build/gear_check/convert.txt results/gear_check_trapezoidal.txt
-	if $(PY) $(ROOT)/helpers/adc_results.py same_codes 1.2 results/gear_check_gear.txt results/gear_check_trapezoidal.txt > results/gear_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) gear_check $$c results/gear_check.log results/gear_check_*.txt
+gear_check: build/convert/tt_27_nom/convert.txt build/convert/tt_m40_nom/convert.txt build/convert/tt_125_nom/convert.txt build/decide/tt_27_nom/decide.txt
+	mkdir -p results
+	for c in tt_27_nom tt_m40_nom tt_125_nom; do d=build/gear_check/$$c; mkdir -p $$d; cp build/convert/$$c/*.cir build/convert/$$c/*.inc build/sar_logic.so $$d; \
+	  sed -i 's/^.option interp rshunt=1e13 method=gear$$/.option interp rshunt=1e13/' $$d/convert.cir; \
+	  if [ $$c = tt_27_nom ]; then sed -i 's/^.tran 50n .*/.tran 50n 50u/' $$d/convert.cir; fi; \
+	  (cd $$d && $(RUN) ngspice -b convert.cir > convert.log 2>&1); cp $$d/convert.txt results/gear_check_trapezoidal_$$c.txt; cp build/convert/$$c/convert.txt results/gear_check_gear_$$c.txt; done
+	d=build/gear_check/decide; mkdir -p $$d; cp build/decide/tt_27_nom/*.cir build/decide/tt_27_nom/*.inc $$d; sed -i 's/^.option reltol=1e-5 vntol=1e-8$$/.option reltol=1e-5 vntol=1e-8 method=gear/' $$d/decide.cir; \
+	  (cd $$d && $(RUN) ngspice -b decide.cir > decide.log 2>&1); cp $$d/decide.txt results/gear_check_decide_gear.txt; cp build/decide/tt_27_nom/decide.txt results/gear_check_decide_trapezoidal.txt
+	if { for c in tt_27_nom tt_m40_nom tt_125_nom; do $(PY) $(ROOT)/helpers/adc_results.py top 1.2 results/gear_check_gear_$$c.txt results/gear_check_trapezoidal_$$c.txt || exit 1; done; \
+	  $(PY) $(ROOT)/helpers/adc_results.py decide_methods results/gear_check_decide_trapezoidal.txt results/gear_check_decide_gear.txt; } > results/gear_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) gear_check $$c results/gear_check.log results/gear_check_*.txt
 
 .PHONY: all sar logic decide offset levels uic_check convert shunt_check gear_check broken review
 .DELETE_ON_ERROR:
