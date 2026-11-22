@@ -1,4 +1,4 @@
-// Test board for the cpu: 64 KB RAM loaded from +program=<hex file>, answering in the same cycle the core asks.
+// Test board for the cpu: 64 KB RAM loaded from +program=<hex file>, synchronous like an SRAM macro: addresses and writes are taken at a clock edge and read data comes out in the following cycle.
 module cpu_board (
   input  logic        clk, rst_n,
   input  logic        s_tvalid, s_tlast,
@@ -19,13 +19,16 @@ module cpu_board (
 
   initial if ($value$plusargs("program=%s", image)) $readmemh(image, ram);
 
-  assign imem_data  = ram[imem_addr[15:2]];
-  assign dmem_rdata = ram[dmem_addr[15:2]];
+  logic [13:0] ia, da;
+  assign imem_data  = ram[ia];
+  assign dmem_rdata = ram[da];
 
-  always_ff @(posedge clk)
+  always_ff @(posedge clk) begin
+    {ia, da} <= {imem_addr[15:2], dmem_addr[15:2]};
     if (dmem_addr[31:16] == 0)
       for (int b = 0; b < 4; b++)
         if (dmem_wstrb[b]) ram[dmem_addr[15:2]][8*b +: 8] <= dmem_wdata[8*b +: 8];
+  end
 
   cpu core (.*);
 endmodule

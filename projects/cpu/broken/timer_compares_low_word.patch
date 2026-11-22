@@ -1,7 +1,7 @@
 Expected failure: cpu took interrupt 7
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -73,7 +73,7 @@
+@@ -72,7 +72,7 @@
    wire [31:0] y = e_op == OP ? b : e_imm;
    wire        alt = e_instr[30];
  

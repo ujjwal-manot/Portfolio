@@ -1,4 +1,4 @@
-# Checks the cpu against cpu_model.Timed one clock edge at a time: the instruction in WB spent its EX two edges earlier (MEM and WB never stall), so the model is told that cycle and decides on its own whether an interrupt was due there and which one (external before timer): an interrupt the cpu reports must be exactly that one and a retired instruction must have had none due; every retired instruction must match in pc, instruction, destination register and value, and its store (address, byte strobes and stored bytes, seen one edge earlier in MEM) must match the model's or be absent; the stream inputs are recorded every edge for the model's IO page, and the pc in decode during each instruction's EX cycle (the one fetched after it) for the model's mispredict counter; nothing is taken from the cpu.
+# Checks the cpu against cpu_model.Timed one clock edge at a time: the instruction in WB spent its EX two edges earlier (MEM and WB never stall), so the model is told that cycle and decides on its own whether an interrupt was due there and which one (external before timer): an interrupt the cpu reports must be exactly that one and a retired instruction must have had none due; every retired instruction must match in pc, instruction, destination register and value, and its store (address, byte strobes and stored bytes, driven to the memory during its EX cycle) must match the model's or be absent; the stream inputs are recorded every edge for the model's IO page, and the pc in decode during each instruction's EX cycle (the one fetched after it) for the model's mispredict counter; nothing is taken from the cpu.
 from pathlib import Path
 from cpu_model import Timed
 
@@ -35,7 +35,7 @@ class Lockstep:
         model.fetched_next = self.decode.pop(cycle - 2)
         pc, instr, rd, value, store = model.step()
         assert got == (pc, instr, rd, value), f"{self.name} instruction {self.retired}: cpu {[hex(x) for x in got]}, model {[hex(x) for x in (pc, instr, rd, value)]}"
-        strobe, addr, data = self.stores.pop(cycle - 1)
+        strobe, addr, data = self.stores.pop(cycle - 2)
         want = (((1 << store[2]) - 1) << (store[0] & 3), store[0], store[1]) if store else (0, addr, 0)
         seen = (strobe, addr, data >> 8 * (addr & 3) & ((1 << 8 * store[2]) - 1) if store else 0)
         assert seen == want, f"{self.name} instruction {self.retired} at {pc:#x}: cpu stored {[hex(x) for x in seen]}, model {[hex(x) for x in want]}"

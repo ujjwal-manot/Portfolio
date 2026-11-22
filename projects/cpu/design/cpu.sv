@@ -1,4 +1,4 @@
-// RV32I core with machine mode, 5 stages (IF ID EX MEM WB): forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000.
+// RV32I core with machine mode, 5 stages (IF ID EX MEM WB): forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM).
 module cpu (
   input  logic        clk, rst_n,
   output logic [31:0] imem_addr,
@@ -38,7 +38,6 @@ module cpu (
 
   wire [3:0] f_idx = pc[5:2];
   wire       f_taken = btb_valid[f_idx] && btb_tag[f_idx] == pc[31:6] && btb_count[f_idx][1];
-  assign imem_addr = pc;
 
   wire [6:0] d_op = d_instr[6:0];
   wire [4:0] d_rs1 = d_instr[19:15], d_rs2 = d_instr[24:20];
@@ -211,10 +210,12 @@ module cpu (
     endcase
     if (!m_load) m_value = m_data;
   end
-  assign dmem_addr  = m_addr;
-  assign dmem_read  = m_load;
-  assign dmem_wdata = m_f3 == 3'd0 ? {4{m_store[7:0]}} : m_f3 == 3'd1 ? {2{m_store[15:0]}} : m_store;
-  assign dmem_wstrb = !m_write ? 4'b0 : m_f3 == 3'd0 ? 4'b0001 << m_off : m_f3 == 3'd1 ? 4'b0011 << m_off : 4'b1111;
+  wire [31:0] pc_next = redirect ? new_pc : e_hold || stall ? pc : f_taken ? btb_target[f_idx] : pc + 4;
+  assign imem_addr  = rst_n ? pc_next : 32'b0;
+  assign dmem_addr  = e_addr;
+  assign dmem_read  = e_commit && e_op == LOAD;
+  assign dmem_wdata = e_f3 == 3'd0 ? {4{b[7:0]}} : e_f3 == 3'd1 ? {2{b[15:0]}} : b;
+  assign dmem_wstrb = !(e_commit && e_op == STORE) ? 4'b0 : e_f3 == 3'd0 ? 4'b0001 << e_addr[1:0] : e_f3 == 3'd1 ? 4'b0011 << e_addr[1:0] : 4'b1111;
   assign s_tready   = m_load && m_addr == 32'h1000_0000;
 
   assign retire_valid   = w_valid;
@@ -242,12 +243,12 @@ module cpu (
       branches <= branches + 32'(e_commit && e_op == BRANCH);
       mispredicts <= mispredicts + 32'(mispredict);
       if (redirect) begin
-        pc <= new_pc;
+        pc <= pc_next;
         {d_valid, e_valid} <= '0;
       end else if (e_hold) ;
       else if (stall) e_valid <= 1'b0;
       else begin
-        pc <= f_taken ? btb_target[f_idx] : pc + 4;
+        pc <= pc_next;
         d_valid <= 1'b1;
         e_valid <= d_valid;
       end

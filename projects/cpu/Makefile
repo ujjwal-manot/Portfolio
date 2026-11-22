@@ -43,7 +43,7 @@ timing:
 	mkdir -p build results
 	$(RUN) cp $(LIB) build/slow.lib
 	if (cd timing && $(RUN) yosys -s synth.ys) > results/synth.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) synth $$c results/synth.log
-	if (cd timing && $(RUN) sta -no_init -exit timing.tcl) > results/timing.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) timing $$c results/timing.log
+	for k in slow typ fast; do if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit timing.tcl) > results/timing_$$k.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) timing_$$k $$c results/timing_$$k.log; done
 
 broken: firmware
 	mkdir -p results

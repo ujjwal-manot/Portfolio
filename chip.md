@@ -143,7 +143,7 @@ module cpu (
 ```
 
 - RV32I, 5 stages (IF, ID, EX, MEM, WB), with forwarding, a load-use stall and a 2-bit branch predictor with a 16-entry BTB.
-- Instruction and data memory are outside the core and read in the same cycle (combinational).
+- Instruction and data memory are outside the core and synchronous, like the IHP SRAM macros (`RM_IHPSG13_1P_2048x32_c2_bm_bist`, 8 KB each): in each cycle the core drives the next fetch address, and the address, write data and byte strobes of the store or load in EX; the memory takes them at the closing edge and its read data arrives in the next cycle (the fetch's IF, the load's MEM).
 - `retire_*` reports every finished instruction, so a testbench can check each one against `helpers/cpu_model.py`. `retire_intr` marks the slot of an interrupt taken in place of the instruction at `retire_pc`, with its cause in `retire_cause`.
 - Machine mode only: Zicsr and the machine CSRs (mstatus, misa, mie, mip, mtvec with vectored interrupts, mscratch, mepc, mcause, mtval, mcycle, minstret, mcountinhibit, the ID registers reading 0), traps for illegal instructions, ecall, ebreak and misaligned loads, stores and jump targets, mret.
 - Interrupts: timer (cause 7, mtime >= mtimecmp) and external (cause 11, high while a stream sample waits). Traps and interrupts are taken in EX, where instructions commit.

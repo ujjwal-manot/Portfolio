@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -237,7 +237,7 @@
+@@ -238,7 +238,7 @@
      end else begin
        mtime <= mtime + 1;
        meip <= s_tvalid;

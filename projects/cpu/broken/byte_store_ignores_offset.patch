@@ -1,12 +1,12 @@
 Expected failure: cpu stored
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -214,7 +214,7 @@
-   assign dmem_addr  = m_addr;
-   assign dmem_read  = m_load;
-   assign dmem_wdata = m_f3 == 3'd0 ? {4{m_store[7:0]}} : m_f3 == 3'd1 ? {2{m_store[15:0]}} : m_store;
--  assign dmem_wstrb = !m_write ? 4'b0 : m_f3 == 3'd0 ? 4'b0001 << m_off : m_f3 == 3'd1 ? 4'b0011 << m_off : 4'b1111;
-+  assign dmem_wstrb = !m_write ? 4'b0 : m_f3 == 3'd0 ? 4'b0001 : m_f3 == 3'd1 ? 4'b0011 << m_off : 4'b1111;
+@@ -215,7 +215,7 @@
+   assign dmem_addr  = e_addr;
+   assign dmem_read  = e_commit && e_op == LOAD;
+   assign dmem_wdata = e_f3 == 3'd0 ? {4{b[7:0]}} : e_f3 == 3'd1 ? {2{b[15:0]}} : b;
+-  assign dmem_wstrb = !(e_commit && e_op == STORE) ? 4'b0 : e_f3 == 3'd0 ? 4'b0001 << e_addr[1:0] : e_f3 == 3'd1 ? 4'b0011 << e_addr[1:0] : 4'b1111;
++  assign dmem_wstrb = !(e_commit && e_op == STORE) ? 4'b0 : e_f3 == 3'd0 ? 4'b0001 : e_f3 == 3'd1 ? 4'b0011 << e_addr[1:0] : 4'b1111;
    assign s_tready   = m_load && m_addr == 32'h1000_0000;
  
    assign retire_valid   = w_valid;

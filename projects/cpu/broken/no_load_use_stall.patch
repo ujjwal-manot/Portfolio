@@ -1,7 +1,7 @@
 Expected failure: , model ['
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -64,7 +64,7 @@
+@@ -63,7 +63,7 @@
    wire        e_writes = e_op == LUI || e_op == AUIPC || e_op == JAL || e_op == JALR || e_op == LOAD || e_op == OPIMM || e_op == OP || e_csr_op;
    wire [4:0]  e_rd = e_writes ? e_instr[11:7] : 5'd0;
    wire [4:0]  e_rs1 = e_instr[19:15], e_rs2 = e_instr[24:20];

@@ -1,7 +1,7 @@
 Expected failure: was due at cycle
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
-@@ -261,7 +261,7 @@
+@@ -262,7 +262,7 @@
          {mepc, mcause, mtval} <= {e_pc, e_irq, 27'b0, trap_cause, e_irq ? 32'b0 : e_tval};
          {mpie, mstatus_mie} <= {mstatus_mie, 1'b0};
        end
