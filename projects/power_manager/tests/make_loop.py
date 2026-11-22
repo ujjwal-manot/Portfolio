@@ -1,4 +1,4 @@
-# Writes loop.cir, the transistor-level digital LDO testbench, into the current directory: 128 switch units (dldo_unit.cir) driven by the controller RTL through ngspice d_cosim (dldo_ctrl.so from vlnggen), four window comparators (the ADC's StrongARM with power_manager's sizes) clocked on the inverted 50 MHz clock comparing a divider of ten identical rppd units on the rail (0.6 V at the 1.0 V setpoint) against a ladder of 201 identical units on the 1.206 V bandgap output (6 mV per unit, taps at 0.570, 0.594, 0.606 and 0.630 V), 2 nF of MOS decoupling and a load drawing the current of load.inc's source lw (volts read as amps) scaled by rail/1.0 V as switched capacitance does; vout and the units on are written every 10 ns to loop.txt.
+# Writes loop.cir, the transistor-level digital LDO testbench, into the current directory: 128 switch units (dldo_unit.cir) driven by the controller RTL through ngspice d_cosim (dldo_ctrl.so from vlnggen), four window comparators (the ADC's StrongARM with power_manager's sizes) clocked on the inverted 50 MHz clock comparing a divider of ten identical rppd units on the rail (0.6 V at the 1.0 V setpoint) against a ladder of 201 identical units on the 1.206 V bandgap output (6 mV per unit, taps at 0.570, 0.594, 0.606 and 0.630 V), 2 nF of MOS decoupling and a load drawing the current of load.inc's source lw (volts read as amps) scaled by rail/1.0 V as switched capacitance does; vout and the units on are written every 10 ns to loop.txt; with check as the first argument it writes cosim_check.cir instead, the controller alone through the same ports under each input in turn (far_lo, lo, far_hi, hi, none, lo) with every output written to check.txt for dldo_results.py cosim.
 import sys
 
 N = 128
@@ -49,4 +49,27 @@ wrdata loop.txt v(out) {" ".join(f"v(drv{i})" for i in range(8))}
 .endc
 .end
 """
-open(sys.argv[1] if len(sys.argv) > 1 else "loop.cir", "w").write(text)
+check = f"""* Digital LDO controller port check: written by tests/make_loop.py.
+VCLK clk 0 pulse(0 1.2 10n 50p 50p 9.95n 20n)
+VRST rst 0 pwl(0 0 100n 0 101n 1.2)
+VLO lo 0 pwl(0 1.2 400n 1.2 401n 0 600n 0 601n 0 700n 0 701n 0 760n 0 761n 1.2)
+VHI hi 0 pwl(0 0 400n 0 401n 1.2 700n 1.2 701n 0)
+VFL flo 0 pwl(0 1.2 300n 1.2 301n 0)
+VFH fhi 0 pwl(0 0 400n 0 401n 1.2 600n 1.2 601n 0)
+AIN [clk rst lo hi flo fhi] [dclk drst dlo dhi dflo dfhi] tobits
+.model tobits adc_bridge(in_low=0.4 in_high=0.8)
+ACTL [dclk drst dlo dhi dflo dfhi] [{ons} {count} {drive}] null ctrl
+.model ctrl d_cosim simulation="./dldo_ctrl.so"
+AOUT [{ons} {count} {drive}] [{analog} {" ".join(f"cta{i}" for i in reversed(range(8)))} {drive_a}] tovolts
+.model tovolts dac_bridge(out_low=0 out_high=1.2 t_rise=100p t_fall=100p)
+.tran 1n 800n
+.control
+run
+wrdata check.txt v(lo) v(hi) v(flo) v(fhi) v(rst) {" ".join(f"v(cta{i})" for i in range(8))} {" ".join(f"v(drv{i})" for i in range(8))} {" ".join(f"v(on{i})" for i in range(N))}
+.endc
+.end
+"""
+if sys.argv[1:2] == ["check"]:
+    open("cosim_check.cir", "w").write(check)
+else:
+    open(sys.argv[1] if len(sys.argv) > 1 else "loop.cir", "w").write(text)

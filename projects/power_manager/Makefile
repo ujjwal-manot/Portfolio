@@ -1,4 +1,4 @@
-# power_manager commands: make speed | ctrl | shifter | cmp_offset | all
+# power_manager commands: make speed | ctrl | cosim | shifter | cmp_offset | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -17,7 +17,19 @@ SHIFTER := $(foreach c,$(SHIFTER_CORNERS),build/shifter/$(c)/shifter.txt)
 ADC := $(ROOT)/projects/adc
 CMP_OFFSET := $(foreach n,$(shell seq 1 100),build/cmp_offset/$(n)/offset.txt)
 
-all: speed ctrl shifter cmp_offset
+all: speed ctrl cosim shifter cmp_offset
+
+build/dldo_ctrl.so: design/dldo_ctrl.sv tests/dldo_ctrl_cosim.sv
+	mkdir -p build/vlnggen
+	cp $^ build/vlnggen
+	cd build/vlnggen && $(RUN) ngspice vlnggen dldo_ctrl_cosim.sv dldo_ctrl.sv > vlnggen.log 2>&1
+	mv build/vlnggen/.so $@
+
+cosim: build/dldo_ctrl.so tests/make_loop.py
+	mkdir -p build/cosim results
+	cp build/dldo_ctrl.so build/cosim
+	cd build/cosim && $(RUN) python3 ../../tests/make_loop.py check && $(RUN) ngspice -b cosim_check.cir > cosim_check.log 2>&1
+	if $(PY) $(ROOT)/helpers/dldo_results.py cosim 128 8 1 build/cosim/check.txt > results/cosim.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cosim $$c results/cosim.log
 
 build/speed/%/speed.txt: tests/speed.cir
 	mkdir -p $(@D)
@@ -59,4 +71,4 @@ cmp_offset: $(CMP_OFFSET)
 	for n in $$(seq 1 100); do cp build/cmp_offset/$$n/offset.txt results/cmp_offset_$$n.txt; done
 	if $(PY) $(ROOT)/helpers/adc_results.py offset results/cmp_offset_*.txt > results/cmp_offset.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cmp_offset $$c results/cmp_offset.log results/cmp_offset_*.txt
 
-.PHONY: all speed ctrl shifter cmp_offset
+.PHONY: all speed ctrl cosim shifter cmp_offset
