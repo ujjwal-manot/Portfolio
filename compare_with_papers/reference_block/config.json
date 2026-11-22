@@ -1,0 +1,13 @@
+{
+  "//": "LibreLane configuration for the 32-bit serial-parallel multiplier reference block (spm) on IHP SG13G2 matching librelane/examples/spm (CLOCK_PORT clk, CLOCK_PERIOD 10 ns = 100 MHz).",
+  "DESIGN_NAME": "spm",
+  "VERILOG_FILES": [
+    "dir::spm.v"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 10,
+  "FP_SIZING": "relative",
+  "FP_CORE_UTIL": 40,
+  "RT_MAX_LAYER": "Metal5",
+  "CTS_DISTANCE_BETWEEN_BUFFERS": 50
+}
