@@ -1,6 +1,6 @@
-# LDO layout: the flattened design netlist (NETLIST) laid out by hv_layout.py, thick-oxide NMOS units and the rhigh filter resistors (as series segments) in the lower row under a substrate ring, thick-oxide PMOS in the upper row inside an n-well ring, the four MIM capacitors as grids right of the rows, ports labelled on their Metal4 tracks: NETLIST=build/layout/ldo.cdl OUT=build/layout klayout -b -r layout/ldo.py (the CDL from spice_flatten.py)
+# LDO layout: the flattened design netlist (NETLIST) laid out by hv_layout.py, thick-oxide NMOS units and the rhigh filter resistors (as series segments) in the lower row under a substrate ring, thick-oxide PMOS in the upper row inside an n-well ring, the four MIM capacitors as grids right of the rows, ports labelled on their Metal4 tracks: HELPERS=helpers NETLIST=build/layout/ldo.cdl OUT=build/layout klayout -b -r layout/ldo.py (the CDL from spice_flatten.py)
 import os, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "helpers"))
+sys.path.insert(0, os.environ["HELPERS"])
 from hv_layout import HV, units
 
 nmos, pmos, caps = units(open(os.environ["NETLIST"]).read())

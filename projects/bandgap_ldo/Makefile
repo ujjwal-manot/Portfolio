@@ -125,10 +125,11 @@ ldo_mc: $(LDO_MC)
 broken:
 	rm -rf build/broken
 	mkdir -p results build/broken
-	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests study Makefile $$d; \
+	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests study layout Makefile $$d; \
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
-	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" $$d/results/$${run%% *}.log; then c=0; else c=2; fi; \
-	  cp $$d/results/$${run%% *}.log results/broken_$$n.log; $(SAVE) broken_$$n $$c results/broken_$$n.log; done
+	  log=$$(sed -n '3s/^Log: //p' $$p); [ -n "$$log" ] || log=results/$${run%% *}.log; \
+	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" $$d/$$log; then c=0; else c=2; fi; \
+	  cp $$d/$$log results/broken_$$n.log; $(SAVE) broken_$$n $$c results/broken_$$n.log; done
 
 build/layout/%.cdl: design/%.cir $(BANDGAP) $(LDO) $(ROOT)/helpers/spice_flatten.py
 	mkdir -p build/layout
@@ -136,7 +137,7 @@ build/layout/%.cdl: design/%.cir $(BANDGAP) $(LDO) $(ROOT)/helpers/spice_flatten
 	python3 $(ROOT)/helpers/spice_flatten.py $* build/layout/sizes.inc $< > $@
 
 build/layout/%.gds: build/layout/%.cdl layout/%.py $(ROOT)/helpers/hv_layout.py $(ROOT)/helpers/row_layout.py
-	$(RUN) env NETLIST=build/layout/$*.cdl OUT=build/layout klayout -b -r layout/$*.py > build/layout/generate_$*.log 2>&1
+	$(RUN) env HELPERS=$(ROOT)/helpers NETLIST=build/layout/$*.cdl OUT=build/layout klayout -b -r layout/$*.py > build/layout/generate_$*.log 2>&1
 
 layout: $(foreach b,$(BLOCKS),build/layout/$(b).gds build/layout/$(b).cdl)
 	rm -rf build/layout/checks

@@ -1,4 +1,4 @@
-// Digital LDO controller, proportional plus integral: on every clock it reads four clocked comparators around the setpoint, a fine window (lo: the rail is below it, hi: above it) and a wider coarse one (far_lo, far_hi); the count (the integral) moves by BIG units beyond the coarse window, by one unit between the two and not at all inside the fine window, never past 0 or N, and on top of the count PB more units are turned on (or off) beyond the coarse window and P more between the two, proportional kicks that damp the rail, whose voltage is itself the integral of the units' current against the load's; the units are driven as a registered thermometer code, so a unit never glitches on.
+// Digital LDO controller, proportional plus integral: on every clock it reads four clocked comparators around the setpoint, a fine window (lo: the rail is below it, hi: above it) and a wider coarse one (far_lo, far_hi); the count (the integral) moves by BIG units beyond the coarse window, by one unit between the two and not at all inside the fine window, never past 0 or N, and on top of the count PB more units are turned on (or off) beyond the coarse window and P more between the two, proportional kicks that damp the rail, whose voltage is itself the integral of the units' current against the load's; the coarse window counts only when one side of it trips, so both coarse comparators asserting at once (a fault or a metastable pair, never a real rail) moves nothing; the units are driven as a registered thermometer code, so a unit never glitches on.
 module dldo_ctrl #(
   parameter int N = 128,
   parameter int BIG = 8,
@@ -12,15 +12,16 @@ module dldo_ctrl #(
 );
   int next_count, next_drive;
   wire up = lo && !hi, down = hi && !lo;
+  wire far_up = far_lo && !far_hi, far_dn = far_hi && !far_lo;
 
   always_comb begin
     next_count = int'(count);
-    if (far_lo) next_count = next_count + BIG;
-    else if (far_hi) next_count = next_count - BIG;
+    if (far_up) next_count = next_count + BIG;
+    else if (far_dn) next_count = next_count - BIG;
     else if (up) next_count = next_count + 1;
     else if (down) next_count = next_count - 1;
     next_count = next_count > N ? N : next_count < 0 ? 0 : next_count;
-    next_drive = next_count + (far_lo ? PB : far_hi ? -PB : up ? P : down ? -P : 0);
+    next_drive = next_count + (far_up ? PB : far_dn ? -PB : up ? P : down ? -P : 0);
     next_drive = next_drive > N ? N : next_drive < 0 ? 0 : next_drive;
   end
 
