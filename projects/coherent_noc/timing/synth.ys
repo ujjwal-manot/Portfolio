@@ -1,0 +1,27 @@
+# Maps coherent_noc RTL blocks (xy_router, d2d_replay, mesi_dir) onto IHP SG13G2 standard cells using the slow corner library (1.08 V, 125 C), with buffering and sizing in ABC.
+read_verilog -sv ../design/xy_router.sv ../design/d2d_replay.sv ../design/mesi_dir.sv
+synth -flatten -top xy_router
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+autoname
+rename -unescape t:sg13g2_*
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+stat -liberty ../build/slow.lib
+write_verilog -noattr ../build/xy_router_cells.v
+design -reset
+read_verilog -sv ../design/d2d_replay.sv
+synth -flatten -top d2d_replay
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+write_verilog -noattr ../build/d2d_replay_cells.v
+design -reset
+read_verilog -sv ../design/mesi_dir.sv
+synth -flatten -top mesi_dir
+dfflibmap -liberty ../build/slow.lib
+abc -D 20000 -liberty ../build/slow.lib -script +strash;dch;map,-B,0.9;topo;stime,-c;buffer,-c;upsize,-c,{D};dnsize,-c,{D};stime,-p
+opt_clean -purge
+hilomap -singleton -hicell sg13g2_tiehi L_HI -locell sg13g2_tielo L_LO
+write_verilog -noattr ../build/mesi_dir_cells.v

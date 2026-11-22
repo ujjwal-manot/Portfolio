@@ -1,0 +1,17 @@
+{
+  "//": "LibreLane physical implementation config for coherent_noc xy_router on IHP SG13G2, starting from the mapped cell netlist ../build/xy_router_cells.v at 50 MHz (20 ns period), 40% core utilization, routing up to Metal5, CTS buffering every 50 um, DRC, LVS, and 3-corner STA signoff.",
+  "DESIGN_NAME": "xy_router",
+  "VERILOG_FILES": [
+    "dir::../build/xy_router_cells.v"
+  ],
+  "CLOCK_PORT": [
+    "clk"
+  ],
+  "CLOCK_PERIOD": 20,
+  "FP_SIZING": "relative",
+  "FP_CORE_UTIL": 40,
+  "RT_MAX_LAYER": "Metal5",
+  "SYNTH_ELABORATE_ONLY": true,
+  "CTS_DISTANCE_BETWEEN_BUFFERS": 50,
+  "ERROR_ON_NL_ASSIGN_STATEMENTS": false
+}

@@ -1,0 +1,23 @@
+# Proves the mapped IHP SG13G2 standard-cell netlist for xy_router (../build/xy_router_cells.v) formally equivalent to its RTL (../design/xy_router.sv) using EQY SAT and ABC PDR strategies.
+[gold]
+read_verilog -sv ../design/xy_router.sv
+prep -flatten -top xy_router
+memory_map
+opt_clean
+
+[gate]
+read_liberty -ignore_miss_func ../build/slow.lib
+read_verilog ../build/xy_router_cells.v
+prep -flatten -top xy_router
+
+[script]
+opt_merge -share_all
+async2sync
+
+[strategy sat]
+use sat
+depth 5
+
+[strategy pdr]
+use sby
+engine abc pdr
