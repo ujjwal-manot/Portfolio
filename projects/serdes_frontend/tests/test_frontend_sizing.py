@@ -1,10 +1,10 @@
-# Checks projects/serdes_frontend/model/frontend_sizing.py: CTLE 5 GHz Nyquist peaking vs misplaced zero, 3-tap FFE ISI cancellation vs flipped post-cursor tap sign, pad+ESD return loss S11 under -10 dB at 5 GHz, and CML TX swing and energy efficiency.
+# Checks projects/serdes_frontend/model/frontend_sizing.py: CTLE 5 GHz Nyquist peaking vs misplaced zero, 3-tap FFE ISI cancellation vs flipped post-cursor tap sign, pad+ESD return loss S11 under -10 dB at 5 GHz, CML TX swing and energy efficiency, and StrongARM sampler sensitivity and metastability window vs 30 mV offset broken copy.
 import sys
 from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "model"))
-from frontend_sizing import ctle_peaking_db, ffe_equalize_pulse, return_loss_db, cml_tx_metrics
+from frontend_sizing import ctle_peaking_db, ffe_equalize_pulse, return_loss_db, cml_tx_metrics, sampler_sensitivity_v
 
 def test_ctle_achieves_nyquist_peaking_and_misplaced_zero_fails():
     pk = ctle_peaking_db(gm_s=10e-3, r_d_ohm=120.0, c_d_f=45e-15, r_s_ohm=450.0, c_s_f=320e-15, f_nyq_hz=5e9)
@@ -26,3 +26,12 @@ def test_pad_return_loss_and_cml_tx_efficiency():
     tx = cml_tx_metrics(i_tail_a=12e-3, r_load_ohm=50.0, vdd_v=1.2, data_rate_gbps=10.0)
     assert abs(tx["diff_swing_vpp"] - 0.6) < 0.05
     assert tx["pj_per_bit"] < 2.5
+
+def test_sampler_sensitivity_and_30mv_offset_broken_copy():
+    nom = sampler_sensitivity_v(tau_reg_s=4.2e-12, t_reg_s=45e-12, v_logic_v=1.2, v_ov_v=0.16, w_inp_um=16.0, w_inn_um=16.0)
+    assert nom["v_offset_v"] == 0.0
+    assert nom["meta_window_v"] < 1.0e-3
+    assert nom["sensitivity_v"] < 5.0e-3
+    broken = sampler_sensitivity_v(tau_reg_s=4.2e-12, t_reg_s=45e-12, v_logic_v=1.2, v_ov_v=0.16, w_inp_um=16.0, w_inn_um=10.9)
+    assert abs(broken["v_offset_v"] - 0.0303) < 0.002
+    assert broken["sensitivity_v"] > 0.025

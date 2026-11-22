@@ -1,4 +1,4 @@
-# Analytical 10 GBd SerDes front-end sizing model for projects/serdes_frontend: differential CTLE peaking transfer function, 3-tap FFE ISI cancellation, pad+ESD return loss S11, and CML TX swing and energy efficiency.
+# Analytical 10 GBd SerDes front-end sizing model for projects/serdes_frontend: differential CTLE peaking transfer function, 3-tap FFE ISI cancellation, pad+ESD return loss S11, CML TX swing and energy efficiency, and StrongARM sampler sensitivity and metastability window.
 import math
 import numpy as np
 
@@ -42,8 +42,26 @@ def cml_tx_metrics(i_tail_a=12e-3, r_load_ohm=50.0, vdd_v=1.2, data_rate_gbps=10
     pj_per_bit = (power_w * 1e12) / (data_rate_gbps * 1e9)
     return {"diff_swing_vpp": diff_swing_vpp, "power_w": power_w, "pj_per_bit": pj_per_bit}
 
+def sampler_sensitivity_v(tau_reg_s=4.2e-12, t_reg_s=45e-12, v_logic_v=1.2, v_ov_v=0.16, w_inp_um=16.0, w_inn_um=16.0):
+    if tau_reg_s <= 0 or t_reg_s <= 0 or v_logic_v <= 0 or w_inp_um <= 0 or w_inn_um <= 0:
+        raise ValueError("sampler parameters must be positive")
+    gain_reg = math.exp(t_reg_s / tau_reg_s)
+    v_meta = v_logic_v / gain_reg
+    w_mean = 0.5 * (w_inp_um + w_inn_um)
+    v_offset = 0.5 * v_ov_v * ((w_inp_um - w_inn_um) / w_mean)
+    meta_window = 2.0 * v_meta
+    sensitivity = abs(v_offset) + v_meta
+    return {
+        "gain_reg": float(gain_reg),
+        "v_meta_v": float(v_meta),
+        "meta_window_v": float(meta_window),
+        "v_offset_v": float(v_offset),
+        "sensitivity_v": float(sensitivity),
+    }
+
 if __name__ == "__main__":
     pk = ctle_peaking_db(10e-3, 120.0, 45e-15, 450.0, 320e-15)
     s11 = return_loss_db(5e9)
     tx = cml_tx_metrics()
-    print(f"CTLE peak={pk['peaking_db']:.2f}dB@{pk['peak_freq_hz']/1e9:.2f}GHz S11(5G)={s11:.2f}dB TX={tx['diff_swing_vpp']:.2f}Vpp {tx['pj_per_bit']:.2f}pJ/b")
+    smp = sampler_sensitivity_v()
+    print(f"CTLE peak={pk['peaking_db']:.2f}dB@{pk['peak_freq_hz']/1e9:.2f}GHz S11(5G)={s11:.2f}dB TX={tx['diff_swing_vpp']:.2f}Vpp {tx['pj_per_bit']:.2f}pJ/b SMP_win={smp['meta_window_v']*1e6:.1f}uV")
