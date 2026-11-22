@@ -1,0 +1,22 @@
+{
+  "timing_slow": {
+    "result": "pass",
+    "time": "2026-11-22 08:55:45",
+    "logs": {
+      "timing_slow.log": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "sources": {
+      "projects/cpu/design/cpu.sv": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "values": {}
+  },
+  "cdc": {
+    "result": "fail",
+    "time": "2026-11-22 08:56:31",
+    "logs": {
+      "cdc.log": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "sources": {},
+    "values": {}
+  }
+}

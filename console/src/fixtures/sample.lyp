@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<layer-properties>
+  <properties>
+    <frame-color>#00ff00</frame-color>
+    <fill-color>#00ff00</fill-color>
+    <dither-pattern>C2</dither-pattern>
+    <visible>true</visible>
+    <name>Activ.drawing</name>
+    <source>1/0</source>
+  </properties>
+  <properties>
+    <frame-color>#ff3355</frame-color>
+    <fill-color>#ff3355</fill-color>
+    <dither-pattern>I5</dither-pattern>
+    <visible>false</visible>
+    <name>Metal1.drawing</name>
+    <source>8/0</source>
+  </properties>
+</layer-properties>
