@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/lc_vco.cir
++++ b/design/lc_vco.cir
+@@ -4,7 +4,7 @@
+ RSP m_p vm {r_ser}
+ LTN outn m_n {l_half}
+ RSN m_n vm {r_ser}
+-XV1 outp vtune outn vss sg13_hv_svaricap w={w_var} l={l_var} Nx={nx_var}
++XV1 vtune outp vtune vss sg13_hv_svaricap w={w_var} l={l_var} Nx={nx_var}
+ XB0 outp outn sw0 vss cap_bit w={w_c0}
+ XB1 outp outn sw1 vss cap_bit w={w_c1}
+ XB2 outp outn sw2 vss cap_bit w={w_c2}

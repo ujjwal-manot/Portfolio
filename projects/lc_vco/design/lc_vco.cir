@@ -1,0 +1,23 @@
+* 10 GHz complementary cross-coupled CMOS LC VCO on IHP SG13G2: differential tank L with finite series Q resistance, sg13_hv_svaricap fine tuning (G1 W G2 bn), 4-bit binary-weighted switched MIM capacitor bank (sw3..sw0), and NMOS tail current mirror; sizes from lc_vco_sizes.inc.
+.subckt lc_vco outp outn vtune sw3 sw2 sw1 sw0 ibias vdd vss
+LTP outp m_p {l_half}
+RSP m_p vm {r_ser}
+LTN outn m_n {l_half}
+RSN m_n vm {r_ser}
+XV1 outp vtune outn vss sg13_hv_svaricap w={w_var} l={l_var} Nx={nx_var}
+XB0 outp outn sw0 vss cap_bit w={w_c0}
+XB1 outp outn sw1 vss cap_bit w={w_c1}
+XB2 outp outn sw2 vss cap_bit w={w_c2}
+XB3 outp outn sw3 vss cap_bit w={w_c3}
+XMN1 outp outn tail vss sg13_lv_nmos w={w_nc} l={l_core} ng={ng_core} mm_ok={mm}
+XMN2 outn outp tail vss sg13_lv_nmos w={w_nc} l={l_core} ng={ng_core} mm_ok={mm}
+XMP1 outp outn vdd vdd sg13_lv_pmos w={w_pc} l={l_core} ng={ng_core} mm_ok={mm}
+XMP2 outn outp vdd vdd sg13_lv_pmos w={w_pc} l={l_core} ng={ng_core} mm_ok={mm}
+XMR ibias ibias vss vss sg13_lv_nmos w={w_ref} l={l_tail} mm_ok={mm}
+XMT tail ibias vss vss sg13_lv_nmos w={w_tail} l={l_tail} ng={ng_tail} mm_ok={mm}
+.ends lc_vco
+.subckt cap_bit a b sw vss w=4u
+XC1 a n1 cap_cmim w={w} l={w} mm_ok={mm}
+XC2 b n2 cap_cmim w={w} l={w} mm_ok={mm}
+XSW n1 sw n2 vss sg13_lv_nmos w={w_sw} l=0.13u mm_ok={mm}
+.ends cap_bit

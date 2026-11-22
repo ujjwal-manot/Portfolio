@@ -1,0 +1,13 @@
+Expected failure: AssertionError:
+--- a/design/cml_tx_ffe.cir
++++ b/design/cml_tx_ffe.cir
+@@ -7,7 +7,7 @@
+ XQP1 outp in_prep t_pre vss npn13G2 Nx={nx_pre}
+ XQP2 outn in_pren t_pre vss npn13G2 Nx={nx_pre}
+-XQT1 outp in_postp t_post vss npn13G2 Nx={nx_post}
+-XQT2 outn in_postn t_post vss npn13G2 Nx={nx_post}
++XQT1 outn in_postp t_post vss npn13G2 Nx={nx_post}
++XQT2 outp in_postn t_post vss npn13G2 Nx={nx_post}
+ XMR ibias ibias vss vss sg13_lv_nmos w={w_ref} l={l_tail} mm_ok={mm}
+ XTM t_main ibias vss vss sg13_lv_nmos w={w_tmain} l={l_tail} ng=16 mm_ok={mm}
+ XTP t_pre ibias vss vss sg13_lv_nmos w={w_tpre} l={l_tail} ng=4 mm_ok={mm}

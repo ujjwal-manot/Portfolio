@@ -1,0 +1,18 @@
+* 10 GBd source-degenerated differential CTLE on IHP SG13G2: sg13_lv_nmos input pair, rppd load and degeneration resistors, MIM peaking capacitor cap_cmim, and IHP bondpad + 2 kV ESD protection at the differential inputs; sizes from ctle_sizes.inc.
+.subckt ctle inp inn outp outn ibias vdd vss
+XPADP inp bondpad
+XPADN inn bondpad
+XESDP1 vdd inp vss diodevdd_2kv
+XESDP2 vdd inp vss diodevss_2kv
+XESDN1 vdd inn vss diodevdd_2kv
+XESDN2 vdd inn vss diodevss_2kv
+XRD1 vdd outp vss rppd w={w_rd} l={l_rd} mm_ok={mm}
+XRD2 vdd outn vss rppd w={w_rd} l={l_rd} mm_ok={mm}
+XM1 outn inp s1 vss sg13_lv_nmos w={w_in} l=0.13u ng=8 mm_ok={mm}
+XM2 outp inn s2 vss sg13_lv_nmos w={w_in} l=0.13u ng=8 mm_ok={mm}
+XRS s1 s2 vss rppd w={w_rs} l={l_rs} mm_ok={mm}
+XCS s1 s2 cap_cmim w={w_cs} l={w_cs} mm_ok={mm}
+XMR ibias ibias vss vss sg13_lv_nmos w={w_ref} l=0.4u mm_ok={mm}
+XT1 s1 ibias vss vss sg13_lv_nmos w={w_tail} l=0.4u ng=8 mm_ok={mm}
+XT2 s2 ibias vss vss sg13_lv_nmos w={w_tail} l=0.4u ng=8 mm_ok={mm}
+.ends ctle

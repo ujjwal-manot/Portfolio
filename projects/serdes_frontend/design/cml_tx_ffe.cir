@@ -1,0 +1,21 @@
+* 10 GBd 3-tap SiGe HBT (npn13G2) CML transmitter driver with FFE (pre-cursor, main, post-cursor tail steering), 50 Ohm rppd loads, and IHP bondpad + 2 kV ESD diodes on both differential outputs; sizes from cml_tx_ffe_sizes.inc.
+.subckt cml_tx_ffe inp inn in_prep in_pren in_postp in_postn outp outn ibias vdd vss
+XRLP vdd outp vss rppd w={w_rl} l={l_rl} mm_ok={mm}
+XRLN vdd outn vss rppd w={w_rl} l={l_rl} mm_ok={mm}
+XQM1 outn inp t_main vss npn13G2 Nx={nx_main}
+XQM2 outp inn t_main vss npn13G2 Nx={nx_main}
+XQP1 outp in_prep t_pre vss npn13G2 Nx={nx_pre}
+XQP2 outn in_pren t_pre vss npn13G2 Nx={nx_pre}
+XQT1 outp in_postp t_post vss npn13G2 Nx={nx_post}
+XQT2 outn in_postn t_post vss npn13G2 Nx={nx_post}
+XMR ibias ibias vss vss sg13_lv_nmos w={w_ref} l={l_tail} mm_ok={mm}
+XTM t_main ibias vss vss sg13_lv_nmos w={w_tmain} l={l_tail} ng=16 mm_ok={mm}
+XTP t_pre ibias vss vss sg13_lv_nmos w={w_tpre} l={l_tail} ng=4 mm_ok={mm}
+XTT t_post ibias vss vss sg13_lv_nmos w={w_tpost} l={l_tail} ng=6 mm_ok={mm}
+XPADP outp bondpad
+XPADN outn bondpad
+XESDP1 vdd outp vss diodevdd_2kv
+XESDP2 vdd outp vss diodevss_2kv
+XESDN1 vdd outn vss diodevdd_2kv
+XESDN2 vdd outn vss diodevss_2kv
+.ends cml_tx_ffe
