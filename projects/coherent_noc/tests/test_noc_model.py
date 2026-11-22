@@ -34,9 +34,9 @@ def test_mesi_directory_enforces_swmr_and_missed_invalidate_breaks_coherence():
             clean.write(core, addr, val)
             broken.write(core, addr, val)
         else:
-            assert clean.read(core, addr) == clean.oracle[addr]
+            assert clean.read(core, addr) == clean.oracle.get(addr, 0)
             assert clean.check_swmr(addr)
-    stale_reads = sum(1 for addr in range(4) for c in range(4) if broken.read(c, addr) != broken.oracle[addr])
+    stale_reads = sum(1 for addr in range(4) for c in range(4) if broken.read(c, addr) != broken.oracle.get(addr, 0))
     swmr_bad = any(not broken.check_swmr(addr) for addr in range(4))
     assert stale_reads > 0 or swmr_bad
 

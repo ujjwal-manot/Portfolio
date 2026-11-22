@@ -14,8 +14,13 @@ def xy_route_path(src, dst):
 
 def simulate_mesh(pattern="uniform", n_packets=64, credits=4, early_credit=False):
     nodes = [(0, 0), (1, 0), (0, 1), (1, 1)]
-    queues = {n: [] for n in nodes}
-    avail = {n: credits for n in nodes}
+    channels = [(n, n) for n in nodes]
+    for a in nodes:
+        for b in nodes:
+            if abs(a[0] - b[0]) + abs(a[1] - b[1]) == 1:
+                channels.append((a, b))
+    queues = {ch: [] for ch in channels}
+    avail = {ch: credits for ch in channels}
     pending = []
     for idx in range(n_packets):
         src = nodes[idx % 4]
@@ -32,34 +37,44 @@ def simulate_mesh(pattern="uniform", n_packets=64, credits=4, early_credit=False
     for _ in range(n_packets * 8):
         if not pending and all(len(q) == 0 for q in queues.values()):
             break
-        if pending:
-            src = pending[0][0]
-            if avail[src] > 0:
-                queues[src].append(pending.pop(0))
-                avail[src] -= 1
+        for _inj in range(4):
+            if not pending:
+                break
+            ch = (pending[0][0], pending[0][0])
+            if avail[ch] > 0:
+                queues[ch].append(pending.pop(0))
+                avail[ch] -= 1
                 if early_credit:
-                    avail[src] += 1
-        for node in nodes:
-            if not queues[node]:
+                    avail[ch] += 1
+            else:
+                break
+        for ch in channels:
+            occ = len(queues[ch])
+            if occ > max_occ:
+                max_occ = occ
+            if occ > credits:
+                overflows += 1
+        for ch in channels:
+            if not queues[ch]:
                 continue
-            path = queues[node][0]
+            path = queues[ch][0]
             if len(path) == 1:
-                queues[node].pop(0)
+                queues[ch].pop(0)
                 delivered += 1
                 if not early_credit:
-                    avail[node] += 1
+                    avail[ch] += 1
             else:
-                nxt = path[1]
-                if avail[nxt] > 0:
-                    queues[node].pop(0)
-                    queues[nxt].append(path[1:])
-                    avail[nxt] -= 1
+                nxt_ch = (path[0], path[1])
+                if avail[nxt_ch] > 0:
+                    queues[ch].pop(0)
+                    queues[nxt_ch].append(path[1:])
+                    avail[nxt_ch] -= 1
                     if early_credit:
-                        avail[nxt] += 1
+                        avail[nxt_ch] += 1
                     else:
-                        avail[node] += 1
-        for node in nodes:
-            occ = len(queues[node])
+                        avail[ch] += 1
+        for ch in channels:
+            occ = len(queues[ch])
             if occ > max_occ:
                 max_occ = occ
             if occ > credits:
