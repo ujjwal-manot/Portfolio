@@ -257,3 +257,59 @@ def test_bandgap_ldo_regulation_and_droop_floor_limits():
     assert v_step_min >= 1.160, f"0.5 mA load step floor {v_step_min:.4f} V drops below 1.16 V"
     v_release_max = p["VREF_NOM_V"] + p["R_TRANS_OHM"] * 2.0e-3
     assert v_release_max <= 1.320, f"2 mA release peak {v_release_max:.4f} V exceeds 1.32 V thin-oxide limit"
+
+
+def test_droop_por_bod_model():
+    rn_mods = parse_sv_modules(RN_SV.read_text(encoding="utf-8"))
+    bg_p = rn_mods["rn_bandgap_ldo"]["params"]
+    dl_p = rn_mods["rn_dldo_rail"]["params"]
+
+    por_rise_mv = int(round(bg_p["VDD_MIN_OK_V"] * 1000))
+    bod_trip_mv = 800
+    bod_hyst_mv = 40
+    assert por_rise_mv == 1160
+    assert 900 - bod_trip_mv == 100
+
+    por_cnt, por_n, bod_alert, droop_alert = 0, 0, 0, 1
+    ramp_mv = [400, 800, 1100, 1165, 1180, 1200, 1205]
+    for v_mv in ramp_mv:
+        if v_mv >= por_rise_mv:
+            por_cnt += 1
+            if por_cnt >= 2:
+                por_n = 1
+        else:
+            por_cnt = 0
+        if v_mv < por_rise_mv:
+            assert por_n == 0
+    assert por_n == 1
+
+    dvfs0_ripple_mv = 885
+    assert dvfs0_ripple_mv >= bod_trip_mv
+    assert dvfs0_ripple_mv < (bod_trip_mv + 100), "100 mV shifted BOD threshold must falsely trip at DVFS 0.90 V"
+
+    droop_thresh_1v2_mv = int(round(1200 * (dl_p["V_TAP_FAR_LO"] / 0.600)))
+    recover_thresh_1v2_mv = int(round(1200 * (dl_p["V_DROOP_REL"] / 0.600)))
+    assert droop_thresh_1v2_mv == 1140
+    assert recover_thresh_1v2_mv == 1170
+
+    wave_mv = [1200, 1195, 1120, 1105, 1135, 1155, 1175, 1198, 780, 810, 1185]
+    stretched_cycles = 0
+    bod_trips = 0
+    for v_mv in wave_mv:
+        if v_mv < bod_trip_mv:
+            bod_alert = 1
+        elif v_mv >= bod_trip_mv + bod_hyst_mv:
+            bod_alert = 0
+        if bod_alert:
+            bod_trips += 1
+        if v_mv < droop_thresh_1v2_mv:
+            droop_alert = 1
+        elif v_mv >= recover_thresh_1v2_mv:
+            droop_alert = 0
+        clk_cpu_en = int(por_n == 1 and bod_alert == 0 and droop_alert == 0)
+        if not clk_cpu_en and not bod_alert:
+            stretched_cycles += 1
+    assert stretched_cycles == 4
+    assert bod_trips == 2
+    assert bod_alert == 0
+
