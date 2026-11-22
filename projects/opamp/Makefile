@@ -70,11 +70,12 @@ build/layout/opamp.gds: layout/opamp.py $(ROOT)/helpers/row_layout.py design/opa
 layout: build/layout/opamp.gds
 	mkdir -p results
 	rm -rf build/layout/drc build/layout/lvs
-	cd build/layout && $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=opamp.gds --topcell=opamp --run_dir=drc --no_density' > drc.log 2>&1 || true
-	cd build/layout && $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=opamp.gds --netlist=opamp.cdl --topcell=opamp --run_dir=lvs --combine_devices --disable_tap_extraction' > lvs.log 2>&1 || true
+	cd build/layout && if $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=opamp.gds --topcell=opamp --run_dir=drc --no_density' > drc.log 2>&1; then e=0; else e=$$?; fi; echo "run_drc exit $$e" >> drc.log
+	cd build/layout && if $(RUN) bash -c 'python3 $$PDK_ROOT/$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=opamp.gds --netlist=opamp.cdl --topcell=opamp --run_dir=lvs --combine_devices --disable_tap_extraction' > lvs.log 2>&1; then e=0; else e=$$?; fi; echo "run_lvs exit $$e" >> lvs.log
+	cd build/layout && if $(RUN) klayout -b -rd path=lvs/opamp.lvsdb -r $(ROOT)/helpers/lvs_names.py >> lvs.log 2>&1; then e=0; else e=$$?; fi; echo "lvs_names exit $$e" >> lvs.log
 	cp build/layout/drc.log results/layout_drc.log; cp build/layout/lvs.log results/layout_lvs.log; cp build/layout/lvs/opamp_extracted.cir results/layout_extracted.cir
-	if grep -q "DRC Check Passed" results/layout_drc.log; then c=0; else c=1; fi; $(SAVE) layout_drc $$c results/layout_drc.log
-	if grep -q "PASS (netlists match)" results/layout_lvs.log; then c=0; else c=1; fi; $(SAVE) layout_lvs $$c results/layout_lvs.log results/layout_extracted.cir
+	if grep -q "DRC Check Passed" results/layout_drc.log && grep -qx "run_drc exit 0" results/layout_drc.log; then c=0; else c=1; fi; $(SAVE) layout_drc $$c results/layout_drc.log
+	if grep -q "PASS (netlists match)" results/layout_lvs.log && grep -qx "run_lvs exit 0" results/layout_lvs.log && grep -qx "lvs_names exit 0" results/layout_lvs.log; then c=0; else c=1; fi; $(SAVE) layout_lvs $$c results/layout_lvs.log results/layout_extracted.cir
 
 build/layout/opamp_pex.spice: build/layout/opamp.gds layout/extract.tcl
 	cd build/layout && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc ../../layout/extract.tcl' > extract.log 2>&1

@@ -137,15 +137,16 @@ build/layout/%.cdl: design/%.cir $(BANDGAP) $(LDO) $(ROOT)/helpers/spice_flatten
 build/layout/%.gds: build/layout/%.cdl layout/%.py $(ROOT)/helpers/hv_layout.py $(ROOT)/helpers/row_layout.py
 	$(RUN) env NETLIST=build/layout/$*.cdl OUT=build/layout klayout -b -r layout/$*.py > build/layout/generate_$*.log 2>&1
 
-layout: $(foreach b,$(BLOCKS),build/layout/$(b).gds)
+layout: $(foreach b,$(BLOCKS),build/layout/$(b).gds build/layout/$(b).cdl)
 	rm -rf build/layout/checks
 	mkdir -p results build/layout/checks
 	for b in $(BLOCKS); do d=build/layout/checks/$$b; mkdir -p $$d; cp build/layout/$$b.gds build/layout/$$b.cdl $$d; \
-	  (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=$$b.gds --topcell=$$b --run_dir=drc --no_density" > drc.log 2>&1) || true; \
-	  (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=$$b.gds --netlist=$$b.cdl --topcell=$$b --run_dir=lvs --combine_devices --disable_tap_extraction" > lvs.log 2>&1) || true; \
+	  if (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=$$b.gds --topcell=$$b --run_dir=drc --no_density" > drc.log 2>&1); then e=0; else e=$$?; fi; echo "run_drc exit $$e" >> $$d/drc.log; \
+	  if (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=$$b.gds --netlist=$$b.cdl --topcell=$$b --run_dir=lvs --combine_devices --disable_tap_extraction" > lvs.log 2>&1); then e=0; else e=$$?; fi; echo "run_lvs exit $$e" >> $$d/lvs.log; \
+	  if $(RUN) klayout -b -rd path=$$d/lvs/$$b.lvsdb -r $(ROOT)/helpers/lvs_names.py >> $$d/lvs.log 2>&1; then e=0; else e=$$?; fi; echo "lvs_names exit $$e" >> $$d/lvs.log; \
 	  cp $$d/drc.log results/layout_drc_$$b.log; cp $$d/lvs.log results/layout_lvs_$$b.log; cp $$d/lvs/$${b}_extracted.cir results/layout_extracted_$$b.cir; cp build/layout/generate_$$b.log results/layout_generate_$$b.log; \
-	  if grep -q "DRC Check Passed" results/layout_drc_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_drc_$$b $$c results/layout_drc_$$b.log results/layout_generate_$$b.log; \
-	  if grep -q "PASS (netlists match)" results/layout_lvs_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_lvs_$$b $$c results/layout_lvs_$$b.log results/layout_extracted_$$b.cir; done
+	  if grep -q "DRC Check Passed" results/layout_drc_$$b.log && grep -qx "run_drc exit 0" results/layout_drc_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_drc_$$b $$c results/layout_drc_$$b.log results/layout_generate_$$b.log; \
+	  if grep -q "PASS (netlists match)" results/layout_lvs_$$b.log && grep -qx "run_lvs exit 0" results/layout_lvs_$$b.log && grep -qx "lvs_names exit 0" results/layout_lvs_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_lvs_$$b $$c results/layout_lvs_$$b.log results/layout_extracted_$$b.cir; done
 
 build/layout/%_pex.spice: build/layout/%.gds layout/extract_%.tcl
 	cd build/layout && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc ../../layout/extract_$*.tcl' > extract_$*.log 2>&1

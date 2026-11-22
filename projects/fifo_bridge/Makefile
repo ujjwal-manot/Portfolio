@@ -39,7 +39,7 @@ atpg: timing
 	if (cd build/atpg && $(RUN) bash -c 'v=$$PDK_ROOT/$$PDK/libs.ref/sg13g2_stdcell/verilog; cat $$v/sg13g2_udp.v $$v/sg13g2_stdcell.v | sed "/^\s*specify/,/^\s*endspecify/d" > cells_logic.v; \
 	  fault cut --dff sg13g2_dfrbpq_1 --clock s_clk --bypassing m_clk --reset rst_n --reset-active-low -o cut.v fifo_bridge_cells.v && \
 	  fault atpg -c cells_logic.v --clock s_clk --bypassing m_clk --reset rst_n --reset-active-low -v 100 -r 100 -m 99 --ceiling 1000 -o tv.json cut.v') > results/atpg.log 2>&1 \
-	  && grep -q "Simulations concluded: Coverage" results/atpg.log; then c=0; else c=1; fi; $(SAVE) atpg $$c results/atpg.log
+	  && awk '/Simulations concluded: Coverage/ { sub(/%.*/, "", $$NF); if ($$NF + 0 >= 95) ok = 1 } END { exit !ok }' results/atpg.log; then c=0; else c=1; fi; $(SAVE) atpg $$c results/atpg.log
 
 layout: timing
 	echo "flow did not finish" > results/layout.log

@@ -1,4 +1,4 @@
-# Flattens a hierarchical SPICE netlist into device lines (MOS, resistors, MIM capacitors, pnp bipolars), so a layout's LVS reference and the simulated design come from the same file: ports map to the caller's nets, internal nets and device names take the instance path joined by "_", and {expressions} are worked out from the global .param values, then the subcircuit's defaults, then the instance's own values, an m on a subcircuit instance multiplying every device inside it; mm_ok is dropped and `python3 spice_flatten.py top sizes.inc design.cir ...` prints CDL with the device lines IHP's LVS reader takes.
+# Flattens a hierarchical SPICE netlist into device lines (MOS, resistors, MIM capacitors, pnp bipolars), so a layout's LVS reference and the simulated design come from the same file: ports map to the caller's nets, internal nets and device names take the instance path joined by "_", and {expressions} are worked out from the global .param values, then the subcircuit's defaults, then the instance's own values, an m on a subcircuit instance multiplying every device inside it; mm_ok is dropped, any line it cannot carry into the reference (a non-X element or a .param inside a subcircuit, a continuation line, a ^ in an expression) stops it, and `python3 spice_flatten.py top sizes.inc design.cir ...` prints CDL with the device lines IHP's LVS reader takes.
 import re, sys
 
 SCALE = {"f": 1e-15, "p": 1e-12, "n": 1e-9, "u": 1e-6, "m": 1e-3, "k": 1e3, "meg": 1e6}
@@ -10,6 +10,8 @@ def value(text):
 
 def work_out(text, scope):
     text = text.strip()
+    if "^" in text:
+        raise ValueError(f"^ means power in SPICE and XOR in Python: {text}")
     return eval(text[1:-1], {}, scope) if text.startswith("{") else value(text)
 
 def subcircuits(text):
@@ -25,8 +27,12 @@ def subcircuits(text):
             found[name] = {"ports": ports, "defaults": defaults, "lines": []}
         elif words[0].lower() == ".ends":
             name = None
+        elif words[0].startswith("+"):
+            raise ValueError(f"continuation lines are not read: {line}")
         elif name and words[0][0] in "Xx":
             found[name]["lines"].append(words)
+        elif name:
+            raise ValueError(f"only X lines are carried into the reference, not: {line}")
     return found
 
 def expand(subs, name, nets, scope, path, out, mult=1):

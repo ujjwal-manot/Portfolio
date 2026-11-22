@@ -1,4 +1,5 @@
-# Checks spice_flatten: nested subcircuits expand to device lines with joined names, ports map to the caller's nets, internal nets get the instance path, and size expressions are worked out from the global .param values, the subcircuit's defaults and the instance's overrides.
+# Checks spice_flatten: nested subcircuits expand to device lines with joined names, ports map to the caller's nets, internal nets get the instance path, and size expressions are worked out from the global .param values, the subcircuit's defaults and the instance's overrides; a line it cannot carry into the reference (a non-X element, a continuation, a .param inside a subcircuit, a ^ in an expression) stops it.
+import pytest
 from spice_flatten import flatten, value
 
 NETLIST = """
@@ -68,3 +69,14 @@ XT y a vss vss stack2 w=4u l=8u
 """
     got = {d["name"]: d["params"] for d in flatten(text, "top", {})}
     assert got["S_A"] == {"w": 16e-6, "l": 16e-6, "m": 2} and got["S_B"]["m"] == 2 and "m" not in got["T_A"]
+
+@pytest.mark.parametrize("line", ["R1 a b 1k", "C1 a b 1p", "M1 d g s b nmos", "V1 a 0 1", "+ w=1u", ".param k=2", "XA a b sg13_lv_nmos w={2^3} l=1u"])
+def test_a_line_it_cannot_carry_into_the_reference_stops_it(line):
+    text = f"""
+.subckt top a b
+XN a b a b sg13_lv_nmos w=1u l=1u
+{line}
+.ends top
+"""
+    with pytest.raises(ValueError):
+        flatten(text, "top", {})
