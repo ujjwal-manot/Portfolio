@@ -1,5 +1,5 @@
-// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM); imem_en is low when the fetch address repeats (a stall or sleep without a redirect), so the code memory need not read again and holds its last word.
-module cpu (
+// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, with MAC set a custom-0 multiply-accumulate for the filter (mac rs1, rs2 adds the signed product of their low halves to an accumulator when it commits in EX, macr rd reads the accumulator into rd and clears it; without MAC both trap as illegal), Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM); imem_en is low when the fetch address repeats (a stall or sleep without a redirect), so the code memory need not read again and holds its last word.
+module cpu #(parameter bit MAC = 1) (
   input  logic        clk, rst_n,
   output logic [31:0] imem_addr,
   output logic        imem_en,
@@ -19,12 +19,12 @@ module cpu (
   output logic [3:0]  retire_cause
 );
   localparam logic [6:0] LUI = 7'h37, AUIPC = 7'h17, JAL = 7'h6f, JALR = 7'h67, BRANCH = 7'h63,
-                         LOAD = 7'h03, STORE = 7'h23, OPIMM = 7'h13, OP = 7'h33, FENCE = 7'h0f, SYSTEM = 7'h73;
+                         LOAD = 7'h03, STORE = 7'h23, OPIMM = 7'h13, OP = 7'h33, FENCE = 7'h0f, SYSTEM = 7'h73, CUSTOM0 = 7'h0b;
   localparam logic [31:0] ECALL = 32'h00000073, EBREAK = 32'h00100073, MRET = 32'h30200073, WFI = 32'h10500073;
 
   logic [31:0] pc, d_pc, d_instr, d_next, e_pc, e_instr, e_next, e_a, e_b, e_imm;
   logic [31:0] m_pc, m_instr, m_addr, m_data, m_store, w_pc, w_instr, w_value;
-  logic [31:0] branches, mispredicts, mtvec, mscratch, mepc, mcause, mtval;
+  logic [31:0] branches, mispredicts, mtvec, mscratch, mepc, mcause, mtval, acc;
   logic [63:0] mcycle, minstret, mtime, mtimecmp;
   logic [4:0]  m_rd, w_rd;
   logic [3:0]  m_cause, w_cause;
@@ -54,7 +54,7 @@ module cpu (
       default:    d_imm = {{21{d_instr[31]}}, d_instr[30:20]};
     endcase
   wire d_uses_rs1 = !(d_op == LUI || d_op == AUIPC || d_op == JAL);
-  wire d_uses_rs2 = d_op == BRANCH || d_op == STORE || d_op == OP;
+  wire d_uses_rs2 = d_op == BRANCH || d_op == STORE || d_op == OP || d_op == CUSTOM0;
   wire [31:0] d_a = d_rs1 == 0 ? 32'b0 : w_valid && w_rd == d_rs1 ? w_value : x[d_rs1];
   wire [31:0] d_b = d_rs2 == 0 ? 32'b0 : w_valid && w_rd == d_rs2 ? w_value : x[d_rs2];
 
@@ -63,7 +63,7 @@ module cpu (
   wire [6:0]  e_f7 = e_instr[31:25];
   wire [11:0] e_csr = e_instr[31:20];
   wire        e_csr_op = e_op == SYSTEM && e_f3[1:0] != 0;
-  wire        e_writes = e_op == LUI || e_op == AUIPC || e_op == JAL || e_op == JALR || e_op == LOAD || e_op == OPIMM || e_op == OP || e_csr_op;
+  wire        e_writes = e_op == LUI || e_op == AUIPC || e_op == JAL || e_op == JALR || e_op == LOAD || e_op == OPIMM || e_op == OP || e_csr_op || MAC && e_op == CUSTOM0 && e_f3 == 1;
   wire [4:0]  e_rd = e_writes ? e_instr[11:7] : 5'd0;
   wire [4:0]  e_rs1 = e_instr[19:15], e_rs2 = e_instr[24:20];
   wire stall = e_valid && e_op == LOAD && e_rd != 0 && d_valid &&
@@ -121,6 +121,7 @@ module cpu (
       AUIPC:     e_result = e_pc + e_imm;
       JAL, JALR: e_result = e_pc + 4;
       SYSTEM:    e_result = csr_old;
+      CUSTOM0:   e_result = acc;
       default:   e_result = alu;
     endcase
   end
@@ -153,6 +154,7 @@ module cpu (
       STORE:  e_legal = e_f3 < 3;
       OPIMM:  e_legal = e_f3 == 1 ? e_f7 == 0 : e_f3 == 5 ? (e_f7 & ~7'h20) == 0 : 1'b1;
       OP:     e_legal = e_f7 == 0 || e_f7 == 7'h20 && (e_f3 == 0 || e_f3 == 5);
+      CUSTOM0: e_legal = MAC && e_f7 == 0 && (e_f3 == 0 && e_instr[11:7] == 0 || e_f3 == 1 && e_rs1 == 0 && e_rs2 == 0);
       SYSTEM: e_legal = e_f3 == 0 ? e_instr == ECALL || e_instr == EBREAK || e_instr == MRET || e_instr == WFI
                                   : e_f3 != 4 && csr_known && !(csr_writes && e_csr[11:10] == 2'b11);
       default: e_legal = 1'b0;
@@ -235,7 +237,7 @@ module cpu (
     if (!run) begin
       pc <= 0;
       {d_valid, e_valid, m_valid, w_valid, m_intr, w_intr, asleep, meip} <= '0;
-      {branches, mispredicts, mcycle, minstret, mtime} <= '0;
+      {branches, mispredicts, mcycle, minstret, mtime, acc} <= '0;
       mtimecmp <= '1;
       {mtvec, mscratch, mepc, mcause, mtval, ie, mstatus_mie, mpie, stop_cycle, stop_instret} <= '0;
       for (int i = 0; i < 16; i++) {btb_valid[i], btb_tag[i], btb_target[i], btb_count[i]} <= '0;
@@ -267,6 +269,7 @@ module cpu (
         {mpie, mstatus_mie} <= {mstatus_mie, 1'b0};
       end
       if (e_commit && e_mret) {mpie, mstatus_mie} <= {1'b1, mpie};
+      if (MAC && e_commit && e_op == CUSTOM0) acc <= e_f3[0] ? 32'b0 : acc + 32'($signed(a[15:0]) * $signed(b[15:0]));
       if (csr_write)
         case (e_csr)
           12'h300: {mpie, mstatus_mie} <= {csr_new[7], csr_new[3]};

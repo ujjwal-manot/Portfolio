@@ -47,3 +47,17 @@ def test_model_matches_spike(name):
     for i, (w, g) in enumerate(zip(want, got)):
         assert w == g, f"{name} instruction {i}: Spike {[hex(x) for x in w]}, model {[hex(x) for x in g]}"
     assert len(want) == len(got)
+
+def test_mac_accumulates_16_bit_signed_products_only_when_enabled():
+    addi = lambda rd, rs1, imm: (imm & 0xFFF) << 20 | rs1 << 15 | rd << 7 | 0x13
+    mac = lambda rs1, rs2: rs2 << 20 | rs1 << 15 | 0x0B
+    macr = lambda rd: 1 << 12 | rd << 7 | 0x0B
+    words = [addi(1, 0, -3), addi(2, 0, 7), mac(1, 2), mac(2, 2), macr(3), mac(1, 1), macr(4), macr(5)]
+    image = b"".join(w.to_bytes(4, "little") for w in words)
+    cpu = Cpu(image, mac=True)
+    got = [cpu.step()[2:4] for _ in words]
+    assert got[4] == (3, 28) and got[6] == (4, 9) and got[7] == (5, 0)
+    plain = Cpu(image)
+    plain.step(), plain.step()
+    plain.step()
+    assert plain.csr[0x342] == 2 and plain.csr[0x343] == mac(1, 2)

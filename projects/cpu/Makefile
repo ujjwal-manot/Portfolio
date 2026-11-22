@@ -1,4 +1,4 @@
-# cpu commands: make firmware | model | test | interrupts | filter | timing | cdc | power | sram_hold | broken | all
+# cpu commands: make firmware | model | test | interrupts | filter | timing | mac_area | cdc | power | sram_hold | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -15,7 +15,7 @@ STREAM := s_tvalid=clk s_tdata=clk s_tlast=clk
 cdc_rtl = $(RUN) yosys -q -p "read_verilog -sv $(1)/design/cpu.sv $(ROOT)/projects/fifo_bridge/design/reset_sync.sv; prep -flatten -top cpu; memory_map; opt_clean; write_json $(1)/build/cdc.json" && \
   $(RUN) python3 $(ROOT)/helpers/cdc_check.py $(1)/build/cdc.json cpu cdc/waivers.txt $(STREAM) imem_data=clk dmem_rdata=clk
 
-all: model test interrupts filter timing cdc power sram_hold broken
+all: model test interrupts filter timing mac_area cdc power sram_hold broken
 HOLD_CORNERS := tt_27_1v2 ff_125_1v32 ss_m40_1v08 sf_125_1v32 fs_125_1v32
 HOLD := $(foreach c,$(HOLD_CORNERS),build/sram_hold/$(c)/hold.txt)
 
@@ -64,10 +64,15 @@ timing:
 	if (cd timing && $(RUN) yosys -s synth.ys) > results/synth.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) synth $$c results/synth.log
 	for k in slow typ fast; do if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit timing.tcl) > results/timing_$$k.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) timing_$$k $$c results/timing_$$k.log; done
 
+mac_area:
+	mkdir -p build results
+	sed -e 's|^synth -flatten|chparam -set MAC 0 cpu\nsynth -flatten|' -e 's|cpu_cells.v|cpu_cells_no_mac.v|' timing/synth.ys > build/synth_no_mac.ys
+	if (cd timing && $(RUN) yosys -s ../build/synth_no_mac.ys) > results/synth_no_mac.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) synth_no_mac $$c results/synth_no_mac.log
+
 broken: firmware
 	mkdir -p results
 	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/$$n; mkdir -p $$d/build; cp -r design tests $$d; \
-	  cp build/filter.* build/interrupts.* $$d/build; ln -sfn $(CURDIR)/build/rv32ui $$d/build/rv32ui; ln -sfn $(CURDIR)/build/rv32mi $$d/build/rv32mi; \
+	  cp build/filter*.* build/interrupts.* $$d/build; ln -sfn $(CURDIR)/build/rv32ui $$d/build/rv32ui; ln -sfn $(CURDIR)/build/rv32mi $$d/build/rv32mi; \
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
 	  if [ "$$run" = cdc ]; then if ($(call cdc_rtl,$$d)) > results/$$n.log 2>&1; then c=1; elif grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  elif (cd $$d && $(PYTEST) -x tests/test_interrupts.py tests/test_cpu.py tests/test_filter.py) > results/$$n.log 2>&1; then c=1; \
@@ -86,4 +91,4 @@ cdc: timing
 	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_liberty -lib $(SRAM_LIB); read_verilog build/cpu_cells.v; hierarchy -top cpu_top; write_json build/cdc_cells.json'
 	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_cells.json cpu_top cdc/waivers.txt $(STREAM) > results/cdc_cells.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_cells $$c results/cdc_cells.log
 
-.PHONY: all firmware model test interrupts filter timing cdc power sram_hold broken
+.PHONY: all firmware model test interrupts filter timing mac_area cdc power sram_hold broken
