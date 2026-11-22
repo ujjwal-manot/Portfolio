@@ -20,4 +20,6 @@ XMT tail ibias vss vss sg13_lv_nmos w={w_tail} l={l_tail} ng={ng_tail} mm_ok={mm
 XC1 a n1 cap_cmim w={w} l={w} mm_ok={mm}
 XC2 b n2 cap_cmim w={w} l={w} mm_ok={mm}
 XSW n1 sw n2 vss sg13_lv_nmos w={w_sw} l=0.13u mm_ok={mm}
+XRB1 n1 vss vss rhigh w=0.5u l=20u mm_ok={mm}
+XRB2 n2 vss vss rhigh w=0.5u l=20u mm_ok={mm}
 .ends cap_bit

@@ -5,6 +5,10 @@ RSP m_p vdd {r_ser}
 LTN outn m_n {l_half}
 RSN m_n vdd {r_ser}
 XV1 outp vtune outn vss sg13_hv_svaricap w={w_var} l={l_var} Nx={nx_var}
+XB0 outp outn sw0 vss cap_bit_hbt w={w_c0}
+XB1 outp outn sw1 vss cap_bit_hbt w={w_c1}
+XB2 outp outn sw2 vss cap_bit_hbt w={w_c2}
+XB3 outp outn sw3 vss cap_bit_hbt w={w_c3}
 XCB1 outp bn cap_cmim w=12u l=12u mm_ok={mm}
 XCB2 outn bp cap_cmim w=12u l=12u mm_ok={mm}
 XRB1 vdd bp vss rhigh w=1u l=20u mm_ok={mm}
@@ -14,3 +18,10 @@ XQ2 outn bn tail vss npn13G2 Nx=4
 XMR ibias ibias vss vss sg13_lv_nmos w={w_ref} l={l_tail} mm_ok={mm}
 XMT tail ibias vss vss sg13_lv_nmos w={w_tail} l={l_tail} ng={ng_tail} mm_ok={mm}
 .ends lc_vco_hbt
+.subckt cap_bit_hbt a b sw vss w=4u
+XC1 a n1 cap_cmim w={w} l={w} mm_ok={mm}
+XC2 b n2 cap_cmim w={w} l={w} mm_ok={mm}
+XSW n1 sw n2 vss sg13_lv_nmos w={w_sw} l=0.13u mm_ok={mm}
+XRB1 n1 vss vss rhigh w=0.5u l=20u mm_ok={mm}
+XRB2 n2 vss vss rhigh w=0.5u l=20u mm_ok={mm}
+.ends cap_bit_hbt
