@@ -3,7 +3,7 @@ Run: levels LEVELS=build/levels/tt_27_nom/dac_levels.txt
 --- a/tests/dac_levels.cir
 +++ b/tests/dac_levels.cir
 @@ -1,6 +1,5 @@
- * Measures the capacitor DAC's level error at every code the way a conversion sees it: for each of the 256 codes (eight pulse sources, each with twice the period of the last, count in binary, 300 ns per code) vin is set to that code's ideal level, sampled for 150 ns, then the bottom plates switch to the code, and the top plate's distance from vcm at the end of the step, which is the DAC's error at that code (measured near vcm, as the comparator sees it), is written to dac_levels.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
+ * Measures the capacitor DAC's level error at every code the way a conversion sees it: for each of the 256 codes (eight pulse sources, each with twice the period of the last, count in binary, 300 ns per code) vin is set to that code's ideal level, sampled for 150 ns, then the bottom plates switch to the code, and the top plate's distance from vcm at the end of the step, which is the DAC's error at that code (measured near vcm, as the comparator sees it), is written to dac_levels.txt, starting without an operating point (uic: at the ff corner the floating top plate makes the operating point fail at this tolerance, and the first 150 ns sample sets every plate's charge anyway; at tt the levels match an operating-point start to 0.6 uV), solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
  .include corner.inc
 -.option reltol=1e-5 vntol=1e-8
  .include cap_dac_sizes.inc

@@ -39,6 +39,11 @@ def same(path_a, path_b, limit=0.01):
     worst = max(abs(a[c] - b[c]) for c in a) / LSB
     return worst <= limit and a.keys() == b.keys(), worst
 
+def same_codes(path_a, path_b, supply):
+    a, b = codes_from_run(path_a, supply), codes_from_run(path_b, supply)
+    differ = sum(x != y for x, y in zip(a, b)) + abs(len(a) - len(b))
+    return differ == 0, differ
+
 def codes_from_run(path, supply):
     rows = [[float(v) for v in l.split()][1::2] for l in open(path) if l.strip()]
     return [sum(1 << (7 - j) for j in range(8) if rows[i][1 + j] > supply / 2) for i in range(1, len(rows)) if rows[i][0] > supply / 2 >= rows[i - 1][0]]
@@ -86,6 +91,10 @@ if __name__ == "__main__":
         ok, worst = same(args[0], args[1])
         print(f"{args[0]} and {args[1]} differ by at most {worst:.4g} LSB over every code")
         fails = [] if ok else [f"the two runs differ by {worst:.4g} LSB, more than 0.01"]
+    elif mode == "same_codes":
+        ok, differ = same_codes(args[1], args[2], float(args[0]))
+        print(f"{args[1]} and {args[2]}: {differ} codes differ")
+        fails = [] if ok else [f"{differ} codes differ between the two conversions"]
     elif mode == "convert":
         supply, n, path, measure = float(args[0]), int(args[1]), args[2], args[3]
         r = check_conversion(path, measure, supply, n)

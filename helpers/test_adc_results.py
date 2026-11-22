@@ -1,6 +1,6 @@
-# Checks the ADC result reader on made-up files: comparator decisions must have the right sign beyond the hysteresis and finish inside the budget, Monte Carlo offsets give their spread, DAC level errors give DNL and INL against chip.md's limits, two DAC level runs agree to a hundredth of an LSB, and converted codes give ENOB from a coherent FFT and an offset and gain error held to chip.md's +-1 and +-2 LSB.
+# Checks the ADC result reader on made-up files: comparator decisions must have the right sign beyond the hysteresis and finish inside the budget, Monte Carlo offsets give their spread, DAC level errors give DNL and INL against chip.md's limits, two DAC level runs agree to a hundredth of an LSB, two conversions give the same codes, and converted codes give ENOB from a coherent FFT and an offset and gain error held to chip.md's +-1 and +-2 LSB.
 import math, pytest
-from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion, same
+from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion, same, same_codes
 
 def write(tmp_path, name, text):
     path = tmp_path / name
@@ -63,3 +63,10 @@ def test_two_level_runs_must_agree_to_a_hundredth_of_an_lsb(tmp_path):
     a, b = write(tmp_path, "a.txt", rows), write(tmp_path, "b.txt", rows.replace("100 0.001", "100 0.00102"))
     assert same(a, b)[0] and abs(same(a, b)[1] - 2e-5 / 0.003125) < 1e-9
     assert not same(a, write(tmp_path, "c.txt", rows.replace("100 0.001", "100 0.0011")))[0]
+
+def test_two_conversions_must_give_the_same_codes(tmp_path):
+    a = conversion(tmp_path, [10, 200, 7], 1e3)[0].read_text()
+    b, c = write(tmp_path, "b.txt", a), write(tmp_path, "c.txt", conversion(tmp_path, [10, 201, 7], 1e3)[0].read_text())
+    a = write(tmp_path, "a.txt", a)
+    assert same_codes(a, b, 1.2) == (True, 0)
+    assert same_codes(a, c, 1.2) == (False, 1)

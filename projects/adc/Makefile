@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | broken | review | all
+# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | shunt_check | broken | review | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -24,7 +24,7 @@ CONVERT := $(foreach p,$(PROCESS),$(foreach t,$(TEMPS),build/convert/$(p)_$(t)_n
 COMPARATOR := design/comparator.cir design/comparator_sizes.inc
 DAC := design/cap_dac.cir design/cap_dac_sizes.inc
 
-all: sar logic decide offset levels uic_check convert broken review
+all: sar logic decide offset levels uic_check convert shunt_check broken review
 
 sar:
 	mkdir -p results
@@ -123,5 +123,13 @@ uic_check: tests/dac_levels.cir $(DAC)
 	for s in op uic; do (cd build/uic_check/$$s && $(RUN) ngspice -b dac_levels.cir > dac_levels.log 2>&1); cp build/uic_check/$$s/dac_levels.txt results/uic_check_$$s.txt; done
 	if $(PY) $(ROOT)/helpers/adc_results.py same results/uic_check_op.txt results/uic_check_uic.txt > results/uic_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) uic_check $$c results/uic_check.log results/uic_check_*.txt
 
-.PHONY: all sar logic decide offset levels uic_check convert broken review
+shunt_check: build/convert/tt_27_nom/convert.txt
+	mkdir -p build/shunt_check results
+	cp build/convert/tt_27_nom/*.cir build/convert/tt_27_nom/*.inc build/sar_logic.so build/shunt_check
+	sed -i 's/^.option interp rshunt=1e13$$/.option interp/' build/shunt_check/convert.cir
+	cd build/shunt_check && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cp build/convert/tt_27_nom/convert.txt results/shunt_check_with.txt; cp build/shunt_check/convert.txt results/shunt_check_without.txt
+	if $(PY) $(ROOT)/helpers/adc_results.py same_codes 1.2 results/shunt_check_with.txt results/shunt_check_without.txt > results/shunt_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) shunt_check $$c results/shunt_check.log results/shunt_check_*.txt
+
+.PHONY: all sar logic decide offset levels uic_check convert shunt_check broken review
 .DELETE_ON_ERROR:

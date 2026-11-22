@@ -1,4 +1,4 @@
-* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), and writes time, m_tvalid, the eight m_tdata bits, samp and vin every 50 ns to convert.txt and the average power drawn from the supply and from vref_hi, vref_lo and vcm over the conversions, with the input frequency measured between two rising crossings of vcm, each integrated by the solver at every step into a 1 F capacitor (the transistor parts only; the SAR logic runs as a Verilator model) to measure.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc.
+* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), and writes time, m_tvalid, the eight m_tdata bits, samp and vin every 50 ns to convert.txt and the average power drawn from the supply and from vref_hi, vref_lo and vcm over the conversions, with the input frequency measured between two rising crossings of vcm, each integrated by the solver at every step into a 1 F capacitor (the transistor parts only; the SAR logic runs as a Verilator model) to measure.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc; every node has 1e13 ohm to ground, without which the -40 C operating point does not solve (at most 0.6 V / 1e13 ohm for 1 us on the 2 pF array, 0.01 LSB, and shunt_check finds no code changed at 27 C).
 .include corner.inc
 .option reltol=1e-5 vntol=1e-8
 .include tone.inc
@@ -6,7 +6,7 @@
 .include cap_dac_sizes.inc
 .include comparator.cir
 .include cap_dac.cir
-.option interp
+.option interp rshunt=1e13
 VDD vdd 0 {vsupply}
 VHI vref_hi 0 1.0
 VLO vref_lo 0 0.2
