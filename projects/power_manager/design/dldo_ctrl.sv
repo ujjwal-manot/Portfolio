@@ -1,0 +1,33 @@
+// Digital LDO controller, proportional plus integral: on every clock it reads four clocked comparators around the setpoint, a fine window (lo: the rail is below it, hi: above it) and a wider coarse one (far_lo, far_hi); the count (the integral) moves by BIG units beyond the coarse window, by one unit between the two and not at all inside the fine window, never past 0 or N, and between the two windows P more units are turned on (or off) on top of the count, which damps the rail at light load where the load itself barely does; the units are driven as a registered thermometer code, so a unit never glitches on.
+module dldo_ctrl #(
+  parameter int N = 128,
+  parameter int BIG = 8,
+  parameter int P = 1
+) (
+  input  logic         clk, rst_n,
+  input  logic         lo, hi, far_lo, far_hi,
+  output logic [N-1:0] on,
+  output logic [$clog2(N+1)-1:0] count, drive
+);
+  int next_count, next_drive;
+  wire up = lo && !hi, down = hi && !lo;
+
+  always_comb begin
+    next_count = int'(count);
+    if (far_lo) next_count = next_count + BIG;
+    else if (far_hi) next_count = next_count - BIG;
+    else if (up) next_count = next_count + 1;
+    else if (down) next_count = next_count - 1;
+    next_count = next_count > N ? N : next_count < 0 ? 0 : next_count;
+    next_drive = next_count + (up && !far_lo ? P : down && !far_hi ? -P : 0);
+    next_drive = next_drive > N ? N : next_drive < 0 ? 0 : next_drive;
+  end
+
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) {count, drive, on} <= '0;
+    else begin
+      count <= ($clog2(N+1))'(next_count);
+      drive <= ($clog2(N+1))'(next_drive);
+      for (int i = 0; i < N; i++) on[i] <= i < next_drive;
+    end
+endmodule
