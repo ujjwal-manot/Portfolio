@@ -1,5 +1,6 @@
-# Verifies RTL port-interface consistency across cocotb testbenches and SymbiYosys formal harnesses, checking every dut.<port> access and .port() binding against the target Verilog or SystemVerilog module declaration.
+# Verifies RTL port-interface consistency across cocotb testbenches, SymbiYosys formal harnesses, Yosys synthesis scripts, OpenSTA timing constraints, EQY equivalence scripts, and LibreLane layout configs.
 import ast
+import json
 import os
 import re
 from pathlib import Path
@@ -435,3 +436,123 @@ def test_flagship_formal_bindings_match_rtl():
             missing_pins = mod_ports[mod] - set(bound_ports)
             assert not unknown, f"{formal_rel} {mod} {inst_name}: unknown pins {sorted(unknown)}"
             assert not missing_pins, f"{formal_rel} {mod} {inst_name}: unconnected pins {sorted(missing_pins)}"
+
+
+FLAGSHIP_SIGNOFF = [
+    (
+        "projects/coherent_noc",
+        "xy_router",
+        "clk",
+        "projects/coherent_noc/timing/synth.ys",
+        "projects/coherent_noc/timing/timing.tcl",
+        "projects/coherent_noc/formal/equiv.eqy",
+        "projects/coherent_noc/layout/config.json",
+    ),
+    (
+        "projects/frac_n_pll",
+        "mash111",
+        "clk",
+        "projects/frac_n_pll/timing/synth.ys",
+        "projects/frac_n_pll/timing/timing.tcl",
+        "projects/frac_n_pll/formal/equiv.eqy",
+        None,
+    ),
+    (
+        "projects/serdes_link",
+        "dfe_lms",
+        "clk",
+        "projects/serdes_link/timing/synth.ys",
+        "projects/serdes_link/timing/timing.tcl",
+        "projects/serdes_link/formal/equiv.eqy",
+        None,
+    ),
+]
+
+
+def _extract_tcl_get_ports(tcl_text):
+    ports = set()
+    for grp in re.findall(r"\[get_ports\s+\{([^}]+)\}\]", tcl_text):
+        for tok in grp.split():
+            ports.add(tok.rstrip("*"))
+    for single in re.findall(r"\[get_ports\s+([A-Za-z_][A-Za-z0-9_$*]*)\]", tcl_text):
+        ports.add(single.rstrip("*"))
+    return ports
+
+
+def validate_signoff_bundle(proj_rel, primary_top, clk_port, ys_text, tcl_text, eqy_text, cfg_text=None, resolve_fn=_resolve_repo_file):
+    ys_dir = Path(proj_rel) / "timing"
+    read_files = []
+    for line in ys_text.splitlines():
+        if line.strip().startswith("read_verilog"):
+            read_files.extend(tok for tok in line.split() if tok.endswith((".sv", ".v")))
+    assert read_files, f"{proj_rel}/timing/synth.ys has no read_verilog files"
+    all_mods = {}
+    for rf in read_files:
+        norm_rel = os.path.normpath(str(ys_dir / rf))
+        p = resolve_fn(norm_rel)
+        assert p is not None, f"{proj_rel}/timing/synth.ys missing RTL file {norm_rel}"
+        all_mods.update(parse_sv_modules(p.read_text()))
+    synth_tops = re.findall(r"synth\s+-flatten\s+-top\s+([A-Za-z_][A-Za-z0-9_$]*)", ys_text)
+    assert primary_top in synth_tops, f"{proj_rel}/timing/synth.ys does not synthesize {primary_top}"
+    for top in synth_tops:
+        assert top in all_mods, f"{proj_rel}/timing/synth.ys top {top} not found in read RTL"
+    written_netlists = re.findall(r"write_verilog\s+-noattr\s+(\S+)", ys_text)
+    expected_netlist = f"../build/{primary_top}_cells.v"
+    assert expected_netlist in written_netlists, f"{proj_rel}/timing/synth.ys does not write {expected_netlist}"
+
+    link_m = re.search(r"\blink_design\s+([A-Za-z_][A-Za-z0-9_$]*)", tcl_text)
+    assert link_m and link_m.group(1) == primary_top, f"{proj_rel}/timing/timing.tcl link_design mismatch"
+    clk_ports = re.findall(r"create_clock\b.*\[get_ports\s+([A-Za-z_][A-Za-z0-9_$]*)\]", tcl_text)
+    assert clk_port in clk_ports, f"{proj_rel}/timing/timing.tcl missing create_clock on {clk_port}"
+    tcl_ports = _extract_tcl_get_ports(tcl_text)
+    rtl_ports = all_mods[primary_top]
+    unknown_tcl = tcl_ports - rtl_ports
+    assert not unknown_tcl, f"{proj_rel}/timing/timing.tcl references unknown ports {sorted(unknown_tcl)}"
+    assert tcl_ports == rtl_ports, f"{proj_rel}/timing/timing.tcl leaves ports unconstrained: {sorted(rtl_ports - tcl_ports)}"
+
+    eqy_sec = parse_sby_file(eqy_text)
+    for req in ("gold", "gate", "script"):
+        assert eqy_sec.get(req), f"{proj_rel}/formal/equiv.eqy missing [{req}]"
+    gold_text = "\n".join(eqy_sec["gold"])
+    gate_text = "\n".join(eqy_sec["gate"])
+    assert f"prep -flatten -top {primary_top}" in gold_text
+    assert f"prep -flatten -top {primary_top}" in gate_text
+    assert expected_netlist in gate_text
+
+    if cfg_text is not None:
+        cfg = json.loads(cfg_text)
+        assert cfg["DESIGN_NAME"] == primary_top
+        assert f"dir::{expected_netlist}" in cfg["VERILOG_FILES"]
+        for cp in cfg["CLOCK_PORT"]:
+            assert cp in rtl_ports, f"{proj_rel}/layout/config.json CLOCK_PORT {cp} not in {primary_top}"
+
+
+def test_signoff_script_linter_catches_bad_port_and_top():
+    rtl = "module blk(input logic clk, input logic rst_n, input logic [3:0] d, output logic [3:0] q); endmodule\n"
+    ys = "read_verilog -sv ../design/blk.sv\nsynth -flatten -top blk\nwrite_verilog -noattr ../build/blk_cells.v\n"
+    tcl = "link_design blk\ncreate_clock -name clk -period 20 [get_ports clk]\nset_input_delay 0 -clock clk [get_ports rst_n]\nset_input_delay 4 -clock clk [get_ports {d*}]\nset_output_delay 4 -clock clk [get_ports {q*}]\n"
+    eqy = "[gold]\nread_verilog -sv ../design/blk.sv\nprep -flatten -top blk\n[gate]\nread_verilog ../build/blk_cells.v\nprep -flatten -top blk\n[script]\nasync2sync\n"
+    cfg = json.dumps({"DESIGN_NAME": "blk", "VERILOG_FILES": ["dir::../build/blk_cells.v"], "CLOCK_PORT": ["clk"]})
+    fake_file = type("F", (), {"read_text": staticmethod(lambda: rtl)})()
+    validate_signoff_bundle("projects/demo", "blk", "clk", ys, tcl, eqy, cfg, resolve_fn=lambda _: fake_file)
+    with pytest.raises(AssertionError, match="unknown ports"):
+        validate_signoff_bundle("projects/demo", "blk", "clk", ys, tcl.replace("q*", "bad_out*"), eqy, cfg, resolve_fn=lambda _: fake_file)
+
+
+def test_flagship_signoff_scripts_match_rtl():
+    resolved_ys = [_resolve_repo_file(ys_rel) for _, _, _, ys_rel, _, _, _ in FLAGSHIP_SIGNOFF]
+    if not any(resolved_ys) and not os.environ.get("RTL_OVERLAY_ROOTS"):
+        pytest.skip("flagship signoff scripts live in stacked PRs #9 and #10; merge them or set RTL_OVERLAY_ROOTS")
+    for proj_rel, top, clk, ys_rel, tcl_rel, eqy_rel, cfg_rel in FLAGSHIP_SIGNOFF:
+        ys_p = _resolve_repo_file(ys_rel)
+        tcl_p = _resolve_repo_file(tcl_rel)
+        eqy_p = _resolve_repo_file(eqy_rel)
+        assert ys_p is not None, f"missing {ys_rel}"
+        assert tcl_p is not None, f"missing {tcl_rel}"
+        assert eqy_p is not None, f"missing {eqy_rel}"
+        cfg_text = None
+        if cfg_rel is not None:
+            cfg_p = _resolve_repo_file(cfg_rel)
+            assert cfg_p is not None, f"missing {cfg_rel}"
+            cfg_text = cfg_p.read_text()
+        validate_signoff_bundle(proj_rel, top, clk, ys_p.read_text(), tcl_p.read_text(), eqy_p.read_text(), cfg_text)
