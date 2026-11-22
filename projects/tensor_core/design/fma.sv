@@ -1,7 +1,8 @@
-// Fused multiply-add for the tensor core's cells: y = a * b + c rounded once to nearest even in FP32, with a and b in BF16, FP8 E4M3 or FP8 E5M2 (fmt 0, 1, 2; FP8 in the low byte) and c in FP32; both operands are normalized to a 24-bit significand first, so aligning the smaller one with a guard, a round and a sticky bit is exact under cancellation; subnormals in and out, infinities, and RISC-V NaN rules (every NaN result is 0x7FC00000).
+// Fused multiply-add for the tensor core's cells: y = a * b * 2^(xa + xb - 254) + c rounded once to nearest even in FP32, with a and b in BF16, FP8 E4M3, FP8 E5M2 or FP4 E2M1 (fmt 0 to 3; FP8 in the low byte, FP4 in the low nibble), xa and xb the OCP MX blocks' shared E8M0 exponents (127 for a scale of one, 255 is NaN) and c in FP32; both operands are normalized to a 24-bit significand first, so aligning the smaller one with a guard, a round and a sticky bit is exact under cancellation; subnormals in and out, infinities, and RISC-V NaN rules (every NaN result is 0x7FC00000).
 module fma (
   input  logic [1:0]  fmt,
   input  logic [15:0] a, b,
+  input  logic [7:0]  xa, xb,
   input  logic [31:0] c,
   output logic [31:0] y
 );
@@ -22,9 +23,13 @@ module fma (
         n.s = x[7]; n.zero = x[6:0] == 0; n.nan = x[6:0] == 7'h7f;
         n.m = {20'b0, x[6:3] != 0, x[2:0]}; n.e = (x[6:3] == 0 ? 12'sd1 : $signed({8'b0, x[6:3]})) - 12'sd10;
       end
-      default: begin
+      2'd2: begin
         n.s = x[7]; n.zero = x[6:0] == 0; n.inf = x[6:2] == 5'h1f && x[1:0] == 0; n.nan = x[6:2] == 5'h1f && x[1:0] != 0;
         n.m = {21'b0, x[6:2] != 0, x[1:0]}; n.e = (x[6:2] == 0 ? 12'sd1 : $signed({7'b0, x[6:2]})) - 12'sd17;
+      end
+      default: begin
+        n.s = x[3]; n.zero = x[2:0] == 0;
+        n.m = {22'b0, x[2:1] != 0, x[0]}; n.e = (x[2:1] == 0 ? 12'sd1 : $signed({10'b0, x[2:1]})) - 12'sd2;
       end
     endcase
     return n;
@@ -64,8 +69,8 @@ module fma (
     q.m = {c[30:23] != 0, c[22:0]}; q.e = (c[30:23] == 0 ? 12'sd1 : $signed({4'b0, c[30:23]})) - 12'sd150;
     p = '0;
     p.s = pa.s ^ pb.s; p.zero = pa.zero || pb.zero; p.inf = pa.inf || pb.inf;
-    p.nan = pa.nan || pb.nan || p.inf && p.zero;
-    p.m = {16'(pa.m[7:0]) * 16'(pb.m[7:0]), 8'b0}; p.e = pa.e + pb.e - 12'sd8;
+    p.nan = pa.nan || pb.nan || p.inf && p.zero || xa == 8'hff || xb == 8'hff;
+    p.m = {16'(pa.m[7:0]) * 16'(pb.m[7:0]), 8'b0}; p.e = pa.e + pb.e - 12'sd8 + $signed({4'b0, xa}) + $signed({4'b0, xb}) - 12'sd254;
     {major, minor, wide, aligned, sum, rounded, eb, sub} = '0;
     y = 32'h7fc00000;
     if (p.nan || q.nan || p.inf && q.inf && p.s != q.s) y = 32'h7fc00000;
