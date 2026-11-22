@@ -1,0 +1,1 @@
+dc vref_v 1.20767 tc_ppm_per_c 14.0829 vref_min_v 1.20509 vref_max_v 1.2079 supply_a 3.27674E-05 line_v_per_v 8.83016E-05 code 9 untrimmed_v 1.20454 untrimmed_tc_ppm_per_c 10.6996 step_v 0.00312117

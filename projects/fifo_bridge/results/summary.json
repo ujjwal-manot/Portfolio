@@ -1,7 +1,7 @@
 {
  "broken_binary_pointers_cross": {
   "logs": {
-   "binary_pointers_cross.log": "cbaf1ea6f6925dececa2c3da54ab1f4093562e5a8e8e38b36b753b425266f805"
+   "binary_pointers_cross.log": "d50702e70eee88f23f728ad3fbd3d04a42fc572cb87aa95294c016ccae983f8b"
   },
   "result": "pass",
   "sources": {
@@ -53,12 +53,12 @@
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
    "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
   },
-  "time": "2026-11-22 04:48:22",
+  "time": "2026-11-22 09:26:19",
   "values": {}
  },
  "broken_data_changes_while_stalled": {
   "logs": {
-   "data_changes_while_stalled.log": "c547a77a4943ac71cf2270855650897ddb7aa4513ca0537c9e9c095aae628ccd"
+   "data_changes_while_stalled.log": "6b431392101611fc8e3eb2ada300046f76758ed1b7daaa644ec6497cc6a31f7d"
   },
   "result": "pass",
   "sources": {
@@ -110,12 +110,12 @@
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
    "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
   },
-  "time": "2026-11-22 04:59:03",
+  "time": "2026-11-22 09:54:49",
   "values": {}
  },
  "broken_drop_word_on_wrap": {
   "logs": {
-   "drop_word_on_wrap.log": "4e988a4d3f395f96d02e4fef10a2259365e782c58bd79fcade8e3e030211111c"
+   "drop_word_on_wrap.log": "330eb93f2081d8bf72026bc55ab0ea08b60d22155ffa7c682e57a2d8c22ddf55"
   },
   "result": "pass",
   "sources": {
@@ -167,7 +167,7 @@
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
    "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
   },
-  "time": "2026-11-22 04:59:45",
+  "time": "2026-11-22 09:56:28",
   "values": {}
  },
  "cdc": {
@@ -179,7 +179,7 @@
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -211,7 +211,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -222,9 +222,11 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:09:00",
+  "time": "2026-11-22 13:59:05",
   "values": {}
  },
  "cdc_cells": {
@@ -236,7 +238,7 @@
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -268,7 +270,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -279,22 +281,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:09:05",
+  "time": "2026-11-22 13:59:07",
   "values": {}
  },
  "cdc_routed": {
   "logs": {
    "cdc_routed.log": "be124414ca07dc9de41125de43777680f25d7e50609343d6535d55d28ad016da",
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c"
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -326,7 +330,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -337,21 +341,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:24:10",
+  "time": "2026-11-22 14:04:38",
   "values": {}
  },
  "equiv": {
   "logs": {
-   "equiv.log": "fa1145034e0f82c4d384ec6b3ec0b202d88202cbb985cb8084bf3269491aec47"
+   "equiv.log": "f2da70439ecdf706c6c8792f7908744e7a334dde5ea26976746c388532209e38"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -383,7 +389,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -394,22 +400,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:36:00",
+  "time": "2026-11-22 14:09:27",
   "values": {}
  },
  "equiv_routed": {
   "logs": {
-   "equiv_routed.log": "b0e8743626a088ffcf9ac1b7b6f1a8ae01eaebe39a7dcd49468485b6559dc14f",
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c"
+   "equiv_routed.log": "83de257ce0c91732d9f43413ed58e4edb3739a338f772b3c91227d95a17a3548",
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -441,7 +449,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -452,21 +460,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:35:34",
+  "time": "2026-11-22 14:09:14",
   "values": {}
  },
  "formal_bridge_check": {
   "logs": {
-   "formal_bridge_check.log": "b45007443658379d066d1eb54decab535a148df9d0105b3c20e8ddc26b9fd136"
+   "formal_bridge_check.log": "a1376a3840434416821428827a19d974a408783b4662a86ca9efc9881a73fd48"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -498,7 +508,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -509,21 +519,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:25",
+  "time": "2026-11-22 13:58:47",
   "values": {}
  },
  "formal_bridge_reach": {
   "logs": {
-   "formal_bridge_reach.log": "9ddf3e7edad19af185f2b7f70ae738c4b66928c80ef1db759056c8b13a523196"
+   "formal_bridge_reach.log": "acc2fbb5343fb4d5281eb0c1366b429744d517ad30817d9bebe31e65304a6ea2"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -555,7 +567,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -566,21 +578,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:42",
+  "time": "2026-11-22 13:58:56",
   "values": {}
  },
  "formal_fifo_proof": {
   "logs": {
-   "formal_fifo_proof.log": "fc1b877ff454aa1964afa3a52ce9421b8a5d228043131d1947e25f05a12d1ede"
+   "formal_fifo_proof.log": "9c9d08b7365709ee87bdf7069b8eb40ac2b701274f26728e1ece25b8028dc420"
   },
   "result": "pass",
   "sources": {
-   "helpers/cdc_check.py": "ff6459db1c4584d51939d5273209e004b8905b946eab893f4f2060e55281295a",
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "3da217d49aeffb7cb1d9c98f0384f92dc882113494b783c96b1d2b0ece5670b3",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -612,7 +626,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -623,21 +637,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 03:49:56",
+  "time": "2026-11-22 14:34:00",
   "values": {}
  },
  "formal_fifo_reach": {
   "logs": {
-   "formal_fifo_reach.log": "74f8e34b95f8f0d0e9d92da11a4db198d50fbc6ba1906d71de5a463fb1a64e9f"
+   "formal_fifo_reach.log": "1a2b4834533c1b0280676f423813ee9aaabc64c6c28c1a9bc6752ec07f7c85da"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -669,7 +685,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -680,78 +696,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:30",
+  "time": "2026-11-22 13:58:50",
   "values": {}
  },
  "formal_skid_proof": {
   "logs": {
-   "formal_skid_proof.log": "f8b6423c09fc084705b85002d5e797b4a560ff51b870568afadb788eafa1a34e"
-  },
-  "result": "pass",
-  "sources": {
-   "helpers/cdc_check.py": "ff6459db1c4584d51939d5273209e004b8905b946eab893f4f2060e55281295a",
-   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
-   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
-   "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
-   "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
-   "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
-   "projects/fifo_bridge/broken/full_low_in_reset.patch": "05e806ad29e6495923209eca4cc8d49120aa3d2fad9b32df918a5c1dd6c379d5",
-   "projects/fifo_bridge/broken/skid_word_survives_reset.patch": "39f4de82ff9c0b856296d310677656701cdd019f5501f0cb66fcc731f04b8774",
-   "projects/fifo_bridge/broken/synchronizer_never_lands_old.patch": "1772bf4cb6c25c143153dd02e5466e1b8833332c97e81c924a24f34b4b59cff0",
-   "projects/fifo_bridge/broken/wrong_full_check.patch": "853e79f4270dcd095810e1a2e7bdcdc03d49c7f6202e3ccfa8650a4f9c61e2f2",
-   "projects/fifo_bridge/cdc/probes/binary_bus.sv": "7f0106f0befb29d54956141f1383f32e36ffee355d1019035aaa162e19a514d3",
-   "projects/fifo_bridge/cdc/probes/buffered_tree.v": "9f912290a9f121366f3549603875b6fa35e0e590d3c9e353153683c4b4de1686",
-   "projects/fifo_bridge/cdc/probes/clean.sv": "39ad9cbba86152e7ef8873a3fc8d615e97922e74fc4d4073145b887d9e657286",
-   "projects/fifo_bridge/cdc/probes/logic_before_sync.sv": "7b21f2cff8eef4d6b79204d2606169dd1bf23f4b221dbe13f26c749817246c03",
-   "projects/fifo_bridge/cdc/probes/meta_used.sv": "18f36d2bd3d804a157e4813c7767df5c1703064a748b51f2453f6ced20d4d847",
-   "projects/fifo_bridge/cdc/probes/no_sync.sv": "4e6aa30c55aa7f652a99df42507a93b80f6b94a511d4c40281bc5c25297e335f",
-   "projects/fifo_bridge/cdc/probes/raw_reset.sv": "a3fcc6a4ebf210d78947efc302a0585978fcbd88abe600202a56c026719b67bb",
-   "projects/fifo_bridge/cdc/probes/reset_from_a.sv": "09b8f0bbedd372f4467049116d9d70e28638165ac9a8aa6b47ff56d6d4bc2667",
-   "projects/fifo_bridge/cdc/probes/reset_sync_ok.sv": "168ba1c92a6d91a31c81fe74fc1d20b8fcd54a5ff96b6042b5b1d25fb2d020f5",
-   "projects/fifo_bridge/cdc/waivers.txt": "2de86a019677d60a3fe7575fc4148f2813080160b800d9daaac11032b34d7f07",
-   "projects/fifo_bridge/design/async_fifo.sv": "a29ef2cf1ba0f9412e9bc3342de933814b581c98487a1209570f5f6b66a5d60b",
-   "projects/fifo_bridge/design/fifo_bridge.sv": "4dcbe120d7c536fbe7af9fbf21c0379c29cee0d081c615e9f648916ab0a42844",
-   "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/design/skid_buffer.sv": "a01c0edb7d65a4d9bda11a3d0903717c37d835403cd6f21a88df29784ae21836",
-   "projects/fifo_bridge/design/sync2.sv": "be3eca8db6fa5d73f6e2907085adbe7d8d19639aec2684cee3f9f16689900603",
-   "projects/fifo_bridge/formal/equiv.eqy": "ec2e190ef626aec758a586353964d365df7f780d0f297ecbd6c97c910c3501cc",
-   "projects/fifo_bridge/formal/fifo_rules.sby": "9e42519eb19101250fc67ede2f36f683ac6aba738d0f384aef12d8aac53475fc",
-   "projects/fifo_bridge/formal/fifo_rules.sv": "9de2119e515090c4bc8d3b1be47e1dfb0ff7e4657e3931b96893260f6e4d0b45",
-   "projects/fifo_bridge/formal/routed.eqy": "41db8e27ba4bbfc9de7f5d9dea2809fabcc5665e01e1cdabab2df1d975eaf376",
-   "projects/fifo_bridge/layout/config.json": "cbcbe95a6aba8a59d42956ea011275cddd7d25346e596bf0c17c8efc73955d12",
-   "projects/fifo_bridge/layout/fifo_bridge.sdc": "7275e96daafeec5ee148273fae8725c78a1fa4fc829880516e0c09582ce5e591",
-   "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
-   "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
-   "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
-   "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
-   "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
-   "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
-   "projects/fifo_bridge/tests/test_fifo_bridge.py": "056eb93039af65fdd5ca665853b989d1659a5ed1b84d348b9716b027a41d6f31",
-   "projects/fifo_bridge/tests/test_gates.py": "b1aa695b07fc0ca404d14d2d36b285cb5a8d84c8416f25fb293cf2eaad170f11",
-   "projects/fifo_bridge/tests/test_sim_sdf.py": "a12992cc5d6951f0c688b9cbc13fc947e1ed1a2897becfd5f473f7c456ce74c1",
-   "projects/fifo_bridge/tests/test_skid_buffer.py": "0c29addc8d9388bede773b84e79438fd7509c9f0e3b3671af9bec1ec72fa054e",
-   "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
-   "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
-   "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
-  },
-  "time": "2026-11-22 03:50:23",
-  "values": {}
- },
- "formal_skid_reach": {
-  "logs": {
-   "formal_skid_reach.log": "213bdb600d2b62abeb9f50d5a7658c126ca47abc852d46498b568a372e85af82"
+   "formal_skid_proof.log": "1f426611cdfc0ec19e31459ea783e254d1c3bbc07af2ce5ddd473eb70408c9ab"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "3da217d49aeffb7cb1d9c98f0384f92dc882113494b783c96b1d2b0ece5670b3",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -783,7 +744,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -794,23 +755,84 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:34",
+  "time": "2026-11-22 14:34:12",
+  "values": {}
+ },
+ "formal_skid_reach": {
+  "logs": {
+   "formal_skid_reach.log": "ceda98cea3e1523e49d5dfa55f0a9ebb05d0cf31cd148541dc398b7893769827"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
+   "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
+   "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
+   "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
+   "projects/fifo_bridge/broken/full_low_in_reset.patch": "05e806ad29e6495923209eca4cc8d49120aa3d2fad9b32df918a5c1dd6c379d5",
+   "projects/fifo_bridge/broken/skid_word_survives_reset.patch": "39f4de82ff9c0b856296d310677656701cdd019f5501f0cb66fcc731f04b8774",
+   "projects/fifo_bridge/broken/synchronizer_never_lands_old.patch": "1772bf4cb6c25c143153dd02e5466e1b8833332c97e81c924a24f34b4b59cff0",
+   "projects/fifo_bridge/broken/wrong_full_check.patch": "853e79f4270dcd095810e1a2e7bdcdc03d49c7f6202e3ccfa8650a4f9c61e2f2",
+   "projects/fifo_bridge/cdc/probes/binary_bus.sv": "7f0106f0befb29d54956141f1383f32e36ffee355d1019035aaa162e19a514d3",
+   "projects/fifo_bridge/cdc/probes/buffered_tree.v": "9f912290a9f121366f3549603875b6fa35e0e590d3c9e353153683c4b4de1686",
+   "projects/fifo_bridge/cdc/probes/clean.sv": "39ad9cbba86152e7ef8873a3fc8d615e97922e74fc4d4073145b887d9e657286",
+   "projects/fifo_bridge/cdc/probes/logic_before_sync.sv": "7b21f2cff8eef4d6b79204d2606169dd1bf23f4b221dbe13f26c749817246c03",
+   "projects/fifo_bridge/cdc/probes/meta_used.sv": "18f36d2bd3d804a157e4813c7767df5c1703064a748b51f2453f6ced20d4d847",
+   "projects/fifo_bridge/cdc/probes/no_sync.sv": "4e6aa30c55aa7f652a99df42507a93b80f6b94a511d4c40281bc5c25297e335f",
+   "projects/fifo_bridge/cdc/probes/raw_reset.sv": "a3fcc6a4ebf210d78947efc302a0585978fcbd88abe600202a56c026719b67bb",
+   "projects/fifo_bridge/cdc/probes/reset_from_a.sv": "09b8f0bbedd372f4467049116d9d70e28638165ac9a8aa6b47ff56d6d4bc2667",
+   "projects/fifo_bridge/cdc/probes/reset_sync_ok.sv": "168ba1c92a6d91a31c81fe74fc1d20b8fcd54a5ff96b6042b5b1d25fb2d020f5",
+   "projects/fifo_bridge/cdc/waivers.txt": "2de86a019677d60a3fe7575fc4148f2813080160b800d9daaac11032b34d7f07",
+   "projects/fifo_bridge/design/async_fifo.sv": "a29ef2cf1ba0f9412e9bc3342de933814b581c98487a1209570f5f6b66a5d60b",
+   "projects/fifo_bridge/design/fifo_bridge.sv": "4dcbe120d7c536fbe7af9fbf21c0379c29cee0d081c615e9f648916ab0a42844",
+   "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
+   "projects/fifo_bridge/design/skid_buffer.sv": "a01c0edb7d65a4d9bda11a3d0903717c37d835403cd6f21a88df29784ae21836",
+   "projects/fifo_bridge/design/sync2.sv": "be3eca8db6fa5d73f6e2907085adbe7d8d19639aec2684cee3f9f16689900603",
+   "projects/fifo_bridge/formal/equiv.eqy": "ec2e190ef626aec758a586353964d365df7f780d0f297ecbd6c97c910c3501cc",
+   "projects/fifo_bridge/formal/fifo_rules.sby": "9e42519eb19101250fc67ede2f36f683ac6aba738d0f384aef12d8aac53475fc",
+   "projects/fifo_bridge/formal/fifo_rules.sv": "9de2119e515090c4bc8d3b1be47e1dfb0ff7e4657e3931b96893260f6e4d0b45",
+   "projects/fifo_bridge/formal/routed.eqy": "41db8e27ba4bbfc9de7f5d9dea2809fabcc5665e01e1cdabab2df1d975eaf376",
+   "projects/fifo_bridge/layout/config.json": "cbcbe95a6aba8a59d42956ea011275cddd7d25346e596bf0c17c8efc73955d12",
+   "projects/fifo_bridge/layout/fifo_bridge.sdc": "7275e96daafeec5ee148273fae8725c78a1fa4fc829880516e0c09582ce5e591",
+   "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
+   "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
+   "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
+   "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
+   "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
+   "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
+   "projects/fifo_bridge/tests/test_fifo_bridge.py": "056eb93039af65fdd5ca665853b989d1659a5ed1b84d348b9716b027a41d6f31",
+   "projects/fifo_bridge/tests/test_gates.py": "b1aa695b07fc0ca404d14d2d36b285cb5a8d84c8416f25fb293cf2eaad170f11",
+   "projects/fifo_bridge/tests/test_sim_sdf.py": "a12992cc5d6951f0c688b9cbc13fc947e1ed1a2897becfd5f473f7c456ce74c1",
+   "projects/fifo_bridge/tests/test_skid_buffer.py": "0c29addc8d9388bede773b84e79438fd7509c9f0e3b3671af9bec1ec72fa054e",
+   "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
+   "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
+   "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
+  },
+  "time": "2026-11-22 13:58:52",
   "values": {}
  },
  "layout": {
   "logs": {
    "layout.log": "53fa6da30064d3402dc337398a2880f496bfb91123fd4e1dee0756cb66929352",
-   "layout_flow.log": "6dafe8b5a8dd3bb48a87492f45dccd66a807adc566b8de9deda54bc2d4ea4319",
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c"
+   "layout_flow.log": "89c69feae7ed21cb16ad0b4b14faa8a299dbd32eae8e21c7f50ae7c21fc22b08",
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -842,7 +864,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -853,9 +875,11 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:24:07",
+  "time": "2026-11-22 14:04:36",
   "values": {}
  },
  "mtbf": {
@@ -919,19 +943,19 @@
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
    "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
   },
-  "time": "2026-11-22 04:47:44",
+  "time": "2026-11-22 09:24:38",
   "values": {}
  },
  "mutant_equiv": {
   "logs": {
-   "mutant_equiv.log": "a9d75122ef1dfa96270eb6babf08718560498f116f8b68ac6796680e05bda778"
+   "mutant_equiv.log": "576971e7d509335059766280aa3584c27d47571ad17087a12e3cb44f93336a36"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -963,7 +987,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -974,21 +998,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:36:18",
+  "time": "2026-11-22 14:09:36",
   "values": {}
  },
  "mutant_routed": {
   "logs": {
-   "mutant_routed.log": "d1a19e0b915875e5086a085e39d643f35bee58593b879cc664cc5c997fbbe21b"
+   "mutant_routed.log": "0369d6c0e3303803f2c62d552f8ff5824de2799bf2e4b9d983a733f16dd7d184"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1020,7 +1046,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1031,21 +1057,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:46:17",
+  "time": "2026-11-22 14:15:05",
   "values": {}
  },
  "power_mapped_fast": {
   "logs": {
-   "power_mapped_fast.log": "90bba177c864ea18bfba4db02f761a91b914f75db42fa1a5d8ccbee969919616"
+   "power_mapped_fast.log": "e322538cb123be6a31ee589755cf139a9e6168d8414815efd775ce1941be9ba2"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1077,7 +1105,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1088,21 +1116,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:36",
+  "time": "2026-11-22 14:15:55",
   "values": {}
  },
  "power_mapped_slow": {
   "logs": {
-   "power_mapped_slow.log": "758812fbe27d6159decf35d68615f9c1f924dd03fd4c0591a7293705bf174123"
+   "power_mapped_slow.log": "0841f852569685f49e558257aa1bb3b851ff87bef7e841ed11a5d8b4f3a3a257"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1134,7 +1164,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1145,21 +1175,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:19",
+  "time": "2026-11-22 14:15:46",
   "values": {}
  },
  "power_mapped_typ": {
   "logs": {
-   "power_mapped_typ.log": "66ae9cc1f0ac263acacb89940b362f358aea0ed355e86c386ced6a0ee0935590"
+   "power_mapped_typ.log": "54d7667b08278a67322deee74d0c89ac00c439749938668a37d9cf5af6f0a2a7"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1191,7 +1223,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1202,22 +1234,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:27",
+  "time": "2026-11-22 14:15:51",
   "values": {}
  },
  "power_routed_fast": {
   "logs": {
-   "power_routed_fast.log": "9f92abe2fd4a7fc725ff77e7a1b8d69b4d0a5a9796a3b76bf01ead0ec64e65f6",
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c"
+   "power_routed_fast.log": "f60ae72c3f704fef6b6bbd325cfac8849a36866f260084877cfbf47135fffbdc",
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1249,7 +1283,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1260,22 +1294,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:41",
+  "time": "2026-11-22 14:15:58",
   "values": {}
  },
  "power_routed_slow": {
   "logs": {
-   "power_routed_slow.log": "0d5bf349868880074d9f41cea7799849b6e36d84f0b82203116d805bf95495c3",
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c"
+   "power_routed_slow.log": "c5e3673e989bfb9ab0488969e6abc3dc6ce84c967ffafe7bd765ecf63796f9a9",
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1307,7 +1343,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1318,22 +1354,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:24",
+  "time": "2026-11-22 14:15:49",
   "values": {}
  },
  "power_routed_typ": {
   "logs": {
-   "power_routed_typ.log": "eb5a89f758d1c4b012e66b0ee96c27ce3cad5fd988e1901a00b54ac07af8ebf2",
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c"
+   "power_routed_typ.log": "f4c672176ebe204568596eb86cef1c158fbd7077841791661544f3f48f782aee",
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1365,7 +1403,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1376,21 +1414,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:32",
+  "time": "2026-11-22 14:15:53",
   "values": {}
  },
  "synth": {
   "logs": {
-   "synth.log": "12216a8c10acdc1a1a3f6ff5303f1f4a6d94155dce2596440525d1702cbf8482"
+   "synth.log": "1885a7d0e9ce7b5095110d2302f3a5a2c987d15c6ceb9f4d094f0783813b823e"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1422,7 +1462,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1433,21 +1473,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:46",
+  "time": "2026-11-22 13:58:58",
   "values": {}
  },
  "test_async_fifo": {
   "logs": {
-   "test_async_fifo.log": "b1659b5f45216babbedc43d924c136dcda5e4495f029796fdfaf66504792335f"
+   "test_async_fifo.log": "ae089dacbde55f5ad9e6b1241d4865865733ed4cfa76e2b31393a7860589f7c3"
   },
   "result": "pass",
   "sources": {
-   "helpers/cdc_check.py": "ff6459db1c4584d51939d5273209e004b8905b946eab893f4f2060e55281295a",
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "3da217d49aeffb7cb1d9c98f0384f92dc882113494b783c96b1d2b0ece5670b3",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1479,7 +1521,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1490,21 +1532,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 03:32:52",
+  "time": "2026-11-22 17:46:52",
   "values": {}
  },
  "test_fifo_bridge": {
   "logs": {
-   "test_fifo_bridge.log": "d0abacd81bb64864e09e4d34a2e3cfbe38a7dbc0cc6dda198dceac5970489f94"
+   "test_fifo_bridge.log": "39309350196885889f7a007a5ef76bdb882b9cf9324898ec8749f442d800ac7c"
   },
   "result": "pass",
   "sources": {
-   "helpers/cdc_check.py": "ff6459db1c4584d51939d5273209e004b8905b946eab893f4f2060e55281295a",
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "3da217d49aeffb7cb1d9c98f0384f92dc882113494b783c96b1d2b0ece5670b3",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1536,7 +1580,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1547,22 +1591,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 03:33:55",
+  "time": "2026-11-22 17:47:35",
   "values": {}
  },
  "test_gates": {
   "logs": {
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c",
-   "test_gates.log": "038e8a4148dbf64c12cb5ea81507408a5f6df6ce6d54cf5789dd10b8658743a5"
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617",
+   "test_gates.log": "699c08935d98974ae1b1c42f92b9a43fa8a7a0014ec404620fc6767ffe106e77"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1594,7 +1640,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1605,21 +1651,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:47:15",
+  "time": "2026-11-22 14:15:44",
   "values": {}
  },
  "test_sim_sdf": {
   "logs": {
-   "test_sim_sdf.log": "830d3605b2e3fdb0182e434fa17365e94c02ad3f164f1927cea34d49899b33b0"
+   "test_sim_sdf.log": "e03ca4c279d02fbeaed2da08c72ab28414c3fdcf1f65f4df0a929c8e253e6336"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1651,7 +1699,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1662,21 +1710,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:46:28",
+  "time": "2026-11-22 14:15:11",
   "values": {}
  },
  "test_skid_buffer": {
   "logs": {
-   "test_skid_buffer.log": "8c115628441a695e058e772b858acea040efaae8c3534b4d0baa3fa16f509dcc"
+   "test_skid_buffer.log": "3bfbcca0a902e8d184ef0a7f56a7973edaef452a0f74ed413cb957c643a3ba3f"
   },
   "result": "pass",
   "sources": {
-   "helpers/cdc_check.py": "ff6459db1c4584d51939d5273209e004b8905b946eab893f4f2060e55281295a",
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "3da217d49aeffb7cb1d9c98f0384f92dc882113494b783c96b1d2b0ece5670b3",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1708,7 +1758,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1719,21 +1769,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 03:33:06",
+  "time": "2026-11-22 17:47:02",
   "values": {}
  },
  "timing_fast": {
   "logs": {
-   "timing_fast.log": "0c787148d9155eda1cdb0396204b1e385ef59103fc4e647e47699a280587d13a"
+   "timing_fast.log": "1fdae3fc9a053cabe42c9d2858e5ae32ad97ceec79c1dec985a23350aaaa3ddc"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1765,7 +1817,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1776,22 +1828,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:56",
+  "time": "2026-11-22 13:59:03",
   "values": {}
  },
  "timing_routed_fast": {
   "logs": {
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c",
-   "timing_routed_fast.log": "69fa7da743d08f2c9afde91cea6cd3374d3b43d84e196206dafa2add1aef14cb"
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617",
+   "timing_routed_fast.log": "88a2bb9e4b58d77dbdee6264efaa7483bc94a3ac844f8ecd3a1e9c647a7030d6"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1823,7 +1877,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1834,22 +1888,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:35:43",
+  "time": "2026-11-22 14:09:20",
   "values": {}
  },
  "timing_routed_slow": {
   "logs": {
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c",
-   "timing_routed_slow.log": "52801bd7296cb00a7943476e2001c4dbe2114c98ca59aa64aa17922ca5d486d4"
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617",
+   "timing_routed_slow.log": "ab4fa14d35aaf9b9189d76a7ba5b3f2b809c3f9c20d561b8ef3a6525ed79f041"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1881,7 +1937,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1892,22 +1948,24 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:35:36",
+  "time": "2026-11-22 14:09:16",
   "values": {}
  },
  "timing_routed_typ": {
   "logs": {
-   "routed_netlist.sha256": "4dc8907fcc6a958bd9fc7b5c694a0cc5359a61e1e3540c2f14bd990d47958d2c",
-   "timing_routed_typ.log": "6b3d2472e09cf5ad569bef3b306d4f7d64b35ff057e5352d2fbd9cbfcf8c9468"
+   "routed_netlist.sha256": "c7288cb4ae996d644217b5c55117bf1230529e8dd49d8c45f464e195e7531617",
+   "timing_routed_typ.log": "c390a340c494a82ff05c246bfee8cc9df2788aee8b8c3ebdf3c5fc452c148adb"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1939,7 +1997,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -1950,21 +2008,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:35:40",
+  "time": "2026-11-22 14:09:18",
   "values": {}
  },
  "timing_slow": {
   "logs": {
-   "timing_slow.log": "b4ce15051a58ad5a20112dacd46ebf1faabf2285d1f1410a370e5e1b43aea598"
+   "timing_slow.log": "5c8cc996eb1281021a5d63dbcbb56e5d59029ec54f4b312f0fb119c7e3b434e9"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -1996,7 +2056,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -2007,21 +2067,23 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:49",
+  "time": "2026-11-22 13:59:00",
   "values": {}
  },
  "timing_typ": {
   "logs": {
-   "timing_typ.log": "af56f82c2bc56ccfc90bb2dc15b1e997b9610da53a9a8402277b0ea76749539c"
+   "timing_typ.log": "0ab1d0738870ca0a2f5e2d0249e5356d6be32fd2cd7337f6a7cd56c13769bd10"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/fifo_bridge/Makefile": "4d9eebd7526fde32fc6d6852697c25f10f6c003aabc06fdcba1d573b81971b5c",
+   "projects/fifo_bridge/Makefile": "039c69dc4ad8c344596b509120e76a94b7a2ec5bca7e91e5ae34474eb7546943",
    "projects/fifo_bridge/broken/binary_pointers_cross.patch": "20310611682cd97da514b6e3e550ca458dd167e30a85aa163812263bd9810025",
    "projects/fifo_bridge/broken/data_changes_while_stalled.patch": "4e3ab1338d95150e9344d51b179d30e879474068c55ae21f9b46e2f1548646c5",
    "projects/fifo_bridge/broken/drop_word_on_wrap.patch": "7b83c79366f07b33c81e387b1674dbf2a2a80fb5149e1a4cc63d39278dc12656",
@@ -2053,7 +2115,7 @@
    "projects/fifo_bridge/layout/metrics.py": "f15fdf8ef146816c864c3a28ca959b676d3a5714e7c24524a73187f4c39b5780",
    "projects/fifo_bridge/mtbf/edge.cir": "3eb50d0e1c918308d45d93b0d99515c4a47f94f0089af4ecb8d5d5803e9b9a0d",
    "projects/fifo_bridge/mtbf/extract.tcl": "02e46aae44a965b838b5f064da6043cb45d9b78dda04c5e99b382e39e3a91fab",
-   "projects/fifo_bridge/mtbf/mtbf.py": "af80dcece4426f7f9659de46260c1d4b711adf21ab89c3dfe2b318f8ea57b3a0",
+   "projects/fifo_bridge/mtbf/mtbf.py": "71c9418ea6cb63f8c23ed4cea98881fbc2174096782832af8838a8952a3c4800",
    "projects/fifo_bridge/tests/one_xor.v": "3e9868ce5870d3dfc22235b4347b2cd890ee6a55d32fd8d14e60a847c5fadfbe",
    "projects/fifo_bridge/tests/sdf.v": "971a1e0b526377f0a9c1907b7a47f9f04bbd420baedbd4570f008e4b8b7c96d4",
    "projects/fifo_bridge/tests/test_async_fifo.py": "ae009ae3c5266bb0975b85171eee5080ea2645b3f66bcf6ce06501d94d9bf592",
@@ -2064,9 +2126,11 @@
    "projects/fifo_bridge/timing/power.tcl": "e96b74f97e04d656c77b735dafbff379a82602df1b8d6383daccdb296dc5f601",
    "projects/fifo_bridge/timing/sim_sdf.py": "85be3ba76200204cf70a081d9ab010be8137c69d4b01ee16f1b6a91d88646522",
    "projects/fifo_bridge/timing/synth.ys": "786f10acc87fd99a5326292265070d554528de40067ec60f50268e5a95c6ce28",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2"
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/fifo_bridge/uses.txt": "b63e17bce1bf7737cf623eb636cd6291040fd708eeb11856cf5490991354aeb5",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 04:08:52",
+  "time": "2026-11-22 13:59:01",
   "values": {}
  }
 }

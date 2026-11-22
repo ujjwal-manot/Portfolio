@@ -1,0 +1,1 @@
+loop gain_db 59.9131 fc_hz 780899 pm_deg 52.0924

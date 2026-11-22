@@ -1,0 +1,20 @@
+OpenSTA 3.1.0 80fbbb2945 Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Annotated 473 pin activities.
+vcd           473
+unannotated     0
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             2.38e-05   4.39e-07   1.99e-08   2.43e-05  94.8%
+Combinational          6.05e-07   6.51e-07   1.07e-08   1.27e-06   5.0%
+Clock                  5.03e-08   1.85e-08   8.19e-11   6.89e-08   0.3%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  2.44e-05   1.11e-06   3.07e-08   2.56e-05 100.0%
+                          95.5%       4.3%       0.1%

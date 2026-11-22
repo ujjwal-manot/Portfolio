@@ -1,127 +1,127 @@
-EQY  4:35:45 [../build/equiv] read_gold: starting process "yosys -ql ../build/equiv/gold.log ../build/equiv/gold.ys"
-EQY  4:35:45 [../build/equiv] read_gold: finished (returncode=0)
-EQY  4:35:45 [../build/equiv] read_gate: starting process "yosys -ql ../build/equiv/gate.log ../build/equiv/gate.ys"
-EQY  4:35:47 [../build/equiv] read_gate: finished (returncode=0)
-EQY  4:35:47 [../build/equiv] combine: starting process "yosys -ql ../build/equiv/combine.log ../build/equiv/combine.ys"
-EQY  4:35:47 [../build/equiv] combine: finished (returncode=0)
-EQY  4:35:48 [../build/equiv] partition: starting process "cd ../build/equiv; yosys -ql partition.log partition.ys"
-EQY  4:35:49 [../build/equiv] partition: finished (returncode=0)
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tlast contains 18 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.7 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.6 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.5 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.4 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.3 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.2 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.1 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.0 contains 19 unused gate inputs.
-EQY  4:35:49 [../build/equiv] run: starting process "make -C ../build/equiv -f strategies.mk"
-EQY  4:35:49 [../build/equiv] run: make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
-EQY  4:35:49 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.0'..
-EQY  4:35:50 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.0' using strategy 'sat'
-EQY  4:35:50 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.1'..
-EQY  4:35:50 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.1' using strategy 'sat'
-EQY  4:35:50 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.10'..
-EQY  4:35:50 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.10' using strategy 'sat'
-EQY  4:35:50 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.11'..
-EQY  4:35:51 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.11' using strategy 'sat'
-EQY  4:35:51 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.12'..
-EQY  4:35:51 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.12' using strategy 'sat'
-EQY  4:35:51 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.13'..
-EQY  4:35:51 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.13' using strategy 'sat'
-EQY  4:35:51 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.14'..
-EQY  4:35:52 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.14' using strategy 'sat'
-EQY  4:35:52 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.15'..
-EQY  4:35:52 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.15' using strategy 'sat'
-EQY  4:35:52 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.2'..
-EQY  4:35:52 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.2' using strategy 'sat'
-EQY  4:35:52 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.3'..
-EQY  4:35:52 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.3' using strategy 'sat'
-EQY  4:35:52 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.4'..
-EQY  4:35:53 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.4' using strategy 'sat'
-EQY  4:35:53 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.5'..
-EQY  4:35:53 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.5' using strategy 'sat'
-EQY  4:35:53 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.6'..
-EQY  4:35:53 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.6' using strategy 'sat'
-EQY  4:35:53 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.7'..
-EQY  4:35:53 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.7' using strategy 'sat'
-EQY  4:35:53 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.8'..
-EQY  4:35:53 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.8' using strategy 'sat'
-EQY  4:35:53 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.9'..
-EQY  4:35:53 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.9' using strategy 'sat'
-EQY  4:35:54 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.r_bin'..
-EQY  4:35:54 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.r_bin' using strategy 'sat'
-EQY  4:35:54 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.w_bin'..
-EQY  4:35:54 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.w_bin' using strategy 'sat'
-EQY  4:35:54 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_reset.meta'..
-EQY  4:35:54 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_reset.meta' using strategy 'sat'
-EQY  4:35:54 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.0'..
-EQY  4:35:55 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.0' using strategy 'sat'
-EQY  4:35:55 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.1'..
-EQY  4:35:55 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.1' using strategy 'sat'
-EQY  4:35:55 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.2'..
-EQY  4:35:55 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.2' using strategy 'sat'
-EQY  4:35:55 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.3'..
-EQY  4:35:55 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.3' using strategy 'sat'
-EQY  4:35:55 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.4'..
-EQY  4:35:56 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.4' using strategy 'sat'
-EQY  4:35:56 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.5'..
-EQY  4:35:56 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.5' using strategy 'sat'
-EQY  4:35:56 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.6'..
-EQY  4:35:56 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.6' using strategy 'sat'
-EQY  4:35:56 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.7'..
-EQY  4:35:57 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.7' using strategy 'sat'
-EQY  4:35:57 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tlast'..
-EQY  4:35:57 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tlast' using strategy 'sat'
-EQY  4:35:57 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tvalid'..
-EQY  4:35:57 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tvalid' using strategy 'sat'
-EQY  4:35:57 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.out.skid'..
-EQY  4:35:58 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.out.skid' using strategy 'sat'
-EQY  4:35:58 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.out.skid_valid'..
-EQY  4:35:58 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.out.skid_valid' using strategy 'sat'
-EQY  4:35:58 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.s_reset.meta'..
-EQY  4:35:58 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.s_reset.meta' using strategy 'sat'
-EQY  4:35:58 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.s_tready'..
-EQY  4:35:59 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.s_tready' using strategy 'sat'
-EQY  4:35:59 [../build/equiv] run: make -f strategies.mk summary
-EQY  4:35:59 [../build/equiv] run: make[1]: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
-EQY  4:35:59 [../build/equiv] run: make[1]: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
-EQY  4:35:59 [../build/equiv] run: make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
-EQY  4:35:59 [../build/equiv] run: finished (returncode=0)
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.s_tready
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.s_reset.meta
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.out.skid_valid
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.out.skid
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tvalid
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tlast
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.7
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.6
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.5
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.4
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.3
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.2
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.1
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.0
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_reset.meta
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.9
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.8
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.7
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.6
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.5
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.4
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.3
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.2
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.1
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.15
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.14
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.13
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.12
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.11
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.10
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.0
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.r_bin
-EQY  4:35:59 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.w_bin
-EQY  4:35:59 [../build/equiv] Successfully proved designs equivalent
-EQY  4:35:59 [../build/equiv] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:14 (14)
-EQY  4:35:59 [../build/equiv] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:04 (4)
-EQY  4:35:59 [../build/equiv] DONE (PASS, rc=0)
+EQY 14:09:21 [../build/equiv] read_gold: starting process "yosys -ql ../build/equiv/gold.log ../build/equiv/gold.ys"
+EQY 14:09:21 [../build/equiv] read_gate: starting process "yosys -ql ../build/equiv/gate.log ../build/equiv/gate.ys"
+EQY 14:09:21 [../build/equiv] read_gold: finished (returncode=0)
+EQY 14:09:21 [../build/equiv] read_gate: finished (returncode=0)
+EQY 14:09:21 [../build/equiv] combine: starting process "yosys -ql ../build/equiv/combine.log ../build/equiv/combine.ys"
+EQY 14:09:22 [../build/equiv] combine: finished (returncode=0)
+EQY 14:09:22 [../build/equiv] partition: starting process "cd ../build/equiv; yosys -ql partition.log partition.ys"
+EQY 14:09:23 [../build/equiv] partition: finished (returncode=0)
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tlast contains 18 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.7 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.6 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.5 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.4 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.3 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.2 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.1 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] Warning: Partition fifo_bridge.m_tdata.0 contains 19 unused gate inputs.
+EQY 14:09:23 [../build/equiv] run: starting process "make -C ../build/equiv -f strategies.mk"
+EQY 14:09:23 [../build/equiv] run: make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.0'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.0' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.1'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.1' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.10'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.10' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.11'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.11' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.12'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.12' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.13'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.13' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.14'..
+EQY 14:09:23 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.14' using strategy 'sat'
+EQY 14:09:23 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.15'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.15' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.2'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.2' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.3'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.3' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.4'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.4' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.5'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.5' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.6'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.6' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.7'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.7' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.8'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.8' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.mem.9'..
+EQY 14:09:24 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.mem.9' using strategy 'sat'
+EQY 14:09:24 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.r_bin'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.r_bin' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.fifo.w_bin'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.fifo.w_bin' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_reset.meta'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_reset.meta' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.0'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.0' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.1'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.1' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.2'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.2' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.3'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.3' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.4'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.4' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.5'..
+EQY 14:09:25 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.5' using strategy 'sat'
+EQY 14:09:25 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.6'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.6' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tdata.7'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tdata.7' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tlast'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tlast' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.m_tvalid'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.m_tvalid' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.out.skid'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.out.skid' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.out.skid_valid'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.out.skid_valid' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.s_reset.meta'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.s_reset.meta' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: Running strategy 'sat' on 'fifo_bridge.s_tready'..
+EQY 14:09:26 [../build/equiv] run: Proved equivalence of partition 'fifo_bridge.s_tready' using strategy 'sat'
+EQY 14:09:26 [../build/equiv] run: make -f strategies.mk summary
+EQY 14:09:26 [../build/equiv] run: make[1]: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
+EQY 14:09:26 [../build/equiv] run: make[1]: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
+EQY 14:09:26 [../build/equiv] run: make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/equiv'
+EQY 14:09:26 [../build/equiv] run: finished (returncode=0)
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.s_tready
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.s_reset.meta
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.out.skid_valid
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.out.skid
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tvalid
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tlast
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.7
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.6
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.5
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.4
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.3
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.2
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.1
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_tdata.0
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.m_reset.meta
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.9
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.8
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.7
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.6
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.5
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.4
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.3
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.2
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.1
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.15
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.14
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.13
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.12
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.11
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.10
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.mem.0
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.r_bin
+EQY 14:09:26 [../build/equiv] Successfully proved equivalence of partition fifo_bridge.fifo.w_bin
+EQY 14:09:26 [../build/equiv] Successfully proved designs equivalent
+EQY 14:09:26 [../build/equiv] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:05 (5)
+EQY 14:09:26 [../build/equiv] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:04 (4)
+EQY 14:09:26 [../build/equiv] DONE (PASS, rc=0)

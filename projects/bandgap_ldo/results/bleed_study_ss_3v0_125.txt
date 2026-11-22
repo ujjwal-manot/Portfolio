@@ -1,0 +1,9 @@
+ldo_dc vout_v 1.19961 vout_2ma_v 1.19862 load_reg_v 0.000993159 line_v_per_v 0.00730789 iq_a 0.000161869
+psrr psrr_1k_db 44.83 psrr_1m_db 35.8083
+step_0p5m istep_a 0.0005 before_v 1.19961 dip_v 1.15535 high_v 1.19914 peak_v 1.23979
+step_2m istep_a 0.002 before_v 1.19961 dip_v 1.10647 high_v 1.19862 peak_v 1.28512
+loop_0 gain_db 45.1404 fc_hz 2.81482E+06 pm_deg 45.4065
+loop_1m gain_db 45.006 fc_hz 3.75764E+06 pm_deg 73.8123
+loop_250u gain_db 45.2462 fc_hz 3.53453E+06 pm_deg 63.439
+loop_2m gain_db 44.517 fc_hz 3.79801E+06 pm_deg 77.2418
+ldo_startup ramp_s 9.999E-09 final_v 1.1993 top_v 1.1993 settle_s 6.50931E-05

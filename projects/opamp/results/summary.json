@@ -102,17 +102,21 @@
   "result": "pass",
   "sources": {
    "helpers/analog_results.py": "b3ebb65d36c36d87bd83f68f0e735724c8c9971ca3472f301edbcd8cd2659972",
-   "helpers/opamp_sizing.py": "8371f8510c142ed3260f01117adbd98a134a5a383afe9bfb58e066c40e8cffe2",
+   "helpers/lvs_names.py": "6798012155511188e1d5702845254527ac4fdd7caec73795694df751937ab606",
+   "helpers/opamp_sizing.py": "266b7c284a6914cdb0a42fecc7c283aa09c300097e2102956cdcaa31393840a9",
+   "helpers/row_layout.py": "126ea6624cd74458c4f38b01a5b141168e1d025c805b1f0c8c38a50d6287422b",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
    "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
    "projects/adc/design/cap_dac.cir": "c63e2113149d094e67edab26bd0c20e155f61c54983f19732b715172b802a7a0",
    "projects/adc/design/cap_dac_sizes.inc": "83d6bf6f191aaa64439ddf9da40e9023d0a4ee5790ddd64fa03c3a2869596749",
-   "projects/opamp/Makefile": "84e694ff10bb53ba0f2e810c16ea80eaa05228b5dde2fcac433abcfec6c04e2e",
+   "projects/opamp/Makefile": "e02d603f086d9176b45c284125dd5f63e3710950a02261bfe12d8bb38df3d7aa",
    "projects/opamp/broken/cascodes_removed.patch": "8bb4d9ebbb79531b693891cdd9bd3e06f08b924978422da63e92484fd684238d",
    "projects/opamp/broken/no_nulling_resistor_small_cc.patch": "c1feba7351b8b6d4a3ee9210fa4e095fcd14d9461433a54acd27ae2e8c1fa431",
    "projects/opamp/broken/tail_current_cut_to_a_third.patch": "4860356ac93d8305faa99dfe00cc55e9d38d56fc4c48dd91d81eff108b05aea8",
    "projects/opamp/design/opamp.cir": "801a2ddb23a3645caa9d5a65e5cecb4ea4b334a9f758553e9d5294a5e7ec7f41",
    "projects/opamp/design/opamp_indirect.cir": "5a22e7097eee2a9a70c106b0ff763a47bd3834f1039debebe55c0d975c6be081",
+   "projects/opamp/layout/extract.tcl": "e1ff01e6ea2e1cbf11ec56b538abf769b68d10dc272d1f7d679d27190b894689",
+   "projects/opamp/layout/opamp.py": "e39206d689169b58d3358ceee19e5ec5968b921dc13b5f91f8359506a4ce1d02",
    "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
    "projects/opamp/tests/load.cir": "a17940ed65c541aaf534b308d59ed1c1811d868a37d6d713a69f3541b01afdaa",
    "projects/opamp/tests/loop.cir": "fa07166fdb6627263aef44e21abae07a2491ea15c46843460071127c7edbffb5",
@@ -122,7 +126,7 @@
    "projects/opamp/tests/swing.cir": "9e0535aa66e3163c4084a21b35aa1f70fa19004a5aa70f398fb713ca1c11a586",
    "projects/opamp/uses.txt": "04f496858de8aaa7a1dfe942b1ea85f8295686da30c2dc316a20d4b37326ac1d"
   },
-  "time": "2026-11-22 07:43:11",
+  "time": "2026-11-22 17:46:05",
   "values": {}
  },
  "check_model": {
@@ -133,17 +137,21 @@
   "result": "pass",
   "sources": {
    "helpers/analog_results.py": "b3ebb65d36c36d87bd83f68f0e735724c8c9971ca3472f301edbcd8cd2659972",
-   "helpers/opamp_sizing.py": "8371f8510c142ed3260f01117adbd98a134a5a383afe9bfb58e066c40e8cffe2",
+   "helpers/lvs_names.py": "6798012155511188e1d5702845254527ac4fdd7caec73795694df751937ab606",
+   "helpers/opamp_sizing.py": "266b7c284a6914cdb0a42fecc7c283aa09c300097e2102956cdcaa31393840a9",
+   "helpers/row_layout.py": "126ea6624cd74458c4f38b01a5b141168e1d025c805b1f0c8c38a50d6287422b",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
    "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
    "projects/adc/design/cap_dac.cir": "c63e2113149d094e67edab26bd0c20e155f61c54983f19732b715172b802a7a0",
    "projects/adc/design/cap_dac_sizes.inc": "83d6bf6f191aaa64439ddf9da40e9023d0a4ee5790ddd64fa03c3a2869596749",
-   "projects/opamp/Makefile": "84e694ff10bb53ba0f2e810c16ea80eaa05228b5dde2fcac433abcfec6c04e2e",
+   "projects/opamp/Makefile": "e02d603f086d9176b45c284125dd5f63e3710950a02261bfe12d8bb38df3d7aa",
    "projects/opamp/broken/cascodes_removed.patch": "8bb4d9ebbb79531b693891cdd9bd3e06f08b924978422da63e92484fd684238d",
    "projects/opamp/broken/no_nulling_resistor_small_cc.patch": "c1feba7351b8b6d4a3ee9210fa4e095fcd14d9461433a54acd27ae2e8c1fa431",
    "projects/opamp/broken/tail_current_cut_to_a_third.patch": "4860356ac93d8305faa99dfe00cc55e9d38d56fc4c48dd91d81eff108b05aea8",
    "projects/opamp/design/opamp.cir": "801a2ddb23a3645caa9d5a65e5cecb4ea4b334a9f758553e9d5294a5e7ec7f41",
    "projects/opamp/design/opamp_indirect.cir": "5a22e7097eee2a9a70c106b0ff763a47bd3834f1039debebe55c0d975c6be081",
+   "projects/opamp/layout/extract.tcl": "e1ff01e6ea2e1cbf11ec56b538abf769b68d10dc272d1f7d679d27190b894689",
+   "projects/opamp/layout/opamp.py": "e39206d689169b58d3358ceee19e5ec5968b921dc13b5f91f8359506a4ce1d02",
    "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
    "projects/opamp/tests/load.cir": "a17940ed65c541aaf534b308d59ed1c1811d868a37d6d713a69f3541b01afdaa",
    "projects/opamp/tests/loop.cir": "fa07166fdb6627263aef44e21abae07a2491ea15c46843460071127c7edbffb5",
@@ -153,7 +161,7 @@
    "projects/opamp/tests/swing.cir": "9e0535aa66e3163c4084a21b35aa1f70fa19004a5aa70f398fb713ca1c11a586",
    "projects/opamp/uses.txt": "04f496858de8aaa7a1dfe942b1ea85f8295686da30c2dc316a20d4b37326ac1d"
   },
-  "time": "2026-11-22 02:44:04",
+  "time": "2026-11-22 17:46:14",
   "values": {}
  },
  "corners": {
@@ -513,22 +521,26 @@
  },
  "sizing": {
   "logs": {
-   "sizing.log": "0809a58ea97821f32933148f190e13af7d16bd92ef019e0fe3a29e9d1b2263cb"
+   "sizing.log": "0d22379eb12a04a25a9251a1f3fbab647089fa2ade25511bacc4a421dd69b294"
   },
   "result": "pass",
   "sources": {
    "helpers/analog_results.py": "b3ebb65d36c36d87bd83f68f0e735724c8c9971ca3472f301edbcd8cd2659972",
-   "helpers/opamp_sizing.py": "8371f8510c142ed3260f01117adbd98a134a5a383afe9bfb58e066c40e8cffe2",
+   "helpers/lvs_names.py": "6798012155511188e1d5702845254527ac4fdd7caec73795694df751937ab606",
+   "helpers/opamp_sizing.py": "266b7c284a6914cdb0a42fecc7c283aa09c300097e2102956cdcaa31393840a9",
+   "helpers/row_layout.py": "126ea6624cd74458c4f38b01a5b141168e1d025c805b1f0c8c38a50d6287422b",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
    "helpers/transistor_charts.py": "39a148ff630b9f31b7f8e3b258db7dc6c4a292ce3a07bdc67eedb529835fd1c6",
    "projects/adc/design/cap_dac.cir": "c63e2113149d094e67edab26bd0c20e155f61c54983f19732b715172b802a7a0",
    "projects/adc/design/cap_dac_sizes.inc": "83d6bf6f191aaa64439ddf9da40e9023d0a4ee5790ddd64fa03c3a2869596749",
-   "projects/opamp/Makefile": "84e694ff10bb53ba0f2e810c16ea80eaa05228b5dde2fcac433abcfec6c04e2e",
+   "projects/opamp/Makefile": "e02d603f086d9176b45c284125dd5f63e3710950a02261bfe12d8bb38df3d7aa",
    "projects/opamp/broken/cascodes_removed.patch": "8bb4d9ebbb79531b693891cdd9bd3e06f08b924978422da63e92484fd684238d",
    "projects/opamp/broken/no_nulling_resistor_small_cc.patch": "c1feba7351b8b6d4a3ee9210fa4e095fcd14d9461433a54acd27ae2e8c1fa431",
    "projects/opamp/broken/tail_current_cut_to_a_third.patch": "4860356ac93d8305faa99dfe00cc55e9d38d56fc4c48dd91d81eff108b05aea8",
    "projects/opamp/design/opamp.cir": "801a2ddb23a3645caa9d5a65e5cecb4ea4b334a9f758553e9d5294a5e7ec7f41",
    "projects/opamp/design/opamp_indirect.cir": "5a22e7097eee2a9a70c106b0ff763a47bd3834f1039debebe55c0d975c6be081",
+   "projects/opamp/layout/extract.tcl": "e1ff01e6ea2e1cbf11ec56b538abf769b68d10dc272d1f7d679d27190b894689",
+   "projects/opamp/layout/opamp.py": "e39206d689169b58d3358ceee19e5ec5968b921dc13b5f91f8359506a4ce1d02",
    "projects/opamp/tests/charts.cir": "6b9bddd9259bca8ce74b182d43d7f23ca7f7fcc5e9f062a73dcdcc893cf329a7",
    "projects/opamp/tests/load.cir": "a17940ed65c541aaf534b308d59ed1c1811d868a37d6d713a69f3541b01afdaa",
    "projects/opamp/tests/loop.cir": "fa07166fdb6627263aef44e21abae07a2491ea15c46843460071127c7edbffb5",
@@ -538,7 +550,7 @@
    "projects/opamp/tests/swing.cir": "9e0535aa66e3163c4084a21b35aa1f70fa19004a5aa70f398fb713ca1c11a586",
    "projects/opamp/uses.txt": "04f496858de8aaa7a1dfe942b1ea85f8295686da30c2dc316a20d4b37326ac1d"
   },
-  "time": "2026-11-22 07:43:21",
+  "time": "2026-11-22 17:46:10",
   "values": {}
  }
 }

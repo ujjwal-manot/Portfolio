@@ -1,0 +1,4 @@
+gain_db  measured 59.9131 expected 59.9136 ok
+fc_hz    measured 780899 expected 780504 ok
+pm_deg   measured 52.0924 expected 52.1012 ok
+loop-gain measurement matches the arithmetic

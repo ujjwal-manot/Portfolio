@@ -1,101 +1,101 @@
-SBY  4:08:36 [../build/formal_bridge_reach] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_bridge_reach'.
-SBY  4:08:36 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/sync2.sv'.
-SBY  4:08:36 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/reset_sync.sv'.
-SBY  4:08:36 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/async_fifo.sv'.
-SBY  4:08:36 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/skid_buffer.sv'.
-SBY  4:08:36 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/fifo_bridge.sv'.
-SBY  4:08:36 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/fifo_rules.sv'.
-SBY  4:08:36 [../build/formal_bridge_reach] engine_0: smtbmc yices
-SBY  4:08:36 [../build/formal_bridge_reach] base: starting process "cd ../build/formal_bridge_reach/src; yosys -ql ../model/design.log ../model/design.ys"
-SBY  4:08:36 [../build/formal_bridge_reach] base: finished (returncode=0)
-SBY  4:08:36 [../build/formal_bridge_reach] prep: starting process "cd ../build/formal_bridge_reach/model; yosys -ql design_prep.log design_prep.ys"
-SBY  4:08:36 [../build/formal_bridge_reach] prep: finished (returncode=0)
-SBY  4:08:36 [../build/formal_bridge_reach] smt2: starting process "cd ../build/formal_bridge_reach/model; yosys -ql design_smt2.log design_smt2.ys"
-SBY  4:08:36 [../build/formal_bridge_reach] smt2: finished (returncode=0)
-SBY  4:08:36 [../build/formal_bridge_reach] engine_0: starting process "cd ../build/formal_bridge_reach; yosys-smtbmc -s yices --presat --unroll -c --noprogress -t 40  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Solver: yices
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 0..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 1..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 2..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 3..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 4..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 5..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 7..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 8..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 9..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Reached cover statement in step 10 at bridge_rules.dut.fifo.w_to_r: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_128)
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 11..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 12..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 14..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 15..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 16..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Reached cover statement in step 17 at bridge_rules.dut.fifo.r_to_w: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_128)
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 18..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 19..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 20..
-SBY  4:08:37 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 21..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 22..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 23..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 24..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 25..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Reached cover statement in step 25 at bridge_rules: fifo_rules.sv:85.5-85.31 (_witness_.check_cover_fifo_rules_sv_85_30)
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to VCD file: engine_0/trace2.vcd
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to Verilog testbench: engine_0/trace2_tb.v
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to constraints file: engine_0/trace2.smtc
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to Yosys witness file: engine_0/trace2.yw
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 25..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 26..
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Reached cover statement in step 26 at bridge_rules: fifo_rules.sv:69.7-69.22 (_witness_.check_cover_fifo_rules_sv_69_12)
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to VCD file: engine_0/trace3.vcd
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to Verilog testbench: engine_0/trace3_tb.v
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to constraints file: engine_0/trace3.smtc
-SBY  4:08:38 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to Yosys witness file: engine_0/trace3.yw
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 26..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 27..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 28..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 29..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 30..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 31..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 32..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 33..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 34..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 35..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 36..
-SBY  4:08:39 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Checking cover reachability in step 37..
-SBY  4:08:40 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Checking cover reachability in step 38..
-SBY  4:08:40 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Reached cover statement in step 38 at bridge_rules: fifo_rules.sv:77.9-77.37 (_witness_.check_cover_fifo_rules_sv_77_21)
-SBY  4:08:40 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Writing trace to VCD file: engine_0/trace4.vcd
-SBY  4:08:40 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Writing trace to Verilog testbench: engine_0/trace4_tb.v
-SBY  4:08:40 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Writing trace to constraints file: engine_0/trace4.smtc
-SBY  4:08:40 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Writing trace to Yosys witness file: engine_0/trace4.yw
-SBY  4:08:41 [../build/formal_bridge_reach] engine_0: ##   0:00:03  Status: passed
-SBY  4:08:41 [../build/formal_bridge_reach] engine_0: finished (returncode=0)
-SBY  4:08:41 [../build/formal_bridge_reach] engine_0: Status returned by engine: pass
-SBY  4:08:41 [../build/formal_bridge_reach] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:04 (4)
-SBY  4:08:41 [../build/formal_bridge_reach] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)
-SBY  4:08:41 [../build/formal_bridge_reach] summary: engine_0 (smtbmc yices) returned pass
-SBY  4:08:41 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace0.vcd
-SBY  4:08:41 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules.dut.fifo.w_to_r._witness_.check_cover_sync2_sv_36_128 at sync2.sv:36.26-36.60 step 10
-SBY  4:08:41 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace1.vcd
-SBY  4:08:41 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules.dut.fifo.r_to_w._witness_.check_cover_sync2_sv_36_128 at sync2.sv:36.26-36.60 step 17
-SBY  4:08:41 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace2.vcd
-SBY  4:08:41 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules._witness_.check_cover_fifo_rules_sv_85_30 at fifo_rules.sv:85.5-85.31 step 25
-SBY  4:08:41 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace3.vcd
-SBY  4:08:41 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules._witness_.check_cover_fifo_rules_sv_69_12 at fifo_rules.sv:69.7-69.22 step 26
-SBY  4:08:41 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace4.vcd
-SBY  4:08:41 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules._witness_.check_cover_fifo_rules_sv_77_21 at fifo_rules.sv:77.9-77.37 step 38
-SBY  4:08:41 [../build/formal_bridge_reach] DONE (PASS, rc=0)
+SBY 13:58:53 [../build/formal_bridge_reach] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/formal_bridge_reach'.
+SBY 13:58:53 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/sync2.sv'.
+SBY 13:58:53 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/reset_sync.sv'.
+SBY 13:58:53 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/async_fifo.sv'.
+SBY 13:58:53 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/skid_buffer.sv'.
+SBY 13:58:53 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/fifo_bridge.sv'.
+SBY 13:58:53 [../build/formal_bridge_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/formal/../build/formal_bridge_reach/src/fifo_rules.sv'.
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: smtbmc yices
+SBY 13:58:53 [../build/formal_bridge_reach] base: starting process "cd ../build/formal_bridge_reach/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 13:58:53 [../build/formal_bridge_reach] base: finished (returncode=0)
+SBY 13:58:53 [../build/formal_bridge_reach] prep: starting process "cd ../build/formal_bridge_reach/model; yosys -ql design_prep.log design_prep.ys"
+SBY 13:58:53 [../build/formal_bridge_reach] prep: finished (returncode=0)
+SBY 13:58:53 [../build/formal_bridge_reach] smt2: starting process "cd ../build/formal_bridge_reach/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 13:58:53 [../build/formal_bridge_reach] smt2: finished (returncode=0)
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: starting process "cd ../build/formal_bridge_reach; yosys-smtbmc -s yices --presat --unroll -c --noprogress -t 40  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Solver: yices
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 9..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Reached cover statement in step 10 at bridge_rules.dut.fifo.w_to_r: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_128)
+SBY 13:58:53 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 11..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 12..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 14..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 15..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 16..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Reached cover statement in step 17 at bridge_rules.dut.fifo.r_to_w: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_128)
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 18..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 19..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 20..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 21..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 22..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 23..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 24..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 25..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Reached cover statement in step 25 at bridge_rules: fifo_rules.sv:85.5-85.31 (_witness_.check_cover_fifo_rules_sv_85_30)
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 25..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 26..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Reached cover statement in step 26 at bridge_rules: fifo_rules.sv:69.7-69.22 (_witness_.check_cover_fifo_rules_sv_69_12)
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 26..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:00  Checking cover reachability in step 27..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 28..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 29..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 30..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 31..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 32..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 33..
+SBY 13:58:54 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 34..
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 35..
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 36..
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 37..
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Checking cover reachability in step 38..
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Reached cover statement in step 38 at bridge_rules: fifo_rules.sv:77.9-77.37 (_witness_.check_cover_fifo_rules_sv_77_21)
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to VCD file: engine_0/trace4.vcd
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to Verilog testbench: engine_0/trace4_tb.v
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:01  Writing trace to constraints file: engine_0/trace4.smtc
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Writing trace to Yosys witness file: engine_0/trace4.yw
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: ##   0:00:02  Status: passed
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: finished (returncode=0)
+SBY 13:58:55 [../build/formal_bridge_reach] engine_0: Status returned by engine: pass
+SBY 13:58:55 [../build/formal_bridge_reach] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:02 (2)
+SBY 13:58:55 [../build/formal_bridge_reach] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:02 (2)
+SBY 13:58:55 [../build/formal_bridge_reach] summary: engine_0 (smtbmc yices) returned pass
+SBY 13:58:55 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace0.vcd
+SBY 13:58:55 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules.dut.fifo.w_to_r._witness_.check_cover_sync2_sv_36_128 at sync2.sv:36.26-36.60 step 10
+SBY 13:58:55 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace1.vcd
+SBY 13:58:55 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules.dut.fifo.r_to_w._witness_.check_cover_sync2_sv_36_128 at sync2.sv:36.26-36.60 step 17
+SBY 13:58:55 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace2.vcd
+SBY 13:58:55 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules._witness_.check_cover_fifo_rules_sv_85_30 at fifo_rules.sv:85.5-85.31 step 25
+SBY 13:58:55 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace3.vcd
+SBY 13:58:55 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules._witness_.check_cover_fifo_rules_sv_69_12 at fifo_rules.sv:69.7-69.22 step 26
+SBY 13:58:55 [../build/formal_bridge_reach] summary: cover trace: ../build/formal_bridge_reach/engine_0/trace4.vcd
+SBY 13:58:55 [../build/formal_bridge_reach] summary:   reached cover statement bridge_rules._witness_.check_cover_fifo_rules_sv_77_21 at fifo_rules.sv:77.9-77.37 step 38
+SBY 13:58:55 [../build/formal_bridge_reach] DONE (PASS, rc=0)

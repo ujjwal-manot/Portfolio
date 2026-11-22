@@ -1,0 +1,1 @@
+startup ramp_s 0.0009999 final_v 1.20632 settle_s -0.00045563

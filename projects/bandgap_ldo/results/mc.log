@@ -1,0 +1,4 @@
+200 runs: tempco yield 100.0% untrimmed, 99.0% trimmed (worst 31.5 ppm/C)
+vref mean 1.2062 V sigma 3.9 mV untrimmed, mean 1.2064 V sigma 0.922 mV trimmed
+trim codes used [5, 6, 7, 8, 9, 10, 11, 12, 13]
+every check passes

@@ -1,0 +1,28 @@
+* Extracted by KLayout with SG13G2 LVS runset on : 22/11/2026 14:17
+
+.SUBCKT ldo fb vdd vg vout vref vss
+M$1 vss \$2 \$2 vss sg13_hv_nmos L=4u W=4u AS=1.36p AD=1.36p PS=8.68u PD=8.68u
++ rfmode=0
+M$2 vss \$47 vout vss sg13_hv_nmos L=4u W=88u AS=17.32p AD=17.32p PS=100.66u
++ PD=100.66u rfmode=0
+M$24 vss \$47 \$3 vss sg13_hv_nmos L=4u W=16u AS=3.64p AD=3.64p PS=21.82u
++ PD=21.82u rfmode=0
+M$28 \$3 \$46 \$4 vss sg13_hv_nmos L=2u W=20u AS=5.3p AD=5.3p PS=31.06u
++ PD=31.06u rfmode=0
+M$30 \$3 fb \$45 vss sg13_hv_nmos L=2u W=20u AS=5.3p AD=5.3p PS=31.06u
++ PD=31.06u rfmode=0
+M$32 vout \$45 vdd vss sg13_hv_nmos L=0.45u W=600u AS=115.5p AD=115.5p
++ PS=633.1u PD=633.1u rfmode=0
+M$92 vdd vg \$2 vdd sg13_hv_pmos L=8u W=8u AS=2.72p AD=2.72p PS=16.68u
++ PD=16.68u rfmode=0
+M$93 vdd \$4 \$4 vdd sg13_hv_pmos L=4u W=8u AS=2.72p AD=2.72p PS=16.68u
++ PD=16.68u rfmode=0
+M$94 vdd \$4 \$45 vdd sg13_hv_pmos L=4u W=8u AS=2.72p AD=2.72p PS=16.68u
++ PD=16.68u rfmode=0
+R$103 vref \$46 vss rhigh w=0.5u l=368u ps=0u b=0 m=1
+R$109 \$2 \$47 vss rhigh w=0.5u l=184u ps=0u b=0 m=1
+C$110 vout vss cap_cmim w=64.5u l=64.5u A=4160.25p P=258u m=16
+C$111 \$46 vss cap_cmim w=41u l=41u A=1681p P=164u m=4
+C$116 \$45 vss cap_cmim w=44u l=44u A=1936p P=176u m=1
+C$127 \$47 vss cap_cmim w=52u l=52u A=2704p P=208u m=1
+.ENDS ldo
