@@ -178,7 +178,7 @@
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284412
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319192
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -390,20 +390,20 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_si
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_sim.sdf:14701: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_sim.sdf:147259350.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
 259350.00ns INFO     cocotb.regression                  running test_gates.clock_to_output_matches_sta (2/2)
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[0] fall: measured 0.2441 to 0.2441 ns over 17 edges, STA 0.2441 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[0] rise: measured 0.2482 to 0.2482 ns over 18 edges, STA 0.2482 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[1] fall: measured 0.2441 to 0.2441 ns over 13 edges, STA 0.2441 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[1] rise: measured 0.2482 to 0.2482 ns over 13 edges, STA 0.2482 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[2] fall: measured 0.2441 to 0.2441 ns over 15 edges, STA 0.2441 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[2] rise: measured 0.2482 to 0.2482 ns over 15 edges, STA 0.2482 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[3] fall: measured 0.2441 to 0.2441 ns over 16 edges, STA 0.2441 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[3] rise: measured 0.2482 to 0.2482 ns over 15 edges, STA 0.2482 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[4] fall: measured 0.2441 to 0.2441 ns over 14 edges, STA 0.2441 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[4] rise: measured 0.2482 to 0.2482 ns over 15 edges, STA 0.2482 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[5] fall: measured 0.2441 to 0.2441 ns over 19 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[0] fall: measured 0.2441 to 0.2441 ns over 15 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[0] rise: measured 0.2482 to 0.2482 ns over 14 edges, STA 0.2482 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[1] fall: measured 0.2441 to 0.2441 ns over 11 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[1] rise: measured 0.2482 to 0.2482 ns over 11 edges, STA 0.2482 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[2] fall: measured 0.2441 to 0.2441 ns over 17 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[2] rise: measured 0.2482 to 0.2482 ns over 18 edges, STA 0.2482 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[3] fall: measured 0.2441 to 0.2441 ns over 14 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[3] rise: measured 0.2482 to 0.2482 ns over 14 edges, STA 0.2482 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[4] fall: measured 0.2441 to 0.2441 ns over 13 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[4] rise: measured 0.2482 to 0.2482 ns over 13 edges, STA 0.2482 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[5] fall: measured 0.2441 to 0.2441 ns over 17 edges, STA 0.2441 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[5] rise: measured 0.2482 to 0.2482 ns over 18 edges, STA 0.2482 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[6] fall: measured 0.2441 to 0.2441 ns over 16 edges, STA 0.2441 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[6] rise: measured 0.2482 to 0.2482 ns over 15 edges, STA 0.2482 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[6] fall: measured 0.2441 to 0.2441 ns over 19 edges, STA 0.2441 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[6] rise: measured 0.2482 to 0.2482 ns over 19 edges, STA 0.2482 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[7] fall: measured 0.2441 to 0.2441 ns over 13 edges, STA 0.2441 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tdata[7] rise: measured 0.2482 to 0.2482 ns over 13 edges, STA 0.2482 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped slow clock to output m_tlast fall: measured 0.2441 to 0.2441 ns over 18 edges, STA 0.2441 ns
@@ -414,10 +414,10 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_si
 265600.00ns INFO     cocotb.regression                  ************************************************************************************************
                                                         ** TEST                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ************************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           2.68      96949.51  **
-                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.10      60917.29  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           2.27     114468.92  **
+                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.05     116949.27  **
                                                         ************************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           2.78      95494.40  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           2.32     114419.25  **
                                                         ************************************************************************************************
 43: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_slow_sim.sdf:14785: TIMINGCHECK not supported.
@@ -603,7 +603,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284418
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319198
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -817,22 +817,22 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_typ_sim
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_typ_sim.sdf:14785: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/b259350.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
 259350.00ns INFO     cocotb.regression                  running test_gates.clock_to_output_matches_sta (2/2)
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[0] fall: measured 0.1545 to 0.1545 ns over 16 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[0] fall: measured 0.1545 to 0.1545 ns over 15 edges, STA 0.1545 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[0] rise: measured 0.1592 to 0.1592 ns over 16 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[1] fall: measured 0.1545 to 0.1545 ns over 16 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[1] rise: measured 0.1592 to 0.1592 ns over 16 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[2] fall: measured 0.1545 to 0.1545 ns over 13 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[2] rise: measured 0.1592 to 0.1592 ns over 12 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[3] fall: measured 0.1545 to 0.1545 ns over 15 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[3] rise: measured 0.1592 to 0.1592 ns over 15 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[4] fall: measured 0.1545 to 0.1545 ns over 12 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[4] rise: measured 0.1592 to 0.1592 ns over 13 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[5] fall: measured 0.1545 to 0.1545 ns over 16 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[5] rise: measured 0.1592 to 0.1592 ns over 16 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[6] fall: measured 0.1545 to 0.1545 ns over 17 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[6] rise: measured 0.1592 to 0.1592 ns over 16 edges, STA 0.1592 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[7] fall: measured 0.1545 to 0.1545 ns over 16 edges, STA 0.1545 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[7] rise: measured 0.1592 to 0.1592 ns over 16 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[1] fall: measured 0.1545 to 0.1545 ns over 14 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[1] rise: measured 0.1592 to 0.1592 ns over 14 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[2] fall: measured 0.1545 to 0.1545 ns over 17 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[2] rise: measured 0.1592 to 0.1592 ns over 18 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[3] fall: measured 0.1545 to 0.1545 ns over 14 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[3] rise: measured 0.1592 to 0.1592 ns over 13 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[4] fall: measured 0.1545 to 0.1545 ns over 13 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[4] rise: measured 0.1592 to 0.1592 ns over 14 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[5] fall: measured 0.1545 to 0.1545 ns over 15 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[5] rise: measured 0.1592 to 0.1592 ns over 15 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[6] fall: measured 0.1545 to 0.1545 ns over 12 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[6] rise: measured 0.1592 to 0.1592 ns over 12 edges, STA 0.1592 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[7] fall: measured 0.1545 to 0.1545 ns over 17 edges, STA 0.1545 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tdata[7] rise: measured 0.1592 to 0.1592 ns over 18 edges, STA 0.1592 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tlast fall: measured 0.1545 to 0.1545 ns over 18 edges, STA 0.1545 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tlast rise: measured 0.1592 to 0.1592 ns over 18 edges, STA 0.1592 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped typ clock to output m_tvalid fall: measured 0.1526 to 0.1526 ns over 35 edges, STA 0.1526 ns
@@ -841,10 +841,10 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/b259350.00ns INFO     coc
 265600.00ns INFO     cocotb.regression                  ************************************************************************************************
                                                         ** TEST                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ************************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           2.06     125906.21  **
-                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.10      65705.56  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           3.15      82255.11  **
+                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.07      85628.32  **
                                                         ************************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           2.16     123117.92  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           3.23      82174.96  **
                                                         ************************************************************************************************
 uild/fifo_bridge_typ_sim.sdf:14817: TIMINGCHECK not supported.
 FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_bridge_test_gates_SDF_TOP_TYP/fifo_bridge.fst opened for output.
@@ -1028,7 +1028,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284422
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319204
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -1240,21 +1240,21 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_si
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_sim.sdf:14701: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_sim.sdf:147259350.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
 259350.00ns INFO     cocotb.regression                  running test_gates.clock_to_output_matches_sta (2/2)
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[0] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[0] rise: measured 0.1072 to 0.1072 ns over 15 edges, STA 0.1072 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[1] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[1] rise: measured 0.1072 to 0.1072 ns over 15 edges, STA 0.1072 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[2] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[2] rise: measured 0.1072 to 0.1072 ns over 16 edges, STA 0.1072 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[3] fall: measured 0.1062 to 0.1062 ns over 16 edges, STA 0.1062 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[3] rise: measured 0.1072 to 0.1072 ns over 15 edges, STA 0.1072 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[4] fall: measured 0.1062 to 0.1062 ns over 13 edges, STA 0.1062 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[4] rise: measured 0.1072 to 0.1072 ns over 13 edges, STA 0.1072 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[0] fall: measured 0.1062 to 0.1062 ns over 10 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[0] rise: measured 0.1072 to 0.1072 ns over 10 edges, STA 0.1072 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[1] fall: measured 0.1062 to 0.1062 ns over 16 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[1] rise: measured 0.1072 to 0.1072 ns over 17 edges, STA 0.1072 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[2] fall: measured 0.1062 to 0.1062 ns over 16 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[2] rise: measured 0.1072 to 0.1072 ns over 15 edges, STA 0.1072 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[3] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[3] rise: measured 0.1072 to 0.1072 ns over 14 edges, STA 0.1072 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[4] fall: measured 0.1062 to 0.1062 ns over 17 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[4] rise: measured 0.1072 to 0.1072 ns over 17 edges, STA 0.1072 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[5] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[5] rise: measured 0.1072 to 0.1072 ns over 16 edges, STA 0.1072 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[6] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[6] rise: measured 0.1072 to 0.1072 ns over 15 edges, STA 0.1072 ns
-265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[7] fall: measured 0.1062 to 0.1062 ns over 15 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[6] fall: measured 0.1062 to 0.1062 ns over 12 edges, STA 0.1062 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[6] rise: measured 0.1072 to 0.1072 ns over 13 edges, STA 0.1072 ns
+265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[7] fall: measured 0.1062 to 0.1062 ns over 16 edges, STA 0.1062 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tdata[7] rise: measured 0.1072 to 0.1072 ns over 16 edges, STA 0.1072 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tlast fall: measured 0.1062 to 0.1062 ns over 18 edges, STA 0.1062 ns
 265600.00ns INFO     cocotb.fifo_bridge                 mapped fast clock to output m_tlast rise: measured 0.1072 to 0.1072 ns over 18 edges, STA 0.1072 ns
@@ -1264,10 +1264,10 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_si
 265600.00ns INFO     cocotb.regression                  ************************************************************************************************
                                                         ** TEST                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ************************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           2.51     103220.38  **
-                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.07      89617.55  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           2.46     105529.86  **
+                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.30      20791.97  **
                                                         ************************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           2.58     102785.11  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           2.76      96169.43  **
                                                         ************************************************************************************************
 43: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/fifo_bridge_fast_sim.sdf:14785: TIMINGCHECK not supported.
@@ -1453,7 +1453,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284426
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319209
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -1638,22 +1638,22 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_slow_sim.sdf
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_slow_sim.sdf:15508: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_slow_si259350.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
 259350.00ns INFO     cocotb.regression                  running test_gates.clock_to_output_matches_sta (2/2)
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[0] fall: measured 0.6940 to 0.6940 ns over 14 edges, STA 0.6944 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[0] rise: measured 0.7030 to 0.7030 ns over 15 edges, STA 0.7034 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[1] fall: measured 0.6930 to 0.6930 ns over 17 edges, STA 0.6936 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[1] rise: measured 0.7030 to 0.7030 ns over 17 edges, STA 0.7034 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[0] fall: measured 0.6940 to 0.6940 ns over 11 edges, STA 0.6944 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[0] rise: measured 0.7030 to 0.7030 ns over 11 edges, STA 0.7034 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[1] fall: measured 0.6930 to 0.6930 ns over 13 edges, STA 0.6936 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[1] rise: measured 0.7030 to 0.7030 ns over 13 edges, STA 0.7034 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[2] fall: measured 0.6920 to 0.6920 ns over 14 edges, STA 0.6921 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[2] rise: measured 0.7000 to 0.7000 ns over 14 edges, STA 0.7005 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[3] fall: measured 0.6980 to 0.6980 ns over 14 edges, STA 0.6984 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[3] rise: measured 0.7080 to 0.7080 ns over 13 edges, STA 0.7080 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[3] fall: measured 0.6980 to 0.6980 ns over 13 edges, STA 0.6984 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[3] rise: measured 0.7080 to 0.7080 ns over 12 edges, STA 0.7080 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[4] fall: measured 0.6990 to 0.6990 ns over 14 edges, STA 0.6985 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[4] rise: measured 0.7090 to 0.7090 ns over 14 edges, STA 0.7079 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[5] fall: measured 0.7010 to 0.7010 ns over 17 edges, STA 0.7011 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[5] rise: measured 0.7110 to 0.7110 ns over 18 edges, STA 0.7112 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[6] fall: measured 0.7000 to 0.7000 ns over 14 edges, STA 0.6995 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[5] fall: measured 0.7010 to 0.7010 ns over 14 edges, STA 0.7011 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[5] rise: measured 0.7110 to 0.7110 ns over 13 edges, STA 0.7112 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[6] fall: measured 0.7000 to 0.7000 ns over 13 edges, STA 0.6995 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[6] rise: measured 0.7100 to 0.7100 ns over 13 edges, STA 0.7093 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[7] fall: measured 0.6930 to 0.6930 ns over 15 edges, STA 0.6928 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[7] rise: measured 0.7010 to 0.7010 ns over 16 edges, STA 0.7015 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[7] fall: measured 0.6930 to 0.6930 ns over 16 edges, STA 0.6928 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tdata[7] rise: measured 0.7010 to 0.7010 ns over 15 edges, STA 0.7015 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tlast fall: measured 0.7000 to 0.7000 ns over 18 edges, STA 0.7007 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tlast rise: measured 0.7110 to 0.7110 ns over 18 edges, STA 0.7109 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed slow clock to output m_tvalid fall: measured 0.6940 to 0.6940 ns over 35 edges, STA 0.6948 ns
@@ -1662,10 +1662,10 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_slow_si25935
 265600.00ns INFO     cocotb.regression                  ************************************************************************************************
                                                         ** TEST                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ************************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           5.14      50442.02  **
-                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.09      67514.44  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           5.50      47183.97  **
+                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.14      43808.90  **
                                                         ************************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           5.24      50724.65  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           5.64      47069.80  **
                                                         ************************************************************************************************
 m.sdf:15550: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_slow_sim.sdf:15592: TIMINGCHECK not supported.
@@ -1878,7 +1878,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284434
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319217
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -2065,22 +2065,22 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_typ_sim.sdf:
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_typ_sim.sdf:15592: TIMINGCHECK not supported.
 SDF WARNING: /home/user/P259350.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
 259350.00ns INFO     cocotb.regression                  running test_gates.clock_to_output_matches_sta (2/2)
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[0] fall: measured 0.4390 to 0.4390 ns over 17 edges, STA 0.4407 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[0] rise: measured 0.4470 to 0.4470 ns over 17 edges, STA 0.4480 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[1] fall: measured 0.4380 to 0.4380 ns over 16 edges, STA 0.4394 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[1] rise: measured 0.4460 to 0.4460 ns over 16 edges, STA 0.4473 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[2] fall: measured 0.4390 to 0.4390 ns over 17 edges, STA 0.4393 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[2] rise: measured 0.4470 to 0.4470 ns over 17 edges, STA 0.4461 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[3] fall: measured 0.4420 to 0.4420 ns over 16 edges, STA 0.4429 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[3] rise: measured 0.4500 to 0.4500 ns over 16 edges, STA 0.4506 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[0] fall: measured 0.4390 to 0.4390 ns over 13 edges, STA 0.4407 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[0] rise: measured 0.4470 to 0.4470 ns over 14 edges, STA 0.4480 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[1] fall: measured 0.4380 to 0.4380 ns over 14 edges, STA 0.4394 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[1] rise: measured 0.4460 to 0.4460 ns over 13 edges, STA 0.4473 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[2] fall: measured 0.4390 to 0.4390 ns over 14 edges, STA 0.4393 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[2] rise: measured 0.4470 to 0.4470 ns over 14 edges, STA 0.4461 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[3] fall: measured 0.4420 to 0.4420 ns over 14 edges, STA 0.4429 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[3] rise: measured 0.4500 to 0.4500 ns over 14 edges, STA 0.4506 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[4] fall: measured 0.4430 to 0.4430 ns over 14 edges, STA 0.4436 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[4] rise: measured 0.4510 to 0.4510 ns over 15 edges, STA 0.4511 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[5] fall: measured 0.4440 to 0.4440 ns over 18 edges, STA 0.4443 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[5] rise: measured 0.4530 to 0.4530 ns over 18 edges, STA 0.4524 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[6] fall: measured 0.4430 to 0.4430 ns over 13 edges, STA 0.4439 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[6] rise: measured 0.4510 to 0.4510 ns over 13 edges, STA 0.4518 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[7] fall: measured 0.4380 to 0.4380 ns over 12 edges, STA 0.4399 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[7] rise: measured 0.4450 to 0.4450 ns over 12 edges, STA 0.4469 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[4] rise: measured 0.4510 to 0.4510 ns over 14 edges, STA 0.4511 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[5] fall: measured 0.4440 to 0.4440 ns over 15 edges, STA 0.4443 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[5] rise: measured 0.4530 to 0.4530 ns over 15 edges, STA 0.4524 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[6] fall: measured 0.4430 to 0.4430 ns over 17 edges, STA 0.4439 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[6] rise: measured 0.4510 to 0.4510 ns over 16 edges, STA 0.4518 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[7] fall: measured 0.4380 to 0.4380 ns over 13 edges, STA 0.4399 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tdata[7] rise: measured 0.4450 to 0.4450 ns over 13 edges, STA 0.4469 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tlast fall: measured 0.4440 to 0.4440 ns over 18 edges, STA 0.4446 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tlast rise: measured 0.4520 to 0.4520 ns over 18 edges, STA 0.4526 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed typ clock to output m_tvalid fall: measured 0.4410 to 0.4410 ns over 35 edges, STA 0.4406 ns
@@ -2089,10 +2089,10 @@ SDF WARNING: /home/user/P259350.00ns INFO     cocotb.regression                 
 265600.00ns INFO     cocotb.regression                  ************************************************************************************************
                                                         ** TEST                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ************************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           4.27      60725.44  **
-                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.11      58608.58  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           6.75      38424.83  **
+                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.16      39877.17  **
                                                         ************************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           4.38      60653.66  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           6.91      38444.96  **
                                                         ************************************************************************************************
 ortfolio/projects/fifo_bridge/build/routed_typ_sim.sdf:15634: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_typ_sim.sdf:15676: TIMINGCHECK not supported.
@@ -2303,7 +2303,7 @@ FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284441
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319226
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -2489,21 +2489,21 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_fast_sim.sdf
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_fast_si259350.00ns INFO     cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu passed
 259350.00ns INFO     cocotb.regression                  running test_gates.clock_to_output_matches_sta (2/2)
 265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[0] fall: measured 0.3020 to 0.3020 ns over 16 edges, STA 0.3030 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[0] rise: measured 0.3040 to 0.3040 ns over 15 edges, STA 0.3052 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[1] fall: measured 0.3010 to 0.3010 ns over 18 edges, STA 0.3015 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[1] rise: measured 0.3030 to 0.3030 ns over 18 edges, STA 0.3039 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[2] fall: measured 0.3010 to 0.3010 ns over 17 edges, STA 0.3020 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[2] rise: measured 0.3030 to 0.3030 ns over 17 edges, STA 0.3039 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[3] fall: measured 0.3030 to 0.3030 ns over 15 edges, STA 0.3042 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[3] rise: measured 0.3050 to 0.3050 ns over 14 edges, STA 0.3066 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[4] fall: measured 0.3050 to 0.3050 ns over 16 edges, STA 0.3052 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[4] rise: measured 0.3070 to 0.3070 ns over 15 edges, STA 0.3074 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[5] fall: measured 0.3040 to 0.3040 ns over 16 edges, STA 0.3050 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[5] rise: measured 0.3070 to 0.3070 ns over 15 edges, STA 0.3075 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[6] fall: measured 0.3050 to 0.3050 ns over 17 edges, STA 0.3052 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[6] rise: measured 0.3080 to 0.3080 ns over 16 edges, STA 0.3077 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[7] fall: measured 0.3020 to 0.3020 ns over 17 edges, STA 0.3025 ns
-265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[7] rise: measured 0.3030 to 0.3030 ns over 16 edges, STA 0.3046 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[0] rise: measured 0.3040 to 0.3040 ns over 17 edges, STA 0.3052 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[1] fall: measured 0.3010 to 0.3010 ns over 14 edges, STA 0.3015 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[1] rise: measured 0.3030 to 0.3030 ns over 14 edges, STA 0.3039 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[2] fall: measured 0.3010 to 0.3010 ns over 14 edges, STA 0.3020 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[2] rise: measured 0.3030 to 0.3030 ns over 15 edges, STA 0.3039 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[3] fall: measured 0.3030 to 0.3030 ns over 11 edges, STA 0.3042 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[3] rise: measured 0.3050 to 0.3050 ns over 12 edges, STA 0.3066 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[4] fall: measured 0.3050 to 0.3050 ns over 17 edges, STA 0.3052 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[4] rise: measured 0.3070 to 0.3070 ns over 18 edges, STA 0.3074 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[5] fall: measured 0.3040 to 0.3040 ns over 13 edges, STA 0.3050 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[5] rise: measured 0.3070 to 0.3070 ns over 13 edges, STA 0.3075 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[6] fall: measured 0.3050 to 0.3050 ns over 16 edges, STA 0.3052 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[6] rise: measured 0.3080 to 0.3080 ns over 15 edges, STA 0.3077 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[7] fall: measured 0.3020 to 0.3020 ns over 16 edges, STA 0.3025 ns
+265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tdata[7] rise: measured 0.3030 to 0.3030 ns over 15 edges, STA 0.3046 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tlast fall: measured 0.3060 to 0.3060 ns over 18 edges, STA 0.3056 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tlast rise: measured 0.3070 to 0.3070 ns over 18 edges, STA 0.3082 ns
 265600.00ns INFO     cocotb.fifo_bridge                 routed fast clock to output m_tvalid fall: measured 0.3010 to 0.3010 ns over 35 edges, STA 0.3026 ns
@@ -2512,10 +2512,10 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_fast_si25935
 265600.00ns INFO     cocotb.regression                  ************************************************************************************************
                                                         ** TEST                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ************************************************************************************************
-                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           4.33      59916.82  **
-                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.11      59057.56  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu      PASS      259350.00           5.40      48033.55  **
+                                                        ** test_gates.clock_to_output_matches_sta   PASS        6250.00           0.15      41045.23  **
                                                         ************************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           4.44      59868.46  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                       265600.00           5.56      47789.41  **
                                                         ************************************************************************************************
 m.sdf:15550: TIMINGCHECK not supported.
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_fast_sim.sdf:15592: TIMINGCHECK not supported.
@@ -2549,4 +2549,4 @@ SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_fast_sim.sdf
 SDF WARNING: /home/user/Portfolio/projects/fifo_bridge/build/routed_fast_sim.sdf:16937: TIMINGCHECK not supported.
 FST info: dumpfile /home/user/Portfolio/projects/fifo_bridge/build/icarus_fifo_bridge_test_gates_FAST_ROUTED_SDF_TOP/fifo_bridge.fst opened for output.
 .
-6 passed in 36.03s
+6 passed in 42.06s

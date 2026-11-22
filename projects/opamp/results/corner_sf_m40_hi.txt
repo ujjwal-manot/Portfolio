@@ -1,4 +1,5 @@
 loop a0_db 79.7852 fc_hz 1.93588E+07 pm_deg 64.4355 gbw_hz 4.20762E+07 ugf_hz 3.52284E+07
 step supply_a 0.000210976 rise_slew_v_per_s 2.45927E+07 fall_slew_v_per_s 2.14136E+07 rise_settle_s 6.64603E-08 fall_settle_s 6.8897E-08
 noise band_v_rms 6.42866E-05 total_v_rms 0.000353043 psrr_1k_db 52.7793 psrr_1m_db 27.0423
-swing out_low_v 0.012568 out_high_v 1.20072 offset_v 0.0003585
+swing out_low_v 0.0125656 out_high_v 1.20055 offset_v 0.0003585 gain_error -0.000274722
+load sampled_v_rms 0.000458649 settle_load_v 0 error_at_50ns_v 0 kick_v 0

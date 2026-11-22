@@ -10,8 +10,8 @@ unannotated     0
 Group                  Internal  Switching    Leakage      Total
                           Power      Power      Power      Power (Watts)
 ----------------------------------------------------------------
-Sequential             2.70e-04   2.83e-07   2.29e-07   2.70e-04  55.9%
-Combinational          2.13e-06   4.67e-06   2.65e-07   7.07e-06   1.5%
+Sequential             2.70e-04   2.82e-07   2.29e-07   2.70e-04  55.9%
+Combinational          2.14e-06   4.68e-06   2.66e-07   7.09e-06   1.5%
 Clock                  1.38e-04   6.36e-05   4.28e-06   2.06e-04  42.6%
 Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
 Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%

@@ -1,6 +1,6 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.203 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.383 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_async_fifo_test_async_fifo'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_async_fifo_test_async_fifo'
@@ -8,61 +8,61 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_wo
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795285248
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319946
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-     0.00ns INFO     cocotb.async_fifo                  r_clk runs 266 ppm off nominal
-  2242.88ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs -868 ppm off nominal
+  2272.46ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 68, in slow_writer_fast_reader
                                                             await traffic(dut, 100, 21, 20000, 1.0, 0.3)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 55, in traffic
                                                             assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 15: got 0x0, expected 0x19b
-                                                        assert 0 == 411
-  2242.88ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-  2242.88ns INFO     cocotb.async_fifo                  r_clk runs 708 ppm off nominal
-  4455.98ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+                                                        AssertionError: word 15: got 0x0, expected 0x24
+                                                        assert 0 == 36
+  2272.46ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+  2272.46ns INFO     cocotb.async_fifo                  r_clk runs 254 ppm off nominal
+  4439.40ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 72, in fast_writer_slow_reader
                                                             await traffic(dut, 21, 100, 20000, 0.9, 1.0)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 55, in traffic
                                                             assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 15: got 0x0, expected 0x1fc
-                                                        assert 0 == 508
-  4455.98ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-  4455.98ns INFO     cocotb.async_fifo                  r_clk runs 144 ppm off nominal
-  6085.58ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+                                                        AssertionError: word 15: got 0x0, expected 0xff
+                                                        assert 0 == 255
+  4439.40ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+  4439.40ns INFO     cocotb.async_fifo                  r_clk runs 502 ppm off nominal
+  5824.87ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 76, in similar_clocks
                                                             await traffic(dut, 37, 41, 40000, 0.6, 0.6)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 55, in traffic
                                                             assert got == want, f"word {stats['read']}: got {got:#x}, expected {want:#x}"
-                                                        AssertionError: word 15: got 0x0, expected 0x186
-                                                        assert 0 == 390
-  6085.58ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        AssertionError: word 15: got 0x0, expected 0x6c
+                                                        assert 0 == 108
+  5824.87ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2242.88           0.00     862074.71  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2213.09           0.00     971839.03  **
-                                                        ** test_async_fifo.similar_clocks            FAIL        1629.60           0.00     903002.91  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2272.46           0.00     661314.70  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2166.94           0.00    1206065.72  **
+                                                        ** test_async_fifo.similar_clocks            FAIL        1385.46           0.00    1014755.90  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          6085.58           0.01     557345.13  **
+                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          5824.87           0.01     483324.72  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795285250
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319948
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_async_fifo.slow_writer_fast_reader (1/3)
-     0.00ns INFO     cocotb.async_fifo                  r_clk runs -186 ppm off nominal
-  2094.24ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
+     0.00ns INFO     cocotb.async_fifo                  r_clk runs -472 ppm off nominal
+  2156.58ns WARNING  cocotb.regression                  test_async_fifo.slow_writer_fast_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 68, in slow_writer_fast_reader
                                                             await traffic(dut, 100, 21, 20000, 1.0, 0.3)
@@ -78,9 +78,9 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  2094.24ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
-  2094.24ns INFO     cocotb.async_fifo                  r_clk runs -430 ppm off nominal
-  4316.79ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
+  2156.58ns INFO     cocotb.regression                  running test_async_fifo.fast_writer_slow_reader (2/3)
+  2156.58ns INFO     cocotb.async_fifo                  r_clk runs 390 ppm off nominal
+  4327.84ns WARNING  cocotb.regression                  test_async_fifo.fast_writer_slow_reader failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 72, in fast_writer_slow_reader
                                                             await traffic(dut, 21, 100, 20000, 0.9, 1.0)
@@ -96,9 +96,9 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  4316.79ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
-  4316.79ns INFO     cocotb.async_fifo                  r_clk runs -200 ppm off nominal
-  6016.81ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
+  4327.84ns INFO     cocotb.regression                  running test_async_fifo.similar_clocks (3/3)
+  4327.84ns INFO     cocotb.async_fifo                  r_clk runs -996 ppm off nominal
+  5739.89ns WARNING  cocotb.regression                  test_async_fifo.similar_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py", line 76, in similar_clocks
                                                             await traffic(dut, 37, 41, 40000, 0.6, 0.6)
@@ -114,18 +114,18 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  6016.81ns INFO     cocotb.regression                  *************************************************************************************************
+  5739.89ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2094.24           0.01     279424.79  **
-                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2222.55           0.01     243349.98  **
-                                                        ** test_async_fifo.similar_clocks            FAIL        1700.02           0.01     327649.88  **
+                                                        ** test_async_fifo.slow_writer_fast_reader   FAIL        2156.58           0.01     404338.04  **
+                                                        ** test_async_fifo.fast_writer_slow_reader   FAIL        2171.26           0.01     287893.11  **
+                                                        ** test_async_fifo.similar_clocks            FAIL        1412.05           0.00     460043.60  **
                                                         *************************************************************************************************
-                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          6016.81           0.03     208018.37  **
+                                                        ** TESTS=3 PASS=0 FAIL=3 SKIP=0                          5739.89           0.02     282605.14  **
                                                         *************************************************************************************************
 F- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.328 MB
+- Verilator: Walltime 0.069 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.438 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_skid_buffer_test_skid_buffer'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_skid_buffer_test_skid_buffer'
@@ -133,29 +133,29 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_wo
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795285251
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319949
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_skid_buffer.random_backpressure (1/3)
-750791.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
-750791.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
-754821.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
-754821.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
-764852.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
-764852.00ns INFO     cocotb.regression                  **********************************************************************************************************
+747951.00ns INFO     cocotb.regression                  test_skid_buffer.random_backpressure passed
+747951.00ns INFO     cocotb.regression                  running test_skid_buffer.full_rate_without_bubbles (2/3)
+751981.00ns INFO     cocotb.regression                  test_skid_buffer.full_rate_without_bubbles passed
+751981.00ns INFO     cocotb.regression                  running test_skid_buffer.s_ready_does_not_follow_m_ready (3/3)
+762012.00ns INFO     cocotb.regression                  test_skid_buffer.s_ready_does_not_follow_m_ready passed
+762012.00ns INFO     cocotb.regression                  **********************************************************************************************************
                                                         ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **********************************************************************************************************
-                                                        ** test_skid_buffer.random_backpressure               PASS      750791.00           1.70     442335.99  **
-                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    1525041.52  **
-                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01     787801.99  **
+                                                        ** test_skid_buffer.random_backpressure               PASS      747951.00           1.35     552351.00  **
+                                                        ** test_skid_buffer.full_rate_without_bubbles         PASS        4030.00           0.00    2489644.50  **
+                                                        ** test_skid_buffer.s_ready_does_not_follow_m_ready   PASS       10031.00           0.01    1341333.10  **
                                                         **********************************************************************************************************
-                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 764852.00           1.72     445677.66  **
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                 762012.00           1.37     557981.19  **
                                                         **********************************************************************************************************
 - :0: Verilog $finish
 .- V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.266 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.441 MB
 make: Entering directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_fifo_bridge_test_fifo_bridge'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/build/verilator_fifo_bridge_test_fifo_bridge'
@@ -163,19 +163,19 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_wo
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795285253
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319951
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
- 12450.00ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
+ 16150.00ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 130, in reset_during_traffic
                                                             assert got == frame, f"after reset got {len(got)} words, first {got[:3]}, expected the fresh 64-word frame"
-                                                        AssertionError: after reset got 64 words, first [(173, 0), (45, 0), (67, 0)], expected the fresh 64-word frame
-                                                        assert [(173, 0), (45, 0), (67, 0), (166, 0), (218, 0), (224, 0), ...] == [(173, 0), (45, 0), (67, 0), (166, 0), (218, 0), (224, 0), ...]
- 12450.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
-271800.00ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
+                                                        AssertionError: after reset got 64 words, first [(133, 0), (163, 0), (201, 0)], expected the fresh 64-word frame
+                                                        assert [(133, 0), (163, 0), (201, 0), (162, 0), (75, 0), (205, 0), ...] == [(133, 0), (163, 0), (201, 0), (162, 0), (75, 0), (205, 0), ...]
+ 16150.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+275500.00ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 173, in adc_samples_to_cpu
                                                             assert await adc_run(dut, 256, 0) == 0, "the ADC lost samples with the CPU always ready"
@@ -183,9 +183,9 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_wo
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 165, in adc_run
                                                             assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
                                                         AssertionError: CPU got 256 samples, the bridge accepted 256
-                                                        assert [(218, 0), (186, 0), (149, 0), (109, 0), (71, 0), (38, 0), ...] == [(218, 0), (186, 0), (149, 0), (109, 0), (71, 0), (38, 0), ...]
-271800.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
-335150.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
+                                                        assert [(21, 0), (4, 0), (0, 0), (9, 0), (28, 0), (58, 0), ...] == [(21, 0), (4, 0), (0, 0), (9, 0), (28, 0), (58, 0), ...]
+275500.00ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+338850.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 180, in cpu_pause_limit
                                                             lost = {pause: await adc_run(dut, 60, pause) for pause in range(14, 23)}
@@ -193,57 +193,57 @@ make: Leaving directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_wo
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 165, in adc_run
                                                             assert got == accepted, f"CPU got {len(got)} samples, the bridge accepted {len(accepted)}"
                                                         AssertionError: CPU got 60 samples, the bridge accepted 60
-                                                        assert [(0, 0), (9, 0), (29, 0), (59, 0), (96, 0), (136, 0), ...] == [(0, 0), (9, 0), (29, 0), (59, 0), (96, 0), (136, 0), ...]
-335150.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
-337454.74ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
+                                                        assert [(9, 0), (30, 0), (60, 0), (97, 0), (136, 0), (175, 0), ...] == [(9, 0), (30, 0), (60, 0), (97, 0), (136, 0), (175, 0), ...]
+338850.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+341122.59ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 187, in adc_clock_to_cpu_clock
                                                             await frames(dut, 100, 20, 100, 1.0, 0.5)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 15: got (0, 0), expected (76, False)
-                                                        assert (0, 0) == (76, 0)
-337454.74ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
-340787.36ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+                                                        AssertionError: word 15: got (0, 0), expected (186, False)
+                                                        assert (0, 0) == (186, 0)
+341122.59ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+344260.37ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 191, in fast_source_slow_sink
                                                             await frames(dut, 20, 100, 100, 0.9, 0.7)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 15: got (0, 0), expected (191, False)
-                                                        assert (0, 0) == (191, 0)
-340787.36ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
-342272.27ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+                                                        AssertionError: word 15: got (0, 0), expected (200, False)
+                                                        assert (0, 0) == (200, 0)
+344260.37ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+345498.70ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 195, in near_equal_clocks
                                                             await frames(dut, 37, 41, 200, 0.8, 0.8)
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 61, in frames
                                                             assert word[1:] == (want[0], int(want[1])), f"word {got}: got {word[1:]}, expected {want}"
-                                                        AssertionError: word 15: got (0, 0), expected (34, False)
-                                                        assert (0, 0) == (34, 0)
-342272.27ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        AssertionError: word 15: got (0, 0), expected (230, False)
+                                                        assert (0, 0) == (230, 0)
+345498.70ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     FAIL       12450.00           0.01    1015528.04  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL      259350.00           0.36     722152.54  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       63350.00           0.12     524544.18  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2304.74           0.00     469711.28  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        3332.62           0.00     788379.52  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1484.91           0.00     439608.56  **
+                                                        ** test_fifo_bridge.reset_during_traffic     FAIL       16150.00           0.02     943220.96  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL      259350.00           0.39     659804.78  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       63350.00           0.08     807284.88  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2272.59           0.00     491887.81  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        3137.78           0.00     791497.61  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1238.33           0.00     402232.65  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                        342272.27           0.51     664785.69  **
+                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                        345498.70           0.51     677179.27  **
                                                         *************************************************************************************************
 - :0: Verilog $finish
 F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/usr/lib/x86_64-linux-gnu/libpython3.12.so.1.0'
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795285255
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319953
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
      0.00ns INFO     cocotb.regression                  running test_fifo_bridge.reset_during_traffic (1/6)
-  2518.02ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
+  2437.53ns WARNING  cocotb.regression                  test_fifo_bridge.reset_during_traffic failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 87, in drain
                                                             got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
@@ -257,8 +257,8 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
-  2518.02ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
- 18897.59ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
+  2437.53ns INFO     cocotb.regression                  running test_fifo_bridge.adc_samples_to_cpu (2/6)
+ 18818.56ns WARNING  cocotb.regression                  test_fifo_bridge.adc_samples_to_cpu failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 153, in cpu
                                                             got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
@@ -272,8 +272,8 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 18897.59ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
- 35287.85ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
+ 18818.56ns INFO     cocotb.regression                  running test_fifo_bridge.cpu_pause_limit (3/6)
+ 35195.00ns WARNING  cocotb.regression                  test_fifo_bridge.cpu_pause_limit failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 153, in cpu
                                                             got.append((int(dut.m_tdata.value), int(dut.m_tlast.value)))
@@ -287,8 +287,8 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 35287.85ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
- 37567.88ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
+ 35195.00ns INFO     cocotb.regression                  running test_fifo_bridge.adc_clock_to_cpu_clock (4/6)
+ 37472.52ns WARNING  cocotb.regression                  test_fifo_bridge.adc_clock_to_cpu_clock failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 187, in adc_clock_to_cpu_clock
                                                             await frames(dut, 100, 20, 100, 1.0, 0.5)
@@ -304,8 +304,8 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 37567.88ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
- 40281.74ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
+ 37472.52ns INFO     cocotb.regression                  running test_fifo_bridge.fast_source_slow_sink (5/6)
+ 40607.60ns WARNING  cocotb.regression                  test_fifo_bridge.fast_source_slow_sink failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 191, in fast_source_slow_sink
                                                             await frames(dut, 20, 100, 100, 0.9, 0.7)
@@ -321,8 +321,8 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 40281.74ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
- 41558.33ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
+ 40607.60ns INFO     cocotb.regression                  running test_fifo_bridge.near_equal_clocks (6/6)
+ 41921.02ns WARNING  cocotb.regression                  test_fifo_bridge.near_equal_clocks failed
                                                         Traceback (most recent call last):
                                                           File "/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py", line 195, in near_equal_clocks
                                                             await frames(dut, 37, 41, 200, 0.8, 0.8)
@@ -338,17 +338,17 @@ F     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:24
                                                           File "/usr/local/lib/python3.12/dist-packages/cocotb/types/_logic_array.py", line 347, in _get_int
                                                             raise ValueError(
                                                         ValueError: Can't convert LogicArray to int: it contains non-0/1 values
- 41558.33ns INFO     cocotb.regression                  *************************************************************************************************
+ 41921.02ns INFO     cocotb.regression                  *************************************************************************************************
                                                         ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         *************************************************************************************************
-                                                        ** test_fifo_bridge.reset_during_traffic     FAIL        2518.02           0.01     322602.85  **
-                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL       16379.57           0.09     185159.96  **
-                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       16390.26           0.07     245530.42  **
-                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2280.03           0.02     142628.58  **
-                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        2713.87           0.01     194056.55  **
-                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1276.59           0.01     162476.94  **
+                                                        ** test_fifo_bridge.reset_during_traffic     FAIL        2437.53           0.01     275513.47  **
+                                                        ** test_fifo_bridge.adc_samples_to_cpu       FAIL       16381.03           0.05     361567.24  **
+                                                        ** test_fifo_bridge.cpu_pause_limit          FAIL       16376.44           0.06     273635.08  **
+                                                        ** test_fifo_bridge.adc_clock_to_cpu_clock   FAIL        2277.52           0.01     232244.55  **
+                                                        ** test_fifo_bridge.fast_source_slow_sink    FAIL        3135.07           0.01     246875.52  **
+                                                        ** test_fifo_bridge.near_equal_clocks        FAIL        1313.43           0.01     250193.92  **
                                                         *************************************************************************************************
-                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                         41558.33           0.21     194285.02  **
+                                                        ** TESTS=6 PASS=0 FAIL=6 SKIP=0                         41921.02           0.15     278143.12  **
                                                         *************************************************************************************************
 F
 =================================== FAILURES ===================================
@@ -364,7 +364,7 @@ top = 'async_fifo'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Verilator object at 0x7f584d096b10>
+runner = <cocotb_tools.runner.Verilator object at 0x7f2165ebed80>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -391,7 +391,7 @@ top = 'async_fifo'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/async_fifo.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_async_fifo.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Icarus object at 0x7f584cf519d0>, results = None
+runner = <cocotb_tools.runner.Icarus object at 0x7f2165cb5160>, results = None
 defines = {'METASTABLE': 1}, sim = 'icarus', waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -417,7 +417,7 @@ top = 'fifo_bridge'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user...skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Verilator object at 0x7f584cfdcad0>
+runner = <cocotb_tools.runner.Verilator object at 0x7f2165d42480>
 results = None, defines = {}, sim = None, waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -444,7 +444,7 @@ top = 'fifo_bridge'
 sources = [PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/sync2.sv'), PosixPath('/home/user...skid_buffer.sv'), PosixPath('/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/design/fifo_bridge.sv')]
 test_file = '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/tests/test_fifo_bridge.py'
 parameters = {}, plusargs = []
-runner = <cocotb_tools.runner.Icarus object at 0x7f584cfded20>, results = None
+runner = <cocotb_tools.runner.Icarus object at 0x7f2165d428d0>, results = None
 defines = {'METASTABLE': 1}, sim = 'icarus', waves = False, build_args = []
 
     def run(top, sources, test_file, parameters={}, plusargs=[], runner=None, results=None, defines={}, sim=None, waves=False, build_args=[]):
@@ -463,485 +463,491 @@ FAILED tests/test_async_fifo.py::test_async_fifo - SystemExit: 1
 FAILED tests/test_async_fifo.py::test_async_fifo_metastable - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge - SystemExit: 1
 FAILED tests/test_fifo_bridge.py::test_fifo_bridge_metastable - SystemExit: 1
-4 failed, 1 passed in 8.62s
-SBY 19:20:57 [fifo_rules_fifo_proof] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof'.
-SBY 19:20:57 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/sync2.sv'.
-SBY 19:20:57 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/reset_sync.sv'.
-SBY 19:20:57 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/async_fifo.sv'.
-SBY 19:20:57 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/skid_buffer.sv'.
-SBY 19:20:57 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/fifo_bridge.sv'.
-SBY 19:20:57 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/fifo_rules.sv'.
-SBY 19:20:57 [fifo_rules_fifo_proof] engine_0: abc pdr
-SBY 19:20:57 [fifo_rules_fifo_proof] base: starting process "cd fifo_rules_fifo_proof/src; yosys -ql ../model/design.log ../model/design.ys"
-SBY 19:20:57 [fifo_rules_fifo_proof] base: finished (returncode=0)
-SBY 19:20:57 [fifo_rules_fifo_proof] prep: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_prep.log design_prep.ys"
-SBY 19:20:58 [fifo_rules_fifo_proof] prep: finished (returncode=0)
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_aiger.log design_aiger.ys"
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_en like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [0] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [1] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [2] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [3] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [4] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [5] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [6] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [7] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [8] like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_clk like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\r_en like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\r_clk like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: Warning: Treating a total of 13 undriven bits in fifo_rules like $anyseq.
-SBY 19:20:58 [fifo_rules_fifo_proof] aig: finished (returncode=0)
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: Warning: The network has no constraints.
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 219. MonoCNF = no. SkipGen = no. SolveAll = no.
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 1 : 0 17                                                                1    17      0.01 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 2 : 0 11 26                                                             3    30      0.01 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 3 : 0 9 10 46 ~5                                                         3    52      0.02 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 25 22 ~9                                                      1    52      0.03 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 5 : 0 4 3 39 27 62 ~9                                                   7    80      0.05 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 6 : 0 4 3 8 6 9 60 ~15                                                   8    81      0.06 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 7 3 8 12 50 ~16                                                2    82      0.07 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 7 3 8 16 21 49 ~16                                             4    82      0.08 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 7 3 9 10 18 25 55 ~17                                         13    82      0.10 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 7 3 9 8 14 18 25 50 ~17                                        5    82      0.11 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 7 3 9 9 17 15 38 43 84 ~21                                    10    95      0.14 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 13 14 17 12 30 42 56 62 ~30                               22   106      0.17 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 13 15 23 18 36 47 69 92 ~30                               21   110      0.20 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 15 17 30 24 43 53 81 118 ~30                              12   114      0.23 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 15 17 37 34 53 68 99 127 ~30                              21   114      0.25 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 16 19 42 39 62 82 119 141 ~30                             20   118      0.28 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 17 21 47 44 71 96 135 162 ~30                             20   122      0.31 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 18 23 52 49 80 110 151 183 ~30                            20   126      0.34 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 19 23 52 49 80 110 158 203 ~30                            20   126      0.35 sec  T/O =  0  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 12 (retrying in next anytime pass).
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 19 23 52 51 85 122 182 242 ~30                            10   126      0.37 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 19 17 23 18 24 27 53 163 176 ~36                           4   126      0.42 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 4 3 19 17 23 18 26 32 40 120 132 147 ~38                      12   126      0.48 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 4 3 19 17 23 18 26 33 47 128 146 170 ~38                      15   126      0.50 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 4 3 19 17 23 18 26 29 47 44 54 134 266 ~40                    11   126      0.56 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 4 3 19 17 23 18 26 29 45 42 31 55 58 332 ~39                  10   126      0.62 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 4 3 19 17 23 18 26 29 45 42 33 60 72 366 ~39                  13   126      0.63 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 4 3 19 17 23 18 26 28 46 38 21 32 34 62 358 ~39               10   126      0.70 sec  T/O =  1  PRV =  0
-SBY 19:20:58 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 4 3 19 17 23 18 26 28 46 30 11 21 14 34 78 382 ~42             9   126      0.77 sec  T/O =  1  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 19 : ... 3 2 4 3 19 17 23 18 26 28 46 29 11 21 17 38 84 209 246 ~46      11   126      0.86 sec  T/O =  1  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 19 : ... 3 2 4 3 19 17 23 18 26 28 46 29 11 21 17 41 90 218 271 ~46      13   126      0.87 sec  T/O =  1  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 20 : ... 4 3 19 17 23 18 26 28 46 29 11 21 14 33 63 190 149 252 ~46       8   126      0.96 sec  T/O =  1  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 21 : ... 19 17 23 18 26 28 46 29 11 20 14 32 58 162 100 109 244 ~49       9   126      1.04 sec  T/O =  1  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 21 : ... 19 17 23 18 26 28 46 29 11 20 14 32 58 165 108 126 273 ~49      13   126      1.07 sec  T/O =  1  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: Timing out on output 5 in frame 21 (retrying in next anytime pass).
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 21 : ... 19 17 23 18 26 28 46 29 11 20 14 32 58 165 108 126 273 ~49       0   126      1.07 sec  T/O =  2  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 22 : ... 17 23 18 26 28 46 29 11 20 14 32 57 161 89 115 143 224 ~50      10   126      1.17 sec  T/O =  2  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 23 : ... 23 18 26 28 44 29 11 20 14 32 57 153 87 53 107 130 238 ~55      27   126      1.26 sec  T/O =  2  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 23 : ... 23 18 26 28 44 29 11 20 14 32 57 153 90 61 127 169 313 ~55      21   126      1.31 sec  T/O =  2  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 23 : ... 23 18 26 28 44 29 11 20 14 32 57 153 90 64 139 189 342 ~55      16   126      1.34 sec  T/O =  2  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 23 : ... 23 18 26 28 44 29 11 20 14 32 57 153 90 64 139 189 345 ~55       4   126      1.34 sec  T/O =  2  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 23 (retrying in next anytime pass).
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 23 : ... 23 18 26 28 44 29 11 20 14 32 57 153 90 64 139 189 345 ~55       0   126      1.34 sec  T/O =  3  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 24 : ... 18 26 28 44 29 11 20 14 31 56 151 86 43 98 121 202 226 ~55       4   126      1.43 sec  T/O =  3  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 25 : ... 28 44 29 11 20 14 31 56 150 86 42 101 106 192 139 174 ~57       19   126      1.54 sec  T/O =  3  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 25 : ... 28 44 29 11 20 14 31 56 150 86 42 102 111 205 159 203 ~57       24   126      1.58 sec  T/O =  3  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 25 : ... 28 44 29 11 20 14 31 56 150 86 42 104 112 216 182 222 ~57       36   126      1.61 sec  T/O =  3  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 25 : ... 28 44 29 11 20 14 31 56 150 86 42 104 112 217 186 226 ~57       34   126      1.62 sec  T/O =  3  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: Timing out on output 3 in frame 25 (retrying in next anytime pass).
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 25 : ... 28 44 29 11 20 14 31 56 150 86 42 104 112 217 186 226 ~57        0   126      1.62 sec  T/O =  4  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 44 29 11 20 14 31 56 150 86 41 96 76 171 164 163 123 ~61      4   126      1.72 sec  T/O =  4  PRV =  0
-SBY 19:20:59 [fifo_rules_fifo_proof] engine_0: 27 : ... 44 29 11 20 14 31 56 150 86 41 96 74 169 155 155 58 91 ~63       5   126      1.79 sec  T/O =  4  PRV =  0
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: Proved output 0 in frame 27.
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 28 : ... 29 11 20 14 31 56 150 86 41 96 74 169 145 144 59 30 26 ~112      3   126      1.86 sec  T/O =  4  PRV =  1
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 29 : ... 11 20 14 31 56 150 86 41 96 74 169 145 142 56 31 15 19 ~112      4   126      1.92 sec  T/O =  4  PRV =  1
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 30 : ... 20 14 31 56 150 86 41 96 74 169 145 142 56 29 20 13 24 ~116      5   126      1.99 sec  T/O =  4  PRV =  1
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 31 : ... 14 31 56 150 86 41 96 74 169 145 142 38 24 16 25 15 12 ~135      5   126      2.06 sec  T/O =  4  PRV =  1
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 32 : ... 31 56 150 80 36 90 71 171 147 141 38 24 9 15 11 4 18 ~146        2   126      2.17 sec  T/O =  4  PRV =  1
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: Proved output 1 in frame 32.
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 33 : ... 80 36 90 71 170 147 141 38 24 9 15 11 2 0 -3 ~165        0   126      2.26 sec  T/O =  4  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 1 : 0 1329 ~154                                                          0     0      0.37 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 1326 ~154                                                        0     0      0.37 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 1324 ~154                                                      0     0      0.38 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 4 1320 ~154                                                    0     0      0.38 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 4 3 1317 ~154                                                  0     0      0.39 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 4 3 19 1298 ~154                                               0     0      0.39 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 4 3 19 17 1281 ~154                                            0     0      0.40 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 4 3 19 17 23 1258 ~154                                         0     0      0.40 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 4 3 19 17 23 18 1240 ~154                                      0     0      0.41 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 4 3 19 17 23 18 26 1214 ~154                                   0     0      0.41 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 4 3 19 17 23 18 26 28 1186 ~154                                0     0      0.42 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 20 18 29 23 41 40 59 1153 ~154                            18    22      0.46 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 20 21 36 28 48 52 71 1172 ~154                            17    35      0.49 sec  T/O =  0  PRV =  2
-SBY 19:21:00 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 22 24 47 37 59 63 77 1183 ~154                            11    44      0.52 sec  T/O =  0  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 23 25 51 43 73 73 92 1196 ~154                            15    49      0.54 sec  T/O =  0  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 24 27 55 48 77 82 111 1218 ~154                           12    55      0.57 sec  T/O =  0  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 25 29 59 52 85 100 122 1234 ~154                          17    59      0.60 sec  T/O =  0  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 26 31 62 55 93 112 132 1252 ~154                          17    59      0.63 sec  T/O =  0  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 12 (retrying in next anytime pass).
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 26 31 62 55 93 112 132 1252 ~154                           0    59      0.63 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 26 25 31 25 28 30 63 38 778 ~155                           0    59      0.88 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 4 3 26 25 31 25 28 30 63 36 6 767 ~155                         0    59      0.90 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 4 3 26 25 31 25 28 30 63 36 6 4 762 ~155                       0    59      0.92 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 4 3 26 25 31 25 28 30 63 36 6 4 8 754 ~155                     0    59      0.94 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 4 3 26 25 31 25 28 30 63 36 6 4 8 8 746 ~155                   0    59      0.97 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 4 3 26 25 31 25 28 30 63 36 6 4 8 8 37 709 ~155                0    59      1.02 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 19 : 0 3 2 4 3 26 25 31 25 28 30 63 36 6 4 8 8 37 184 525 ~155            0    59      1.09 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 20 : ... 3 2 4 3 26 25 31 25 28 30 63 36 6 4 8 8 37 184 31 494 ~155       0    59      1.13 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 21 : ... 2 4 3 26 25 31 25 28 30 63 36 6 4 8 8 37 184 31 26 468 ~155      0    59      1.16 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 22 : ... 3 26 25 31 25 28 30 63 36 6 4 8 8 37 184 31 26 33 435 ~155       0    59      1.18 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 23 : ... 26 25 31 25 28 30 63 36 6 4 8 8 37 184 31 29 42 60 402 ~155      7    75      1.22 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 24 : ... 25 31 25 28 30 63 36 6 4 7 8 38 184 31 22 33 42 61 369 ~155     10    80      1.31 sec  T/O =  1  PRV =  2
-SBY 19:21:01 [fifo_rules_fifo_proof] engine_0: 25 : ... 25 28 30 63 36 6 4 7 8 38 184 31 22 29 41 65 101 330 ~155        9   100      1.42 sec  T/O =  1  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 30 63 36 6 4 7 8 38 184 31 22 28 34 51 86 155 312 ~155       14   102      1.60 sec  T/O =  1  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 30 63 36 6 4 7 8 38 184 31 22 28 35 61 97 172 335 ~155       16   103      1.65 sec  T/O =  1  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 30 63 36 6 4 7 8 38 184 31 22 28 35 63 102 181 335 ~155      16   103      1.66 sec  T/O =  1  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: Timing out on output 5 in frame 26 (retrying in next anytime pass).
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 30 63 36 6 4 7 8 38 184 31 22 28 35 63 102 181 335 ~155       0   103      1.66 sec  T/O =  2  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 27 : ... 30 63 36 6 4 7 8 38 184 31 22 28 31 49 79 130 174 246 ~156       5   108      1.76 sec  T/O =  2  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 28 : ... 63 36 6 4 7 8 38 184 31 22 28 31 49 80 136 172 147 133 ~157     31   109      1.87 sec  T/O =  2  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 28 : ... 63 36 6 4 7 8 38 184 31 22 28 31 49 80 138 193 179 141 ~157     52   109      1.90 sec  T/O =  2  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 28 : ... 63 36 6 4 7 8 38 184 31 22 28 31 49 80 139 197 197 183 ~157     52   109      1.99 sec  T/O =  2  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 28 : ... 63 36 6 4 7 8 38 184 31 22 28 31 49 80 141 198 198 196 ~157     41   109      2.02 sec  T/O =  2  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: Timing out on output 3 in frame 28 (retrying in next anytime pass).
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 28 : ... 63 36 6 4 7 8 38 184 31 22 28 31 49 80 141 198 199 204 ~157      3   109      2.03 sec  T/O =  3  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 29 : ... 36 6 4 7 8 38 184 31 22 28 30 45 59 87 133 179 176 121 ~159     14   109      2.27 sec  T/O =  3  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 29 (retrying in next anytime pass).
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 29 : ... 36 6 4 7 8 38 184 31 22 28 30 45 59 87 133 179 176 121 ~159      0   109      2.27 sec  T/O =  4  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: 30 : ... 6 4 7 8 38 184 31 22 28 30 45 59 83 126 172 166 88 43 ~159       0   109      2.49 sec  T/O =  4  PRV =  2
-SBY 19:21:02 [fifo_rules_fifo_proof] engine_0: All outputs solved or timed out in frame 30.
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 1 : 0 1413 ~159                                                          0     0      0.66 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 1410 ~159                                                        0     0      0.67 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 1408 ~159                                                      0     0      0.68 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 4 1404 ~159                                                    0     0      0.70 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 4 3 1401 ~159                                                  0     0      0.71 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 4 3 26 1375 ~159                                               0     0      0.71 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 4 3 26 25 1350 ~159                                            0     0      0.72 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 4 3 26 25 31 1319 ~159                                         0     0      0.73 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 4 3 26 25 31 25 1294 ~159                                      0     0      0.73 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 4 3 26 25 31 25 28 1266 ~159                                   0     0      0.74 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 4 3 26 25 31 25 28 30 1236 ~159                                0     0      0.75 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 28 28 41 34 41 40 70 1182 ~159                            11    30      0.79 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 29 30 43 34 46 53 87 1203 ~159                            19    39      0.83 sec  T/O =  0  PRV =  2
-SBY 19:21:03 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 29 30 45 38 54 65 97 1220 ~159                            17    41      0.85 sec  T/O =  0  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 29 28 34 27 28 30 87 71 1189 ~159                         17    51      1.21 sec  T/O =  0  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 29 28 34 27 28 30 100 100 1192 ~159                       17    51      1.25 sec  T/O =  0  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 29 28 34 27 28 30 110 124 1205 ~159                       15    57      1.40 sec  T/O =  0  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 29 28 34 27 28 30 113 141 1208 ~159                       16    57      1.49 sec  T/O =  0  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 13 (retrying in next anytime pass).
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 29 28 34 27 28 30 113 141 1208 ~159                        0    57      1.49 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 4 3 29 28 34 27 28 30 50 34 13 1294 ~159                       0    57      1.84 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 4 3 29 28 34 27 28 30 50 34 13 4 1289 ~159                     0    57      1.86 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 4 3 29 28 34 27 28 30 50 34 13 4 7 1282 ~159                   0    57      1.88 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 4 3 29 28 34 27 28 30 50 34 13 4 7 8 1274 ~159                 0    57      1.90 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 4 3 29 28 34 27 28 30 50 34 13 4 7 8 34 1234 ~159              0    57      1.92 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 19 : 0 3 2 4 3 29 28 34 27 28 30 50 34 13 4 7 8 34 275 959 ~159           0    57      1.95 sec  T/O =  1  PRV =  2
-SBY 19:21:04 [fifo_rules_fifo_proof] engine_0: 20 : ... 2 4 3 29 28 34 27 28 30 50 34 13 4 7 8 34 275 100 859 ~159       0    57      1.98 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 21 : ... 4 3 29 28 34 27 28 30 50 34 13 4 7 8 34 275 100 22 837 ~159      0    57      2.02 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 22 : ... 29 28 34 27 28 30 50 34 13 4 7 8 34 275 100 22 28 809 ~159       0    57      2.05 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 23 : ... 28 34 27 28 30 50 34 13 4 7 8 34 275 100 22 28 30 779 ~159       0    57      2.08 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 24 : ... 34 27 28 30 50 34 13 4 7 8 34 275 100 22 28 30 45 734 ~159       0    57      2.11 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 25 : ... 27 28 30 50 34 13 4 7 8 34 275 100 22 28 30 45 59 675 ~159       0    57      2.15 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 30 50 34 13 4 7 8 34 275 100 22 28 30 45 59 83 592 ~159       0    57      2.19 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 27 : ... 30 50 34 13 4 7 8 34 275 100 22 28 30 45 59 83 126 469 ~159      1    61      2.24 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 28 : ... 34 13 4 7 8 34 275 100 22 28 30 45 59 84 135 177 353 ~159       10    73      2.38 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 28 : ... 34 13 4 7 8 34 275 100 22 28 30 45 59 92 147 209 398 ~159       12    79      2.43 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 28 : ... 34 13 4 7 8 34 275 100 22 28 30 45 59 92 149 218 418 ~159        9    80      2.44 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 29 : ... 13 4 7 8 34 275 100 22 28 28 43 53 85 115 173 233 304 ~159      10    86      2.63 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 29 : ... 13 4 7 8 34 275 100 22 28 28 43 53 85 117 179 254 342 ~159       8    88      2.67 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 34 275 100 22 28 28 43 53 85 106 130 209 209 297 ~159     15    90      2.89 sec  T/O =  1  PRV =  2
-SBY 19:21:05 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 34 275 100 22 28 28 43 53 86 106 134 228 255 351 ~159     19    96      2.97 sec  T/O =  1  PRV =  2
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 34 275 100 22 28 28 43 53 86 107 137 233 278 394 ~159     10    96      3.03 sec  T/O =  1  PRV =  2
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: 31 : ... 8 34 275 100 22 28 28 43 53 84 100 69 132 155 183 437 ~159      10    97      3.30 sec  T/O =  1  PRV =  2
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: 31 : ... 8 34 275 100 22 28 28 43 53 84 100 69 138 162 190 456 ~159       8    99      3.43 sec  T/O =  1  PRV =  2
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 31 (retrying in next anytime pass).
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: 31 : ... 8 34 275 100 22 28 28 43 53 84 100 70 143 172 213 495 ~159       9   100      3.48 sec  T/O =  2  PRV =  2
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: 31 : ... 8 34 275 100 22 28 28 43 53 84 100 70 143 172 213 497 ~159       0   100      3.48 sec  T/O =  2  PRV =  2
-SBY 19:21:06 [fifo_rules_fifo_proof] engine_0: 32 : ... 275 100 22 28 27 43 51 85 100 66 126 102 192 194 444 ~172       22   104      3.99 sec  T/O =  2  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 32 : ... 275 100 22 28 27 43 51 85 100 66 126 106 208 223 456 ~172       42   104      4.03 sec  T/O =  2  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 32 : ... 275 100 22 28 27 43 51 85 100 66 126 106 208 226 470 ~172       40   104      4.05 sec  T/O =  2  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: Timing out on output 5 in frame 32 (retrying in next anytime pass).
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 32 : ... 275 100 22 28 27 43 51 85 100 66 126 106 208 226 470 ~172        0   104      4.05 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 33 : ... 275 100 22 28 27 43 51 85 99 57 118 62 133 164 174 493 ~169     28   106      4.37 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 33 : ... 275 100 22 28 27 43 51 85 99 57 118 62 133 171 204 530 ~169     40   106      4.41 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 33 : ... 275 100 22 28 27 43 51 85 99 57 118 63 136 178 229 558 ~169     27   106      4.46 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 33 : ... 275 100 22 28 27 43 51 85 99 57 118 63 136 178 229 569 ~169      1   106      4.46 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 34 : ... 100 22 28 27 43 51 85 99 58 117 60 119 125 165 316 367 ~170     24   106      4.75 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 34 : ... 100 22 28 27 43 51 85 99 58 117 60 119 125 168 342 400 ~170     23   106      4.82 sec  T/O =  3  PRV =  2
-SBY 19:21:07 [fifo_rules_fifo_proof] engine_0: 34 : ... 100 22 28 27 43 51 85 99 58 117 60 119 125 172 358 442 ~170     20   106      4.86 sec  T/O =  3  PRV =  2
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: 35 : ... 22 28 27 43 51 85 99 57 117 66 113 111 124 336 235 340 ~171     26   106      5.14 sec  T/O =  3  PRV =  2
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: 35 : ... 22 28 27 43 51 85 99 57 117 66 113 111 125 336 235 340 ~171     26   106      5.14 sec  T/O =  3  PRV =  2
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: Timing out on output 3 in frame 35 (retrying in next anytime pass).
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: 35 : ... 22 28 27 43 51 85 99 57 117 66 113 111 125 336 235 340 ~171      0   106      5.14 sec  T/O =  4  PRV =  2
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: 36 : ... 28 27 43 51 85 99 52 101 63 102 77 88 256 190 211 278 ~173       0   106      5.36 sec  T/O =  4  PRV =  2
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: All outputs solved or timed out in frame 36.
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 19:21:08 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 1 : 0 1328 ~171                                                          0     0      1.02 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 1325 ~171                                                        0     0      1.02 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 1323 ~171                                                      0     0      1.03 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 2 1321 ~171                                                    0     0      1.03 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 2 1 1320 ~171                                                  0     0      1.03 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 2 1 13 1307 ~171                                               0     0      1.04 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 2 1 13 15 1292 ~171                                            0     0      1.04 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 2 1 13 15 4 1288 ~171                                          0     0      1.05 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 2 1 13 15 4 7 1281 ~171                                        0     0      1.05 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 2 1 13 15 4 7 7 1274 ~171                                      0     0      1.06 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 2 1 13 15 4 7 7 11 1263 ~171                                   0     0      1.06 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 13 15 4 7 7 11 14 1249 ~171                                0     0      1.07 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 13 15 4 7 7 11 28 54 1236 ~171                            15    26      1.11 sec  T/O =  0  PRV =  2
-SBY 19:21:09 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 13 15 4 7 7 11 30 60 1239 ~171                            17    29      1.11 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 4 7 7 15 19 38 15 1264 ~170                         12    38      1.81 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 4 7 7 17 28 60 20 1269 ~170                         16    41      1.84 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 6 9 13 23 36 74 25 1277 ~170                        16    54      1.86 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 8 11 19 30 44 90 30 1286 ~170                       17    60      1.90 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 9 12 25 36 51 104 33 1294 ~170                      18    66      1.92 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 11 14 35 46 58 115 37 1300 ~170                     15    68      1.96 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 12 15 40 53 69 133 41 1304 ~170                     19    70      1.99 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 13 16 44 57 81 156 44 1309 ~170                     17    72      2.02 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 16 19 51 63 85 161 50 1320 ~170                     18    72      2.05 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 17 20 59 71 93 179 54 1326 ~170                     14    72      2.08 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 18 21 63 74 100 194 61 1335 ~170                    17    73      2.11 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 20 24 69 80 110 210 66 1341 ~170                    18    77      2.15 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 22 27 75 90 115 214 70 1352 ~170                    14    77      2.19 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 22 27 75 94 123 235 74 1358 ~170                    14    81      2.23 sec  T/O =  0  PRV =  2
-SBY 19:21:10 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 22 27 75 94 129 253 76 1364 ~170                    12    81      2.26 sec  T/O =  0  PRV =  2
-SBY 19:21:11 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 2 1 13 15 22 18 7 11 5 8 17 14 1645 ~172                      11    82      3.05 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 10 18 12 19 8 6 11 1648 ~172                  20    86      3.74 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 10 24 21 28 13 17 15 1653 ~172                15    90      3.78 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 13 31 27 39 17 25 18 1657 ~172                18    91      3.82 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 16 38 35 49 19 30 22 1665 ~172                14    91      3.87 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 20 46 44 60 21 36 25 1669 ~172                20    92      3.92 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 21 48 57 82 24 38 27 1674 ~172                22    92      3.96 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 23 50 58 87 26 40 29 1678 ~172                20    93      3.98 sec  T/O =  0  PRV =  2
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 16 (retrying in next anytime pass).
-SBY 19:21:12 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 22 18 23 50 58 87 26 40 29 1678 ~172                 0    93      3.98 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 2 1 13 15 22 18 23 26 5 5 5 4 8 8 1805 ~172                    0    93      4.61 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 2 1 13 15 22 18 23 26 5 5 5 4 8 8 58 1744 ~172                 0    93      4.66 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 19 : 0 3 2 2 1 13 15 22 18 23 26 5 5 5 4 8 8 58 270 1473 ~172             0    93      4.70 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 20 : ... 3 2 2 1 13 15 22 18 23 26 5 5 5 4 8 8 58 270 337 1136 ~172       0    93      4.75 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 21 : ... 2 1 13 15 22 18 23 26 5 5 5 4 8 8 58 270 337 126 1010 ~172       0    93      4.81 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 22 : ... 1 13 15 22 18 23 26 5 5 5 4 8 8 58 270 337 126 48 962 ~172       0    93      4.87 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 23 : ... 15 22 18 23 26 5 5 5 4 8 8 58 270 337 126 48 100 862 ~172        0    93      4.93 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 24 : ... 22 18 23 26 5 5 5 4 8 8 58 270 337 126 48 100 30 832 ~172        0    93      5.00 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 25 : ... 18 23 26 5 5 5 4 8 8 58 270 337 126 48 100 30 20 812 ~172        0    93      5.09 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 26 : ... 23 26 5 5 5 4 8 8 58 270 337 126 48 100 30 20 10 802 ~172        0    93      5.16 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 27 : ... 26 5 5 5 4 8 8 58 270 337 126 48 100 30 20 10 17 785 ~172        0    93      5.21 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 28 : ... 5 5 5 4 8 8 58 270 337 126 48 100 30 20 10 17 26 759 ~172        0    93      5.26 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 29 : ... 5 5 4 8 8 58 270 337 126 48 100 30 20 10 17 26 18 741 ~172       0    93      5.33 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 30 : ... 5 4 8 8 58 270 337 126 48 100 30 20 10 17 26 18 28 713 ~172      0    93      5.42 sec  T/O =  1  PRV =  2
-SBY 19:21:13 [fifo_rules_fifo_proof] engine_0: 31 : ... 8 8 58 270 337 126 48 100 30 20 10 17 26 18 28 28 685 ~172       0    93      5.51 sec  T/O =  1  PRV =  2
-SBY 19:21:14 [fifo_rules_fifo_proof] engine_0: 32 : ... 8 58 270 337 126 48 100 30 20 10 17 26 18 28 28 30 655 ~172      0    93      5.60 sec  T/O =  1  PRV =  2
-SBY 19:21:14 [fifo_rules_fifo_proof] engine_0: 33 : ... 270 337 126 48 100 30 20 10 17 26 18 28 31 46 67 632 ~172       12   113      5.72 sec  T/O =  1  PRV =  2
-SBY 19:21:14 [fifo_rules_fifo_proof] engine_0: 33 : ... 270 337 126 48 100 30 20 10 17 26 18 28 33 48 74 651 ~172        7   115      5.73 sec  T/O =  1  PRV =  2
-SBY 19:21:14 [fifo_rules_fifo_proof] engine_0: 34 : ... 337 126 48 100 30 20 10 17 26 18 28 26 33 54 185 530 ~172        9   116      5.93 sec  T/O =  1  PRV =  2
-SBY 19:21:14 [fifo_rules_fifo_proof] engine_0: 35 : ... 126 48 100 30 20 10 17 26 18 28 26 33 54 149 177 431 ~172       19   117      6.36 sec  T/O =  1  PRV =  2
-SBY 19:21:14 [fifo_rules_fifo_proof] engine_0: 35 : ... 126 48 100 30 20 10 17 26 18 28 26 33 57 163 201 491 ~172       12   121      6.43 sec  T/O =  1  PRV =  2
-SBY 19:21:15 [fifo_rules_fifo_proof] engine_0: 36 : ... 47 100 30 20 10 17 26 18 28 26 24 35 91 129 187 486 ~172         7   122      6.64 sec  T/O =  1  PRV =  2
-SBY 19:21:15 [fifo_rules_fifo_proof] engine_0: 37 : ... 47 100 30 20 10 17 26 18 28 26 24 35 73 92 177 205 382 ~172     12   123      6.84 sec  T/O =  1  PRV =  2
-SBY 19:21:15 [fifo_rules_fifo_proof] engine_0: 37 : ... 47 100 30 20 10 17 26 18 28 26 24 36 73 93 185 225 409 ~172     13   124      6.87 sec  T/O =  1  PRV =  2
-SBY 19:21:15 [fifo_rules_fifo_proof] engine_0: 37 : ... 100 30 20 10 17 26 18 28 26 24 36 74 101 215 287 509 ~172       11   124      7.05 sec  T/O =  1  PRV =  2
-SBY 19:21:15 [fifo_rules_fifo_proof] engine_0: 38 : ... 30 20 10 17 26 18 28 26 24 34 59 55 110 183 266 595 ~172        12   129      7.40 sec  T/O =  1  PRV =  2
-SBY 19:21:16 [fifo_rules_fifo_proof] engine_0: 39 : ... 30 20 10 16 26 16 28 26 24 34 50 32 81 61 179 234 645 ~172      21   130      7.76 sec  T/O =  1  PRV =  2
-SBY 19:21:16 [fifo_rules_fifo_proof] engine_0: 39 : ... 30 20 10 16 26 16 28 26 24 34 50 32 81 61 180 240 676 ~172      18   130      7.79 sec  T/O =  1  PRV =  2
-SBY 19:21:16 [fifo_rules_fifo_proof] engine_0: 40 : ... 20 10 16 26 16 28 26 24 34 50 30 76 43 62 63 137 835 ~172       10   130      8.17 sec  T/O =  1  PRV =  2
-SBY 19:21:17 [fifo_rules_fifo_proof] engine_0: 41 : ... 10 16 26 16 28 26 24 34 50 30 75 43 60 59 131 238 722 ~172       9   130      8.79 sec  T/O =  1  PRV =  2
-SBY 19:21:17 [fifo_rules_fifo_proof] engine_0: 42 : ... 14 24 14 28 26 24 34 52 34 75 40 50 35 66 166 234 724 ~172       7   130      9.10 sec  T/O =  1  PRV =  2
-SBY 19:21:17 [fifo_rules_fifo_proof] engine_0: 43 : ... 24 14 23 26 24 34 52 34 75 40 44 15 39 36 83 115 911 ~172        8   130      9.49 sec  T/O =  1  PRV =  2
-SBY 19:21:18 [fifo_rules_fifo_proof] engine_0: 44 : ... 14 23 26 24 34 52 34 75 40 44 11 29 17 25 47 129 903 ~172        2   130     10.07 sec  T/O =  1  PRV =  2
-SBY 19:21:19 [fifo_rules_fifo_proof] engine_0: 45 : ... 23 26 24 34 52 34 75 40 44 11 29 16 25 45 136 181 776 ~172       7   130     10.79 sec  T/O =  1  PRV =  2
-SBY 19:21:19 [fifo_rules_fifo_proof] engine_0: 46 : ... 26 24 34 52 34 75 40 44 11 29 16 25 27 55 116 152 869 ~172       9   130     11.14 sec  T/O =  1  PRV =  2
-SBY 19:21:20 [fifo_rules_fifo_proof] engine_0: 47 : ... 24 34 49 34 74 38 48 11 31 16 23 15 16 27 59 174 895 ~173        7   130     11.69 sec  T/O =  1  PRV =  2
-SBY 19:21:20 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 47 (retrying in next anytime pass).
-SBY 19:21:20 [fifo_rules_fifo_proof] engine_0: 47 : ... 24 34 49 34 74 38 48 11 31 16 23 15 16 27 62 182 911 ~173        9   130     11.71 sec  T/O =  2  PRV =  2
-SBY 19:21:20 [fifo_rules_fifo_proof] engine_0: 48 : ... 34 49 34 74 38 48 11 31 16 23 15 9 15 23 108 211 821 ~174        1   130     12.16 sec  T/O =  2  PRV =  2
-SBY 19:21:20 [fifo_rules_fifo_proof] engine_0: 49 : ... 49 34 74 38 46 12 32 16 23 15 9 15 23 108 209 229 612 ~174       5   130     12.51 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 50 : ... 34 74 38 46 11 33 16 23 15 9 15 24 109 199 227 231 481 ~174     17   130     12.80 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 50 : ... 34 74 38 46 11 33 16 23 15 9 15 26 114 210 239 251 511 ~174     22   130     12.86 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 50 : ... 34 74 38 46 11 33 16 23 15 9 16 28 114 218 250 272 529 ~174     32   130     12.90 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 50 : ... 34 74 38 46 11 33 16 23 15 9 20 42 121 229 265 274 530 ~174     42   130     12.96 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 50 : ... 34 74 38 46 11 33 16 23 15 9 20 42 121 229 276 302 555 ~174     40   130     13.00 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 50 : ... 34 74 38 46 11 33 16 23 15 9 20 42 121 229 276 303 592 ~174     20   131     13.02 sec  T/O =  2  PRV =  2
-SBY 19:21:21 [fifo_rules_fifo_proof] engine_0: 51 : ... 74 38 46 11 33 14 22 10 8 8 12 51 120 112 214 288 719 ~174      11   133     13.41 sec  T/O =  2  PRV =  2
-SBY 19:21:22 [fifo_rules_fifo_proof] engine_0: 52 : ... 74 38 46 11 33 14 22 10 8 8 12 48 100 27 38 31 25 1101 ~174      0   133     13.84 sec  T/O =  2  PRV =  2
-SBY 19:21:22 [fifo_rules_fifo_proof] engine_0: 53 : ... 38 46 11 33 14 22 10 8 8 12 48 98 25 39 28 23 30 1061 ~174       0   133     14.04 sec  T/O =  2  PRV =  2
-SBY 19:21:22 [fifo_rules_fifo_proof] engine_0: 54 : ... 46 11 33 14 22 10 8 8 12 48 96 27 39 27 23 30 62 998 ~174        0   133     14.20 sec  T/O =  2  PRV =  2
-SBY 19:21:22 [fifo_rules_fifo_proof] engine_0: 55 : ... 11 32 15 22 10 8 8 12 48 96 27 39 27 23 30 62 144 856 ~174       1   133     14.43 sec  T/O =  2  PRV =  2
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: 56 : ... 31 14 22 10 8 8 12 48 96 27 39 27 24 33 66 158 233 702 ~174     14   133     14.82 sec  T/O =  2  PRV =  2
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: 56 : ... 31 14 22 10 8 8 12 48 96 27 39 27 24 33 66 161 237 716 ~174      7   133     14.87 sec  T/O =  2  PRV =  2
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: 57 : ... 11 31 14 22 10 8 8 12 48 96 27 39 12 1 0 0 0 0 0 1147 ~174       0   133     15.29 sec  T/O =  2  PRV =  2
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: Proved output 3 in frame -523271076 (converged).
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: Proved output 5 in frame -523271068 (converged).
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
-SBY 19:21:23 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: Proved output 4 in frame 0.
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 1 : 0 1032 ~1330                                                         0     0      1.36 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 1029 ~1330                                                       0     0      1.36 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 1027 ~1330                                                     0     0      1.37 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 2 1025 ~1330                                                   0     0      1.37 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 2 1 1024 ~1330                                                 0     0      1.38 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 2 1 13 1011 ~1330                                              0     0      1.38 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 2 1 13 15 996 ~1330                                            0     0      1.39 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 2 1 13 15 4 992 ~1330                                          0     0      1.40 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 2 1 13 15 4 7 985 ~1330                                        0     0      1.40 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 2 1 13 15 4 7 6 979 ~1330                                      0     0      1.41 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 2 1 13 15 4 7 6 11 968 ~1330                                   0     0      1.41 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 13 15 4 7 6 11 5 963 ~1330                                 0     0      1.42 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 13 15 4 7 6 11 5 5 958 ~1330                               0     0      1.43 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 13 15 4 7 6 11 5 5 5 953 ~1330                             0     0      1.43 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 2 1 13 15 4 7 6 11 5 5 5 4 949 ~1330                           0     0      1.44 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 7 20 12 10 9 8 12 951 ~1330                     12    33      1.47 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 11 26 19 24 12 11 15 956 ~1330                  18    38      1.50 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 12 32 29 42 32 18 15 958 ~1330                  26    43      1.54 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 13 37 36 50 37 30 18 964 ~1330                  27    49      1.57 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 13 42 43 61 41 34 22 974 ~1330                  22    54      1.60 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 17 51 47 65 44 45 39 977 ~1330                  20    57      1.64 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 21 59 50 69 56 47 41 995 ~1330                  20    59      1.68 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 21 63 57 83 59 51 46 1002 ~1330                 20    64      1.71 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 25 74 75 101 67 58 46 1004 ~1330                24    64      1.75 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 28 79 79 111 73 61 49 1007 ~1330                33    65      1.78 sec  T/O =  0  PRV =  5
-SBY 19:21:25 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 13 15 4 7 29 84 92 127 76 63 51 1012 ~1330                22    67      1.81 sec  T/O =  0  PRV =  5
-SBY 19:21:26 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 2 1 13 15 4 7 29 34 5 5 5 4 7 9 1194 ~776                      1    67      2.93 sec  T/O =  0  PRV =  5
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 2 1 13 15 4 7 29 34 5 5 5 4 7 9 57 1138 ~776                  19    68      3.39 sec  T/O =  0  PRV =  5
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Block =  756  Oblig = 15902  Clause =  9507  Call =276398 (sat=68.2%)  Cex =   0  Start = 837
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: SAT solving =    14.74 sec ( 50.81 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: unsat     =     3.56 sec ( 12.27 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: sat       =    11.18 sec ( 38.54 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Generalize  =     4.65 sec ( 16.01 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Push clause =    10.85 sec ( 37.38 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Ternary sim =     0.15 sec (  0.50 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Containment =     0.08 sec (  0.27 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: CNF compute =     0.80 sec (  2.75 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Refinement  =     0.00 sec (  0.00 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: TOTAL       =    29.01 sec (100.00 %)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Output 2 of miter "model/design_aiger" was asserted in frame 18.  Time =    29.03 sec
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: finished (returncode=0)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Status returned by engine: FAIL
-SBY 19:21:27 [fifo_rules_fifo_proof] smt2: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_smt2.log design_smt2.ys"
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-witness aiw2yw engine_0/trace.aiw model/design_aiger.ywa engine_0/trace_aiw.yw"
-SBY 19:21:27 [fifo_rules_fifo_proof] smt2: finished (returncode=0)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Converting AIGER witness trace 'engine_0/trace.aiw' to Yosys witness trace 'engine_0/trace_aiw.yw'...
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Using Yosys witness AIGER map file 'model/design_aiger.ywa'
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: Converted 19 time steps.
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: finished (returncode=0)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-smtbmc -s yices --noprogress --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc --yw engine_0/trace_aiw.yw model/design_smt2.smt2"
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Solver: yices
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 0..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 1..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 2..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 3..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 4..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 5..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 6..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 7..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 8..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 9..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 10..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 11..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 12..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 13..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 14..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 15..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 16..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 17..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Checking assertions in step 18..
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  BMC failed!
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Value for anyconst fifo_rules.pick (fifo_rules.sv:11.32-11.36): 3
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Assert failed in fifo_rules: fifo_rules.sv:29.9-29.32 (_witness_.check_assert_fifo_rules_sv_29_15)
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Status: FAILED
-SBY 19:21:27 [fifo_rules_fifo_proof] engine_0: finished (returncode=1)
-SBY 19:21:27 [fifo_rules_fifo_proof] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:29 (29)
-SBY 19:21:27 [fifo_rules_fifo_proof] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:22 (22)
-SBY 19:21:27 [fifo_rules_fifo_proof] summary: engine_0 (abc pdr) returned FAIL
-SBY 19:21:27 [fifo_rules_fifo_proof] summary: counterexample trace: fifo_rules_fifo_proof/engine_0/trace.vcd
-SBY 19:21:27 [fifo_rules_fifo_proof] summary:   failed assertion fifo_rules._witness_.check_assert_fifo_rules_sv_29_15 at fifo_rules.sv:29.9-29.32 step 18
-SBY 19:21:27 [fifo_rules_fifo_proof] DONE (FAIL, rc=2)
-SBY 19:21:27 The following tasks failed: ['fifo_proof']
-SBY 19:21:28 [fifo_rules_fifo_reach] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach'.
-SBY 19:21:28 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/sync2.sv'.
-SBY 19:21:28 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/reset_sync.sv'.
-SBY 19:21:28 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/async_fifo.sv'.
-SBY 19:21:28 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/skid_buffer.sv'.
-SBY 19:21:28 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/fifo_bridge.sv'.
-SBY 19:21:28 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/fifo_rules.sv'.
-SBY 19:21:28 [fifo_rules_fifo_reach] engine_0: smtbmc yices
-SBY 19:21:28 [fifo_rules_fifo_reach] base: starting process "cd fifo_rules_fifo_reach/src; yosys -ql ../model/design.log ../model/design.ys"
-SBY 19:21:28 [fifo_rules_fifo_reach] base: finished (returncode=0)
-SBY 19:21:28 [fifo_rules_fifo_reach] prep: starting process "cd fifo_rules_fifo_reach/model; yosys -ql design_prep.log design_prep.ys"
-SBY 19:21:28 [fifo_rules_fifo_reach] prep: finished (returncode=0)
-SBY 19:21:28 [fifo_rules_fifo_reach] smt2: starting process "cd fifo_rules_fifo_reach/model; yosys -ql design_smt2.log design_smt2.ys"
-SBY 19:21:29 [fifo_rules_fifo_reach] smt2: finished (returncode=0)
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: starting process "cd fifo_rules_fifo_reach; yosys-smtbmc -s yices --presat --unroll -c --noprogress -t 40  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Solver: yices
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 0..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 1..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 2..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 3..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 4..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 5..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 6 at fifo_rules.dut.w_to_r: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_113)
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 7..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 8..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 9..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 11..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 12..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 13 at fifo_rules.dut.r_to_w: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_113)
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 14..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 15..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 16..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 18..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 19..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 20..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 21..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 22..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 23..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 23 at fifo_rules: fifo_rules.sv:39.5-39.40 (_witness_.check_cover_fifo_rules_sv_39_26)
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 23..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 24..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 25..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 26..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 27..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 28..
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 28 at fifo_rules: fifo_rules.sv:30.9-30.26 (_witness_.check_cover_fifo_rules_sv_30_17)
-SBY 19:21:29 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
-SBY 19:21:30 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
-SBY 19:21:30 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
-SBY 19:21:30 [fifo_rules_fifo_reach] engine_0: ##   0:00:01  Writing trace to Yosys witness file: engine_0/trace3.yw
-SBY 19:21:30 [fifo_rules_fifo_reach] engine_0: ##   0:00:01  Status: passed
-SBY 19:21:30 [fifo_rules_fifo_reach] engine_0: finished (returncode=0)
-SBY 19:21:30 [fifo_rules_fifo_reach] engine_0: Status returned by engine: pass
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:01 (1)
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: engine_0 (smtbmc yices) returned pass
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace0.vcd
-SBY 19:21:30 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules.dut.w_to_r._witness_.check_cover_sync2_sv_36_113 at sync2.sv:36.26-36.60 step 6
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace1.vcd
-SBY 19:21:30 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules.dut.r_to_w._witness_.check_cover_sync2_sv_36_113 at sync2.sv:36.26-36.60 step 13
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace2.vcd
-SBY 19:21:30 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules._witness_.check_cover_fifo_rules_sv_39_26 at fifo_rules.sv:39.5-39.40 step 23
-SBY 19:21:30 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace3.vcd
-SBY 19:21:30 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules._witness_.check_cover_fifo_rules_sv_30_17 at fifo_rules.sv:30.9-30.26 step 28
-SBY 19:21:30 [fifo_rules_fifo_reach] DONE (PASS, rc=0)
+4 failed, 1 passed in 7.71s
+SBY  4:59:15 [fifo_rules_fifo_proof] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof'.
+SBY  4:59:15 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/sync2.sv'.
+SBY  4:59:15 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/reset_sync.sv'.
+SBY  4:59:15 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/async_fifo.sv'.
+SBY  4:59:15 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/skid_buffer.sv'.
+SBY  4:59:15 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/fifo_bridge.sv'.
+SBY  4:59:15 [fifo_rules_fifo_proof] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_proof/src/fifo_rules.sv'.
+SBY  4:59:15 [fifo_rules_fifo_proof] engine_0: abc pdr
+SBY  4:59:15 [fifo_rules_fifo_proof] base: starting process "cd fifo_rules_fifo_proof/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY  4:59:15 [fifo_rules_fifo_proof] base: finished (returncode=0)
+SBY  4:59:15 [fifo_rules_fifo_proof] prep: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_prep.log design_prep.ys"
+SBY  4:59:15 [fifo_rules_fifo_proof] prep: finished (returncode=0)
+SBY  4:59:15 [fifo_rules_fifo_proof] aig: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_en like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [0] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [1] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [2] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [3] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [4] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [5] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [6] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [7] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_data [8] like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\w_clk like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\r_en like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating undriven bit fifo_rules.\r_clk like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: Warning: Treating a total of 13 undriven bits in fifo_rules like $anyseq.
+SBY  4:59:16 [fifo_rules_fifo_proof] aig: finished (returncode=0)
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: Warning: The network has no constraints.
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 219. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 1 : 0 17                                                                1    17      0.00 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 2 : 0 11 26                                                             3    30      0.01 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 3 : 0 9 10 46 ~5                                                         3    52      0.02 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 25 22 ~9                                                      1    52      0.02 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 5 : 0 4 3 39 27 62 ~9                                                   7    80      0.04 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 6 : 0 4 3 8 6 9 60 ~15                                                   8    81      0.04 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 7 3 8 12 50 ~16                                                2    82      0.05 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 7 3 8 16 21 49 ~16                                             4    82      0.06 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 7 3 9 10 18 25 55 ~17                                         13    82      0.07 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 7 3 9 8 14 18 25 50 ~17                                        5    82      0.08 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 7 3 9 9 17 15 38 43 84 ~21                                    10    95      0.11 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 13 14 17 12 30 42 56 62 ~30                               22   106      0.15 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 13 15 23 18 36 47 69 92 ~30                               21   110      0.19 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 15 17 30 24 43 53 81 118 ~30                              12   114      0.22 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 15 17 37 34 53 68 99 127 ~30                              21   114      0.26 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 16 19 42 39 62 82 119 141 ~30                             20   118      0.30 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 17 21 47 44 69 88 121 162 ~30                             16   122      0.32 sec  T/O =  0  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 12 (retrying in next anytime pass).
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 4 3 17 21 47 46 73 99 141 198 ~30                              9   122      0.35 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 4 3 17 16 22 17 30 36 53 139 161 ~36                           8   122      0.53 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 4 3 17 16 22 17 35 43 44 49 97 182 ~39                        12   122      0.62 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 4 3 17 16 22 17 36 45 50 57 113 208 ~39                       15   122      0.64 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 4 3 17 16 22 17 31 34 45 45 99 191 164 ~39                    15   122      0.70 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 4 3 17 16 22 17 31 34 42 34 34 58 61 309 ~42                   9   122      0.75 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 4 3 17 16 22 17 31 34 42 34 38 66 75 347 ~42                   8   122      0.77 sec  T/O =  1  PRV =  0
+SBY  4:59:16 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 4 3 17 16 22 17 31 33 43 26 12 21 20 28 355 ~45                3   122      0.81 sec  T/O =  1  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 4 3 17 16 22 17 31 33 43 25 12 20 20 44 98 353 ~49            11   122      0.89 sec  T/O =  1  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 19 : ... 3 2 4 3 17 16 22 17 31 33 43 24 12 20 17 34 88 181 252 ~51      11   122      0.97 sec  T/O =  1  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 20 : ... 4 3 17 16 22 17 31 33 43 24 12 20 15 31 63 160 145 196 ~51       8   122      1.03 sec  T/O =  1  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: Timing out on output 5 in frame 20 (retrying in next anytime pass).
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 20 : ... 4 3 17 16 22 17 31 33 43 24 12 20 15 31 63 160 145 196 ~51       0   122      1.04 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 21 : ... 17 16 22 17 31 33 43 24 12 19 15 29 60 144 138 173 182 ~54      18   122      1.12 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 21 : ... 17 16 22 17 31 33 43 24 12 19 15 30 63 151 142 195 211 ~54      13   122      1.14 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 21 : ... 17 16 22 17 31 33 43 24 12 19 15 30 65 159 159 222 252 ~54      11   122      1.17 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 21 : ... 17 16 22 17 31 33 43 24 12 19 15 30 65 159 164 233 272 ~54      13   122      1.18 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 22 : ... 16 22 17 31 33 43 24 12 19 15 28 59 139 100 176 238 141 ~57     13   122      1.32 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 22 : ... 16 22 17 31 33 43 24 12 19 15 28 59 140 106 189 264 173 ~57     16   122      1.40 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 22 : ... 16 22 17 31 33 43 24 12 19 15 28 59 140 106 189 274 192 ~57     16   122      1.43 sec  T/O =  2  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: Timing out on output 3 in frame 22 (retrying in next anytime pass).
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 22 : ... 16 22 17 31 33 43 24 12 19 15 28 59 140 106 189 274 203 ~57      2   122      1.44 sec  T/O =  3  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 23 : ... 22 17 31 33 42 24 12 19 15 28 55 128 79 50 100 135 348 ~67      12   122      1.58 sec  T/O =  3  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 23 : ... 22 17 31 33 42 24 12 19 15 28 55 128 79 50 103 145 357 ~67      10   122      1.59 sec  T/O =  3  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 23 (retrying in next anytime pass).
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 23 : ... 22 17 31 33 42 24 12 19 15 28 55 128 79 50 103 145 357 ~67       0   122      1.59 sec  T/O =  4  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 24 : ... 17 31 33 42 24 12 19 15 28 55 127 77 41 91 121 191 192 ~68       4   122      1.65 sec  T/O =  4  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 25 : ... 31 33 42 24 12 19 15 28 55 127 77 41 90 102 173 81 148 ~70       5   122      1.70 sec  T/O =  4  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 26 : ... 33 42 24 12 19 15 28 55 127 77 41 90 101 169 82 31 98 ~102       4   122      1.75 sec  T/O =  4  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 27 : ... 42 24 12 19 15 28 55 127 77 41 90 101 168 77 28 38 65 ~104       3   122      1.81 sec  T/O =  4  PRV =  0
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: Proved output 0 in frame 27.
+SBY  4:59:17 [fifo_rules_fifo_proof] engine_0: 28 : ... 24 12 19 15 28 55 127 77 41 90 101 168 77 27 40 35 26 ~116       3   122      1.86 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 29 : ... 12 19 15 28 55 127 77 41 90 101 168 77 27 27 37 23 14 ~112       3   122      1.92 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 30 : ... 19 15 28 55 127 77 41 90 101 168 77 27 27 37 28 17 21 ~114       5   122      1.98 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 31 : ... 15 28 55 127 77 41 90 101 168 77 27 7 27 13 18 17 19 ~131        1   122      2.03 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 32 : ... 28 55 127 77 41 90 101 168 77 27 7 27 13 18 18 15 14 ~128        4   122      2.07 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 33 : ... 28 55 127 77 41 90 101 168 77 27 7 27 13 18 15 6 8 18 ~130       5   122      2.12 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 34 : ... 55 127 77 41 90 101 168 77 27 7 27 13 16 13 3 7 10 4 ~136        0   122      2.18 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 90 101 168 77 27 7 27 13 16 13 3 7 10 7 -2 ~136       1   122      2.23 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 36 : ... 127 77 41 90 101 168 77 27 7 27 13 16 13 3 7 10 8 2 2 ~134       5   122      2.28 sec  T/O =  4  PRV =  1
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: Proved output 1 in frame 36.
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 37 : ... 77 41 90 101 168 77 27 7 27 13 16 13 3 0 0 0 0 0 12 ~142         0   122      2.32 sec  T/O =  4  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 1 : 0 555 ~159                                                           0     0      0.21 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 552 ~159                                                         0     0      0.21 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 550 ~159                                                       0     0      0.21 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 2 548 ~159                                                     0     0      0.21 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 2 1 547 ~159                                                   0     0      0.22 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 2 1 6 541 ~159                                                 0     0      0.22 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 2 1 6 9 532 ~159                                               0     0      0.22 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 2 1 6 9 8 524 ~159                                             0     0      0.22 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 2 1 6 9 8 11 513 ~159                                          0     0      0.23 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 2 1 6 9 8 11 7 506 ~159                                        0     0      0.23 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 2 1 6 9 8 11 7 12 494 ~159                                     0     0      0.23 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 9 13 19 20 17 20 18 496 ~159                              12    28      0.26 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 10 15 27 28 26 33 28 513 ~159                             18    39      0.29 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 11 16 34 36 42 46 38 530 ~159                             18    42      0.32 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 12 18 40 42 54 65 46 540 ~159                             15    48      0.35 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 13 20 45 47 63 79 59 553 ~159                             18    52      0.38 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 14 22 50 52 71 91 72 580 ~159                             17    56      0.40 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 15 23 57 62 79 104 78 593 ~159                            18    56      0.43 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 15 23 57 62 84 108 81 597 ~159                            12    56      0.44 sec  T/O =  0  PRV =  2
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 12 (retrying in next anytime pass).
+SBY  4:59:18 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 15 23 57 62 84 108 81 597 ~159                             0    56      0.44 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 15 18 17 27 12 15 23 24 603 ~151                           0    56      0.57 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 15 18 17 25 12 15 23 23 7 594 ~151                         0    56      0.58 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 2 1 15 18 17 24 12 15 23 23 7 4 590 ~151                       0    56      0.59 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 15 18 17 24 12 15 23 23 7 4 8 582 ~151                     0    56      0.61 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 2 1 15 18 17 24 12 15 23 23 7 4 8 8 574 ~151                   0    56      0.62 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 2 1 15 18 17 24 12 15 23 23 7 4 8 8 36 538 ~151                0    56      0.63 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 19 : 0 3 2 2 1 15 18 17 24 12 15 23 23 7 4 8 8 36 184 354 ~151            0    56      0.65 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 20 : ... 3 2 2 1 15 18 17 24 12 15 23 23 7 4 8 8 36 184 26 328 ~151       0    56      0.67 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 21 : ... 2 2 1 15 18 17 24 12 15 23 23 7 4 8 8 36 184 26 22 306 ~151      0    56      0.69 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 22 : ... 1 15 18 17 24 12 15 23 23 7 4 8 8 36 184 26 22 36 270 ~151       0    56      0.70 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 23 : ... 15 18 17 24 12 15 23 23 7 4 8 8 36 184 27 23 48 82 240 ~151     12    75      0.75 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 24 : ... 17 24 12 15 23 23 7 4 7 8 37 184 27 23 36 75 103 239 ~151       13    78      0.82 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 25 : ... 24 12 15 23 23 7 4 7 8 37 184 27 17 35 50 101 150 247 ~151      14    95      0.96 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 25 : ... 24 12 15 23 23 7 4 7 8 37 184 27 17 35 50 110 179 303 ~151      14    95      1.02 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 26 : ... 12 15 23 23 7 4 7 8 37 184 27 17 34 32 61 116 142 283 ~154      12    97      1.18 sec  T/O =  1  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: Timing out on output 5 in frame 26 (retrying in next anytime pass).
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 26 : ... 12 15 23 23 7 4 7 8 37 184 27 17 34 32 61 116 142 283 ~154       0    97      1.18 sec  T/O =  2  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 27 : ... 15 23 23 7 4 7 8 37 184 27 17 34 32 58 80 119 146 193 ~154       5   100      1.29 sec  T/O =  2  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 28 : ... 23 23 7 4 7 8 37 184 27 17 33 37 63 87 123 148 122 101 ~155     36   102      1.47 sec  T/O =  2  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 28 : ... 23 7 4 7 8 37 184 27 17 33 48 77 108 140 148 122 102 ~155       59   104      1.50 sec  T/O =  2  PRV =  2
+SBY  4:59:19 [fifo_rules_fifo_proof] engine_0: 28 : ... 23 7 4 7 8 37 184 27 17 33 48 80 111 150 170 144 109 ~155       53   104      1.54 sec  T/O =  2  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 28 : ... 23 7 4 7 8 37 184 27 17 33 48 80 111 154 200 164 117 ~155       67   104      1.59 sec  T/O =  2  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 28 : ... 23 7 4 7 8 37 184 27 17 33 48 80 111 154 205 167 119 ~155       70   104      1.60 sec  T/O =  2  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: Timing out on output 3 in frame 28 (retrying in next anytime pass).
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 28 : ... 23 7 4 7 8 37 184 27 17 33 48 80 112 156 207 180 143 ~155        6   104      1.63 sec  T/O =  3  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 29 : ... 7 4 7 8 37 184 27 17 33 33 58 68 113 123 151 170 198 ~156       12   105      1.83 sec  T/O =  3  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 37 184 27 17 33 33 58 67 106 122 114 173 171 94 ~155      16   111      1.93 sec  T/O =  3  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 37 184 27 17 33 33 58 67 106 122 114 180 182 109 ~155      8   111      1.95 sec  T/O =  3  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 30 (retrying in next anytime pass).
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 37 184 27 17 33 33 58 67 106 122 114 180 182 109 ~155      0   111      1.95 sec  T/O =  4  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: 31 : ... 8 37 184 27 17 33 33 58 67 106 121 107 155 137 133 28 ~156       0   111      2.02 sec  T/O =  4  PRV =  2
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: All outputs solved or timed out in frame 31.
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY  4:59:20 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 1 : 0 1416 ~156                                                          0     0      0.74 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 1413 ~156                                                        0     0      0.75 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 1411 ~156                                                      0     0      0.75 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 2 1409 ~156                                                    0     0      0.76 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 2 1 1408 ~156                                                  0     0      0.76 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 2 1 15 1393 ~156                                               0     0      0.76 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 2 1 15 18 1375 ~156                                            0     0      0.77 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 2 1 15 18 17 1358 ~156                                         0     0      0.77 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 2 1 15 18 17 24 1334 ~156                                      0     0      0.78 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 2 1 15 18 17 24 12 1322 ~156                                   0     0      0.78 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 2 1 15 18 17 24 12 15 1307 ~156                                0     0      0.79 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 17 20 28 39 24 21 28 1293 ~156                            15    29      0.81 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 17 20 28 43 25 37 50 1311 ~156                            15    34      0.84 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 18 21 34 50 32 46 59 1327 ~156                            12    47      0.86 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 18 21 34 50 32 49 68 1338 ~156                            11    51      0.87 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 18 21 20 24 6 10 47 62 1344 ~156                          17    54      1.21 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 18 21 20 24 6 10 56 88 1356 ~156                          17    56      1.24 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 18 21 20 24 6 10 67 116 1365 ~156                         16    59      1.27 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 18 21 20 24 6 10 77 143 1378 ~156                         15    60      1.30 sec  T/O =  0  PRV =  2
+SBY  4:59:21 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 18 21 20 24 6 10 77 143 1379 ~156                          0    60      1.31 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 20 24 6 18 31 29 10 1480 ~156                       15    63      1.76 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 20 24 6 22 41 52 15 1485 ~156                       16    63      1.79 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 20 24 6 22 50 75 17 1490 ~156                       14    67      1.81 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 20 24 6 22 59 104 20 1494 ~156                      14    67      1.84 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 21 25 12 30 67 119 24 1499 ~156                     21    72      1.87 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 22 27 16 38 78 133 26 1507 ~156                     16    74      1.91 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 24 31 19 41 80 137 30 1513 ~156                     18    76      1.92 sec  T/O =  0  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 14 (retrying in next anytime pass).
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 24 31 19 41 80 137 30 1513 ~156                      0    76      1.92 sec  T/O =  1  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 2 1 18 21 24 28 12 15 15 5 6 4 1209 ~157                       0    76      2.25 sec  T/O =  1  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 18 21 24 28 12 15 15 5 6 4 7 1192 ~157                     0    76      2.27 sec  T/O =  1  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 2 1 18 21 24 28 12 15 15 5 6 4 7 8 1183 ~157                   0    76      2.30 sec  T/O =  1  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 2 1 18 21 24 28 12 15 15 5 6 4 7 8 47 1133 ~157                0    76      2.33 sec  T/O =  1  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 19 : 0 3 2 2 1 18 21 24 28 12 15 15 5 6 4 7 8 47 314 819 ~157             0    76      2.44 sec  T/O =  1  PRV =  2
+SBY  4:59:22 [fifo_rules_fifo_proof] engine_0: 20 : ... 3 2 2 1 18 21 24 28 12 15 15 5 6 4 7 8 47 314 211 608 ~157       0    76      2.50 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 21 : ... 2 2 1 18 21 24 28 12 15 15 5 6 4 7 8 47 314 211 41 567 ~157      0    76      2.53 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 22 : ... 1 18 21 24 28 12 15 15 5 6 4 7 8 47 314 211 41 10 557 ~157       0    76      2.56 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 23 : ... 18 21 24 28 12 15 15 5 6 4 7 8 47 314 211 41 10 25 532 ~157      0    76      2.59 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 24 : ... 21 24 28 12 15 15 5 6 4 7 8 47 314 211 41 10 25 19 513 ~157      0    76      2.62 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 25 : ... 24 28 12 15 15 5 6 4 7 8 47 314 211 41 10 25 19 22 491 ~157      0    76      2.65 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 26 : ... 28 12 15 15 5 6 4 7 8 47 314 211 41 10 25 19 22 31 462 ~157      1    79      2.69 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 27 : ... 12 15 15 5 6 4 7 8 47 314 211 41 10 25 19 22 31 52 418 ~157      1    83      2.78 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 28 : ... 15 5 6 4 7 8 47 314 211 41 10 25 19 22 31 65 102 363 ~157       17    96      2.90 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 28 : ... 15 5 6 4 7 8 47 314 211 41 10 25 20 23 35 75 127 430 ~157       20    98      2.96 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 29 : ... 5 6 4 7 8 47 314 211 41 10 25 20 23 33 51 103 146 356 ~158       6   100      3.10 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 30 : ... 6 4 7 8 47 314 211 41 10 25 20 23 33 52 99 142 192 297 ~158     19   106      3.27 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 47 314 211 41 10 25 20 23 33 53 101 156 207 320 ~158      19   108      3.31 sec  T/O =  1  PRV =  2
+SBY  4:59:23 [fifo_rules_fifo_proof] engine_0: 30 : ... 4 7 8 47 314 211 41 10 25 20 23 34 54 106 162 222 353 ~158       9   108      3.34 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 31 : ... 7 7 46 313 211 41 10 26 21 23 30 45 67 107 142 216 306 ~158     24   116      3.55 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 31 : ... 7 7 46 313 211 41 10 26 21 23 30 45 69 118 164 268 407 ~158     20   117      3.72 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 32 : ... 7 46 313 211 41 10 24 23 22 30 45 43 69 63 113 162 523 ~161     13   117      3.93 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 33 : ... 313 211 41 10 24 23 22 30 45 42 62 60 94 152 174 432 ~173       12   119      4.18 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 33 : ... 313 211 41 10 24 23 22 30 45 42 62 60 96 163 196 463 ~173       10   119      4.23 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 33 : ... 313 211 41 10 24 23 22 30 45 42 62 61 99 180 224 493 ~173       19   119      4.28 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 33 : ... 313 211 41 10 24 23 22 30 45 42 62 61 99 180 224 493 ~173        0   119      4.28 sec  T/O =  1  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: Timing out on output 4 in frame 33 (retrying in next anytime pass).
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 33 : ... 313 211 41 10 24 23 22 30 45 42 62 62 100 182 227 517 ~173       6   119      4.30 sec  T/O =  2  PRV =  2
+SBY  4:59:24 [fifo_rules_fifo_proof] engine_0: 34 : ... 211 41 10 24 23 22 30 45 42 56 45 88 109 159 275 414 ~167        5   119      4.48 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 104 121 239 200 317 ~167       22   119      4.68 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 106 126 258 239 323 ~167       45   119      4.75 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 106 127 268 268 345 ~167       58   119      4.79 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 106 129 273 290 386 ~167       53   119      4.82 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 135 286 311 408 ~167       55   119      4.87 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 144 309 330 414 ~167       80   120      4.91 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 144 331 369 418 ~167       99   122      4.95 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 144 336 398 446 ~167      107   122      4.99 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 144 338 413 463 ~167      103   122      5.01 sec  T/O =  2  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: Timing out on output 3 in frame 35 (retrying in next anytime pass).
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 144 338 416 468 ~167        3   122      5.01 sec  T/O =  3  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: Timing out on output 5 in frame 35 (retrying in next anytime pass).
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 35 : ... 41 10 24 23 22 30 45 42 60 51 91 107 144 338 416 468 ~167        0   122      5.01 sec  T/O =  4  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: 36 : ... 45 13 24 23 21 28 41 38 61 51 81 84 91 195 347 323 284 ~170      0   122      5.21 sec  T/O =  4  PRV =  2
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: All outputs solved or timed out in frame 36.
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY  4:59:25 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 1 : 0 2442 ~168                                                          0     0      1.17 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 2439 ~168                                                        0     0      1.18 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 2437 ~168                                                      0     0      1.19 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 2 2435 ~168                                                    0     0      1.20 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 2 1 2434 ~168                                                  0     0      1.20 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 2 1 18 2416 ~168                                               0     0      1.21 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 2 1 18 21 2395 ~168                                            0     0      1.22 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 2 1 18 21 24 2371 ~168                                         0     0      1.24 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 2 1 18 21 24 28 2343 ~168                                      0     0      1.25 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 2 1 18 21 24 28 12 2331 ~168                                   0     0      1.26 sec  T/O =  0  PRV =  2
+SBY  4:59:26 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 2 1 18 21 24 28 12 15 2316 ~168                                0     0      1.28 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 18 21 24 28 12 15 15 2301 ~168                             0     0      1.29 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 18 21 24 28 12 15 15 5 2296 ~168                           0     0      1.31 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 26 30 22 28 23 13 10 2298 ~168                      15    30      1.36 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 27 31 26 35 30 27 15 2306 ~168                      18    41      1.39 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 29 32 30 39 37 41 21 2317 ~168                      15    52      1.43 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 29 34 34 44 52 59 25 2321 ~168                      18    55      1.46 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 33 38 41 53 56 63 32 2333 ~168                      10    61      1.50 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 34 39 48 67 66 77 35 2337 ~168                      16    62      1.53 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 37 43 55 77 69 81 40 2346 ~168                      14    68      1.56 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 38 45 58 81 80 101 49 2354 ~168                     19    73      1.61 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 41 49 66 88 83 110 55 2365 ~168                     16    74      1.65 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 41 49 69 101 96 120 60 2374 ~168                    11    76      1.70 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 41 49 71 111 107 131 68 2383 ~168                   12    76      1.77 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 43 51 79 121 116 137 72 2394 ~168                   11    77      1.81 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 43 51 81 125 124 161 77 2399 ~168                   17    77      1.84 sec  T/O =  0  PRV =  2
+SBY  4:59:27 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 18 21 43 51 81 125 124 161 77 2402 ~168                    0    79      1.85 sec  T/O =  0  PRV =  2
+SBY  4:59:28 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 2 1 18 21 43 44 7 10 12 5 5 3 2584 ~168                        0    79      2.85 sec  T/O =  0  PRV =  2
+SBY  4:59:28 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 18 21 43 44 11 17 16 11 8 9 17 2574 ~168                  13    83      2.96 sec  T/O =  0  PRV =  2
+SBY  4:59:28 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 18 21 43 44 13 21 31 33 11 11 18 2575 ~168                25    87      3.15 sec  T/O =  0  PRV =  2
+SBY  4:59:28 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 18 21 43 44 13 21 31 33 11 12 19 2575 ~168                 8    87      3.15 sec  T/O =  0  PRV =  2
+SBY  4:59:28 [fifo_rules_fifo_proof] engine_0: Timing out on output 2 in frame 16 (retrying in next anytime pass).
+SBY  4:59:28 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 18 21 43 44 13 21 31 33 11 12 19 2575 ~168                 0    87      3.16 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 2 1 18 21 43 44 13 15 24 17 10 3 6 4 2599 ~168                 0    87      4.54 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 2 1 18 21 43 44 13 15 24 17 9 3 6 4 63 2535 ~168               0    87      4.57 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 19 : 0 3 2 2 1 18 21 43 44 13 15 24 17 9 3 6 4 63 321 2211 ~168           0    87      4.61 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 20 : ... 2 2 1 18 21 43 44 13 15 24 17 9 3 6 4 63 321 273 1934 ~168       0    87      4.66 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 21 : ... 1 18 21 43 44 13 15 24 17 9 3 6 4 63 321 273 247 1687 ~168       0    87      4.70 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 22 : ... 18 21 43 44 13 15 24 17 9 3 6 4 63 321 273 247 22 1665 ~168      0    87      4.76 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 23 : ... 21 43 44 13 15 24 17 9 3 6 4 63 321 273 247 22 34 1631 ~168      0    87      4.82 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 24 : ... 43 44 13 15 24 17 9 3 6 4 63 321 273 247 22 34 23 1608 ~168      0    87      4.89 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 25 : ... 44 13 15 24 17 9 3 6 4 63 321 273 247 22 34 23 21 1587 ~168      0    87      4.98 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 26 : ... 13 15 24 17 9 3 6 4 63 321 273 247 22 34 23 21 28 1559 ~168      0    87      5.06 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 27 : ... 15 24 17 9 3 6 4 63 321 273 247 22 34 23 21 28 41 1518 ~168      0    87      5.13 sec  T/O =  1  PRV =  2
+SBY  4:59:30 [fifo_rules_fifo_proof] engine_0: 28 : ... 24 17 9 3 6 4 63 321 273 247 22 34 23 21 28 41 38 1480 ~168      0    87      5.21 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 29 : ... 17 9 3 6 4 63 321 273 247 22 34 23 21 28 41 38 61 1419 ~168      0    87      5.28 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 30 : ... 9 3 6 4 63 321 273 247 22 34 23 21 28 41 38 61 51 1368 ~168      0    87      5.35 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 31 : ... 6 4 63 321 273 247 22 34 23 21 28 41 38 61 51 81 1287 ~168       0    87      5.41 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 32 : ... 4 63 321 273 247 22 34 23 21 28 41 38 61 51 81 82 1205 ~168      0    87      5.48 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 33 : ... 321 273 247 22 34 23 21 28 41 38 61 51 81 82 87 1118 ~168        0    87      5.55 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 34 : ... 273 247 22 34 23 21 28 41 38 61 51 81 82 87 193 934 ~168         3    98      5.64 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 35 : ... 247 22 34 23 21 28 41 38 61 51 81 84 97 188 322 660 ~168        12   111      5.90 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 35 : ... 247 22 34 23 21 28 41 38 61 51 81 84 97 193 337 699 ~168        12   116      5.93 sec  T/O =  1  PRV =  2
+SBY  4:59:31 [fifo_rules_fifo_proof] engine_0: 36 : ... 22 34 23 21 28 41 38 61 51 75 76 69 168 274 323 483 ~169         8   120      6.21 sec  T/O =  1  PRV =  2
+SBY  4:59:32 [fifo_rules_fifo_proof] engine_0: 37 : ... 34 23 21 28 41 38 61 51 75 76 69 146 205 284 244 377 ~169       13   122      6.47 sec  T/O =  1  PRV =  2
+SBY  4:59:32 [fifo_rules_fifo_proof] engine_0: 37 : ... 34 23 21 28 41 38 61 51 75 76 69 146 211 316 325 515 ~169       13   123      6.61 sec  T/O =  1  PRV =  2
+SBY  4:59:32 [fifo_rules_fifo_proof] engine_0: 38 : ... 23 21 28 41 37 61 52 75 76 69 130 134 195 264 284 555 ~169      11   125      7.09 sec  T/O =  1  PRV =  2
+SBY  4:59:33 [fifo_rules_fifo_proof] engine_0: 39 : ... 21 26 40 36 61 52 75 76 69 120 79 154 125 212 218 649 ~172      18   125      7.45 sec  T/O =  1  PRV =  2
+SBY  4:59:33 [fifo_rules_fifo_proof] engine_0: 39 : ... 21 26 40 36 61 52 75 76 69 120 79 154 126 223 247 683 ~172      12   128      7.49 sec  T/O =  1  PRV =  2
+SBY  4:59:33 [fifo_rules_fifo_proof] engine_0: 39 : ... 21 26 40 36 61 52 75 76 69 120 79 154 126 223 247 692 ~172       1   128      7.50 sec  T/O =  1  PRV =  2
+SBY  4:59:33 [fifo_rules_fifo_proof] engine_0: 40 : ... 26 40 36 61 53 76 76 69 121 79 136 86 96 144 257 736 ~173       11   128      7.87 sec  T/O =  1  PRV =  2
+SBY  4:59:34 [fifo_rules_fifo_proof] engine_0: 41 : ... 38 37 61 53 76 76 69 121 79 129 56 69 90 202 257 715 ~173        8   128      8.38 sec  T/O =  1  PRV =  2
+SBY  4:59:34 [fifo_rules_fifo_proof] engine_0: 42 : ... 37 61 53 76 76 69 121 79 129 51 54 41 72 172 253 785 ~173       14   128      8.79 sec  T/O =  1  PRV =  2
+SBY  4:59:34 [fifo_rules_fifo_proof] engine_0: 43 : ... 61 53 76 76 69 121 79 129 51 46 23 35 55 165 270 785 ~173        8   128      9.13 sec  T/O =  1  PRV =  2
+SBY  4:59:35 [fifo_rules_fifo_proof] engine_0: 44 : ... 52 75 76 69 121 79 129 51 46 23 36 38 74 156 223 794 ~173       11   128      9.43 sec  T/O =  1  PRV =  2
+SBY  4:59:35 [fifo_rules_fifo_proof] engine_0: 44 : ... 52 75 76 69 121 79 129 51 46 23 36 38 74 158 227 824 ~173        7   128      9.45 sec  T/O =  1  PRV =  2
+SBY  4:59:35 [fifo_rules_fifo_proof] engine_0: 45 : ... 75 76 69 114 68 133 53 44 23 31 18 31 77 141 207 880 ~174        7   128      9.83 sec  T/O =  1  PRV =  2
+SBY  4:59:35 [fifo_rules_fifo_proof] engine_0: 46 : ... 75 76 69 114 68 133 52 44 23 31 14 14 50 66 88 192 920 ~174      7   128     10.23 sec  T/O =  1  PRV =  2
+SBY  4:59:36 [fifo_rules_fifo_proof] engine_0: 47 : ... 69 114 67 133 52 44 23 31 14 12 30 39 39 145 244 876 ~174        9   128     10.60 sec  T/O =  1  PRV =  2
+SBY  4:59:36 [fifo_rules_fifo_proof] engine_0: 48 : ... 114 67 133 52 44 23 31 14 11 25 16 10 28 135 222 922 ~174        6   128     10.94 sec  T/O =  1  PRV =  2
+SBY  4:59:37 [fifo_rules_fifo_proof] engine_0: 49 : ... 114 67 133 52 44 23 31 14 11 25 16 9 11 58 150 158 931 ~174      6   129     11.28 sec  T/O =  1  PRV =  2
+SBY  4:59:37 [fifo_rules_fifo_proof] engine_0: 50 : ... 67 133 52 44 23 31 14 11 25 16 7 4 42 102 117 132 922 ~174       6   130     11.59 sec  T/O =  1  PRV =  2
+SBY  4:59:37 [fifo_rules_fifo_proof] engine_0: 51 : ... 67 133 52 44 23 31 14 11 25 16 7 4 42 92 17 14 17 1093 ~174      0   130     11.88 sec  T/O =  1  PRV =  2
+SBY  4:59:37 [fifo_rules_fifo_proof] engine_0: 52 : ... 133 52 44 23 31 14 11 25 16 7 4 42 90 15 11 11 13 1093 ~174      0   130     12.12 sec  T/O =  1  PRV =  2
+SBY  4:59:38 [fifo_rules_fifo_proof] engine_0: 53 : ... 52 44 23 31 14 11 25 16 7 4 42 90 15 11 11 13 32 1062 ~174       1   130     12.44 sec  T/O =  1  PRV =  2
+SBY  4:59:38 [fifo_rules_fifo_proof] engine_0: 54 : ... 44 23 31 14 11 25 16 7 4 42 90 15 11 11 16 34 54 1028 ~174       8   130     12.84 sec  T/O =  1  PRV =  2
+SBY  4:59:38 [fifo_rules_fifo_proof] engine_0: 55 : ... 52 44 23 31 14 11 25 16 7 4 42 90 15 7 4 0 0 0 0 1119 ~174       0   130     13.26 sec  T/O =  1  PRV =  2
+SBY  4:59:38 [fifo_rules_fifo_proof] engine_0: Proved output 3 in frame 2034885724 (converged).
+SBY  4:59:38 [fifo_rules_fifo_proof] engine_0: Proved output 4 in frame 2034885728 (converged).
+SBY  4:59:38 [fifo_rules_fifo_proof] engine_0: Proved output 5 in frame 2034885732 (converged).
+SBY  4:59:39 [fifo_rules_fifo_proof] engine_0: Starting new anytime pass, reusing clauses.
+SBY  4:59:39 [fifo_rules_fifo_proof] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 1 : 0 977 ~1304                                                          0     0      1.27 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 2 : 0 3 974 ~1304                                                        0     0      1.29 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 3 : 0 3 2 972 ~1304                                                      0     0      1.29 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 4 : 0 3 2 2 970 ~1304                                                    0     0      1.30 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 5 : 0 3 2 2 1 969 ~1304                                                  0     0      1.30 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 6 : 0 3 2 2 1 10 959 ~1304                                               0     0      1.31 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 7 : 0 3 2 2 1 10 13 946 ~1304                                            0     0      1.31 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 8 : 0 3 2 2 1 10 13 16 930 ~1304                                         0     0      1.32 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 9 : 0 3 2 2 1 10 13 16 18 912 ~1304                                      0     0      1.32 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 10 : 0 3 2 2 1 10 13 16 18 5 907 ~1304                                    0     0      1.33 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 11 : 0 3 2 2 1 10 13 16 18 5 10 897 ~1304                                 0     0      1.33 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 12 : 0 3 2 2 1 10 13 16 18 5 10 10 887 ~1304                              0     0      1.34 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 13 : 0 3 2 2 1 10 13 16 18 5 10 10 10 877 ~1304                           0     0      1.34 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 14 : 0 3 2 2 1 10 13 16 18 5 10 10 10 9 868 ~1304                         0     0      1.35 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 15 : 0 3 2 2 1 10 13 16 18 5 10 10 10 9 3 865 ~1304                       0     0      1.36 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 15 15 21 12 6 8 875 ~1304                   17    39      1.38 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 19 22 37 17 9 9 882 ~1304                   16    54      1.41 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 23 26 41 21 30 13 885 ~1304                 19    59      1.44 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 28 39 50 26 42 15 888 ~1304                 25    63      1.46 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 28 46 60 44 49 18 891 ~1304                 26    65      1.51 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 33 62 83 60 52 18 891 ~1304                 30    68      1.54 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 38 71 95 68 57 21 895 ~1304                 33    68      1.57 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 43 82 106 76 63 23 898 ~1304                26    68      1.59 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 43 89 119 94 81 24 898 ~1304                23    71      1.63 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 48 98 129 104 93 25 900 ~1304               29    73      1.66 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 55 111 142 110 97 26 902 ~1304              25    73      1.70 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 55 118 154 116 108 28 904 ~1304             30    73      1.73 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 60 130 171 126 114 29 905 ~1304             24    75      1.77 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 65 149 189 133 120 30 906 ~1304             23    77      1.81 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 70 165 205 142 124 30 908 ~1304             22    77      1.85 sec  T/O =  0  PRV =  5
+SBY  4:59:40 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 77 178 217 150 133 31 910 ~1304             25    77      1.89 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 77 178 221 172 151 33 912 ~1304             25    77      1.93 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 82 189 233 175 153 42 924 ~1304             20    78      1.99 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 87 196 241 187 159 44 928 ~1304             22    80      2.04 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 87 209 264 196 164 45 929 ~1304             23    80      2.11 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 92 221 276 209 174 46 931 ~1304             21    80      2.20 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 16 : 0 3 2 2 1 10 13 16 18 5 92 226 289 211 176 48 935 ~1304             21    82      2.23 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 17 : 0 3 2 2 1 10 13 16 18 5 10 6 7 6 4 5 5 1380 ~731                     0    82      2.83 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: 18 : 0 3 2 2 1 10 13 16 18 5 10 6 7 6 4 5 5 199 1179 ~731                19    83      2.87 sec  T/O =  0  PRV =  5
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Block =  755  Oblig = 16668  Clause =  9922  Call =290048 (sat=69.3%)  Cex =   0  Start = 876
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: SAT solving =    13.56 sec ( 52.47 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: unsat     =     3.00 sec ( 11.61 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: sat       =    10.56 sec ( 40.86 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Generalize  =     4.55 sec ( 17.59 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Push clause =     9.77 sec ( 37.79 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Ternary sim =     0.16 sec (  0.61 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Containment =     0.10 sec (  0.38 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: CNF compute =     0.61 sec (  2.34 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Refinement  =     0.00 sec (  0.00 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: TOTAL       =    25.84 sec (100.00 %)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Output 2 of miter "model/design_aiger" was asserted in frame 18.  Time =    25.85 sec
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: finished (returncode=0)
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: Status returned by engine: FAIL
+SBY  4:59:41 [fifo_rules_fifo_proof] smt2: starting process "cd fifo_rules_fifo_proof/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY  4:59:41 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-witness aiw2yw engine_0/trace.aiw model/design_aiger.ywa engine_0/trace_aiw.yw"
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: Converting AIGER witness trace 'engine_0/trace.aiw' to Yosys witness trace 'engine_0/trace_aiw.yw'...
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: Using Yosys witness AIGER map file 'model/design_aiger.ywa'
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: Converted 19 time steps.
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: finished (returncode=0)
+SBY  4:59:42 [fifo_rules_fifo_proof] smt2: finished (returncode=0)
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: starting process "cd fifo_rules_fifo_proof; yosys-smtbmc -s yices --noprogress --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc --yw engine_0/trace_aiw.yw model/design_smt2.smt2"
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Solver: yices
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 0..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 1..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 2..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 3..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 4..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 5..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 6..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 7..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 8..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 9..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 10..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 11..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 12..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 13..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 14..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 15..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 16..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Skipping step 17..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Checking assertions in step 18..
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  BMC failed!
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Value for anyconst fifo_rules.pick (fifo_rules.sv:11.32-11.36): 3
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Assert failed in fifo_rules: fifo_rules.sv:29.9-29.32 (_witness_.check_assert_fifo_rules_sv_29_15)
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: ##   0:00:00  Status: FAILED
+SBY  4:59:42 [fifo_rules_fifo_proof] engine_0: finished (returncode=1)
+SBY  4:59:42 [fifo_rules_fifo_proof] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:26 (26)
+SBY  4:59:42 [fifo_rules_fifo_proof] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:20 (20)
+SBY  4:59:42 [fifo_rules_fifo_proof] summary: engine_0 (abc pdr) returned FAIL
+SBY  4:59:42 [fifo_rules_fifo_proof] summary: counterexample trace: fifo_rules_fifo_proof/engine_0/trace.vcd
+SBY  4:59:42 [fifo_rules_fifo_proof] summary:   failed assertion fifo_rules._witness_.check_assert_fifo_rules_sv_29_15 at fifo_rules.sv:29.9-29.32 step 18
+SBY  4:59:42 [fifo_rules_fifo_proof] DONE (FAIL, rc=2)
+SBY  4:59:42 The following tasks failed: ['fifo_proof']
+SBY  4:59:43 [fifo_rules_fifo_reach] Removing directory '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach'.
+SBY  4:59:43 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/sync2.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/sync2.sv'.
+SBY  4:59:43 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/reset_sync.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/reset_sync.sv'.
+SBY  4:59:43 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/async_fifo.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/async_fifo.sv'.
+SBY  4:59:43 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/skid_buffer.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/skid_buffer.sv'.
+SBY  4:59:43 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/../design/fifo_bridge.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/fifo_bridge.sv'.
+SBY  4:59:43 [fifo_rules_fifo_reach] Copy '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules.sv' to '/home/user/Portfolio/projects/fifo_bridge/build/drop_word_on_wrap/formal/fifo_rules_fifo_reach/src/fifo_rules.sv'.
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: smtbmc yices
+SBY  4:59:43 [fifo_rules_fifo_reach] base: starting process "cd fifo_rules_fifo_reach/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY  4:59:43 [fifo_rules_fifo_reach] base: finished (returncode=0)
+SBY  4:59:43 [fifo_rules_fifo_reach] prep: starting process "cd fifo_rules_fifo_reach/model; yosys -ql design_prep.log design_prep.ys"
+SBY  4:59:43 [fifo_rules_fifo_reach] prep: finished (returncode=0)
+SBY  4:59:43 [fifo_rules_fifo_reach] smt2: starting process "cd fifo_rules_fifo_reach/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY  4:59:43 [fifo_rules_fifo_reach] smt2: finished (returncode=0)
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: starting process "cd fifo_rules_fifo_reach; yosys-smtbmc -s yices --presat --unroll -c --noprogress -t 40  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Solver: yices
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 6 at fifo_rules.dut.w_to_r: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_113)
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 8..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 9..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 10..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 11..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 12..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 13 at fifo_rules.dut.r_to_w: sync2.sv:36.26-36.60 (_witness_.check_cover_sync2_sv_36_113)
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 13..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 14..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 15..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 16..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 17..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 18..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 19..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 20..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 21..
+SBY  4:59:43 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 22..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 23..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 23 at fifo_rules: fifo_rules.sv:39.5-39.40 (_witness_.check_cover_fifo_rules_sv_39_26)
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 23..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 24..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 25..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 26..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 27..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Checking cover reachability in step 28..
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Reached cover statement in step 28 at fifo_rules: fifo_rules.sv:30.9-30.26 (_witness_.check_cover_fifo_rules_sv_30_17)
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: ##   0:00:00  Status: passed
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: finished (returncode=0)
+SBY  4:59:44 [fifo_rules_fifo_reach] engine_0: Status returned by engine: pass
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:01 (1)
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: engine_0 (smtbmc yices) returned pass
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace0.vcd
+SBY  4:59:44 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules.dut.w_to_r._witness_.check_cover_sync2_sv_36_113 at sync2.sv:36.26-36.60 step 6
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace1.vcd
+SBY  4:59:44 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules.dut.r_to_w._witness_.check_cover_sync2_sv_36_113 at sync2.sv:36.26-36.60 step 13
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace2.vcd
+SBY  4:59:44 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules._witness_.check_cover_fifo_rules_sv_39_26 at fifo_rules.sv:39.5-39.40 step 23
+SBY  4:59:44 [fifo_rules_fifo_reach] summary: cover trace: fifo_rules_fifo_reach/engine_0/trace3.vcd
+SBY  4:59:44 [fifo_rules_fifo_reach] summary:   reached cover statement fifo_rules._witness_.check_cover_fifo_rules_sv_30_17 at fifo_rules.sv:30.9-30.26 step 28
+SBY  4:59:44 [fifo_rules_fifo_reach] DONE (PASS, rc=0)

@@ -178,7 +178,7 @@
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284403
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319182
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -195,9 +195,9 @@
     66.35ns INFO     cocotb.regression                  ********************************************************************************************************
                                                         ** TEST                                            STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ********************************************************************************************************
-                                                        ** test_sim_sdf.every_edge_takes_the_expected_arc   PASS          66.35           0.03       2421.18  **
+                                                        ** test_sim_sdf.every_edge_takes_the_expected_arc   PASS          66.35           0.03       2480.32  **
                                                         ********************************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                   66.35           0.03       2382.07  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                   66.35           0.03       2448.52  **
                                                         ********************************************************************************************************
 ./home/user/Portfolio/projects/fifo_bridge/build/sg13g2_stdcell.v:42: sorry: ifnone with an edge-sensitive path is not supported.
 /home/user/Portfolio/projects/fifo_bridge/build/sg13g2_stdcell.v:44: sorry: ifnone with an edge-sensitive path is not supported.
@@ -379,7 +379,7 @@
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795284405
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795319186
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -396,9 +396,9 @@
     65.97ns INFO     cocotb.regression                  ********************************************************************************************************
                                                         ** TEST                                            STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ********************************************************************************************************
-                                                        ** test_sim_sdf.every_edge_takes_the_expected_arc   PASS          65.97           0.02       3204.11  **
+                                                        ** test_sim_sdf.every_edge_takes_the_expected_arc   PASS          65.97           0.02       3162.19  **
                                                         ********************************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                   65.97           0.02       3140.67  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                   65.97           0.02       3052.25  **
                                                         ********************************************************************************************************
 .
-2 passed in 3.34s
+2 passed in 4.49s
