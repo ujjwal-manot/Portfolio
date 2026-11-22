@@ -1,4 +1,4 @@
-// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, with MAC set a custom-0 multiply-accumulate for the filter (mac rs1, rs2 adds the signed product of their low halves to an accumulator when it commits in EX, macr rd reads the accumulator into rd and clears it; without MAC both trap as illegal), Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending, and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM); imem_en is low when the fetch address repeats (a stall or sleep without a redirect), so the code memory need not read again and holds its last word.
+// RV32I core with machine mode, 5 stages (IF ID EX MEM WB), every flop reset by rst_n asserted at once and released two edges later through reset_sync (from fifo_bridge), x0 read as zero rather than stored: forwarding, one-cycle load-use stall, 2-bit predictor with a 16-entry BTB, with MAC set a custom-0 multiply-accumulate for the filter (mac rs1, rs2 adds the signed product of their low halves to an accumulator when it commits in EX, macr rd reads the accumulator into rd and clears it; without MAC both trap as illegal), Zicsr with the machine CSRs, precise traps and interrupts (timer, and external while a stream sample waits, registered for a cycle) taken in EX where instructions commit, mret, wfi holding the pipeline asleep until an enabled interrupt is pending (the instruction held in EX meanwhile keeps its operands up to date from the forwarding paths, since the writer it depends on leaves WB while it waits), and stream, counters and the mtime/mtimecmp timer at 0x1000_0000; memories are synchronous like the IHP SRAM macros: the next fetch address and the data address, write data and byte strobes of the instruction in EX go out in one cycle and are captured at its closing edge, and read data comes back in the next cycle (IF and MEM); with RISCV_FORMAL an RVFI port reports each instruction at WB for riscv-formal (an exception as a trap with no register or memory write, the first instruction after any trap or interrupt marked intr); imem_en is low when the fetch address repeats (a stall or sleep without a redirect), so the code memory need not read again and holds its last word.
 module cpu #(parameter bit MAC = 1) (
   input  logic        clk, rst_n,
   output logic [31:0] imem_addr,
@@ -17,6 +17,9 @@ module cpu #(parameter bit MAC = 1) (
   output logic [4:0]  retire_rd,
   output logic        retire_intr, sleep,
   output logic [3:0]  retire_cause
+`ifdef RISCV_FORMAL
+  , `RVFI_OUTPUTS
+`endif
 );
   localparam logic [6:0] LUI = 7'h37, AUIPC = 7'h17, JAL = 7'h6f, JALR = 7'h67, BRANCH = 7'h63,
                          LOAD = 7'h03, STORE = 7'h23, OPIMM = 7'h13, OP = 7'h33, FENCE = 7'h0f, SYSTEM = 7'h73, CUSTOM0 = 7'h0b;
@@ -298,6 +301,59 @@ module cpu #(parameter bit MAC = 1) (
       end
     end
 
+`ifdef RISCV_FORMAL
+  wire        e_uses_rs1 = !(e_op == LUI || e_op == AUIPC || e_op == JAL);
+  wire        e_uses_rs2 = e_op == BRANCH || e_op == STORE || e_op == OP || e_op == CUSTOM0;
+  wire [3:0]  e_rmask = !(e_commit && e_op == LOAD) ? 4'b0 : (e_f3[1:0] == 2'd0 ? 4'b0001 : e_f3[1:0] == 2'd1 ? 4'b0011 : 4'b1111) << e_addr[1:0];
+  logic        m_fv, w_fv, m_ftrap, w_ftrap, m_fintr, w_fintr, intr_due;
+  logic [4:0]  m_frs1, m_frs2, w_frs1, w_frs2;
+  logic [3:0]  m_frmask, w_frmask, m_fwmask, w_fwmask;
+  logic [31:0] m_fa, m_fb, w_fa, w_fb, m_fnext, w_fnext, m_fwdata, w_fwdata, w_frdata, w_faddr;
+  logic [63:0] order;
+  always_ff @(posedge clk or negedge run)
+    if (!run) begin
+      {m_fv, w_fv, m_ftrap, w_ftrap, m_fintr, w_fintr, intr_due, m_frs1, m_frs2, w_frs1, w_frs2, m_frmask, w_frmask, m_fwmask, w_fwmask} <= '0;
+      {m_fa, m_fb, w_fa, w_fb, m_fnext, w_fnext, m_fwdata, w_fwdata, w_frdata, w_faddr, order} <= '0;
+    end else begin
+      m_fv <= e_commit || e_trap && !e_irq;
+      m_ftrap <= !e_commit;
+      m_fintr <= intr_due;
+      if (e_trap) intr_due <= 1'b1;
+      else if (e_commit) intr_due <= 1'b0;
+      m_frs1 <= e_uses_rs1 ? e_rs1 : 5'd0;
+      m_frs2 <= e_uses_rs2 ? e_rs2 : 5'd0;
+      m_fa <= e_uses_rs1 && e_rs1 != 0 ? a : 32'b0;
+      m_fb <= e_uses_rs2 && e_rs2 != 0 ? b : 32'b0;
+      m_fnext <= new_pc;
+      {m_frmask, m_fwmask, m_fwdata} <= {e_rmask, dmem_wstrb, dmem_wdata};
+      {w_fv, w_ftrap, w_fintr, w_frs1, w_frs2, w_fa, w_fb, w_fnext} <= {m_fv, m_ftrap, m_fintr, m_frs1, m_frs2, m_fa, m_fb, m_fnext};
+      {w_frmask, w_fwmask, w_fwdata, w_faddr} <= {m_frmask, m_fwmask, m_fwdata, m_addr & ~32'd3};
+      w_frdata <= m_io ? io_data : dmem_rdata;
+      order <= order + 64'(w_fv);
+    end
+  assign rvfi_valid = w_fv;
+  assign rvfi_order = order;
+  assign rvfi_insn = w_instr;
+  assign rvfi_trap = w_ftrap;
+  assign rvfi_halt = 1'b0;
+  assign rvfi_intr = w_fintr;
+  assign rvfi_mode = 2'd3;
+  assign rvfi_ixl = 2'd1;
+  assign rvfi_rs1_addr = w_frs1;
+  assign rvfi_rs2_addr = w_frs2;
+  assign rvfi_rs1_rdata = w_fa;
+  assign rvfi_rs2_rdata = w_fb;
+  assign rvfi_rd_addr = w_ftrap ? 5'd0 : w_rd;
+  assign rvfi_rd_wdata = w_ftrap || w_rd == 0 ? 32'b0 : w_value;
+  assign rvfi_pc_rdata = w_pc;
+  assign rvfi_pc_wdata = w_fnext;
+  assign rvfi_mem_addr = w_faddr;
+  assign rvfi_mem_rmask = w_frmask;
+  assign rvfi_mem_wmask = w_fwmask;
+  assign rvfi_mem_rdata = w_frdata;
+  assign rvfi_mem_wdata = w_fwdata;
+`endif
+
   always_ff @(posedge clk or negedge run)
     if (!run) begin
       {d_pc, d_instr, d_next, e_pc, e_instr, e_next, e_imm, e_a, e_b} <= '0;
@@ -309,6 +365,7 @@ module cpu #(parameter bit MAC = 1) (
         d_next <= f_taken ? btb_target[f_idx] : pc + 4;
         {e_pc, e_instr, e_next, e_imm, e_a, e_b} <= {d_pc, d_instr, d_next, d_imm, d_a, d_b};
       end
+      else if (e_hold) {e_a, e_b} <= {a, b};
       {m_pc, m_instr, m_rd, m_data, m_store, m_cause} <= {e_pc, e_instr, e_rd, e_result, b, irq_cause};
       m_addr <= e_addr;
       {w_pc, w_instr, w_rd, w_value, w_cause} <= {m_pc, m_instr, m_rd, m_value, m_cause};

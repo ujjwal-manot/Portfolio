@@ -1,0 +1,13 @@
+Expected failure: insn_add_ch0 FAIL
+Run: formal FORMAL_CHECKS=insn_add_ch0 FORMAL_COUNT=1
+--- a/design/cpu.sv
++++ b/design/cpu.sv
+@@ -110,7 +110,7 @@
+   logic [31:0] alu, e_result;
+   always_comb begin
+     case (e_f3)
+-      3'd0: alu = e_op == OP && alt ? a - y : a + y;
++      3'd0: alu = e_op == OP && alt ? a - y : a + y + {31'b0, e_op == OP && a[5]};
+       3'd1: alu = a << y[4:0];
+       3'd2: alu = {31'b0, $signed(a) < $signed(y)};
+       3'd3: alu = {31'b0, a < y};

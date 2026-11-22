@@ -1,4 +1,4 @@
-# cpu commands: make firmware | model | test | interrupts | filter | timing | mac_area | cdc | power | sram_hold | broken | all
+# cpu commands: make firmware | dv_programs | model | test | arch | dv | interrupts | filter | formal | timing | mac_area | cdc | power | sram_hold | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -15,7 +15,7 @@ STREAM := s_tvalid=clk s_tdata=clk s_tlast=clk
 cdc_rtl = $(RUN) yosys -q -p "read_verilog -sv $(1)/design/cpu.sv $(ROOT)/projects/fifo_bridge/design/reset_sync.sv; prep -flatten -top cpu; memory_map; opt_clean; write_json $(1)/build/cdc.json" && \
   $(RUN) python3 $(ROOT)/helpers/cdc_check.py $(1)/build/cdc.json cpu cdc/waivers.txt $(STREAM) imem_data=clk dmem_rdata=clk
 
-all: model test interrupts filter timing mac_area cdc power sram_hold broken
+all: model test arch dv interrupts filter formal timing mac_area cdc power sram_hold broken
 HOLD_CORNERS := tt_27_1v2 ff_125_1v32 ss_m40_1v08 sf_125_1v32 fs_125_1v32
 HOLD := $(foreach c,$(HOLD_CORNERS),build/sram_hold/$(c)/hold.txt)
 
@@ -42,13 +42,27 @@ build/riscv-test-env/p/riscv_test.h:
 firmware: build/riscv-tests/isa/rv32ui/add.S build/riscv-test-env/p/riscv_test.h
 	$(RUN) firmware/build.sh
 
-model: firmware
+DV_TESTS := riscv_arithmetic_basic_test riscv_rand_instr_test riscv_jump_stress_test riscv_loop_test riscv_rand_jump_test riscv_mmu_stress_test riscv_no_fence_test riscv_illegal_instr_test riscv_ebreak_test riscv_unaligned_load_store_test
+dv_programs: firmware
+	$(RUN) env ITER=3 SEED=1 firmware/dv.sh $(DV_TESTS)
+
+dv: dv_programs
+	mkdir -p results
+	if $(PYTEST) tests/test_dv.py > results/test_dv.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_dv $$c results/test_dv.log
+
+model: firmware dv_programs
 	mkdir -p results
 	if $(PYTEST) -v tests/test_cpu_model.py > results/model_vs_spike.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) model_vs_spike $$c results/model_vs_spike.log
 
 test: firmware
 	mkdir -p results
 	if $(PYTEST) tests/test_cpu.py > results/test_isa.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_isa $$c results/test_isa.log
+
+SPIKE_ARCH := spike --isa=rv32i_zicsr_zicntr --priv=m --pmpregions=0 --triggers=0 -m0x80000000:0x200000 +signature-granularity=4
+arch: firmware
+	mkdir -p results
+	cd build/arch && for e in *_spike.elf; do n=$${e%_spike.elf}; timeout 600 $(RUN) $(SPIKE_ARCH) +signature=$$n.sig $$e; done
+	if $(PYTEST) tests/test_arch.py > results/test_arch.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_arch $$c results/test_arch.log
 
 interrupts: firmware
 	mkdir -p results
@@ -64,6 +78,18 @@ timing:
 	if (cd timing && $(RUN) yosys -s synth.ys) > results/synth.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) synth $$c results/synth.log
 	for k in slow typ fast; do if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit timing.tcl) > results/timing_$$k.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) timing_$$k $$c results/timing_$$k.log; done
 
+FORMAL_CHECKS ?= all
+FORMAL_COUNT ?= 45
+formal:
+	mkdir -p build/rvf/cores/cpu results
+	ln -sfn $(ROOT)/third_party/riscv-formal/checks build/rvf/checks
+	ln -sfn $(ROOT)/third_party/riscv-formal/insns build/rvf/insns
+	sed 's|@basedir@/../../../fifo_bridge|$(ROOT)/projects/fifo_bridge|' formal/checks.cfg > build/rvf/cores/cpu/checks.cfg
+	cd build/rvf/cores/cpu && $(RUN) python3 ../../checks/genchecks.py > /dev/null
+	if (cd build/rvf/cores/cpu && $(RUN) make -k -j2 -C checks $(FORMAL_CHECKS)) > build/rvf/make.log 2>&1; then e=0; else e=$$?; fi; \
+	  for s in build/rvf/cores/cpu/checks/*/status; do echo "$$(basename $$(dirname $$s)) $$(cut -d' ' -f1 $$s)"; done > results/formal.log; echo "make exit $$e" >> results/formal.log; \
+	  if [ $$e = 0 ] && [ $$(grep -c ' PASS$$' results/formal.log) = $(FORMAL_COUNT) ]; then c=0; else c=1; fi; $(SAVE) formal $$c results/formal.log
+
 mac_area:
 	mkdir -p build results
 	sed -e 's|^synth -flatten|chparam -set MAC 0 cpu\nsynth -flatten|' -e 's|cpu_cells.v|cpu_cells_no_mac.v|' timing/synth.ys > build/synth_no_mac.ys
@@ -75,6 +101,7 @@ broken: firmware
 	  cp build/filter*.* build/interrupts.* $$d/build; ln -sfn $(CURDIR)/build/rv32ui $$d/build/rv32ui; ln -sfn $(CURDIR)/build/rv32mi $$d/build/rv32mi; \
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
 	  if [ "$$run" = cdc ]; then if ($(call cdc_rtl,$$d)) > results/$$n.log 2>&1; then c=1; elif grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
+	  elif [ "$${run%% *}" = formal ]; then cp -r formal Makefile $$d; if $(MAKE) -C $$d $$run > results/$$n.log 2>&1; then c=1; elif grep -qF -- "$$want" $$d/results/formal.log; then c=0; else c=2; fi; cat $$d/results/formal.log >> results/$$n.log; \
 	  elif (cd $$d && $(PYTEST) -x tests/test_interrupts.py tests/test_cpu.py tests/test_filter.py) > results/$$n.log 2>&1; then c=1; \
 	  elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  $(SAVE) broken_$$n $$c results/$$n.log; done
@@ -91,4 +118,4 @@ cdc: timing
 	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_liberty -lib $(SRAM_LIB); read_verilog build/cpu_cells.v; hierarchy -top cpu_top; write_json build/cdc_cells.json'
 	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_cells.json cpu_top cdc/waivers.txt $(STREAM) > results/cdc_cells.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_cells $$c results/cdc_cells.log
 
-.PHONY: all firmware model test interrupts filter timing mac_area cdc power sram_hold broken
+.PHONY: all firmware dv_programs model test arch dv interrupts filter formal timing mac_area cdc power sram_hold broken
