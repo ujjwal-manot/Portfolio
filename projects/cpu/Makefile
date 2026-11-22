@@ -1,4 +1,4 @@
-# cpu commands: make firmware | model | test | interrupts | filter | timing | broken | all
+# cpu commands: make firmware | model | test | interrupts | filter | timing | power | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -10,7 +10,7 @@ LIB := /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_slow_1p0
 RISCV_TESTS := 3df703cd52d5f0d8224e3c50bf03c6cb70efff98
 RISCV_TEST_ENV := 6de71edb142be36319e380ce782c3d1830c65d68
 
-all: model test interrupts filter timing broken
+all: model test interrupts filter timing power broken
 
 build/riscv-tests/isa/rv32ui/add.S:
 	mkdir -p build/riscv-tests
@@ -54,4 +54,10 @@ broken: firmware
 	  elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  $(SAVE) broken_$$n $$c results/$$n.log; done
 
-.PHONY: all firmware model test interrupts filter timing broken
+power: timing firmware
+	mkdir -p results
+	if $(PYTEST) tests/test_power.py > results/test_power.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) test_power $$c results/test_power.log
+	$(RUN) fst2vcd -f build/icarus_cpu_top_board_test_power_FUNCTIONAL/cpu_top_board.fst -o build/cpu_gates.vcd > /dev/null
+	if (cd timing && $(RUN) sta -no_init -exit power.tcl) > results/power.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) power $$c results/power.log
+
+.PHONY: all firmware model test interrupts filter timing power broken

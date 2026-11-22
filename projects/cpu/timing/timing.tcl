@@ -16,6 +16,9 @@ set_load [get_property [lindex [get_lib_pins */sg13g2_dfrbpq_1/D] 0] capacitance
 set_false_path -to [get_ports {retire* sleep}]
 report_checks -path_delay max -group_path_count 3
 report_checks -path_delay min -group_path_count 3
+report_checks -path_delay max -from [all_registers -clock_pins] -to [all_registers -data_pins]
+set internal [expr {[get_property [lindex [find_timing_paths -path_delay max -from [all_registers -clock_pins] -to [all_registers -data_pins]] 0] slack]}]
+puts "$corner: worst setup slack between flops and macros $internal ns (the core's own critical path, without the input and output delays)"
 set setup [expr {[sta::worst_slack_cmd max] * 1e9}]
 set hold [expr {[sta::worst_slack_cmd min] * 1e9}]
 puts "$corner: worst setup slack $setup ns, worst hold slack $hold ns before layout (no clock tree, no hold repair; hold is signed off after layout)"

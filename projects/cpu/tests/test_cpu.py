@@ -6,7 +6,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, RisingEdge, ReadOnly
 from cocotb_run import build, run
-from lockstep import Lockstep, hex_file
+from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -37,7 +37,7 @@ async def lockstep(dut):
 
 @pytest.fixture(scope="module")
 def runner():
-    return build("cpu_board", SOURCES, __file__)
+    return build("cpu_board", SOURCES, __file__, build_args=RANDOM_START)
 
 def test_found_the_tests():
     assert len(NAMES) >= 52
@@ -45,4 +45,4 @@ def test_found_the_tests():
 @pytest.mark.parametrize("name", NAMES)
 def test_isa(runner, name):
     os.environ["PROGRAM"] = name
-    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / f'{name}.bin')}"], runner=runner, results=str(BUILD / f"{name}.result.xml"))
+    run("cpu_board", SOURCES, __file__, build_args=RANDOM_START, plusargs=[f"+program={hex_file(BUILD / f'{name}.bin')}", *RANDOM_SEED], runner=runner, results=str(BUILD / f"{name}.result.xml"))

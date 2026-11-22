@@ -1,0 +1,79 @@
+* Measures the fanout-of-4 stage delay of the IHP inv_1, nand2_1 and nor2_1 standard cells (their transistor netlists from the PDK) at supplies from 0.80 to 1.32 V in 20 mV steps: six stages of each cell, every output driving the next stage and three more copies of the same cell, the delay averaged over the rising and the falling edge across stages 3 and 4, written to speed.txt as vdd and the three delays; corner and temperature come from corner.inc.
+.include corner.inc
+.include /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+VDD vdd 0 1.2
+VIN in 0 pulse(0 1 0.5n 20p 20p 3.98n 8n)
+BIN a 0 v = v(in) * v(vdd)
+.subckt inv4 o i vdd
+X0 o i vdd 0 sg13g2_inv_1
+X1 n1 o vdd 0 sg13g2_inv_1
+X2 n2 o vdd 0 sg13g2_inv_1
+X3 n3 o vdd 0 sg13g2_inv_1
+.ends
+.subckt nand4 o i vdd
+X0 o i vdd vdd 0 sg13g2_nand2_1
+X1 n1 o vdd vdd 0 sg13g2_nand2_1
+X2 n2 o vdd vdd 0 sg13g2_nand2_1
+X3 n3 o vdd vdd 0 sg13g2_nand2_1
+.ends
+.subckt nor4 o i vdd
+X0 o i 0 vdd 0 sg13g2_nor2_1
+X1 n1 o 0 vdd 0 sg13g2_nor2_1
+X2 n2 o 0 vdd 0 sg13g2_nor2_1
+X3 n3 o 0 vdd 0 sg13g2_nor2_1
+.ends
+XINV a inv2 inv4 vdd chain_inv
+XNAND a nand2 nand4 vdd chain_nand
+XNOR a nor2 nor4 vdd chain_nor
+.subckt chain_inv i o2 o4 vdd
+X1 o1 i vdd inv4
+X2 o2 o1 vdd inv4
+X3 o3 o2 vdd inv4
+X4 o4 o3 vdd inv4
+X5 o5 o4 vdd inv4
+X6 o6 o5 vdd inv4
+.ends
+.subckt chain_nand i o2 o4 vdd
+X1 o1 i vdd nand4
+X2 o2 o1 vdd nand4
+X3 o3 o2 vdd nand4
+X4 o4 o3 vdd nand4
+X5 o5 o4 vdd nand4
+X6 o6 o5 vdd nand4
+.ends
+.subckt chain_nor i o2 o4 vdd
+X1 o1 i vdd nor4
+X2 o2 o1 vdd nor4
+X3 o3 o2 vdd nor4
+X4 o4 o3 vdd nor4
+X5 o5 o4 vdd nor4
+X6 o6 o5 vdd nor4
+.ends
+.tran 1p 8.5n
+.control
+let v = 0.8
+echo "vdd inv_s nand_s nor_s" > speed.txt
+while v < 1.3299
+  alter VDD dc = v
+  run
+  let h = v / 2
+  meas tran ir when v(inv2)=$&h rise=1
+  meas tran ir4 when v(inv4)=$&h rise=1
+  meas tran fi when v(inv2)=$&h fall=1
+  meas tran fi4 when v(inv4)=$&h fall=1
+  meas tran nr when v(nand2)=$&h rise=1
+  meas tran nr4 when v(nand4)=$&h rise=1
+  meas tran nf when v(nand2)=$&h fall=1
+  meas tran nf4 when v(nand4)=$&h fall=1
+  meas tran orr when v(nor2)=$&h rise=1
+  meas tran or4 when v(nor4)=$&h rise=1
+  meas tran of when v(nor2)=$&h fall=1
+  meas tran of4 when v(nor4)=$&h fall=1
+  let tinv = (ir4 - ir + fi4 - fi) / 4
+  let tnand = (nr4 - nr + nf4 - nf) / 4
+  let tnor = (or4 - orr + of4 - of) / 4
+  echo "$&v $&tinv $&tnand $&tnor" >> speed.txt
+  let v = v + 0.02
+end
+.endc
+.end

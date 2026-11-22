@@ -5,7 +5,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import run
-from lockstep import Lockstep, hex_file
+from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -66,4 +66,4 @@ async def timer_wraps(dut):
     await workout(dut, (1 << 32) - 2000)
 
 def test_interrupts():
-    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}"])
+    run("cpu_board", SOURCES, __file__, build_args=RANDOM_START, plusargs=[f"+program={hex_file(BUILD / 'interrupts.bin')}", *RANDOM_SEED])

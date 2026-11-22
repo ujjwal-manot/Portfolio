@@ -234,7 +234,7 @@ module cpu (
       {branches, mispredicts, mcycle, minstret, mtime} <= '0;
       mtimecmp <= '1;
       {mtvec, mscratch, mepc, mcause, mtval, ie, mstatus_mie, mpie, stop_cycle, stop_instret} <= '0;
-      for (int i = 0; i < 16; i++) btb_valid[i] <= 1'b0;
+      for (int i = 0; i < 16; i++) {btb_valid[i], btb_tag[i], btb_target[i], btb_count[i]} <= '0;
     end else begin
       mtime <= mtime + 1;
       meip <= s_tvalid;
@@ -291,15 +291,20 @@ module cpu (
       end
     end
 
-  always_ff @(posedge clk) begin
-    if (!redirect && !stall && !e_hold) begin
-      {d_pc, d_instr} <= {pc, imem_data};
-      d_next <= f_taken ? btb_target[f_idx] : pc + 4;
-      {e_pc, e_instr, e_next, e_imm, e_a, e_b} <= {d_pc, d_instr, d_next, d_imm, d_a, d_b};
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) begin
+      {d_pc, d_instr, d_next, e_pc, e_instr, e_next, e_imm, e_a, e_b} <= '0;
+      {m_pc, m_instr, m_rd, m_data, m_store, m_cause, m_addr, w_pc, w_instr, w_rd, w_value, w_cause} <= '0;
+      for (int i = 0; i < 32; i++) x[i] <= '0;
+    end else begin
+      if (!redirect && !stall && !e_hold) begin
+        {d_pc, d_instr} <= {pc, imem_data};
+        d_next <= f_taken ? btb_target[f_idx] : pc + 4;
+        {e_pc, e_instr, e_next, e_imm, e_a, e_b} <= {d_pc, d_instr, d_next, d_imm, d_a, d_b};
+      end
+      {m_pc, m_instr, m_rd, m_data, m_store, m_cause} <= {e_pc, e_instr, e_rd, e_result, b, irq_cause};
+      m_addr <= e_addr;
+      {w_pc, w_instr, w_rd, w_value, w_cause} <= {m_pc, m_instr, m_rd, m_value, m_cause};
+      if (w_valid && w_rd != 0) x[w_rd] <= w_value;
     end
-    {m_pc, m_instr, m_rd, m_data, m_store, m_cause} <= {e_pc, e_instr, e_rd, e_result, b, irq_cause};
-    m_addr <= e_addr;
-    {w_pc, w_instr, w_rd, w_value, w_cause} <= {m_pc, m_instr, m_rd, m_value, m_cause};
-    if (w_valid && w_rd != 0) x[w_rd] <= w_value;
-  end
 endmodule

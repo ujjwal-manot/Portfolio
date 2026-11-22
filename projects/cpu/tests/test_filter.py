@@ -5,7 +5,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import build, run
-from lockstep import Lockstep, hex_file
+from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
@@ -80,4 +80,4 @@ async def stream_with_gaps(dut):
     await filter_run(dut, 0.7)
 
 def test_filter():
-    run("cpu_board", SOURCES, __file__, plusargs=[f"+program={hex_file(BUILD / 'filter.bin')}"])
+    run("cpu_board", SOURCES, __file__, build_args=RANDOM_START, plusargs=[f"+program={hex_file(BUILD / 'filter.bin')}", *RANDOM_SEED])

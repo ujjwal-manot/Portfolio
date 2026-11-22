@@ -1,4 +1,4 @@
-Expected failure: cpu took interrupt 7
+Expected failure: test_interrupts.timer_wraps failed
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
 @@ -72,7 +72,7 @@
