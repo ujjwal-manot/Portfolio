@@ -1,0 +1,11 @@
+Expected failure: AssertionError:
+--- a/design/cp_lf.cir
++++ b/design/cp_lf.cir
+@@ -10,5 +10,5 @@ XUPN up_n up vss vss sg13_lv_nmos w=1u l=0.13u ng=1 mm_ok={mm}
+ XSW_UP vctrl up_n src_up vdd sg13_lv_pmos w={w_sw_p} l=0.13u ng=4 mm_ok={mm}
+ XSW_DN vctrl dn snk_dn vss sg13_lv_nmos w={w_sw_n} l=0.13u ng=4 mm_ok={mm}
+ XR1 vctrl vz vss rhigh w={w_r1} l={l_r1} mm_ok={mm}
+-XC1 vz vss cap_cmim w={w_c1} l={l_c1} mm_ok={mm}
++XC1 vctrl vss cap_cmim w={w_c1} l={l_c1} mm_ok={mm}
+ XC2 vctrl vss cap_cmim w={w_c2} l={l_c2} mm_ok={mm}
+ .ends cp_lf

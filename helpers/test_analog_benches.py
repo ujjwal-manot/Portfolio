@@ -1,5 +1,5 @@
-# Verifies SPICE subcircuit-port consistency, verified IHP SG13G2 PDK pin counts, zero toy .model lines, single-comment honesty, and phase_noise/eye_diagram bench contracts across analog paper comparisons and flagship testbenches.
-import re
+# Verifies SPICE subcircuit-port consistency, verified IHP SG13G2 PDK pin counts, zero toy .model lines, single-comment honesty, broken-patch application, and phase_noise/eye_diagram bench contracts across analog paper comparisons and flagship testbenches.
+import re, subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +27,8 @@ EXPECTED_DUT_PINS = {
     "lc_vco_hbt": 10,
     "ctle": 7,
     "cml_tx_ffe": 11,
+    "sampler": 7,
+    "cp_lf": 6,
 }
 
 TARGET_DIRS = (
@@ -34,6 +36,7 @@ TARGET_DIRS = (
     ROOT / "compare_with_papers" / "transistors",
     ROOT / "projects" / "lc_vco",
     ROOT / "projects" / "serdes_frontend",
+    ROOT / "projects" / "frac_n_pll",
 )
 
 def _logical_lines(text):
@@ -90,13 +93,18 @@ def test_all_required_benches_exist():
         ROOT / "projects" / "serdes_frontend" / "tests" / "ctle_ac.cir",
         ROOT / "projects" / "serdes_frontend" / "tests" / "tx_eye.cir",
         ROOT / "projects" / "serdes_frontend" / "tests" / "s11_ac.cir",
+        ROOT / "projects" / "serdes_frontend" / "tests" / "sampler_tran.cir",
+        ROOT / "projects" / "frac_n_pll" / "design" / "cp_lf.cir",
+        ROOT / "projects" / "frac_n_pll" / "design" / "cp_lf_sizes.inc",
+        ROOT / "projects" / "frac_n_pll" / "broken" / "cp_mismatch_20pct.patch",
+        ROOT / "projects" / "frac_n_pll" / "broken" / "lf_zero_removed.patch",
     )
     for path in required:
-        assert path.is_file(), f"missing SPICE file: {path}"
+        assert path.is_file(), f"missing SPICE/patch file: {path}"
 
 def test_every_x_call_matches_subckt_pin_count():
     cir_files = _all_target_cir_files()
-    assert len(cir_files) >= 8
+    assert len(cir_files) >= 10
     defined = {}
     parsed = {}
     for path in cir_files:
@@ -113,7 +121,7 @@ def test_every_x_call_matches_subckt_pin_count():
             assert model in known, f"{path}:{idx} {inst} references unverified subckt '{model}'"
             assert len(pins) == known[model], f"{path}:{idx} {inst} calls {model} with {len(pins)} pins, expected {known[model]}"
             total_calls += 1
-    assert total_calls >= 24
+    assert total_calls >= 35
 
 def test_zero_toy_models_and_strict_honesty_across_analog_benches():
     for path in _all_target_cir_files():
@@ -129,7 +137,7 @@ def test_zero_toy_models_and_strict_honesty_across_analog_benches():
             assert ".include corner.inc" in lines, f"{path} must include corner.inc"
             assert lines[-1].strip().lower() == ".end", f"{path} must end with .end"
 
-def test_flagship_benches_feed_phase_noise_and_eye_helpers():
+def test_flagship_benches_and_broken_patches():
     osc = (ROOT / "projects" / "lc_vco" / "tests" / "osc_tran.cir").read_text(encoding="utf-8")
     assert "set wr_singlescale" in osc
     assert "unset wr_vecnames" in osc
@@ -149,3 +157,11 @@ def test_flagship_benches_feed_phase_noise_and_eye_helpers():
     s11 = (ROOT / "projects" / "serdes_frontend" / "tests" / "s11_ac.cir").read_text(encoding="utf-8")
     assert "at=5g" in s11
     assert "s11_ac.txt" in s11
+    smp = (ROOT / "projects" / "serdes_frontend" / "tests" / "sampler_tran.cir").read_text(encoding="utf-8")
+    assert "sampler_tran.txt" in smp
+    for folder in TARGET_DIRS:
+        broken_dir = folder / "broken"
+        if broken_dir.is_dir():
+            for patch in sorted(broken_dir.glob("*.patch")):
+                res = subprocess.run(["git", "apply", "--check", str(patch)], cwd=folder, capture_output=True, text=True)
+                assert res.returncode == 0, f"{patch} failed git apply --check: {res.stderr}"

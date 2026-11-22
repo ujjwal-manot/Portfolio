@@ -1,0 +1,15 @@
+* Fractional-N PLL 200 uA CMOS charge pump and passive 2nd-order lead-lag loop filter (R1 = 16.92 kOhm rhigh, C1 = 35.1 pF cap_cmim, C2 = 2.71 pF cap_cmim) on IHP SG13G2; sizes from cp_lf_sizes.inc.
+.subckt cp_lf up dn vctrl ibias vdd vss
+XMR ibias ibias vss vss sg13_lv_nmos w={w_ref} l={l_cp} ng=1 mm_ok={mm}
+XMPB vbp ibias vss vss sg13_lv_nmos w={w_ref} l={l_cp} ng=1 mm_ok={mm}
+XMPR vbp vbp vdd vdd sg13_lv_pmos w={w_pref} l={l_cp} ng=2 mm_ok={mm}
+XMSRC src_up vbp vdd vdd sg13_lv_pmos w={w_up} l={l_cp} ng=20 mm_ok={mm}
+XMSNK snk_dn ibias vss vss sg13_lv_nmos w={w_dn} l={l_cp} ng=10 mm_ok={mm}
+XUPP up_n up vdd vdd sg13_lv_pmos w=2u l=0.13u ng=1 mm_ok={mm}
+XUPN up_n up vss vss sg13_lv_nmos w=1u l=0.13u ng=1 mm_ok={mm}
+XSW_UP vctrl up_n src_up vdd sg13_lv_pmos w={w_sw_p} l=0.13u ng=4 mm_ok={mm}
+XSW_DN vctrl dn snk_dn vss sg13_lv_nmos w={w_sw_n} l=0.13u ng=4 mm_ok={mm}
+XR1 vctrl vz vss rhigh w={w_r1} l={l_r1} mm_ok={mm}
+XC1 vz vss cap_cmim w={w_c1} l={l_c1} mm_ok={mm}
+XC2 vctrl vss cap_cmim w={w_c2} l={l_c2} mm_ok={mm}
+.ends cp_lf

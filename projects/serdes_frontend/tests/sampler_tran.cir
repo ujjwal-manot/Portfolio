@@ -1,0 +1,39 @@
+* 10 GBd (100 ps clock period) StrongARM regenerative sampler transient sensitivity and decision-time testbench for projects/serdes_frontend: steps differential input voltage from +10 mV down to -10 mV around 0.85 V common-mode, measuring clk-to-regeneration decision time and latched output level to sampler_tran.txt; corner, temp, supply and mismatch come from corner.inc.
+.include corner.inc
+.option reltol=1e-5 vntol=1e-8
+.include sampler_sizes.inc
+.include sampler.cir
+VDD vdd 0 {vsupply}
+VH half 0 {vsupply/2}
+VCLK clk 0 pulse(0 {vsupply} 50p 5p 5p 45p 100p)
+VP inp 0 0.85
+VN inn 0 0.85
+XSMP inp inn clk outp outn vdd 0 sampler
+CLP outp 0 5f
+CLN outn 0 5f
+.control
+let tc = 0
+let td = 0
+let op = 0
+let dt = 0
+echo "dv_v t_decide_s outp_v" > sampler_tran.txt
+foreach d 10e-3 2e-3 0.5e-3 -0.5e-3 -2e-3 -10e-3
+  let up = 0.85 + $d / 2
+  let down = 0.85 - $d / 2
+  alter VP dc = $&up
+  alter VN dc = $&down
+  tran 0.5p 200p
+  meas tran tc when v(clk)=v(half) rise=2
+  if $d > 0
+    meas tran td when v(xsmp.an)=v(half) fall=1 td=120p
+  else
+    meas tran td when v(xsmp.ap)=v(half) fall=1 td=120p
+  end
+  meas tran op find v(outp) at=195p
+  let dt = td - tc
+  echo "$d $&dt $&op" >> sampler_tran.txt
+  destroy all
+end
+quit
+.endc
+.end
