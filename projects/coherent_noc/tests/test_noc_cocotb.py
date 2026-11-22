@@ -1,4 +1,4 @@
-# Container-ready cocotb verification benches for projects/coherent_noc RTL blocks (xy_router.sv and d2d_replay.sv): checks all 5 X-then-Y dimension-order output ports, per-VC credit exhaustion and VC isolation, CRC-16-CCITT match against model/noc_model.py, Go-Back-N NAK replay (catches broken/replay_skips_flit.patch), and 8-slot backpressure.
+# Container-ready cocotb verification benches for projects/coherent_noc RTL blocks (xy_router.sv, d2d_replay.sv, mesi_dir.sv): checks 5-port X-then-Y routing and credit flow control (catches broken/early_credit_return.patch), CRC-16-CCITT Go-Back-N replay and 7-to-0 wrap (catches broken/replay_skips_flit.patch), and 4-core directory MESI SWMR invalidations (catches broken/missed_invalidate.patch).
 import sys
 from pathlib import Path
 import cocotb
@@ -167,10 +167,70 @@ async def d2d_replay_crc_and_gobackn(dut):
     assert int(dut.tx_ready.value) == 0, "8-slot replay buffer must deassert tx_ready when full"
     await FallingEdge(dut.clk)
     dut.ack_valid.value = 1
-    dut.ack_seq.value = 7
+    dut.ack_seq.value = 5
+    await RisingEdge(dut.clk)
+    await FallingEdge(dut.clk)
+    dut.ack_valid.value = 0
+    for wrap_idx in range(2):
+        dut.tx_valid.value = 1
+        dut.tx_flit.value = 0x77000000 + wrap_idx
+        await RisingEdge(dut.clk)
+        await FallingEdge(dut.clk)
+    dut.tx_valid.value = 0
+    dut.ack_valid.value = 1
+    dut.ack_seq.value = 1
     await RisingEdge(dut.clk)
     await ReadOnly()
-    assert int(dut.tx_ready.value) == 1, "cumulative ACK must free replay buffer slots"
+    assert int(dut.tx_ready.value) == 1, "wrap-around cumulative ACK across 7->0 must free all slots"
+
+
+@cocotb.test()
+async def mesi_dir_coherence_and_swmr(dut):
+    cocotb.start_soon(Clock(dut.clk, 10, "ns").start())
+    dut.req_valid.value = 0
+    dut.req_we.value = 0
+    dut.req_core.value = 0
+    dut.req_addr.value = 0
+    dut.req_wdata.value = 0
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 2)
+    await ReadOnly()
+    assert int(dut.resp_valid.value) == 0 and int(dut.inv_mask.value) == 0
+    await FallingEdge(dut.clk)
+    dut.rst_n.value = 1
+
+    dut.req_valid.value = 1
+    dut.req_we.value = 0
+    dut.req_core.value = 0
+    dut.req_addr.value = 1
+    await RisingEdge(dut.clk)
+    await ReadOnly()
+    assert int(dut.resp_valid.value) == 1 and int(dut.resp_state.value) == 2 and int(dut.sharer_vec.value) == 0b0001
+    await FallingEdge(dut.clk)
+
+    dut.req_core.value = 2
+    await RisingEdge(dut.clk)
+    await ReadOnly()
+    assert int(dut.resp_valid.value) == 1 and int(dut.resp_state.value) == 1 and int(dut.sharer_vec.value) == 0b0101
+    await FallingEdge(dut.clk)
+
+    dut.req_we.value = 1
+    dut.req_core.value = 3
+    dut.req_wdata.value = 0xCAFEBABE
+    await RisingEdge(dut.clk)
+    await ReadOnly()
+    assert int(dut.resp_valid.value) == 1 and int(dut.resp_state.value) == 3
+    assert int(dut.inv_mask.value) == 0b0101, f"expected inv_mask 0b0101, got {int(dut.inv_mask.value):#06b}"
+    assert int(dut.sharer_vec.value) == 0b1000, f"SWMR violation: sharer_vec={int(dut.sharer_vec.value):#06b} in Modified state"
+    assert int(dut.resp_data.value) == 0xCAFEBABE
+    await FallingEdge(dut.clk)
+
+    dut.req_we.value = 0
+    dut.req_core.value = 1
+    await RisingEdge(dut.clk)
+    await ReadOnly()
+    assert int(dut.resp_valid.value) == 1 and int(dut.resp_state.value) == 1
+    assert int(dut.sharer_vec.value) == 0b1010 and int(dut.resp_data.value) == 0xCAFEBABE
 
 
 def test_xy_router_rtl():
@@ -179,3 +239,7 @@ def test_xy_router_rtl():
 
 def test_d2d_replay_rtl():
     run("d2d_replay", [DESIGN / "d2d_replay.sv"], __file__, parameters={"FLIT_W": 32}, defines={"COCOTB_TEST_FILTER": "d2d_replay_crc_and_gobackn"})
+
+
+def test_mesi_dir_rtl():
+    run("mesi_dir", [DESIGN / "mesi_dir.sv"], __file__, parameters={"N_LINES": 4, "DATA_W": 32}, defines={"COCOTB_TEST_FILTER": "mesi_dir_coherence_and_swmr"})

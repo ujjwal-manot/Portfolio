@@ -11,13 +11,20 @@ PORT_DIRECTIONS = {"input", "output", "inout"}
 PORT_TYPE_WORDS = {"logic", "wire", "reg", "bit", "signed", "unsigned", "var", "tri"}
 
 FLAGSHIP_COCOTB = [
-    ("projects/frac_n_pll/tests/test_mash111_cocotb.py", {"mash111": "projects/frac_n_pll/design/mash111.sv"}),
+    (
+        "projects/frac_n_pll/tests/test_mash111_cocotb.py",
+        {
+            "mash111": "projects/frac_n_pll/design/mash111.sv",
+            "pfd_div": "projects/frac_n_pll/design/pfd_div.sv",
+        },
+    ),
     (
         "projects/serdes_link/tests/test_serdes_cocotb.py",
         {
             "prbs": "projects/serdes_link/design/prbs.sv",
             "dfe_lms": "projects/serdes_link/design/dfe_lms.sv",
             "bb_cdr": "projects/serdes_link/design/bb_cdr.sv",
+            "pam4_slicer": "projects/serdes_link/design/pam4_slicer.sv",
         },
     ),
     (
@@ -25,6 +32,7 @@ FLAGSHIP_COCOTB = [
         {
             "xy_router": "projects/coherent_noc/design/xy_router.sv",
             "d2d_replay": "projects/coherent_noc/design/d2d_replay.sv",
+            "mesi_dir": "projects/coherent_noc/design/mesi_dir.sv",
         },
     ),
     ("compare_with_papers/cummings_fifo/test_cummings_cocotb.py", {"fifo1": "compare_with_papers/cummings_fifo/fifo1.v"}),
@@ -37,6 +45,7 @@ FLAGSHIP_FORMAL = [
         {
             "xy_router": "projects/coherent_noc/design/xy_router.sv",
             "d2d_replay": "projects/coherent_noc/design/d2d_replay.sv",
+            "mesi_dir": "projects/coherent_noc/design/mesi_dir.sv",
         },
     ),
     (

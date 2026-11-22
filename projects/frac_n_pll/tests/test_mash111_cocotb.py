@@ -1,4 +1,4 @@
-# Container-ready cocotb verification bench for projects/frac_n_pll/design/mash111.sv checking reset, bit-exact match against model/pll_loop.py::mash111_sequence across multiple fractional inputs, dither range [-3, +4], DC mean accuracy, and 3rd-order in-band noise shaping (catches broken/mash_order_one.patch).
+# Container-ready cocotb verification benches for projects/frac_n_pll RTL blocks (mash111.sv and pfd_div.sv): checks MASH-111 bit-exact sequence, bounds [-3, +4], DC mean, 3rd-order noise shaping (catches broken/mash_order_one.patch), programmable modulus division n_int + dither_in, and dead-zone-free PFD overlap pulses.
 import math
 import sys
 from pathlib import Path
@@ -76,5 +76,51 @@ async def mash111_third_order_noise_shaping(dut):
     assert shaping_db > 50.0, f"insufficient 3rd-order noise shaping: {shaping_db:.1f} dB (expected > 50 dB)"
 
 
+@cocotb.test()
+async def pfd_div_modulus_and_deadzone_free_pulses(dut):
+    cocotb.start_soon(Clock(dut.vco_clk, 4, "ns").start())
+    dut.ref_clk.value = 0
+    dut.n_int.value = 8
+    dut.dither_in.value = 0
+    dut.rst_n.value = 0
+    await ClockCycles(dut.vco_clk, 2)
+    await ReadOnly()
+    assert int(dut.pfd_up.value) == 0 and int(dut.pfd_dn.value) == 0 and int(dut.div_clk.value) == 0
+    await FallingEdge(dut.vco_clk)
+    dut.rst_n.value = 1
+
+    for dither in (-2, 0, 3):
+        dut.n_int.value = 8
+        dut.dither_in.value = dither & 0xF
+        expected_mod = 8 + dither
+        saw_reload = False
+        for _ in range(40):
+            await RisingEdge(dut.vco_clk)
+            await ReadOnly()
+            if int(dut.eff_div.value) == expected_mod:
+                saw_reload = True
+                break
+            await FallingEdge(dut.vco_clk)
+        assert saw_reload, f"pfd_div failed to load eff_div={expected_mod}"
+
+    await FallingEdge(dut.vco_clk)
+    dut.ref_clk.value = 1
+    up_cycles, dn_cycles, overlap_cycles = 0, 0, 0
+    for _ in range(16):
+        await RisingEdge(dut.vco_clk)
+        await ReadOnly()
+        u, d = int(dut.pfd_up.value), int(dut.pfd_dn.value)
+        up_cycles += u
+        dn_cycles += d
+        overlap_cycles += int(u == 1 and d == 1)
+        await FallingEdge(dut.vco_clk)
+        dut.ref_clk.value = 0
+    assert up_cycles >= 1 and overlap_cycles >= 1 and dn_cycles >= 1
+
+
 def test_mash111_rtl():
-    run("mash111", [DESIGN / "mash111.sv"], __file__, parameters={"W": W})
+    run("mash111", [DESIGN / "mash111.sv"], __file__, parameters={"W": W}, defines={"COCOTB_TEST_FILTER": "mash111_"})
+
+
+def test_pfd_div_rtl():
+    run("pfd_div", [DESIGN / "pfd_div.sv"], __file__, parameters={"DIV_W": 10, "MIN_DIV": 2}, defines={"COCOTB_TEST_FILTER": "pfd_div_modulus_and_deadzone_free_pulses"})

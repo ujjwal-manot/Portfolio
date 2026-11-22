@@ -1,4 +1,4 @@
-# Container-ready cocotb verification benches for projects/serdes_link RTL blocks (prbs.sv, dfe_lms.sv, bb_cdr.sv): checks PRBS7/PRBS31 generator and self-synchronizing error checker, 1-tap sign-sign LMS DFE bit-exact convergence (catches broken/lms_sign_flipped.patch), and Alexander bang-bang CDR phase/frequency lock with 6-bit PI wrap.
+# Container-ready cocotb verification benches for projects/serdes_link RTL blocks (prbs.sv, dfe_lms.sv, bb_cdr.sv, pam4_slicer.sv): checks PRBS7/PRBS31 generator and checker, 1-tap sign-sign LMS DFE convergence (catches broken/lms_sign_flipped.patch), Alexander bang-bang CDR tracking (catches broken/cdr_gain_too_high.patch), and 3-threshold PAM4 Gray slicer (catches broken/pam4_thresholds_swapped.patch).
 import os
 import sys
 from pathlib import Path
@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DESIGN = ROOT / "design"
 MODEL = ROOT / "model" if (ROOT / "model").is_dir() else ROOT.parents[1] / "model"
 sys.path.insert(0, str(MODEL))
-from link_models import dfe_lms_run, prbs_generate
+from link_models import dfe_lms_run, pam4_slice, prbs_generate
 
 
 def _to_signed(val, bits):
@@ -142,6 +142,30 @@ async def bb_cdr_phase_and_frequency_tracking(dut):
     assert freq_final > 0, f"CDR freq_acc {freq_final} did not track positive ppm offset"
 
 
+@cocotb.test()
+async def pam4_slicer_gray_levels_and_thresholds(dut):
+    cocotb.start_soon(Clock(dut.clk, 10, "ns").start())
+    dut.en.value = 0
+    dut.sample_in.value = 0
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 2)
+    await ReadOnly()
+    assert int(dut.sym_out.value) == 0
+    await FallingEdge(dut.clk)
+    dut.rst_n.value = 1
+    dut.en.value = 1
+    test_vals = list(range(-64, 65, 4))
+    ref_dibits = pam4_slice([v / 64.0 for v in test_vals], thresholds=(-0.5, 0.0, 0.5))
+    for val, (msb, lsb) in zip(test_vals, ref_dibits):
+        dut.sample_in.value = val & 0x3FF
+        await RisingEdge(dut.clk)
+        await ReadOnly()
+        want = (msb << 1) | lsb
+        got = int(dut.sym_out.value)
+        assert got == want, f"pam4_slicer sample_in={val}: sym_out={got:02b}, expected {want:02b}"
+        await FallingEdge(dut.clk)
+
+
 def test_prbs7_rtl():
     run("prbs", [DESIGN / "prbs.sv"], __file__, parameters={"ORDER": 7}, defines={"COCOTB_TEST_FILTER": "prbs_sequence_and_checker", "PRBS_ORDER": 7})
 
@@ -156,3 +180,7 @@ def test_dfe_lms_rtl():
 
 def test_bb_cdr_rtl():
     run("bb_cdr", [DESIGN / "bb_cdr.sv"], __file__, defines={"COCOTB_TEST_FILTER": "bb_cdr_phase_and_frequency_tracking"})
+
+
+def test_pam4_slicer_rtl():
+    run("pam4_slicer", [DESIGN / "pam4_slicer.sv"], __file__, defines={"COCOTB_TEST_FILTER": "pam4_slicer_gray_levels_and_thresholds"})

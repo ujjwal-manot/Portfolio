@@ -1,7 +1,9 @@
-# Formal verification tasks for projects/coherent_noc: full proof and covers for xy_router (X-then-Y routing, one-hot output, per-VC credit conservation, VC isolation) and bounded check and covers for d2d_replay (8-slot safety, CRC-16-CCITT integrity, exact Go-Back-N NAK replay).
+# Formal verification tasks for projects/coherent_noc: full proofs and covers for xy_router (X-then-Y routing, one-hot output, per-VC credit conservation, VC isolation) and mesi_dir (SWMR coherence invariant, invalidation masks, read-after-write value match), plus bounded check and covers for d2d_replay (8-slot safety, CRC-16-CCITT integrity, exact Go-Back-N NAK replay across 7-to-0 wrap).
 [tasks]
 xy_proof xy prove
 xy_reach xy cover
+mesi_proof mesi prove
+mesi_reach mesi cover
 d2d_check d2d bmc
 d2d_reach d2d cover
 
@@ -18,11 +20,13 @@ bmc: abc bmc3
 cover: smtbmc yices
 
 [script]
-read -formal xy_router.sv d2d_replay.sv noc_rules.sv
+read -formal xy_router.sv d2d_replay.sv mesi_dir.sv noc_rules.sv
 xy: prep -top xy_router_rules
+mesi: prep -top mesi_dir_rules
 d2d: prep -top d2d_replay_rules
 
 [files]
 ../design/xy_router.sv
 ../design/d2d_replay.sv
+../design/mesi_dir.sv
 noc_rules.sv

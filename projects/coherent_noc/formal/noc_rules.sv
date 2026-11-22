@@ -1,4 +1,4 @@
-// Formal verification harnesses for projects/coherent_noc xy_router and d2d_replay proving dimension-order routing, per-VC credit bounds, CRC-16-CCITT integrity, and exact Go-Back-N replay without skipped flits.
+// Formal verification harnesses for projects/coherent_noc xy_router, mesi_dir, and d2d_replay proving dimension-order routing, per-VC credit bounds, SWMR coherence and read-after-write value integrity, CRC-16-CCITT integrity, and exact Go-Back-N replay without skipped flits.
 module xy_router_rules (
   input logic       clk,
   input logic       in_valid,
@@ -97,6 +97,91 @@ module xy_router_rules (
       cover (out_valid[4]);
       cover (!in_ready);
       cover (occ0[3] == 4'd2 && in_vc && dst_x == 2'd2 && in_ready);
+    end
+  end
+endmodule
+
+module mesi_dir_rules (
+  input logic       clk,
+  input logic       req_valid,
+  input logic       req_we,
+  input logic [1:0] req_core,
+  input logic [1:0] req_addr,
+  input logic [7:0] req_wdata
+);
+  logic       rst_n = 0;
+  logic       resp_valid;
+  logic [1:0] resp_state;
+  logic [3:0] inv_mask, sharer_vec;
+  logic [7:0] resp_data;
+  logic [7:0] oracle_mem [0:3];
+  logic [3:0] oracle_sh  [0:3];
+  logic [7:0] exp_data_q;
+  logic [3:0] exp_inv_q;
+  logic       was_we_q;
+
+  mesi_dir #(.N_LINES(4), .DATA_W(8)) dut (
+    .clk       (clk),
+    .rst_n     (rst_n),
+    .req_valid (req_valid),
+    .req_we    (req_we),
+    .req_core  (req_core),
+    .req_addr  (req_addr),
+    .req_wdata (req_wdata),
+    .resp_valid(resp_valid),
+    .resp_state(resp_state),
+    .inv_mask  (inv_mask),
+    .sharer_vec(sharer_vec),
+    .resp_data (resp_data)
+  );
+
+  wire [3:0] c_mask = 4'b0001 << req_core;
+
+  genvar l;
+  generate
+    for (l = 0; l < 4; l = l + 1) begin : gen_oracle
+      always_ff @(posedge clk) begin
+        if (!rst_n) begin
+          oracle_mem[l] <= 8'd0;
+          oracle_sh[l]  <= 4'b0000;
+        end else if (req_valid && req_addr == l[1:0]) begin
+          if (req_we) begin
+            oracle_mem[l] <= req_wdata;
+            oracle_sh[l]  <= c_mask;
+          end else begin
+            oracle_sh[l]  <= oracle_sh[l] | c_mask;
+          end
+        end
+      end
+    end
+  endgenerate
+
+  always_ff @(posedge clk) begin
+    if (!rst_n) begin
+      rst_n      <= 1'b1;
+      exp_data_q <= 8'd0;
+      exp_inv_q  <= 4'd0;
+      was_we_q   <= 1'b0;
+    end else begin
+      was_we_q   <= req_valid && req_we;
+      exp_data_q <= req_we ? req_wdata : oracle_mem[req_addr];
+      exp_inv_q  <= req_we ? (oracle_sh[req_addr] & ~c_mask) : 4'b0000;
+    end
+  end
+
+  always_comb begin
+    if (rst_n && resp_valid) begin
+      assert (resp_data == exp_data_q);
+      assert (inv_mask == exp_inv_q);
+      assert (sharer_vec != 4'b0000);
+      if (resp_state == 2'd2 || resp_state == 2'd3) begin
+        assert ((sharer_vec & (sharer_vec - 4'd1)) == 4'd0);
+      end
+      if (was_we_q) begin
+        assert (resp_state == 2'd3);
+      end
+      cover (resp_state == 2'd1 && (sharer_vec & (sharer_vec - 4'd1)) != 4'd0);
+      cover (resp_state == 2'd3 && inv_mask != 4'b0000);
     end
   end
 endmodule
