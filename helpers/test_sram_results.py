@@ -1,5 +1,5 @@
 # Tests sram_results.py on small hand-written hold tables.
-from sram_results import held
+from sram_results import held, label
 
 GOOD = "case q_early_v q_late_v vdd_v\na 1.2 1.2 1.2\nb1 1.2 1.19 1.2\nb0 1e-4 2e-4 1.2\nc 1.2 1.2 1.2\nd 1.2 1.2 1.2\n"
 
@@ -11,3 +11,6 @@ def test_every_case_must_read_right_and_hold(tmp_path):
     assert held(path)
     path.write_text(GOOD.replace("b0 1e-4 2e-4 1.2", "b0 1.2 1.2 1.2"))
     assert held(path)
+
+def test_corner_label_comes_from_the_file_name():
+    assert label("results/sram_hold_ss_m40_1v08.txt") == "ss -40 C 1.08 V"

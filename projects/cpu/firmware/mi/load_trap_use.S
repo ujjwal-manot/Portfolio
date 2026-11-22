@@ -1,4 +1,4 @@
-# Misaligned loads whose result the very next instruction needs, so the load-use stall and the trap's redirect come in the same cycle: the handler must run next (not a stale fetch), the load must leave its register alone, and both traps must be taken with cause 4.
+// Misaligned loads whose result the very next instruction needs, so the load-use stall and the trap's redirect come in the same cycle: the handler must run next (not a stale fetch), the load must leave its register alone, and both traps must be taken with cause 4.
 #include "riscv_test.h"
 #include "test_macros.h"
 

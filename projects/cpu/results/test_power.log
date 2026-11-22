@@ -70,7 +70,7 @@
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795316617
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795334230
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -80,12 +80,12 @@
 175600.00ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test_power.filter_on_cells     PASS      175600.00         141.26       1243.10  **
+                                                        ** test_power.filter_on_cells     PASS      175600.00         122.13       1437.76  **
                                                         **************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             175600.00         141.27       1243.04  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             175600.00         122.14       1437.75  **
                                                         **************************************************************************************
 WARNING: /home/user/Portfolio/projects/cpu/tests/cpu_top_board.sv:16: $readmemh(/home/user/Portfolio/projects/cpu/build/filter.hex): Not enough words in the file for the requested range [0:2047].
 WARNING: /home/user/Portfolio/projects/cpu/tests/cpu_top_board.sv:17: $readmemh(/home/user/Portfolio/projects/cpu/build/filter.hex): Not enough words in the file for the requested range [0:2047].
 FST info: dumpfile /home/user/Portfolio/projects/cpu/build/icarus_cpu_top_board_test_power_FUNCTIONAL/cpu_top_board.fst opened for output.
 .
-1 passed in 154.07s (0:02:34)
+1 passed in 136.67s (0:02:16)

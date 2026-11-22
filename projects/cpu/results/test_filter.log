@@ -1,6 +1,6 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
 - Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
-- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.496 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 13.516 MB
 make: Entering directory '/home/user/Portfolio/projects/cpu/build/verilator_cpu_board_test_filter'
 make: Nothing to be done for 'default'.
 make: Leaving directory '/home/user/Portfolio/projects/cpu/build/verilator_cpu_board_test_filter'
@@ -8,7 +8,7 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/verilator_cpu_b
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795316477
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795334094
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
@@ -21,11 +21,11 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/verilator_cpu_b
 400160.00ns INFO     cocotb.regression                  ***************************************************************************************
                                                         ** TEST                           STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ***************************************************************************************
-                                                        ** test_filter.full_speed_stream   PASS      175900.00           1.81      97121.10  **
-                                                        ** test_filter.stream_with_gaps    PASS      224260.00           2.13     105389.28  **
+                                                        ** test_filter.full_speed_stream   PASS      175900.00           2.51      69945.04  **
+                                                        ** test_filter.stream_with_gaps    PASS      224260.00           2.62      85721.79  **
                                                         ***************************************************************************************
-                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0              400160.00           3.94     101539.28  **
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0              400160.00           5.14      77924.01  **
                                                         ***************************************************************************************
 - :0: Verilog $finish
 .
-1 passed in 10.17s
+1 passed in 10.74s

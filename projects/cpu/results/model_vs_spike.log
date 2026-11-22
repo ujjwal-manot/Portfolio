@@ -2,8 +2,8 @@
 platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
 rootdir: /home/user/Portfolio/projects/cpu
 plugins: platformdirs-4.13.0, anyio-4.15.1, lambdalib-0.13.2
-collected 55 items
+collected 56 items
 
-tests/test_cpu_model.py .......................................................
+tests/test_cpu_model.py ........................................................
 
-============================= 55 passed in 13.90s ==============================
+============================= 56 passed in 11.87s ==============================

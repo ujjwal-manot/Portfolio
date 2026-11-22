@@ -1,6 +1,6 @@
 - V e r i l a t i o n   R e p o r t: Verilator 5.052 2026-09-05 rev v5.052
-- Verilator: Built from 0.099 MB sources in 4 modules, into 0.367 MB in 6 C++ files needing 0.000 MB
-- Verilator: Walltime 0.144 s (elab=0.010, cvt=0.111, bld=0.000); cpu 0.055 s on 1 threads; allocated 27.902 MB
+- Verilator: Built from 0.099 MB sources in 4 modules, into 0.369 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.202 s (elab=0.005, cvt=0.166, bld=0.000); cpu 0.075 s on 1 threads; allocated 27.898 MB
 make: Entering directory '/home/user/Portfolio/projects/cpu/build/timer_compares_low_word/build/verilator_cpu_board_test_interrupts'
 ccache g++  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.12/dist-packages/cocotb/share/lib/verilator/verilator.cpp
 ccache g++ -Os  -I.  -MMD -I/foss/tools/verilator/share/verilator/include -I/foss/tools/verilator/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -DVM_VPI=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-int-in-bool-context -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /foss/tools/verilator/share/verilator/include/verilated.cpp
@@ -16,7 +16,7 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/timer_compares_
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795317680
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795335317
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.052 2026-09-05
      0.00ns INFO     cocotb.regression                  Running tests
@@ -37,10 +37,10 @@ make: Leaving directory '/home/user/Portfolio/projects/cpu/build/timer_compares_
 165340.00ns INFO     cocotb.regression                  **************************************************************************************
                                                         ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **************************************************************************************
-                                                        ** test_interrupts.interrupts     PASS      124000.00           0.89     138915.45  **
-                                                        ** test_interrupts.timer_wraps    FAIL       41340.00           0.21     194656.89  **
+                                                        ** test_interrupts.interrupts     PASS      124000.00           1.49      83468.00  **
+                                                        ** test_interrupts.timer_wraps    FAIL       41340.00           0.46      89223.36  **
                                                         **************************************************************************************
-                                                        ** TESTS=2 PASS=1 FAIL=1 SKIP=0             165340.00           1.11     149008.64  **
+                                                        ** TESTS=2 PASS=1 FAIL=1 SKIP=0             165340.00           1.96      84497.44  **
                                                         **************************************************************************************
 - :0: Verilog $finish
 F
@@ -58,7 +58,7 @@ sources = [PosixPath('/home/user/Portfolio/projects/cpu/build/timer_compares_low
 test_file = '/home/user/Portfolio/projects/cpu/build/timer_compares_low_word/tests/test_interrupts.py'
 parameters = {}
 plusargs = ['+program=/home/user/Portfolio/projects/cpu/build/timer_compares_low_word/build/interrupts.hex', '+verilator+rand+reset+2', '+verilator+seed+7']
-runner = <cocotb_tools.runner.Verilator object at 0x7fdce7616420>
+runner = <cocotb_tools.runner.Verilator object at 0x7ff896701400>
 results = None, defines = {}, sim = None, waves = False
 build_args = ['--x-initial', 'unique']
 
@@ -77,4 +77,4 @@ ERROR    Verilator:runner.py:674 ERROR: Failed 1 of 2 tests.
 =========================== short test summary info ============================
 FAILED tests/test_interrupts.py::test_interrupts - SystemExit: 1
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-1 failed in 53.04s
+1 failed in 43.10s
