@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | convert | broken | review | all
+# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | broken | review | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -24,7 +24,7 @@ CONVERT := $(foreach p,$(PROCESS),$(foreach t,$(TEMPS),build/convert/$(p)_$(t)_n
 COMPARATOR := design/comparator.cir design/comparator_sizes.inc
 DAC := design/cap_dac.cir design/cap_dac_sizes.inc
 
-all: sar logic decide offset levels convert broken review
+all: sar logic decide offset levels uic_check convert broken review
 
 sar:
 	mkdir -p results
@@ -115,5 +115,13 @@ review: build/sar_logic.so
 	  { sed -n 1p $$p; echo "make $$run exit $$ok"; cat $$log; } > results/review_$$n.log; \
 	  if [ -s $$log ]; then c=0; else c=1; fi; $(SAVE) review_$$n $$c results/review_$$n.log; done
 
-.PHONY: all sar logic decide offset levels convert broken review
+uic_check: tests/dac_levels.cir $(DAC)
+	mkdir -p results
+	for s in op uic; do d=build/uic_check/$$s; mkdir -p $$d; cp $(DAC) $$d; sed '/^.option reltol=1e-5 vntol=1e-8$$/d' tests/dac_levels.cir > $$d/dac_levels.cir; \
+	  $(call corner,ff,27,nom,0) > $$d/corner.inc; done
+	sed -i 's/ uic$$//' build/uic_check/op/dac_levels.cir
+	for s in op uic; do (cd build/uic_check/$$s && $(RUN) ngspice -b dac_levels.cir > dac_levels.log 2>&1); cp build/uic_check/$$s/dac_levels.txt results/uic_check_$$s.txt; done
+	if $(PY) $(ROOT)/helpers/adc_results.py same results/uic_check_op.txt results/uic_check_uic.txt > results/uic_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) uic_check $$c results/uic_check.log results/uic_check_*.txt
+
+.PHONY: all sar logic decide offset levels uic_check convert broken review
 .DELETE_ON_ERROR:

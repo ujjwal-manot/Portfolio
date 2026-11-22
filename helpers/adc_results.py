@@ -1,4 +1,4 @@
-# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: python3 adc_results.py decide|offset|levels|convert ...
+# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: two DAC level runs that must agree to 0.01 LSB at every code (same): python3 adc_results.py decide|offset|levels|same|convert ...
 import math, statistics, sys
 import numpy as np
 from adc_spectrum import spectrum, coherent_bin
@@ -32,6 +32,12 @@ def linearity(path):
     dnl = [(e[d] - e[d - 1]) / LSB for d in range(1, len(e))]
     inl = [(e[d] - e[0] - (e[-1] - e[0]) * d / (len(e) - 1)) / LSB for d in range(len(e))]
     return {"dnl_min": min(dnl), "dnl_max": max(dnl), "inl_min": min(inl), "inl_max": max(inl)}
+
+def same(path_a, path_b, limit=0.01):
+    load = lambda p: {int(c): float(v) for c, v in (line.split() for line in open(p).read().splitlines()[1:])}
+    a, b = load(path_a), load(path_b)
+    worst = max(abs(a[c] - b[c]) for c in a) / LSB
+    return worst <= limit and a.keys() == b.keys(), worst
 
 def codes_from_run(path, supply):
     rows = [[float(v) for v in l.split()][1::2] for l in open(path) if l.strip()]
@@ -76,6 +82,10 @@ if __name__ == "__main__":
             r = linearity(path)
             print(f"{path}: dnl {r['dnl_min']:.3f} to {r['dnl_max']:.3f} LSB, inl {r['inl_min']:.3f} to {r['inl_max']:.3f} LSB")
             fails += [f"{path}: {k} beyond +-{LIMITS[k]} LSB" for k in ("dnl", "inl") if max(-r[f"{k}_min"], r[f"{k}_max"]) > LIMITS[k]]
+    elif mode == "same":
+        ok, worst = same(args[0], args[1])
+        print(f"{args[0]} and {args[1]} differ by at most {worst:.4g} LSB over every code")
+        fails = [] if ok else [f"the two runs differ by {worst:.4g} LSB, more than 0.01"]
     elif mode == "convert":
         supply, n, path, measure = float(args[0]), int(args[1]), args[2], args[3]
         r = check_conversion(path, measure, supply, n)
