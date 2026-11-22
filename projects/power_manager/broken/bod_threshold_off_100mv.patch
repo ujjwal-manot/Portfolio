@@ -1,0 +1,12 @@
+Expected failure: AssertionError: brown-out tripped during normal 0.90 V DVFS operation
+--- a/design/droop_por_bod.sv
++++ b/design/droop_por_bod.sv
+@@ -2,7 +2,7 @@
+ module droop_por_bod #(
+   parameter int POR_CYCLES    = 16,
+   parameter int POR_RISE_MV   = 1160,
+-  parameter int BOD_TRIP_MV   = 800,
++  parameter int BOD_TRIP_MV   = 900,
+   parameter int BOD_HYST_MV   = 40,
+   parameter int DELAY_TAPS    = 16,
+   parameter int DROOP_HYST_MV = 25

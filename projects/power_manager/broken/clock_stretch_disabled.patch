@@ -1,0 +1,12 @@
+Expected failure: AssertionError: clk_cpu_en did not stretch clock during droop
+--- a/design/droop_por_bod.sv
++++ b/design/droop_por_bod.sv
+@@ -68,6 +68,6 @@
+   end
+ 
+   always_latch begin
+-    if (!clk_sys) clk_cpu_en = sys_rst_n && !droop_alert;
++    if (!clk_sys) clk_cpu_en = 1'b1;
+   end
+   assign clk_cpu = clk_sys & clk_cpu_en;
+ endmodule
