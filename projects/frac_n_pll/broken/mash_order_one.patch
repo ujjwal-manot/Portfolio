@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/mash111.sv
++++ b/design/mash111.sv
+@@ -36,7 +36,7 @@
+       c2_d1      <= c2;
+       c3_d1      <= c3;
+       c3_d2      <= c3_d1;
+-      dither_out <= s1 + s2 + s3;
++      dither_out <= s1;
+     end
+   end
+ endmodule

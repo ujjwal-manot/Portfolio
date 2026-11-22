@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/dfe_lms.sv
++++ b/design/dfe_lms.sv
+@@ -19,7 +19,7 @@
+   assign err_val   = eq_sum - (cur_bit ? {TARGET_AMP[W-1], TARGET_AMP} : -{TARGET_AMP[W-1], TARGET_AMP});
+   assign err_pos   = !err_val[W];
+   assign same_sign = (err_pos == prev_bit);
+-  assign next_h1   = {h1_tap[W-1], h1_tap} + (same_sign ? 11'sd1 : -11'sd1);
++  assign next_h1   = {h1_tap[W-1], h1_tap} + (same_sign ? -11'sd1 : 11'sd1);
+   assign h1_sat    = (next_h1 > 11'sd127) ? 10'sd127 : (next_h1 < -11'sd127) ? -10'sd127 : next_h1[W-1:0];
+ 
+   always_ff @(posedge clk or negedge rst_n) begin
