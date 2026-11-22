@@ -1,4 +1,4 @@
-Expected failure: , model ['
+Expected failure: rv32mi/load_trap_use instruction 71: cpu
 --- a/design/cpu.sv
 +++ b/design/cpu.sv
 @@ -215,7 +215,7 @@

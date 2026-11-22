@@ -1,4 +1,4 @@
-# cpu commands: make firmware | model | test | interrupts | filter | timing | cdc | power | broken | all
+# cpu commands: make firmware | model | test | interrupts | filter | timing | cdc | power | sram_hold | broken | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -6,6 +6,7 @@ RUN := $(ROOT)/setup/run.sh
 SIM ?= verilator
 PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers SIM=$(SIM) python3 -m pytest -q -s -p no:cacheprovider
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
+PY := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3
 LIB := /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_slow_1p08V_125C.lib
 RISCV_TESTS := 3df703cd52d5f0d8224e3c50bf03c6cb70efff98
 RISCV_TEST_ENV := 6de71edb142be36319e380ce782c3d1830c65d68
@@ -14,7 +15,21 @@ STREAM := s_tvalid=clk s_tdata=clk s_tlast=clk
 cdc_rtl = $(RUN) yosys -q -p "read_verilog -sv $(1)/design/cpu.sv $(ROOT)/projects/fifo_bridge/design/reset_sync.sv; prep -flatten -top cpu; memory_map; opt_clean; write_json $(1)/build/cdc.json" && \
   $(RUN) python3 $(ROOT)/helpers/cdc_check.py $(1)/build/cdc.json cpu cdc/waivers.txt $(STREAM) imem_data=clk dmem_rdata=clk
 
-all: model test interrupts filter timing cdc power broken
+all: model test interrupts filter timing cdc power sram_hold broken
+HOLD_CORNERS := tt_27_1v2 ff_125_1v32 ss_m40_1v08 sf_125_1v32 fs_125_1v32
+HOLD := $(foreach c,$(HOLD_CORNERS),build/sram_hold/$(c)/hold.txt)
+
+build/sram_hold/%/hold.txt: tests/sram_hold.cir
+	mkdir -p $(@D)
+	cp $< $(@D)
+	$(RUN) bash -c 'sed -n "/^.SUBCKT RSC_IHPSG13_DFPQD_MSAFFX2 /,/^.ENDS/p" $$PDK_ROOT/ihp-sg13g2/libs.ref/sg13g2_sram/cdl/RM_IHPSG13_1P_2048x32_c2_bm_bist.cdl' | sed 's/^M/XM/; s/ nrd=0//; s/ nrs=0//; s/^+ *$$//' > $(@D)/msaff.cir
+	printf '.lib cornerMOSlv.lib mos_%s\n.temp %s\n.param vsupply=%s\n' $$(echo $* | cut -d_ -f1) $$(echo $* | cut -d_ -f2 | tr m -) $$(echo $* | cut -d_ -f3 | tr v .) > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b sram_hold.cir > hold.log 2>&1
+
+sram_hold: $(HOLD)
+	mkdir -p results
+	for f in $(HOLD); do cp $$f results/sram_hold_$$(basename $$(dirname $$f)).txt; done
+	if $(PY) $(ROOT)/helpers/sram_results.py results/sram_hold_*.txt > results/sram_hold.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) sram_hold $$c results/sram_hold.log results/sram_hold_*.txt
 
 build/riscv-tests/isa/rv32ui/add.S:
 	mkdir -p build/riscv-tests
@@ -71,4 +86,4 @@ cdc: timing
 	$(RUN) yosys -q -p 'read_liberty -lib build/slow.lib; read_liberty -lib $(SRAM_LIB); read_verilog build/cpu_cells.v; hierarchy -top cpu_top; write_json build/cdc_cells.json'
 	if $(RUN) python3 $(ROOT)/helpers/cdc_check.py build/cdc_cells.json cpu_top cdc/waivers.txt $(STREAM) > results/cdc_cells.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cdc_cells $$c results/cdc_cells.log
 
-.PHONY: all firmware model test interrupts filter timing cdc power broken
+.PHONY: all firmware model test interrupts filter timing cdc power sram_hold broken

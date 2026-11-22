@@ -1,5 +1,5 @@
 # Checks the cell speed reader on made-up sweeps: the slowdown at each supply is the worst over the slow-process corners and the three cells against the slow library's own point (ss, 125 C, 1.08 V), and the transistor sweep must reproduce the library's slow/typ and fast/typ delay ratios to within 5%.
-from speed_results import read_sweep, slowdown, ratio_errors
+from speed_results import read_sweep, slowdown, ratio_errors, cold_read_slowdown
 
 def sweep(tmp_path, name, scale):
     rows = "vdd inv_s nand_s nor_s\n" + "".join(f"{v / 100:.2f} {scale * 1e-10 * 1.2 / (v / 100)} {scale * 1.4e-10 * 1.2 / (v / 100)} {scale * 1.6e-10 * 1.2 / (v / 100)}\n" for v in range(80, 134, 2))
@@ -26,3 +26,10 @@ def test_library_ratios_must_be_reproduced(tmp_path):
     assert max(abs(e) for e in ratio_errors(sweeps, lib).values()) < 1e-9
     lib["slow"]["nor_s"] *= 1.06
     assert abs(ratio_errors(sweeps, lib)[("slow", "nor_s")] - (1 / 1.06 - 1)) < 1e-9
+
+def test_cold_read_slowdown_is_hot_current_over_cold(tmp_path):
+    hot, cold = tmp_path / "read_ss_125.txt", tmp_path / "read_ss_m40.txt"
+    hot.write_text("vdd_v read_a\n1.08 3.0e-5\n1.2 4.0e-5\n")
+    cold.write_text("vdd_v read_a\n1.08 2.5e-5\n1.2 5.0e-5\n")
+    s = cold_read_slowdown(hot, cold)
+    assert abs(s[1.08] - 1.2) < 1e-9 and abs(s[1.2] - 0.8) < 1e-9

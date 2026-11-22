@@ -1,0 +1,11 @@
+* ADC references from the 1.2 V analog rail: six identical rppd units from vtop to ground give vref_hi, vcm and vref_lo at 5/6, 3/6 and 1/6 of it (1.0, 0.6 and 0.2 V from 1.2 V); the DAC draws charge from vref_hi and returns about as much into vref_lo, so the main decoupling is thin-oxide NMOS gate capacitance from vref_hi (gate) to vref_lo (channel, 0.8 V across it, well in inversion) and vcm, which only holds the top plate, gets MIM capacitance to ground.
+.subckt reference vtop vref_hi vcm vref_lo vss
+XR5 vtop vref_hi vss rppd w={w_lad} l={l_lad} mm_ok={mm}
+XR4 vref_hi n4 vss rppd w={w_lad} l={l_lad} mm_ok={mm}
+XR3 n4 vcm vss rppd w={w_lad} l={l_lad} mm_ok={mm}
+XR2 vcm n2 vss rppd w={w_lad} l={l_lad} mm_ok={mm}
+XR1 n2 vref_lo vss rppd w={w_lad} l={l_lad} mm_ok={mm}
+XR0 vref_lo vss vss rppd w={w_lad} l={l_lad} mm_ok={mm}
+XCHL vref_lo vref_hi vref_lo vss sg13_lv_nmos w=10u l=10u m={m_hl} mm_ok={mm}
+XCCM vcm vss cap_cmim w={w_cm} l={w_cm} mm_ok={mm}
+.ends

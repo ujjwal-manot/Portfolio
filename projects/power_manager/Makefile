@@ -1,4 +1,4 @@
-# power_manager commands: make speed | ctrl | cosim | shifter | cmp_offset | all
+# power_manager commands: make speed | bitcell | ctrl | cosim | shifter | cmp_offset | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -17,7 +17,18 @@ SHIFTER := $(foreach c,$(SHIFTER_CORNERS),build/shifter/$(c)/shifter.txt)
 ADC := $(ROOT)/projects/adc
 CMP_OFFSET := $(foreach n,$(shell seq 1 100),build/cmp_offset/$(n)/offset.txt)
 
-all: speed ctrl cosim shifter cmp_offset
+all: speed bitcell ctrl cosim shifter cmp_offset
+
+build/bitcell/%/read.txt: tests/bitcell_read.cir
+	mkdir -p $(@D)
+	cp $< $(@D)
+	printf '.lib cornerMOSlv.lib mos_ss\n.temp %s\n' $(TEMP_$*) > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b bitcell_read.cir > read.log 2>&1
+
+bitcell: build/bitcell/125/read.txt build/bitcell/m40/read.txt
+	mkdir -p results
+	cp build/bitcell/125/read.txt results/read_ss_125.txt; cp build/bitcell/m40/read.txt results/read_ss_m40.txt
+	if $(PY) $(ROOT)/helpers/speed_results.py bitcell results/read_ss_125.txt results/read_ss_m40.txt > results/bitcell.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) bitcell $$c results/bitcell.log results/read_ss_*.txt
 
 build/dldo_ctrl.so: design/dldo_ctrl.sv tests/dldo_ctrl_cosim.sv
 	mkdir -p build/vlnggen
@@ -71,4 +82,4 @@ cmp_offset: $(CMP_OFFSET)
 	for n in $$(seq 1 100); do cp build/cmp_offset/$$n/offset.txt results/cmp_offset_$$n.txt; done
 	if $(PY) $(ROOT)/helpers/adc_results.py offset results/cmp_offset_*.txt > results/cmp_offset.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cmp_offset $$c results/cmp_offset.log results/cmp_offset_*.txt
 
-.PHONY: all speed ctrl cosim shifter cmp_offset
+.PHONY: all speed bitcell ctrl cosim shifter cmp_offset

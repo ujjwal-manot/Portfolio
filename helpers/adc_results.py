@@ -1,4 +1,4 @@
-# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate against vcm at every comparator clock rise (each decision, read between solver steps from a run written without interpolation) under two integration methods within 0.1 LSB (top) and comparator decision times under both within 5% (decide_methods): python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert ...
+# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power, the same conversion with the chip's own supply and references against the ideal-source one (at most a quarter bit lost, supplied): two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate against vcm at every comparator clock rise (each decision, read between solver steps from a run written without interpolation) under two integration methods within 0.1 LSB (top) and comparator decision times under both within 5% (decide_methods): python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert|supplied ...
 import math, statistics, sys
 import numpy as np
 from adc_spectrum import spectrum, coherent_bin
@@ -81,7 +81,7 @@ def check_conversion(codes_path, measure_path, supply, n, fs=1e6):
     r = spectrum(codes, k)
     x = np.asarray(codes, float)
     amplitude = 2 * abs(np.sum(x * np.exp(-2j * np.pi * k * np.arange(n) / n))) / n
-    r.update(offset_lsb=x.mean() - 127.5, gain=amplitude / (0.4 * 10 ** (-0.5 / 20) / LSB), power_w=sum(abs(float(m[q])) for q in ("p_vdd_w", "p_hi_w", "p_lo_w", "p_cm_w")))
+    r.update(offset_lsb=x.mean() - 127.5, gain=amplitude / (0.4 * 10 ** (-0.5 / 20) / LSB), power_w=sum(abs(float(v)) for q, v in m.items() if q.startswith("p_")))
     r["gain_error_lsb"] = (r["gain"] - 1) * 256
     if r["enob"] < LIMITS["enob"]:
         problems.append(f"{codes_path}: enob below {LIMITS['enob']}")
@@ -90,6 +90,15 @@ def check_conversion(codes_path, measure_path, supply, n, fs=1e6):
     if abs(r["gain_error_lsb"]) > LIMITS["gain_error"]:
         problems.append(f"{codes_path}: gain error beyond +-{LIMITS['gain_error']} LSB")
     r["problems"] = problems
+    return r
+
+def compare_supplied(codes, measure, ideal_codes, ideal_measure, supply, n):
+    r, ideal = check_conversion(codes, measure, supply, n), check_conversion(ideal_codes, ideal_measure, supply, n)
+    if "enob" not in r or "enob" not in ideal:
+        return {"problems": r["problems"] + ideal["problems"]}
+    r["enob_loss"], r["ideal_enob"] = ideal["enob"] - r["enob"], ideal["enob"]
+    if r["enob_loss"] > 0.25:
+        r["problems"].append(f"{codes}: {r['enob_loss']:.3f} bits below the ideal-source conversion, more than a quarter bit")
     return r
 
 if __name__ == "__main__":
@@ -128,6 +137,12 @@ if __name__ == "__main__":
         r = check_conversion(path, measure, supply, n)
         if "enob" in r:
             print(f"{path}: {n} codes, enob {r['enob']:.3f} bits, sndr {r['sndr_db']:.2f} dB, sfdr {r['sfdr_db']:.2f} dB, offset {r['offset_lsb']:.2f} LSB, gain {r['gain']:.4f} ({r['gain_error_lsb']:.2f} LSB over full scale), power {r['power_w']:.4g} W")
+        fails = r["problems"]
+    elif mode == "supplied":
+        supply, n = float(args[0]), int(args[1])
+        r = compare_supplied(args[2], args[3], args[4], args[5], supply, n)
+        if "enob" in r:
+            print(f"{args[2]}: enob {r['enob']:.3f} bits ({r['enob_loss']:.3f} below {r['ideal_enob']:.3f} with ideal sources), sndr {r['sndr_db']:.2f} dB, sfdr {r['sfdr_db']:.2f} dB, offset {r['offset_lsb']:.2f} LSB, gain error {r['gain_error_lsb']:.2f} LSB, 3.3 V supply power {r['power_w']:.4g} W")
         fails = r["problems"]
     for f in fails:
         print("FAIL " + f)

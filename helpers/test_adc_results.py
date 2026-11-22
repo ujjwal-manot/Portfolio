@@ -1,6 +1,6 @@
 # Checks the ADC result reader on made-up files: comparator decisions must have the right sign beyond the hysteresis and finish inside the budget, Monte Carlo offsets give their spread, DAC level errors give DNL and INL against chip.md's limits, two DAC level runs agree to a hundredth of an LSB, two conversions give the same codes, and converted codes give ENOB from a coherent FFT and an offset and gain error held to chip.md's +-1 and +-2 LSB.
 import math, pytest
-from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion, same, same_codes, top_difference, decide_difference
+from adc_results import decisions, offsets, linearity, codes_from_run, check_conversion, compare_supplied, same, same_codes, top_difference, decide_difference
 
 def write(tmp_path, name, text):
     path = tmp_path / name
@@ -33,13 +33,13 @@ def test_codes_are_read_on_each_rising_valid(tmp_path):
         rows.append(" ".join(f"{t} {v}" for v in cols[1:]))
     assert codes_from_run(write(tmp_path, "c.txt", "\n".join(f"{r}" for r in rows) + "\n"), 1.2) == [200, 7]
 
-def conversion(tmp_path, codes, fin):
+def conversion(tmp_path, codes, fin, powers="p_vdd_w 1e-6 p_hi_w 1e-6 p_lo_w -1e-7 p_cm_w 0"):
     rows = []
     for t, code in enumerate([0, 0] + codes):
         for valid in (0, 1):
             bits = [1.2 if code >> (7 - j) & 1 else 0 for j in range(8)]
             rows.append(" ".join(f"{2 * t + valid} {v}" for v in [valid * 1.2] + bits))
-    write(tmp_path, "m.txt", f"p_vdd_w 1e-6 p_hi_w 1e-6 p_lo_w -1e-7 p_cm_w 0 fin_hz {fin}\n")
+    write(tmp_path, "m.txt", f"{powers} fin_hz {fin}\n")
     return write(tmp_path, "c.txt", "\n".join(rows) + "\n"), tmp_path / "m.txt"
 
 def test_a_conversion_needs_the_full_record_and_a_coherent_tone(tmp_path):
@@ -49,6 +49,23 @@ def test_a_conversion_needs_the_full_record_and_a_coherent_tone(tmp_path):
     assert r["problems"] == [] and abs(r["offset_lsb"] - 0.6) < 0.3 and r["enob"] > 7.5
     assert check_conversion(*conversion(tmp_path, codes[:-1], k * 1e6 / n), 1.2, n)["problems"]
     assert any("not coherent" in p for p in check_conversion(*conversion(tmp_path, codes, (k + 0.3) * 1e6 / n), 1.2, n)["problems"])
+
+def test_power_adds_every_p_entry_and_ignores_the_rest(tmp_path):
+    n, k = 128, 5
+    codes = [min(255, max(0, math.floor(127.5 + 120.8 * math.sin(2 * math.pi * k * i / n) + 0.5))) for i in range(n)]
+    assert abs(check_conversion(*conversion(tmp_path, codes, k * 1e6 / n), 1.2, n)["power_w"] - 2.1e-6) < 1e-12
+    assert abs(check_conversion(*conversion(tmp_path, codes, k * 1e6 / n, "p_sup_w 3e-4 code 9"), 1.2, n)["power_w"] - 3e-4) < 1e-12
+
+def test_a_supplied_conversion_may_lose_at_most_a_quarter_bit(tmp_path):
+    n, k = 128, 5
+    tone = lambda noise: [min(255, max(0, math.floor(127.5 + 120.8 * math.sin(2 * math.pi * k * i / n) + noise * ((i * 37) % 11 - 5) + 0.5))) for i in range(n)]
+    (tmp_path / "a").mkdir(); (tmp_path / "b").mkdir(); (tmp_path / "c").mkdir()
+    ideal = conversion(tmp_path / "a", tone(0), k * 1e6 / n)
+    close = conversion(tmp_path / "b", tone(0.02), k * 1e6 / n, "p_sup_w 3e-4")
+    worse = conversion(tmp_path / "c", tone(0.3), k * 1e6 / n, "p_sup_w 3e-4")
+    r = compare_supplied(*close, *ideal, 1.2, n)
+    assert r["problems"] == [] and r["enob_loss"] < 0.25
+    assert any("quarter" in p for p in compare_supplied(*worse, *ideal, 1.2, n)["problems"])
 
 def test_offset_and_gain_error_are_held_to_chip_md(tmp_path):
     n, k = 128, 5

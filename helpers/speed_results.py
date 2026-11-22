@@ -1,4 +1,4 @@
-# Reads the standard cell speed sweeps (speed_<corner>.txt from tests/speed.cir) and the library's own delays (fo4_<corner>.txt from tests/fo4.tcl): checks that the transistor sweep gives the library's slow/typ and fast/typ ratios to within 5%, and prints how much slower the cells are at each supply than at the slow library's point (ss, 125 C, 1.08 V), worst over the slow-process corners and the three cells.
+# Reads the standard cell speed sweeps (speed_<corner>.txt from tests/speed.cir) and the library's own delays (fo4_<corner>.txt from tests/fo4.tcl): checks that the transistor sweep gives the library's slow/typ and fast/typ ratios to within 5%, and prints how much slower the cells are at each supply (with bitcell, from two read_<corner>.txt tables of the SRAM bitcell's read current, how much longer the bit lines take at ss -40 C than at ss 125 C, current being what discharges them) than at the slow library's point (ss, 125 C, 1.08 V), worst over the slow-process corners and the three cells.
 import sys
 from pathlib import Path
 
@@ -21,7 +21,16 @@ def ratio_errors(sweeps, library):
     typ = sweeps["tt_25"][1.2]
     return {(k, cell): (sweeps[c][v][cell] / typ[cell]) / (library[k][cell] / library["typ"][cell]) - 1 for k, (c, v) in POINTS.items() for cell in typ}
 
+def cold_read_slowdown(hot_path, cold_path):
+    load = lambda p: {round(float(l.split()[0]), 2): float(l.split()[1]) for l in Path(p).read_text().split("\n")[1:] if l.strip()}
+    hot, cold = load(hot_path), load(cold_path)
+    return {v: hot[v] / cold[v] for v in hot if v in cold}
+
 if __name__ == "__main__":
+    if sys.argv[1] == "bitcell":
+        for v, s in cold_read_slowdown(sys.argv[2], sys.argv[3]).items():
+            print(f"vdd {v:.2f} V: bitcell read current at ss -40 C gives {s:.3f} x the bit line time at ss 125 C")
+        sys.exit(0)
     sweeps, library = {}, {}
     for path in sys.argv[1:]:
         name = Path(path).stem

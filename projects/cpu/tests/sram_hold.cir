@@ -1,0 +1,28 @@
+* Whether the IHP SRAM macro's data output holds while the macro is idle, on the macro's own sense amplifier flip-flop (RSC_IHPSG13_DFPQD_MSAFFX2, taken from the PDK's CDL into msaff.cir): its clock CP is the read clock inverted, so between reads it stays high and the amplifier holds its decision regeneratively (one internal node is then held only while that side's bitline input stays high), and an access lowers it (the output latch alone holds) until the next sense; each copy reads a 100 mV split at 10 ns, then for 1 ms: (a) both bitlines high, as precharged, (b) both low, the worst case, for either decision, (c) the split reversed, (d) CP low; the output QP 10 ns after the read and at 1 ms go to hold.txt.
+.include corner.inc
+.include msaff.cir
+VDD vdd 0 {vsupply}
+VCP cp 0 pwl(0 0 10n 0 10.1n {vsupply})
+VCPD cpd 0 pwl(0 0 10n 0 10.1n {vsupply} 15n {vsupply} 15.1n 0)
+VHI hi 0 {vsupply}
+VSPLIT split 0 pwl(0 {vsupply - 0.1} 12n {vsupply - 0.1} 13n {vsupply})
+VLOW low 0 pwl(0 {vsupply - 0.1} 12n {vsupply - 0.1} 13n 0)
+VLOWH lowh 0 pwl(0 {vsupply} 12n {vsupply} 13n 0)
+VREV rev 0 pwl(0 {vsupply} 12n {vsupply} 13n {vsupply - 0.1})
+XA cp split hi qna qpa vdd 0 RSC_IHPSG13_DFPQD_MSAFFX2
+XB1 cp low lowh qnb1 qpb1 vdd 0 RSC_IHPSG13_DFPQD_MSAFFX2
+XB0 cp lowh low qnb0 qpb0 vdd 0 RSC_IHPSG13_DFPQD_MSAFFX2
+XC cp split rev qnc qpc vdd 0 RSC_IHPSG13_DFPQD_MSAFFX2
+XD cpd split hi qnd qpd vdd 0 RSC_IHPSG13_DFPQD_MSAFFX2
+.tran 1n 1m 0 1u
+.control
+run
+let vdd_v = v(vdd)[0]
+echo "case q_early_v q_late_v vdd_v" > hold.txt
+foreach c a b1 b0 c d
+  meas tran early find v(qp$c) at=20n
+  meas tran late find v(qp$c) at=1m
+  echo "$c $&early $&late $&vdd_v" >> hold.txt
+end
+.endc
+.end
