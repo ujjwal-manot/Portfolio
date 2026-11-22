@@ -1,4 +1,4 @@
-* Converts the same coherent tone as convert.cir with the ADC powered the way the chip powers it: bandgap_ldo's bandgap and LDO from the 3.3 V supply make the 1.2 V rail, which is the ADC's vdd and the top of design/reference.cir's ladder (vref_hi, vcm, vref_lo); the bandgap is trimmed first at 27 C (codes 8 and 9 solved, the code nearest 1.2063 V set, as bandgap_ldo trims), then the run goes back to the corner's temperature, the input sine is centred on the solved vcm as the front end that references vcm would centre it, and the same columns as convert.txt plus the three references are written every 50 ns to convert.txt, with the 3.3 V supply's average power over the conversions (integrated into a 1 F capacitor) and the input frequency to measure.txt; corner, temperature (as .option temp, read back after the trim), supplies and mismatch come from corner.inc.
+* Converts the same coherent tone as convert.cir with the ADC powered the way the chip powers it: bandgap_ldo's bandgap and LDO from the 3.3 V supply make the 1.2 V rail, which is the ADC's vdd and the top of design/reference.cir's ladder (vref_hi, vcm, vref_lo), with the bandgap at the trim code bandgap_ldo found for this process corner (trim0 to trim3 in corner.inc, from its results/corners.log); the input sine rides on vcm seen through a 1 Mohm, 10 pF filter (10 us), as a front end referenced to vcm would centre it without following each kick on vcm; the same columns as convert.txt plus the rail and the three references are written every 50 ns to convert.txt, and the 3.3 V supply's average power over the conversions (integrated into a 1 F capacitor) and the input frequency to measure.txt; corner, temperature, supplies and trim come from corner.inc.
 .include corner.inc
 .option reltol=1e-5 vntol=1e-8
 .include tone.inc
@@ -14,14 +14,16 @@
 .include ldo.cir
 .option interp rshunt=1e13 method=gear
 VSUP sup 0 {vsupply33}
-VT3 t3 0 {vsupply33}
-VT2 t2 0 0
-VT1 t1 0 0
-VT0 t0 0 0
-XBG bg vg sup 0 t3 t2 t1 t0 bandgap
+VT3 tr3 0 {vsupply33 * trim3}
+VT2 tr2 0 {vsupply33 * trim2}
+VT1 tr1 0 {vsupply33 * trim1}
+VT0 tr0 0 {vsupply33 * trim0}
+XBG bg vg sup 0 tr3 tr2 tr1 tr0 bandgap
 XLDO vdd vdd bg vg sup 0 ldo
 XREF vdd vref_hi vcm vref_lo 0 reference
-VIN vin 0 sin(0.6 {0.4 * 10 ** (-0.5 / 20)} {k_tone * 1e6 / n_samples} 0 0 0)
+RF vcm vcmf 1meg
+CF vcmf 0 10p
+BIN vin 0 v = v(vcmf) + 0.4 * 10 ** (-0.5 / 20) * sin(2 * pi * k_tone * 1e6 / n_samples * time)
 VCLK clk 0 pulse(0 {vsupply} 50n 50p 50p 49.95n 100n)
 VRST rst 0 pwl(0 0 250n 0 251n {vsupply})
 VRDY rdy 0 {vsupply}
@@ -38,54 +40,15 @@ CESUP e_sup 0 1
 RESUP e_sup 0 1e12
 .tran 50n {(n_samples + 3) * 1u + 300n}
 .control
-let target = 1.2063
-let trun = $temp
-let v8 = 0
-let v9 = 0
-let hi = 0
-let code = 8
-let vc = 0
-let s = 0
-let amp = 0
-let f = 0
-option temp=27
-op
-let v8 = v(bg)
-let hi = v(sup)
-alter vt0 = $&hi
-op
-let v9 = v(bg)
-let code = floor(8 + (target - v8) / (v9 - v8) + 0.5)
-if code < 0
-  let code = 0
-end
-if code > 15
-  let code = 15
-end
-let x3 = floor(code / 8) * hi
-let x2 = (floor(code / 4) - 2 * floor(code / 8)) * hi
-let x1 = (floor(code / 2) - 2 * floor(code / 4)) * hi
-let x0 = (code - 2 * floor(code / 2)) * hi
-alter vt3 = $&x3
-alter vt2 = $&x2
-alter vt1 = $&x1
-alter vt0 = $&x0
-option temp=$&trun
-op
-let vc = v(vcm)
-let s = @vin[sin]
-let amp = s[1]
-let f = s[2]
-alter @vin[sin] = [ $&vc $&amp $&f 0 0 0 ]
 run
 let span = length(time) - 1
 let window = time[span] - 1.3e-6
 meas tran s0 find v(e_sup) at=1.3u
 let p_sup = (v(e_sup)[span] - s0) / window
-meas tran first when v(vin)=v(vcm) rise=1
-meas tran second when v(vin)=v(vcm) rise=2
+meas tran first when v(vin)=v(vcmf) rise=1
+meas tran second when v(vin)=v(vcmf) rise=2
 let fin = 1 / (second - first)
-echo "p_sup_w $&p_sup fin_hz $&fin code $&code" > measure.txt
+echo "p_sup_w $&p_sup fin_hz $&fin" > measure.txt
 wrdata convert.txt v(valid) v(b7) v(b6) v(b5) v(b4) v(b3) v(b2) v(b1) v(b0) v(samp) v(vin) v(top) v(vcm) v(vdd) v(vref_hi) v(vref_lo)
 .endc
 .end

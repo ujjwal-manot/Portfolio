@@ -40,7 +40,7 @@ cosim: build/dldo_ctrl.so tests/make_loop.py
 	mkdir -p build/cosim results
 	cp build/dldo_ctrl.so build/cosim
 	cd build/cosim && $(RUN) python3 ../../tests/make_loop.py check && $(RUN) ngspice -b cosim_check.cir > cosim_check.log 2>&1
-	if $(PY) $(ROOT)/helpers/dldo_results.py cosim 128 8 1 build/cosim/check.txt > results/cosim.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cosim $$c results/cosim.log
+	if $(PY) $(ROOT)/helpers/dldo_results.py cosim 128 8 1 8 build/cosim/check.txt > results/cosim.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cosim $$c results/cosim.log
 
 build/speed/%/speed.txt: tests/speed.cir
 	mkdir -p $(@D)

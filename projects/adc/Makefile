@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | shunt_check | gear_check | broken | review | all
+# adc commands: make sar | logic | decide | offset | levels | uic_check | convert | supplied | shunt_check | gear_check | broken | review | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -23,8 +23,12 @@ LEVELS := $(foreach p,$(PROCESS),build/levels/$(p)_27_nom/dac_levels.txt) $(fore
 CONVERT := $(foreach p,$(PROCESS),$(foreach t,$(TEMPS),build/convert/$(p)_$(t)_nom/convert.txt))
 COMPARATOR := design/comparator.cir design/comparator_sizes.inc
 DAC := design/cap_dac.cir design/cap_dac_sizes.inc
+BANDGAP_LDO := $(foreach f,bandgap.cir bandgap_sizes.inc ldo.cir ldo_sizes.inc,$(ROOT)/projects/bandgap_ldo/design/$(f))
+TRIMS := $(ROOT)/projects/bandgap_ldo/results/corners.log
+SUPPLIED_CORNERS := tt_27 ss_125 ff_m40
+SUPPLIED := $(foreach c,$(SUPPLIED_CORNERS),build/supplied/$(c)/convert.txt)
 
-all: sar logic decide offset levels uic_check convert shunt_check gear_check broken review
+all: sar logic decide offset levels uic_check convert supplied shunt_check gear_check broken review
 
 sar:
 	mkdir -p results
@@ -99,6 +103,22 @@ build/convert/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_lo
 	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+
+build/supplied/%/convert.txt: tests/supplied.cir $(COMPARATOR) $(DAC) design/reference.cir design/reference_sizes.inc $(BANDGAP_LDO) $(TRIMS) build/sar_logic.so
+	mkdir -p $(@D)
+	cp $(filter-out $(TRIMS),$^) $(@D)
+	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
+	p=$$(echo $* | cut -d_ -f1); t=$$(echo $* | cut -d_ -f2 | tr m -); q=$(PASSIVE_$(word 1,$(subst _, ,$*))); \
+	  code=$$(sed -n "s/^dc_$${p}_3v3 .* code=\([0-9]*\) .*/\1/p" $(TRIMS)); [ -n "$$code" ]; \
+	  printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=1.2 vsupply33=3.3 mm=0\n.param trim3=%s trim2=%s trim1=%s trim0=%s\n' \
+	  $$p $$p $$q $$q $$q $$t $$((code / 8)) $$((code / 4 % 2)) $$((code / 2 % 2)) $$((code % 2)) > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b supplied.cir > supplied.log 2>&1
+
+supplied: $(SUPPLIED) $(foreach c,$(SUPPLIED_CORNERS),build/convert/$(c)_nom/convert.txt)
+	mkdir -p results
+	if for c in $(SUPPLIED_CORNERS); do cp build/supplied/$$c/convert.txt results/supplied_$$c.txt; cp build/supplied/$$c/measure.txt results/supplied_measure_$$c.txt; \
+	  $(PY) $(ROOT)/helpers/adc_results.py supplied 1.2 $(N) results/supplied_$$c.txt results/supplied_measure_$$c.txt build/convert/$${c}_nom/convert.txt build/convert/$${c}_nom/measure.txt || exit 1; done > results/supplied.log 2>&1; then c=0; else c=$$?; fi; \
+	  $(SAVE) supplied $$c results/supplied.log results/supplied_*.txt
 
 broken: build/sar_logic.so
 	mkdir -p results

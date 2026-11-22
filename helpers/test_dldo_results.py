@@ -12,11 +12,11 @@ def table(tmp_path, samples, n=4):
 
 def run(tmp_path, wrong=None):
     rst, flo, up = (0, 0, 0, 0, 0), (1, 0, 1, 0, 1), (1, 0, 0, 0, 1)
-    states = [(0, 0, 0), (2, 2, 2), (4, 4, 4), (4, 4, 4)]
+    states = [(0, 0, 0), (2, 3, 3), (4, 4, 4), (4, 4, 4)]
     if wrong:
         states[wrong[0]] = wrong[1]
     samples = [(0, rst, *states[0]), (9e-9, flo, *states[0]), (15e-9, flo, *states[1]), (29e-9, flo, *states[1]), (35e-9, up, *states[2]), (49e-9, up, *states[2]), (55e-9, up, *states[3])]
-    return cosim_check(table(tmp_path, samples), n=4, big=2, p=1, first=10e-9, period=20e-9)
+    return cosim_check(table(tmp_path, samples), n=4, big=2, p=1, pb=1, first=10e-9, period=20e-9)
 
 def test_outputs_that_follow_the_rule_pass(tmp_path):
     problems, edges = run(tmp_path)
@@ -24,4 +24,4 @@ def test_outputs_that_follow_the_rule_pass(tmp_path):
 
 def test_a_wrong_count_or_a_broken_thermometer_fails(tmp_path):
     assert run(tmp_path, (2, (4, 3, 3)))[0]
-    assert run(tmp_path, (1, (2, 2, 1)))[0]
+    assert run(tmp_path, (1, (2, 3, 1)))[0]
