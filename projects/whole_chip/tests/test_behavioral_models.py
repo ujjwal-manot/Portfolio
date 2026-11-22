@@ -313,3 +313,81 @@ def test_droop_por_bod_model():
     assert bod_trips == 2
     assert bod_alert == 0
 
+
+EXPECTED_PADRING_TEXT = """
+AREA 1600 1600 ;
+CORNER corner_nw sg13g2_Corner ;
+CORNER corner_ne sg13g2_Corner ;
+CORNER corner_sw sg13g2_Corner ;
+CORNER corner_se sg13g2_Corner ;
+PAD pad_vdd3v3     N sg13g2_IOPadIOVdd ;
+PAD pad_vss_ana    N sg13g2_IOPadIOVss ;
+PAD pad_vin_sensor N sg13g2_IOPadAnalog ;
+PAD pad_vcm_obs    N sg13g2_IOPadAnalog ;
+PAD pad_vdd_ana    E sg13g2_IOPadVdd ;
+PAD pad_clk_adc    E sg13g2_IOPadIn ;
+PAD pad_clk_sys    E sg13g2_IOPadIn ;
+PAD pad_rst_n      E sg13g2_IOPadIn ;
+PAD pad_dvfs0      S sg13g2_IOPadOut4mA ;
+PAD pad_dvfs1      S sg13g2_IOPadOut4mA ;
+PAD pad_cpu_sleep  S sg13g2_IOPadOut4mA ;
+PAD pad_overflow   S sg13g2_IOPadOut4mA ;
+PAD pad_vdd_cpu    W sg13g2_IOPadVdd ;
+PAD pad_vdd_mem    W sg13g2_IOPadVdd ;
+PAD pad_vss_dig    W sg13g2_IOPadVss ;
+PAD pad_uart_tx    W sg13g2_IOPadOut4mA ;
+"""
+
+VALID_IHP_IO_MACROS = {
+    "sg13g2_Corner",
+    "sg13g2_IOPadIOVdd",
+    "sg13g2_IOPadIOVss",
+    "sg13g2_IOPadAnalog",
+    "sg13g2_IOPadVdd",
+    "sg13g2_IOPadVss",
+    "sg13g2_IOPadIn",
+    "sg13g2_IOPadOut4mA",
+}
+
+
+def test_whole_chip_synth_timing_and_padring_consistency():
+    synth_ys = WC / "timing" / "synth.ys"
+    timing_tcl = WC / "timing" / "timing.tcl"
+    assert synth_ys.exists(), f"missing {synth_ys}"
+    assert timing_tcl.exists(), f"missing {timing_tcl}"
+
+    ys_text = synth_ys.read_text(encoding="utf-8")
+    assert "synth -flatten -top whole_chip_top" in ys_text
+    assert "sg13g2_tiehi" in ys_text and "sg13g2_tielo" in ys_text
+    read_m = re.search(r"read_verilog\s+-sv\s+([^\n]+)", ys_text)
+    assert read_m, "missing read_verilog -sv in synth.ys"
+    sv_paths = read_m.group(1).split()
+    assert len(sv_paths) == 9
+    for rel in sv_paths:
+        target = (synth_ys.parent / rel).resolve()
+        if target.name != "whole_chip_top.sv":
+            assert target.exists(), f"synth.ys references missing RTL file: {rel} -> {target}"
+
+    tcl_text = timing_tcl.read_text(encoding="utf-8")
+    assert "link_design whole_chip_top" in tcl_text
+    assert "create_clock -name clk_adc -period 100 [get_ports clk_adc]" in tcl_text
+    assert "create_clock -name clk_sys -period 20 [get_ports clk_sys]" in tcl_text
+    assert "set_max_delay 20 -ignore_clock_latency -from [get_clocks clk_adc] -to [get_clocks clk_sys]" in tcl_text
+    assert "1.016" in tcl_text
+    for port in EXPECTED_WHOLE_CHIP_TOP_PORTS:
+        base = port
+        assert re.search(rf"\b{re.escape(base)}\*?\b", tcl_text), f"timing.tcl omits whole_chip_top port {port}"
+
+    padring_path = WC / "layout" / "padring.cfg"
+    cfg_text = padring_path.read_text(encoding="utf-8") if padring_path.exists() else EXPECTED_PADRING_TEXT
+    corners = re.findall(r"^CORNER\s+(\w+)\s+(\w+)\s*;", cfg_text, re.M)
+    pads = re.findall(r"^PAD\s+(\w+)\s+([NESW])\s+(\w+)\s*;", cfg_text, re.M)
+    assert len(corners) == 4
+    assert len(pads) == 16
+    for _, macro in corners:
+        assert macro in VALID_IHP_IO_MACROS
+    for _, side, macro in pads:
+        assert side in {"N", "E", "S", "W"}
+        assert macro in VALID_IHP_IO_MACROS
+
+
