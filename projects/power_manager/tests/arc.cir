@@ -1,0 +1,33 @@
+* One inv_1 timing arc measured by hand, outside both lctime and the IHP liberty: a linear ramp on A whose 20-80% time is the liberty's 0.174 ns slew index (so 0.29 ns from 0 to 100%), the output loaded by a 39 fF capacitor (the liberty's 0.039 pF index), delay at 50% and output slew at 20-80%, and the input capacitance as the charge the source delivers into A over each full edge divided by vdd; the cell is the PDK's transistor netlist, or the Magic extraction when cell.inc says so; corner and temperature come from corner.inc and the results go to arc.txt.
+.include corner.inc
+.include cell.inc
+VDD vdd 0 {vsupply}
+VA a 0 pwl(0 0 1n 0 {1n + 0.29n} {vsupply} 5n {vsupply} {5n + 0.29n} 0)
+XI y a vdd 0 dut
+CL y 0 39f
+.tran 1p 9n
+.control
+run
+let vs = v(vdd)[0]
+let h = vs / 2
+let lo = vs * 0.2
+let hi = vs * 0.8
+meas tran a_rise when v(a)=$&h rise=1
+meas tran y_fall when v(y)=$&h fall=1
+meas tran a_fall when v(a)=$&h fall=1
+meas tran y_rise when v(y)=$&h rise=1
+meas tran f80 when v(y)=$&hi fall=1
+meas tran f20 when v(y)=$&lo fall=1
+meas tran r20 when v(y)=$&lo rise=1
+meas tran r80 when v(y)=$&hi rise=1
+meas tran q_rise integ i(VA) from=0.9n to=4.5n
+meas tran q_fall integ i(VA) from=4.9n to=8.5n
+let fall_delay = y_fall - a_rise
+let rise_delay = y_rise - a_fall
+let fall_slew = f20 - f80
+let rise_slew = r80 - r20
+let cap_rise = -q_rise / vs
+let cap_fall = q_fall / vs
+echo "rise_delay $&rise_delay fall_delay $&fall_delay rise_slew $&rise_slew fall_slew $&fall_slew cap_rise $&cap_rise cap_fall $&cap_fall" > arc.txt
+.endc
+.end

@@ -5,11 +5,11 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import build, run
-from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
+from lockstep import RANDOM_SEED, RANDOM_START, RESET_SYNC, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
-SOURCES = [HERE.parent / "design" / "cpu.sv", HERE.parent.parent / "fifo_bridge" / "design" / "reset_sync.sv", HERE / "cpu_board.sv"]
+SOURCES = [HERE.parent / "design" / "cpu.sv", RESET_SYNC, HERE / "cpu_board.sv"]
 RESULT, FRAMES, BUDGET = 0x10000100, 4, 3200
 
 def symbols():

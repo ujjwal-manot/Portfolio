@@ -29,7 +29,7 @@ Everything is built in the open. Every design is visible at any time.
 ## The chip
 
 ```
-supplies    3.3 V in -> bandgap_ldo -> 1.2 V analog; power_manager -> 0.9 to 1.2 V cpu supply (DVFS)
+supplies    3.3 V in -> bandgap_ldo -> 1.2 V analog; power_manager -> 0.9 to 1.2 V cpu logic supply (DVFS) and a fixed 1.2 V digital supply (SRAM macros, fifo_bridge, clocks)
 signal      sensor (0.2 to 1.0 V, up to 50 kHz)
               -> opamp        inverting amplifier, gain -1 around 0.6 V, drives the ADC
               -> adc          8-bit SAR ADC, 1 MS/s
@@ -242,9 +242,9 @@ Each README has a design review: what was tried, what failed, the numbers, and w
 - Broken copies: +2 LSB comparator offset, 10% MSB cap mismatch, non-coherent test tone.
 
 ### power_manager (core): digital power control, the way large chips handle supply droop
-- Design: digital LDO (comparator, PMOS switch array, digital controller) giving the cpu 0.9 to 1.2 V in four DVFS states set by a cpu register; a droop detector (a delay line that measures the supply) that stretches the cpu clock when the supply sags; power-on reset and brown-out detector.
+- Design: digital LDO (comparator, PMOS switch array, digital controller) giving the cpu logic 0.9 to 1.2 V in four DVFS states set by a cpu register, and a second copy fixed at 1.2 V for the SRAM macros, fifo_bridge and the clocks, with level shifters wherever the cpu logic drives that rail (the IHP SRAM macros are characterized only from 1.08 to 1.32 V; whether they work lower is a separate study: bitcell margins to 5.2 sigma, sense-amp offset, the full read path and write completion from the macro's CDL); a droop detector (a delay line that measures the supply) that stretches the cpu clock when the supply sags; power-on reset and brown-out detector.
 - Mixed-signal: the controller RTL runs against the transistor switch array and comparator; a real-number model of the whole loop is checked against it.
-- Measured: DVFS transition time; droop on a load step with and without clock stretching; limit-cycle ripple and how the controller design changes it; energy per filter frame at each DVFS state, run by the real firmware.
+- Measured: the cells the cpu uses characterized from their extracted layout at each DVFS supply (lctime) and checked against IHP's liberty at its three corners, then real STA at each state; DVFS transition time; droop on a load step with and without clock stretching; limit-cycle ripple and how the controller design changes it; energy per filter frame at each DVFS state, run by the real firmware.
 - Layout of the switch array and comparator, extracted.
 - Broken copies: controller gain too high (limit cycle grows), clock stretch disabled, brown-out threshold off by 100 mV.
 

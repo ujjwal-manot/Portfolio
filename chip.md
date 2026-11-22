@@ -204,7 +204,17 @@ Both run from the 3.3 V supply on thick-oxide devices. `vg` carries the bandgap'
 
 The first LDO pick in `plan.md` (0 to 20 mA in 100 ns with under 40 mV of droop, under 100 uA) is out of reach without an external capacitor: 40 mV on the 100 pF output is 4 pC, which a 20 mA ramp uses up in 6.3 ns, while the pass gate must swing about 0.5 V; and with a follower pass device the light-load output pole is its gm over the output capacitance, so the bleed current, not the compensation, sets how fast the loop can be at no load. Under 100 uA total the loop was either unstable at no load or let a 0.25 mA step pull the rail under 1.16 V. The targets above come from the loads the rail really has.
 
-## Why these numbers
+### power_manager
+
+Two supplies come out of it, both from the 3.3 V input:
+
+| Rail | Voltage | Feeds | Load |
+|---|---|---|---|
+| vdd_cpu | 0.90, 1.00, 1.10 or 1.20 V, picked by a cpu register | the cpu's cells | 9.0 mW at 1.2 V, 50 MHz, typical corner (7.5 mA), from `projects/cpu/results/power.log` |
+| vdd_mem | 1.20 V fixed | both SRAM macros, fifo_bridge, the clock divider and the power manager's own logic | the macros' 3.5 mW (2.9 mA) in the same report, plus the rest |
+
+Why two: the IHP SRAM macros are characterized only at 1.08, 1.2 and 1.32 V, so below 1.08 V there are no access times, setup times or read and write margins for them. Product teams keep such macros on a fixed rail and level-shift what drives them; every macro input the cpu drives (address, data, byte mask, enables and the clock) goes up through a level shifter from vdd_cpu to vdd_mem. Macro outputs and fifo_bridge outputs come down into vdd_cpu without one (a 1.2 V input on a 0.9 V gate turns its PMOS fully off and stays inside the oxide limit); `s_tready` goes up through one. Running the macros lower is a separate study and only moves the rail if it proves a margin.
+
 
 See the table in `plan.md`. In short:
 - Half an LSB of settling in 200 ns needs tau under 32 ns. Gain -1 halves the loop bandwidth, so GBW must be at least 20 MHz for tau = 16 ns.

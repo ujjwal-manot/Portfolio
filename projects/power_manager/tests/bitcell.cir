@@ -1,0 +1,37 @@
+* Butterfly curves of the IHP SRAM bitcell (RM_IHPSG13_2048x32_c2_1P_BITKIT_CELL in the macro's CDL: pull-down and access 0.3/0.13 um, pull-up 0.15/0.13 um): each half of the cell (pull-up, pull-down and access device, every one with its own mismatch draw) is swept from 0 to vdd at its input with the bit line held at vdd, once with the word line off (hold) and once on (read), at supplies from 0.80 to 1.20 V in 50 mV steps, and the two output curves are written to vtc.txt as vdd, mode, input and both outputs; corner, temperature and mismatch come from corner.inc.
+.include corner.inc
+.param w_pd=0.3u w_ax=0.3u w_pu=0.15u l_cell=0.13u
+VDD vdd 0 1.2
+VWL wl 0 0
+VIN in 0 0
+XPL outl in vdd vdd sg13_lv_pmos w={w_pu} l={l_cell} mm_ok={mm}
+XNL outl in 0 0 sg13_lv_nmos w={w_pd} l={l_cell} mm_ok={mm}
+XAL outl wl vdd 0 sg13_lv_nmos w={w_ax} l={l_cell} mm_ok={mm}
+XPR outr in vdd vdd sg13_lv_pmos w={w_pu} l={l_cell} mm_ok={mm}
+XNR outr in 0 0 sg13_lv_nmos w={w_pd} l={l_cell} mm_ok={mm}
+XAR outr wl vdd 0 sg13_lv_nmos w={w_ax} l={l_cell} mm_ok={mm}
+.control
+let v = 0.8
+echo "vdd read in outl outr" > vtc.txt
+while v < 1.2001
+  alter VDD dc = v
+  let mode = 0
+  while mode < 2
+    let wlv = mode * v
+    alter VWL dc = wlv
+    let stop = v + 1e-9
+    let stepv = v / 200
+    dc VIN 0 $&stop $&stepv
+    let n = length(v(in))
+    let i = 0
+    while i < n
+      echo "$&v $&mode $&v(in)[$&i] $&v(outl)[$&i] $&v(outr)[$&i]" >> vtc.txt
+      let i = i + 1
+    end
+    destroy dc1
+    let mode = mode + 1
+  end
+  let v = v + 0.05
+end
+.endc
+.end

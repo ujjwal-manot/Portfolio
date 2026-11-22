@@ -6,11 +6,11 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, RisingEdge, ReadOnly
 from cocotb_run import build, run
-from lockstep import RANDOM_SEED, RANDOM_START, Lockstep, hex_file
+from lockstep import RANDOM_SEED, RANDOM_START, RESET_SYNC, Lockstep, hex_file
 
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
-SOURCES = [HERE.parent / "design" / "cpu.sv", HERE.parent.parent / "fifo_bridge" / "design" / "reset_sync.sv", HERE / "cpu_board.sv"]
+SOURCES = [HERE.parent / "design" / "cpu.sv", RESET_SYNC, HERE / "cpu_board.sv"]
 SKIP = {"breakpoint", "pmpaddr"}
 NAMES = sorted(f"{s}/{p.stem}" for s in ("rv32ui", "rv32mi") for p in (BUILD / s).glob("*.bin") if not p.stem.endswith("_spike") and p.stem not in SKIP)
 RESULT = 0x10000100

@@ -2,6 +2,7 @@
 from pathlib import Path
 from cpu_model import Timed
 
+RESET_SYNC = next(p / "projects/fifo_bridge/design/reset_sync.sv" for p in Path(__file__).resolve().parents if (p / "projects/fifo_bridge").is_dir())
 RANDOM_START, RANDOM_SEED = ["--x-initial", "unique"], ["+verilator+rand+reset+2", "+verilator+seed+7"]
 
 def hex_file(binary):
