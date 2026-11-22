@@ -1,0 +1,14 @@
+Expected failure: Overvoltage Error:Source vs Drain: Vds=1.65
+Run: cvc
+Log: results/cvc_shifter_hv_3v3.log
+--- a/design/shifter_hv.cir	2026-11-22 18:00:25.562396841 +0000
++++ b/design/shifter_hv.cir	2026-11-22 18:00:25.562732560 +0000
+@@ -3,7 +3,7 @@
+ XIP inb in vdd vdd sg13_lv_pmos w={w_ip} l=0.13u mm_ok={mm}
+ XIN inb in vss vss sg13_lv_nmos w={w_in} l=0.13u mm_ok={mm}
+ XN1 outp inb vss vss sg13_hv_nmos w={w_n} l={l_n} mm_ok={mm}
+-XN2 outn in vss vss sg13_hv_nmos w={w_n} l={l_n} mm_ok={mm}
++XN2 outn in vss vss sg13_lv_nmos w={w_n} l={l_n} mm_ok={mm}
+ XP1 outp outn vin vin sg13_hv_pmos w={w_p} l={l_p} mm_ok={mm}
+ XP2 outn outp vin vin sg13_hv_pmos w={w_p} l={l_p} mm_ok={mm}
+ .ends shifter_hv
