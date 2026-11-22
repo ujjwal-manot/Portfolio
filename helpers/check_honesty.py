@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, quotes README numbers its logs never show, hides failures, uses toy models, or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, quotes README numbers its logs never show, hides failures, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -39,6 +39,9 @@ def comment_lines(path, text):
     return None
 
 
+TIME_STEP = re.compile(r"^(dt|t_?step\w*|period\w*|step_s|h)$")
+CAPACITOR = re.compile(r"^(c|cap\w*|c_\w+|\w+_cap|\w+_f)$")
+
 def python_problems(path, text):
     tree = ast.parse(text)
     in_helpers = bool({"helpers", "compare_with_papers"} & set(path.parts)) and not path.name.startswith("test_")
@@ -49,6 +52,14 @@ def python_problems(path, text):
                 yield "fake_fallback", f"line {node.lineno} swallows {name or 'every error'}"
         if in_helpers and isinstance(node, ast.Call) and RANDOM_CALLS.match(ast.unparse(node.func)):
             yield "made_up_numbers", f"line {node.lineno} calls {ast.unparse(node.func)}"
+        if isinstance(node, (ast.For, ast.While)):
+            for step in ast.walk(node):
+                if isinstance(step, (ast.Assign, ast.AugAssign)):
+                    targets = {ast.unparse(x) for x in (step.targets if isinstance(step, ast.Assign) else [step.target])}
+                    names = {ast.unparse(x) for x in ast.walk(step.value) if isinstance(x, (ast.Name, ast.Attribute))}
+                    divisors = {ast.unparse(x.right) for x in ast.walk(step.value) if isinstance(x, ast.BinOp) and isinstance(x.op, ast.Div)}
+                    if (isinstance(step, ast.AugAssign) or targets & names) and any(TIME_STEP.search(n) for n in names) and any(CAPACITOR.search(d) for d in divisors):
+                        yield "python_simulation", f"line {step.lineno} steps a capacitor voltage through time"
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             mods = [a.name for a in node.names] if isinstance(node, ast.Import) else [node.module or ""]
             names = {a.name for a in node.names} if isinstance(node, ast.ImportFrom) else set()

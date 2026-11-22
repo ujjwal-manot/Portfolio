@@ -103,3 +103,10 @@ def test_a_makefile_branch_that_drops_an_exit_code_is_a_hidden_failure(tmp_path)
     assert rules(tmp_path) == []
     write(tmp_path, "Makefile", "# Runs the flow.\nall:\n\tif ./flow > out.log; then :; else tail out.log; fi\n")
     assert rules(tmp_path) == ["hidden_failure"]
+
+def test_a_hand_written_rail_integrator_is_a_python_simulation(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    write(tmp_path, "tests/test_rail.py", "# Rail.\nv = 0.0\nfor _ in range(10):\n    v = max(0.0, v + (drive * unit_a - load_a * v / vset) * period_s / cap_f)\n")
+    assert rules(tmp_path) == ["python_simulation"]
+    write(tmp_path, "tests/test_rail.py", "# Arithmetic.\ngain = 1000 * 10 / 10.1\nfor k in range(3):\n    tau = k * cap_f / g\n")
+    assert rules(tmp_path) == []
