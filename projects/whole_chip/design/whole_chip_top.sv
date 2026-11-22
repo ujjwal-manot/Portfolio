@@ -31,17 +31,17 @@ module whole_chip_top (
     .m_tlast(s_tlast), .overflow(adc_overflow)
   );
 
-  fifo_bridge #(.DEPTH_LOG2(4)) bridge (
-    .rst_n(rst_n),
-    .s_clk(clk_adc), .s_tvalid(s_tvalid), .s_tready(s_tready), .s_tdata(s_tdata), .s_tlast(s_tlast),
-    .m_clk(clk_sys), .m_tvalid(m_tvalid), .m_tready(m_tready), .m_tdata(m_tdata), .m_tlast(m_tlast)
-  );
-
   logic clk_cpu_en, clk_cpu;
   always_latch begin
     if (!clk_sys) clk_cpu_en = !droop_alert;
   end
   assign clk_cpu = clk_sys & clk_cpu_en;
+
+  fifo_bridge #(.DEPTH_LOG2(4)) bridge (
+    .rst_n(rst_n),
+    .s_clk(clk_adc), .s_tvalid(s_tvalid), .s_tready(s_tready), .s_tdata(s_tdata), .s_tlast(s_tlast),
+    .m_clk(clk_sys), .m_tvalid(m_tvalid), .m_tready(m_tready && clk_cpu_en), .m_tdata(m_tdata), .m_tlast(m_tlast)
+  );
 
   logic [31:0] imem [0:1023];
   logic [31:0] dmem [0:1023];
@@ -69,7 +69,7 @@ module whole_chip_top (
   end
 
   always_ff @(posedge clk_cpu) begin
-    if (!is_mmio) begin
+    if (dmem_addr[31:16] == 16'h0000) begin
       if (dmem_wstrb[0]) dmem[dmem_addr[11:2]][7:0]   <= dmem_wdata[7:0];
       if (dmem_wstrb[1]) dmem[dmem_addr[11:2]][15:8]  <= dmem_wdata[15:8];
       if (dmem_wstrb[2]) dmem[dmem_addr[11:2]][23:16] <= dmem_wdata[23:16];
