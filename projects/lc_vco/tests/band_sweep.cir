@@ -1,0 +1,55 @@
+* 10 GHz LC VCO 16-band tuning-range sweep for projects/lc_vco: steps coarse capacitor bank codes 0..15 (sw3..sw0) at varactor endpoints vtune = 0 and vsupply, measuring steady-state oscillation frequency and differential swing to band_sweep.txt to verify continuous 9 to 11 GHz coverage, positive adjacent-band overlap, and positive Kvco polarity; corner, temp, supply and mismatch come from corner.inc.
+.include corner.inc
+.include lc_vco_sizes.inc
+.include lc_vco.cir
+.option method=gear reltol=1e-4 vntol=1e-6
+VDD vdd 0 {vsupply}
+IB vdd ibias 250u
+VTUNE vtune 0 0
+VSW3 sw3 0 0
+VSW2 sw2 0 0
+VSW1 sw1 0 0
+VSW0 sw0 0 0
+IKICK outp outn pulse(0 100u 0 2p 2p 16p 1)
+XVCO outp outn vtune sw3 sw2 sw1 sw0 ibias vdd 0 lc_vco
+.control
+let hi = 0
+let code = 0
+let f0 = 0
+let vpp = 0
+let t1 = 0
+let t2 = 0
+op
+let hi = v(vdd)
+destroy all
+echo "code vtune_v f0_hz vpp_v" > band_sweep.txt
+while code < 16
+  let b3 = floor(code / 8)
+  let b2 = floor(code / 4) - 2 * b3
+  let b1 = floor(code / 2) - 2 * floor(code / 4)
+  let b0 = code - 2 * floor(code / 2)
+  let x3 = b3 * hi
+  let x2 = b2 * hi
+  let x1 = b1 * hi
+  let x0 = b0 * hi
+  alter VSW3 dc = $&x3
+  alter VSW2 dc = $&x2
+  alter VSW1 dc = $&x1
+  alter VSW0 dc = $&x0
+  foreach vt_frac 0 1
+    let vt = $vt_frac * hi
+    alter VTUNE dc = $&vt
+    tran 5p 15n 4n
+    let vdiff = v(outp) - v(outn)
+    meas tran t1 when vdiff=0 rise=20
+    meas tran t2 when vdiff=0 rise=70
+    let f0 = 50 / (t2 - t1)
+    let vpp = vecmax(vdiff) - vecmin(vdiff)
+    echo "$&code $&vt $&f0 $&vpp" >> band_sweep.txt
+    destroy all
+  end
+  let code = code + 1
+end
+quit
+.endc
+.end

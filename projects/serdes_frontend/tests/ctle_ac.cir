@@ -1,0 +1,35 @@
+* 10 GBd differential CTLE AC transfer testbench for projects/serdes_frontend: drives ctle around 0.85 V input common-mode with 45 fF differential load, sweeps 1 MHz to 50 GHz, and writes DC gain, 5 GHz Nyquist gain, peak gain, peaking boost, Nyquist boost, and DC power to ctle_ac.txt; corner, temp, supply and mismatch come from corner.inc.
+.include corner.inc
+.include ctle_sizes.inc
+.include ctle.cir
+VDD vdd 0 {vsupply}
+IB vdd ibias 250u
+VCM vcm 0 0.85
+VINP inp vcm dc 0 ac 0.5
+VINN inn vcm dc 0 ac -0.5
+CLP outp 0 45f
+CLN outn 0 45f
+XCTLE inp inn outp outn ibias vdd 0 ctle
+.control
+let g_dc = 0
+let g_nyq = 0
+let g_pk = 0
+let pk_db = 0
+let nyq_db = 0
+let idd = 0
+let pwr = 0
+op
+let idd = -i(VDD)
+let pwr = idd * v(vdd)
+ac dec 50 1meg 50g
+let vdiff = v(outp) - v(outn)
+let gdb = db(vdiff)
+meas ac g_dc find gdb at=1meg
+meas ac g_nyq find gdb at=5g
+meas ac g_pk max gdb from=1meg to=50g
+let pk_db = g_pk - g_dc
+let nyq_db = g_nyq - g_dc
+echo ctle gain_dc_db $&g_dc gain_nyq_db $&g_nyq peak_gain_db $&g_pk peaking_db $&pk_db nyq_boost_db $&nyq_db power_w $&pwr > ctle_ac.txt
+quit
+.endc
+.end

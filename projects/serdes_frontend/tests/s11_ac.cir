@@ -1,0 +1,33 @@
+* 10 GBd SerDes CTLE differential input return-loss (S11) AC testbench for projects/serdes_frontend: drives ctle (with bondpad, 2 kV ESD diodes, and 50 Ohm rppd input terminations) from a 100 Ohm differential (50 Ohm per side) source from 100 MHz to 20 GHz, writing S11 at 1, 5, and 10 GHz plus worst-case S11 up to 5 GHz Nyquist to s11_ac.txt; corner, temp, supply and mismatch come from corner.inc.
+.include corner.inc
+.include ctle_sizes.inc
+.include ctle.cir
+VDD vdd 0 {vsupply}
+IB vdd ibias 250u
+VCM vcm 0 0.85
+VSRCP srcp vcm dc 0 ac 0.5
+VSRCN srcn vcm dc 0 ac -0.5
+RSP srcp inp 50
+RSN srcn inn 50
+XRTP inp vcm 0 rppd w=5.2u l=1.0u mm_ok={mm}
+XRTN inn vcm 0 rppd w=5.2u l=1.0u mm_ok={mm}
+CLP outp 0 45f
+CLN outn 0 45f
+XCTLE inp inn outp outn ibias vdd 0 ctle
+.control
+let s11_1g = 0
+let s11_5g = 0
+let s11_10g = 0
+let s11_worst = 0
+ac dec 50 100meg 20g
+let vport = v(inp) - v(inn)
+let s11 = 2 * vport - 1
+let s11_db = db(s11)
+meas ac s11_1g find s11_db at=1g
+meas ac s11_5g find s11_db at=5g
+meas ac s11_10g find s11_db at=10g
+meas ac s11_worst max s11_db from=100meg to=5g
+echo s11 s11_1g_db $&s11_1g s11_5g_db $&s11_5g s11_10g_db $&s11_10g s11_max_to_5g_db $&s11_worst > s11_ac.txt
+quit
+.endc
+.end

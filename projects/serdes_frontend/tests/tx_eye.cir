@@ -1,0 +1,45 @@
+* 10 GBd (100 ps UI) 3-tap SiGe HBT CML TX FFE eye-diagram testbench for projects/serdes_frontend: drives pre/main/post taps with a 1-UI delayed 32-bit PRBS sequence through a dispersive differential channel into 50 Ohm terminations, writing 2-column time and differential rx voltage to tx_eye_wave.txt for helpers/eye_diagram.py and summary swing/power to tx_eye.txt; corner, temp, supply and mismatch come from corner.inc.
+.include corner.inc
+.include cml_tx_ffe_sizes.inc
+.include cml_tx_ffe.cir
+.option method=gear reltol=1e-4 vntol=1e-6
+VDD vdd 0 {vsupply}
+IB vdd ibias 430u
+VBIT bit_pre 0 pwl(0 0 85p 0 100p 1 185p 1 200p 0 285p 0 300p 1 485p 1 500p 0 685p 0 700p 1 985p 1 1000p 0 1285p 0 1300p 1 1385p 1 1400p 0 1485p 0 1500p 1 1585p 1 1600p 0 1785p 0 1800p 1 1885p 1 1900p 0 1985p 0 2000p 1 2385p 1 2400p 0 2485p 0 2500p 1 2685p 1 2700p 0 2785p 0 2800p 1 2885p 1 2900p 0 3085p 0 3100p 1 3185p 1 3200p 0 3500p 0)
+TD1 bit_pre 0 bit_main 0 z0=50 td=100p
+RT1 bit_main 0 50
+TD2 bit_pre 0 bit_post 0 z0=50 td=200p
+RT2 bit_post 0 50
+EPREP in_prep 0 vol='0.95 + 0.2 * v(bit_pre)'
+EPREN in_pren 0 vol='1.15 - 0.2 * v(bit_pre)'
+EMAINP inp 0 vol='0.95 + 0.2 * v(bit_main)'
+EMAINN inn 0 vol='1.15 - 0.2 * v(bit_main)'
+EPOSTP in_postp 0 vol='0.95 + 0.2 * v(bit_post)'
+EPOSTN in_postn 0 vol='1.15 - 0.2 * v(bit_post)'
+XTX inp inn in_prep in_pren in_postp in_postn outp outn ibias vdd 0 cml_tx_ffe
+RCHP outp rxp 20
+RCHN outn rxn 20
+CCH rxp rxn 0.9p
+RTERMP vdd rxp 50
+RTERMN vdd rxn 50
+.control
+let vpp_tx = 0
+let vpp_rx = 0
+let idd = 0
+let vdd_avg = 0
+let pwr = 0
+tran 2p 3.4n 0.2n
+let vtx_diff = v(outp) - v(outn)
+let vrx_diff = v(rxp) - v(rxn)
+let vpp_tx = vecmax(vtx_diff) - vecmin(vtx_diff)
+let vpp_rx = vecmax(vrx_diff) - vecmin(vrx_diff)
+meas tran idd avg i(VDD) from=0.2n to=3.4n
+meas tran vdd_avg avg v(vdd) from=0.2n to=3.4n
+let pwr = -idd * vdd_avg
+set wr_singlescale
+unset wr_vecnames
+wrdata tx_eye_wave.txt vrx_diff
+echo tx_eye vpp_tx_v $&vpp_tx vpp_rx_v $&vpp_rx idd_a $&idd power_w $&pwr > tx_eye.txt
+quit
+.endc
+.end

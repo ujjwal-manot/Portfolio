@@ -1,0 +1,40 @@
+* 10 GHz LC VCO transient-noise testbench for projects/lc_vco: kicks differential tank oscillation at mid-band code 8, injects calibrated thermal tank noise via trnoise, records 100 ns steady-state differential waveform (2-column time vdiff) to vco_wave.txt for helpers/phase_noise.py, and writes f0_hz, vpp_v, idd_a, and power_w to osc_tran.txt; corner, temp, supply and mismatch come from corner.inc.
+.include corner.inc
+.include lc_vco_sizes.inc
+.include lc_vco.cir
+.option method=gear reltol=1e-5 vntol=1e-7
+.param vtune_v=0.6 inoise_rms=3.83u
+VDD vdd 0 {vsupply}
+IB vdd ibias 250u
+VTUNE vtune 0 {vtune_v}
+VSW3 sw3 0 {vsupply}
+VSW2 sw2 0 0
+VSW1 sw1 0 0
+VSW0 sw0 0 0
+IKICK outp outn pulse(0 100u 0 2p 2p 16p 1)
+INTH outp outn dc 0 trnoise({inoise_rms} 2p 0 0)
+XVCO outp outn vtune sw3 sw2 sw1 sw0 ibias vdd 0 lc_vco
+.control
+let f0 = 0
+let vpp = 0
+let idd = 0
+let vdd_avg = 0
+let pwr = 0
+let t1 = 0
+let t2 = 0
+tran 2p 120n 20n
+let vdiff = v(outp) - v(outn)
+meas tran t1 when vdiff=0 rise=100
+meas tran t2 when vdiff=0 rise=200
+let f0 = 100 / (t2 - t1)
+let vpp = vecmax(vdiff) - vecmin(vdiff)
+meas tran idd avg i(VDD) from=20n to=120n
+meas tran vdd_avg avg v(vdd) from=20n to=120n
+let pwr = -idd * vdd_avg
+set wr_singlescale
+unset wr_vecnames
+wrdata vco_wave.txt vdiff
+echo osc f0_hz $&f0 vpp_v $&vpp idd_a $&idd power_w $&pwr > osc_tran.txt
+quit
+.endc
+.end

@@ -1,0 +1,64 @@
+* JKU 5T OTA CACE unity-gain buffer bench (vdd=1.5 V, vin=0.8 V, ibias=20 uA, cload=50 fF nominal): measures DC voltage ratio, closed-loop -3 dB bandwidth, Tian open-loop DC gain, GBW, phase margin, 1 kHz CMRR, 1 kHz PSRR, and 1 kHz to 100 MHz rms output noise to cace_bench.txt; corner, temp, supply, input DC and mismatch come from corner.inc.
+.include corner.inc
+.include ota_5t.cir
+VDD vdd 0 dc {vsupply} ac 0
+VENA ena 0 {vsupply}
+IB vdd ibias {ibias}
+VIN vin 0 dc {vin_dc} ac 1
+CL vout 0 {cload}
+XOTA vdd oa vin vout ibias ena 0 ota_5t
+VI vout oa dc 0 ac 0
+II 0 vout dc 0 ac 0
+.control
+let dc_gain = 0
+let cl_gain = 0
+let bw_hz = 0
+let g1k = 0
+let a0_db = 0
+let gbw_hz = 0
+let ph = 0
+let pm_deg = 0
+let cmrr_1k_db = 0
+let s1k = 0
+let psrr_1k_db = 0
+let noise_rms = 0
+op
+let dc_gain = v(vout) / v(vin)
+ac dec 50 1 1g
+meas ac cl_gain max vmag(vout) from=10 to=100
+let f3db = cl_gain / sqrt(2)
+meas ac bw_hz when vmag(vout)=$&f3db fall=1
+meas ac g1k find vdb(vout) at=1e3
+alter VIN ac = 0
+alter VI ac = 1
+ac dec 50 1 1g
+let ip = i(vi)
+let vp = v(vout)
+alter VI ac = 0
+alter II ac = 1
+ac dec 50 1 1g
+let t = -1/(1-1/(2*(ac2.ip*v(vout)-ac2.vp*i(vi))+ac2.vp+i(vi)))
+let tdb = db(t)
+let tph = 180/pi*cph(t)
+let a0_db = tdb[0]
+meas ac gbw_hz when tdb=0
+meas ac ph find tph at=$&gbw_hz
+let pm_deg = 180 + ph
+let vcl = ac1.v(vout)
+let acm = vcl - t * (1 - vcl)
+let adm = t + 0.5 * acm
+let cmrr_db = 20 * log10(abs(adm) / (abs(acm) + 1e-18))
+meas ac cmrr_1k_db find cmrr_db at=1e3
+alter II ac = 0
+alter VDD ac = 1
+ac dec 50 1 1g
+meas ac s1k find vdb(vout) at=1e3
+let psrr_1k_db = g1k - s1k
+alter VDD ac = 0
+alter VIN ac = 1
+noise v(vout) VIN dec 50 1k 100meg
+let noise_rms = noise2.onoise_total
+echo cace gain $&dc_gain bw_hz $&bw_hz a0_db $&a0_db gbw_hz $&gbw_hz pm_deg $&pm_deg cmrr_1k_db $&cmrr_1k_db psrr_1k_db $&psrr_1k_db noise_v_rms $&noise_rms > cace_bench.txt
+quit
+.endc
+.end

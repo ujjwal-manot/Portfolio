@@ -1,0 +1,16 @@
+* JKU 5-transistor OTA with enable and power-down logic on IHP SG13G2 low-voltage devices, matching iic-jku/analog-circuit-design commit c2d03d2bd7106e29303d6d184fe96c2eebbed24f (xschem/ota-5t.sch and published.json jku_5t_ota); mismatch controlled by {mm} from corner.inc.
+.subckt ota_5t vdd vout vinp vinn ibias_20u d_ena vss
+XM1 gate_p vinp tail vss sg13_lv_nmos w=2u l=5u ng=1 m=1 mm_ok={mm}
+XM2 vout vinn tail vss sg13_lv_nmos w=2u l=5u ng=1 m=1 mm_ok={mm}
+XM3 gate_p gate_p vdd vdd sg13_lv_pmos w=1.5u l=5u ng=1 m=1 mm_ok={mm}
+XM4 vout gate_p vdd vdd sg13_lv_pmos w=1.5u l=5u ng=1 m=1 mm_ok={mm}
+XM5 tail gate_n vss vss sg13_lv_nmos w=0.5u l=5u ng=1 m=1 mm_ok={mm}
+XM6 ibias_20u gate_n vss vss sg13_lv_nmos w=2.5u l=5u ng=5 m=1 mm_ok={mm}
+XM7 ena ena_n vss vss sg13_lv_nmos w=0.5u l=0.13u ng=1 m=1 mm_ok={mm}
+XM8 ena ena_n vdd vdd sg13_lv_pmos w=1.5u l=0.13u ng=1 m=1 mm_ok={mm}
+XM9 gate_n ena_n vss vss sg13_lv_nmos w=0.5u l=0.13u ng=1 m=1 mm_ok={mm}
+XM10 ibias_20u ena gate_n vss sg13_lv_nmos w=0.5u l=0.13u ng=1 m=1 mm_ok={mm}
+XM11 gate_p ena vdd vdd sg13_lv_pmos w=1.5u l=0.13u ng=1 m=1 mm_ok={mm}
+XM12 ena_n d_ena vss vss sg13_lv_nmos w=0.5u l=0.13u ng=1 m=1 mm_ok={mm}
+XM13 ena_n d_ena vdd vdd sg13_lv_pmos w=1.5u l=0.13u ng=1 m=1 mm_ok={mm}
+.ends ota_5t

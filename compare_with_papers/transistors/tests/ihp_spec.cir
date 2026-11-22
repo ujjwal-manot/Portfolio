@@ -1,0 +1,156 @@
+* Sweeps IHP SG13G2 low-voltage NMOS and PMOS at W/L = 10/0.13, 10/10, and 0.15/0.13 um with Vds = +-0.05 V and +-1.2 V (Vbs = 0 V, 27 C nominal) matching SG13G2_os_process_spec.pdf Sections 2.1 and 2.2 and Attachment A.a1/b1/c1, extracting VTN/VTP, IDSN013/IDSP013, IOFFN013/IOFFP013 and peak gm/Id to ihp_spec.txt and sat currents to ihp_spec_sat.txt; corner and temperature come from corner.inc.
+.include corner.inc
+VG g 0 0
+EP gp 0 g 0 -1
+VDN10x013 dn1 0 0.05
+VDN10x10 dn2 0 0.05
+VDN015x013 dn3 0 0.05
+VDP10x013 dp1 0 -0.05
+VDP10x10 dp2 0 -0.05
+VDP015x013 dp3 0 -0.05
+XN10x013 dn1 g 0 0 sg13_lv_nmos w=10u l=0.13u ng=1 m=1 mm_ok=0
+XN10x10 dn2 g 0 0 sg13_lv_nmos w=10u l=10u ng=1 m=1 mm_ok=0
+XN015x013 dn3 g 0 0 sg13_lv_nmos w=0.15u l=0.13u ng=1 m=1 mm_ok=0
+XP10x013 dp1 gp 0 0 sg13_lv_pmos w=10u l=0.13u ng=1 m=1 mm_ok=0
+XP10x10 dp2 gp 0 0 sg13_lv_pmos w=10u l=10u ng=1 m=1 mm_ok=0
+XP015x013 dp3 gp 0 0 sg13_lv_pmos w=0.15u l=0.13u ng=1 m=1 mm_ok=0
+.control
+let vtn1 = 0
+let vtn2 = 0
+let vtn3 = 0
+let vtp1 = 0
+let vtp2 = 0
+let vtp3 = 0
+let idsn013 = 0
+let idsp013 = 0
+let ioffn013 = 0
+let ioffp013 = 0
+let gmidn1 = 0
+let gmidn2 = 0
+let gmidn3 = 0
+let gmidp1 = 0
+let gmidp2 = 0
+let gmidp3 = 0
+dc VG 0 1.2 0.005
+let in1 = -i(vdn10x013)
+let in2 = -i(vdn10x10)
+let in3 = -i(vdn015x013)
+let ip1 = i(vdp10x013)
+let ip2 = i(vdp10x10)
+let ip3 = i(vdp015x013)
+let gmn1 = deriv(in1)
+let gmn2 = deriv(in2)
+let gmn3 = deriv(in3)
+let gmp1 = deriv(ip1)
+let gmp2 = deriv(ip2)
+let gmp3 = deriv(ip3)
+let npts = length(v(g))
+let kn1 = 1
+let kn2 = 1
+let kn3 = 1
+let kp1 = 1
+let kp2 = 1
+let kp3 = 1
+let k = 1
+while k < npts - 1
+  if gmn1[k] > gmn1[kn1]
+    let kn1 = k
+  end
+  if gmn2[k] > gmn2[kn2]
+    let kn2 = k
+  end
+  if gmn3[k] > gmn3[kn3]
+    let kn3 = k
+  end
+  if gmp1[k] > gmp1[kp1]
+    let kp1 = k
+  end
+  if gmp2[k] > gmp2[kp2]
+    let kp2 = k
+  end
+  if gmp3[k] > gmp3[kp3]
+    let kp3 = k
+  end
+  let k = k + 1
+end
+let vtn1 = v(g)[kn1] - in1[kn1] / gmn1[kn1] - 0.025
+let vtn2 = v(g)[kn2] - in2[kn2] / gmn2[kn2] - 0.025
+let vtn3 = v(g)[kn3] - in3[kn3] / gmn3[kn3] - 0.025
+let vtp1 = -(v(g)[kp1] - ip1[kp1] / gmp1[kp1] - 0.025)
+let vtp2 = -(v(g)[kp2] - ip2[kp2] / gmp2[kp2] - 0.025)
+let vtp3 = -(v(g)[kp3] - ip3[kp3] / gmp3[kp3] - 0.025)
+alter VDN10x013 dc = 1.2
+alter VDN10x10 dc = 1.2
+alter VDN015x013 dc = 1.2
+alter VDP10x013 dc = -1.2
+alter VDP10x10 dc = -1.2
+alter VDP015x013 dc = -1.2
+dc VG 0 1.2 0.005
+let in1 = -i(vdn10x013)
+let in2 = -i(vdn10x10)
+let in3 = -i(vdn015x013)
+let ip1 = i(vdp10x013)
+let ip2 = i(vdp10x10)
+let ip3 = i(vdp015x013)
+let gmn1 = deriv(in1)
+let gmn2 = deriv(in2)
+let gmn3 = deriv(in3)
+let gmp1 = deriv(ip1)
+let gmp2 = deriv(ip2)
+let gmp3 = deriv(ip3)
+let last = length(v(g)) - 1
+let idsn013 = in1[last] * 1e6 / 10
+let idsp013 = -ip1[last] * 1e6 / 10
+let ioffn_abs = (abs(in1[0]) > 1e-30 ? abs(in1[0]) : 1e-30)
+let ioffp_abs = (abs(ip1[0]) > 1e-30 ? abs(ip1[0]) : 1e-30)
+let ioffn013 = log10(ioffn_abs / 10)
+let ioffp013 = log10(ioffp_abs / 10)
+let k = 1
+while k < last
+  if in1[k] > 1e-12
+    let r = gmn1[k] / in1[k]
+    if r > gmidn1
+      let gmidn1 = r
+    end
+  end
+  if in2[k] > 1e-12
+    let r = gmn2[k] / in2[k]
+    if r > gmidn2
+      let gmidn2 = r
+    end
+  end
+  if in3[k] > 1e-12
+    let r = gmn3[k] / in3[k]
+    if r > gmidn3
+      let gmidn3 = r
+    end
+  end
+  if ip1[k] > 1e-12
+    let r = gmp1[k] / ip1[k]
+    if r > gmidp1
+      let gmidp1 = r
+    end
+  end
+  if ip2[k] > 1e-12
+    let r = gmp2[k] / ip2[k]
+    if r > gmidp2
+      let gmidp2 = r
+    end
+  end
+  if ip3[k] > 1e-12
+    let r = gmp3[k] / ip3[k]
+    if r > gmidp3
+      let gmidp3 = r
+    end
+  end
+  let k = k + 1
+end
+set wr_singlescale
+unset wr_vecnames
+wrdata ihp_spec_sat.txt in1 in2 in3 ip1 ip2 ip3
+echo lv_nmos VTN10x013 $&vtn1 VTN10x10 $&vtn2 VTN015x013 $&vtn3 IDSN013 $&idsn013 IOFFN013 $&ioffn013 > ihp_spec.txt
+echo lv_pmos VTP10x013 $&vtp1 VTP10x10 $&vtp2 VTP015x013 $&vtp3 IDSP013 $&idsp013 IOFFP013 $&ioffp013 >> ihp_spec.txt
+echo gm_id_max n10x013 $&gmidn1 n10x10 $&gmidn2 n015x013 $&gmidn3 p10x013 $&gmidp1 p10x10 $&gmidp2 p015x013 $&gmidp3 >> ihp_spec.txt
+quit
+.endc
+.end
