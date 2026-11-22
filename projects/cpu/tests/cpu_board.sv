@@ -1,5 +1,5 @@
-// Test board for the cpu: WORDS words of RAM (64 KB unless given) loaded from +program=<hex file>, synchronous like an SRAM macro: addresses and writes are taken at a clock edge and read data comes out in the following cycle, and the code side keeps its last word on a cycle where imem_en is low.
-module cpu_board #(parameter int WORDS = 16384) (
+// Test board for the cpu: WORDS words of RAM (64 KB unless given) loaded from +program=<hex file>, with the cpu's predictor and forwarding settings passed through, synchronous like an SRAM macro: addresses and writes are taken at a clock edge and read data comes out in the following cycle, and the code side keeps its last word on a cycle where imem_en is low.
+module cpu_board #(parameter int WORDS = 16384, parameter int BTB = 16, parameter bit GSHARE = 0, parameter bit FORWARD = 1) (
   input  logic        clk, rst_n,
   input  logic        s_tvalid, s_tlast,
   input  logic [7:0]  s_tdata,
@@ -33,5 +33,5 @@ module cpu_board #(parameter int WORDS = 16384) (
         if (dmem_wstrb[b]) ram[dmem_addr[A+1:2]][8*b +: 8] <= dmem_wdata[8*b +: 8];
   end
 
-  cpu core (.*);
+  cpu #(.BTB(BTB), .GSHARE(GSHARE), .FORWARD(FORWARD)) core (.*);
 endmodule
