@@ -1,0 +1,29 @@
+# Formal proofs and reachability covers for Cummings SNUG-2002 Rev 1.3 async FIFO (fifo1.v): proves no overflow or underflow, exact in-order data delivery, and single-bit Gray pointer transitions across async clocks (catches broken/wrong_full_bit.patch).
+[tasks]
+cummings_proof fifo prove
+cummings_reach fifo cover
+gray_proof gray prove
+
+[options]
+prove: mode prove
+cover: mode cover
+cover: depth 40
+multiclock on
+
+[engines]
+prove: abc pdr
+cover: smtbmc yices
+
+[script]
+read -formal fifomem.v sync_r2w.v sync_w2r.v rptr_empty.v wptr_full.v fifo1.v cummings_formal.sv
+fifo: prep -top cummings_formal
+gray: prep -top gray_ptr_rules
+
+[files]
+../fifomem.v
+../sync_r2w.v
+../sync_w2r.v
+../rptr_empty.v
+../wptr_full.v
+../fifo1.v
+cummings_formal.sv
