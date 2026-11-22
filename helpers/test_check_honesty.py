@@ -110,3 +110,12 @@ def test_a_hand_written_rail_integrator_is_a_python_simulation(tmp_path):
     assert rules(tmp_path) == ["python_simulation"]
     write(tmp_path, "tests/test_rail.py", "# Arithmetic.\ngain = 1000 * 10 / 10.1\nfor k in range(3):\n    tau = k * cap_f / g\n")
     assert rules(tmp_path) == []
+
+def test_a_uses_entry_that_does_not_exist_is_reported_not_a_crash(tmp_path):
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    write(tmp_path, "proj/design/top.sv", "// Top level.\nmodule top(input logic a, output logic y);\n  assign y = a;\nendmodule\n")
+    log = write(tmp_path, "proj/results/run.log", "ok")
+    save(tmp_path / "proj/results/summary.json", "sim", True, [log], root=tmp_path)
+    write(tmp_path, "proj/uses.txt", "other/results/gone.log\n")
+    found = find_problems(tmp_path)
+    assert ("missing_use", "other/results/gone.log") in {(rule, why.split()[-1]) for rule, _, why in found}

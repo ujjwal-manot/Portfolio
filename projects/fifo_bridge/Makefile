@@ -76,9 +76,14 @@ cdc: timing
 CORNER_tt := 1.2 27
 CORNER_ss := 1.08 125
 CORNER_ff := 1.32 -40
+CORNER_sc := 1.08 -40
+MOS_tt := tt
+MOS_ss := ss
+MOS_ff := ff
+MOS_sc := ss
 V0_rise := 0 v1={vsupply}
 V0_fall := {vsupply} v1=0
-EDGES := $(foreach m,tt ss ff,$(foreach e,rise fall,build/mtbf/$(m)_$(e)/edge.txt))
+EDGES := $(foreach m,tt ss sc ff,$(foreach e,rise fall,build/mtbf/$(m)_$(e)/edge.txt))
 
 mtbf: $(EDGES)
 	for f in $(EDGES); do cp $$f results/mtbf_$$(basename $$(dirname $$f)).txt; done
@@ -94,7 +99,7 @@ build/mtbf/dfrbpq_pex.spice: mtbf/extract.tcl
 build/mtbf/%/edge.txt: mtbf/edge.cir build/mtbf/dfrbpq_pex.spice
 	mkdir -p $(@D)
 	cp $^ $(@D)
-	printf '.lib cornerMOSlv.lib mos_%s\n.param vsupply=%s\n.temp %s\n.param v0=%s\n' $(word 1,$(subst _, ,$*)) $(CORNER_$(word 1,$(subst _, ,$*))) "$(V0_$(word 2,$(subst _, ,$*)))" > $(@D)/corner.inc
+	printf '.lib cornerMOSlv.lib mos_%s\n.param vsupply=%s\n.temp %s\n.param v0=%s\n' $(MOS_$(word 1,$(subst _, ,$*))) $(CORNER_$(word 1,$(subst _, ,$*))) "$(V0_$(word 2,$(subst _, ,$*)))" > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b edge.cir > edge.log 2>&1
 
 broken:

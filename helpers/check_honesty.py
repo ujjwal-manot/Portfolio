@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, quotes README numbers its logs never show, hides failures, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -67,7 +67,16 @@ def python_problems(path, text):
                 yield "python_simulation", f"line {node.lineno} imports a circuit solver"
 
 
+def missing_uses(project, root):
+    uses = project / "uses.txt"
+    return [line.strip() for line in (uses.read_text().splitlines() if uses.exists() else []) if line.strip() and not (root / line.strip()).exists()]
+
 def summary_problems(path, root):
+    missing = missing_uses(path.resolve().parent.parent, root.resolve())
+    for name in missing:
+        yield "missing_use", f"uses.txt names a file that does not exist, so no result here can be checked for staleness: {name}"
+    if missing:
+        return
     now = sources(path.resolve().parent.parent, root.resolve())
     for check, entry in json.loads(path.read_text()).items():
         then = entry.get("sources", {})

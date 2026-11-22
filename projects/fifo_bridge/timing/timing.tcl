@@ -1,4 +1,4 @@
-# Checks fifo_bridge timing at the corner named by CORNER (slow, typ, fast), on the mapped netlist or, when NETLIST and SPEF are set, on the routed netlist with its extracted wires and propagated clock trees: s_clk 10 MHz, m_clk 50 MHz, every crossing held under one m_clk period, rst_n untimed because reset_sync owns it, inputs driven by an IHP flop and outputs loading one IHP flop D pin, neighbours given 20% of their clock period as an interface budget, no clock jitter (no measured source exists for the input clocks); reports the Gray pointer skew (latest late arrival minus earliest early arrival at the first synchronizer flops) and, before layout, writes the corner's SDF.
+# Checks fifo_bridge timing at the corner named by CORNER (slow, typ, fast), on the mapped netlist or, when NETLIST and SPEF are set, on the routed netlist with its extracted wires and propagated clock trees: s_clk 10 MHz, m_clk 50 MHz, every crossing held under one m_clk period, rst_n untimed because reset_sync owns it, inputs driven by an IHP flop and outputs loading one IHP flop D pin, neighbours given 20% of their clock period as an interface budget, no clock jitter (no measured source exists for the input clocks); at the slow corner late cell delays and setup checks are raised 1.6%, since at 1.08 V the cold slow corner (ss, -40 C, which IHP ships no library for) is that much slower than the 125 C library in power_manager's transistor sweep (projects/power_manager/results/speed.log); reports the Gray pointer skew (latest late arrival minus earliest early arrival at the first synchronizer flops) and, before layout, writes the corner's SDF.
 set corner $::env(CORNER)
 set routed [info exists ::env(SPEF)]
 read_liberty ../build/$corner.lib
@@ -9,6 +9,7 @@ create_clock -name s_clk -period 100 [get_ports s_clk]
 create_clock -name m_clk -period 20 [get_ports m_clk]
 if {$routed} { set_propagated_clock [all_clocks] }
 set_max_delay 20 -ignore_clock_latency -from [get_clocks s_clk] -to [get_clocks m_clk]
+if {$corner == "slow"} { set_timing_derate -late -cell_delay 1.016; set_timing_derate -late -cell_check 1.016 }
 set_max_delay 20 -ignore_clock_latency -from [get_clocks m_clk] -to [get_clocks s_clk]
 set_input_delay 0 -clock s_clk [get_ports rst_n]
 set_false_path -from [get_ports rst_n]

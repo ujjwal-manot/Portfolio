@@ -1,2 +1,2 @@
-* Reference sizes: ladder unit (2.65 kohm at w=1u l=10u, about 75 uA through the ladder from 1.2 V), NMOS decoupling between vref_hi and vref_lo in 10 by 10 um units (m_hl) and the side of the vcm MIM capacitor (w_cm, 1.5 fF per um2).
-.param w_lad=1u l_lad=10u m_hl=40 w_cm=100u
+* Reference sizes: ladder unit (2.65 kohm at w=1u l=10u, about 75 uA through the ladder from 1.2 V), and NMOS decoupling in 10 by 10 um units (about 1.25 pF each in inversion, from the power_manager decap measurement): vref_hi to vref_lo (m_hl, about 1 nF), vref_hi to ground (m_h) and vcm to ground (m_cm); with m_hl=40 and 15 pF of MIM on vcm the references moved 9.5, 7.8 and 20.7 LSB at the comparator decisions, with m_hl=800 and m_cm=400 the pair moved 0.92 LSB and vcm 0.83 LSB but the pair's common mode 2 LSB, hence m_h.
+.param w_lad=1u l_lad=10u m_hl=800 m_h=400 m_cm=400

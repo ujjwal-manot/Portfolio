@@ -1,9 +1,9 @@
-# Fits the metastability time constant from the ngspice flop sweeps where the solver still resolves the gap, compares each flip point with the IHP liberty setup time, checks sync2.sv uses the measured capture window, and works out the bridge synchronizers' MTBF.
+# Fits the metastability time constant from the ngspice flop sweeps where the solver still resolves the gap (tt 27 C, ss 125 C, ss -40 C as sc, since at 1.08 V cold is the slower side, and ff -40 C), compares each flip point with the IHP liberty setup time (sc against the 125 C slow library, IHP ships no cold one), checks sync2.sv uses the measured capture window, and works out the bridge synchronizers' MTBF.
 import math, re, statistics, sys
 from pathlib import Path
 
 LIB = "/foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_{}.lib"
-CORNERS = {"tt": "typ_1p20V_25C", "ss": "slow_1p08V_125C", "ff": "fast_1p32V_m40C"}
+CORNERS = {"tt": "typ_1p20V_25C", "ss": "slow_1p08V_125C", "sc": "slow_1p08V_125C", "ff": "fast_1p32V_m40C"}
 CROSSINGS = [("w_gray into m_clk", 50e6, 10e6), ("r_gray into s_clk", 10e6, 50e6)]
 SYNC2 = Path(__file__).resolve().parents[1] / "design" / "sync2.sv"
 
