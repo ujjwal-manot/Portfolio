@@ -1,0 +1,5 @@
+# CVC device limits for IHP SG13G2 from SG13G2_os_process_spec.pdf Rev 1.2: thresholds are the 10 x Lmin targets (VTN10x013 0.50 V, VTP10x013 -0.47 V, VTNHV10x045 0.70 V, VTPHV10x04 -0.65 V), the gate limit is the spec's VGS rating (1.65 V thin oxide in 2.1 and 2.2, 3.3 V thick oxide in 2.4 and 2.5), and the same value bounds Vds, Vbs and Vbg, below every BVDSS minimum (2.0 V thin, 5.3 V thick).
+MN sg13_lv_nmos Vth=0.50 Vgs=1.65 Vds=1.65 Vbs=1.65 Vbg=1.65
+MP sg13_lv_pmos Vth=-0.47 Vgs=1.65 Vds=1.65 Vbs=1.65 Vbg=1.65
+MN sg13_hv_nmos Vth=0.70 Vgs=3.3 Vds=3.3 Vbs=3.3 Vbg=3.3
+MP sg13_hv_pmos Vth=-0.65 Vgs=3.3 Vds=3.3 Vbs=3.3 Vbg=3.3
