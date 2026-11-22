@@ -16,7 +16,7 @@ module d2d_replay #(
   output logic [15:0]         link_crc
 );
   logic [FLIT_W-1:0] buf_mem [8];
-  logic [3:0]        wptr, rptr, aptr;
+  logic [3:0]        wptr, rptr, aptr, seq_ptr;
   logic              full, has_pending;
 
   function automatic logic [15:0] crc16_word(input logic [FLIT_W-1:0] d);
@@ -32,6 +32,7 @@ module d2d_replay #(
   assign full        = (wptr - aptr) >= 4'd8;
   assign tx_ready    = !full && !nak_valid;
   assign has_pending = (rptr != wptr);
+  assign seq_ptr     = {aptr[3] ^ (ack_seq < aptr[2:0]), ack_seq};
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -43,13 +44,13 @@ module d2d_replay #(
       link_flit  <= '0;
       link_crc   <= 16'd0;
     end else begin
-      if (ack_valid) aptr <= {aptr[3], ack_seq} + 4'd1;
+      if (ack_valid) aptr <= seq_ptr + 4'd1;
       if (tx_valid && tx_ready) begin
         buf_mem[wptr[2:0]] <= tx_flit;
         wptr               <= wptr + 4'd1;
       end
       if (nak_valid) begin
-        rptr       <= {aptr[3], ack_seq};
+        rptr       <= seq_ptr;
         link_valid <= 1'b0;
       end else if (has_pending) begin
         link_valid <= 1'b1;
