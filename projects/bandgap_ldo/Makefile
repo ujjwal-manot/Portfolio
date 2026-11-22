@@ -29,6 +29,7 @@ all: pnp corners mc startup ldo_model ldo bleed_study ldo_mc broken layout post_
 LDO_MC := $(foreach k,ss ff,$(foreach n,$(shell seq 1 50),build/ldo_mc/$(k)_$(n)/mc.txt))
 STUDY_CORNERS := tt_3v3_27 ff_3v6_125 ss_3v0_125
 BLOCKS := bandgap ldo
+NAMES_bandgap := a,e8,e3
 POST_BG := tt_3v3 ss_3v0 ff_3v6
 POST_LDO := tt_3v3_27 ss_3v0_125 ff_3v6_m40
 
@@ -143,7 +144,7 @@ layout: $(foreach b,$(BLOCKS),build/layout/$(b).gds build/layout/$(b).cdl)
 	for b in $(BLOCKS); do d=build/layout/checks/$$b; mkdir -p $$d; cp build/layout/$$b.gds build/layout/$$b.cdl $$d; \
 	  if (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/drc/run_drc.py --path=$$b.gds --topcell=$$b --run_dir=drc --no_density" > drc.log 2>&1); then e=0; else e=$$?; fi; echo "run_drc exit $$e" >> $$d/drc.log; \
 	  if (cd $$d && $(RUN) bash -c "python3 \$$PDK_ROOT/\$$PDK/libs.tech/klayout/tech/lvs/run_lvs.py --layout=$$b.gds --netlist=$$b.cdl --topcell=$$b --run_dir=lvs --combine_devices --disable_tap_extraction" > lvs.log 2>&1); then e=0; else e=$$?; fi; echo "run_lvs exit $$e" >> $$d/lvs.log; \
-	  if $(RUN) klayout -b -rd path=$$d/lvs/$$b.lvsdb -r $(ROOT)/helpers/lvs_names.py >> $$d/lvs.log 2>&1; then e=0; else e=$$?; fi; echo "lvs_names exit $$e" >> $$d/lvs.log; \
+	  if [ $$b = bandgap ]; then n=$(NAMES_bandgap); else n=; fi; if $(RUN) klayout -b -rd path=$$d/lvs/$$b.lvsdb -rd names=$$n -r $(ROOT)/helpers/lvs_names.py >> $$d/lvs.log 2>&1; then e=0; else e=$$?; fi; echo "lvs_names exit $$e" >> $$d/lvs.log; \
 	  cp $$d/drc.log results/layout_drc_$$b.log; cp $$d/lvs.log results/layout_lvs_$$b.log; cp $$d/lvs/$${b}_extracted.cir results/layout_extracted_$$b.cir; cp build/layout/generate_$$b.log results/layout_generate_$$b.log; \
 	  if grep -q "DRC Check Passed" results/layout_drc_$$b.log && grep -qx "run_drc exit 0" results/layout_drc_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_drc_$$b $$c results/layout_drc_$$b.log results/layout_generate_$$b.log; \
 	  if grep -q "PASS (netlists match)" results/layout_lvs_$$b.log && grep -qx "run_lvs exit 0" results/layout_lvs_$$b.log && grep -qx "lvs_names exit 0" results/layout_lvs_$$b.log; then c=0; else c=1; fi; $(SAVE) layout_lvs_$$b $$c results/layout_lvs_$$b.log results/layout_extracted_$$b.cir; done
