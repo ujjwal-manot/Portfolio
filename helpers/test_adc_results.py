@@ -71,18 +71,20 @@ def test_two_conversions_must_give_the_same_codes(tmp_path):
     assert same_codes(a, b, 1.2) == (True, 0)
     assert same_codes(a, c, 1.2) == (False, 1)
 
-def run_with_top(tmp_path, name, tops, samp_high=(0,)):
-    rows = []
-    for t, top in enumerate(tops):
-        values = [0] * 9 + [1.2 if t in samp_high else 0, 0.6, top, 0.6, 1e-9 * t]
-        rows.append(" ".join(f"{t * 5e-8} {v}" for v in values))
+def run_at_steps(tmp_path, name, steps):
+    rows = [" ".join(f"{time} {v}" for v in (cclk, top, 0.6)) for time, cclk, top in steps]
     return write(tmp_path, name, "\n".join(rows) + "\n")
 
-def test_top_plate_difference_is_taken_in_lsb_while_converting(tmp_path):
-    gear = run_with_top(tmp_path, "g.txt", [0.9, 0.600, 0.601, 0.602])
-    trap = run_with_top(tmp_path, "t.txt", [0.1, 0.600, 0.6011, 0.602, 0.7])
+def test_top_plate_is_read_at_each_comparator_clock_rise(tmp_path):
+    gear = run_at_steps(tmp_path, "g.txt", [(0, 0, 0.61), (1e-9, 1.2, 0.62), (2e-9, 0, 0.63), (4e-9, 1.2, 0.65)])
+    trap = run_at_steps(tmp_path, "t.txt", [(0, 0, 0.61), (2e-9, 1.2, 0.6206), (3e-9, 0, 0.63), (5e-9, 1.2, 0.65)])
     worst, points = top_difference(gear, trap, 1.2)
-    assert points == 3 and abs(worst - 0.0001 / 0.003125) < 1e-6
+    assert points == 2 and abs(worst - 0.0003 / 0.003125) < 1e-6
+
+def test_a_missing_decision_counts_as_a_difference(tmp_path):
+    gear = run_at_steps(tmp_path, "g.txt", [(0, 0, 0.6), (1e-9, 1.2, 0.6), (2e-9, 0, 0.6), (3e-9, 1.2, 0.6)])
+    trap = run_at_steps(tmp_path, "t.txt", [(0, 0, 0.6), (1e-9, 1.2, 0.6), (2e-9, 0, 0.6)])
+    assert top_difference(gear, trap, 1.2)[0] == float("inf")
 
 def test_decision_times_are_compared_row_by_row(tmp_path):
     a = write(tmp_path, "a.txt", "dv_v t_decide_s outp_v\n1e-3 3.0e-10 1.2\n-1e-3 3.2e-10 0\n")

@@ -1,4 +1,4 @@
-# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate under two integration methods within 0.1 LSB while converting (top) and comparator decision times under both within 5% (decide_methods): python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert ...
+# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power: two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate against vcm at every comparator clock rise (each decision, read between solver steps from a run written without interpolation) under two integration methods within 0.1 LSB (top) and comparator decision times under both within 5% (decide_methods): python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert ...
 import math, statistics, sys
 import numpy as np
 from adc_spectrum import spectrum, coherent_bin
@@ -44,11 +44,20 @@ def same_codes(path_a, path_b, supply):
     differ = sum(x != y for x, y in zip(a, b)) + abs(len(a) - len(b))
     return differ == 0, differ
 
+def top_at_decisions(path, supply):
+    rows = [[float(v) for v in l.split()] for l in open(path) if l.strip()]
+    tops = []
+    for a, b in zip(rows, rows[1:]):
+        if a[1] < supply / 2 <= b[1]:
+            f = (supply / 2 - a[1]) / (b[1] - a[1])
+            tops.append(a[3] - a[5] + f * (b[3] - b[5] - a[3] + a[5]))
+    return tops
+
 def top_difference(path_a, path_b, supply):
-    load = lambda p: [[float(v) for v in l.split()][1::2] for l in open(p) if l.strip()]
-    a, b = load(path_a), load(path_b)
-    gaps = [abs(x[11] - y[11]) for x, y in zip(a, b) if x[9] < supply / 2 and y[9] < supply / 2]
-    return max(gaps) / LSB, len(gaps)
+    a, b = top_at_decisions(path_a, supply), top_at_decisions(path_b, supply)
+    if len(a) != len(b):
+        return float("inf"), min(len(a), len(b))
+    return max(abs(x - y) for x, y in zip(a, b)) / LSB, len(a)
 
 def decide_difference(path_a, path_b):
     load = lambda p: {l.split()[0]: float(l.split()[1]) for l in open(p).readlines()[1:] if len(l.split()) == 3}
@@ -108,7 +117,7 @@ if __name__ == "__main__":
         fails = [] if ok else [f"{differ} codes differ between the two conversions"]
     elif mode == "top":
         worst, points = top_difference(args[1], args[2], float(args[0]))
-        print(f"{args[1]} and {args[2]}: the top plate differs by at most {worst:.4g} LSB over {points} points while converting")
+        print(f"{args[1]} and {args[2]}: the top plate against vcm differs by at most {worst:.4g} LSB over {points} comparator clock rises")
         fails = [] if worst <= 0.1 else [f"top plate differs by {worst:.4g} LSB, more than 0.1"]
     elif mode == "decide_methods":
         worst = decide_difference(args[0], args[1])
