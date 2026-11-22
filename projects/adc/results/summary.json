@@ -83,13 +83,13 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:43",
+  "time": "2026-11-22 17:56:57",
   "values": {}
  },
  "levels": {
@@ -156,13 +156,13 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:52",
+  "time": "2026-11-22 17:57:04",
   "values": {}
  },
  "logic_power": {
@@ -204,18 +204,18 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:35",
+  "time": "2026-11-22 17:56:49",
   "values": {}
  },
  "logic_synth": {
   "logs": {
-   "logic_synth.log": "d4fd2b34c8a7cb40e6348217dbd59bb57278b9b0fce6ce98fe27d346e00d28a8"
+   "logic_synth.log": "3e9c0738e88592f714aeb2525e0fb770ac6c835076af87630ef6b0df0a6bd719"
   },
   "result": "pass",
   "sources": {
@@ -252,13 +252,13 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:22",
+  "time": "2026-11-22 17:56:33",
   "values": {}
  },
  "offset": {
@@ -400,18 +400,18 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:48",
+  "time": "2026-11-22 17:57:00",
   "values": {}
  },
  "test_sar_logic": {
   "logs": {
-   "test_sar_logic.log": "00716f2a5c56348faad08df1184574fa61d3ec2b9f044d571bc9f1a4bb07ef4f"
+   "test_sar_logic.log": "f7e7e7327779c94b745252c40d3b641d65eddcfc0ee1cd4a0320411df066736a"
   },
   "result": "pass",
   "sources": {
@@ -448,18 +448,18 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:13",
+  "time": "2026-11-22 17:56:30",
   "values": {}
  },
  "test_sar_logic_cells": {
   "logs": {
-   "test_sar_logic_cells.log": "3c8e11b6062a2d29762dd9dca7c390d1263032e1a5e0eac45e9ebff036f2e7b0"
+   "test_sar_logic_cells.log": "586eaaadccfa1f1cef81289352e5f8fe97d48eafb9cdff789b7f7be8ec28a08e"
   },
   "result": "pass",
   "sources": {
@@ -496,13 +496,13 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 17:46:32",
+  "time": "2026-11-22 17:56:46",
   "values": {}
  },
  "uic_check": {
@@ -546,13 +546,13 @@
    "projects/adc/tests/supplied.cir": "6fecfea74b8872b392bfe28beddb586ce96f146420461f7600e247dc2316afe1",
    "projects/adc/tests/test_sar_logic.py": "4c75c8743044ba4341dff204470e0805b550f884589493a020b32cf502c643d2",
    "projects/adc/uses.txt": "f712ab3b59b562ceac7599fed4b704c893fd353e48c6b9f50c998dab0e8ec023",
-   "projects/bandgap_ldo/design/bandgap.cir": "88398cbc16e120eac63a16ea3c9c4f64da056ce92ef522b67e5e6b015f1aca96",
+   "projects/bandgap_ldo/design/bandgap.cir": "18e054e297c3e58f9ef1835adf9c32d5d0ef25c084f44b5c23c4b8b9f1949966",
    "projects/bandgap_ldo/design/bandgap_sizes.inc": "7167d9236e4be0c3acafe39cacf475a933a6a3ba15325cd666f935c8690f3e5c",
    "projects/bandgap_ldo/design/ldo.cir": "049b00510f55bab10c75fe9bf6336b3b1f7d50763e550edeb7f6fced606f6456",
    "projects/bandgap_ldo/design/ldo_sizes.inc": "03fd198b2d27a26e8937d6cd6ae39816fa9e5491777db4809a567055082beb74",
    "projects/bandgap_ldo/results/corners.log": "5f78588470af7080e57c49ad8d4efc1686a6763c77aaaeddcc69474b59aff9aa"
   },
-  "time": "2026-11-22 14:33:54",
+  "time": "2026-11-22 18:09:49",
   "values": {}
  }
 }

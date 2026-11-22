@@ -70,7 +70,7 @@
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/usr/local/lib/python3.12/dist-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
      -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
-     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795365986
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1795366600
      0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /usr/local/lib/python3.12/dist-packages/cocotb
      0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 14.0 (devel)
      0.00ns INFO     cocotb.regression                  Running tests
@@ -80,10 +80,10 @@
 1026300.00ns INFO     cocotb.regression                  **********************************************************************************************************
                                                         ** TEST                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         **********************************************************************************************************
-                                                        ** test_sar_logic.ideal_quantizer_scores_eight_bits   PASS     1026300.00           1.41     728981.46  **
+                                                        ** test_sar_logic.ideal_quantizer_scores_eight_bits   PASS     1026300.00           1.63     629982.09  **
                                                         **********************************************************************************************************
-                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                1026300.00           1.41     728669.84  **
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                1026300.00           1.63     628911.78  **
                                                         **********************************************************************************************************
 FST info: dumpfile /home/user/Portfolio/projects/adc/build/icarus_sar_logic_test_sar_logic_COCOTB_TEST_FILTER/sar_logic.fst opened for output.
 .
-1 passed, 1 deselected in 5.09s
+1 passed, 1 deselected in 6.08s

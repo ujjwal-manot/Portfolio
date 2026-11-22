@@ -1,1 +1,1 @@
-startup ramp_s 9.999E-05 final_v 1.20943 settle_s -4.41064E-05
+startup ramp_s 9.999E-05 final_v 1.20943 settle_s -4.25087E-05

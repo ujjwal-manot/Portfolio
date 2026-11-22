@@ -782,7 +782,7 @@ Removing temp directory.
 Extracted 25 gates and 34 wires to a netlist network with 9 inputs and 9 outputs.
 Running ABC script: <abc-temp-dir>/abc.script
 ABC: empty
-ABC: abc 07> source <abc-temp-dir>/abc.script
+ABC: abc 13> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
 ABC: + read_library <abc-temp-dir>/stdcells.genlib 
 ABC: + strash 
@@ -1032,6 +1032,6 @@ Removed 0 unused cells and 139 unused wires.
 8.2. Executing DEMUXMAP pass.
 Dumping module `\sar_logic'.
 
-End of script. Logfile hash: 4525bc7ce4, time: 3.00s, user: 0.16s, system: 0.07s, MEM: 39.86 MB peak
+End of script. Logfile hash: e9266f7a57, time: 0.81s, user: 0.15s, system: 0.04s, MEM: 41.34 MB peak
 Yosys 0.70 (git sha1 28ba3cb92, Release, GNU /usr/bin/c++ 13.3.0)
-Time spent: 79% 2x abc (0 sec), 3% 1x techmap (0 sec), ...
+Time spent: 81% 2x abc (0 sec), 2% 22x opt_clean (0 sec), ...
