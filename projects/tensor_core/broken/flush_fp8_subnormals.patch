@@ -1,0 +1,17 @@
+Expected failure: AssertionError:
+--- a/design/fma.sv
++++ b/design/fma.sv
+@@ -20,11 +20,11 @@
+         n.m = {16'b0, x[14:7] != 0, x[6:0]}; n.e = (x[14:7] == 0 ? 12'sd1 : $signed({4'b0, x[14:7]})) - 12'sd134;
+       end
+       2'd1: begin
+-        n.s = x[7]; n.zero = x[6:0] == 0; n.nan = x[6:0] == 7'h7f;
++        n.s = x[7]; n.zero = x[6:3] == 0; n.nan = x[6:0] == 7'h7f;
+         n.m = {20'b0, x[6:3] != 0, x[2:0]}; n.e = (x[6:3] == 0 ? 12'sd1 : $signed({8'b0, x[6:3]})) - 12'sd10;
+       end
+       2'd2: begin
+-        n.s = x[7]; n.zero = x[6:0] == 0; n.inf = x[6:2] == 5'h1f && x[1:0] == 0; n.nan = x[6:2] == 5'h1f && x[1:0] != 0;
++        n.s = x[7]; n.zero = x[6:2] == 0; n.inf = x[6:2] == 5'h1f && x[1:0] == 0; n.nan = x[6:2] == 5'h1f && x[1:0] != 0;
+         n.m = {21'b0, x[6:2] != 0, x[1:0]}; n.e = (x[6:2] == 0 ? 12'sd1 : $signed({7'b0, x[6:2]})) - 12'sd17;
+       end
+       default: begin

@@ -1,0 +1,12 @@
+Expected failure: AssertionError:
+--- a/design/fma.sv
++++ b/design/fma.sv
+@@ -102,7 +102,7 @@
+           wide = shift_sticky(wide, int'(unsigned'(12'sd1 - eb)));
+           eb = 1;
+         end
+-        rounded = {1'b0, wide[26:3]} + {24'b0, wide[2] && (wide[1] || wide[0] || wide[3])};
++        rounded = {1'b0, wide[26:3]};
+         if (rounded[24]) begin
+           rounded = rounded >> 1;
+           eb = eb + 1;
