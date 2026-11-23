@@ -119,3 +119,12 @@ def test_a_uses_entry_that_does_not_exist_is_reported_not_a_crash(tmp_path):
     write(tmp_path, "proj/uses.txt", "other/results/gone.log\n")
     found = find_problems(tmp_path)
     assert ("missing_use", "other/results/gone.log") in {(rule, why.split()[-1]) for rule, _, why in found}
+
+def test_a_value_preset_before_it_is_measured_is_a_silent_default(tmp_path):
+    write(tmp_path, "tests/load.cir", "load bench\n.control\nlet error = 0\nmeas tran got find v(out) at=1u\nlet error = abs(got - 1)\nquit\n.endc\n")
+    write(tmp_path, "tests/dc.cir", "dc bench\n.control\nlet tc = 0\nmeas dc tc find v(out) at=27\nquit\n.endc\n")
+    write(tmp_path, "tests/step.cir", "step bench\n.control\nlet ub = -1\nmeas tran ub when v(out)=1 cross=last\necho \"may be absent: ub (the output never overshoots)\"\nquit\n.endc\n")
+    write(tmp_path, "tests/ok.cir", "ok bench\n.control\nlet span = 0.6\nmeas tran got find v(out) at=1u\nquit\n.endc\n")
+    found = {(rule, str(path)) for rule, path, _ in find_problems(tmp_path)}
+    assert ("silent_default", "tests/load.cir") in found and ("silent_default", "tests/dc.cir") in found
+    assert not any(path in ("tests/step.cir", "tests/ok.cir") for rule, path in found if rule == "silent_default")

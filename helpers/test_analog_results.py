@@ -85,3 +85,8 @@ def test_a_nan_fails_wherever_it_sits_among_the_corners(tmp_path):
     for order in (("corner_aa_27_nom.txt", "corner_zz_27_nom.txt"), ("corner_zz_27_nom.txt", "corner_aa_27_nom.txt")):
         paths = [write(tmp_path, order[0], failed), write(tmp_path, order[1], GOOD)]
         assert not corners(paths)[0]
+
+def test_the_verdict_line_states_both_the_point_estimate_and_its_lower_bound(tmp_path):
+    runs = [write(tmp_path, f"mc_{i}.txt", GOOD) for i in range(200)]
+    out = subprocess.run([sys.executable, str(Path(__file__).parent / "analog_results.py"), "mc", *map(str, runs)], capture_output=True, text=True).stdout
+    assert "point estimate 100.0% meets 99%; its 95% lower bound 98.5% is below 99%" in out

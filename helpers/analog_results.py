@@ -1,4 +1,4 @@
-# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and the opamp's error at the peak of the largest sensor signal chip.md allows (-1 dBFS, 0.357 V), twice its input offset (noise gain 2) plus its gain error times that peak, within the headroom left once the ADC's own allowed offset (1 LSB) and gain error (2 LSB over full scale, scaled to the peak) are taken out; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) with the one-sided 95% lower bound on the combined yield and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
+# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and the opamp's error at the peak of the largest sensor signal chip.md allows (-1 dBFS, 0.357 V), twice its input offset (noise gain 2) plus its gain error times that peak, within the headroom left once the ADC's own allowed offset (1 LSB) and gain error (2 LSB over full scale, scaled to the peak) are taken out; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) with the one-sided 95% lower bound on each yield, the verdict on the combined point estimate printed beside whether its lower bound also meets 99%, and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
 import cmath, math, sys
 from pathlib import Path
 
@@ -103,7 +103,8 @@ if __name__ == "__main__":
             sigma = math.sqrt(sum((o - mean) ** 2 for o in offsets) / (len(offsets) - 1))
             print(f"offset_v       mean {mean:.4g} sigma {sigma:.4g} worst {max(offsets, key=abs):.4g}")
         print(f"combined yield is at least {lower_bound(round(yields['combined'] * len(paths)), len(paths)):.1%} at 95% confidence")
-        print(f"combined yield meets {YIELD:.0%}" if ok else f"combined yield below {YIELD:.0%}")
+        bound = lower_bound(round(yields['combined'] * len(paths)), len(paths))
+        print(f"combined yield point estimate {yields['combined']:.1%} {'meets' if ok else 'is below'} {YIELD:.0%}; its 95% lower bound {bound:.1%} {'meets' if bound >= YIELD else 'is below'} {YIELD:.0%}")
     else:
         for p in sorted(paths):
             m = measured(parse(p))

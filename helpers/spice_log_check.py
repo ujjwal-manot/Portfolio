@@ -1,4 +1,4 @@
-# Fails an ngspice run from its log, whatever ngspice's exit code says: a stopped analysis (timestep too small, iteration limit, no convergence, simulation aborted), any "Error:" line, a meas that failed, or a log that does not end with ngspice's own done line (the run was killed or cut short, or the bench has no quit); a measure may fail only if the bench echoes "may be absent: <name> (<reason>)", and warnings ngspice recovers from (a failed gmin or source stepping step, a singular matrix that stepping clears) or the word "failed" in the bench's own Circuit title do not count.
+# Fails an ngspice run from its log, whatever ngspice's exit code says: a stopped analysis (timestep too small, iteration limit, no convergence, simulation aborted), any "Error:" line, a meas that failed, or a log that does not end with ngspice's own done line, apart from stderr Note lines that can land after it (the run was killed or cut short, or the bench has no quit); failure lines count wherever stderr put them; a measure may fail only if the bench echoes "may be absent: <name> (<reason>)", and warnings ngspice recovers from (a failed gmin or source stepping step, a singular matrix that stepping clears) or the word "failed" in the bench's own Circuit title do not count.
 import re, sys
 from pathlib import Path
 
@@ -21,6 +21,8 @@ def problems(text):
         elif STOPPED.search(line):
             found.append(line.strip())
     ending = [line.strip() for line in lines if line.strip()]
+    while ending and ending[-1].startswith("Note:"):
+        ending.pop()
     if not ending or not DONE.match(ending[-1]):
         found.append("log does not end with ngspice's done line: the run was killed or cut short, or the bench has no quit")
     return found

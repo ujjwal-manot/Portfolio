@@ -1,4 +1,4 @@
-# Checks spice_log_check on real ngspice logs kept in fixtures/spice_logs: runs that finished (cleanly, after a failed dynamic gmin step, after a singular-matrix warning that gmin stepping cleared, after source stepping failed and the transient op took over, or with "failed" only in the bench's own title) pass; an operating point that never converged, a transient that stopped with a failed meas, a run killed partway (no closing done line) and a meas that failed without being declared absent each fail with the line that shows why; the same step log passes once it carries the declaration a bench echoes for a measure that may be absent.
+# Checks spice_log_check on real ngspice logs kept in fixtures/spice_logs: runs that finished (cleanly, with a stderr Note printed after ngspice's done line, after a failed dynamic gmin step, after a singular-matrix warning that gmin stepping cleared, after source stepping failed and the transient op took over, or with "failed" only in the bench's own title) pass; an operating point that never converged, a transient that stopped with a failed meas, a missing include file, a failed meas whose stderr lines landed after the done line, a run killed partway (no closing done line) and a meas that failed without being declared absent each fail with the line that shows why; the same step log passes once it carries the declaration a bench echoes for a measure that may be absent.
 import subprocess, sys
 from pathlib import Path
 import pytest
@@ -7,7 +7,7 @@ from spice_log_check import problems
 LOGS = Path(__file__).parent / "fixtures" / "spice_logs"
 
 @pytest.mark.parametrize("name", ["clean.log", "converged_after_gmin_failed.log", "converged_after_singular_matrix.log",
-                                  "converged_by_transient_op.log", "title_mentions_failure.log"])
+                                  "converged_by_transient_op.log", "title_mentions_failure.log", "note_after_done.log"])
 def test_a_run_that_finished_passes(name):
     assert problems((LOGS / name).read_text()) == []
 
@@ -18,6 +18,8 @@ def test_a_run_that_finished_passes(name):
     ("tran_stopped_meas_failed.log", "meas tran settled when err=0.01 cross=last failed!"),
     ("killed.log", "does not end with ngspice's done line"),
     ("measure_absent_undeclared.log", "meas tran ub when"),
+    ("missing_include.log", "Could not find include file"),
+    ("error_after_done.log", "meas dc lo when"),
 ])
 def test_a_failed_or_cut_short_run_fails_and_names_the_line(name, shown):
     assert any(shown in line for line in problems((LOGS / name).read_text()))

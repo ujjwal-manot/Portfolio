@@ -31,3 +31,8 @@ def test_startup_must_end_at_vref_and_settle(tmp_path):
     assert startups([good])[0]
     assert not startups([good, write(tmp_path, "startup_b.txt", "startup ramp_s 1e-03 final_v 0.002 settle_s -1\n")])[0]
     assert not startups([good, write(tmp_path, "startup_c.txt", "startup ramp_s 1e-03 final_v 1.2063 settle_s 2e-04\n")])[0]
+
+def test_a_startup_written_as_nan_fails(tmp_path):
+    good = write(tmp_path, "startup_a.txt", "startup ramp_s 1e-08 final_v 1.20633 settle_s 7.5e-06\n")
+    assert not startups([good, write(tmp_path, "startup_n.txt", "startup ramp_s 1e-03 final_v nan settle_s 7.5e-06\n")])[0]
+    assert not startups([good, write(tmp_path, "startup_m.txt", "startup ramp_s 1e-03 final_v 1.2063 settle_s nan\n")])[0]

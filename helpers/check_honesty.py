@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured value to a constant in a SPICE bench (a failed run would keep it), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -142,6 +142,15 @@ def readme_problems(path):
                     yield "readme_claim", f"says {claim} in row '{cells[0]}', and no line of {', '.join(logs)} shows it next to {', '.join(sorted(words)) or 'a label'}"
 
 
+def silent_defaults(text):
+    constant = re.compile(r"[-+]?[0-9.]+(?:e[-+]?\d+)?$", re.I)
+    lets = [(m.group(1), m.group(2).strip()) for m in re.finditer(r"^\s*let\s+(\w+)\s*=(.*)$", text, re.M | re.I)]
+    presets = [name for name, value in lets if constant.match(value)]
+    recomputed = {name for name, value in lets if not constant.match(value)}
+    measured = set(re.findall(r"^\s*meas\s+\w+\s+(\w+)\b", text, re.M | re.I))
+    absent = set(re.findall(r"may be absent: (\w+) \(\S", text))
+    return [name for name in dict.fromkeys(presets) if (name in measured and name not in absent) or name in recomputed]
+
 def find_problems(root):
     root = Path(root)
     problems = []
@@ -163,6 +172,7 @@ def find_problems(root):
             problems.append(("comments", rel, f"{count} comment lines, needs exactly 1"))
         if path.suffix in SPICE:
             problems += [("toy_model", rel, l.strip()) for l in text.splitlines() if re.match(r"\s*\.model\s+\S+\s+[np]mos", l, re.I)]
+            problems += [("silent_default", rel, f"{name} is preset to a constant and later measured or recomputed, so a failed run keeps the preset") for name in silent_defaults(text)]
         if path.suffix == ".py":
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
