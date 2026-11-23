@@ -29,8 +29,6 @@ foreach first -50e-3 50e-3
     else
       let lo = mid
     end
-    let lo = lo + op - op
-    let hi = hi + op - op
   end
   let found[side] = (lo + hi) / 2
   let side = side + 1
