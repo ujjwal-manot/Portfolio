@@ -1,4 +1,4 @@
-# LDO layout: the flattened design netlist (NETLIST) laid out by hv_layout.py, thick-oxide NMOS units and the rhigh filter resistors (as series segments) in the lower row under a substrate ring, thick-oxide PMOS in the upper row inside an n-well ring, the four MIM capacitors as grids right of the rows, ports labelled on their Metal4 tracks, and the pass device's 2 mA brought out on its own pins (helpers/em_check.py found its single via stack and the 0.2 um vdd and vout tracks over IHP's electromigration limits): a via2 at every source and drain strip, Metal3 plates (the drain plate split around the source strap), via3 and via4 arrays and a 3 um Metal5 plate per side labelled vout and vdd, where the top level connects the rail; it prints the via count per level for em_check.py: HELPERS=helpers NETLIST=build/layout/ldo.cdl OUT=build/layout klayout -b -r layout/ldo.py (the CDL from spice_flatten.py)
+# LDO layout: the flattened design netlist (NETLIST) laid out by hv_layout.py, thick-oxide NMOS units and the rhigh filter resistors (as series segments) in the lower row under a substrate ring, thick-oxide PMOS in the upper row inside an n-well ring, the four MIM capacitors as grids right of the rows, ports labelled on their Metal4 tracks, and the pass device's 2 mA brought out on its own pins (helpers/em_check.py found its single via stack and the 0.2 um vdd and vout tracks over IHP's electromigration limits): a via2 at every source and drain strip, Metal3 plates (the drain plate split around the source strap), via3 and via4 arrays and a 3 um Metal5 plate per side labelled vout and vdd, where the top level connects the rail, which layout/pins.py measures for em_check.py: HELPERS=helpers NETLIST=build/layout/ldo.cdl OUT=build/layout klayout -b -r layout/ldo.py (the CDL from spice_flatten.py)
 import os, sys
 sys.path.insert(0, os.environ["HELPERS"])
 from hv_layout import HV, units
@@ -26,7 +26,6 @@ inst = next(i for i in b.top.each_inst() if i.cell.basic_name() == "nmosHV" and 
 strips = sorted({round(r.left, 3): r for r in b.shapes(inst.cell, "m1", inst.dtrans.disp.x, 0.0) if r.height() > 0.25}.values(), key=lambda r: r.left)
 h = max(r.top for r in strips)
 strap = strips[0::2][len(strips[0::2]) // 2].center().x
-counts = []
 for index, net, ty in ((0, "vout", 0.3 * h), (1, "vdd", 0.7 * h)):
     xs = [r.center().x for r in strips[index::2]]
     up = [x for x in xs if index == 0 or abs(x - strap) > 0.6]
@@ -43,8 +42,5 @@ for index, net, ty in ((0, "vout", 0.3 * h), (1, "vdd", 0.7 * h)):
     b.box("m5", xs[0] - 0.2, ty - 1.5, xs[-1] + 0.2, ty + 1.5)
     b.top.shapes(b.ly.layer(67, 2)).insert(pya.DBox(xs[0] - 0.2, ty - 1.5, xs[-1] + 0.2, ty + 1.5))
     b.top.shapes(b.ly.layer(67, 25)).insert(pya.DText(net, pya.DTrans((xs[0] + xs[-1]) / 2, ty)))
-    counts.append(min(len(xs), len(up)))
-    print(f"{net} pin over the pass device: {len(xs)} via2, {len(up)} via3, {len(up)} via4, Metal5 plate 3 um")
-print(f"own pins x2.xn={min(counts)},3.0")
 b.top.write(os.path.join(os.environ["OUT"], "ldo.gds"))
 print("wrote ldo.gds", b.top.dbbox())

@@ -19,8 +19,8 @@ VSAMP samp 0 dc {vsupply} pwl(0 {vsupply} 0.5u {vsupply} 0.50005u 0 2u 0 2.00005
 XDAC top out vcmd vref_hi vref_lo samp 0 0 0 0 0 0 0 0 vdd 0 cap_dac
 .control
 noise v(xdac.xc.xb7.b) VIN dec 20 1 10g
-let sampled = noise2.onoise_total
 tran 0.1n 2.25u
+let sampled = noise2.onoise_total
 meas tran target find v(out) at=0.99u
 meas tran got find v(xdac.xc.xb7.b) at=2.199u
 meas tran early find v(xdac.xc.xb7.b) at=2.05u

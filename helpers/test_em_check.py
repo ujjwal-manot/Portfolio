@@ -57,3 +57,28 @@ def test_a_device_with_its_own_pins_uses_its_via_arrays_and_leaves_the_tracks():
     ok, lines = check(raw(c), DESIGN, {}, {"x1": "pair"}, {"x1.xb": (4, 1.0)})
     assert not ok
     assert any(l.startswith("FAIL x1.xb") for l in lines)
+
+BRANCH = """.subckt branch b vdd vss
+XP b b vdd vdd sg13_hv_pmos w=8u l=8u
+XR b e vss rppd w=1u l=40u
+XQ vss vss e pnpMPA
+.ends branch
+"""
+
+def branch(i, r=None):
+    return "\n".join([f"@n.x1.xp.nsg13_hv_pmos[ids] = {i}", f"@n.x1.xr.nr1[ibody] = {i if r is None else r}",
+                      f"@q.x1.xq.qpnpmpa[ic] = {-0.7 * i}", f"@q.x1.xq.qpnpmpa[ib] = {-0.3 * i}", f"@q.x1.xq.qpnpmpa[ie] = {i}"])
+
+def test_resistor_and_pnp_currents_are_probed_and_counted_on_their_nets():
+    assert probes(BRANCH, {}, {"x1": "branch"}) == [".save @n.x1.xp.nsg13_hv_pmos[ids]", ".save @n.x1.xr.nr1[ibody]",
+                                                     ".save @q.x1.xq.qpnpmpa[ic]", ".save @q.x1.xq.qpnpmpa[ib]", ".save @q.x1.xq.qpnpmpa[ie]"]
+    ok, lines = check(branch(10e-6), BRANCH, {}, {"x1": "branch"})
+    assert ok, lines
+    assert any("x1.xr" in l and "rppd" in l for l in lines)
+    assert any("net x1.e track at most 0.01 mA" in l for l in lines)
+
+def test_a_resistor_over_its_width_limit_or_missing_fails():
+    ok, lines = check(branch(10e-6, r=0.25e-3).replace("ibody] = 0.00025", "ibody] = 0.00025"), BRANCH.replace("w=1u l=40u", "w=0.2u l=40u"), {}, {"x1": "branch"})
+    assert not ok and any(l.startswith("FAIL x1.xr") for l in lines)
+    ok, lines = check(branch(10e-6).replace("@n.x1.xr.nr1[ibody]", "@n.x1.xr.nr1[other]"), BRANCH, {}, {"x1": "branch"})
+    assert not ok
