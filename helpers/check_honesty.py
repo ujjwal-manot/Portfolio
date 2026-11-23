@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile without the ngspice log check, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or ignores that wrapper's exit code, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -199,10 +199,26 @@ def stale_measures(text):
                 found.append(m.group(1))
     return found
 
+DIRECT = re.compile(r"(?<![\w./-])ngspice\s+(?!vlnggen\b|-v\b)")
+WRAPPER = re.compile(r"^(\w+)\s*[:?+]?=.*helpers/ngspice\.sh")
+
 def unchecked_log(text):
-    checkers = set(re.findall(r"^(\w+)\s*[:?+]?=.*spice_log_check", text, re.M))
-    checked = "spice_log_check" in text and (any(f"$({v})" in text for v in checkers) or re.search(r"^\t.*spice_log_check", text, re.M))
-    return bool(re.search(r"ngspice\s+(?:\S+\s+)*-b\b", text)) and not checked
+    names = set(re.findall(WRAPPER.pattern, text, re.M))
+    call = re.compile("(?:" + "|".join([r"\S*helpers/ngspice\.sh"] + [re.escape(f"$({n})") for n in names]) + r")[^;&|()\n]*")
+    found = []
+    for line in text.splitlines():
+        if line.lstrip().startswith("#") or WRAPPER.match(line):
+            continue
+        if DIRECT.search(line):
+            found.append(f"runs ngspice directly, so its log is never checked: {line.strip()}")
+            continue
+        for m in call.finditer(line):
+            rest = line[m.end():].lstrip(") \t")
+            guarded = re.search(r"\b(?:if|while|until)\s[^;]*$", line[:m.start()])
+            if rest in ("", "\\") or rest.startswith("&&") or guarded or re.match(r"\|\|\s*\w+=", rest):
+                continue
+            found.append(f"ignores the checked run's exit code: {line.strip()}")
+    return found
 
 def find_problems(root):
     root = Path(root)
@@ -231,8 +247,7 @@ def find_problems(root):
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
             problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :", l) or re.match(r"\t-\S", l) or l.startswith(".IGNORE")]
-            if unchecked_log(text):
-                problems.append(("unchecked_log", rel, "runs ngspice -b but never runs spice_log_check on its logs, so a failed run passes on ngspice's exit code"))
+            problems += [("unchecked_log", rel, why) for why in unchecked_log(text)]
     return problems
 
 

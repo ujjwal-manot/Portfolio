@@ -1,5 +1,6 @@
 # Plants every kind of cheat in a scratch folder, including results older than their sources and README numbers no log shows, and checks that check_honesty catches each one.
 import json, subprocess
+from pathlib import Path
 from check_honesty import find_problems
 from save_result import save
 
@@ -17,7 +18,7 @@ def test_clean_tree_passes(tmp_path):
     write(tmp_path, "design/amp.sp", "two stage amp\n.lib cornerMOSlv.lib mos_tt\nXM1 d g s b sg13_lv_nmos w=1u l=1u\n")
     write(tmp_path, "helpers/read.py", "# Reads a log.\nimport numpy as np\nprint(np.mean([1, 2]))\n")
     write(tmp_path, "design/top.sv", "// Top level.\nmodule top(input logic a, output logic y);\n  assign y = a;\nendmodule\n")
-    write(tmp_path, "Makefile", "# Runs tests.\ntest:\n\tngspice -b amp.sp > amp.log 2>&1\n\tpython3 helpers/spice_log_check.py amp.log\n")
+    write(tmp_path, "Makefile", "# Runs tests.\ntest:\n\thelpers/ngspice.sh amp.sp amp.log\n")
     log = write(tmp_path, "results/run.log", "ok")
     save(tmp_path / "results/summary.json", "sim", True, [log], root=tmp_path)
     assert find_problems(tmp_path) == []
@@ -163,8 +164,38 @@ def test_the_loop_and_preset_rules_cannot_be_dodged(tmp_path):
         assert any(path == f"tests/{name}.cir" for _, path in found), name
     assert not any(path == "tests/good.cir" for _, path in found)
 
-def test_a_makefile_that_runs_ngspice_without_the_log_check_is_flagged(tmp_path):
-    write(tmp_path, "a/Makefile", "# Runs a bench.\nrun:\n\tcd build && $(RUN) ngspice -b dc.cir > dc.log 2>&1\n")
-    write(tmp_path, "b/Makefile", "# Runs a bench.\nrun:\n\tcd build && $(RUN) ngspice -b dc.cir > dc.log 2>&1\n\t$(RUN) python3 $(ROOT)/helpers/spice_log_check.py build/dc.log\n")
-    found = {str(path) for rule, path, _ in find_problems(tmp_path) if rule == "unchecked_log"}
-    assert found == {"a/Makefile"}
+def test_every_ngspice_run_in_a_makefile_goes_through_the_checked_wrapper(tmp_path):
+    bad = {
+        "direct": "\tcd build && $(RUN) ngspice -b dc.cir > dc.log 2>&1\n\t$(PY) helpers/spice_log_check.py build/dc.log\n",
+        "batch": "\tcd build && $(RUN) ngspice --batch dc.cir > dc.log 2>&1\n",
+        "ignored": "\tcd build && $(RUN) ngspice -b x.cir > x.log 2>&1; $(L) x.log; exit 0\n",
+        "tworule": "\t$(SPICE) a.cir a.log\nother:\n\tcd build && $(RUN) ngspice -b b.cir > b.log 2>&1\n",
+        "loop": "\tfor t in a b; do $(SPICE) $$t.cir $$t.log; done\n",
+        "subshell": "\t(cd d && $(SPICE) a.cir a.log); cp d/a.txt results/\n",
+        "true": "\t$(SPICE) a.cir a.log || true\n",
+    }
+    good = {
+        "plain": "\tcd build && $(SPICE) dc.cir dc.log\n",
+        "chained": "\tcd build && $(SPICE) dc.cir dc.log && cp dc.txt ../results/\n",
+        "recorded": "\tfor t in a b; do $(SPICE) $$t.cir $$t.log || c=1; done; exit $$c\n",
+        "iftest": "\tif ! (cd d && $(SPICE) a.cir a.log); then c=1; fi\n",
+        "direct_path": "\tcd build && $(ROOT)/helpers/ngspice.sh dc.cir dc.log\n",
+        "codegen": "\tcd build && $(RUN) ngspice vlnggen top.sv > vlnggen.log 2>&1\n",
+    }
+    for name, recipe in {**bad, **good}.items():
+        write(tmp_path, f"{name}/Makefile", "# Runs a bench.\nSPICE := $(ROOT)/helpers/ngspice.sh\nrun:\n" + recipe)
+    found = {str(path).split("/")[0] for rule, path, _ in find_problems(tmp_path) if rule == "unchecked_log"}
+    assert found == set(bad)
+
+def test_the_wrapper_fails_when_the_log_check_fails(tmp_path):
+    fake = write(tmp_path, "setup/run.sh", "#!/bin/bash\n# Fake tool runner.\nshift 2; cat " + str(Path(__file__).parent / "fixtures/spice_logs") + "/$1\n")
+    fake.chmod(0o755)
+    wrapper = tmp_path / "helpers/ngspice.sh"
+    wrapper.parent.mkdir()
+    wrapper.write_text((Path(__file__).parent / "ngspice.sh").read_text())
+    wrapper.chmod(0o755)
+    (tmp_path / "helpers/spice_log_check.py").write_text((Path(__file__).parent / "spice_log_check.py").read_text())
+    good = subprocess.run([str(wrapper), "clean.log", str(tmp_path / "a.log")], capture_output=True, text=True)
+    bad = subprocess.run([str(wrapper), "killed.log", str(tmp_path / "b.log")], capture_output=True, text=True)
+    assert good.returncode == 0 and bad.returncode != 0
+    assert "ngspice-47 done" in (tmp_path / "a.log").read_text()
