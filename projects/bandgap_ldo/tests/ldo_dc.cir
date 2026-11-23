@@ -1,4 +1,4 @@
-* LDO DC testbench with the bandgap at trim code 8: vout with no load and with 2 mA (load regulation), vout at 1 mA with a 3.0 and a 3.6 V supply (line regulation), and the supply current of bandgap and LDO together with no load, written to ldo_dc.txt; supply and corner from corner.inc.
+* LDO DC testbench with the bandgap at trim code 8: vout with no load and with 2 mA (load regulation), vout at 1 mA with a 3.0 and a 3.6 V supply (line regulation), and the supply current of bandgap and LDO together with no load, written to ldo_dc.txt, every earlier plot is dropped before each operating point, so one that does not solve leaves nan, never a stale or preset number; supply and corner from corner.inc.
 .include corner.inc
 .include bandgap_sizes.inc
 .include bandgap.cir
@@ -10,29 +10,34 @@ X1 vref vg vdd 0 vdd 0 0 0 bandgap
 X2 vout vout vref vg vdd 0 ldo
 ILOAD vout 0 0
 .control
-let v0 = 0
-let v2 = 0
-let iq = 0
-let line = 0
-let lo = 0
-let va = 0
-let reg = 0
+let nan = 1e400 - 1e400
+let v0 = nan
+let v2 = nan
+let iq = nan
+let va = nan
+let vb = nan
+let lo = nan
+destroy all
 op
 let v0 = v(vout)
 let iq = -i(VDD)
 let lo = v(vdd)
 alter iload = 2m
+destroy all
 op
 let v2 = v(vout)
 alter iload = 1m
 let s1 = lo - 0.3
 alter vdd = $&s1
+destroy all
 op
 let va = v(vout)
 let s2 = lo + 0.3
 alter vdd = $&s2
+destroy all
 op
-let line = (v(vout) - va) / 0.6
+let vb = v(vout)
+let line = (vb - va) / 0.6
 let reg = v0 - v2
 echo ldo_dc vout_v $&v0 vout_2ma_v $&v2 load_reg_v $&reg line_v_per_v $&line iq_a $&iq > ldo_dc.txt
 quit

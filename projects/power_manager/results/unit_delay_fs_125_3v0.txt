@@ -1,0 +1,1 @@
+unit t_on_s 1.25429E-10 t_off_s 5.8244E-10 t_end_s 5E-08 full_a 0.000130075

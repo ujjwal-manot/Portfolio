@@ -1,2 +1,7 @@
-40 clock edges checked
+45 clock edges checked
+every check passes
+both coarse high at edge 8.1e-07 s: count 2 held, drive 2
+both coarse high at edge 8.3e-07 s: count 2 held, drive 2
+both coarse high at edge 8.5e-07 s: count 2 held, drive 2
+both coarse high at edge 8.7e-07 s: count 2 held, drive 2
 every check passes

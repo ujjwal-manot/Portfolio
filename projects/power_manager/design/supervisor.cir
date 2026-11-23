@@ -1,0 +1,193 @@
+* Power-on reset and brown-out detector on the 3.3 V input, all thick-oxide devices on vin so it works before either 1.2 V rail exists: a PMOS matched to the bandgap's mirror copies its PTAT current (vg) into every bias; comparator A watches vin through an 84-unit rppd string against the bandgap's vref, the tap 34 units up, with one more unit under it shorted while vin is low, so vin_ok rises at 83/34 of vref (2.944 V) and falls at 84/35 (2.894 V); comparator B watches vdd_mem against a copy of vref made by a two-stage follower driving a 60-unit string, tapped at 56 units while vdd_mem is low and at 55 once it is good, so mem_ok rises at 56/60 of vref (1.126 V) and falls at 55/60 (1.106 V); each comparator's inverted output has a weak pull-up, so with no bias current (bandgap not running) it reads as a failed rail; rst_n is vin_ok and mem_ok, driven by a thick-oxide inverter on vdd_mem so it swings 0 to vdd_mem and is low whenever vdd_mem is; limits and their reasons are in helpers/supervisor_results.py; sizes from supervisor_sizes.inc.
+.subckt supervisor rst_n vin_ok mem_ok vin vdd_mem vref vg vss
+XPB nb vg vin vin sg13_hv_pmos w={sup_w_bp} l={sup_l_bp} mm_ok={mm}
+XNB nb nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
+XRA83 vin a82 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA82 a82 a81 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA81 a81 a80 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA80 a80 a79 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA79 a79 a78 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA78 a78 a77 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA77 a77 a76 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA76 a76 a75 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA75 a75 a74 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA74 a74 a73 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA73 a73 a72 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA72 a72 a71 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA71 a71 a70 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA70 a70 a69 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA69 a69 a68 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA68 a68 a67 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA67 a67 a66 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA66 a66 a65 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA65 a65 a64 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA64 a64 a63 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA63 a63 a62 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA62 a62 a61 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA61 a61 a60 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA60 a60 a59 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA59 a59 a58 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA58 a58 a57 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA57 a57 a56 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA56 a56 a55 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA55 a55 a54 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA54 a54 a53 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA53 a53 a52 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA52 a52 a51 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA51 a51 a50 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA50 a50 a49 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA49 a49 a48 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA48 a48 a47 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA47 a47 a46 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA46 a46 a45 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA45 a45 a44 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA44 a44 a43 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA43 a43 a42 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA42 a42 a41 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA41 a41 a40 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA40 a40 a39 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA39 a39 a38 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA38 a38 a37 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA37 a37 a36 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA36 a36 a35 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA35 a35 tapa vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA34 tapa a33 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA33 a33 a32 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA32 a32 a31 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA31 a31 a30 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA30 a30 a29 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA29 a29 a28 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA28 a28 a27 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA27 a27 a26 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA26 a26 a25 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA25 a25 a24 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA24 a24 a23 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA23 a23 a22 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA22 a22 a21 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA21 a21 a20 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA20 a20 a19 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA19 a19 a18 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA18 a18 a17 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA17 a17 a16 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA16 a16 a15 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA15 a15 a14 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA14 a14 a13 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA13 a13 a12 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA12 a12 a11 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA11 a11 a10 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA10 a10 a9 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA9 a9 a8 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA8 a8 a7 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA7 a7 a6 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA6 a6 a5 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA5 a5 a4 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA4 a4 a3 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA3 a3 a2 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA2 a2 a1 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRA1 a1 a0 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRAX a0 vss vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XSA a0 vin_bad vss vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
+XCA vin_ok vin_bad tapa vref nb vin vss supcomp
+XBUF vbuf vref nb vin vss supbuf
+XRB60 vbuf b59 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB59 b59 b58 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB58 b58 b57 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB57 b57 b56 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB56 b56 b55 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB55 b55 b54 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB54 b54 b53 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB53 b53 b52 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB52 b52 b51 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB51 b51 b50 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB50 b50 b49 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB49 b49 b48 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB48 b48 b47 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB47 b47 b46 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB46 b46 b45 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB45 b45 b44 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB44 b44 b43 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB43 b43 b42 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB42 b42 b41 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB41 b41 b40 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB40 b40 b39 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB39 b39 b38 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB38 b38 b37 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB37 b37 b36 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB36 b36 b35 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB35 b35 b34 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB34 b34 b33 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB33 b33 b32 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB32 b32 b31 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB31 b31 b30 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB30 b30 b29 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB29 b29 b28 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB28 b28 b27 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB27 b27 b26 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB26 b26 b25 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB25 b25 b24 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB24 b24 b23 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB23 b23 b22 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB22 b22 b21 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB21 b21 b20 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB20 b20 b19 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB19 b19 b18 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB18 b18 b17 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB17 b17 b16 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB16 b16 b15 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB15 b15 b14 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB14 b14 b13 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB13 b13 b12 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB12 b12 b11 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB11 b11 b10 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB10 b10 b9 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB9 b9 b8 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB8 b8 b7 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB7 b7 b6 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB6 b6 b5 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB5 b5 b4 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB4 b4 b3 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB3 b3 b2 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB2 b2 b1 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XRB1 b1 vss vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
+XSB1 refb b55 mem_ok vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
+XSB2 refb b56 mem_bad vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
+XCB mem_ok mem_bad vdd_mem refb nb vin vss supcomp
+XG1 both_n vin_ok mem_ok vin vss supnand
+XOP rst_n both_n vdd_mem vdd_mem sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
+XON rst_n both_n vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+.ends supervisor
+.subckt supcomp ok bad inp inn nb vdd vss
+XM1 d1 inp t vss sg13_hv_nmos w={sup_w_in} l={sup_l_in} mm_ok={mm}
+XM2 o1 inn t vss sg13_hv_nmos w={sup_w_in} l={sup_l_in} mm_ok={mm}
+XM3 d1 d1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
+XM4 o1 d1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
+XM5 t nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
+XM6 bad o1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
+XM7 bad nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
+XW bad vss vdd supweak
+XIP ok bad vdd vdd sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
+XIN ok bad vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+.ends supcomp
+.subckt supbuf out ref nb vdd vss
+XM1 d1 out t vss sg13_hv_nmos w={sup_w_in} l={sup_l_in} mm_ok={mm}
+XM2 o1 ref t vss sg13_hv_nmos w={sup_w_in} l={sup_l_in} mm_ok={mm}
+XM3 d1 d1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
+XM4 o1 d1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
+XM5 t nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
+XM6 out o1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
+XM7 out nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
+XC o1 out cap_cmim w={sup_w_cc} l={sup_w_cc} mm_ok={mm}
+.ends supbuf
+.subckt supnand y a b vdd vss
+XPA y a vdd vdd sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
+XPB y b vdd vdd sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
+XNA y a m vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+XNB m b vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+.ends supnand
+.subckt supweak d g vdd
+XA d g m1 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XB m1 g m2 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XC m2 g m3 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XD m3 g m4 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XE m4 g vdd vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+.ends supweak

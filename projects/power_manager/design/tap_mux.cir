@@ -1,0 +1,11 @@
+* DVFS tap selector for one window comparator: four thin-oxide transmission gates, one per ladder tap (0.9, 1.0, 1.1 and 1.2 V setpoints), each closed by its one-hot select from the 2-bit DVFS register's decoder (s and its complement sb, on the 1.2 V logic rail); the comparator input is a gate, so no DC current flows and the on-resistance only sets how fast the tap settles; sizes are this subcircuit's own parameters so they cannot collide with the deck's global ones.
+.subckt tap_mux out in0 in1 in2 in3 s0 s1 s2 s3 s0b s1b s2b s3b vdd vss params: w_tn=0.5u w_tp=1u l_t=0.13u
+XN0 out s0 in0 vss sg13_lv_nmos w={w_tn} l={l_t} mm_ok={mm}
+XP0 out s0b in0 vdd sg13_lv_pmos w={w_tp} l={l_t} mm_ok={mm}
+XN1 out s1 in1 vss sg13_lv_nmos w={w_tn} l={l_t} mm_ok={mm}
+XP1 out s1b in1 vdd sg13_lv_pmos w={w_tp} l={l_t} mm_ok={mm}
+XN2 out s2 in2 vss sg13_lv_nmos w={w_tn} l={l_t} mm_ok={mm}
+XP2 out s2b in2 vdd sg13_lv_pmos w={w_tp} l={l_t} mm_ok={mm}
+XN3 out s3 in3 vss sg13_lv_nmos w={w_tn} l={l_t} mm_ok={mm}
+XP3 out s3b in3 vdd sg13_lv_pmos w={w_tp} l={l_t} mm_ok={mm}
+.ends tap_mux

@@ -1,4 +1,4 @@
-* Steps the input of the real inverting loop from 1.0 to 0.2 V and back (output 0.2 to 1.0 V and back, a 0.8 V step each way, 1 ns edges), and writes the supply current with the output settled low and high (the larger), the 20 to 80% slew rate and the time to settle within half an LSB (1.5625 mV) of the final value for each direction to step.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+* Steps the input of the real inverting loop from 1.0 to 0.2 V and back (output 0.2 to 1.0 V and back, a 0.8 V step each way, 1 ns edges), and writes the supply current with the output settled low and high (the larger), the 20 to 80% slew rate and the time to settle within half an LSB (1.5625 mV) of the final value for each direction to step.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc (ub and db stay -1 when the output never overshoots the band, by design); every value is written as nan if any measurement or analysis failed.
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -11,18 +11,18 @@ XRF inn out 0 rhigh w={w_rf} l={l_rf} mm_ok={mm}
 XCL out 0 cap_cmim w={w_cl} l={l_cl} mm_ok={mm}
 XOP inp inn out vdd 0 ibias opamp
 .control
-let idd = 0
-let idh = 0
-let lo = 0
-let hi = 0
-let dn = 0
-let r20 = 0
-let r80 = 0
-let f80 = 0
-let f20 = 0
-let ua = -1
+let idd = 1e30
+let idh = 1e30
+let lo = 1e30
+let hi = 1e30
+let dn = 1e30
+let r20 = 1e30
+let r80 = 1e30
+let f80 = 1e30
+let f20 = 1e30
+let ua = 1e30
 let ub = -1
-let da = -1
+let da = 1e30
 let db = -1
 tran 0.1n 850n
 meas tran idd avg i(VDD) from=10n to=45n
@@ -44,12 +44,17 @@ meas tran ua when v(out)=$&hb cross=last from=50n to=445n
 meas tran ub when v(out)=$&ht cross=last from=50n to=445n
 meas tran da when v(out)=$&lt cross=last from=450n to=845n
 meas tran db when v(out)=$&lb cross=last from=450n to=845n
+let failed = (idd > 1e29) + (idh > 1e29) + (lo > 1e29) + (hi > 1e29) + (dn > 1e29) + (r20 > 1e29) + (r80 > 1e29) + (f80 > 1e29) + (f20 > 1e29) + (ua > 1e29) + (da > 1e29)
 let rise_settle = (ua > ub ? ua : ub) - 50n
 let fall_settle = (da > db ? da : db) - 450n
 let rise_slew = 0.6 * (hi - lo) / (r80 - r20)
 let fall_slew = 0.6 * (hi - lo) / (f20 - f80)
 let supply = (-idd > -idh ? -idd : -idh)
-echo step supply_a $&supply rise_slew_v_per_s $&rise_slew fall_slew_v_per_s $&fall_slew rise_settle_s $&rise_settle fall_settle_s $&fall_settle > step.txt
+if failed > 0
+  echo step supply_a nan rise_slew_v_per_s nan fall_slew_v_per_s nan rise_settle_s nan fall_settle_s nan > step.txt
+else
+  echo step supply_a $&supply rise_slew_v_per_s $&rise_slew fall_slew_v_per_s $&fall_slew rise_settle_s $&rise_settle fall_settle_s $&fall_settle > step.txt
+end
 quit
 .endc
 .end

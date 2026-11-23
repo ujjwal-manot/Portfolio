@@ -1,5 +1,5 @@
-* The ADC core that is laid out: the cap DAC with its switches and the comparator, joined as in tests/convert.cir (comparator inp on vcm, inn on the DAC top plate), with top brought out so the conversion test can record it.
-.subckt adc_core top vin vcm vref_hi vref_lo samp d7 d6 d5 d4 d3 d2 d1 d0 cclk cmp cmpn vdd vss
-XDAC top vin vcm vref_hi vref_lo samp d7 d6 d5 d4 d3 d2 d1 d0 vdd vss cap_dac
+* The ADC core that is laid out: the cap DAC with its switches, its top-plate offset trim and calibration gating, and the comparator, joined as in tests/convert.cir (comparator inp on vcm, inn on the DAC top plate), with top brought out so the conversion test can record it.
+.subckt adc_core top vin vcm vref_hi vref_lo samp cal d7 d6 d5 d4 d3 d2 d1 d0 t6 t5 t4 t3 t2 t1 t0 cclk cmp cmpn vdd vss
+XDAC top vin vcm vref_hi vref_lo samp cal d7 d6 d5 d4 d3 d2 d1 d0 t6 t5 t4 t3 t2 t1 t0 vdd vss cap_dac_cal
 XCMP vcm top cclk cmp cmpn vdd vss comparator
 .ends adc_core

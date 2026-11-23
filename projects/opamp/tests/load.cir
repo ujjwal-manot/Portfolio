@@ -1,4 +1,4 @@
-* Runs the opamp's inverting loop (output at 1.0 V) into the ADC's real capacitor DAC (projects/adc/design/cap_dac.cir, listed in uses.txt) instead of a fixed capacitor, and writes to load.txt the output noise integrated from 1 Hz to 10 GHz at the MSB bottom plate with the DAC sampling (so the sampling switches' own band limit and thermal noise count), and the settling error (against the output's settled value before the first window) at the end of a 200 ns sampling window and 50 ns into it, and how far the output dips, when the bottom plates, parked at vref_lo between samples, are switched back onto the output (the worst kick: 0.8 V across 2.05 pF); corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+* Runs the opamp's inverting loop (output at 1.0 V) into the ADC's real capacitor DAC (projects/adc/design/cap_dac.cir, listed in uses.txt) instead of a fixed capacitor, and writes to load.txt the output noise integrated from 1 Hz to 10 GHz at the MSB bottom plate with the DAC sampling (so the sampling switches' own band limit and thermal noise count), and the settling error (against the output's settled value before the first window) at the end of a 200 ns sampling window and 50 ns into it, and how far the output dips, when the bottom plates, parked at vref_lo between samples, are switched back onto the output (the worst kick: 0.8 V across 2.05 pF); samp is high from time 0 so the top plate is tied to vcmd at the transient's operating point (with samp low it floats and the operating point fails at cold and fast corners), and every value is written as nan if any measurement failed; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -15,13 +15,14 @@ XOP inp inn out vdd 0 ibias opamp
 VHI vref_hi 0 1.0
 VLO vref_lo 0 0.2
 VCMD vcmd 0 0.6
-VSAMP samp 0 dc {vsupply} pulse(0 {vsupply} 1u 50p 50p 200n 1u)
+VSAMP samp 0 dc {vsupply} pwl(0 {vsupply} 0.5u {vsupply} 0.50005u 0 2u 0 2.00005u {vsupply} 2.2u {vsupply} 2.20005u 0)
 XDAC top out vcmd vref_hi vref_lo samp 0 0 0 0 0 0 0 0 vdd 0 cap_dac
 .control
-let sampled = 0
-let error = 0
-let error50 = 0
-let kick = 0
+let sampled = 1e30
+let target = 1e30
+let got = 1e30
+let early = 1e30
+let dip = 1e30
 noise v(xdac.xb7.b) VIN dec 20 1 10g
 let sampled = noise2.onoise_total
 tran 0.1n 2.25u
@@ -32,7 +33,12 @@ meas tran dip min v(out) from=2u to=2.2u
 let error = abs(got - target)
 let error50 = abs(early - target)
 let kick = target - dip
-echo load sampled_v_rms $&sampled settle_load_v $&error error_at_50ns_v $&error50 kick_v $&kick > load.txt
+let failed = (sampled > 1e29) + (target > 1e29) + (got > 1e29) + (early > 1e29) + (dip > 1e29)
+if failed > 0
+  echo load sampled_v_rms nan settle_load_v nan error_at_50ns_v nan kick_v nan > load.txt
+else
+  echo load sampled_v_rms $&sampled settle_load_v $&error error_at_50ns_v $&error50 kick_v $&kick > load.txt
+end
 quit
 .endc
 .end
