@@ -142,6 +142,22 @@ build/convert/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_lo
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
 
+MC_RUNS := 20
+MC_CONVERT := $(foreach n,$(shell seq 1 $(MC_RUNS)),build/convert_mc/$(n)/convert.txt)
+
+build/convert_mc/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_logic.so
+	mkdir -p $(@D)
+	cp $^ $(@D)
+	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
+	$(call mismatch,$*) > $(@D)/corner.inc
+	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+
+mc_convert: $(MC_CONVERT)
+	mkdir -p results
+	for n in $(shell seq 1 $(MC_RUNS)); do cp build/convert_mc/$$n/convert.txt results/convert_mc$$n.txt; cp build/convert_mc/$$n/measure.txt results/measure_mc$$n.txt; done
+	if { $(LOGS) $(MC_CONVERT:.txt=.log) && $(PY) $(ROOT)/helpers/adc_trim.py code 1.2 $(MC_CONVERT) && bad=0 && for n in $(shell seq 1 $(MC_RUNS)); do $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(N) results/convert_mc$$n.txt results/measure_mc$$n.txt || bad=$$((bad + 1)); done && echo "$$bad of $(MC_RUNS) Monte Carlo dies at tt 27 C 1.2 V fail a chip.md limit" && [ $$bad = 0 ]; } > results/mc_convert.log 2>&1; then c=0; else c=$$?; fi; \
+	$(SAVE) mc_convert $$c results/mc_convert.log results/convert_mc*.txt results/measure_mc*.txt
+
 build/ramp/%/ramp.txt: tests/ramp.cir $(COMPARATOR) $(DAC) build/sar_logic.so $(ROOT)/helpers/adc_ramp.py
 	mkdir -p $(@D)
 	cp $(filter-out %.py,$^) $(@D)
@@ -317,6 +333,8 @@ layout: build/layout/adc_core.gds
 	cd build/layout && if $(RUN) klayout -b -rd path=lvs/adc_core.lvsdb -r $(ROOT)/helpers/lvs_names.py >> lvs.log 2>&1; then e=0; else e=$$?; fi; echo "lvs_names exit $$e" >> lvs.log
 	cp build/layout/drc.log results/layout_drc.log; cp build/layout/lvs.log results/layout_lvs.log; cp build/layout/lvs/adc_core_extracted.cir results/layout_extracted.cir; cp build/layout/generate.log results/layout_generate.log
 	if grep -q "DRC Check Passed" results/layout_drc.log && grep -qx "run_drc exit 0" results/layout_drc.log; then c=0; else c=1; fi; $(SAVE) layout_drc $$c results/layout_drc.log results/layout_generate.log
+	{ echo "every net a trim device (DAC_T0_ to DAC_T6_ in the flattened netlist) touches:"; grep -E '^[MC]DAC_T[0-6]_' build/layout/adc_core.cdl | awk '{print $$2; print $$3; if ($$1 ~ /^M/) { print $$4; print $$5 }}' | sort -u; } > results/trim_nodes.log
+	if grep -qx "top" results/trim_nodes.log && ! grep -qx "vin" results/trim_nodes.log; then c=0; else c=1; fi; $(SAVE) trim_nodes $$c results/trim_nodes.log
 	if grep -q "PASS (netlists match)" results/layout_lvs.log && grep -qx "run_lvs exit 0" results/layout_lvs.log && grep -qx "lvs_names exit 0" results/layout_lvs.log; then c=0; else c=1; fi; $(SAVE) layout_lvs $$c results/layout_lvs.log results/layout_extracted.cir
 
 build/layout/adc_core_pex.spice: build/layout/adc_core.gds layout/extract.tcl

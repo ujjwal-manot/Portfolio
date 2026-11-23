@@ -13,12 +13,16 @@ CLP outp 0 5f
 CLN outn 0 5f
 .control
 echo "cmp" > cmp.txt
+let lo = 0
+let hi = 0
+let mid = 0
 foreach first -50e-3 50e-3
   let lo = -20e-3
   let hi = 20e-3
   repeat 15
     let mid = (lo + hi) / 2
     alter @VD[pwl] = [ 0 $first 15e-9 $first 15.1e-9 $&mid 40e-9 $&mid ]
+    destroy all
     tran 10p 40n
     let half = v(vdd)[0] / 2
     meas tran op find v(outp) at=38n

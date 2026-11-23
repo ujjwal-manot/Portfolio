@@ -55,6 +55,7 @@ let v = 0.8
 echo "vdd inv_s nand_s nor_s" > speed.txt
 while v < 1.3299
   alter VDD dc = v
+  destroy all
   run
   let h = v / 2
   meas tran ir when v(inv2)=$&h rise=1

@@ -1,0 +1,28 @@
+hbt_typ and hbt_typ_mismatch, pnpMPA parameters:
+.param sgp_mpa_cje = 1.0	.param sgp_mpa_cje = 1.0
+.param sgp_mpa_cjc = 1.0	.param sgp_mpa_cjc = 1.0
+.param sgp_mpa_is = 1.0	.param sgp_mpa_is = 1.0
+.param sgp_mpa_bf = 1.0	.param sgp_mpa_bf = 1.0
+.param sgp_mpa_re = 1.0	.param sgp_mpa_re = 1.0
+.param sgp_mpa_rb = 1.0	.param sgp_mpa_rb = 1.0
+.param sgp_mpa_rc = 1.0	.param sgp_mpa_rc = 1.0
+hbt_typ_mismatch sets every pnpMPA parameter to its hbt_typ value
+hbt_wcs and hbt_wcs_mismatch, pnpMPA parameters:
+.param sgp_mpa_cje = 1.045	.param sgp_mpa_cje = 1.045
+.param sgp_mpa_cjc = 1.02	.param sgp_mpa_cjc = 1.02
+.param sgp_mpa_is = 0.87	.param sgp_mpa_is = 0.87
+.param sgp_mpa_bf = 0.76	.param sgp_mpa_bf = 0.76
+.param sgp_mpa_re = 1.048	.param sgp_mpa_re = 1.048
+.param sgp_mpa_rb = 1.025	.param sgp_mpa_rb = 1.025
+.param sgp_mpa_rc = 1.05	.param sgp_mpa_rc = 1.05
+hbt_wcs_mismatch sets every pnpMPA parameter to its hbt_wcs value
+hbt_bcs and hbt_bcs_mismatch, pnpMPA parameters:
+.param sgp_mpa_cje = 0.955	.param sgp_mpa_cje = 0.955
+.param sgp_mpa_cjc = 0.98	.param sgp_mpa_cjc = 0.98
+.param sgp_mpa_is = 1.13	.param sgp_mpa_is = 1.13
+.param sgp_mpa_bf = 1.24	.param sgp_mpa_bf = 1.24
+.param sgp_mpa_re = 0.952	.param sgp_mpa_re = 0.952
+.param sgp_mpa_rb = 0.975	.param sgp_mpa_rb = 0.975
+.param sgp_mpa_rc = 0.95	.param sgp_mpa_rc = 0.95
+hbt_bcs_mismatch sets every pnpMPA parameter to its hbt_bcs value
+no pnpMPA mismatch is drawn in any Monte Carlo corner
