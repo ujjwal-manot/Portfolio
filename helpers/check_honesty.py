@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset or destroy all first (a failed meas keeps the last pass's value), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile without the ngspice log check, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -142,6 +142,9 @@ def readme_problems(path):
                     yield "readme_claim", f"says {claim} in row '{cells[0]}', and no line of {', '.join(logs)} shows it next to {', '.join(sorted(words)) or 'a label'}"
 
 
+MEAS = r"^\s*meas(?:ure)?\s+\w+\s+(\w+)\b"
+ANALYSIS = re.compile(r"^\s*(tran|ac|dc|op|noise|run|pz|sens|disto)\b", re.I)
+
 def run_derived(lets, measured):
     derived = set(measured)
     while True:
@@ -150,11 +153,21 @@ def run_derived(lets, measured):
             return derived
         derived |= new
 
+def real_nans(text):
+    lines = text.splitlines()
+    first = next((i for i, line in enumerate(lines) if ANALYSIS.match(line)), len(lines))
+    nans = set()
+    for i, line in enumerate(lines[:first]):
+        m = re.match(r"\s*let\s+(\w+)\s*=\s*\(?\s*1e(\d+)\s*-\s*1e(\d+)\s*\)?\s*$", line, re.I)
+        if m and int(m.group(2)) >= 309 and int(m.group(3)) >= 309:
+            nans.add(m.group(1))
+    return nans
+
 def silent_defaults(text):
     lets = [(m.group(1), m.group(2).strip()) for m in re.finditer(r"^\s*let\s+(\w+)\s*=(.*)$", text, re.M | re.I)]
-    measured = set(re.findall(r"^\s*meas\s+\w+\s+(\w+)\b", text, re.M | re.I))
+    measured = set(re.findall(MEAS, text, re.M | re.I))
     absent = set(re.findall(r"may be absent: (\w+) \(\S", text))
-    nans = {name for name, value in lets if re.fullmatch(r"\(?\s*1e\d{3,}\s*-\s*1e\d{3,}\s*\)?", value, re.I)}
+    nans = real_nans(text)
     derived = run_derived(lets, measured)
     names = lambda value: set(re.findall(r"[a-z_]\w*", value, re.I))
     first = {}
@@ -164,20 +177,32 @@ def silent_defaults(text):
     return [name for name in preset if (name in measured and name not in absent) or any(n == name and (names(v) & derived - {name} or re.search(r"\b[vi]\(|\btime\b", v, re.I)) for n, v in lets)]
 
 def stale_measures(text):
-    found, stack = [], []
+    nans, found, stack = real_nans(text), [], []
     for line in text.splitlines():
         word = line.strip().split(" ", 1)[0].lower()
-        if word in ("while", "repeat", "dowhile", "foreach"):
-            stack.append(set())
+        if word in ("while", "repeat", "dowhile", "foreach", "if"):
+            stack.append((word != "if", set()))
         elif word == "end" and stack:
             stack.pop()
         elif stack and re.match(r"destroy\s+all\b", line.strip(), re.I):
-            stack[-1].add("*")
-        elif stack and (m := re.match(r"\s*let\s+(\w+)\s*=\s*(\w+)\s*$", line)) and m.group(2).lower() == "nan":
-            stack[-1].add(m.group(1))
-        elif stack and (m := re.match(r"\s*meas\s+\w+\s+(\w+)\b", line, re.I)) and not ({"*", m.group(1)} & set().union(*stack)):
-            found.append(m.group(1))
+            stack[-1][1].add("*")
+        elif stack and (m := re.match(r"\s*let\s+(\w+)\s*=\s*(\w+)\s*$", line)) and m.group(2) in nans:
+            stack[-1][1].add(m.group(1))
+        elif stack and (m := re.match(MEAS, line, re.I)):
+            seen, in_loop = set(), False
+            for is_loop, resets in reversed(stack):
+                seen |= resets
+                if is_loop:
+                    in_loop = True
+                    break
+            if in_loop and not {"*", m.group(1)} & seen:
+                found.append(m.group(1))
     return found
+
+def unchecked_log(text):
+    checkers = set(re.findall(r"^(\w+)\s*[:?+]?=.*spice_log_check", text, re.M))
+    checked = "spice_log_check" in text and (any(f"$({v})" in text for v in checkers) or re.search(r"^\t.*spice_log_check", text, re.M))
+    return bool(re.search(r"ngspice\s+(?:\S+\s+)*-b\b", text)) and not checked
 
 def find_problems(root):
     root = Path(root)
@@ -206,6 +231,8 @@ def find_problems(root):
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
             problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :", l) or re.match(r"\t-\S", l) or l.startswith(".IGNORE")]
+            if unchecked_log(text):
+                problems.append(("unchecked_log", rel, "runs ngspice -b but never runs spice_log_check on its logs, so a failed run passes on ngspice's exit code"))
     return problems
 
 

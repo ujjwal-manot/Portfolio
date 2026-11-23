@@ -17,7 +17,7 @@ def test_clean_tree_passes(tmp_path):
     write(tmp_path, "design/amp.sp", "two stage amp\n.lib cornerMOSlv.lib mos_tt\nXM1 d g s b sg13_lv_nmos w=1u l=1u\n")
     write(tmp_path, "helpers/read.py", "# Reads a log.\nimport numpy as np\nprint(np.mean([1, 2]))\n")
     write(tmp_path, "design/top.sv", "// Top level.\nmodule top(input logic a, output logic y);\n  assign y = a;\nendmodule\n")
-    write(tmp_path, "Makefile", "# Runs tests.\ntest:\n\tngspice -b amp.sp\n")
+    write(tmp_path, "Makefile", "# Runs tests.\ntest:\n\tngspice -b amp.sp > amp.log 2>&1\n\tpython3 helpers/spice_log_check.py amp.log\n")
     log = write(tmp_path, "results/run.log", "ok")
     save(tmp_path / "results/summary.json", "sim", True, [log], root=tmp_path)
     assert find_problems(tmp_path) == []
@@ -39,7 +39,7 @@ def test_catches_each_cheat(tmp_path):
     data["fake"] = {"result": "pass", "logs": {}, "values": {}, "time": "now"}
     summary.write_text(json.dumps(data))
     assert rules(tmp_path) == ["bad_log", "comments", "fake_fallback", "hidden_failure",
-                               "made_up_numbers", "python_simulation", "stale_result", "toy_model"]
+                               "made_up_numbers", "python_simulation", "stale_result", "toy_model", "unchecked_log"]
 
 def test_spice_title_is_its_one_comment(tmp_path):
     write(tmp_path, "a.sp", "title line\n* extra comment\nR1 a 0 1k\n")
@@ -149,3 +149,22 @@ def test_a_meas_in_a_loop_must_be_reset_each_pass(tmp_path):
     write(tmp_path, "tests/destroy.cir", "destroy bench\n.control\nforeach c 1 2\ndestroy all\ntran 1n 1u\nmeas tran level find v(out) at=1u\nend\nquit\n.endc\n")
     found = {str(path) for rule, path, _ in find_problems(tmp_path) if rule == "stale_meas"}
     assert found == {"tests/stale.cir"}
+
+def test_the_loop_and_preset_rules_cannot_be_dodged(tmp_path):
+    nan = "let nan = 1e400 - 1e400\n"
+    write(tmp_path, "tests/spelled.cir", "spelled\n.control\nlet w = 5\nmeasure tran w find v(a) at=1u\nquit\n.endc\n")
+    write(tmp_path, "tests/ifblock.cir", "ifblock\n.control\nlet k = 0\nwhile k < 3\nif k > 1\nlet k = k\nend\ntran 1n 1u\nmeas tran q find v(a) at=1u\nlet k = k + 1\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/outer.cir", "outer\n.control\n" + nan + "let j = 0\nwhile j < 2\nlet q = nan\nlet k = 0\nwhile k < 2\ntran 1n 1u\nmeas tran q find v(a) at=1u\nlet k = k + 1\nend\nlet j = j + 1\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/zero.cir", "zero\n.control\nlet x = 1e100 - 1e100\nmeas tran x find v(a) at=1u\nquit\n.endc\n")
+    write(tmp_path, "tests/late.cir", "late\n.control\ntran 1n 1u\n" + nan + "let k = 0\nwhile k < 2\nlet q = nan\nmeas tran q find v(a) at=1u\nlet k = k + 1\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/good.cir", "good\n.control\n" + nan + "let k = 0\nwhile k < 2\nif k > 0\nlet k = k\nend\nlet q = nan\ntran 1n 1u\nmeas tran q find v(a) at=1u\nlet k = k + 1\nend\nquit\n.endc\n")
+    found = {(rule, str(path)) for rule, path, _ in find_problems(tmp_path) if rule in ("silent_default", "stale_meas")}
+    for name in ("spelled", "ifblock", "outer", "zero", "late"):
+        assert any(path == f"tests/{name}.cir" for _, path in found), name
+    assert not any(path == "tests/good.cir" for _, path in found)
+
+def test_a_makefile_that_runs_ngspice_without_the_log_check_is_flagged(tmp_path):
+    write(tmp_path, "a/Makefile", "# Runs a bench.\nrun:\n\tcd build && $(RUN) ngspice -b dc.cir > dc.log 2>&1\n")
+    write(tmp_path, "b/Makefile", "# Runs a bench.\nrun:\n\tcd build && $(RUN) ngspice -b dc.cir > dc.log 2>&1\n\t$(RUN) python3 $(ROOT)/helpers/spice_log_check.py build/dc.log\n")
+    found = {str(path) for rule, path, _ in find_problems(tmp_path) if rule == "unchecked_log"}
+    assert found == {"a/Makefile"}
