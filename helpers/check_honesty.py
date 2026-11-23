@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured value to a constant in a SPICE bench (a failed run would keep it), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or recomputed value to a constant in a SPICE bench (a failed run would keep it; a counter stepped only from itself is fine), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -145,11 +145,14 @@ def readme_problems(path):
 def silent_defaults(text):
     constant = re.compile(r"[-+]?[0-9.]+(?:e[-+]?\d+)?$", re.I)
     lets = [(m.group(1), m.group(2).strip()) for m in re.finditer(r"^\s*let\s+(\w+)\s*=(.*)$", text, re.M | re.I)]
-    presets = [name for name, value in lets if constant.match(value)]
-    recomputed = {name for name, value in lets if not constant.match(value)}
     measured = set(re.findall(r"^\s*meas\s+\w+\s+(\w+)\b", text, re.M | re.I))
     absent = set(re.findall(r"may be absent: (\w+) \(\S", text))
-    return [name for name in dict.fromkeys(presets) if (name in measured and name not in absent) or name in recomputed]
+    from_run = lambda value: re.search(r"\b[vi]\(|\btime\b", value, re.I) or set(re.findall(r"[a-z_]\w*", value, re.I)) & measured
+    first = {}
+    for name, value in lets:
+        first.setdefault(name, value)
+    preset = [name for name, value in first.items() if constant.match(value)]
+    return [name for name in preset if (name in measured and name not in absent) or any(n == name and from_run(v) for n, v in lets)]
 
 def find_problems(root):
     root = Path(root)

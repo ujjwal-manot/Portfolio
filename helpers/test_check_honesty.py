@@ -125,6 +125,12 @@ def test_a_value_preset_before_it_is_measured_is_a_silent_default(tmp_path):
     write(tmp_path, "tests/dc.cir", "dc bench\n.control\nlet tc = 0\nmeas dc tc find v(out) at=27\nquit\n.endc\n")
     write(tmp_path, "tests/step.cir", "step bench\n.control\nlet ub = -1\nmeas tran ub when v(out)=1 cross=last\necho \"may be absent: ub (the output never overshoots)\"\nquit\n.endc\n")
     write(tmp_path, "tests/ok.cir", "ok bench\n.control\nlet span = 0.6\nmeas tran got find v(out) at=1u\nquit\n.endc\n")
+    write(tmp_path, "tests/loop.cir", "loop bench\n.control\nlet k = 0\nwhile k < 4\nlet k = k + 1\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/clamp.cir", "clamp bench\n.control\nlet code = 1e400 - 1e400\nmeas tran v8 find v(out) at=1u\nlet code = floor(v8 * 10)\nif code < 0\nlet code = 0\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/search.cir", "search bench\n.control\nlet lo = -0.02\nlet hi = 0.02\nlet mid = (lo + hi) / 2\nlet hi = mid\nquit\n.endc\n")
+    write(tmp_path, "tests/tend.cir", "tend bench\n.control\nlet tend = 0\ntran 1n 1u\nlet tend = time[length(time) - 1]\nquit\n.endc\n")
+    write(tmp_path, "tests/sum.cir", "sum bench\n.control\nlet total = 0\nmeas tran v1 find v(out) at=1u\nlet total = total + v1\nquit\n.endc\n")
     found = {(rule, str(path)) for rule, path, _ in find_problems(tmp_path)}
     assert ("silent_default", "tests/load.cir") in found and ("silent_default", "tests/dc.cir") in found
-    assert not any(path in ("tests/step.cir", "tests/ok.cir") for rule, path in found if rule == "silent_default")
+    assert ("silent_default", "tests/sum.cir") in found and ("silent_default", "tests/tend.cir") in found
+    assert not any(path in ("tests/step.cir", "tests/ok.cir", "tests/loop.cir", "tests/clamp.cir", "tests/search.cir") for rule, path in found if rule == "silent_default")
