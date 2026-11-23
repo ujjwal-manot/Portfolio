@@ -1,14 +1,15 @@
-# Extra bandgap_ldo checks: pex mode reads a Magic extracted netlist and fails a diode line (a junction counted twice), a device model outside the thick-oxide MOS, rppd, rhigh and MIM set, a capacitor across a MIM's two plates or a resistor across a resistor device's two ends (both counted twice), and lists the resistor segments by size; clean mode prints an extracted netlist without the capacitors Magic puts across a MIM's plates (its TopMetal1 over Metal5 area cap, which the cap_cmim model already holds) and names each dropped line on stderr; startup mode holds ldo_startup lines to the LDO's start-up limits from ldo_results.py (within 5% of 1.2063 V, at most 1.32 V, settled in 200 us); load mode holds load lines (the rail's lowest and highest point under the ADC's switching load) to 1.16 V and 1.32 V; nan or missing values fail: python3 bandgap_ldo_checks.py pex|clean|startup|load files...
+# Extra bandgap_ldo checks: pex mode reads a Magic extracted netlist and fails a diode line (a junction counted twice), a device model outside the thick-oxide MOS, rppd, rhigh, MIM and pnpMPA set (the pnps are spliced from the CDL) or the netlist's own subcircuits, a capacitor across a MIM's two plates or a resistor across a resistor device's two ends (both counted twice), and lists the resistor segments by size; clean mode prints an extracted netlist without the capacitors Magic puts across a MIM's plates (its TopMetal1 over Metal5 area cap, which the cap_cmim model already holds) and names each dropped line on stderr; startup mode holds ldo_startup lines to the LDO's start-up limits from ldo_results.py (within 5% of 1.2063 V, at most 1.32 V, settled in 200 us); load mode holds load lines (the rail's lowest and highest point under the ADC's switching load) to 1.16 V and 1.32 V; nan or missing values fail: python3 bandgap_ldo_checks.py pex|clean|startup|load files...
 import math, sys
 from collections import Counter
 from pathlib import Path
 from ldo_results import LIMITS, parse
 
-MODELS = {"sg13_hv_nmos", "sg13_hv_pmos", "rppd", "rhigh", "cap_cmim"}
+MODELS = {"sg13_hv_nmos", "sg13_hv_pmos", "rppd", "rhigh", "cap_cmim", "pnpMPA"}
 TOP = dict(((r, k), v) for r, k, _, v in LIMITS)
 
 def pex(text):
     bad, segments, caps, resistors, plain = [], Counter(), {}, {}, []
+    known = MODELS | {l.split()[1] for l in text.splitlines() if l.lower().startswith(".subckt")}
     for line in text.splitlines():
         w = line.split()
         if not w or w[0][0] in "*.+":
@@ -19,7 +20,7 @@ def pex(text):
         elif kind == "X":
             model = [x for x in w[1:] if "=" not in x][-1]
             nodes = [x for x in w[1:] if "=" not in x][:-1]
-            if model not in MODELS:
+            if model not in known:
                 bad.append(f"FAIL {w[0]}: device model {model} is not one this block draws")
             if model == "cap_cmim":
                 caps[frozenset(nodes[:2])] = w[0]

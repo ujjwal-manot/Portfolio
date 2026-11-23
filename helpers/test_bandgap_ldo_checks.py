@@ -53,3 +53,7 @@ def test_clean_drops_only_the_lines_counted_twice():
     assert [l.split()[0] for l in dropped] == ["C9"]
     assert "C10 a vss 3f" in out and "C9 " not in out
     assert pex(out)[0]
+
+def test_a_wrapper_around_its_own_subcircuit_and_a_spliced_pnp_pass():
+    text = CLEAN.replace(".ends", "XQ1 vss vss a pnpMPA a=2e-12 p=6e-06\n.ends\n.subckt x a b vss\nX1 a b vss x_pex\n.ends")
+    assert pex(text)[0], pex(text)[1]

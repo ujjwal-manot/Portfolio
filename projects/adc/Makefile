@@ -249,16 +249,19 @@ gear_check: $(GEAR) build/gear_check/decide/decide.txt
 	if { $(LOGS) $(GEAR:.txt=.log) build/gear_check/decide/decide.log && for c in tt_27_nom tt_m40_nom tt_125_nom; do $(PY) $(ROOT)/helpers/adc_results.py top 1.2 results/gear_check_gear_$$c.txt results/gear_check_trapezoidal_$$c.txt || exit 1; done && \
 	  $(PY) $(ROOT)/helpers/adc_results.py decide_methods results/gear_check_decide_trapezoidal.txt results/gear_check_decide_gear.txt; } > results/gear_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) gear_check $$c results/gear_check.log results/gear_check_*.txt
 
-build/ktc/ktc.txt: tests/ktc.cir $(DAC)
+KTC_CORNERS := tt_27_nom ss_125_nom ff_m40_nom
+KTC := $(foreach c,$(KTC_CORNERS),build/ktc/$(c)/ktc.txt)
+
+build/ktc/%/ktc.txt: tests/ktc.cir $(DAC)
 	mkdir -p $(@D)
 	cp $^ $(@D)
-	$(call corner,tt,27,nom,0) > $(@D)/corner.inc
+	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b ktc.cir > ktc.log 2>&1
 
-ktc: build/ktc/ktc.txt
+ktc: $(KTC)
 	mkdir -p results
-	cp $< results/ktc_tt_27_nom.txt
-	if { $(LOGS) build/ktc/ktc.log && $(PY) $(ROOT)/helpers/adc_supply.py ktc results/ktc_tt_27_nom.txt; } > results/ktc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) ktc $$c results/ktc.log results/ktc_tt_27_nom.txt
+	for c in $(KTC_CORNERS); do cp build/ktc/$$c/ktc.txt results/ktc_$$c.txt; done
+	if { $(LOGS) $(KTC:.txt=.log) && for c in $(KTC_CORNERS); do $(PY) $(ROOT)/helpers/adc_supply.py ktc results/ktc_$$c.txt $$(echo $$c | cut -d_ -f2 | sed s/m/-/) || exit 1; done; } > results/ktc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) ktc $$c results/ktc.log results/ktc_*.txt
 
 build/model/adc_model: design/adc_model.sv design/sar_logic.sv tests/model_tb.sv
 	mkdir -p $(@D)
@@ -282,8 +285,9 @@ fom: convert logic
 
 broken: build/sar_logic.so
 	mkdir -p results
-	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; rm -rf $$d; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
+	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); pass=$$(sed -n '1s/^Expected pass: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
+	  mkdir -p $$d/results; echo "the run left no log" > $$d/results/$${run%% *}.log; \
 	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then ok=0; else ok=1; fi; \
 	  cp $$d/results/$${run%% *}.log results/broken_$$n.log; \
 	  if [ -n "$$pass" ]; then c=$$ok; elif [ $$ok = 1 ] && [ -n "$$want" ] && grep -qF -- "$$want" results/broken_$$n.log && ! grep -q ': FAIL$$' results/broken_$$n.log; then c=0; else c=1; fi; \
@@ -291,11 +295,11 @@ broken: build/sar_logic.so
 
 review: build/sar_logic.so
 	mkdir -p results
-	for p in review/*.patch; do n=$$(basename $$p .patch); d=build/review/$$n; rm -rf $$d; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
-	  patch -s -F0 -d $$d -p1 < $$p; run=$$(sed -n '2s/^Run: //p' $$p); log=$$d/results/$${run%% *}.log; \
+	for p in review/*.patch; do n=$$(basename $$p .patch); d=build/review/$$n; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
+	  patch -s -F0 -d $$d -p1 < $$p; run=$$(sed -n '2s/^Run: //p' $$p); log=$$d/results/$${run%% *}.log; mkdir -p $$d/results; echo "the run left no log" > $$log; \
 	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then ok=0; else ok=$$?; fi; \
 	  { sed -n 1p $$p; echo "make $$run exit $$ok"; cat $$log; } > results/review_$$n.log; \
-	  if [ -s $$log ]; then c=0; else c=1; fi; $(SAVE) review_$$n $$c results/review_$$n.log; done
+	  if grep -qx "the run left no log" $$log; then c=1; else c=0; fi; $(SAVE) review_$$n $$c results/review_$$n.log; done
 
 build/layout/adc_core.cdl: layout/core.cir $(COMPARATOR) $(DAC) $(ROOT)/helpers/spice_flatten.py
 	mkdir -p build/layout

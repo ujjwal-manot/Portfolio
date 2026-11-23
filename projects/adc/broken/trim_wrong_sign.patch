@@ -1,0 +1,25 @@
+Expected failure: offset beyond +-1.0 LSB
+Run: convert CONVERT=build/convert/tt_27_nom/convert.txt
+--- a/design/cap_dac.cir	2026-11-22 22:38:24.265981691 +0000
++++ b/design/cap_dac.cir	2026-11-23 14:26:04.697622052 +0000
+@@ -21,13 +21,13 @@
+ XB1 top vin vref_hi vref_lo sv svb d1 vdd vss dacbit1
+ XB0 top vin vref_hi vref_lo sv svb d0 vdd vss dacbit0
+ XBD top vin vref_hi vref_lo sv svb vss vdd vss dacbit0
+-XT6 top vcm vref_hi vref_lo sl slb t6 vdd vss trimbit6
+-XT5 top vcm vref_hi vref_lo sl slb t5 vdd vss trimbit5
+-XT4 top vcm vref_hi vref_lo sl slb t4 vdd vss trimbit4
+-XT3 top vcm vref_hi vref_lo sl slb t3 vdd vss trimbit3
+-XT2 top vcm vref_hi vref_lo sl slb t2 vdd vss trimbit2
+-XT1 top vcm vref_hi vref_lo sl slb t1 vdd vss trimbit1
+-XT0 top vcm vref_hi vcm sl slb t0 vdd vss trimbit1
++XT6 top vcm vref_lo vref_hi sl slb t6 vdd vss trimbit6
++XT5 top vcm vref_lo vref_hi sl slb t5 vdd vss trimbit5
++XT4 top vcm vref_lo vref_hi sl slb t4 vdd vss trimbit4
++XT3 top vcm vref_lo vref_hi sl slb t3 vdd vss trimbit3
++XT2 top vcm vref_lo vref_hi sl slb t2 vdd vss trimbit2
++XT1 top vcm vref_lo vref_hi sl slb t1 vdd vss trimbit1
++XT0 top vcm vref_lo vcm sl slb t0 vdd vss trimbit1
+ .ends cap_dac_cal
+ .subckt trimbit6 top vcm hi lo sl slb d vdd vss
+ XU top b tu32

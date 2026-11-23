@@ -1,9 +1,10 @@
-# Reads the ADC's supply and noise results: current gives the 1.2 V supply's average current over the conversions after calibration (from measure.txt), the references' currents, the calibration-phase average and the highest 50 ns average (from the energy integral in convert.txt, so spikes shorter than 50 ns are averaged away); wave reads a full-resolution supply current record (time, current) and gives its peak, its average over the conversions and the charge drawn in each half clock period (each clk edge); refs gives how far vref_hi minus vref_lo, vcm and the pair's mid point move at the comparator decisions (each comp_clk rise, read between solver steps) from their median, in LSB; ktc gives the sampled kT/C noise in LSB and what it costs an ideal 8-bit quantizer's ENOB; fom gives the Walden and Schreier figures of merit from a conversion and the SAR logic's power report: python3 adc_supply.py current|wave|refs|ktc|fom ...
+# Reads the ADC's supply and noise results: current gives the 1.2 V supply's average current over the conversions after calibration (from measure.txt), the references' currents, the calibration-phase average and the highest 50 ns average (from the energy integral in convert.txt, so spikes shorter than 50 ns are averaged away); wave reads a full-resolution supply current record (time, current) and gives its peak, its average over the conversions and the charge drawn in each half clock period (each clk edge); refs gives how far vref_hi minus vref_lo, vcm and the pair's mid point move at the comparator decisions (each comp_clk rise, read between solver steps) from their median, in LSB; ktc gives the sampled kT/C noise in LSB and what it costs an ideal 8-bit quantizer's ENOB, failing above 0.0774 LSB rms (a 0.05 bit ENOB loss, the budget fixed before the runs) or outside 0.5 to 2 times sqrt(kT/2.05 pF) at the corner's temperature (the bench would be wrong); fom gives the Walden and Schreier figures of merit from a conversion and the SAR logic's power report: python3 adc_supply.py current|wave|refs|ktc|fom ...
 import math, statistics, sys
 from adc_results import check_conversion, LSB
 from adc_histogram import walden, schreier
 
 CAL_END, CLK_HALF, FS = 9.3e-6, 50e-9, 1e6
+KTC_LIMIT = 0.0774
 
 def rows(path):
     out = [[float(v) for v in l.split()] for l in open(path) if l.strip()]
@@ -80,11 +81,16 @@ if __name__ == "__main__":
                 print(f"{path}: {k} moves at most {r[k][0]:.4g} LSB from its median {r[k][1]:.5g} V over {r['decisions']} comparator decisions")
     elif mode == "ktc":
         v = float(dict(zip(*[iter(open(args[0]).read().split())] * 2))["ktc_rms_v"])
+        anchor = math.sqrt(1.380649e-23 * (float(args[1]) + 273.15) / 2.05e-12)
         if not math.isfinite(v) or v <= 0:
             fails.append(f"{args[0]}: ktc_rms_v {v} is not a positive number")
         else:
             cost = 0.5 * math.log2(1 + (v / LSB) ** 2 * 12)
-            print(f"{args[0]}: sampled kT/C noise {v * 1e6:.4g} uV rms, {v / LSB:.4g} LSB, against 0.2887 LSB of quantization noise; it costs an ideal 8-bit quantizer {cost:.4g} bits of ENOB")
+            print(f"{args[0]}: sampled kT/C noise {v * 1e6:.4g} uV rms, {v / LSB:.4g} LSB (limit {KTC_LIMIT} LSB), {v / anchor:.3g} times sqrt(kT/2.05 pF) at {args[1]} C; against 0.2887 LSB of quantization noise it costs an ideal 8-bit quantizer {cost:.4g} bits of ENOB")
+            if v / LSB > KTC_LIMIT:
+                fails.append(f"{args[0]}: kT/C noise {v / LSB:.4g} LSB, above {KTC_LIMIT} LSB")
+            if not 0.5 <= v / anchor <= 2:
+                fails.append(f"{args[0]}: kT/C noise is {v / anchor:.3g} times sqrt(kT/2.05 pF), outside 0.5 to 2, so the bench is wrong")
     elif mode == "fom":
         supply, n = float(args[0]), int(args[1])
         r = check_conversion(args[2], args[3], supply, n)
