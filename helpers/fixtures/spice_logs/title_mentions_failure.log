@@ -1,0 +1,401 @@
+Note: Starting dynamic gmin stepping
+Note: Dynamic gmin stepping completed
+
+Note: No compatibility mode selected!
+
+
+Circuit: * runs the opamp's inverting loop (output at 1.0 v) into the adc's real capacitor dac (projects/adc/design/cap_dac.cir, listed in uses.txt) instead of a fixed capacitor, and writes to load.txt the output noise integrated from 1 hz to 10 ghz at the msb bottom plate with the dac sampling (so the sampling switches' own band limit and thermal noise count), and the settling error (against the output's settled value before the first window) at the end of a 200 ns sampling window and 50 ns into it, and how far the output dips, when the bottom plates, parked at vref_lo between samples, are switched back onto the output (the worst kick: 0.8 v across 2.05 pf); samp is high from time 0 so the top plate is tied to vcmd at the transient's operating point (with samp low it floats and the operating point fails at cold and fast corners), and every value is written as nan if any measurement failed; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  1.00000e+00Note: Starting dynamic gmin stepping
+Note: Dynamic gmin stepping completed
+
+No. of Data Rows : 201
+
+No. of Data Rows : 1
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                       1.32
+inp                                        0.6
+in                                         0.2
+ibias                                 0.282848
+inn                                   0.600503
+xrin.dt                                      0
+out                                    1.00101
+xrf.dt                                       0
+xop.vbp                               0.905764
+xop.vbpc                              0.687996
+xop.vbnc                               0.54052
+xop.t                                 0.336007
+xop.f1                                 1.10961
+xop.f2                                 1.11228
+xop.x                                 0.401324
+xop.o1                                0.719764
+xop.n1                                0.245533
+xop.n2                                 0.25723
+xop.cz                                0.719764
+xop.xrz.dt                                   0
+xop.xcc.1                             0.719764
+vref_hi                                      1
+vref_lo                                    0.2
+vcmd                                       0.6
+samp                                      1.32
+xdac.s1                            8.56131e-07
+xdac.s2                                   1.32
+xdac.s3                            8.56135e-07
+xdac.sl                                   1.32
+xdac.sb                            7.91846e-07
+xdac.slb                            1.2812e-06
+top                                        0.6
+xdac.xb7.xu.xa.xa.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.b                             1.00101
+xdac.xb7.xu.xa.xa.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xa.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xa.xb.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xa.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb7.xu.xb.xb.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb7.xsw.db                           1.32
+xdac.xb7.xsw.xhn.m                     1.27296
+xdac.xb7.xsw.hn                    2.41279e-07
+xdac.xb7.xsw.xln.m                    0.205563
+xdac.xb7.xsw.ln                    1.12216e-06
+xdac.xb7.xsw.hb                           1.32
+xdac.xb7.xsw.lb                           1.32
+xdac.xb6.xu.xa.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb6.b                             1.00101
+xdac.xb6.xu.xa.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xa.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb6.xu.xb.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb6.xsw.db                           1.32
+xdac.xb6.xsw.xhn.m                     1.27296
+xdac.xb6.xsw.hn                    2.37052e-07
+xdac.xb6.xsw.xln.m                    0.205563
+xdac.xb6.xsw.ln                    1.11786e-06
+xdac.xb6.xsw.hb                           1.32
+xdac.xb6.xsw.lb                           1.32
+xdac.xb5.xu.xa.xa.xa.xa.xa.xc.1             0.6
+xdac.xb5.b                             1.00101
+xdac.xb5.xu.xa.xa.xa.xa.xb.xc.1             0.6
+xdac.xb5.xu.xa.xa.xa.xb.xa.xc.1             0.6
+xdac.xb5.xu.xa.xa.xa.xb.xb.xc.1             0.6
+xdac.xb5.xu.xa.xa.xb.xa.xa.xc.1             0.6
+xdac.xb5.xu.xa.xa.xb.xa.xb.xc.1             0.6
+xdac.xb5.xu.xa.xa.xb.xb.xa.xc.1             0.6
+xdac.xb5.xu.xa.xa.xb.xb.xb.xc.1             0.6
+xdac.xb5.xu.xa.xb.xa.xa.xa.xc.1             0.6
+xdac.xb5.xu.xa.xb.xa.xa.xb.xc.1             0.6
+xdac.xb5.xu.xa.xb.xa.xb.xa.xc.1             0.6
+xdac.xb5.xu.xa.xb.xa.xb.xb.xc.1             0.6
+xdac.xb5.xu.xa.xb.xb.xa.xa.xc.1             0.6
+xdac.xb5.xu.xa.xb.xb.xa.xb.xc.1             0.6
+xdac.xb5.xu.xa.xb.xb.xb.xa.xc.1             0.6
+xdac.xb5.xu.xa.xb.xb.xb.xb.xc.1             0.6
+xdac.xb5.xu.xb.xa.xa.xa.xa.xc.1             0.6
+xdac.xb5.xu.xb.xa.xa.xa.xb.xc.1             0.6
+xdac.xb5.xu.xb.xa.xa.xb.xa.xc.1             0.6
+xdac.xb5.xu.xb.xa.xa.xb.xb.xc.1             0.6
+xdac.xb5.xu.xb.xa.xb.xa.xa.xc.1             0.6
+xdac.xb5.xu.xb.xa.xb.xa.xb.xc.1             0.6
+xdac.xb5.xu.xb.xa.xb.xb.xa.xc.1             0.6
+xdac.xb5.xu.xb.xa.xb.xb.xb.xc.1             0.6
+xdac.xb5.xu.xb.xb.xa.xa.xa.xc.1             0.6
+xdac.xb5.xu.xb.xb.xa.xa.xb.xc.1             0.6
+xdac.xb5.xu.xb.xb.xa.xb.xa.xc.1             0.6
+xdac.xb5.xu.xb.xb.xa.xb.xb.xc.1             0.6
+xdac.xb5.xu.xb.xb.xb.xa.xa.xc.1             0.6
+xdac.xb5.xu.xb.xb.xb.xa.xb.xc.1             0.6
+xdac.xb5.xu.xb.xb.xb.xb.xa.xc.1             0.6
+xdac.xb5.xu.xb.xb.xb.xb.xb.xc.1             0.6
+xdac.xb5.xsw.db                           1.32
+xdac.xb5.xsw.xhn.m                     1.27296
+xdac.xb5.xsw.hn                    2.34938e-07
+xdac.xb5.xsw.xln.m                    0.205563
+xdac.xb5.xsw.ln                    1.11572e-06
+xdac.xb5.xsw.hb                           1.32
+xdac.xb5.xsw.lb                           1.32
+xdac.xb4.xu.xa.xa.xa.xa.xc.1               0.6
+xdac.xb4.b                             1.00101
+xdac.xb4.xu.xa.xa.xa.xb.xc.1               0.6
+xdac.xb4.xu.xa.xa.xb.xa.xc.1               0.6
+xdac.xb4.xu.xa.xa.xb.xb.xc.1               0.6
+xdac.xb4.xu.xa.xb.xa.xa.xc.1               0.6
+xdac.xb4.xu.xa.xb.xa.xb.xc.1               0.6
+xdac.xb4.xu.xa.xb.xb.xa.xc.1               0.6
+xdac.xb4.xu.xa.xb.xb.xb.xc.1               0.6
+xdac.xb4.xu.xb.xa.xa.xa.xc.1               0.6
+xdac.xb4.xu.xb.xa.xa.xb.xc.1               0.6
+xdac.xb4.xu.xb.xa.xb.xa.xc.1               0.6
+xdac.xb4.xu.xb.xa.xb.xb.xc.1               0.6
+xdac.xb4.xu.xb.xb.xa.xa.xc.1               0.6
+xdac.xb4.xu.xb.xb.xa.xb.xc.1               0.6
+xdac.xb4.xu.xb.xb.xb.xa.xc.1               0.6
+xdac.xb4.xu.xb.xb.xb.xb.xc.1               0.6
+xdac.xb4.xsw.db                           1.32
+xdac.xb4.xsw.xhn.m                     1.27296
+xdac.xb4.xsw.hn                    2.34093e-07
+xdac.xb4.xsw.xln.m                    0.205563
+xdac.xb4.xsw.ln                    1.11486e-06
+xdac.xb4.xsw.hb                           1.32
+xdac.xb4.xsw.lb                           1.32
+xdac.xb3.xu.xa.xa.xa.xc.1                  0.6
+xdac.xb3.b                             1.00101
+xdac.xb3.xu.xa.xa.xb.xc.1                  0.6
+xdac.xb3.xu.xa.xb.xa.xc.1                  0.6
+xdac.xb3.xu.xa.xb.xb.xc.1                  0.6
+xdac.xb3.xu.xb.xa.xa.xc.1                  0.6
+xdac.xb3.xu.xb.xa.xb.xc.1                  0.6
+xdac.xb3.xu.xb.xb.xa.xc.1                  0.6
+xdac.xb3.xu.xb.xb.xb.xc.1                  0.6
+xdac.xb3.xsw.db                           1.32
+xdac.xb3.xsw.xhn.m                     1.27296
+xdac.xb3.xsw.hn                    2.33459e-07
+xdac.xb3.xsw.xln.m                    0.205563
+xdac.xb3.xsw.ln                    1.11422e-06
+xdac.xb3.xsw.hb                           1.32
+xdac.xb3.xsw.lb                           1.32
+xdac.xb2.xu.xa.xa.xc.1                     0.6
+xdac.xb2.b                             1.00101
+xdac.xb2.xu.xa.xb.xc.1                     0.6
+xdac.xb2.xu.xb.xa.xc.1                     0.6
+xdac.xb2.xu.xb.xb.xc.1                     0.6
+xdac.xb2.xsw.db                           1.32
+xdac.xb2.xsw.xhn.m                     1.27296
+xdac.xb2.xsw.hn                    2.33459e-07
+xdac.xb2.xsw.xln.m                    0.205563
+xdac.xb2.xsw.ln                    1.11422e-06
+xdac.xb2.xsw.hb                           1.32
+xdac.xb2.xsw.lb                           1.32
+xdac.xb1.xu.xa.xc.1                        0.6
+xdac.xb1.b                             1.00101
+xdac.xb1.xu.xb.xc.1                        0.6
+xdac.xb1.xsw.db                           1.32
+xdac.xb1.xsw.xhn.m                     1.27296
+xdac.xb1.xsw.hn                    2.33459e-07
+xdac.xb1.xsw.xln.m                    0.205563
+xdac.xb1.xsw.ln                    1.11422e-06
+xdac.xb1.xsw.hb                           1.32
+xdac.xb1.xsw.lb                           1.32
+xdac.xb0.xu.xc.1                           0.6
+xdac.xb0.b                             1.00101
+xdac.xb0.xsw.db                           1.32
+xdac.xb0.xsw.xhn.m                     1.27296
+xdac.xb0.xsw.hn                    2.33459e-07
+xdac.xb0.xsw.xln.m                    0.205563
+xdac.xb0.xsw.ln                    1.11422e-06
+xdac.xb0.xsw.hb                           1.32
+xdac.xb0.xsw.lb                           1.32
+xdac.xbd.xu.xc.1                           0.6
+xdac.xbd.b                             1.00101
+xdac.xbd.xsw.db                           1.32
+xdac.xbd.xsw.xhn.m                     1.27296
+xdac.xbd.xsw.hn                    2.33459e-07
+xdac.xbd.xsw.xln.m                    0.205563
+xdac.xbd.xsw.ln                    1.11422e-06
+xdac.xbd.xsw.hb                           1.32
+xdac.xbd.xsw.lb                           1.32
+vsamp#branch                      -8.23584e-11
+vcmd#branch                       -5.03541e-12
+vlo#branch                         3.48481e-11
+vhi#branch                        -1.20268e-11
+vin#branch                         2.34425e-05
+vcm#branch                        -1.78674e-12
+vdd#branch                        -0.000220986
+
+ Reference value :  0.00000e+00 Reference value :  9.72800e-09 Reference value :  2.06280e-08 Reference value :  3.15280e-08 Reference value :  4.20280e-08 Reference value :  5.29280e-08 Reference value :  6.22280e-08 Reference value :  6.94280e-08 Reference value :  7.67280e-08 Reference value :  8.43280e-08 Reference value :  9.40280e-08 Reference value :  1.04928e-07 Reference value :  1.15528e-07 Reference value :  1.25928e-07 Reference value :  1.36728e-07 Reference value :  1.47428e-07 Reference value :  1.57928e-07 Reference value :  1.68328e-07 Reference value :  1.78928e-07 Reference value :  1.89728e-07 Reference value :  2.00728e-07 Reference value :  2.11628e-07 Reference value :  2.22328e-07 Reference value :  2.33228e-07 Reference value :  2.43928e-07 Reference value :  2.54128e-07 Reference value :  2.63828e-07 Reference value :  2.73528e-07 Reference value :  2.83328e-07 Reference value :  2.94028e-07 Reference value :  3.04228e-07 Reference value :  3.13928e-07 Reference value :  3.22328e-07 Reference value :  3.29728e-07 Reference value :  3.37228e-07 Reference value :  3.46628e-07 Reference value :  3.57528e-07 Reference value :  3.68428e-07 Reference value :  3.79028e-07 Reference value :  3.89728e-07 Reference value :  4.00428e-07 Reference value :  4.10928e-07 Reference value :  4.20828e-07 Reference value :  4.31628e-07 Reference value :  4.42328e-07 Reference value :  4.52028e-07 Reference value :  4.62228e-07 Reference value :  4.73328e-07 Reference value :  4.84028e-07 Reference value :  4.94928e-07 Reference value :  5.00080e-07 Reference value :  5.00488e-07 Reference value :  5.07485e-07 Reference value :  5.17385e-07 Reference value :  5.27485e-07 Reference value :  5.37885e-07 Reference value :  5.46685e-07 Reference value :  5.57285e-07 Reference value :  5.68185e-07 Reference value :  5.79285e-07 Reference value :  5.90385e-07 Reference value :  6.01585e-07 Reference value :  6.12485e-07 Reference value :  6.23485e-07 Reference value :  6.34385e-07 Reference value :  6.44685e-07 Reference value :  6.54785e-07 Reference value :  6.61985e-07 Reference value :  6.71085e-07 Reference value :  6.80085e-07 Reference value :  6.90985e-07 Reference value :  7.00985e-07 Reference value :  7.10885e-07 Reference value :  7.21285e-07 Reference value :  7.31885e-07 Reference value :  7.42385e-07 Reference value :  7.52485e-07 Reference value :  7.63085e-07 Reference value :  7.73885e-07 Reference value :  7.83885e-07 Reference value :  7.94185e-07 Reference value :  8.03485e-07 Reference value :  8.12985e-07 Reference value :  8.23685e-07 Reference value :  8.33785e-07 Reference value :  8.44585e-07 Reference value :  8.54985e-07 Reference value :  8.62985e-07 Reference value :  8.71185e-07 Reference value :  8.81285e-07 Reference value :  8.90885e-07 Reference value :  9.00785e-07 Reference value :  9.10385e-07 Reference value :  9.17685e-07 Reference value :  9.26485e-07 Reference value :  9.36585e-07 Reference value :  9.46485e-07 Reference value :  9.57385e-07 Reference value :  9.67885e-07 Reference value :  9.78385e-07 Reference value :  9.88485e-07 Reference value :  9.96485e-07 Reference value :  1.00488e-06 Reference value :  1.01458e-06 Reference value :  1.02248e-06 Reference value :  1.03108e-06 Reference value :  1.04138e-06 Reference value :  1.04998e-06 Reference value :  1.06068e-06 Reference value :  1.07168e-06 Reference value :  1.08168e-06 Reference value :  1.09078e-06 Reference value :  1.09918e-06 Reference value :  1.10868e-06 Reference value :  1.11958e-06 Reference value :  1.13028e-06 Reference value :  1.14028e-06 Reference value :  1.15018e-06 Reference value :  1.16048e-06 Reference value :  1.16978e-06 Reference value :  1.17958e-06 Reference value :  1.18948e-06 Reference value :  1.19928e-06 Reference value :  1.20768e-06 Reference value :  1.21478e-06 Reference value :  1.22238e-06 Reference value :  1.22958e-06 Reference value :  1.23918e-06 Reference value :  1.24668e-06 Reference value :  1.25478e-06 Reference value :  1.26398e-06 Reference value :  1.27128e-06 Reference value :  1.27638e-06 Reference value :  1.28398e-06 Reference value :  1.29428e-06 Reference value :  1.30268e-06 Reference value :  1.30928e-06 Reference value :  1.31758e-06 Reference value :  1.32618e-06 Reference value :  1.33658e-06 Reference value :  1.34718e-06 Reference value :  1.35798e-06 Reference value :  1.36748e-06 Reference value :  1.37658e-06 Reference value :  1.38598e-06 Reference value :  1.39518e-06 Reference value :  1.40268e-06 Reference value :  1.41128e-06 Reference value :  1.42188e-06 Reference value :  1.43028e-06 Reference value :  1.44068e-06 Reference value :  1.45098e-06 Reference value :  1.45878e-06 Reference value :  1.46948e-06 Reference value :  1.47938e-06 Reference value :  1.48908e-06 Reference value :  1.49898e-06 Reference value :  1.50918e-06 Reference value :  1.51698e-06 Reference value :  1.52588e-06 Reference value :  1.53378e-06 Reference value :  1.53968e-06 Reference value :  1.54538e-06 Reference value :  1.55338e-06 Reference value :  1.56348e-06 Reference value :  1.57368e-06 Reference value :  1.58328e-06 Reference value :  1.59308e-06 Reference value :  1.59908e-06 Reference value :  1.60548e-06 Reference value :  1.61258e-06 Reference value :  1.61958e-06 Reference value :  1.62968e-06 Reference value :  1.63808e-06 Reference value :  1.64578e-06 Reference value :  1.65538e-06 Reference value :  1.66168e-06 Reference value :  1.66858e-06 Reference value :  1.67848e-06 Reference value :  1.68688e-06 Reference value :  1.69508e-06 Reference value :  1.70398e-06 Reference value :  1.71228e-06 Reference value :  1.72208e-06 Reference value :  1.73088e-06 Reference value :  1.73828e-06 Reference value :  1.74588e-06 Reference value :  1.75418e-06 Reference value :  1.76428e-06 Reference value :  1.77248e-06 Reference value :  1.77948e-06 Reference value :  1.78868e-06 Reference value :  1.79738e-06 Reference value :  1.80508e-06 Reference value :  1.81468e-06 Reference value :  1.82508e-06 Reference value :  1.83548e-06 Reference value :  1.84048e-06 Reference value :  1.84638e-06 Reference value :  1.85358e-06 Reference value :  1.86078e-06 Reference value :  1.86818e-06 Reference value :  1.87688e-06 Reference value :  1.88678e-06 Reference value :  1.89608e-06 Reference value :  1.90308e-06 Reference value :  1.91048e-06 Reference value :  1.92088e-06 Reference value :  1.93128e-06 Reference value :  1.93968e-06 Reference value :  1.94698e-06 Reference value :  1.95488e-06 Reference value :  1.96298e-06 Reference value :  1.96978e-06 Reference value :  1.97888e-06 Reference value :  1.98648e-06 Reference value :  1.99568e-06 Reference value :  2.00005e-06 Reference value :  2.00043e-06 Reference value :  2.00134e-06 Reference value :  2.00624e-06 Reference value :  2.01134e-06 Reference value :  2.01634e-06 Reference value :  2.02224e-06 Reference value :  2.02914e-06 Reference value :  2.03814e-06 Reference value :  2.04694e-06 Reference value :  2.05594e-06 Reference value :  2.06564e-06 Reference value :  2.07484e-06 Reference value :  2.08314e-06 Reference value :  2.09324e-06 Reference value :  2.10274e-06 Reference value :  2.11234e-06 Reference value :  2.12204e-06 Reference value :  2.12894e-06 Reference value :  2.13514e-06 Reference value :  2.14454e-06 Reference value :  2.15524e-06 Reference value :  2.16484e-06 Reference value :  2.17264e-06 Reference value :  2.18234e-06 Reference value :  2.19124e-06 Reference value :  2.20000e-06 Reference value :  2.20018e-06 Reference value :  2.20045e-06 Reference value :  2.20399e-06 Reference value :  2.21199e-06 Reference value :  2.21899e-06 Reference value :  2.22649e-06 Reference value :  2.23459e-06 Reference value :  2.24359e-06
+No. of Data Rows : 22717
+target              =  1.00101e+00
+got                 =  1.00101e+00
+early               =  1.00087e+00
+dip                 =  9.26485e-01 at=  2.00055e-06
+ngspice-47 done
