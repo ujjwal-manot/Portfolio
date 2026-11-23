@@ -1,13 +1,16 @@
-# Drives sar_logic with a model front end (sampled input, DAC level, top-plate trim shift and a comparator offset in LSB): after reset the logic must run 8 calibration frames with cal high, the DAC held at 0x80 and a 7-bit SAR search on the trim code in each, average them into the trim it then holds (rails stay at 0 and 127 when the offset is out of range, and comparator noise averages down), deliver no code while calibrating, and then convert a coherent -0.5 dBFS sine 1024 times at ENOB 8.0 +- 0.1 with any offset inside the trim range; each sample takes 2 sampling cycles and 8 trials with the comparator clocked in the low half, m_tlast marks every 64th delivered sample, and a sample that finds the previous one still waiting is dropped and sets the sticky overflow flag without touching the waiting word; the conversion is also run on the IHP cell netlist (make logic first), recording the switching the power report reads.
+# Drives sar_logic with a model front end (sampled input, DAC level, top-plate trim shift and a comparator offset in LSB): after reset the logic must run 8 calibration frames with cal high, the DAC held at 0x80 and a 7-bit SAR search on the trim code in each, average them into the trim it then holds (rails stay at 0 and 127 when the offset is out of range, and comparator noise averages down), deliver no code while calibrating, and then convert a coherent -0.5 dBFS sine 1024 times at ENOB 8.0 +- 0.1 with any offset inside the trim range; each sample takes 2 sampling cycles and 8 trials with the comparator clocked in the low half, m_tlast marks every 64th delivered sample, and a sample that finds the previous one still waiting is dropped and sets the sticky overflow flag without touching the waiting word; the calibration and conversion are also run on the IHP cell netlist (make logic first) with each corner's SDF delays, recording the switching each corner's power report reads, and m_tvalid's clock-to-output delay in that run must match STA's arrival to 1 ps (the cell models' step is cut from 10 ps to 100 fs, and Icarus skips their setup and hold checks, which STA covers).
 import math, os, random
 from pathlib import Path
+import pytest
 import cocotb
 from cocotb.clock import Clock
-from cocotb.triggers import ClockCycles, FallingEdge, RisingEdge, ReadOnly
+from cocotb.triggers import ClockCycles, Edge, FallingEdge, First, RisingEdge, ReadOnly, Timer
+from cocotb.utils import get_sim_time
 from cocotb_run import run
 from adc_spectrum import spectrum, coherent_bin
 
 DESIGN = Path(__file__).resolve().parents[1] / "design"
+BUILD = DESIGN.parent / "build"
 FS, N, K = 1e6, 1024, 31
 LO, HI = 0.2, 1.0
 LSB = (HI - LO) / 256
@@ -183,10 +186,34 @@ async def overflow_drops_new_samples_and_keeps_the_waiting_word(dut):
     await ClockCycles(dut.clk, 30)
     assert dut.overflow.value, "overflow is not sticky"
 
-def test_sar_logic():
-    run("sar_logic", [DESIGN / "sar_logic.sv"], __file__)
+@cocotb.test()
+async def clock_to_output_matches_sta(dut):
+    corner = next(c for c in ("slow", "typ", "fast") if c.upper() in os.environ)
+    rise, fall = [float(v) for v in (BUILD / f"clock_to_output_{corner}.txt").read_text().split()[1:]]
+    await start(dut)
+    Front(dut, lambda t: 0.6)
+    seen = {}
+    while len(seen) < 2:
+        await RisingEdge(dut.clk)
+        edge = get_sim_time("ps")
+        fired = await First(Edge(dut.m_tvalid), Timer(20, "ns"))
+        if isinstance(fired, Edge):
+            seen.setdefault(int(dut.m_tvalid.value), (get_sim_time("ps") - edge) / 1000)
+    dut._log.info(f"{corner}: m_tvalid rise {seen[1]:.4f} ns, fall {seen[0]:.4f} ns after clk; STA {rise:.4f} and {fall:.4f} ns")
+    assert abs(seen[1] - rise) <= 0.001 and abs(seen[0] - fall) <= 0.001, "the gate run is not timed by the SDF"
 
-def test_sar_logic_cells():
+def fine(name):
     cells = Path(os.environ["PDK_ROOT"]) / os.environ["PDK"] / "libs.ref/sg13g2_stdcell/verilog"
-    run("sar_logic", [DESIGN.parent / "build" / "sar_logic_cells.v", cells / "sg13g2_udp.v", cells / "sg13g2_stdcell.v"], __file__, sim="icarus", waves=True,
-        defines={"COCOTB_TEST_FILTER": "ideal_quantizer_scores_eight_bits"})
+    text = (cells / name).read_text()
+    assert "`timescale 1ns/10ps" in text
+    (BUILD / name).write_text(text.replace("`timescale 1ns/10ps", "`timescale 1ns/100fs"))
+    return BUILD / name
+
+def test_sar_logic():
+    run("sar_logic", [DESIGN / "sar_logic.sv"], __file__, defines={"COCOTB_TEST_FILTER": "^(?!clock_to_output)"})
+
+@pytest.mark.parametrize("corner", ["slow", "typ", "fast"])
+def test_sar_logic_gates(corner):
+    run("sar_logic", [BUILD / "sar_logic_cells.v", fine("sg13g2_udp.v"), fine("sg13g2_stdcell.v"), Path(__file__).parent / "sdf.v"], __file__, sim="icarus", waves=True,
+        defines={"SDF": f'"{BUILD / f"sar_logic_{corner}_sim.sdf"}"', "TOP": "sar_logic", corner.upper(): 1, "COCOTB_TEST_FILTER": "ideal_quantizer_scores_eight_bits|clock_to_output_matches_sta"},
+        build_args=["-gspecify", "-ginterconnect", "-Tmax", "-s", "sdf"])

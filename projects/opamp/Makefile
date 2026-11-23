@@ -5,6 +5,7 @@ ROOT := $(shell git rev-parse --show-toplevel)
 RUN := $(ROOT)/setup/run.sh
 PY := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
+LOGS := $(PY) $(ROOT)/helpers/spice_log_check.py
 CHARTS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,build/charts/$(c)_$(t)/charts.txt))
 CORNERS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,$(foreach v,lo min nom hi,build/corners/$(c)_$(t)_$(v)/result.txt)))
 MC := $(foreach n,$(shell seq 1 200),build/mc/$(n)/result.txt)
@@ -26,29 +27,39 @@ all: charts sizing check_model corners load_check mc mc_hot broken review model 
 charts: $(CHARTS)
 	mkdir -p results
 	for f in $(CHARTS); do cp -p $$f results/charts_$$(basename $$(dirname $$f)).txt; done
-	if $(PY) $(ROOT)/helpers/transistor_charts.py results/charts_*.txt > results/charts.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) charts $$c results/charts.log results/charts_*.txt
+	if $(PY) $(ROOT)/helpers/transistor_charts.py results/charts_*.txt > results/charts.log 2>&1; then c=0; else c=$$?; fi; \
+	  if ! $(LOGS) $(addsuffix ngspice.log,$(dir $(CHARTS))) > results/charts_logs.log 2>&1; then c=1; fi; $(SAVE) charts $$c results/charts.log results/charts_logs.log results/charts_*.txt
 
 sizing: build/sizes.inc
+	$(SAVE) sizing $$(cat build/sizing.exit) results/sizing.log
 
 build/sizes.inc: results/charts_tt_27.txt $(ROOT)/helpers/opamp_sizing.py
 	mkdir -p build
-	if $(PY) $(ROOT)/helpers/opamp_sizing.py $< $@ > results/sizing.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) sizing $$c results/sizing.log
+	if $(PY) $(ROOT)/helpers/opamp_sizing.py $< build/sizes.new > results/sizing.log 2>&1; then c=0; else c=$$?; fi; echo $$c > build/sizing.exit; \
+	  if [ $$c = 0 ] && ! cmp -s build/sizes.new $@; then cp build/sizes.new $@; fi
 
 check_model: build/model/result.txt
 	cp $< results/model.txt
-	if $(PY) $(ROOT)/helpers/analog_results.py model results/model.txt > results/check_model.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) check_model $$c results/check_model.log results/model.txt
+	if $(PY) $(ROOT)/helpers/analog_results.py model results/model.txt > results/check_model.log 2>&1; then c=0; else c=$$?; fi; \
+	  if ! $(LOGS) build/model/loop.log > results/check_model_logs.log 2>&1; then c=1; fi; $(SAVE) check_model $$c results/check_model.log results/check_model_logs.log results/model.txt
 
 corners: $(CORNERS)
 	for f in $(CORNERS); do cp $$f results/corner_$$(basename $$(dirname $$f)).txt; done
-	if $(PY) $(ROOT)/helpers/analog_results.py corners results/corner_*.txt > results/corners.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) corners $$c results/corners.log results/corner_*.txt
+	if $(PY) $(ROOT)/helpers/analog_results.py corners results/corner_*.txt > results/corners.log 2>&1; then c=0; else c=$$?; fi; \
+	  if ! $(LOGS) $(foreach f,$(CORNERS),$(foreach t,$(TESTS),$(dir $(f))$(t).log)) > results/corners_logs.log 2>&1; then c=1; fi; \
+	  $(SAVE) corners $$c results/corners.log results/corners_logs.log results/corner_*.txt
 
 mc: $(MC)
 	for f in $(MC); do cp $$f results/mc_$$(basename $$(dirname $$f)).txt; done
-	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mc_*.txt > results/mc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) mc $$c results/mc.log results/mc_*.txt
+	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mc_*.txt > results/mc.log 2>&1; then c=0; else c=$$?; fi; \
+	  if ! $(LOGS) $(foreach f,$(MC),$(foreach t,loop step swing load,$(dir $(f))$(t).log)) > results/mc_logs.log 2>&1; then c=1; fi; \
+	  $(SAVE) mc $$c results/mc.log results/mc_logs.log results/mc_*.txt
 
 mc_hot: $(MC_HOT)
 	for f in $(MC_HOT); do cp $$f results/mchot_$$(basename $$(dirname $$f)).txt; done
-	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mchot_*.txt > results/mc_hot.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) mc_hot $$c results/mc_hot.log results/mchot_*.txt
+	if $(PY) $(ROOT)/helpers/analog_results.py mc results/mchot_*.txt > results/mc_hot.log 2>&1; then c=0; else c=$$?; fi; \
+	  if ! $(LOGS) $(foreach f,$(MC_HOT),$(foreach t,loop step swing load,$(dir $(f))$(t).log)) > results/mc_hot_logs.log 2>&1; then c=1; fi; \
+	  $(SAVE) mc_hot $$c results/mc_hot.log results/mc_hot_logs.log results/mchot_*.txt
 
 broken: build/sizes.inc
 	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d; cp -r design tests $$d; \
@@ -59,10 +70,10 @@ broken: build/sizes.inc
 	  cp $$d/corner_tt_27_nom.txt results/broken_$$n.txt; \
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners results/broken_$$n.txt > results/broken_$$n.log 2>&1; then c=1; \
 	  elif [ -n "$$want" ] && grep -qxF -- "$$want" results/broken_$$n.log; then c=0; else c=2; fi; \
+	  if $(LOGS) $(addprefix $$d/,$(addsuffix .log,$(TESTS))) >> results/broken_$$n.log 2>&1; then echo "spice_log_check exit 0" >> results/broken_$$n.log; else echo "spice_log_check exit 1" >> results/broken_$$n.log; fi; \
 	  $(SAVE) broken_$$n $$c results/broken_$$n.log results/broken_$$n.txt; done
 
 REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min
-POST := $(sort $(REVIEW) $(shell sed -nE 's/^[a-z0-9_]+ +worst \S+ at ([a-z0-9_]+).*/\1/p' results/corners.log))
 MODEL_FIT := tt_27_nom ss_125_min
 MODEL := $(MODEL_FIT) ff_m40_min ff_125_hi sf_125_min fs_125_nom tt_m40_hi ss_27_nom
 LOAD_CHECK := tt_27_nom ss_27_lo
@@ -84,17 +95,19 @@ layout: build/layout/opamp.gds
 build/layout/opamp_pex.spice: build/layout/opamp.gds layout/extract.tcl
 	cd build/layout && $(RUN) bash -c 'magic -dnull -noconsole -rcfile $$PDK_ROOT/$$PDK/libs.tech/magic/ihp-sg13g2.magicrc ../../layout/extract.tcl' > extract.log 2>&1
 
-post_layout: build/layout/opamp_pex.spice build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(POST)))
+post_layout: build/layout/opamp_pex.spice build/sizes.inc $(CORNERS)
 	mkdir -p results
 	cp build/layout/opamp_pex.spice results/opamp_pex.spice
 	cp build/layout/extract.log results/layout_extract.log
-	for c in $(POST); do d=build/post_layout/$$c; mkdir -p $$d; \
+	post=$$(sed -nE 's/^[a-z0-9_]+ +worst \S+ at ([a-z0-9_]+).*/\1/p' results/corners.log | cat - <(printf '%s\n' $(REVIEW)) | sort -u); test -n "$$post"; \
+	for c in $$post; do d=build/post_layout/$$c; mkdir -p $$d; \
 	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc build/corners/$$c/corner.inc build/layout/opamp_pex.spice $$d; \
 	  printf '.include opamp_pex.spice\n.subckt opamp inp inn out vdd vss ibias\nX1 %s opamp_pex\n.ends\n' "$$(sed -n 's/^.subckt opamp_pex //p' build/layout/opamp_pex.spice)" > $$d/dut.cir; \
 	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt); \
-	  cp $$d/result.txt results/post_layout_$$c.txt; done
-	if $(PY) $(ROOT)/helpers/analog_results.py corners $(foreach c,$(POST),results/post_layout_$(c).txt) > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
-	  $(SAVE) post_layout $$c results/post_layout.log $(foreach c,$(POST),results/post_layout_$(c).txt) results/opamp_pex.spice results/layout_extract.log
+	  cp $$d/result.txt results/post_layout_$$c.txt; done; \
+	if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $$post; do echo results/post_layout_$$c.txt; done) > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
+	  if ! $(LOGS) $$(for c in $$post; do for t in $(TESTS); do echo build/post_layout/$$c/$$t.log; done; done) > results/post_layout_logs.log 2>&1; then c=1; fi; \
+	  $(SAVE) post_layout $$c results/post_layout.log results/post_layout_logs.log $$(for c in $$post; do echo results/post_layout_$$c.txt; done) results/opamp_pex.spice results/layout_extract.log
 
 review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
 	for v in opamp opamp_indirect; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
@@ -102,7 +115,9 @@ review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REV
 	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt); \
 	  cp $$d/result.txt results/review_$${v}_$$c.txt; done; \
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $(REVIEW); do echo results/review_$${v}_$$c.txt; done) > results/review_$$v.log 2>&1; then c=0; else c=$$?; fi; echo "analog_results exit $$c" >> results/review_$$v.log; done
-	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; $(SAVE) review $$c results/review_opamp.log results/review_opamp_indirect.log results/review_*_*.txt
+	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; \
+	  if ! $(LOGS) $(foreach v,opamp opamp_indirect,$(foreach k,$(REVIEW),$(foreach t,$(TESTS),build/review/$(v)/$(k)/$(t).log))) > results/review_logs.log 2>&1; then c=1; fi; \
+	  $(SAVE) review $$c results/review_opamp.log results/review_opamp_indirect.log results/review_logs.log results/review_*_*.txt
 
 load_check: $(addprefix build/corners/,$(addsuffix /result.txt,$(LOAD_CHECK)))
 	mkdir -p results
@@ -110,7 +125,8 @@ load_check: $(addprefix build/corners/,$(addsuffix /result.txt,$(LOAD_CHECK)))
 	  sed -i 's/^.option reltol=1e-5 vntol=1e-8$$/.option reltol=1e-6 vntol=1e-9/' $$d/load.cir; grep -qx '.option reltol=1e-6 vntol=1e-9' $$d/load.cir; \
 	  true > $$d/load.txt; (cd $$d && $(RUN) ngspice -b load.cir > load.log 2>&1); \
 	  cp build/corners/$$c/load.txt results/load_check_$${c}_used.txt; cp $$d/load.txt results/load_check_$${c}_tighter.txt; done
-	c=0; for k in $(LOAD_CHECK); do if ! $(PY) $(ROOT)/helpers/same_values.py settle_load_v=2e-5,error_at_50ns_v=5e-5,kick_v=1e-3,sampled_v_rms=1e-5 \
+	c=0; if ! $(LOGS) $(foreach k,$(LOAD_CHECK),build/load_check/$(k)/load.log build/corners/$(k)/load.log) > results/load_check_logs.log 2>&1; then c=1; fi; \
+	  for k in $(LOAD_CHECK); do if ! $(PY) $(ROOT)/helpers/same_values.py settle_load_v=2e-5,error_at_50ns_v=5e-5,kick_v=1e-3,sampled_v_rms=1e-5 \
 	  results/load_check_$${k}_used.txt results/load_check_$${k}_tighter.txt > results/load_check_$$k.log 2>&1; then c=1; fi; done; \
 	  $(SAVE) load_check $$c results/load_check_*.log results/load_check_*.txt
 
@@ -127,7 +143,9 @@ model: $(addprefix build/wave/,$(addsuffix /wave.txt,$(MODEL))) design/opamp_mod
 	  $(PY) $(ROOT)/helpers/opamp_model.py define build/corners/$$c/result.txt > $$d/params.svh; cp $$d/params.svh results/model_params_$$c.svh; \
 	  (cd $$d && $(RUN) bash -c 'iverilog -g2012 -o sim opamp_model_tb.sv opamp_model.sv && vvp -n sim' > model.log 2>&1); done
 	if $(PY) $(ROOT)/helpers/opamp_model.py check "$(MODEL_FIT)" $(addprefix build/wave/,$(MODEL)) > results/model.log 2>&1; then c=0; else c=$$?; fi; \
-	  $(SAVE) model $$c results/model.log $(foreach c,$(MODEL),results/model_params_$(c).svh)
+	  if ! $(LOGS) $(foreach k,$(MODEL),build/wave/$(k)/wave.log) > results/model_logs.log 2>&1; then c=1; fi; \
+	  for k in $(MODEL); do if ! grep -q 'finish called at 3650000' build/wave/$$k/model.log; then c=1; echo "$$k: model run did not reach 3.65 us" >> results/model_logs.log; fi; done; \
+	  $(SAVE) model $$c results/model.log results/model_logs.log $(foreach c,$(MODEL),results/model_params_$(c).svh)
 
 build/model/result.txt: tests/model.cir tests/loop.cir build/sizes.inc
 	mkdir -p $(@D)

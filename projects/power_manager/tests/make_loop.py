@@ -58,7 +58,7 @@ def loop(model, mem, short, trap):
     t_end = segments[-1][2] * 1e-6
     Path("schedule.txt").write_text(f"t_end {t_end:.6g}\n" + "".join(f"{n} {a * 1e-6:.6g} {b * 1e-6:.6g} {tap} {load} {kind}\n" for n, a, b, tap, load, kind in segments))
     Path("shifter_scoped.cir").write_text(scoped("shifter_hv.cir", "shifter_hv_sizes.inc", "shifter_hv"))
-    ladder = "\n".join(f"XL{k} l{k + 1 if k < 200 else 'top'} {f'l{k}' if k else 0} 0 rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(201))
+    ladder = "\n".join(f"XL{k} {f'l{k + 1}' if k < 200 else 'top'} {f'l{k}' if k else 0} 0 rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(201))
     divider = "\n".join(f"XD{k} {'out' if k == 9 else 'fb' if k == 5 else f'dv{k + 1}'} {'fb' if k == 6 else f'dv{k}' if k else 0} 0 rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(10))
     sel = " ".join(f"s{j}" for j in range(4)) + " " + " ".join(f"s{j}b" for j in range(4))
     muxes = "\n".join(f"XM{c.upper()} t{c} {' '.join(f'l{tap + d}' for tap in TAPS)} {sel} vdd 0 tap_mux" for c, d in WINDOWS.items())
@@ -115,6 +115,7 @@ ACTL [dclk drst dlo dhi dflo dfhi] [{ons} {count} {drive}] null ctrl
 .control
 run
 wrdata loop.txt v(out)
+quit
 .endc
 .end
 """
@@ -142,6 +143,7 @@ AOUT [{ons} {count} {drive}] [{analog} {" ".join(f"cta{i}" for i in reversed(ran
 .control
 run
 wrdata check.txt v(lo) v(hi) v(flo) v(fhi) v(rst) {" ".join(f"v(cta{i})" for i in range(8))} {" ".join(f"v(drv{i})" for i in range(8))} {" ".join(f"v(on{i})" for i in range(N))}
+quit
 .endc
 .end
 """
@@ -166,6 +168,7 @@ XLAD vout 0 dldo_ladder
 op
 let vref_v = v(vout)
 echo "vref_v $&vref_v bandgap_v $&v(vref)" > ref.txt
+quit
 .endc
 .end
 """
@@ -197,6 +200,7 @@ let t_on_s = up - 5.05n
 let t_off_s = down - 25.15n
 let t_end_s = time[length(time) - 1]
 echo "unit t_on_s $&t_on_s t_off_s $&t_off_s t_end_s $&t_end_s full_a $&full" > delay.txt
+quit
 .endc
 .end
 """

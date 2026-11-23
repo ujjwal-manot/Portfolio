@@ -50,5 +50,5 @@ def test_missing_or_misaligned_samples_are_refused(tmp_path):
         transitions(record(tmp_path, lag=0.5), 1.2)
 
 def test_falling_code_fails(tmp_path):
-    edges, problems = transitions(record(tmp_path, swap=2 + 10), 1.2)
+    edges, problems = transitions(record(tmp_path, swap=2 + 11), 1.2)
     assert problems and "fell" in problems[0]

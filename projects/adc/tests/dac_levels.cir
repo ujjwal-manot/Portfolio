@@ -31,5 +31,6 @@ while code < 256
   echo "$&code $&err" >> dac_levels.txt
   let code = code + 1
 end
+quit
 .endc
 .end

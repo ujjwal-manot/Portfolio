@@ -24,6 +24,8 @@ let ua = 1e30
 let ub = -1
 let da = 1e30
 let db = -1
+echo may be absent: ub (the rising output never overshoots the upper half-LSB band)
+echo may be absent: db (the falling output never undershoots the lower half-LSB band)
 tran 0.1n 850n
 meas tran idd avg i(VDD) from=10n to=45n
 meas tran idh avg i(VDD) from=400n to=445n

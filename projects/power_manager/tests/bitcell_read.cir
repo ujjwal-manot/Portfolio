@@ -15,5 +15,6 @@ foreach v 1.08 1.2 1.32
   let ir = -i(VBL)
   echo "$v $&ir" >> read.txt
 end
+quit
 .endc
 .end

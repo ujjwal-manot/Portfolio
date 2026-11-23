@@ -27,5 +27,6 @@ meas tran i_logic avg i(VDD) from=60n to=64n
 let t_on = o_down - a_up
 let t_off = o_up - a_dn
 echo "shifter lo_v $&lo_v hi_v $&hi_v t_on_s $&t_on t_off_s $&t_off i_vin_on_a $&i_on i_vin_off_a $&i_off i_logic_a $&i_logic" > shifter.txt
+quit
 .endc
 .end

@@ -44,5 +44,6 @@ meas tran tc when v(clk)=$&half rise=2
 meas tran tw when v(outn)=$&half rise=1 td=25n
 let t = tw - tc
 echo "delay -1e-3 $&t" >> cmp.txt
+quit
 .endc
 .end

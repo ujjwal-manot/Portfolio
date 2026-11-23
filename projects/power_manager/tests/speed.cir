@@ -75,5 +75,6 @@ while v < 1.3299
   echo "$&v $&tinv $&tnand $&tnor" >> speed.txt
   let v = v + 0.02
 end
+quit
 .endc
 .end

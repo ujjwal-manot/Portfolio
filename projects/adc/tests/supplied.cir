@@ -50,5 +50,6 @@ meas tran second when v(vin)=v(vcmf) rise=2
 let fin = 1 / (second - first)
 echo "p_sup_w $&p_sup fin_hz $&fin" > measure.txt
 wrdata convert.txt v(valid) v(b7) v(b6) v(b5) v(b4) v(b3) v(b2) v(b1) v(b0) v(samp) v(vin) v(top) v(vcm) v(vdd) v(vref_hi) v(vref_lo) v(t6) v(t5) v(t4) v(t3) v(t2) v(t1) v(t0)
+quit
 .endc
 .end

@@ -36,5 +36,6 @@ let down = found[1]
 let offset = (up + down) / 2
 let hysteresis = up - down
 echo "offset_v $&offset hysteresis_v $&hysteresis up_v $&up down_v $&down" > offset.txt
+quit
 .endc
 .end

@@ -29,5 +29,6 @@ foreach d 10e-3 1e-3 100e-6 10e-6 1e-6 -1e-6 -10e-6 -100e-6 -1e-3 -10e-3
   let dt = td - tc
   echo "$d $&dt $&op" >> decide.txt
 end
+quit
 .endc
 .end

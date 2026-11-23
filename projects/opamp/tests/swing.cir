@@ -16,6 +16,8 @@ let lo = 1.2
 let hi = 0
 let top = 1e30
 let bottom = 1e30
+echo may be absent: hi (the output stays within half an LSB of its line down to an input of 0 V)
+echo may be absent: lo (the output stays within half an LSB of its line up to an input of 1.2 V)
 dc VIN 0 1.2 1m
 meas dc mid find v(out) at=0.6
 meas dc top find v(out) at=0.24
