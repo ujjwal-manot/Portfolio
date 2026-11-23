@@ -30,11 +30,13 @@ VCAL cal 0 {vsupply}
 XDAC top vin vcm vref_hi vref_lo samp cal vdd 0 0 0 0 0 0 d0 t6 t5 t4 t3 t2 t1 t0 vdd 0 cap_dac_cal
 VIN vin 0 0.6
 .control
+let nan = 1e400 - 1e400
 tran 1n 38.7u uic
 echo "code shift_v" > trim_levels.txt
 let code = 0
 while code < 128
   let at = 300e-9 + (code + 0.95) * 300e-9
+  let level = nan
   meas tran level find v(top) at=$&at
   let err = level - 0.6
   echo "$&code $&err" >> trim_levels.txt
@@ -45,8 +47,10 @@ tran 1n 5.4u uic
 let k = 0
 while k < 8
   let at = 300e-9 + (2 * k + 0.95) * 300e-9
+  let a = nan
   meas tran a find v(top) at=$&at
   let at = 300e-9 + (2 * k + 1.95) * 300e-9
+  let b = nan
   meas tran b find v(top) at=$&at
   echo "pair_$&k $&a $&b" >> trim_levels.txt
   let k = k + 1
