@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or ignores that wrapper's exit code, uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -202,22 +202,36 @@ def stale_measures(text):
 DIRECT = re.compile(r"(?<![\w./-])ngspice\s+(?!vlnggen\b|-v\b)")
 WRAPPER = re.compile(r"^(\w+)\s*[:?+]?=.*helpers/ngspice\.sh")
 
+FAILS = r"(?:\w+=[1-9]\d*\b|exit\s+[1-9]\d*\b|false\b|>>\s*\S*failed\S*)"
+
 def unchecked_log(text):
     names = set(re.findall(WRAPPER.pattern, text, re.M))
     call = re.compile("(?:" + "|".join([r"\S*helpers/ngspice\.sh"] + [re.escape(f"$({n})") for n in names]) + r")[^;&|()\n]*")
     found = []
-    for line in text.splitlines():
+    for line in re.sub(r"\\\n\s*", " ", text).splitlines():
         if line.lstrip().startswith("#") or WRAPPER.match(line):
             continue
         if DIRECT.search(line):
             found.append(f"runs ngspice directly, so its log is never checked: {line.strip()}")
             continue
         for m in call.finditer(line):
-            rest = line[m.end():].lstrip(") \t")
-            guarded = re.search(r"\b(?:if|while|until)\s[^;]*$", line[:m.start()])
-            if rest in ("", "\\") or rest.startswith("&&") or guarded or re.match(r"\|\|\s*\w+=", rest):
-                continue
-            found.append(f"ignores the checked run's exit code: {line.strip()}")
+            before, after = line[:m.start()], line[m.end():]
+            rest = after.lstrip(") \t")
+            cond = re.search(r"\bif\s+(!?)[^;]*$", before)
+            if cond:
+                block = re.split(r"\bfi\b", after, maxsplit=1)[0]
+                parts = re.split(r"\belse\b", block, maxsplit=1)
+                branch = parts[0] if cond.group(1) else (parts[1] if len(parts) > 1 else "")
+                ok = re.search(FAILS, branch)
+            elif rest.startswith("||"):
+                ok = re.match(r"\|\|\s*" + FAILS, rest)
+            else:
+                ok = rest == "" or (rest.startswith("&&") and not re.search(r"\|\|(?!\s*" + FAILS + ")", rest))
+            if not ok:
+                found.append(f"does not fail on the checked run's exit code: {line.strip()}")
+    for name in sorted(set(re.findall(r">>\s*([\w$/.-]*failed[\w.]*)", text))):
+        if not any(name in line and not re.search(r">>\s*" + re.escape(name), line) for line in text.splitlines()):
+            found.append(f"appends failed runs to {name} but never reads it, so they never reach a verdict")
     return found
 
 def find_problems(root):
@@ -246,7 +260,7 @@ def find_problems(root):
         if path.suffix == ".py":
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
-            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :", l) or re.match(r"\t-\S", l) or l.startswith(".IGNORE")]
+            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :", l) or re.match(r"\t@?-\S", l) or l.startswith(".IGNORE") or re.match(r"\s*MAKEFLAGS\s*[+:?]?=.*(?<!\S)-\w*[ik]", l)]
             problems += [("unchecked_log", rel, why) for why in unchecked_log(text)]
     return problems
 

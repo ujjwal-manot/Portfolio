@@ -3,5 +3,5 @@
 here=$(cd "$(dirname "$0")" && pwd)
 "$here/../setup/run.sh" ngspice -b "$1" > "$2" 2>&1
 e=$?
-python3 "$here/spice_log_check.py" "$2" || exit 1
+"$here/../setup/run.sh" python3 "$here/spice_log_check.py" "$2" || exit 1
 exit $e

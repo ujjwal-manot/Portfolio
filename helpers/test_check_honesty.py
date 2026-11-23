@@ -173,22 +173,35 @@ def test_every_ngspice_run_in_a_makefile_goes_through_the_checked_wrapper(tmp_pa
         "loop": "\tfor t in a b; do $(SPICE) $$t.cir $$t.log; done\n",
         "subshell": "\t(cd d && $(SPICE) a.cir a.log); cp d/a.txt results/\n",
         "true": "\t$(SPICE) a.cir a.log || true\n",
+        "zero": "\t$(SPICE) a.cir a.log || c=0\n",
+        "echoed": "\t$(SPICE) a.cir a.log && echo fine || echo bad\n",
+        "noelse": "\tif $(SPICE) a.cir a.log; then echo ok; fi\n",
+        "unread": "\tif ! $(SPICE) a.cir a.log; then echo \"a failed\" >> failed.txt; fi\n",
+        "echofile": "\tif ! $(SPICE) a.cir a.log; then echo \"a failed\" >> notes.txt; fi\n",
+        "noop": "\tif ! $(SPICE) a.cir a.log; then :; fi\n",
+        "dash": "\t-$(SPICE) a.cir a.log\n",
+        "atdash": "\t@-$(SPICE) a.cir a.log\n",
+        "ignore": "\t$(SPICE) a.cir a.log\n.IGNORE:\n",
+        "keepgoing": "\t$(SPICE) a.cir a.log\nMAKEFLAGS += -k\n",
     }
     good = {
         "plain": "\tcd build && $(SPICE) dc.cir dc.log\n",
         "chained": "\tcd build && $(SPICE) dc.cir dc.log && cp dc.txt ../results/\n",
         "recorded": "\tfor t in a b; do $(SPICE) $$t.cir $$t.log || c=1; done; exit $$c\n",
         "iftest": "\tif ! (cd d && $(SPICE) a.cir a.log); then c=1; fi\n",
+        "failfile": "\tif ! $(SPICE) a.cir a.log; then echo \"a failed\" >> failed.txt; fi\n\ttest ! -s failed.txt\n",
+        "elsebranch": "\tif $(SPICE) a.cir a.log; then echo ok; else exit 1; fi\n",
+        "continued": "\tif ! $(SPICE) a.cir a.log; then \\\n\t  c=1; fi\n",
         "direct_path": "\tcd build && $(ROOT)/helpers/ngspice.sh dc.cir dc.log\n",
         "codegen": "\tcd build && $(RUN) ngspice vlnggen top.sv > vlnggen.log 2>&1\n",
     }
     for name, recipe in {**bad, **good}.items():
         write(tmp_path, f"{name}/Makefile", "# Runs a bench.\nSPICE := $(ROOT)/helpers/ngspice.sh\nrun:\n" + recipe)
-    found = {str(path).split("/")[0] for rule, path, _ in find_problems(tmp_path) if rule == "unchecked_log"}
+    found = {str(path).split("/")[0] for rule, path, _ in find_problems(tmp_path) if rule in ("unchecked_log", "hidden_failure")}
     assert found == set(bad)
 
 def test_the_wrapper_fails_when_the_log_check_fails(tmp_path):
-    fake = write(tmp_path, "setup/run.sh", "#!/bin/bash\n# Fake tool runner.\nshift 2; cat " + str(Path(__file__).parent / "fixtures/spice_logs") + "/$1\n")
+    fake = write(tmp_path, "setup/run.sh", "#!/bin/bash\n# Fake tool runner.\nif [ \"$1\" = ngspice ]; then cat " + str(Path(__file__).parent / "fixtures/spice_logs") + "/$3; else exec \"$@\"; fi\n")
     fake.chmod(0o755)
     wrapper = tmp_path / "helpers/ngspice.sh"
     wrapper.parent.mkdir()
