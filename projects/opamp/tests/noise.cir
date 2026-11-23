@@ -1,4 +1,4 @@
-* Runs the real inverting loop (input and inp at 0.6 V) for output noise, integrated over the 50 kHz signal band and over 1 Hz to 1 GHz (all of it reaches the sampling ADC), and for supply rejection (gain from input over gain from vdd) at 1 kHz and 1 MHz, writing them to noise.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed.
+* Runs the real inverting loop (input and inp at 0.6 V) for output noise, integrated over the 50 kHz signal band and over 1 Hz to 1 GHz (all of it reaches the sampling ADC), and for supply rejection (gain from input over gain from vdd) at 1 kHz and 1 MHz, writing them to noise.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed (a failed measure leaves its vector undefined, so the sum of the measures times zero cannot be formed).
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -11,13 +11,6 @@ XRF inn out 0 rhigh w={w_rf} l={l_rf} mm_ok={mm}
 XCL out 0 cap_cmim w={w_cl} l={l_cl} mm_ok={mm}
 XOP inp inn out vdd 0 ibias opamp
 .control
-let band = 1e30
-let total = 1e30
-let g1k = 1e30
-let g1m = 1e30
-let s1k = 1e30
-let s1m = 1e30
-let points = 1e30
 noise v(out) VIN dec 20 1 1g
 let total = noise2.onoise_total
 noise v(out) VIN dec 20 1 50k
@@ -33,11 +26,11 @@ meas ac s1k find vdb(out) at=1e3
 meas ac s1m find vdb(out) at=1e6
 let psrr1k = g1k - s1k
 let psrr1m = g1m - s1m
-let failed = (band > 1e29) + (total > 1e29) + (g1k > 1e29) + (g1m > 1e29) + (s1k > 1e29) + (s1m > 1e29) + (points > 1e29)
-if failed > 0
-  echo noise band_v_rms nan total_v_rms nan psrr_1k_db nan psrr_1m_db nan > noise.txt
-else
+let complete = band*0 + total*0 + g1k*0 + g1m*0 + s1k*0 + s1m*0 + points*0
+if complete = 0
   echo noise band_v_rms $&band total_v_rms $&total psrr_1k_db $&psrr1k psrr_1m_db $&psrr1m > noise.txt
+else
+  echo noise band_v_rms nan total_v_rms nan psrr_1k_db nan psrr_1m_db nan > noise.txt
 end
 quit
 .endc

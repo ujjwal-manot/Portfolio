@@ -1,12 +1,12 @@
 Expected failure: FAIL settle_load_v
 --- a/tests/load.cir
 +++ b/tests/load.cir
-@@ -25,7 +25,7 @@
- let dip = 1e30
- noise v(xdac.xb7.b) VIN dec 20 1 10g
+@@ -20,7 +20,7 @@
+ .control
+ noise v(xdac.xc.xb7.b) VIN dec 20 1 10g
  let sampled = noise2.onoise_total
 -tran 0.1n 2.25u
 +tran 0.1n 1.5u
  meas tran target find v(out) at=0.99u
- meas tran got find v(xdac.xb7.b) at=2.199u
- meas tran early find v(xdac.xb7.b) at=2.05u
+ meas tran got find v(xdac.xc.xb7.b) at=2.199u
+ meas tran early find v(xdac.xc.xb7.b) at=2.05u

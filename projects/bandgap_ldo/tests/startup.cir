@@ -12,7 +12,7 @@ let nan = 1e400 - 1e400
 let final = nan
 let settle = nan
 let rampend = nan
-let tend = 0
+let tend = nan
 run
 let n = length(time) - 1
 let tend = time[n]

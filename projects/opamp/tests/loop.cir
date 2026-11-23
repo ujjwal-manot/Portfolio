@@ -1,4 +1,4 @@
-* Measures the loop gain of the opamp in its real inverting loop (rhigh Rin = Rf = 20 k, MIM 2.05 pF load, input and inp at 0.6 V) by Tian's method, with no loop-breaking parts, and writes DC loop gain, open-loop gain, loop crossover, phase margin, GBW (open-loop gain times frequency at 1 MHz, between the poles) and the open-loop unity-gain frequency to loop.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed.
+* Measures the loop gain of the opamp in its real inverting loop (rhigh Rin = Rf = 20 k, MIM 2.05 pF load, input and inp at 0.6 V) by Tian's method, with no loop-breaking parts, and writes DC loop gain, open-loop gain, loop crossover, phase margin, GBW (open-loop gain times frequency at 1 MHz, between the poles) and the open-loop unity-gain frequency to loop.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed (a failed measure leaves its vector undefined, so the sum of the measures times zero cannot be formed).
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -13,11 +13,6 @@ XOP inp inn oa vdd 0 ibias opamp
 VI out oa dc 0 ac 1
 II 0 out dc 0 ac 0
 .control
-let fc = 1e30
-let ugf = 1e30
-let t1m = 1e30
-let ph = 1e30
-let points = 1e30
 ac dec 50 1 10g
 let ip = i(vi)
 let vp = v(out)
@@ -36,11 +31,11 @@ let t0 = tdb[0]
 let pm = 180 + ph
 let a0 = t0 + 6.0206
 let gbw = 1e6 * 10^((t1m + 6.0206) / 20)
-let failed = (fc > 1e29) + (ugf > 1e29) + (t1m > 1e29) + (ph > 1e29) + (points > 1e29)
-if failed > 0
-  echo loop a0_db nan fc_hz nan pm_deg nan gbw_hz nan ugf_hz nan > loop.txt
-else
+let complete = fc*0 + ugf*0 + t1m*0 + ph*0 + points*0
+if complete = 0
   echo loop a0_db $&a0 fc_hz $&fc pm_deg $&pm gbw_hz $&gbw ugf_hz $&ugf > loop.txt
+else
+  echo loop a0_db nan fc_hz nan pm_deg nan gbw_hz nan ugf_hz nan > loop.txt
 end
 quit
 .endc

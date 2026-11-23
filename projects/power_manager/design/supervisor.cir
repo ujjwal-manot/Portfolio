@@ -149,8 +149,8 @@ XRB4 b4 b3 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
 XRB3 b3 b2 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
 XRB2 b2 b1 vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
 XRB1 b1 vss vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
-XSB1 refb b55 mem_ok vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
-XSB2 refb b56 mem_bad vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
+XSB1 refb mem_ok b55 vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
+XSB2 refb mem_bad b56 vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
 XCB mem_ok mem_bad vdd_mem refb nb vin vss supcomp
 XG1 both_n vin_ok mem_ok vin vss supnand
 XOP rst_n both_n vdd_mem vdd_mem sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}

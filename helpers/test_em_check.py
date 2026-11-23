@@ -47,3 +47,13 @@ def test_a_missing_or_nan_current_fails(value):
         c["x1.xs.xb.nsg13_hv_nmos"] = value
     ok, lines = check(raw(c), DESIGN, {}, {"x1": "pair"})
     assert not ok
+
+def test_a_device_with_its_own_pins_uses_its_via_arrays_and_leaves_the_tracks():
+    c = currents(top=0.35e-3, stack=10e-6)
+    ok, lines = check(raw(c), DESIGN, {}, {"x1": "pair"}, {"x1.xb": (4, 1.0)})
+    assert ok, lines
+    assert any("x1.xb" in l and "own pins" in l for l in lines)
+    c["x1.xb.nsg13_hv_pmos"] = 2.1e-3
+    ok, lines = check(raw(c), DESIGN, {}, {"x1": "pair"}, {"x1.xb": (4, 1.0)})
+    assert not ok
+    assert any(l.startswith("FAIL x1.xb") for l in lines)

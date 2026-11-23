@@ -26,7 +26,7 @@ let iq = nan
 let dip = nan
 let pm = nan
 let v27 = nan
-let tend = 0
+let tend = nan
 option reltol=1e-5 vntol=1e-8
 option temp=27
 destroy all

@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | trim | uic_check | convert | supply_corners | ramp | supplied | refs | shunt_check | gear_check | ktc | model | supply_current | fom | broken | review | layout | post_layout | all
+# adc commands: make sar | logic | decide | offset | levels | trim | uic_check | convert | supply_corners | ramp | supplied | refs | supply_wave | shunt_check | gear_check | ktc | model | supply_current | fom | broken | review | layout | post_layout | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -40,7 +40,7 @@ CORNERS_LOGIC := slow typ fast
 K := 5
 N := 128
 
-all: sar logic decide offset levels trim uic_check convert supply_corners ramp supplied refs shunt_check gear_check ktc model supply_current fom broken review layout post_layout
+all: sar logic decide offset levels trim uic_check convert supply_corners ramp supplied refs supply_wave shunt_check gear_check ktc model supply_current fom broken review layout post_layout
 
 sar:
 	mkdir -p results
@@ -172,9 +172,37 @@ supplied: $(SUPPLIED) $(foreach c,$(SUPPLIED_CORNERS),build/convert/$(c)_nom/con
 	  $(PY) $(ROOT)/helpers/adc_results.py supplied 1.2 $(N) results/supplied_$$c.txt results/supplied_measure_$$c.txt build/convert/$${c}_nom/convert.txt build/convert/$${c}_nom/measure.txt || exit 1; done; } > results/supplied.log 2>&1; then c=0; else c=$$?; fi; \
 	  $(SAVE) supplied $$c results/supplied.log results/supplied_*.txt
 
-refs: supplied
+build/refs/%/convert.txt: build/supplied/%/convert.txt
+	mkdir -p $(@D)
+	cp build/supplied/$*/*.cir build/supplied/$*/*.inc build/sar_logic.so $(@D)
+	sed -i 's/^.option interp rshunt=1e13 method=gear$$/.option rshunt=1e13 method=gear/; s/^.tran 50n .*/.tran 50n 20u/; /^let span/,/^echo/d; s/^wrdata convert.txt .*/wrdata convert.txt v(cclk) v(vref_hi) v(vcm) v(vref_lo)/' $(@D)/supplied.cir
+	grep -q '^wrdata convert.txt v(cclk)' $(@D)/supplied.cir
+	cd $(@D) && $(RUN) ngspice -b supplied.cir > supplied.log 2>&1
+
+REFS := $(foreach c,$(SUPPLIED_CORNERS),build/refs/$(c)/convert.txt)
+
+refs: $(REFS)
 	mkdir -p results
-	if $(PY) $(ROOT)/helpers/adc_supply.py refs 1.2 $(foreach c,$(SUPPLIED_CORNERS),results/supplied_$(c).txt) > results/refs.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) refs $$c results/refs.log results/supplied_*.txt
+	for c in $(SUPPLIED_CORNERS); do cp build/refs/$$c/convert.txt results/refs_$$c.txt; done
+	if { $(LOGS) $(REFS:convert.txt=supplied.log) && $(PY) $(ROOT)/helpers/adc_supply.py refs 1.2 $(foreach c,$(SUPPLIED_CORNERS),results/refs_$(c).txt); } > results/refs.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) refs $$c results/refs.log results/refs_*.txt
+
+build/supply_wave/%/wave.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_logic.so
+	mkdir -p $(@D)
+	cp $^ $(@D)
+	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
+	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
+	sed -i 's/^.option interp rshunt=1e13 method=gear$$/.option rshunt=1e13 method=gear/; s/^.tran 50n .*/.tran 50n 14u/; /^let span/,/^echo/d; s/^wrdata convert.txt .*/let isup = -i(VDD)\nwrdata wave.txt isup/' $(@D)/convert.cir
+	grep -q '^wrdata wave.txt isup' $(@D)/convert.cir
+	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+
+WAVE_CORNERS := tt_27_nom ff_m40_hi
+WAVE := $(foreach c,$(WAVE_CORNERS),build/supply_wave/$(c)/wave.txt)
+
+supply_wave: $(WAVE)
+	mkdir -p results
+	for c in $(WAVE_CORNERS); do cp build/supply_wave/$$c/wave.txt results/supply_wave_$$c.txt; done
+	if { $(LOGS) $(WAVE:wave.txt=convert.log) && $(PY) $(ROOT)/helpers/adc_supply.py wave 14e-6 $(foreach c,$(WAVE_CORNERS),results/supply_wave_$(c).txt); } > results/supply_wave.log 2>&1; then c=0; else c=$$?; fi; \
+	$(SAVE) supply_wave $$c results/supply_wave.log results/supply_wave_*.txt
 
 uic_check: tests/dac_levels.cir $(DAC)
 	mkdir -p results
@@ -227,10 +255,10 @@ build/ktc/ktc.txt: tests/ktc.cir $(DAC)
 	$(call corner,tt,27,nom,0) > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b ktc.cir > ktc.log 2>&1
 
-ktc: build/ktc/ktc.txt trim
+ktc: build/ktc/ktc.txt
 	mkdir -p results
 	cp $< results/ktc_tt_27_nom.txt
-	if { $(LOGS) build/ktc/ktc.log && $(PY) $(ROOT)/helpers/adc_supply.py ktc results/ktc_tt_27_nom.txt results/trim_tt_27_nom.txt; } > results/ktc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) ktc $$c results/ktc.log results/ktc_tt_27_nom.txt
+	if { $(LOGS) build/ktc/ktc.log && $(PY) $(ROOT)/helpers/adc_supply.py ktc results/ktc_tt_27_nom.txt; } > results/ktc.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) ktc $$c results/ktc.log results/ktc_tt_27_nom.txt
 
 build/model/adc_model: design/adc_model.sv design/sar_logic.sv tests/model_tb.sv
 	mkdir -p $(@D)
@@ -310,5 +338,5 @@ post_layout: $(POST) $(foreach c,$(LAYOUT_CORNERS),build/convert/$(c)/convert.tx
 	  echo "schematic $$c convert check exit $$s (its verdict is the convert target's)"; echo "extracted layout $$c:"; $(PY) $(ROOT)/helpers/adc_trim.py code 1.2 results/post_layout_$$c.txt && $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(N) results/post_layout_$$c.txt results/post_layout_measure_$$c.txt || exit 1; done; } > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
 	  $(SAVE) post_layout $$c results/post_layout.log results/post_layout_*.txt results/adc_core_pex.spice
 
-.PHONY: all sar logic decide offset levels trim uic_check convert supply_corners ramp supplied refs shunt_check gear_check ktc model supply_current fom broken review layout post_layout
+.PHONY: all sar logic decide offset levels trim uic_check convert supply_corners ramp supplied refs supply_wave shunt_check gear_check ktc model supply_current fom broken review layout post_layout
 .DELETE_ON_ERROR:

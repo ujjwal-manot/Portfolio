@@ -1,4 +1,4 @@
-* Sweeps the input of the real inverting loop from 0 to 1.2 V and writes the output range over which the output stays within half an LSB (1.5625 mV) of the loop's own straight line (through the mid-scale output, with the slope measured between inputs of 0.24 and 0.96 V, so gain error from resistor mismatch is not counted as clipping), searching each half of the sweep on its own (a range that never leaves the band runs to the end of the sweep), plus the input-referred offset (half the output error at mid-scale, noise gain 2) and the closed-loop gain error (output slope between inputs of 0.24 and 0.96 V, just outside the -1 dBFS peaks of 0.243 and 0.957 V, against the ideal -1), to swing.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed.
+* Sweeps the input of the real inverting loop from 0 to 1.2 V and writes the output range over which the output stays within half an LSB (1.5625 mV) of the loop's own straight line (through the mid-scale output, with the slope measured between inputs of 0.24 and 0.96 V, so gain error from resistor mismatch is not counted as clipping), searching each half of the sweep on its own (a range that never leaves the band runs to the end of the sweep), plus the input-referred offset (half the output error at mid-scale, noise gain 2) and the closed-loop gain error (output slope between inputs of 0.24 and 0.96 V, just outside the -1 dBFS peaks of 0.243 and 0.957 V, against the ideal -1), to swing.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed (a failed measure leaves its vector undefined, so the sum of the measures times zero cannot be formed).
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -11,11 +11,8 @@ XRF inn out 0 rhigh w={w_rf} l={l_rf} mm_ok={mm}
 XCL out 0 cap_cmim w={w_cl} l={l_cl} mm_ok={mm}
 XOP inp inn out vdd 0 ibias opamp
 .control
-let mid = 1e30
 let lo = 1.2
 let hi = 0
-let top = 1e30
-let bottom = 1e30
 echo may be absent: hi (the output stays within half an LSB of its line down to an input of 0 V)
 echo may be absent: lo (the output stays within half an LSB of its line up to an input of 1.2 V)
 dc VIN 0 1.2 1m
@@ -30,11 +27,11 @@ meas dc lo when err=1.5625m cross=1 from=0.6 to=1.2
 let out_high = mid + slope * (0.6 - hi)
 let out_low = mid + slope * (0.6 - lo)
 let offset = (mid - 0.6) / 2
-let failed = (mid > 1e29) + (top > 1e29) + (bottom > 1e29)
-if failed > 0
-  echo swing out_low_v nan out_high_v nan offset_v nan gain_error nan > swing.txt
-else
+let complete = mid*0 + top*0 + bottom*0
+if complete = 0
   echo swing out_low_v $&out_low out_high_v $&out_high offset_v $&offset gain_error $&gain_error > swing.txt
+else
+  echo swing out_low_v nan out_high_v nan offset_v nan gain_error nan > swing.txt
 end
 quit
 .endc
