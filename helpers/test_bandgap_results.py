@@ -20,10 +20,11 @@ def test_corner_fails_when_the_trimmed_vref_misses_the_target(tmp_path):
     assert not corners([write(tmp_path, "dc_sf_3v3.txt", GOOD.replace("vref_v 1.2063 ", "vref_v 1.2126 "))])[0]
 
 def test_montecarlo_counts_trimmed_and_untrimmed_yield(tmp_path):
-    runs = [write(tmp_path, f"mc_{i}.txt", GOOD.replace("untrimmed_tc_ppm_per_c 11", f"untrimmed_tc_ppm_per_c {40 if i < 10 else 11}").replace("code 8", f"code {6 + i % 5}")) for i in range(100)]
+    runs = [write(tmp_path, f"mc_{i}.txt", GOOD.replace("untrimmed_tc_ppm_per_c 11", f"untrimmed_tc_ppm_per_c {40 if i < 10 else 11}").replace("code 8", f"code {6 + i % 5}")) for i in range(300)]
     r = montecarlo(runs)
-    assert r["untrimmed_yield"] == 0.9 and r["trimmed_yield"] == 1.0 and r["codes"] == [6, 7, 8, 9, 10] and r["ok"]
-    runs += [write(tmp_path, f"mc_{i}.txt", GOOD.replace("tc_ppm_per_c 11 ", "tc_ppm_per_c 35 ")) for i in (100, 101)]
+    assert r["untrimmed_yield"] == 290 / 300 and r["trimmed_yield"] == 1.0 and r["codes"] == [6, 7, 8, 9, 10] and r["ok"]
+    assert not montecarlo(runs[:200])["ok"], "200 of 200 bounds the yield at only 98.5%"
+    runs[-1] = write(tmp_path, "mc_299.txt", GOOD.replace("tc_ppm_per_c 11 ", "tc_ppm_per_c 35 "))
     assert not montecarlo(runs)["ok"]
 
 def test_startup_must_end_at_vref_and_settle(tmp_path):

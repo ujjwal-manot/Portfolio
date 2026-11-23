@@ -27,7 +27,7 @@ def montecarlo(paths):
          "untrimmed_yield": sum(x["untrimmed_tc_ppm_per_c"] <= TC for x in runs) / len(runs),
          "untrimmed_v": spread([x["untrimmed_v"] for x in runs]), "trimmed_v": spread([x["vref_v"] for x in runs]),
          "codes": sorted({int(x["code"]) for x in runs}), "worst_tc": max(x["tc_ppm_per_c"] for x in runs)}
-    r["ok"] = r["trimmed_yield"] >= YIELD and 0 not in r["codes"] and 15 not in r["codes"]
+    r["ok"] = lower_bound(round(r["trimmed_yield"] * r["runs"]), r["runs"]) >= YIELD and 0 not in r["codes"] and 15 not in r["codes"]
     return r
 
 def startups(paths):
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         print(f"vref mean {r['untrimmed_v'][0]:.5g} V sigma {r['untrimmed_v'][1] * 1e3:.3g} mV untrimmed, mean {r['trimmed_v'][0]:.5g} V sigma {r['trimmed_v'][1] * 1e3:.3g} mV trimmed")
         print(f"trim codes used {r['codes']}")
         print(f"trimmed tempco yield is at least {lower_bound(round(r['trimmed_yield'] * r['runs']), r['runs']):.4f} at 95% confidence (one-sided, {r['runs']} seeds)")
-        ok, bad = r["ok"], [] if r["ok"] else ["trimmed tempco yield below 99% or a trim code at the end of its range"]
+        ok, bad = r["ok"], [] if r["ok"] else ["trimmed tempco yield's 95% lower bound below 99% or a trim code at the end of its range"]
     else:
         ok, rows, bad = (corners if mode == "corners" else startups)(paths)
         for name, row in sorted(rows.items()):

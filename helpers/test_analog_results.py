@@ -36,11 +36,12 @@ def test_swing_is_not_required_at_the_lowest_supply(tmp_path):
     assert not corners([a, write(tmp_path, "corner_ss_125_min.txt", GOOD.replace("out_high_v 1.14", "out_high_v 0.99"))])[0]
 
 def test_montecarlo_yield_per_spec_and_combined(tmp_path):
+    runs = [write(tmp_path, f"mc_{i}.txt", GOOD) for i in range(300)]
+    assert montecarlo(runs)[0], "300 of 300 bounds the yield at 99.0%"
+    assert not montecarlo(runs[:200])[0], "200 of 200 bounds it at only 98.5%"
     runs = [write(tmp_path, f"mc_{i}.txt", GOOD.replace("pm_deg 67", f"pm_deg {59 if i < 1 else 67}")) for i in range(100)]
     ok, yields, offsets = montecarlo(runs)
-    assert yields["pm_deg"] == 0.99 and yields["combined"] == 0.99 and ok
-    runs.append(write(tmp_path, "mc_100.txt", GOOD.replace("gbw_hz 2.8e7", "gbw_hz 1.9e7")))
-    assert not montecarlo(runs)[0]
+    assert yields["pm_deg"] == 0.99 and yields["combined"] == 0.99 and not ok
 
 def test_each_failed_spec_gets_a_line_naming_it(tmp_path):
     bad = write(tmp_path, "corner_tt_27_nom.txt", GOOD.replace("pm_deg 67", "pm_deg 15").replace("a0_db 72", "a0_db 40"))
@@ -89,4 +90,4 @@ def test_a_nan_fails_wherever_it_sits_among_the_corners(tmp_path):
 def test_the_verdict_line_states_both_the_point_estimate_and_its_lower_bound(tmp_path):
     runs = [write(tmp_path, f"mc_{i}.txt", GOOD) for i in range(200)]
     out = subprocess.run([sys.executable, str(Path(__file__).parent / "analog_results.py"), "mc", *map(str, runs)], capture_output=True, text=True).stdout
-    assert "point estimate 100.0% meets 99%; its 95% lower bound 98.5% is below 99%" in out
+    assert "point estimate 100.0%; its 95% lower bound 98.5% is below 99%, so the yield verdict fails" in out
