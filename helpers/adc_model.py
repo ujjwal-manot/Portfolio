@@ -1,4 +1,4 @@
-# Fits, validates and uses the ADC's real-number model (adc_model.sv run by Verilator through tests/model_tb.sv), with the metric and limits fixed before any fit: each table takes the DAC levels from that corner's transistor dac_levels run and the trim shifts from its trim_levels run (both turned into volts at the input with the measured top-plate gain), and only two numbers are fitted, both at tt 27 C 1.2 V: the calibration-mode offset from the trim code the transistor calibration settled on, and the conversion-mode offset from the transistor ramp's code edges (fit error: every ramp edge within 0.25 LSB); validation runs the model on stimuli and corners the fit never saw (the tt 27 C tone, and the tone at every other transistor conversion corner, using that process's 27 C tables where no table was run at the corner itself) and fails unless every code is within 1 of the transistor's, the trim code within 2, ENOB within 0.1 bit, offset within 0.25 LSB and gain error within 0.5 LSB; then the model gives the sine-histogram DNL and INL at tt 27 C (IEEE 1241 code density, 2^18 samples of an overranged sine, whose ends beyond the 0.2 to 1.0 V range the transistor runs never checked) and at the five process corners, and a Monte Carlo yield at tt 27 C 1.2 V over 100 dies (die i takes DAC and trim mismatch tables i mod 20 and the comparator offset from Monte Carlo run i) against chip.md's offset, gain, ENOB, DNL and INL limits with a calibrated trim off its rails, with the one-sided 95% lower bound: python3 adc_model.py all binary build_dir results_dir.
+# Fits, validates and uses the ADC's real-number model (adc_model.sv run by Verilator through tests/model_tb.sv), with the metric and limits fixed before any fit: each table takes the DAC levels from that corner's transistor dac_levels run and the trim shifts from its trim_levels run (both turned into volts at the input with the measured top-plate gain), and only two numbers are fitted, both at tt 27 C 1.2 V: the calibration-mode offset from the trim code the transistor calibration settled on, and the conversion-mode offset from the transistor ramp's code edges (fit error: every ramp edge within 0.25 LSB); validation runs the model on stimuli and corners the fit never saw (the tt 27 C tone, and the tone at every other transistor conversion corner, using that process's 27 C tables where no table was run at the corner itself) and fails unless every code is within 1 of the transistor's, the trim code within 2, ENOB within 0.1 bit, offset within 0.25 LSB and gain error within 0.5 LSB; then the model gives the sine-histogram DNL and INL at tt 27 C (IEEE 1241 code density, 2^18 samples of an overranged sine, whose ends beyond the 0.2 to 1.0 V range the transistor runs never checked) and at the five process corners, and a Monte Carlo yield at tt 27 C 1.2 V over 100 dies (die i takes DAC and trim mismatch tables i mod 20 and the comparator offset from Monte Carlo run i) against chip.md's offset, gain, ENOB, DNL and INL limits with a calibrated trim off its rails, with the one-sided 95% lower bound; last it checks chip.md's clipping budget (the opamp's 37.6 mV plus the worst offset and the worst full-scale gain error scaled to the 0.357 V peak, within the 43.5 mV headroom) with the transistor corners' and the Monte Carlo dies' worst values: python3 adc_model.py all binary build_dir results_dir.
 import math, statistics, subprocess, sys
 from pathlib import Path
 from adc_results import codes_from_run, check_conversion
@@ -13,6 +13,7 @@ AMP = 0.4 * 10 ** (-0.5 / 20)
 LIMIT = {"code": 1, "trim": 2, "enob": 0.1, "offset_lsb": 0.25, "gain_error_lsb": 0.5, "fit_edge_lsb": 0.25}
 SPEC = {"offset_lsb": 1.0, "gain_error_lsb": 2.0, "enob": 7.5, "dnl": 0.5, "inl": 1.0}
 HIST_N, HIST_K, HIST_AMP = 2 ** 18, 1031, 0.41
+OPAMP_MV, PEAK, HEADROOM_MV = 37.6, 0.357, 43.5
 VOLT = {"min": 1.16, "nom": 1.2, "hi": 1.32}
 
 def gain(trim_path):
@@ -130,6 +131,14 @@ def main(binary, build, results):
     (results / "model_mc.txt").write_text("\n".join(mc) + "\n")
     worst = lambda key: max((float(r.split()[r.split().index(key) + 1]) for r in mc), key=abs)
     print(f"model Monte Carlo at tt 27 C 1.2 V with mismatch, 100 dies (20 DAC and trim mismatch tables, 100 comparator offsets): calibrated yield {passed}% against chip.md's offset, gain error, ENOB, DNL and INL, at least {lower_bound(passed, 100):.1%} at 95% confidence; worst offset {worst('offset_lsb'):+.4f} LSB, worst gain error {worst('gain_error_lsb'):+.4f} LSB, worst dnl {worst('dnl'):.4f} LSB, worst inl {worst('inl'):.4f} LSB")
+    field = lambda row, key: float(row.split()[row.split().index(key) + 1])
+    for label, values in (("transistor conversions at every corner above", [(field(r, "offset_transistor"), field(r, "gain_error_transistor")) for r in rows]),
+                          ("model Monte Carlo dies", [(field(r, "offset_lsb"), field(r, "gain_error_lsb")) for r in mc])):
+        off, gain_err = max(abs(o) for o, _ in values), max(abs(g) for _, g in values)
+        used = OPAMP_MV + off * LSB * 1e3 + gain_err * LSB * 1e3 * PEAK / 0.8
+        print(f"clipping headroom with the {label}: opamp {OPAMP_MV} mV + worst offset {off:.3f} LSB + worst gain error {gain_err:.3f} LSB scaled to the {PEAK} V peak = {used:.2f} mV of the {HEADROOM_MV} mV headroom")
+        if used > HEADROOM_MV:
+            fails.append(f"{label}: {used:.2f} mV is beyond the {HEADROOM_MV} mV headroom")
     for f in fails:
         print("FAIL " + f)
     print("every check passes" if not fails else f"{len(fails)} failures")

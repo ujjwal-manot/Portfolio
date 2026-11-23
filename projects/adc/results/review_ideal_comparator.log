@@ -1,0 +1,3 @@
+Why: an ideal comparator in place of the transistor one, to separate its offset from the DAC
+make convert CONVERT=build/convert/tt_27_nom/convert.txt exit 2
+the run left no log

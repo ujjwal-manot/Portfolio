@@ -299,23 +299,35 @@ fom: convert logic
 	if $(PY) $(ROOT)/helpers/adc_supply.py fom 1.2 $(N) results/convert_tt_27_nom.txt results/measure_tt_27_nom.txt results/logic_power_typ.log > results/fom.log 2>&1; then c=0; else c=$$?; fi; \
 	$(SAVE) fom $$c results/fom.log results/convert_tt_27_nom.txt results/measure_tt_27_nom.txt results/logic_power_typ.log
 
-broken: build/sar_logic.so
-	mkdir -p results
-	for p in broken/*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
-	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); pass=$$(sed -n '1s/^Expected pass: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); \
-	  mkdir -p $$d/results; echo "the run left no log" > $$d/results/$${run%% *}.log; \
-	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then ok=0; else ok=1; fi; \
-	  cp $$d/results/$${run%% *}.log results/broken_$$n.log; \
-	  if [ -n "$$pass" ]; then c=$$ok; elif [ $$ok = 1 ] && [ -n "$$want" ] && grep -qF -- "$$want" results/broken_$$n.log && ! grep -q ': FAIL$$' results/broken_$$n.log; then c=0; else c=1; fi; \
-	  $(SAVE) broken_$$n $$c results/broken_$$n.log; done
+SOURCES := $(wildcard design/* tests/*.cir tests/*.py tests/*.sv tests/*.v logic/*) Makefile
+BROKEN := $(patsubst broken/%.patch,build/broken/%/verdict,$(wildcard broken/*.patch))
+REVIEW := $(patsubst review/%.patch,build/review/%/verdict,$(wildcard review/*.patch))
 
-review: build/sar_logic.so
-	mkdir -p results
-	for p in review/*.patch; do n=$$(basename $$p .patch); d=build/review/$$n; mkdir -p $$d/build; cp -r design tests logic Makefile $$d; cp build/sar_logic.so $$d/build; \
-	  patch -s -F0 -d $$d -p1 < $$p; run=$$(sed -n '2s/^Run: //p' $$p); log=$$d/results/$${run%% *}.log; mkdir -p $$d/results; echo "the run left no log" > $$log; \
-	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then ok=0; else ok=$$?; fi; \
-	  { sed -n 1p $$p; echo "make $$run exit $$ok"; cat $$log; } > results/review_$$n.log; \
-	  if grep -qx "the run left no log" $$log; then c=1; else c=0; fi; $(SAVE) review_$$n $$c results/review_$$n.log; done
+build/broken/%/verdict: broken/%.patch $(SOURCES) build/sar_logic.so
+	mkdir -p $(@D)/build results
+	cp -r design tests logic Makefile $(@D); cp build/sar_logic.so $(@D)/build
+	patch -s -F0 -d $(@D) -p1 < $<
+	want=$$(sed -n '1s/^Expected failure: //p' $<); pass=$$(sed -n '1s/^Expected pass: //p' $<); run=$$(sed -n '2s/^Run: //p' $<); \
+	  mkdir -p $(@D)/results; echo "the run left no log" > $(@D)/results/$${run%% *}.log; \
+	  if $(MAKE) -C $(@D) $$run > $(@D)/make.log 2>&1; then ok=0; else ok=1; fi; \
+	  cp $(@D)/results/$${run%% *}.log results/broken_$*.log; \
+	  if [ -n "$$pass" ]; then c=$$ok; elif [ $$ok = 1 ] && [ -n "$$want" ] && grep -qF -- "$$want" results/broken_$*.log && ! grep -q ': FAIL$$' results/broken_$*.log; then c=0; else c=1; fi; \
+	  echo $$c > $@
+
+broken: $(BROKEN)
+	for v in $(BROKEN); do n=$$(basename $$(dirname $$v)); $(SAVE) broken_$$n $$(cat $$v) results/broken_$$n.log; done
+
+build/review/%/verdict: review/%.patch $(SOURCES) build/sar_logic.so
+	mkdir -p $(@D)/build results
+	cp -r design tests logic Makefile $(@D); cp build/sar_logic.so $(@D)/build
+	patch -s -F0 -d $(@D) -p1 < $<
+	run=$$(sed -n '2s/^Run: //p' $<); log=$(@D)/results/$${run%% *}.log; mkdir -p $(@D)/results; echo "the run left no log" > $$log; \
+	  if $(MAKE) -C $(@D) $$run > $(@D)/make.log 2>&1; then ok=0; else ok=$$?; fi; \
+	  { sed -n 1p $<; echo "make $$run exit $$ok"; cat $$log; } > results/review_$*.log; \
+	  if grep -qx "the run left no log" $$log; then c=1; else c=0; fi; echo $$c > $@
+
+review: $(REVIEW)
+	for v in $(REVIEW); do n=$$(basename $$(dirname $$v)); $(SAVE) review_$$n $$(cat $$v) results/review_$$n.log; done
 
 build/layout/adc_core.cdl: layout/core.cir $(COMPARATOR) $(DAC) $(ROOT)/helpers/spice_flatten.py
 	mkdir -p build/layout
@@ -360,5 +372,5 @@ post_layout: $(POST) $(foreach c,$(LAYOUT_CORNERS),build/convert/$(c)/convert.tx
 	  echo "schematic $$c convert check exit $$s (its verdict is the convert target's)"; echo "extracted layout $$c:"; $(PY) $(ROOT)/helpers/adc_trim.py code 1.2 results/post_layout_$$c.txt && $(PY) $(ROOT)/helpers/adc_results.py convert 1.2 $(N) results/post_layout_$$c.txt results/post_layout_measure_$$c.txt || exit 1; done; } > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
 	  $(SAVE) post_layout $$c results/post_layout.log results/post_layout_*.txt results/adc_core_pex.spice
 
-.PHONY: all sar logic decide offset levels trim uic_check convert supply_corners ramp supplied refs supply_wave shunt_check gear_check ktc model supply_current fom broken review layout post_layout
+.PHONY: all mc_convert sar logic decide offset levels trim uic_check convert supply_corners ramp supplied refs supply_wave shunt_check gear_check ktc model supply_current fom broken review layout post_layout
 .DELETE_ON_ERROR:

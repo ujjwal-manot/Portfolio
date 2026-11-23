@@ -129,7 +129,7 @@ ldo_gear_check: $(foreach c,$(GEAR_CORNERS),build/ldo/$(c)/result.txt)
 	mkdir -p results
 	for c in $(GEAR_CORNERS); do d=build/gear_check/$$c; mkdir -p $$d; cp build/ldo/$$c/*.cir build/ldo/$$c/*.inc $$d; \
 	  sed -i '/^\.option method=gear$$/d; s/^\(\.tran .*\)$$/\1 0 1n/' $$d/ldo_startup.cir; \
-	  if (cd $$d && $(RUN) ngspice -b ldo_startup.cir > ldo_startup.log 2>&1); then :; else echo "ngspice exit $$?" >> $$d/ldo_startup.log; fi; \
+	  if ! (cd $$d && $(RUN) ngspice -b ldo_startup.cir > ldo_startup.log 2>&1); then echo "ngspice stopped with an error" >> $$d/ldo_startup.log; fi; \
 	  cp build/ldo/$$c/ldo_startup.txt results/gear_check_$${c}_gear.txt; cp $$d/ldo_startup.txt results/gear_check_$${c}_trap.txt; done
 	c=0; : > results/ldo_gear_check.log; for k in $(GEAR_CORNERS); do echo "$$k: the bench (Gear) against the trapezoidal rule held to a 1 ns step" >> results/ldo_gear_check.log; \
 	  if ! $(PY) $(ROOT)/helpers/same_values.py final_v=1e-3,top_v=1e-3,settle_s=2e-6 results/gear_check_$${k}_gear.txt results/gear_check_$${k}_trap.txt >> results/ldo_gear_check.log 2>&1; then c=1; fi; done; \

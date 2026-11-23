@@ -1,0 +1,11 @@
+* Behavioral model of the bandgap for whole_chip, the same ports as bandgap.cir, its parameters fitted at tt 3.3 V 27 C into model_params.inc by helpers/bandgap_ldo_model.py and checked against the transistor design at the other corners by make models: vref = bg_v0 + bg_a1 (T - 27) + bg_a2 (T - 27)^2 + bg_line (vdd - 3.3) + bg_step (code - 8), the code read from trim3..trim0 (a bit is high above half the supply), switched on as the supply passes bg_von and reached through a first-order lag bg_tau; the supply draws bg_i0 + bg_i1 (T - 27) once on, and vg sits bg_vsg below the supply (it only feeds ldo_model.cir, which ignores it); the 50 mV tanh widths only smooth the switching for the solver.
+.subckt bandgap vref vg vdd vss trim3 trim2 trim1 trim0
+Bon on vss v = (1 + tanh((v(vdd,vss) - bg_von) / 0.05)) / 2
+Bcode code vss v = 4 * (1 + tanh((v(trim3,vss) - v(vdd,vss) / 2) / 0.05)) + 2 * (1 + tanh((v(trim2,vss) - v(vdd,vss) / 2) / 0.05)) + (1 + tanh((v(trim1,vss) - v(vdd,vss) / 2) / 0.05)) + 0.5 * (1 + tanh((v(trim0,vss) - v(vdd,vss) / 2) / 0.05))
+Btgt tgt vss v = v(on,vss) * (bg_v0 + bg_a1 * (temper - 27) + bg_a2 * (temper - 27) * (temper - 27) + bg_line * (v(vdd,vss) - 3.3) + bg_step * (v(code,vss) - 8))
+Rlag tgt lag {bg_tau / 1p}
+Clag lag vss 1p
+Eout vref vss lag vss 1
+Bsup vdd vss i = v(on,vss) * (bg_i0 + bg_i1 * (temper - 27))
+Bvg vg vss v = v(vdd,vss) - bg_vsg * v(on,vss)
+.ends bandgap

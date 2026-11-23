@@ -1,0 +1,3 @@
+Why: the DAC level test at ngspice default tolerance, to show how much of a small DNL is the solver
+make levels LEVELS=build/levels/tt_27_nom/dac_levels.txt exit 0
+the run left no log

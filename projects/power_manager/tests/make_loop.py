@@ -2,7 +2,7 @@
 import sys
 from pathlib import Path
 
-N, TAPS, PERIOD, EDGE = 128, (90, 100, 110, 120), 20e-9, 10e-9
+N, LADDER_UNITS, TAPS, PERIOD, EDGE = 128, 201, (90, 100, 110, 120), 20e-9, 10e-9
 WINDOWS = {"fl": -1, "fh": 1, "cl": -5, "ch": 5}
 CPU = [("s0", 0.0, 1.0, 90, "idle", "start"), ("s1", 1.0, 1.8, 90, "active", "load_up"), ("s2", 1.8, 2.6, 100, "active", "dvfs_up"),
        ("s3", 2.6, 3.4, 110, "active", "dvfs_up"), ("s4", 3.4, 4.2, 120, "active", "dvfs_up"), ("s5", 4.2, 5.4, 90, "active", "dvfs_down"),
@@ -58,7 +58,7 @@ def loop(model, mem, short, trap):
     t_end = segments[-1][2] * 1e-6
     Path("schedule.txt").write_text(f"t_end {t_end:.6g}\n" + "".join(f"{n} {a * 1e-6:.6g} {b * 1e-6:.6g} {tap} {load} {kind}\n" for n, a, b, tap, load, kind in segments))
     Path("shifter_scoped.cir").write_text(scoped("shifter_hv.cir", "shifter_hv_sizes.inc", "shifter_hv"))
-    ladder = "\n".join(f"XL{k} {f'l{k + 1}' if k < 200 else 'top'} {f'l{k}' if k else 0} 0 rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(201))
+    ladder = "\n".join(f"XL{k} {f'l{k + 1}' if k < 200 else 'top'} {f'l{k}' if k else 0} 0 rppd w={{w_lad}} l={{l_lad}} mm_ok={{mm}}" for k in range(201))
     divider = "\n".join(f"XD{k} {'out' if k == 9 else 'fb' if k == 5 else f'dv{k + 1}'} {'fb' if k == 6 else f'dv{k}' if k else 0} 0 rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(10))
     sel = " ".join(f"s{j}" for j in range(4)) + " " + " ".join(f"s{j}b" for j in range(4))
     muxes = "\n".join(f"XM{c.upper()} t{c} {' '.join(f'l{tap + d}' for tap in TAPS)} {sel} vdd 0 tap_mux" for c, d in WINDOWS.items())
@@ -150,14 +150,14 @@ quit
     Path("cosim_check.cir").write_text(text)
 
 def ref():
-    ladder = "\n".join(f"XL{k} {f'l{k + 1}' if k < 200 else 'top'} {f'l{k}' if k else 'vss'} vss rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(201))
+    ladder = "\n".join(f"XL{k} {f'l{k + 1}' if k < 200 else 'top'} {f'l{k}' if k else 'vss'} vss rppd w={{w_lad}} l={{l_lad}} mm_ok={{mm}}" for k in range(201))
     text = f"""* Analog rail with the DLDO ladder on it: written by tests/make_loop.py.
 .include corner.inc
 .include bandgap_sizes.inc
 .include bandgap.cir
 .include ldo_sizes.inc
 .include ldo.cir
-.subckt dldo_ladder top vss params: {" ".join(w for w in params("dldo_sizes.inc").split() if w.startswith(("w_r=", "l_r=")))}
+.subckt dldo_ladder top vss params: {" ".join(w for w in params("dldo_sizes.inc").split() if w.startswith(("w_lad=", "l_lad=")))}
 {ladder}
 .ends dldo_ladder
 VDD vdd 0 {{vin_v}}
@@ -206,6 +206,49 @@ quit
 """
     Path("unit.cir").write_text(text)
 
+def sense():
+    vref = float(Path("ref.inc").read_text().split("vref_v=")[1].split()[0])
+    ladder = "\n".join(f"XL{k} {f'l{k + 1}' if k < 200 else 'top'} {f'l{k}' if k else 0} 0 rppd w={{w_lad}} l={{l_lad}} mm_ok={{mm}}" for k in range(201))
+    divider = "\n".join(f"XD{k} {'out' if k == 9 else 'fb' if k == 5 else f'dv{k + 1}'} {'fb' if k == 6 else f'dv{k}' if k else 0} 0 rppd w={{w_r}} l={{l_r}} mm_ok={{mm}}" for k in range(10))
+    sel = " ".join(f"s{j}" for j in range(4)) + " " + " ".join(f"s{j}b" for j in range(4))
+    muxes = "\n".join(f"XM{c.upper()} t{c} {' '.join(f'l{tap + d}' for tap in TAPS)} {sel} vdd 0 tap_mux" for c, d in WINDOWS.items())
+    runs = []
+    for j, tap in enumerate(TAPS):
+        out = vref * tap / LADDER_UNITS / 0.6
+        runs.append("\n".join([f"alter VS{i} dc = {1.2 if i == j else 0}\nalter VS{i}B dc = {0 if i == j else 1.2}" for i in range(4)])
+                    + f"\nalter VOUT dc = {out:.6g}\ndestroy all\n" + "".join(f"let {c}_{e} = nan\n" for c in (*WINDOWS, "fb") for e in ("a", "b"))
+                    + "tran 10p 200n\n"
+                    + "".join(f"meas tran {c}_{e} find v({'fb' if c == 'fb' else 't' + c}) at={t}\n" for c in (*WINDOWS, "fb") for e, t in (("a", "180.05n"), ("b", "180.35n")))
+                    + "echo \"sense " + str(tap) + " " + " ".join(f"{c}_{e} $&{c}_{e} ideal_{c} {vref * (tap + d) / LADDER_UNITS:.6g}" for c, d in WINDOWS.items() for e in ("a", "b"))
+                    + " " + " ".join(f"fb_{e} $&fb_{e}" for e in ("a", "b")) + f" ideal_fb {0.6 * out:.6g}\" >> sense.txt")
+    text = f"""* DLDO sensing at the comparators' sampling edge: written by tests/make_loop.py.
+.include corner.inc
+.include comparator_sizes.inc
+.include comparator.cir
+.include dldo_sizes.inc
+.include tap_mux.cir
+VDD vdd 0 {{vdd_v}}
+VREF top 0 {vref:.6g}
+VOUT out 0 1.0
+VCLKB clkb 0 pulse({{vdd_v}} 0 10n 50p 50p 9.95n 20n)
+{chr(10).join(f"VS{j} s{j} 0 0{chr(10)}VS{j}B s{j}b 0 1.2" for j in range(4))}
+{divider}
+{ladder}
+{muxes}
+XCFL tfl fb clkb lo lon vdd 0 comparator
+XCFH fb tfh clkb hi hin vdd 0 comparator
+XCCL tcl fb clkb flo flon vdd 0 comparator
+XCCH fb tch clkb fhi fhin vdd 0 comparator
+.control
+let nan = 1e400 - 1e400
+echo "sensing residues" > sense.txt
+{chr(10).join(runs)}
+quit
+.endc
+.end
+"""
+    Path("sense.cir").write_text(text)
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     if args[0] == "check":
@@ -214,5 +257,7 @@ if __name__ == "__main__":
         ref()
     elif args[0] == "unit":
         unit()
+    elif args[0] == "sense":
+        sense()
     else:
         loop("model" in args, "mem" in args, "short" in args, "trap" in args)
