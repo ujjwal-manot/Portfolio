@@ -19,6 +19,7 @@ BGL := $(ROOT)/projects/bandgap_ldo
 CPU := $(ROOT)/projects/cpu
 CMP_OFFSET := $(foreach n,$(shell seq 1 100),build/cmp_offset/$(n)/offset.txt)
 LOOP := $(PY) $(ROOT)/helpers/dldo_loop.py
+SPICE := $(ROOT)/helpers/ngspice.sh
 LOGCHECK := $(PY) $(ROOT)/helpers/spice_log_check.py
 CORNERS := tt_27_3v3 ss_125_3v0 ff_m40_3v6 sf_m40_3v6 fs_125_3v0
 GAINS := $(shell sed -n 's/.*BIG = \([0-9]*\), P = \([0-9]*\), PB = \([0-9]*\).*/\1_\2_\3/p' tests/dldo_ctrl_cosim.sv)
@@ -34,7 +35,7 @@ build/bitcell/%/read.txt: tests/bitcell_read.cir
 	mkdir -p $(@D)
 	cp $< $(@D)
 	printf '.lib cornerMOSlv.lib mos_ss\n.temp %s\n' $(TEMP_$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b bitcell_read.cir > read.log 2>&1
+	cd $(@D) && $(SPICE) bitcell_read.cir read.log
 
 bitcell: build/bitcell/125/read.txt build/bitcell/m40/read.txt
 	mkdir -p results
@@ -51,7 +52,7 @@ build/so/%/dldo_ctrl.so: design/dldo_ctrl.sv tests/dldo_ctrl_cosim.sv
 cosim: build/so/$(GAINS)/dldo_ctrl.so tests/make_loop.py
 	mkdir -p build/cosim results
 	cp build/so/$(GAINS)/dldo_ctrl.so build/cosim
-	cd build/cosim && $(RUN) python3 ../../tests/make_loop.py check && $(RUN) ngspice -b cosim_check.cir > cosim_check.log 2>&1
+	cd build/cosim && $(RUN) python3 ../../tests/make_loop.py check && $(SPICE) cosim_check.cir cosim_check.log
 	set -- $(subst _, ,$(GAINS)); c=0; $(PY) $(ROOT)/helpers/dldo_results.py cosim 128 $$1 $$2 $$3 build/cosim/check.txt > results/cosim.log 2>&1 || c=1; \
 	  $(LOOP) coarse build/cosim/check.txt 128 9e-07 >> results/cosim.log 2>&1 || c=1; $(LOGCHECK) build/cosim/cosim_check.log >> results/cosim.log 2>&1 || c=1; $(SAVE) cosim $$c results/cosim.log
 
@@ -59,7 +60,7 @@ build/speed/%/speed.txt: tests/speed.cir
 	mkdir -p $(@D)
 	cp $< $(@D)
 	printf '.lib cornerMOSlv.lib mos_%s\n.temp %s\n' $(word 1,$(subst _, ,$*)) $(TEMP_$(word 2,$(subst _, ,$*))) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b speed.cir > speed.log 2>&1
+	cd $(@D) && $(SPICE) speed.cir speed.log
 
 speed: $(SPEED) tests/fo4.v tests/fo4.tcl
 	mkdir -p build/fo4 results
@@ -76,7 +77,7 @@ build/shifter/%/shifter.txt: tests/shifter.cir design/shifter_hv.cir design/shif
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	set -- $(subst _, ,$*); printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerMOShv.lib mos_%s\n.temp %s\n.param vdd_v=%s vin_v=%s\n' $$1 $$1 $(TEMP_$(word 2,$(subst _, ,$*))) $$(echo $$3 | tr v .) $$(echo $$4 | tr v .) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b shifter.cir > shifter.log 2>&1
+	cd $(@D) && $(SPICE) shifter.cir shifter.log
 
 shifter: $(SHIFTER)
 	mkdir -p results
@@ -88,7 +89,7 @@ build/cmp_offset/%/offset.txt: $(ADC)/tests/offset.cir $(ADC)/design/comparator.
 	cp $(ADC)/tests/offset.cir design/comparator_sizes.inc $(@D)
 	cp $(ADC)/design/comparator.cir $(@D)/dut.cir
 	printf '.lib cornerMOSlv.lib mos_tt_mismatch\n.temp 27\n.param vsupply=1.2\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b offset.cir > offset.log 2>&1
+	cd $(@D) && $(SPICE) offset.cir offset.log
 
 cmp_offset: $(CMP_OFFSET)
 	mkdir -p results
@@ -102,7 +103,7 @@ build/ref/%/ref.txt: tests/make_loop.py design/dldo_sizes.inc $(BGL)/design/band
 	mkdir -p $(@D)
 	cp $(filter-out tests/make_loop.py,$^) $(@D)
 	$(call corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) python3 ../../../tests/make_loop.py ref && $(RUN) ngspice -b ref.cir > ref.log 2>&1
+	cd $(@D) && $(RUN) python3 ../../../tests/make_loop.py ref && $(SPICE) ref.cir ref.log
 
 ref: $(foreach c,$(CORNERS),build/ref/$(c)/ref.txt)
 	mkdir -p results
@@ -113,7 +114,7 @@ build/unit/%/unit.inc: tests/make_loop.py design/dldo_unit.cir design/dldo_sizes
 	mkdir -p $(@D)
 	cp $(filter-out tests/make_loop.py,$^) $(@D)
 	$(call corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) python3 ../../../tests/make_loop.py unit && $(RUN) ngspice -b unit.cir > unit.log 2>&1
+	cd $(@D) && $(RUN) python3 ../../../tests/make_loop.py unit && $(SPICE) unit.cir unit.log
 	$(LOOP) unit $(@D)/iv.txt $(@D)/delay.txt $@ 5e-08 > $(@D)/unit_inc.log 2>&1
 
 unit: $(foreach c,$(CORNERS),build/unit/$(c)/unit.inc)
@@ -135,7 +136,7 @@ build/run/%/loop.txt: $(LOOP_FILES) build/cpu_load/cycles.txt build/so/$$(call p
 	cp $(filter-out tests/make_loop.py,$(LOOP_FILES)) build/cpu_load/cycles.txt build/so/$(call part,2,$*)/dldo_ctrl.so build/ref/$(call part,3,$*)/ref.inc $(@D)
 	$(if $(findstring model,$(call part,1,$*)),cp build/unit/$(call part,3,$*)/unit.inc $(@D))
 	$(call corner,$(call part,3,$*)) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) python3 $(CURDIR)/tests/make_loop.py loop $(subst -, ,$(call part,1,$*)) && $(RUN) ngspice -b loop.cir > loop.log 2>&1
+	cd $(@D) && $(RUN) python3 $(CURDIR)/tests/make_loop.py loop $(subst -, ,$(call part,1,$*)) && $(SPICE) loop.cir loop.log
 
 loop_%: build/run/cpu/$(GAINS)/%/loop.txt
 	mkdir -p results

@@ -6,6 +6,7 @@ RUN := $(ROOT)/setup/run.sh
 PY := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 LOGS := $(PY) $(ROOT)/helpers/spice_log_check.py
+SPICE := $(ROOT)/helpers/ngspice.sh
 CHARTS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,build/charts/$(c)_$(t)/charts.txt))
 CORNERS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,$(foreach v,lo min nom hi,build/corners/$(c)_$(t)_$(v)/result.txt)))
 MC := $(foreach n,$(shell seq 1 200),build/mc/$(n)/result.txt)
@@ -66,11 +67,11 @@ broken: build/sizes.inc
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); \
 	  cp $(addprefix $$d/tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc $$d; cp $$d/design/opamp.cir $$d/dut.cir; \
 	  printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp 27\n.param vsupply=1.2\n.param mm=0\n' > $$d/corner.inc; \
-	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > corner_tt_27_nom.txt); \
+	  s=0; (cd $$d && for t in $(TESTS); do $(SPICE) $$t.cir $$t.log > /dev/null || s=1; done; cat $(addsuffix .txt,$(TESTS)) > corner_tt_27_nom.txt; exit $$s) || s=1; \
 	  cp $$d/corner_tt_27_nom.txt results/broken_$$n.txt; \
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners results/broken_$$n.txt > results/broken_$$n.log 2>&1; then c=1; \
 	  elif [ -n "$$want" ] && grep -qxF -- "$$want" results/broken_$$n.log; then c=0; else c=2; fi; \
-	  if $(LOGS) $(addprefix $$d/,$(addsuffix .log,$(TESTS))) >> results/broken_$$n.log 2>&1; then echo "spice_log_check exit 0" >> results/broken_$$n.log; else echo "spice_log_check exit 1" >> results/broken_$$n.log; fi; \
+	  $(LOGS) $(addprefix $$d/,$(addsuffix .log,$(TESTS))) >> results/broken_$$n.log 2>&1 || s=1; echo "ngspice runs failed: $$s" >> results/broken_$$n.log; \
 	  $(SAVE) broken_$$n $$c results/broken_$$n.log results/broken_$$n.txt; done
 
 REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min
@@ -103,7 +104,7 @@ post_layout: build/layout/opamp_pex.spice build/sizes.inc $(CORNERS)
 	for c in $$post; do d=build/post_layout/$$c; mkdir -p $$d; \
 	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc build/corners/$$c/corner.inc build/layout/opamp_pex.spice $$d; \
 	  printf '.include opamp_pex.spice\n.subckt opamp inp inn out vdd vss ibias\nX1 %s opamp_pex\n.ends\n' "$$(sed -n 's/^.subckt opamp_pex //p' build/layout/opamp_pex.spice)" > $$d/dut.cir; \
-	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt); \
+	  (cd $$d && for t in $(TESTS); do $(SPICE) $$t.cir $$t.log > /dev/null || f=1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt; exit $${f:-0}) || f=1; \
 	  cp $$d/result.txt results/post_layout_$$c.txt; done; \
 	if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $$post; do echo results/post_layout_$$c.txt; done) > results/post_layout.log 2>&1; then c=0; else c=$$?; fi; \
 	  if ! $(LOGS) $$(for c in $$post; do for t in $(TESTS); do echo build/post_layout/$$c/$$t.log; done; done) > results/post_layout_logs.log 2>&1; then c=1; fi; \
@@ -112,7 +113,7 @@ post_layout: build/layout/opamp_pex.spice build/sizes.inc $(CORNERS)
 review: build/sizes.inc $(addprefix build/corners/,$(addsuffix /result.txt,$(REVIEW)))
 	for v in opamp opamp_indirect; do for c in $(REVIEW); do d=build/review/$$v/$$c; mkdir -p $$d; \
 	  cp $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) build/sizes.inc build/corners/$$c/corner.inc $$d; cp design/$$v.cir $$d/dut.cir; \
-	  (cd $$d && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt); \
+	  (cd $$d && for t in $(TESTS); do $(SPICE) $$t.cir $$t.log > /dev/null || f=1; done; cat $(addsuffix .txt,$(TESTS)) > result.txt; exit $${f:-0}) || f=1; \
 	  cp $$d/result.txt results/review_$${v}_$$c.txt; done; \
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners $$(for c in $(REVIEW); do echo results/review_$${v}_$$c.txt; done) > results/review_$$v.log 2>&1; then c=0; else c=$$?; fi; echo "analog_results exit $$c" >> results/review_$$v.log; done
 	if grep -q "every corner meets every spec" results/review_opamp.log; then c=0; else c=1; fi; \
@@ -123,7 +124,7 @@ load_check: $(addprefix build/corners/,$(addsuffix /result.txt,$(LOAD_CHECK)))
 	mkdir -p results
 	for c in $(LOAD_CHECK); do d=build/load_check/$$c; mkdir -p $$d; cp build/corners/$$c/*.cir build/corners/$$c/*.inc $$d; \
 	  sed -i 's/^.option reltol=1e-5 vntol=1e-8$$/.option reltol=1e-6 vntol=1e-9/' $$d/load.cir; grep -qx '.option reltol=1e-6 vntol=1e-9' $$d/load.cir; \
-	  true > $$d/load.txt; (cd $$d && $(RUN) ngspice -b load.cir > load.log 2>&1); \
+	  true > $$d/load.txt; (cd $$d && $(SPICE) load.cir load.log > /dev/null) || f=1; \
 	  cp build/corners/$$c/load.txt results/load_check_$${c}_used.txt; cp $$d/load.txt results/load_check_$${c}_tighter.txt; done
 	c=0; if ! $(LOGS) $(foreach k,$(LOAD_CHECK),build/load_check/$(k)/load.log build/corners/$(k)/load.log) > results/load_check_logs.log 2>&1; then c=1; fi; \
 	  for k in $(LOAD_CHECK); do if ! $(PY) $(ROOT)/helpers/same_values.py settle_load_v=2e-5,error_at_50ns_v=5e-5,kick_v=1e-3,sampled_v_rms=1e-5 \
@@ -135,7 +136,7 @@ build/wave/%/wave.txt: tests/wave.cir design/opamp.cir build/sizes.inc build/cor
 	true > $@
 	cp tests/wave.cir build/sizes.inc build/corners/$*/corner.inc $(@D)
 	cp design/opamp.cir $(@D)/dut.cir
-	cd $(@D) && $(RUN) ngspice -b wave.cir > wave.log 2>&1
+	cd $(@D) && $(SPICE) wave.cir wave.log
 
 model: $(addprefix build/wave/,$(addsuffix /wave.txt,$(MODEL))) design/opamp_model.sv tests/opamp_model_tb.sv
 	mkdir -p results
@@ -152,7 +153,7 @@ build/model/result.txt: tests/model.cir tests/loop.cir build/sizes.inc
 	cp tests/loop.cir build/sizes.inc $(@D)
 	cp tests/model.cir $(@D)/dut.cir
 	printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp 27\n.param vsupply=1.2\n.param mm=0\n' > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b loop.cir > loop.log 2>&1
+	cd $(@D) && $(SPICE) loop.cir loop.log
 	cat $(@D)/loop.txt > $@
 
 build/corners/%/result.txt: $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC) design/opamp.cir build/sizes.inc
@@ -162,7 +163,7 @@ build/corners/%/result.txt: $(addprefix tests/,$(addsuffix .cir,$(TESTS))) $(DAC
 	p=$(PASSIVE_$(word 1,$(subst _, ,$*))); \
 	  printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' \
 	  $(word 1,$(subst _, ,$*)) $$p $$p $(subst m,-,$(word 2,$(subst _, ,$*))) $(VOLT_$(word 3,$(subst _, ,$*))) > $(@D)/corner.inc
-	cd $(@D) && for t in $(TESTS); do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
+	cd $(@D) && c=0 && for t in $(TESTS); do $(SPICE) $$t.cir $$t.log || c=1; done; exit $$c
 	cat $(addprefix $(@D)/,$(addsuffix .txt,$(TESTS))) > $@
 
 build/mc/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) design/opamp.cir build/sizes.inc
@@ -170,7 +171,7 @@ build/mc/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/load.
 	cp tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) build/sizes.inc $(@D)
 	cp design/opamp.cir $(@D)/dut.cir
 	printf '.lib cornerMOSlv.lib mos_tt_mismatch\n.lib cornerRES.lib res_typ_mismatch\n.lib cornerCAP.lib cap_typ_mismatch\n.temp 27\n.param vsupply=1.2\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
-	cd $(@D) && for t in loop step swing load; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
+	cd $(@D) && c=0 && for t in loop step swing load; do $(SPICE) $$t.cir $$t.log || c=1; done; exit $$c
 	cat $(@D)/loop.txt $(@D)/step.txt $(@D)/swing.txt $(@D)/load.txt > $@
 
 build/mc_hot/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) design/opamp.cir build/sizes.inc
@@ -178,7 +179,7 @@ build/mc_hot/%/result.txt: tests/loop.cir tests/step.cir tests/swing.cir tests/l
 	cp tests/loop.cir tests/step.cir tests/swing.cir tests/load.cir $(DAC) build/sizes.inc $(@D)
 	cp design/opamp.cir $(@D)/dut.cir
 	printf '.lib cornerMOSlv.lib mos_ff_mismatch\n.lib cornerRES.lib res_bcs_mismatch\n.lib cornerCAP.lib cap_bcs_mismatch\n.temp 125\n.param vsupply=1.32\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
-	cd $(@D) && for t in loop step swing load; do $(RUN) ngspice -b $$t.cir > $$t.log 2>&1; done
+	cd $(@D) && c=0 && for t in loop step swing load; do $(SPICE) $$t.cir $$t.log || c=1; done; exit $$c
 	cat $(@D)/loop.txt $(@D)/step.txt $(@D)/swing.txt $(@D)/load.txt > $@
 
 build/charts/%/charts.txt: tests/charts.cir
@@ -186,7 +187,7 @@ build/charts/%/charts.txt: tests/charts.cir
 	cp $< $(@D)
 	printf '.lib cornerMOSlv.lib mos_%s\n.temp %s\n' $(word 1,$(subst _, ,$*)) $(subst m,-,$(word 2,$(subst _, ,$*))) > $(@D)/corner.inc
 	rm -f $@
-	cd $(@D) && $(RUN) ngspice -b charts.cir > ngspice.log 2>&1
+	cd $(@D) && $(SPICE) charts.cir ngspice.log
 
 .PHONY: layout post_layout all charts sizing check_model corners load_check mc mc_hot broken review model
 .DELETE_ON_ERROR:

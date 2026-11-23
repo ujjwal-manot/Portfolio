@@ -32,7 +32,7 @@ $(B)/detector/%/detector.txt: tests/detector.cir design/droop_detector.cir $(B)/
 	cp $^ $(@D)
 	printf '.lib cornerMOSlv.lib mos_%s\n.temp %s\n.param mm=0\n' $(word 1,$(subst _, ,$*)) $(TEMP_$(word 2,$(subst _, ,$*))) > $(@D)/corner.inc
 	rm -f $@
-	cd $(@D) && $(RUN) ngspice -b detector.cir > detector.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh detector.cir detector.log
 
 sup_detector: $(DET)
 	mkdir -p results
@@ -49,7 +49,7 @@ $(B)/por/%/sup.txt: $(SUP_FILES)
 	n=$*; r=$${n##*_}; c=$${n%_*}; p=$${c%%_*}; t=$${c#*_}; case $$p in ss) q=wcs;; ff) q=bcs;; *) q=typ;; esac; case $$t in m40) t=-40;; esac; \
 	  printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param mm=0\n' $$p $$q $$q $$q $$t > $(@D)/corner.inc; \
 	  echo ".param ramp=$$r" > $(@D)/ramp.inc
-	cd $(@D) && $(RUN) ngspice -b supervisor_bench.cir > sup.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh supervisor_bench.cir sup.log
 
 sup_por: $(SUP)
 	mkdir -p results
@@ -61,7 +61,7 @@ $(B)/mc/%/sup.txt: $(SUP_FILES)
 	cp $^ $(@D)
 	printf '.lib cornerMOShv.lib mos_tt_mismatch\n.lib cornerHBT.lib hbt_typ_mismatch\n.lib cornerRES.lib res_typ_mismatch\n.lib cornerCAP.lib cap_typ_mismatch\n.temp 27\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
 	echo ".param ramp=100u" > $(@D)/ramp.inc
-	cd $(@D) && $(RUN) ngspice -b supervisor_bench.cir > sup.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh supervisor_bench.cir sup.log
 
 sup_mc: $(SUP_MC)
 	mkdir -p results

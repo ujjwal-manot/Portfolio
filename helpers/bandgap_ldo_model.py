@@ -42,7 +42,8 @@ def values(path):
     out = {}
     for line in Path(path).read_text().splitlines():
         f = line.split()
-        out.update({f"{f[0]}.{k}": float(v) for k, v in zip(f[1::2], f[2::2])})
+        if f and f[0] != "*":
+            out.update({f"{f[0]}.{k}": float(v) for k, v in zip(f[1::2], f[2::2])})
     return out
 
 if __name__ == "__main__":

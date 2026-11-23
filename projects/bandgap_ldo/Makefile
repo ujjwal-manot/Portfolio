@@ -6,6 +6,7 @@ RUN := $(ROOT)/setup/run.sh
 PY := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 LOGCHECK := $(PY) $(ROOT)/helpers/spice_log_check.py
+SPICE := $(ROOT)/helpers/ngspice.sh
 CHECKS := $(PY) $(ROOT)/helpers/bandgap_ldo_checks.py
 PROCESS := tt ss ff sf fs
 VOLTS := 3v0 3v3 3v6
@@ -45,16 +46,16 @@ corner = printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib co
 ldo_corner = p=$$(echo $(1) | cut -d_ -f1); v=$$(echo $(1) | cut -d_ -f2 | tr v .); t=$$(echo $(1) | cut -d_ -f3 | sed 's/m/-/'); q=typ; case $$p in ss) q=wcs;; ff) q=bcs;; esac; \
   printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=%s\n.param mm=0\n' $$p $$q $$q $$q $$t $$v
 trim = for b in 3 2 1 0; do if [ $$(( ($(1) >> b) & 1 )) = 1 ]; then to=vdd; else to=0; fi; echo "VT$$b t$$b $$to 0"; done
-ldo_suite = cd $(@D) && echo ".param ramp=10n" > ramp.inc && $(call trim,8) > trim.inc && $(RUN) ngspice -b ldo_dc.cir > ldo_dc.log 2>&1 && $(RUN) ngspice -b ldo_psrr.cir > ldo_psrr.log 2>&1 && $(RUN) ngspice -b ldo_startup.cir > ldo_startup.log 2>&1; \
-  for s in 0p5m 2m; do echo ".param istep=$$(echo $$s | tr p .)" > step.inc; rm -f step.txt; $(RUN) ngspice -b ldo_step.cir > step_$$s.log 2>&1; sed "s/^step /step_$$s /" step.txt > step_$$s.txt; done; \
-  for l in 0 250u 1m 2m; do echo ".param iload=$$l" > load.inc; rm -f loop.txt; $(RUN) ngspice -b loop.cir > loop_$$l.log 2>&1; sed "s/^loop /loop_$$l /" loop.txt > loop_$$l.txt; done; \
+ldo_suite = cd $(@D) && echo ".param ramp=10n" > ramp.inc && $(call trim,8) > trim.inc && for b in ldo_dc ldo_psrr ldo_startup; do if ! $(SPICE) $$b.cir $$b.log; then echo "$$b.cir failed" >> failed.txt; fi; done; \
+  for s in 0p5m 2m; do echo ".param istep=$$(echo $$s | tr p .)" > step.inc; rm -f step.txt; if ! $(SPICE) ldo_step.cir step_$$s.log; then echo "ldo_step.cir $$s failed" >> failed.txt; fi; sed "s/^step /step_$$s /" step.txt > step_$$s.txt; done; \
+  for l in 0 250u 1m 2m; do echo ".param iload=$$l" > load.inc; rm -f loop.txt; if ! $(SPICE) loop.cir loop_$$l.log; then echo "loop.cir $$l failed" >> failed.txt; fi; sed "s/^loop /loop_$$l /" loop.txt > loop_$$l.txt; done; \
   cat ldo_dc.txt psrr.txt step_0p5m.txt step_2m.txt loop_*.txt ldo_startup.txt > result.txt
 ldo_logs = $(foreach d,$(1),$(foreach l,$(LDO_LOGS),$(d)/$(l).log))
 
 pnp:
 	mkdir -p build/pnp results
 	cp tests/pnp.cir build/pnp
-	if (cd build/pnp && $(RUN) ngspice -b pnp.cir > pnp.log 2>&1); then e=0; else e=$$?; fi; cp build/pnp/pnp.txt results/pnp.txt; \
+	if (cd build/pnp && $(SPICE) pnp.cir pnp.log); then e=0; else e=1; fi; cp build/pnp/pnp.txt results/pnp.txt; \
 	  if $(LOGCHECK) build/pnp/pnp.log > results/pnp.log 2>&1 && [ $$e = 0 ] && ! grep -qi nan results/pnp.txt; then c=0; else c=1; fi; $(SAVE) pnp $$c results/pnp.txt results/pnp.log
 
 pnp_mismatch: tests/pnp_mismatch.sh
@@ -85,13 +86,13 @@ build/corners/%/dc.txt: tests/dc.cir $(BANDGAP)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	$(call corner,$(word 1,$(subst _, ,$*)),27,$(VOLT_$(word 2,$(subst _, ,$*)))) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b dc.cir > dc.log 2>&1
+	cd $(@D) && if ! $(SPICE) dc.cir dc.log; then echo "dc.cir failed" >> failed.txt; fi
 
 build/mc/%/dc.txt: tests/dc.cir $(BANDGAP)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	printf '.lib cornerMOShv.lib mos_tt_mismatch\n.lib cornerHBT.lib hbt_typ_mismatch\n.lib cornerRES.lib res_typ_mismatch\n.lib cornerCAP.lib cap_typ_mismatch\n.temp 27\n.param vsupply=3.3\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b dc.cir > dc.log 2>&1
+	cd $(@D) && if ! $(SPICE) dc.cir dc.log; then echo "dc.cir failed" >> failed.txt; fi
 
 build/startup/%/startup.txt: tests/startup.cir $(BANDGAP)
 	mkdir -p $(@D)
@@ -100,7 +101,7 @@ build/startup/%/startup.txt: tests/startup.cir $(BANDGAP)
 	  q=typ; case $$p in ss) q=wcs;; ff) q=bcs;; esac; \
 	  printf '.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=3.3\n.param mm=0\n' $$p $$q $$q $$q $$t > $(@D)/corner.inc; \
 	  echo ".param ramp=$$ramp" > $(@D)/ramp.inc
-	cd $(@D) && $(RUN) ngspice -b startup.cir > startup.log 2>&1
+	cd $(@D) && if ! $(SPICE) startup.cir startup.log; then echo "startup.cir failed" >> failed.txt; fi
 
 ldo_model: tests/loop.cir tests/tian_model.cir $(BANDGAP)
 	mkdir -p build/ldo_model results
@@ -108,7 +109,7 @@ ldo_model: tests/loop.cir tests/tian_model.cir $(BANDGAP)
 	cp tests/tian_model.cir build/ldo_model/ldo.cir
 	$(call corner,tt,27,3.3) > build/ldo_model/corner.inc
 	echo ".param iload=0" > build/ldo_model/load.inc
-	cd build/ldo_model && $(RUN) ngspice -b loop.cir > loop.log 2>&1
+	cd build/ldo_model && if ! $(SPICE) loop.cir loop.log; then echo "loop.cir failed" >> failed.txt; fi
 	cp build/ldo_model/loop.txt results/ldo_model.txt
 	if $(PY) $(ROOT)/helpers/ldo_results.py model results/ldo_model.txt > results/ldo_model.log 2>&1; then c=0; else c=1; fi; \
 	  if ! $(LOGCHECK) build/ldo_model/loop.log >> results/ldo_model.log 2>&1; then c=1; fi; $(SAVE) ldo_model $$c results/ldo_model.log results/ldo_model.txt
@@ -129,7 +130,7 @@ ldo_gear_check: $(foreach c,$(GEAR_CORNERS),build/ldo/$(c)/result.txt)
 	mkdir -p results
 	for c in $(GEAR_CORNERS); do d=build/gear_check/$$c; mkdir -p $$d; cp build/ldo/$$c/*.cir build/ldo/$$c/*.inc $$d; \
 	  sed -i '/^\.option method=gear$$/d; s/^\(\.tran .*\)$$/\1 0 1n/' $$d/ldo_startup.cir; \
-	  if ! (cd $$d && $(RUN) ngspice -b ldo_startup.cir > ldo_startup.log 2>&1); then echo "ngspice stopped with an error" >> $$d/ldo_startup.log; fi; \
+	  if ! (cd $$d && $(SPICE) ldo_startup.cir ldo_startup.log); then echo "ldo_startup.cir failed" >> $$d/failed.txt; fi; \
 	  cp build/ldo/$$c/ldo_startup.txt results/gear_check_$${c}_gear.txt; cp $$d/ldo_startup.txt results/gear_check_$${c}_trap.txt; done
 	c=0; : > results/ldo_gear_check.log; for k in $(GEAR_CORNERS); do echo "$$k: the bench (Gear) against the trapezoidal rule held to a 1 ns step" >> results/ldo_gear_check.log; \
 	  if ! $(PY) $(ROOT)/helpers/same_values.py final_v=1e-3,top_v=1e-3,settle_s=2e-6 results/gear_check_$${k}_gear.txt results/gear_check_$${k}_trap.txt >> results/ldo_gear_check.log 2>&1; then c=1; fi; done; \
@@ -140,7 +141,7 @@ build/trim_ends/%/ldo_startup.txt: tests/ldo_startup.cir $(BANDGAP) $(LDO)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	n=$*; c=$${n%_code*}; k=$${n##*_code}; $(call ldo_corner,$$c) > $(@D)/corner.inc; $(call trim,$$k) > $(@D)/trim.inc
-	cd $(@D) && echo ".param ramp=10n" > ramp.inc && $(RUN) ngspice -b ldo_startup.cir > ldo_startup.log 2>&1
+	cd $(@D) && echo ".param ramp=10n" > ramp.inc && if ! $(SPICE) ldo_startup.cir ldo_startup.log; then echo "ldo_startup.cir failed" >> failed.txt; fi
 
 trim_ends: $(TRIM_RUNS)
 	mkdir -p results
@@ -162,7 +163,7 @@ build/ldo_mc/%/mc.txt: tests/ldo_mc.cir $(BANDGAP) $(LDO)
 	cp $^ $(@D)
 	k=$$(echo $* | cut -d_ -f1); n=$$(echo $* | cut -d_ -f2); q=wcs; v=3.0; if [ $$k = ff ]; then q=bcs; v=3.6; fi; \
 	  printf '.lib cornerMOShv.lib mos_%s_mismatch\n.lib cornerHBT.lib hbt_%s_mismatch\n.lib cornerRES.lib res_%s_mismatch\n.lib cornerCAP.lib cap_%s_mismatch\n.temp 125\n.param vsupply=%s\n.param mm=1\n.option seed=%s\n' $$k $$q $$q $$q $$v $$n > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b ldo_mc.cir > mc.log 2>&1
+	cd $(@D) && if ! $(SPICE) ldo_mc.cir mc.log; then echo "ldo_mc.cir failed" >> failed.txt; fi
 
 ldo_mc: $(LDO_MC)
 	mkdir -p results
@@ -174,7 +175,7 @@ ldo_mc: $(LDO_MC)
 heads: tests/heads.cir
 	mkdir -p build/heads results
 	cp tests/heads.cir build/heads
-	cd build/heads && $(RUN) ngspice -b heads.cir > heads.log 2>&1
+	cd build/heads && if ! $(SPICE) heads.cir heads.log; then echo "heads.cir failed" >> failed.txt; fi
 	cp build/heads/heads.txt results/heads.txt
 	if $(LOGCHECK) build/heads/heads.log > results/heads.log 2>&1 && ! grep -qi nan results/heads.txt; then c=0; else c=1; fi; $(SAVE) heads $$c results/heads.log results/heads.txt
 
@@ -183,7 +184,7 @@ build/em/%/em.txt: tests/em.cir $(BANDGAP) $(LDO) $(ROOT)/helpers/em_check.py
 	cp tests/em.cir $(BANDGAP) $(LDO) $(@D)
 	cat design/bandgap_sizes.inc design/ldo_sizes.inc > $(@D)/sizes.inc
 	$(call ldo_corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(PY) $(ROOT)/helpers/em_check.py probes sizes.inc bandgap.cir ldo.cir -- x1=bandgap x2=ldo > probes.inc && $(RUN) ngspice -b em.cir > em.log 2>&1
+	cd $(@D) && $(PY) $(ROOT)/helpers/em_check.py probes sizes.inc bandgap.cir ldo.cir -- x1=bandgap x2=ldo > probes.inc && if ! $(SPICE) em.cir em.log; then echo "em.cir failed" >> failed.txt; fi
 
 em: $(EM_RUNS) build/layout/ldo.gds layout/pins.py
 	mkdir -p results
@@ -198,7 +199,7 @@ build/adc_load/%/load.txt: tests/ldo_load.cir $(BANDGAP) $(LDO) $(ADC_INC) $(ROO
 	cp $(ADC_INC) $(@D)/adc.inc
 	$(call ldo_corner,$*) > $(@D)/corner.inc
 	echo ".param iopamp=$$(sed -n 's/^supply_a *worst \([^ ]*\) .*/\1/p' $(ROOT)/projects/opamp/results/corners.log)" > $(@D)/load.inc
-	cd $(@D) && $(RUN) ngspice -b ldo_load.cir > load.log 2>&1
+	cd $(@D) && if ! $(SPICE) ldo_load.cir load.log; then echo "ldo_load.cir failed" >> failed.txt; fi
 
 adc_load: $(foreach c,$(LOAD_CORNERS),build/adc_load/$(c)/load.txt)
 	mkdir -p results
@@ -259,7 +260,7 @@ build/post_layout/dc_%/dc.txt: tests/dc.cir design/bandgap_sizes.inc build/layou
 	cp tests/dc.cir design/bandgap_sizes.inc $(@D)
 	cp build/layout/bandgap_post.cir $(@D)/bandgap.cir
 	$(call corner,$(word 1,$(subst _, ,$*)),27,$(VOLT_$(word 2,$(subst _, ,$*)))) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b dc.cir > dc.log 2>&1
+	cd $(@D) && if ! $(SPICE) dc.cir dc.log; then echo "dc.cir failed" >> failed.txt; fi
 
 build/post_layout/ldo_%/result.txt: $(LDO_TESTS) design/bandgap_sizes.inc design/ldo_sizes.inc build/layout/bandgap_post.cir build/layout/ldo_post.cir
 	mkdir -p $(@D)

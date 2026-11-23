@@ -50,7 +50,7 @@ Test setup: inverting amplifier, Rin = Rf = 20 k, `inp` at 0.6 V, 2.05 pF load. 
 | DC gain | >= 66 dB |
 | GBW | >= 20 MHz |
 | Phase margin (beta = 0.5 loop, all corners, Monte Carlo) | >= 60 deg |
-| Monte Carlo yield, every spec above combined | one-sided 95% lower bound of 99% or more (at least 299 seeds with no failure); a point estimate alone does not count |
+| Monte Carlo yield, every spec in this table combined | one-sided 95% lower bound of 99% or more (at least 299 seeds with no failure); a point estimate alone does not count |
 | Slew rate | >= 10 V/us |
 | Settling, 0.8 V step to 1.56 mV | <= 200 ns |
 | Error at the -1 dBFS peak: 2 x input offset (noise gain 2) + gain error x 0.357 V | <= 37.6 mV (the 43.5 mV headroom less the ADC's allowed 1 LSB offset and 2 LSB full-scale gain error, scaled to the peak) |

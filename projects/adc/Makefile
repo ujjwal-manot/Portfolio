@@ -7,6 +7,7 @@ PY := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3
 PYTEST := $(RUN) env PYTHONPATH=$(ROOT)/helpers python3 -m pytest -q -s -p no:cacheprovider
 SAVE := $(RUN) python3 $(ROOT)/helpers/save_result.py results/summary.json
 LOGS := $(PY) $(ROOT)/helpers/spice_log_check.py
+SPICE := $(ROOT)/helpers/ngspice.sh
 PROCESS := tt ss ff sf fs
 TEMPS := m40 27 125
 VOLTS := min nom hi
@@ -96,38 +97,38 @@ build/decide/%/decide.txt: tests/decide.cir $(COMPARATOR)
 	cp $^ $(@D)
 	mv $(@D)/comparator.cir $(@D)/dut.cir
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b decide.cir > decide.log 2>&1
+	cd $(@D) && $(SPICE) decide.cir decide.log
 
 build/offset/%/offset.txt: tests/offset.cir $(COMPARATOR)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	mv $(@D)/comparator.cir $(@D)/dut.cir
 	printf '.lib cornerMOSlv.lib mos_tt_mismatch\n.temp 27\n.param vsupply=1.2\n.param mm=1\n.option seed=%s\n' $* > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b offset.cir > offset.log 2>&1
+	cd $(@D) && $(SPICE) offset.cir offset.log
 
 build/levels/mc%/dac_levels.txt: tests/dac_levels.cir $(DAC)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	$(call mismatch,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b dac_levels.cir > dac_levels.log 2>&1
+	cd $(@D) && $(SPICE) dac_levels.cir dac_levels.log
 
 build/levels/%/dac_levels.txt: tests/dac_levels.cir $(DAC)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b dac_levels.cir > dac_levels.log 2>&1
+	cd $(@D) && $(SPICE) dac_levels.cir dac_levels.log
 
 build/trim/mc%/trim_levels.txt: tests/trim_levels.cir $(DAC)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	$(call mismatch,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b trim_levels.cir > trim_levels.log 2>&1
+	cd $(@D) && $(SPICE) trim_levels.cir trim_levels.log
 
 build/trim/%/trim_levels.txt: tests/trim_levels.cir $(DAC)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b trim_levels.cir > trim_levels.log 2>&1
+	cd $(@D) && $(SPICE) trim_levels.cir trim_levels.log
 
 build/sar_logic.so: design/sar_logic.sv
 	mkdir -p build/vlnggen
@@ -140,7 +141,7 @@ build/convert/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_lo
 	cp $^ $(@D)
 	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cd $(@D) && $(SPICE) convert.cir convert.log
 
 MC_RUNS := 20
 MC_CONVERT := $(foreach n,$(shell seq 1 $(MC_RUNS)),build/convert_mc/$(n)/convert.txt)
@@ -150,7 +151,7 @@ build/convert_mc/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar
 	cp $^ $(@D)
 	printf '.param n_samples=%s k_tone=%s\n' $(N) $(K) > $(@D)/tone.inc
 	$(call mismatch,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cd $(@D) && $(SPICE) convert.cir convert.log
 
 mc_convert: $(MC_CONVERT)
 	mkdir -p results
@@ -163,7 +164,7 @@ build/ramp/%/ramp.txt: tests/ramp.cir $(COMPARATOR) $(DAC) build/sar_logic.so $(
 	cp $(filter-out %.py,$^) $(@D)
 	$(PY) $(ROOT)/helpers/adc_ramp.py pwl $(@D)/ramp.inc
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b ramp.cir > ramp.log 2>&1
+	cd $(@D) && $(SPICE) ramp.cir ramp.log
 
 ramp: build/ramp/tt_27_nom/ramp.txt
 	mkdir -p results
@@ -179,7 +180,7 @@ build/supplied/%/convert.txt: tests/supplied.cir $(COMPARATOR) $(DAC) design/ref
 	  code=$$(sed -n "s/^dc_$${p}_3v3 .* code=\([0-9]*\) .*/\1/p" $(TRIMS)); [ -n "$$code" ]; \
 	  printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_%s\n.lib cornerRES.lib res_%s\n.lib cornerCAP.lib cap_%s\n.temp %s\n.param vsupply=1.2 vsupply33=3.3 mm=0\n.param trim3=%s trim2=%s trim1=%s trim0=%s\n' \
 	  $$p $$p $$q $$q $$q $$t $$((code / 8)) $$((code / 4 % 2)) $$((code / 2 % 2)) $$((code % 2)) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b supplied.cir > supplied.log 2>&1
+	cd $(@D) && $(SPICE) supplied.cir supplied.log
 
 supplied: $(SUPPLIED) $(foreach c,$(SUPPLIED_CORNERS),build/convert/$(c)_nom/convert.txt)
 	mkdir -p results
@@ -193,7 +194,7 @@ build/refs/%/convert.txt: build/supplied/%/convert.txt
 	cp build/supplied/$*/*.cir build/supplied/$*/*.inc build/sar_logic.so $(@D)
 	sed -i 's/^.option interp rshunt=1e13 method=gear$$/.option rshunt=1e13 method=gear/; s/^.tran 50n .*/.tran 50n 20u/; /^let span/,/^echo/d; s/^wrdata convert.txt .*/wrdata convert.txt v(cclk) v(vref_hi) v(vcm) v(vref_lo)/' $(@D)/supplied.cir
 	grep -q '^wrdata convert.txt v(cclk)' $(@D)/supplied.cir
-	cd $(@D) && $(RUN) ngspice -b supplied.cir > supplied.log 2>&1
+	cd $(@D) && $(SPICE) supplied.cir supplied.log
 
 REFS := $(foreach c,$(SUPPLIED_CORNERS),build/refs/$(c)/convert.txt)
 
@@ -209,7 +210,7 @@ build/supply_wave/%/wave.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar_l
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
 	sed -i 's/^.option interp rshunt=1e13 method=gear$$/.option rshunt=1e13 method=gear/; s/^.tran 50n .*/.tran 50n 14u/; /^let span/,/^echo/d; s/^wrdata convert.txt .*/let isup = -i(VDD)\nwrdata wave.txt isup/' $(@D)/convert.cir
 	grep -q '^wrdata wave.txt isup' $(@D)/convert.cir
-	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cd $(@D) && $(SPICE) convert.cir convert.log
 
 WAVE_CORNERS := tt_27_nom ff_m40_hi
 WAVE := $(foreach c,$(WAVE_CORNERS),build/supply_wave/$(c)/wave.txt)
@@ -225,7 +226,7 @@ uic_check: tests/dac_levels.cir $(DAC)
 	for s in op uic; do d=build/uic_check/$$s; mkdir -p $$d; cp $(DAC) $$d; sed '/^.option reltol=1e-5 vntol=1e-8$$/d' tests/dac_levels.cir > $$d/dac_levels.cir; \
 	  $(call corner,ff,27,nom,0) > $$d/corner.inc; done
 	sed -i 's/ uic$$//' build/uic_check/op/dac_levels.cir
-	for s in op uic; do (cd build/uic_check/$$s && $(RUN) ngspice -b dac_levels.cir > dac_levels.log 2>&1); cp build/uic_check/$$s/dac_levels.txt results/uic_check_$$s.txt; done
+	for s in op uic; do (cd build/uic_check/$$s && $(SPICE) dac_levels.cir dac_levels.log) && cp build/uic_check/$$s/dac_levels.txt results/uic_check_$$s.txt; done
 	if { $(LOGS) build/uic_check/op/dac_levels.log build/uic_check/uic/dac_levels.log && $(PY) $(ROOT)/helpers/adc_results.py same results/uic_check_op.txt results/uic_check_uic.txt; } > results/uic_check.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) uic_check $$c results/uic_check.log results/uic_check_*.txt
 
 build/shunt_check/%/convert.txt: build/convert/%/convert.txt
@@ -233,7 +234,7 @@ build/shunt_check/%/convert.txt: build/convert/%/convert.txt
 	cp build/convert/$*/*.cir build/convert/$*/*.inc build/sar_logic.so $(@D)
 	if [ $* = tt_27_nom ]; then o='.option interp method=gear'; else o='.option interp rshunt=1e14 method=gear'; fi; \
 	  sed -i "s/^.option interp rshunt=1e13 method=gear$$/$$o/" $(@D)/convert.cir; ! grep -q 'rshunt=1e13' $(@D)/convert.cir
-	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cd $(@D) && $(SPICE) convert.cir convert.log
 
 shunt_check: build/shunt_check/tt_27_nom/convert.txt build/shunt_check/tt_m40_nom/convert.txt
 	mkdir -p results
@@ -248,13 +249,13 @@ build/gear_check/%/convert.txt: tests/convert.cir $(COMPARATOR) $(DAC) build/sar
 	c=$$(echo $* | cut -d_ -f1-3); m=$$(echo $* | cut -d_ -f4); printf '.lib cornerMOSlv.lib mos_tt\n.lib cornerCAP.lib cap_typ\n.temp %s\n.param vsupply=1.2\n.param mm=0\n' $$(echo $$c | cut -d_ -f2 | tr m -) > $(@D)/corner.inc; \
 	  if [ $$m = gear ]; then o='.option rshunt=1e13 method=gear'; else o='.option rshunt=1e13'; fi; \
 	  sed -i "s/^.option interp rshunt=1e13 method=gear$$/$$o/; s/^.tran 50n .*/.tran 50n 30u/; /^let span/,/^echo/d; s/^wrdata convert.txt .*/wrdata convert.txt v(cclk) v(top) v(vcm)/" $(@D)/convert.cir
-	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cd $(@D) && $(SPICE) convert.cir convert.log
 
 build/gear_check/decide/decide.txt: build/decide/tt_27_nom/decide.txt
 	mkdir -p $(@D)
 	cp build/decide/tt_27_nom/*.cir build/decide/tt_27_nom/*.inc $(@D)
 	sed -i 's/^.option reltol=1e-5 vntol=1e-8$$/.option reltol=1e-5 vntol=1e-8 method=gear/' $(@D)/decide.cir
-	cd $(@D) && $(RUN) ngspice -b decide.cir > decide.log 2>&1
+	cd $(@D) && $(SPICE) decide.cir decide.log
 
 GEAR := $(foreach c,tt_27_nom tt_m40_nom tt_125_nom,$(foreach m,gear trapezoidal,build/gear_check/$(c)_$(m)/convert.txt))
 
@@ -272,7 +273,7 @@ build/ktc/%/ktc.txt: tests/ktc.cir $(DAC)
 	mkdir -p $(@D)
 	cp $^ $(@D)
 	$(call corner,$(word 1,$(subst _, ,$*)),$(word 2,$(subst _, ,$*)),$(word 3,$(subst _, ,$*)),0) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b ktc.cir > ktc.log 2>&1
+	cd $(@D) && $(SPICE) ktc.cir ktc.log
 
 ktc: $(KTC)
 	mkdir -p results
@@ -362,7 +363,7 @@ build/post_layout/%/convert.txt: tests/convert.cir build/layout/adc_core_pex.spi
 	sed -i -e '/^.include comparator_sizes.inc$$/d' -e '/^.include cap_dac_sizes.inc$$/d' -e '/^.include comparator.cir$$/d' -e 's/^.include cap_dac.cir$$/.include core.cir/' -e '/^XCMP /d' \
 	  -e 's/^XDAC top vin vcm vref_hi vref_lo samp cal a7 a6 a5 a4 a3 a2 a1 a0 t6 t5 t4 t3 t2 t1 t0 vdd 0 cap_dac_cal$$/XCORE top vin vcm vref_hi vref_lo samp cal a7 a6 a5 a4 a3 a2 a1 a0 t6 t5 t4 t3 t2 t1 t0 cclk cmp cmpn vdd 0 adc_core/' $(@D)/convert.cir
 	grep -q '^XCORE ' $(@D)/convert.cir
-	cd $(@D) && $(RUN) ngspice -b convert.cir > convert.log 2>&1
+	cd $(@D) && $(SPICE) convert.cir convert.log
 
 post_layout: $(POST) $(foreach c,$(LAYOUT_CORNERS),build/convert/$(c)/convert.txt)
 	mkdir -p results

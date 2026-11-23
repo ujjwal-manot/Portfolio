@@ -90,37 +90,37 @@ build/layout/%_pex.spice: build/layout/%.gds layout/extract.tcl
 build/post/unit_sch_%/unit.txt: tests/unit_post.cir build/layout/unit_sizes.inc design/shifter_hv.cir design/dldo_unit.cir
 	mkdir -p $(@D)
 	cp $< $(@D); cat build/layout/unit_sizes.inc design/shifter_hv.cir design/dldo_unit.cir > $(@D)/dut.cir; $(call hv_corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b unit_post.cir > unit.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh unit_post.cir unit.log
 	$(CHECK) $(@D)/unit.log
 
 build/post/unit_ext_%/unit.txt: tests/unit_post.cir build/layout/dldo_unit_pex.spice build/layout/dldo_unit.cdl
 	mkdir -p $(@D)
 	cp $< $(@D); $(call wrap,dldo_unit) > $(@D)/dut.cir; $(call hv_corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b unit_post.cir > unit.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh unit_post.cir unit.log
 	$(CHECK) $(@D)/unit.log
 
 build/post/array_sch_%/array.txt: tests/array_post.cir build/layout/unit_sizes.inc design/shifter_hv.cir design/dldo_unit.cir build/layout/dldo_array.cir
 	mkdir -p $(@D)
 	cp $< $(@D); cat build/layout/unit_sizes.inc design/shifter_hv.cir design/dldo_unit.cir build/layout/dldo_array.cir > $(@D)/dut.cir; $(call hv_corner,$*) > $(@D)/corner.inc; $(ONS) > $(@D)/ons.inc
-	cd $(@D) && $(RUN) ngspice -b array_post.cir > array.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh array_post.cir array.log
 	$(CHECK) $(@D)/array.log
 
 build/post/array_ext_%/array.txt: tests/array_post.cir build/layout/dldo_array_pex.spice build/layout/dldo_array.cdl
 	mkdir -p $(@D)
 	cp $< $(@D); $(call wrap,dldo_array) > $(@D)/dut.cir; $(call hv_corner,$*) > $(@D)/corner.inc; $(ONS) > $(@D)/ons.inc
-	cd $(@D) && $(RUN) ngspice -b array_post.cir > array.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh array_post.cir array.log
 	$(CHECK) $(@D)/array.log
 
 build/post/cmp_sch_%/cmp.txt: tests/cmp_post.cir design/comparator_sizes.inc $(ROOT)/projects/adc/design/comparator.cir
 	mkdir -p $(@D)
 	cp $< design/comparator_sizes.inc $(@D); cp $(ROOT)/projects/adc/design/comparator.cir $(@D)/dut.cir; $(call lv_corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b cmp_post.cir > cmp.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh cmp_post.cir cmp.log
 	$(CHECK) $(@D)/cmp.log
 
 build/post/cmp_ext_%/cmp.txt: tests/cmp_post.cir design/comparator_sizes.inc build/layout/comparator_pex.spice build/layout/comparator.cdl
 	mkdir -p $(@D)
 	cp $< design/comparator_sizes.inc $(@D); $(call wrap,comparator) > $(@D)/dut.cir; $(call lv_corner,$*) > $(@D)/corner.inc
-	cd $(@D) && $(RUN) ngspice -b cmp_post.cir > cmp.log 2>&1
+	cd $(@D) && $(ROOT)/helpers/ngspice.sh cmp_post.cir cmp.log
 	$(CHECK) $(@D)/cmp.log
 
 post_layout: $(POST)
