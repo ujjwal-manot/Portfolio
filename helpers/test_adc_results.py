@@ -107,3 +107,11 @@ def test_decision_times_are_compared_row_by_row(tmp_path):
     a = write(tmp_path, "a.txt", "dv_v t_decide_s outp_v\n1e-3 3.0e-10 1.2\n-1e-3 3.2e-10 0\n")
     b = write(tmp_path, "b.txt", "dv_v t_decide_s outp_v\n1e-3 3.3e-10 1.2\n-1e-3 3.2e-10 0\n")
     assert abs(decide_difference(a, b) - 0.1) < 1e-9
+
+def test_nan_in_a_result_is_refused(tmp_path):
+    import pytest
+    from adc_results import linearity
+    p = tmp_path / "levels.txt"
+    p.write_text("code error_v\n0 0\n1 nan\n2 0\n")
+    with pytest.raises(ValueError, match="not a number"):
+        linearity(p)
