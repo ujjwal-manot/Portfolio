@@ -30,7 +30,7 @@ meas tran out0 find v(out) at=0.45u
 let error = abs(got - target)
 let error50 = abs(early - target)
 let kick = target - dip
-let complete = sampled*0 + target*0 + got*0 + early*0 + dip*0 + (abs(plate0 - out0) > 1m)
+let complete = sampled*0 + target*0 + got*0 + early*0 + dip*0 + (abs(plate0 - out0) > 1e-3)
 if complete = 0
   echo load sampled_v_rms $&sampled settle_load_v $&error error_at_50ns_v $&error50 kick_v $&kick > load.txt
 else

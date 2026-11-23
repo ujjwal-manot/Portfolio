@@ -1,4 +1,4 @@
-* Measures the top-plate offset trim the way calibration uses it: with cal high the DAC samples its own 0x80 level (150 ns of each 300 ns step), then for each of the 128 trim codes (seven pulse sources counting in binary) the top plate's distance from vcm at the end of the step is written to trim_levels.txt; a second run holds the trim at code 63 and, after every second sample, moves the DAC from the sampled 0x80 to 0x81, and the mean difference between the top plate after those samples and after the samples left at 0x80, over eight pairs (one DAC LSB as the comparator sees it, attenuated by the trim and every other top-plate capacitance, with the top switch's charge injection common to both and so cancelled), is written as dac_step_v, so the trim can be read in LSB; starts without an operating point like dac_levels.cir, solved to a relative tolerance of 1e-5; corner, temperature, supply and mismatch come from corner.inc.
+* Measures the top-plate offset trim the way calibration uses it: with cal high the DAC samples its own 0x80 level (150 ns of each 300 ns step), then for each of the 128 trim codes (seven pulse sources counting in binary) the top plate's distance from vcm at the end of the step is written to trim_levels.txt; a second run holds the trim at code 63 and, after every second sample, moves the DAC from the sampled 0x80 to 0x81, and the top plate after a sample left at 0x80 and after the next one moved to 0x81 is written for eight such pairs, whose mean difference adc_trim.py takes as dac_step_v (one DAC LSB as the comparator sees it, attenuated by the trim and every other top-plate capacitance, with the top switch's charge injection common to both and so cancelled), so the trim can be read in LSB; starts without an operating point like dac_levels.cir, solved to a relative tolerance of 1e-5; corner, temperature, supply and mismatch come from corner.inc.
 .include corner.inc
 .option reltol=1e-5 vntol=1e-8
 .include cap_dac_sizes.inc
@@ -42,18 +42,15 @@ while code < 128
 end
 alter VMODE dc = 1
 tran 1n 5.4u uic
-let total = 0
 let k = 0
 while k < 8
   let at = 300e-9 + (2 * k + 0.95) * 300e-9
   meas tran a find v(top) at=$&at
   let at = 300e-9 + (2 * k + 1.95) * 300e-9
   meas tran b find v(top) at=$&at
-  let total = total + b - a
+  echo "pair_$&k $&a $&b" >> trim_levels.txt
   let k = k + 1
 end
-let step = total / 8
-echo "dac_step_v $&step" >> trim_levels.txt
 quit
 .endc
 .end

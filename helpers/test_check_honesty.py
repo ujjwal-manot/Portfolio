@@ -134,3 +134,18 @@ def test_a_value_preset_before_it_is_measured_is_a_silent_default(tmp_path):
     assert ("silent_default", "tests/load.cir") in found and ("silent_default", "tests/dc.cir") in found
     assert ("silent_default", "tests/sum.cir") in found and ("silent_default", "tests/tend.cir") in found
     assert not any(path in ("tests/step.cir", "tests/ok.cir", "tests/loop.cir", "tests/clamp.cir", "tests/search.cir") for rule, path in found if rule == "silent_default")
+
+def test_a_preset_cannot_dodge_the_rule_by_its_spelling_or_a_chain(tmp_path):
+    for name, preset in [("sum", "0+0"), ("paren", "(0)"), ("vec", "vector(1)")]:
+        write(tmp_path, f"tests/{name}.cir", f"{name} bench\n.control\nlet x = {preset}\nmeas tran x find v(out) at=1u\nquit\n.endc\n")
+    write(tmp_path, "tests/chain.cir", "chain bench\n.control\nlet t = 0\nmeas tran a find v(out) at=1u\nlet b = a * 2\nlet t = b\nquit\n.endc\n")
+    write(tmp_path, "tests/nan.cir", "nan bench\n.control\nlet nan = 1e400 - 1e400\nlet x = nan\nmeas tran x find v(out) at=1u\nquit\n.endc\n")
+    found = {str(path) for rule, path, _ in find_problems(tmp_path) if rule == "silent_default"}
+    assert {"tests/sum.cir", "tests/paren.cir", "tests/vec.cir", "tests/chain.cir"} <= found and "tests/nan.cir" not in found
+
+def test_a_meas_in_a_loop_must_be_reset_each_pass(tmp_path):
+    write(tmp_path, "tests/stale.cir", "stale bench\n.control\nlet k = 0\nwhile k < 4\ntran 1n 1u\nmeas tran level find v(out) at=1u\nlet k = k + 1\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/reset.cir", "reset bench\n.control\nlet nan = 1e400 - 1e400\nlet k = 0\nwhile k < 4\nlet level = nan\ntran 1n 1u\nmeas tran level find v(out) at=1u\nlet k = k + 1\nend\nquit\n.endc\n")
+    write(tmp_path, "tests/destroy.cir", "destroy bench\n.control\nforeach c 1 2\ndestroy all\ntran 1n 1u\nmeas tran level find v(out) at=1u\nend\nquit\n.endc\n")
+    found = {str(path) for rule, path, _ in find_problems(tmp_path) if rule == "stale_meas"}
+    assert found == {"tests/stale.cir"}

@@ -1,18 +1,22 @@
-# Reads the ADC's top-plate offset trim results: trim_levels.txt (top plate minus vcm for each of the 128 trim codes, and the top-plate move of one DAC LSB) gives the trim step, its DNL in steps, monotonicity and its reach either side of the zero code 63 in LSB, checked against a step of at most 0.25 LSB, no step at or below zero, and a reach of at least 7.0 LSB each way (the 4.19 LSB worst comparator Monte Carlo offset, up to 10% more once the trim and parasitics load the plate, plus the 2.02 LSB uncalibrated offset seen at ff 27 C, plus 0.4 LSB for temperature and supply drift); a conversion record (convert.txt with the trim bits as its last seven columns) gives the trim code calibration settled on, and fails if the code moves after calibration: python3 adc_trim.py levels|code ...
-import sys
+# Reads the ADC's top-plate offset trim results: trim_levels.txt (top plate minus vcm for each of the 128 trim codes, and eight pairs of top-plate readings a DAC LSB apart, whose mean difference is one DAC LSB at the plate, any missing or nan value refused) gives the trim step, its DNL in steps, monotonicity and its reach either side of the zero code 63 in LSB, checked against a step of at most 0.25 LSB, no step at or below zero, and a reach of at least 7.0 LSB each way (the 4.19 LSB worst comparator Monte Carlo offset, up to 10% more once the trim and parasitics load the plate, plus the 2.02 LSB uncalibrated offset seen at ff 27 C, plus 0.4 LSB for temperature and supply drift); a conversion record (convert.txt with the trim bits as its last seven columns) gives the trim code calibration settled on, and fails if the code moves after calibration: python3 adc_trim.py levels|code ...
+import math, statistics, sys
 
 ZERO, STEP_MAX, REACH = 63, 0.25, 7.0
 
 def read_levels(path):
-    shifts, dac_step = {}, None
+    shifts, pairs = {}, {}
     for line in open(path).read().splitlines()[1:]:
-        key, value = line.split()
-        if key == "dac_step_v":
-            dac_step = float(value)
+        key, *values = line.split()
+        values = [float(v) for v in values]
+        if any(not math.isfinite(v) for v in values):
+            raise ValueError(f"{path}: {key} is not a number")
+        if key.startswith("pair_"):
+            pairs[int(key[5:])] = values[1] - values[0]
         else:
-            shifts[int(key)] = float(value)
+            shifts[int(key)] = values[0]
+    dac_step = statistics.mean(pairs.values()) if sorted(pairs) == list(range(8)) else None
     if sorted(shifts) != list(range(128)) or dac_step is None or not dac_step > 0:
-        raise ValueError(f"{path}: needs 128 trim codes and a positive dac_step_v, found {len(shifts)} codes and {dac_step}")
+        raise ValueError(f"{path}: needs 128 trim codes and 8 DAC step pairs with a positive mean, found {len(shifts)} codes and {sorted(pairs)}")
     return [shifts[c] for c in range(128)], dac_step
 
 def levels(path):

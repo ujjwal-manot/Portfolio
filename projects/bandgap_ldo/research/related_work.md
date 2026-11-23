@@ -4,7 +4,7 @@
 ## How the sources were checked
 
 - Each citation below was taken from the DOI's Crossref record (https://api.crossref.org/works/DOI). Greek letters are written in ASCII (u for micro).
-- "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI. No full text could be opened; the publisher copies were behind bot checks.
+- "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI. No full text could be opened; the publisher copies could not be opened.
 - Numbers are quoted as the abstract states them. The page given is the paper's first page, or its article number.
 - "Not verified" means only the Crossref record was opened, so no number is given.
 
@@ -28,12 +28,14 @@
    - Relevance: it relates trim word width to the spread left after trim, which is the same question as here.
 4. O. Bass, A. Feldman, J. Shor, "A Resistor-Less nW-Level Bandgap Reference With Fine-Grained Voltage and Temperature Coefficient Trims," IEEE OJCAS, vol. 3, pp. 192-198, 2022. https://doi.org/10.1109/ojcas.2022.3206326
    - Numbers (abstract, p. 192): "38nW", "0.0174 mm2"; TC trimmable "between 50-200 ppm/°C in either direction"; voltage trimmable "between 580-800mV".
+   - Node: not stated in the abstract.
    - Relevance: separate voltage and TC trims, where this design has one trim that moves both.
 5. V. McKinsey et al., "A Node Agnostic Methodology for Optimizing Reference Circuit Designs," MWSCAS, pp. 710-714, 2025. https://doi.org/10.1109/mwscas53549.2025.11244560
    - Numbers (abstract, p. 710):
      - "0.000723 mm2";
      - "worst case TC of 73.0 ppm/°C over -40 °C to 125 °C for a 1.8 V ± 10% supply without trimming";
      - "yield for all parameters ... greater than 95% (p=0.01, n=500)".
+   - Node: not stated in the abstract.
    - Relevance: the same temperature range, with Monte Carlo yield stated with a confidence level.
 6. Y. Weng, J. Pan, Y. Zhao, J. Jiang, L. Qi, "A 2.3-ppm/°C High-Order Compensated Bandgap Reference With Low-Cost Current Trimming," ISCAS, pp. 1-5, 2024. https://doi.org/10.1109/iscas58744.2024.10558263
    - Numbers (abstract, p. 1, 180nm BCD, post-layout simulation):
@@ -43,6 +45,7 @@
    - Relevance: the area cost of the trim network.
 7. E. Nageib, S. Ibrahim, M. Dessouky, "Resistor Variation Compensation for Enhanced Current Matching in Bandgap References," Electronics, vol. 14, no. 19, art. 3808, 2025. https://doi.org/10.3390/electronics14193808
    - Numbers (abstract, art. 3808): current variation reduced "from 21% to 3% in worst-case corners (±3%)".
+   - Node: not stated in the abstract.
    - Relevance: resistor spread, which is what the 16-tap R2 trim corrects here.
 8. J. Wang, F. Zhang, Z. He, H. Zhang, L. Cheng, "A 2.69 ppm/°C bandgap reference with 42 ppm/V line sensitivity for battery management system," J. Semicond., vol. 46, no. 6, art. 062203, 2025. https://doi.org/10.1088/1674-4926/24120045
    - Numbers (abstract, art. 062203, 180 nm):
@@ -85,12 +88,12 @@
 
 No clear gap was found. Trim range against yield is the exact title of 13, and trim width against residual spread is studied in 3, 4 and 8, so a new method cannot be claimed without reading 13 first.
 
-Change of angle: a reproducible answer, in IHP SG13G2's open PDK and with its vertical PNP and rppd/rhigh Monte Carlo models, to "how many trim bits does a -40 to 125 C, 30 ppm/C box-method spec need?". The answer would be stated with seed count and confidence bound, and none of the open-PDK references (9 to 11) report it.
+Change of angle: a reproducible answer, in IHP SG13G2's open PDK and with its vertical PNP and rppd Monte Carlo models, to "how many trim bits does a -40 to 125 C, 30 ppm/C box-method spec need?". The answer would be stated with seed count and confidence bound, and none of the open-PDK references (9 to 11) report it.
 
 ## Proposed claim (fixed before any run)
 
 - **Claim:** 4 trim bits (16 taps on R2) is the minimum that meets the chip.md tempco spec in Monte Carlo, and 3 bits is not enough.
-- **Metric:** box-method tempco from -40 to 125 C after choosing the best tap per Monte Carlo run. The fraction of runs at or under 30 ppm/C is the yield.
+- **Metric:** box-method tempco from -40 to 125 C after choosing the tap per Monte Carlo run by a single room-temperature rule: the tap whose vref at 27 C is closest to the nominal design's vref at 27 C (a single-trim rule, as in items 1 and 14; picking the tap by full tempco would be an oracle). The rule is proposed here and is for the lead to approve. The fraction of runs at or under 30 ppm/C is the yield.
 - **Ablation:**
   - 3 bits: every second tap only;
   - 2 bits: every fourth tap;
@@ -98,8 +101,8 @@ Change of angle: a reproducible answer, in IHP SG13G2's open PDK and with its ve
   - All are taken from the same runs, so no extra simulation is needed per width.
 - **Baseline:** the untrimmed design (nominal tap) in the same runs.
 - **Seeds:** 300 Monte Carlo seeds at tt 27. With 0 failures in 300, the one-sided 95% lower bound on yield is 0.990.
-- **Pass:** at 4 bits, the one-sided 95% lower bound on yield >= 99%; at 3 bits, the point yield < 99%.
-- **Corners:** every corner on the project's fixed list is checked at its own best tap, at 4 bits and at 3 bits.
+- **Pass:** at 4 bits, the one-sided 95% lower bound on yield >= 99%; at 3 bits, the same lower bound < 99%.
+- **Corners:** every corner on the project's fixed list is checked at the tap the same rule picks, at 4 bits and at 3 bits.
 - **Fail:**
-  - if 3 bits also meets 99%, the claim is false and the minimum is lower (a positive result: a cheaper trim);
+  - if 3 bits also reaches a lower bound of 99%, the claim is false and the minimum is lower (a positive result: a cheaper trim);
   - if 4 bits misses, the claim is false and the design needs more resolution.

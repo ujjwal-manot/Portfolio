@@ -1,10 +1,10 @@
-# Checks adc_trim on made-up trim level files and conversion records: an even trim passes and reports its step and reach, a reversed step, a coarse step, a short reach and a missing code each fail, and the settled trim code is read from the last seven columns and refused if it moves after the first delivered code.
+# Checks adc_trim on made-up trim level files and conversion records: an even trim passes and reports its step and reach, a reversed step, a coarse step, a short reach, a missing code or step pair and a nan each fail, and the settled trim code is read from the last seven columns and refused if it moves after the first delivered code.
 import pytest
 from adc_trim import levels, settled_code
 
 def write_levels(tmp_path, shifts, dac_step=3e-3, name="t.txt"):
     p = tmp_path / name
-    p.write_text("code shift_v\n" + "".join(f"{c} {v}\n" for c, v in enumerate(shifts)) + (f"dac_step_v {dac_step}\n" if dac_step else ""))
+    p.write_text("code shift_v\n" + "".join(f"{c} {v}\n" for c, v in enumerate(shifts)) + ("".join(f"pair_{k} {2e-4} {2e-4 + dac_step}\n" for k in range(8)) if dac_step else ""))
     return p
 
 def even(step):
@@ -30,6 +30,10 @@ def test_missing_code_or_step_is_refused(tmp_path):
         levels(write_levels(tmp_path, even(0.4e-3)[:127]))
     with pytest.raises(ValueError):
         levels(write_levels(tmp_path, even(0.4e-3), dac_step=None))
+    s = even(0.4e-3)
+    s[5] = float("nan")
+    with pytest.raises(ValueError, match="not a number"):
+        levels(write_levels(tmp_path, s))
 
 def record(tmp_path, trims, valid_at=2):
     lines = []

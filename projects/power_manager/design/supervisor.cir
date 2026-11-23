@@ -1,4 +1,4 @@
-* Power-on reset and brown-out detector on the 3.3 V input, all thick-oxide devices on vin so it works before either 1.2 V rail exists: a PMOS matched to the bandgap's mirror copies its PTAT current (vg) into every bias; comparator A watches vin through an 84-unit rppd string against the bandgap's vref, the tap 34 units up, with one more unit under it shorted while vin is low, so vin_ok rises at 83/34 of vref (2.944 V) and falls at 84/35 (2.894 V); comparator B watches vdd_mem against a copy of vref made by a two-stage follower driving a 60-unit string, tapped at 56 units while vdd_mem is low and at 55 once it is good, so mem_ok rises at 56/60 of vref (1.126 V) and falls at 55/60 (1.106 V); each comparator's inverted output has a weak pull-up, so with no bias current (bandgap not running) it reads as a failed rail; rst_n is vin_ok and mem_ok, driven by a thick-oxide inverter on vdd_mem so it swings 0 to vdd_mem and is low whenever vdd_mem is; limits and their reasons are in helpers/supervisor_results.py; sizes from supervisor_sizes.inc.
+* Power-on reset and brown-out detector on the 3.3 V input, all thick-oxide devices on vin so it works before either 1.2 V rail exists: a PMOS matched to the bandgap's mirror copies its PTAT current (vg) into every bias; comparator A watches vin through an 84-unit rppd string against the bandgap's vref, the tap 34 units up, with one more unit under it shorted while vin is low, so vin_ok rises at 83/34 of vref (2.944 V) and falls at 84/35 (2.894 V); comparator B watches vdd_mem against a copy of vref made by a two-stage follower driving a 60-unit string, tapped at 56 units while vdd_mem is low and at 55 once it is good, so mem_ok rises at 56/60 of vref (1.126 V) and falls at 55/60 (1.106 V); each comparator's inverted output has a weak pull-up, so with no bias current (bandgap not running) it reads as a failed rail; a reference-free gate holds vin_hi low until vin exceeds two PMOS diode drops plus an NMOS threshold (about 2 V), so neither comparator can release reset while the bandgap is still starting and vref is too low to trust; rst_n is vin_ok and mem_ok and vin_hi, driven by a thick-oxide inverter on vdd_mem so it swings 0 to vdd_mem and is low whenever vdd_mem is; limits and their reasons are in helpers/supervisor_results.py; sizes from supervisor_sizes.inc.
 .subckt supervisor rst_n vin_ok mem_ok vin vdd_mem vref vg vss
 XPB nb vg vin vin sg13_hv_pmos w={sup_w_bp} l={sup_l_bp} mm_ok={mm}
 XNB nb nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
@@ -152,7 +152,14 @@ XRB1 b1 vss vss rppd w={sup_w_u} l={sup_l_u} mm_ok={mm}
 XSB1 refb mem_ok b55 vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
 XSB2 refb mem_bad b56 vss sg13_hv_nmos w={sup_w_sw} l={sup_l_sw} mm_ok={mm}
 XCB mem_ok mem_bad vdd_mem refb nb vin vss supcomp
-XG1 both_n vin_ok mem_ok vin vss supnand
+XH1 h1 h1 vin vin sg13_hv_pmos w={sup_w_h} l={sup_l_h} mm_ok={mm}
+XH2 h2 h2 h1 h1 sg13_hv_pmos w={sup_w_h} l={sup_l_h} mm_ok={mm}
+XHS h2 vin vss supweakn
+XHN hd h2 vss vss sg13_hv_nmos w={sup_w_h} l={sup_l_h} mm_ok={mm}
+XHW hd vss vin supweak
+XHIP vin_hi hd vin vin sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
+XHIN vin_hi hd vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+XG1 both_n vin_ok mem_ok vin_hi vin vss supnand3
 XOP rst_n both_n vdd_mem vdd_mem sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
 XON rst_n both_n vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
 .ends supervisor
@@ -178,12 +185,14 @@ XM6 out o1 vdd vdd sg13_hv_pmos w={sup_w_ld} l={sup_l_ld} mm_ok={mm}
 XM7 out nb vss vss sg13_hv_nmos w={sup_w_tl} l={sup_l_tl} mm_ok={mm}
 XC o1 out cap_cmim w={sup_w_cc} l={sup_w_cc} mm_ok={mm}
 .ends supbuf
-.subckt supnand y a b vdd vss
+.subckt supnand3 y a b c vdd vss
 XPA y a vdd vdd sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
 XPB y b vdd vdd sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
-XNA y a m vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
-XNB m b vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
-.ends supnand
+XPC y c vdd vdd sg13_hv_pmos w={sup_w_lp} l={sup_l_sw} mm_ok={mm}
+XNA y a m1 vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+XNB m1 b m2 vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+XNC m2 c vss vss sg13_hv_nmos w={sup_w_lg} l={sup_l_sw} mm_ok={mm}
+.ends supnand3
 .subckt supweak d g vdd
 XA d g m1 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
 XB m1 g m2 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
@@ -191,3 +200,10 @@ XC m2 g m3 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
 XD m3 g m4 vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
 XE m4 g vdd vdd sg13_hv_pmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
 .ends supweak
+.subckt supweakn d g vss
+XA d g m1 vss sg13_hv_nmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XB m1 g m2 vss sg13_hv_nmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XC m2 g m3 vss sg13_hv_nmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XD m3 g m4 vss sg13_hv_nmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+XE m4 g vss vss sg13_hv_nmos w={sup_w_wk} l={sup_l_wk} mm_ok={mm}
+.ends supweakn

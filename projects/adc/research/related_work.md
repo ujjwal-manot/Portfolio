@@ -4,7 +4,7 @@
 ## How the sources were checked
 
 - Each citation below was taken from the DOI's Crossref record (https://api.crossref.org/works/DOI). Greek letters are written in ASCII (u for micro).
-- "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI. No full text could be opened; the publisher and repository copies were behind bot checks.
+- "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI. No full text could be opened; the publisher and repository copies could not be opened.
 - Numbers are quoted as the abstract states them. The page given is the paper's first page, or its article number.
 - One entry (8) is quoted from B. Murmann, "ADC Performance Survey 1997-2026," https://github.com/bmurmann/ADC-survey (local copy: third_party/adc-survey, file xls/ADCsurvey_latest.xlsx, commit 00b4b855). Those numbers are the survey's, not read from the paper.
 - "Not verified" means only the Crossref record was opened, so no number is given.
@@ -60,7 +60,7 @@
 
 ## Gap (one sentence)
 
-CC placement of binary capacitor arrays is a mature CAD topic (1 to 3, 9, 11 to 15), scored by dispersion, correlation or ratio error and mostly in commercial or FinFET nodes. No source found compares ruler-ordered CC, row-major and spiral placement by post-layout INL/DNL and Monte Carlo yield of an 8-bit MIM DAC in IHP SG13G2. At 8 bits with 7.95 fF MIM units the true effect may be close to zero, so the useful contribution may be a measured null result.
+CC placement of binary capacitor arrays is a mature CAD topic (1 to 3, 9, 11 to 15), with the abstracts read scoring it by dispersion and INL/DNL (1, 2, FinFET-targeted) or by measured ratio accuracy (9). No source found compares ruler-ordered CC, row-major and spiral placement by post-layout INL/DNL and Monte Carlo yield of an 8-bit MIM DAC in IHP SG13G2. At 8 bits with 7.95 fF MIM units the true effect may be close to zero, so the useful contribution may be a measured null result.
 
 ## Proposed claim (fixed before any run)
 
@@ -77,4 +77,4 @@ CC placement of binary capacitor arrays is a mature CAD topic (1 to 3, 9, 11 to 
   - and the MC yield lower bound of (a) is not below that of (b).
   - 200 seeds at tt 27, yield with its one-sided 95% lower bound.
 - **Null:** if the INL difference between styles stays under 0.1 LSB everywhere, the result is the null "placement does not matter at this resolution and unit size", and it is reported as such.
-- **Caveat:** the PDK's mismatch model draws each unit independently with no spatial gradient, so any difference in this flow comes only from extracted routing capacitance. A gradient study would need a measured IHP MIM gradient, and none was found in the sources opened.
+- **Caveat:** if the PDK's MIM mismatch model draws each unit independently with no spatial gradient (to be confirmed in the PDK model files before the run), any difference in this flow comes only from extracted routing capacitance. A gradient study would need a measured IHP MIM gradient, and none was found in the sources opened.

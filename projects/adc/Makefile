@@ -262,7 +262,7 @@ ktc: build/ktc/ktc.txt
 
 build/model/adc_model: design/adc_model.sv design/sar_logic.sv tests/model_tb.sv
 	mkdir -p $(@D)
-	cd $(@D) && $(RUN) verilator --binary -j 1 -Wno-fatal --top-module model_tb -o adc_model ../../design/adc_model.sv ../../design/sar_logic.sv ../../tests/model_tb.sv > build.log 2>&1
+	cd $(@D) && $(RUN) verilator --binary -j 1 -Wno-fatal --timescale 1ns/1ps --top-module model_tb -o adc_model ../../design/adc_model.sv ../../design/sar_logic.sv ../../tests/model_tb.sv > build.log 2>&1
 	cp $(@D)/obj_dir/adc_model $@
 
 model: build/model/adc_model trim levels ramp convert supply_corners offset

@@ -7,8 +7,8 @@ HERE = Path(__file__).parent
 def run(args):
     return subprocess.run([sys.executable, str(HERE / "cells_results.py"), *map(str, args)], capture_output=True, text=True)
 
-def unit(path, i_on="3e-4", t_on="2e-9"):
-    path.write_text(f"unit i_on_a {i_on} i_off_a 1e-12 t_on_s {t_on} t_off_s 3e-9 i_vin_on_a 3.1e-4 i_vin_off_a 1e-11\n")
+def unit(path, i_on="3e-4", t_on="2e-9", i_off="1e-12"):
+    path.write_text(f"unit i_on_a {i_on} i_off_a {i_off} t_on_s {t_on} t_off_s 3e-9 i_vin_on_a -{i_on} i_vin_off_a -1.1e-12\n")
 
 def test_unit(tmp_path):
     unit(tmp_path / "unit_sch_tt_27_1v2_3v3.txt")
@@ -20,6 +20,9 @@ def test_unit(tmp_path):
     assert run(["unit", tmp_path / "unit_ext_tt_27_1v2_3v3.txt"]).returncode == 1
     unit(tmp_path / "unit_ext_tt_27_1v2_3v3.txt", t_on="11e-9")
     assert run(["unit", tmp_path / "unit_ext_tt_27_1v2_3v3.txt"]).returncode == 1
+    unit(tmp_path / "unit_ext_tt_27_1v2_3v3.txt", i_off="3e-6")
+    assert run(["unit", tmp_path / "unit_ext_tt_27_1v2_3v3.txt"]).returncode == 1
+    assert run(["unit", tmp_path / "unit_ext_ss_125_1v08_3v6.txt"]).returncode == 1
 
 def bisect(threshold, vdd=1.2, steps=15, stuck=False):
     lines = []
@@ -50,12 +53,17 @@ def test_cmp(tmp_path):
     assert run(["cmp", ext]).returncode == 1
     cmp(ext, delay="$&t")
     assert run(["cmp", ext]).returncode == 1
+    cmp(ext)
+    cmp(sch, delay="12e-9")
+    assert run(["cmp", ext]).returncode == 1
 
 def test_array(tmp_path):
     (tmp_path / "array_sch_tt_27_1v2_3v3.txt").write_text("array i_rail_a 4.0e-2 i_vin_a -4.0e-2\n")
     (tmp_path / "array_ext_tt_27_1v2_3v3.txt").write_text("array i_rail_a 3.95e-2 i_vin_a -3.95e-2\n")
     assert run(["array", tmp_path / "array_ext_tt_27_1v2_3v3.txt"]).returncode == 0
     (tmp_path / "array_ext_tt_27_1v2_3v3.txt").write_text("array i_rail_a 3.9e-2 i_vin_a -3.9e-2\n")
+    assert run(["array", tmp_path / "array_ext_tt_27_1v2_3v3.txt"]).returncode == 1
+    (tmp_path / "array_ext_tt_27_1v2_3v3.txt").write_text("array i_rail_a 4.2e-2 i_vin_a -4.2e-2\n")
     assert run(["array", tmp_path / "array_ext_tt_27_1v2_3v3.txt"]).returncode == 1
     (tmp_path / "array_ext_tt_27_1v2_3v3.txt").write_text("array i_rail_a nan i_vin_a -3.9e-2\n")
     assert run(["array", tmp_path / "array_ext_tt_27_1v2_3v3.txt"]).returncode == 1

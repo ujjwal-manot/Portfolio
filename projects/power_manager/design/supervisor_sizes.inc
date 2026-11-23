@@ -1,2 +1,2 @@
 * Supervisor sizes: rppd divider units 1 by 40 um (about 10 kOhm), thick-oxide amplifier devices long for matching, the weak pull-ups five 10 um devices in series so an unbiased comparator reads as a failed rail, the buffer's Miller capacitor about 1 pF of MIM.
-.param sup_w_u=1u sup_l_u=40u sup_w_in=8u sup_l_in=4u sup_w_ld=4u sup_l_ld=8u sup_w_tl=4u sup_l_tl=8u sup_w_bp=8u sup_l_bp=8u sup_w_sw=2u sup_l_sw=0.45u sup_w_lg=1u sup_w_lp=2u sup_w_wk=0.5u sup_l_wk=10u sup_w_cc=31.6u
+.param sup_w_u=1u sup_l_u=40u sup_w_in=8u sup_l_in=4u sup_w_ld=4u sup_l_ld=8u sup_w_tl=4u sup_l_tl=8u sup_w_bp=8u sup_l_bp=8u sup_w_sw=2u sup_l_sw=0.45u sup_w_lg=1u sup_w_lp=2u sup_w_wk=0.5u sup_l_wk=10u sup_w_cc=31.6u sup_w_h=10u sup_l_h=1u

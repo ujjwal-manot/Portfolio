@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or recomputed value to a constant in a SPICE bench (a failed run would keep it; a counter stepped only from itself is fine), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset or destroy all first (a failed meas keeps the last pass's value), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -142,17 +142,42 @@ def readme_problems(path):
                     yield "readme_claim", f"says {claim} in row '{cells[0]}', and no line of {', '.join(logs)} shows it next to {', '.join(sorted(words)) or 'a label'}"
 
 
+def run_derived(lets, measured):
+    derived = set(measured)
+    while True:
+        new = {name for name, value in lets if re.search(r"\b[vi]\(|\btime\b", value, re.I) or set(re.findall(r"[a-z_]\w*", value, re.I)) & derived} - derived
+        if not new:
+            return derived
+        derived |= new
+
 def silent_defaults(text):
-    constant = re.compile(r"[-+]?[0-9.]+(?:e[-+]?\d+)?$", re.I)
     lets = [(m.group(1), m.group(2).strip()) for m in re.finditer(r"^\s*let\s+(\w+)\s*=(.*)$", text, re.M | re.I)]
     measured = set(re.findall(r"^\s*meas\s+\w+\s+(\w+)\b", text, re.M | re.I))
     absent = set(re.findall(r"may be absent: (\w+) \(\S", text))
-    from_run = lambda value: re.search(r"\b[vi]\(|\btime\b", value, re.I) or set(re.findall(r"[a-z_]\w*", value, re.I)) & measured
+    nans = {name for name, value in lets if re.fullmatch(r"\(?\s*1e\d{3,}\s*-\s*1e\d{3,}\s*\)?", value, re.I)}
+    derived = run_derived(lets, measured)
+    names = lambda value: set(re.findall(r"[a-z_]\w*", value, re.I))
     first = {}
     for name, value in lets:
         first.setdefault(name, value)
-    preset = [name for name, value in first.items() if constant.match(value)]
-    return [name for name in preset if (name in measured and name not in absent) or any(n == name and from_run(v) for n, v in lets)]
+    preset = [name for name, value in first.items() if name not in nans and not names(value) & (derived | nans) and not re.search(r"\b[vi]\(|\btime\b", value, re.I)]
+    return [name for name in preset if (name in measured and name not in absent) or any(n == name and (names(v) & derived - {name} or re.search(r"\b[vi]\(|\btime\b", v, re.I)) for n, v in lets)]
+
+def stale_measures(text):
+    found, stack = [], []
+    for line in text.splitlines():
+        word = line.strip().split(" ", 1)[0].lower()
+        if word in ("while", "repeat", "dowhile", "foreach"):
+            stack.append(set())
+        elif word == "end" and stack:
+            stack.pop()
+        elif stack and re.match(r"destroy\s+all\b", line.strip(), re.I):
+            stack[-1].add("*")
+        elif stack and (m := re.match(r"\s*let\s+(\w+)\s*=\s*(\w+)\s*$", line)) and m.group(2).lower() == "nan":
+            stack[-1].add(m.group(1))
+        elif stack and (m := re.match(r"\s*meas\s+\w+\s+(\w+)\b", line, re.I)) and not ({"*", m.group(1)} & set().union(*stack)):
+            found.append(m.group(1))
+    return found
 
 def find_problems(root):
     root = Path(root)
@@ -176,6 +201,7 @@ def find_problems(root):
         if path.suffix in SPICE:
             problems += [("toy_model", rel, l.strip()) for l in text.splitlines() if re.match(r"\s*\.model\s+\S+\s+[np]mos", l, re.I)]
             problems += [("silent_default", rel, f"{name} is preset to a constant and later measured or recomputed, so a failed run keeps the preset") for name in silent_defaults(text)]
+            problems += [("stale_meas", rel, f"{name} is measured inside a loop without a nan reset or destroy all before it, so a failed meas keeps the last pass's value") for name in stale_measures(text)]
         if path.suffix == ".py":
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":

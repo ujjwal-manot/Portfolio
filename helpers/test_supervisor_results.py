@@ -43,7 +43,7 @@ def sup_rows(vin_fall=2.894, vin_rise=2.944, mem_fall=1.106, mem_rise=1.126, ram
             vok = not vok
         mok = mem > (mem_fall if t0 + 1250e-6 <= t < t0 + 1750e-6 else mem_rise)
         rst = mem if (vok and mok) or (release is not None and vin > release and t < t0) else 0.0
-        rows.append((t, vin, mem, 3.3 * vok, 3.3 * mok, rst, 1.206, -4e-5))
+        rows.append((t, vin, mem, 3.3 * vok, 3.3 * mok, rst, 1.206, -4e-5, 3.3 * (vin > 2.0)))
         t += 1e-6
     if early:
         rows = rows[: len(rows) // 2]

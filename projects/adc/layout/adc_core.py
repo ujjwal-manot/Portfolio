@@ -57,7 +57,7 @@ tside = size(trims[0], "w")
 b = Rows("adc_core")
 nrow = b.row(nmos, 0.0)
 nring = b.ring("psub", nrow, "vss", False, True)
-nets = list(dict.fromkeys(["vss"] + [u["nets"][k] for u in nmos + pmos for k in "dgs"] + ["vdd", "top"] + sorted({c[2] for c in caps})))
+nets = list(dict.fromkeys(["vss"] + [u["nets"][k] for u in nmos + pmos for k in "dgs"] + ["vdd", "top"] + sorted({c[2] for c in caps + trims})))
 track_y = b.tracks(nets, nring.top + 1.0)
 prow = b.row(pmos, max(track_y.values()) + 1.0 + 2.31)
 pring = b.ring("nwell", prow, "vdd", True, False)
@@ -70,7 +70,7 @@ owner = {}
 by_bit = {}
 for c in caps:
     by_bit.setdefault(c[2], []).append(c)
-order = sorted(bottoms, key=lambda n: -len(by_bit[n]))
+order = sorted(by_bit, key=lambda n: -len(by_bit[n]))
 for q, k in enumerate(spots):
     tz = ((q + 1) & -(q + 1)).bit_length() - 1
     pick = [n for n in order if len(by_bit[n]) == 2 ** (7 - tz)] if tz < 7 else [n for n in order if len(by_bit[n]) == 1]

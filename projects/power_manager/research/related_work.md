@@ -5,7 +5,7 @@
 
 - Each citation below was taken from the DOI's Crossref record (https://api.crossref.org/works/DOI). Greek letters are written in ASCII (u for micro).
 - "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI.
-- "Full text" applies to one paper (5): its HTML edition at https://www.jos.ac.cn/en/article/doi/10.1088/1674-4926/41/11/111405 was opened, and its tables and figure captions were read. No other full text could be opened; the IEEE and repository copies were behind bot checks.
+- "Full text" applies to one paper (5): its HTML edition at https://www.jos.ac.cn/en/article/doi/10.1088/1674-4926/41/11/111405 was opened, and its tables and figure captions were read. No other full text could be opened; the IEEE and repository copies could not be opened.
 - Numbers are quoted as the source states them. The page given is the paper's first page, or the table named.
 - "Not verified" means only the Crossref record was opened, so no number is given.
 
@@ -48,7 +48,7 @@
    - Relevance: a digital PID DLDO.
 10. J.-E. Park, D.-K. Jeong, "A Fully Integrated 700mA Event-Driven Digital Low-Dropout Regulator with Residue-Tracking Loop for Fine-Grained Power Management Unit," VLSI Symp., pp. 231-232, 2018. https://doi.org/10.1109/vlsic.2018.8502295
     - Numbers (abstract, p. 231, 65nm LP): "on-chip 100pF output capacitor", "load regulation of 0.1mV/mA", "output voltage error below 1.1% across a range from 0.5 to 1V", "figure-of-merit (FOM) of 6.74fs".
-    - Relevance: the same output range as vdd_cpu's DVFS states.
+    - Relevance: an output range (0.5 to 1 V) that overlaps vdd_cpu's 0.9 to 1.2 V DVFS states.
 11. Y. Yu, J. Yuan, S. Qiao, Y. Hei, "A Fast-Transient All-Digital LDO with Adaptive Clock Technique," Electronics, vol. 8, no. 12, art. 1422, 2019. https://doi.org/10.3390/electronics8121422
     - Numbers (abstract, art. 1422, SMIC 55 nm): "loop gain boost adaptively when the output voltage undershoot/overshoot is detected"; "5.03e-4 mm2"; "undershoot is 40 mV and transient response time is 500 ns with load step of 10 to 800 uA".
     - Relevance: gain boost on droop, the same idea as the coarse-window kick.
@@ -69,7 +69,7 @@
     - Numbers (abstract, p. 330, 65-nm):
       - "0.098 mm2", input "0.6 V to 1.2 V";
       - "recovery time of ≤ 30 ns for a 109 mV voltage droop when a (0 mA → 25 mA)" step "with an edge timing of 10 ns";
-      - "FoM of 1.106 ns2", "VRIPP of ≤ 2 mV".
+      - "overall figure-of-merit of 1.106 ns" (squared, as a superscript in the abstract), "VRIPP of ≤ 2 mV".
     - Relevance: coarse plus fine loops, as here.
 
 ## Not verified (Crossref record only, no number)
@@ -90,12 +90,12 @@ PI and PID digital control (1, 7, 9), gain boost on droop (1, 11 to 13) and 3.3 
   - droop: the lowest rail voltage below the setpoint after a load step;
   - settling time: from the step until the rail stays inside the fine comparator window;
   - steady-state ripple: limit-cycle peak to peak.
-  - Step: 0 to 7.5 mA (the cpu's typical current at 1.2 V in chip.md), taken from the cpu current profile listed in uses.txt, at the 1.2 V DVFS state.
+  - Step: 0 to 7.5 mA (the cpu's typical current at 1.2 V in chip.md), with a 1 ns edge (proposed, fixed before the run), at the 1.2 V DVFS state; whether the cpu activity file in uses.txt (projects/cpu/build/cpu_gates.vcd) is used instead of the plain step is for the lead to decide before the run.
 - **Baseline:** the same controller and switch array with P = 0 and PB = 0 (PI only, with the same BIG step), in the same loop simulation (tests/make_loop.py), at each corner on the project's fixed list.
 - **Pass:** at every corner,
   - PI plus kick's worst droop is <= 0.8 times PI-only's;
   - its settling time is no longer than PI-only's plus one 20 ns clock;
-  - its ripple is no larger than PI-only's plus one unit step.
+  - its ripple is no larger than PI-only's plus the fine comparator window width (in mV, read from the design before the run).
 - **Monte Carlo:** 100 seeds at tt 27 on comparator offsets and switch mismatch. The droop ratio is reported with its spread, and the pass rate with its one-sided 95% lower bound.
 - **Fail:** any corner where the droop ratio exceeds 0.8, or where kick lengthens settling or adds ripple beyond the limits above. A fail is reported as a negative result.
 - **Published context, not a baseline:** item 1 (the same node) reports "55-ns setting time for a 5 to 45 mA load step in 100 ps". The process, load and output capacitance differ, so the comparison is qualitative.

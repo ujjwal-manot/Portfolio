@@ -4,7 +4,7 @@
 ## How the sources were checked
 
 - Each citation below was taken from the DOI's Crossref record (https://api.crossref.org/works/DOI), not typed by hand. Greek letters are written in ASCII (u for micro).
-- "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI. No full text could be opened for this block; the IEEE, KAUST, TUM and Udelar copies were behind bot checks.
+- "Abstract" means the abstract was read in the Semantic Scholar record for the same DOI. No full text could be opened for this block; the IEEE, TUM and Udelar copies could not be opened.
 - Numbers are quoted as the abstract states them. The page given is the paper's first page, where the abstract sits.
 - "Not verified" means only the Crossref record was opened, so nothing is said about the content and no number is given.
 - Copies of the records are in third_party/literature/evidence/ (git-ignored).
@@ -45,7 +45,7 @@
     - Numbers (abstract, p. 1, GF180): "four different Folded-Cascode OTA designs, operating at 1.8 V and 3.3 V"; generation times are "within tens to hundreds of seconds".
     - Relevance: parameterized placement matrices for folded cascodes in an open PDK. The abstract gives no schematic-to-extracted numbers.
 11. N. Czepl, D. Zupan, "Noise Behaviour of EMI Improved Folded Cascode Amplifier Input Stages Including Layout Parasitics," Austrochip, pp. 1-4, 2021. https://doi.org/10.1109/austrochip53290.2021.9576855
-    - Numbers: "seven EMI improved differential input pair structures" compared at the design and layout stages (abstract, p. 1).
+    - Numbers: "seven EMI improved differential input pair structures" compared at the design and layout stages (abstract, p. 1); node not stated in the abstract.
     - Relevance: a design-to-layout comparison for folded-cascode input stages.
 12. N. Karmokar, M. Madhusudan, A. K. Sharma, R. Harjani, M. P.-H. Lin, S. S. Sapatnekar, "Common-Centroid Layout for Active and Passive Devices: A Review and the Road Ahead," ASP-DAC, pp. 114-121, 2022. https://doi.org/10.1109/asp-dac52403.2022.9712576
     - Numbers: none. The abstract says CC layout must account for "routing parasitics, layout-dependent effects" and "examines scenarios where non-CC layouts may be preferable" (abstract, p. 114).
@@ -78,5 +78,5 @@ In the abstracts read, the IHP SG13G2 and other open-PDK opamp work (4, 5, 6, 9,
   - the worst GBW drop is <= 10%;
   - the extracted design still meets PM >= 60 deg and GBW >= 20 MHz from chip.md.
 - **Placement effect:** if the worst phase-margin drop of (a), (b) and (c) differs by less than 2 deg, the result is the null "placement style does not matter for this sizing", and it is reported as such.
-- **Monte Carlo:** 200 seeds at tt 27 on the extracted netlist for style (a), with yield on PM >= 60 deg stated with its one-sided 95% lower bound. The PDK's mismatch model has no spatial gradient, so MC cannot separate the styles; only the extracted parasitics can.
+- **Monte Carlo:** 200 seeds at tt 27 on the extracted netlist for style (a), with yield on PM >= 60 deg stated with its one-sided 95% lower bound. If the PDK's mismatch model has no spatial gradient (to be confirmed in the PDK model files), MC cannot separate the styles and only the extracted parasitics can.
 - **Fail:** any corner breaks the 5 deg, 10% or spec limits above.

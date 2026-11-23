@@ -1,0 +1,17 @@
+* Supervisor trip bench: the bandgap (trim code 8) and the supervisor settled at vin 3.3 V and vdd_mem 1.2 V; from 50 us vin falls to 2.7 V and climbs back to 3.3 V at 1 mV/us, then from 1300 us vdd_mem falls to 1.05 V and climbs back to 1.2 V at 0.3 mV/us; every time point of vin, vdd_mem, vin_ok, mem_ok, rst_n, vref, the vin current and the reference-free gate vin_hi is written to sup.txt, so a run that stops early leaves a short file; corner and mismatch from corner.inc.
+.include corner.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+.include supervisor_sizes.inc
+.include supervisor.cir
+VIN vin 0 pwl(0 3.3 50u 3.3 650u 2.7 1250u 3.3)
+VMEM vdd_mem 0 pwl(0 1.2 1300u 1.2 1800u 1.05 2300u 1.2)
+XBG vref vg vin 0 vin 0 0 0 bandgap
+XS rst_n vin_ok mem_ok vin vdd_mem vref vg 0 supervisor
+.tran 1u 2350u
+.control
+run
+wrdata sup.txt v(vin) v(vdd_mem) v(vin_ok) v(mem_ok) v(rst_n) v(vref) i(VIN) v(xs.vin_hi)
+quit
+.endc
+.end
