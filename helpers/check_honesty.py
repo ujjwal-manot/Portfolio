@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), reports a result that is exactly zero without the bench's own 'zero is real: <key> (<reason>)' line beside it, or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), reports a result that is exactly zero without the bench's own 'zero is real: <key> (<reason>)' line beside it (in key/value pairs separated by space, =, : or comma, or in any row under a header; every exemption is listed for review), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -237,23 +237,36 @@ def unchecked_log(text):
 ZERO = re.compile(r"-?0(?:\.0*)?(?:e[+-]?\d+)?$", re.I)
 NAME = re.compile(r"[A-Za-z_]\w*$")
 
+REAL_ZERO = re.compile(r"^zero is real: (\w+) \(\S.*\)\s*$")
+
 def exact_zeros(text):
-    lines = [l.split() for l in text.splitlines()]
-    real = {m.group(1) for m in map(re.compile(r"^zero is real: (\w+) \(\S.*\)\s*$").match, text.splitlines()) if m}
-    zeros = set()
-    for i, words in enumerate(lines):
-        for j in range(len(words) - 1):
-            if NAME.match(words[j]) and ZERO.match(words[j + 1]):
-                zeros.add(words[j])
-        header = lines[i - 1] if i else []
-        if header and len(header) == len(words) and all(NAME.match(w) for w in header) and not any(NAME.match(w) for w in words):
+    real = {m.group(1) for m in map(REAL_ZERO.match, text.splitlines()) if m}
+    zeros, header = set(), None
+    for line in text.splitlines():
+        if line.startswith("zero is real:"):
+            continue
+        words = re.sub(r"[=,]|:(?=\s)", " ", line).split()
+        for a, b in zip(words, words[1:]):
+            if NAME.match(a) and ZERO.match(b):
+                zeros.add(a)
+        if words and all(NAME.match(w) for w in words):
+            header = words
+        elif header and len(words) == len(header) and not any(NAME.match(w) for w in words):
             zeros |= {h for h, w in zip(header, words) if ZERO.match(w)}
     return sorted(zeros - real)
 
+def zero_exemptions(text):
+    return [m.groups() for m in map(re.compile(r"^zero is real: (\w+) \((\S.*)\)\s*$").match, text.splitlines()) if m]
+
 def ignores_errors(line):
-    flags = re.match(r"\s*MAKEFLAGS\s*[+:?]?=(.*)", line)
+    flags = re.match(r"\s*(?:(?:export|override)\s+)*MAKEFLAGS\s*[+:?]?=(.*)", line)
     if flags:
-        return any("ignore-errors" in w or "keep-going" in w or re.fullmatch(r"-?[A-Za-z]*[ik][A-Za-z]*", w) for w in flags.group(1).split())
+        words, bad = flags.group(1).split(), False
+        for i, w in enumerate(words):
+            if i and words[i - 1] in ("-I", "-C", "-f", "-o", "-W"):
+                continue
+            bad |= "ignore-errors" in w or "keep-going" in w or bool(re.fullmatch(r"-[A-Za-z]*[ik][A-Za-z]*", w)) or (i == 0 and bool(re.fullmatch(r"[A-Za-z]*[ik][A-Za-z]*", w)))
+        return bad
     return bool(re.match(r"\t[@+\s]*-", line) or re.match(r"[^\t#=]*:[^=]*;\s*[@+\s]*-", line) or line.startswith(".IGNORE"))
 
 def find_problems(root):
@@ -293,5 +306,9 @@ if __name__ == "__main__":
     found = find_problems(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).parent.parent)
     for rule, path, why in found:
         print(f"{rule:18} {path}: {why}")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else Path(__file__).parent.parent)
+    for path in sorted(root.glob("projects/*/results/*.txt")):
+        for key, reason in zero_exemptions(path.read_text(errors="replace")):
+            print(f"{'zero_exemption':18} {path.relative_to(root)}: {key} ({reason}), for review")
     print(f"{len(found)} problems")
     sys.exit(1 if found else 0)

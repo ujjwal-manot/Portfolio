@@ -1,7 +1,7 @@
 # Plants every kind of cheat in a scratch folder, including results older than their sources and README numbers no log shows, and checks that check_honesty catches each one.
 import json, subprocess
 from pathlib import Path
-from check_honesty import find_problems
+from check_honesty import find_problems, exact_zeros, ignores_errors
 from save_result import save
 
 def write(root, name, text):
@@ -235,3 +235,14 @@ def test_every_way_make_can_ignore_an_error_is_a_hidden_failure(tmp_path):
         write(tmp_path, f"{name}/Makefile", "# Runs a bench.\n" + body)
     found = {str(path).split("/")[0] for rule, path, _ in find_problems(tmp_path) if rule == "hidden_failure"}
     assert found == set(bad)
+
+def test_exact_zero_reads_every_row_and_each_separator(tmp_path):
+    for name, text in {"third": "code err\n5 0.1\n6 0.2\n7 0\n", "equals": "settle_v=0 kick_v=1e-3\n", "colon": "settle_v: 0\n",
+                       "csv": "code,err\n5,0.1\n6,0\n", "pair": "settle_v,0\n"}.items():
+        assert exact_zeros(text), name
+    assert exact_zeros("code err\n5 0.1\n6 0.2\n") == []
+    assert exact_zeros("temp_c vbe_v\n-40 0.8\n0 0.7\nzero is real: temp_c (a sweep point)\n") == []
+
+def test_makeflags_with_a_prefix_or_an_option_argument(tmp_path):
+    assert ignores_errors("export MAKEFLAGS += i") and ignores_errors("override MAKEFLAGS += -i")
+    assert not ignores_errors("MAKEFLAGS += -I include") and not ignores_errors("MAKEFLAGS += -C dir -W file")
