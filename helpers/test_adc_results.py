@@ -117,7 +117,7 @@ def test_nan_in_a_result_is_refused(tmp_path):
         linearity(p)
 
 def test_level_readers_skip_the_bench_line_that_says_code_zero_is_real(tmp_path):
-    text = "code e_v\nzero is real: code (the first DAC code)\n0 0.1\n1 0.1031\n2 0.1062\n"
+    text = "code e_v\nzero is real: code (the first DAC code)\n0 0.001\n1 0.001\n2 0.0011\n"
     a = tmp_path / "a.txt"
     a.write_text(text)
     assert linearity(a)["dnl_max"] < 0.1 and same(a, a)[0]
