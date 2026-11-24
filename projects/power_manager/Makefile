@@ -29,7 +29,7 @@ LOOP_FILES := tests/make_loop.py design/dldo_unit.cir design/dldo_sizes.inc desi
 corner = printf '.lib cornerMOSlv.lib mos_%s\n.lib cornerMOShv.lib mos_%s\n.lib cornerHBT.lib hbt_typ\n.lib cornerRES.lib res_typ\n.lib cornerCAP.lib cap_typ\n.temp %s\n.param vdd_v=1.2 vin_v=%s vsupply=%s mm=0\n' $(word 1,$(subst _, ,$(1))) $(word 1,$(subst _, ,$(1))) $(TEMP_$(word 2,$(subst _, ,$(1)))) $(subst v,.,$(word 3,$(subst _, ,$(1)))) $(subst v,.,$(word 3,$(subst _, ,$(1))))
 part = $(word $(1),$(subst /, ,$(2)))
 
-all: speed bitcell ctrl cosim shifter cmp_offset windows ref unit cpu_load loop model model_check gains mem gear_check broken
+all: speed bitcell ctrl cosim shifter cmp_offset windows ref unit loop model model_check gains mem gear_check broken
 
 build/bitcell/%/read.txt: tests/bitcell_read.cir
 	mkdir -p $(@D)
@@ -123,17 +123,16 @@ unit: $(foreach c,$(CORNERS),build/unit/$(c)/unit.inc)
 	cat $(foreach c,$(CORNERS),build/unit/$(c)/unit_inc.log) > results/unit.log
 	c=0; $(LOGCHECK) $(foreach c,$(CORNERS),build/unit/$(c)/unit.log) >> results/unit.log 2>&1 || c=1; $(SAVE) unit $$c results/unit.log results/unit_delay_*.txt results/unit_iv_*.txt
 
-build/cpu_load/cycles.txt: tests/cpu_load.tcl $(CPU)/build/cpu_gates.vcd $(CPU)/build/cpu_cells.v
-	mkdir -p $(@D) results
-	cd $(@D) && $(RUN) env CPU_CELLS=$(CPU)/build/cpu_cells.v CPU_VCD=$(CPU)/build/cpu_gates.vcd sta -no_init -exit $(CURDIR)/tests/cpu_load.tcl > sta.log 2>&1
-	if $(LOOP) cpu_load $(@D)/sta.log $@ > results/cpu_load.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cpu_load $$c results/cpu_load.log; exit $$c
-
-cpu_load: build/cpu_load/cycles.txt
+cpu_load: tests/cpu_load.tcl
+	mkdir -p build/cpu_load results
+	cd build/cpu_load && $(RUN) env CPU_CELLS=$(CPU)/build/cpu_cells.v CPU_VCD=$(CPU)/build/cpu_gates.vcd sta -no_init -exit $(CURDIR)/tests/cpu_load.tcl > sta.log 2>&1
+	if $(LOOP) cpu_load build/cpu_load/sta.log tests/cpu_cycles.txt > results/cpu_load.log 2>&1; then c=0; else c=$$?; fi; $(SAVE) cpu_load $$c results/cpu_load.log
 
 .SECONDEXPANSION:
-build/run/%/loop.txt: $(LOOP_FILES) build/cpu_load/cycles.txt build/so/$$(call part,2,$$*)/dldo_ctrl.so build/ref/$$(call part,3,$$*)/ref.txt $$(if $$(findstring model,$$(call part,1,$$*)),build/unit/$$(call part,3,$$*)/unit.inc)
+build/run/%/loop.txt: $(LOOP_FILES) tests/cpu_cycles.txt build/so/$$(call part,2,$$*)/dldo_ctrl.so build/ref/$$(call part,3,$$*)/ref.txt $$(if $$(findstring model,$$(call part,1,$$*)),build/unit/$$(call part,3,$$*)/unit.inc)
 	mkdir -p $(@D)
-	cp $(filter-out tests/make_loop.py,$(LOOP_FILES)) build/cpu_load/cycles.txt build/so/$(call part,2,$*)/dldo_ctrl.so build/ref/$(call part,3,$*)/ref.inc $(@D)
+	cp $(filter-out tests/make_loop.py,$(LOOP_FILES)) build/so/$(call part,2,$*)/dldo_ctrl.so build/ref/$(call part,3,$*)/ref.inc $(@D)
+	cp tests/cpu_cycles.txt $(@D)/cycles.txt
 	$(if $(findstring model,$(call part,1,$*)),cp build/unit/$(call part,3,$*)/unit.inc $(@D))
 	$(call corner,$(call part,3,$*)) > $(@D)/corner.inc
 	cd $(@D) && $(RUN) python3 $(CURDIR)/tests/make_loop.py loop $(subst -, ,$(call part,1,$*)) && $(SPICE) loop.cir loop.log
@@ -170,7 +169,7 @@ broken:
 	rm -rf build/broken
 	mkdir -p results build/broken
 	e=0; for p in broken/dldo_*.patch; do n=$$(basename $$p .patch); d=build/broken/$$n; mkdir -p $$d/build; cp -rp design tests Makefile uses.txt $$d; \
-	  for b in cpu_load ref unit; do if [ -d build/$$b ]; then cp -rp build/$$b $$d/build; fi; done; \
+	  for b in ref unit; do if [ -d build/$$b ]; then cp -rp build/$$b $$d/build; fi; done; \
 	  patch -s -F0 -d $$d -p1 < $$p; want=$$(sed -n '1s/^Expected failure: //p' $$p); run=$$(sed -n '2s/^Run: //p' $$p); log=$$(sed -n '3s/^Log: //p' $$p); \
 	  if $(MAKE) -C $$d $$run > $$d/make.log 2>&1; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" $$d/$$log; then c=0; else c=2; fi; \
 	  cp $$d/$$log results/broken_$$n.log; $(SAVE) broken_$$n $$c results/broken_$$n.log || e=1; done; exit $$e

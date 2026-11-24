@@ -129,11 +129,11 @@ build/ldo/%/result.txt: $(LDO_TESTS) $(BANDGAP) $(LDO)
 
 ldo_gear_check: $(foreach c,$(GEAR_CORNERS),build/ldo/$(c)/result.txt)
 	mkdir -p results
-	for c in $(GEAR_CORNERS); do d=build/gear_check/$$c; mkdir -p $$d; cp build/ldo/$$c/*.cir build/ldo/$$c/*.inc $$d; \
+	g=0; for c in $(GEAR_CORNERS); do d=build/gear_check/$$c; mkdir -p $$d; cp build/ldo/$$c/*.cir build/ldo/$$c/*.inc $$d; \
 	  sed -i '/^\.option method=gear$$/d; s/^\(\.tran .*\)$$/\1 0 1n/' $$d/ldo_startup.cir; \
-	  : > $$d/failed.txt; if ! (cd $$d && $(SPICE) ldo_startup.cir ldo_startup.log); then echo "ldo_startup.cir failed" >> $$d/failed.txt; fi; \
-	  cp build/ldo/$$c/ldo_startup.txt results/gear_check_$${c}_gear.txt; cp $$d/ldo_startup.txt results/gear_check_$${c}_trap.txt; done
-	c=0; : > results/ldo_gear_check.log; for k in $(GEAR_CORNERS); do echo "$$k: the bench (Gear) against the trapezoidal rule held to a 1 ns step" >> results/ldo_gear_check.log; \
+	  : > $$d/failed.txt; if ! (cd $$d && $(SPICE) ldo_startup.cir ldo_startup.log); then echo "ldo_startup.cir failed" >> $$d/failed.txt; fi; if [ -s $$d/failed.txt ]; then g=1; fi; \
+	  cp build/ldo/$$c/ldo_startup.txt results/gear_check_$${c}_gear.txt; cp $$d/ldo_startup.txt results/gear_check_$${c}_trap.txt; done; \
+	c=$$g; : > results/ldo_gear_check.log; for k in $(GEAR_CORNERS); do echo "$$k: the bench (Gear) against the trapezoidal rule held to a 1 ns step" >> results/ldo_gear_check.log; \
 	  if ! $(PY) $(ROOT)/helpers/same_values.py final_v=1e-3,top_v=1e-3,settle_s=2e-6 results/gear_check_$${k}_gear.txt results/gear_check_$${k}_trap.txt >> results/ldo_gear_check.log 2>&1; then c=1; fi; done; \
 	  if ! $(LOGCHECK) $(foreach c,$(GEAR_CORNERS),build/ldo/$(c)/ldo_startup.log build/gear_check/$(c)/ldo_startup.log) >> results/ldo_gear_check.log 2>&1; then c=1; fi; \
 	  $(call failed,$(foreach c,$(GEAR_CORNERS),build/ldo/$(c) build/gear_check/$(c)),results/ldo_gear_check.log); $(SAVE) ldo_gear_check $$c results/ldo_gear_check.log results/gear_check_*.txt
@@ -299,7 +299,7 @@ build/model/fit/model_fit.txt: tests/model_fit.cir $(BANDGAP) $(LDO)
 	cp $^ $(@D)
 	$(call corner,tt,27,3.3) > $(@D)/corner.inc
 	cd $(@D) && : > failed.txt && if ! $(SPICE) model_fit.cir model_fit.log; then echo "model_fit.cir failed" >> failed.txt; fi
-	cd $(@D) && awk '{print "curve", $$1, $$2}' model_curve.txt >> model_fit.txt
+	cd $(@D) && awk '{print "curve temp_c", $$1, "vref_v", $$2}' model_curve.txt >> model_fit.txt && echo "zero is real: temp_c (the 0 C point of the vref curve)" >> model_fit.txt
 
 build/model/model_params.inc: build/model/fit/model_fit.txt build/corners/tt_3v3/dc.txt build/ldo/tt_3v3_27/result.txt build/startup/tt_10n/startup.txt build/startup/tt_1m/startup.txt build/em/tt_3v3_27/em.txt $(ROOT)/helpers/bandgap_ldo_model.py
 	$(PY) $(ROOT)/helpers/bandgap_ldo_model.py $(filter-out %.py,$^) > $@
