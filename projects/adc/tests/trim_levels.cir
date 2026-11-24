@@ -33,6 +33,7 @@ VIN vin 0 0.6
 let nan = 1e400 - 1e400
 tran 1n 38.7u uic
 echo "code shift_v" > trim_levels.txt
+echo "zero is real: code (trim codes are numbered from 0, the first with every trim bit low)" >> trim_levels.txt
 let code = 0
 while code < 128
   let at = 300e-9 + (code + 0.95) * 300e-9
