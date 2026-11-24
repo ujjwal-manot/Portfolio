@@ -9,6 +9,8 @@ TARGETS = (6, 8, 10, 12, 14, 16, 18, 20)
 def read(path):
     out = {}
     for line in Path(path).read_text().splitlines():
+        if line.startswith("zero is real:"):
+            continue
         f = line.split()
         if f[0] == "l":
             l, vds, vsb = round(float(f[1].rstrip("u")) * 1e-6, 9), float(f[3]), float(f[5])
