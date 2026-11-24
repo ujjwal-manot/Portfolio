@@ -191,6 +191,8 @@ Cycle timing (the contract `cpu_model.Timed` checks the RTL against; edges are r
 
 Both run from the 3.3 V supply on thick-oxide devices. `vg` carries the bandgap's PTAT branch current to the LDO's bias mirrors; `fb` is tied to `vout` (unity gain).
 
+`trim3`..`trim0` come from a 4-bit cpu register through four power_manager `shifter_hv` level shifters (1.2 V to 3.3 V; `outn` inverts, so the register holds the complement of the code); firmware writes the production code after reset, and until then the code is whatever the shifters power up in, and the LDO starts cleanly at either end of the range (codes 0 and 15 at tt 3.3 V 27 C, ss 3.0 V 125 C and ff 3.6 V -40 C, `make trim_ends` in bandgap_ldo), though at code 0 the rail sits 1.167 V at ss 125 C, so analog loads wait for the trim write.
+
 | Spec | Target |
 |---|---|
 | Bandgap tempco, -40 to 125 C, box method | <= 30 ppm/C at every corner, and a Monte Carlo yield whose one-sided 95% lower bound is 99% or more (at least 299 seeds with no failure) |
