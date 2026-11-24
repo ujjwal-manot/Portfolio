@@ -1,0 +1,24 @@
+ldo_tt_3v3_27 ldo_dc.vout_v=nan ldo_dc.vout_2ma_v=nan ldo_dc.load_reg_v=nan ldo_dc.line_v_per_v=nan ldo_dc.iq_a=nan psrr.psrr_1k_db=47.11 psrr.psrr_1m_db=37.14 step_0p5m.istep_a=0.0005 step_0p5m.before_v=1.206 step_0p5m.dip_v=1.178 step_0p5m.high_v=1.206 step_0p5m.peak_v=1.234 step_2m.istep_a=0.002 step_2m.before_v=1.206 step_2m.dip_v=1.142 step_2m.high_v=1.206 step_2m.peak_v=1.269 loop_0.gain_db=46.17 loop_0.fc_hz=3.849e+06 loop_0.pm_deg=48.6 loop_1m.gain_db=46.32 loop_1m.fc_hz=4.711e+06 loop_1m.pm_deg=73.55 loop_250u.gain_db=46.24 loop_250u.fc_hz=4.5e+06 loop_250u.pm_deg=64.17 loop_2m.gain_db=46.36 loop_2m.fc_hz=4.751e+06 loop_2m.pm_deg=76.75 ldo_startup.ramp_s=9.999e-09 ldo_startup.final_v=1.206 ldo_startup.top_v=1.206 ldo_startup.settle_s=5.802e-05
+FAIL ldo_tt_3v3_27: ldo_dc iq_a nan, limit <= 0.0002 at 27 C
+FAIL ldo_tt_3v3_27: ldo_dc load_reg_v nan, limit abs<= 0.005
+FAIL ldo_tt_3v3_27: ldo_dc line_v_per_v nan, limit abs<= 0.01
+some corner misses a limit
+build/ldo/tt_3v3_27/ldo_dc.log: FAIL
+  x1.xa3.m2                           Error: Transient op failed, timestep too small
+  Error: The operating point could not be simulated successfully.
+  doAnalyses: OP:  Timestep too small; trouble with x1.xq1:pnpmpa_mod-instance q.x1.xq1.qpnpmpa
+  op simulation(s) aborted
+  Error: RHS "v(vout)" invalid
+  Error: RHS "-i(vdd)" invalid
+  Error: RHS "v(vdd)" invalid
+  x1.n0                                Error: Transient op failed, timestep too small
+  Error: The operating point could not be simulated successfully.
+  doAnalyses: OP:  Timestep too small; trouble with x1.xq1:pnpmpa_mod-instance q.x1.xq1.qpnpmpa
+build/ldo/tt_3v3_27/ldo_psrr.log: ok
+build/ldo/tt_3v3_27/ldo_startup.log: ok
+build/ldo/tt_3v3_27/step_0p5m.log: ok
+build/ldo/tt_3v3_27/step_2m.log: ok
+build/ldo/tt_3v3_27/loop_0.log: ok
+build/ldo/tt_3v3_27/loop_250u.log: ok
+build/ldo/tt_3v3_27/loop_1m.log: ok
+build/ldo/tt_3v3_27/loop_2m.log: ok

@@ -12,6 +12,7 @@ XC inp inn clk outp outn vdd 0 comparator
 CLP outp 0 5f
 CLN outn 0 5f
 .control
+let nan = 1e400 - 1e400
 let found = vector(2)
 let side = 0
 foreach first -50e-3 50e-3
@@ -21,6 +22,7 @@ foreach first -50e-3 50e-3
     let mid = (lo + hi) / 2
     alter @VD[pwl] = [ 0 $first 15e-9 $first 15.1e-9 $&mid 40e-9 $&mid ]
     tran 10p 40n
+    let op = nan
     meas tran op find v(outp) at=38n
     if op > 0.6
       let hi = mid
@@ -36,5 +38,6 @@ let down = found[1]
 let offset = (up + down) / 2
 let hysteresis = up - down
 echo "offset_v $&offset hysteresis_v $&hysteresis up_v $&up down_v $&down" > offset.txt
+quit
 .endc
 .end

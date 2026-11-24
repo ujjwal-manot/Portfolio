@@ -1,5 +1,5 @@
 #!/bin/bash
-# Builds the filter and interrupt firmware, and every rv32ui test (on the small environment in riscv_test.h) and rv32mi test and this project's own machine-mode tests in firmware/mi (on the standard riscv-test-env, which sets up traps) twice: at address 0 for this cpu and at 0x8000_0000 for Spike.
+# Builds the filter firmware (plain, and with -DMAC using the custom-0 multiply-accumulate) and the interrupt firmware, and every rv32ui test (on the small environment in riscv_test.h) and rv32mi test and this project's own machine-mode tests in firmware/mi (on the standard riscv-test-env, which sets up traps) and every riscv-arch-test rv32i_m/I test (on firmware/arch/model_test.h, with the definitions its RVTEST_CASE line asks for) twice: at address 0 for this cpu and at 0x8000_0000 for Spike.
 set -e
 src=build/riscv-tests/isa
 out=build/rv32ui
@@ -29,9 +29,21 @@ for s in firmware/mi/*.S; do
   riscv64-unknown-elf-objcopy -O binary build/rv32mi/$n.elf build/rv32mi/$n.bin
   riscv64-unknown-elf-objcopy -O binary build/rv32mi/${n}_spike.elf build/rv32mi/${n}_spike.bin
 done
+a=../../third_party/riscv-arch-test/riscv-test-suite
+acc="riscv64-unknown-elf-gcc -march=rv32i_zicsr -mabi=ilp32 -mno-relax -nostdlib -nostartfiles -Wl,--no-warn-rwx-segments -Wl,--entry=rvtest_entry_point -T firmware/link_env.ld -Ifirmware/arch -I$a/env -DXLEN=32"
+mkdir -p build/arch
+for s in $a/rv32i_m/I/src/*.S; do
+  n=$(basename $s .S)
+  d=$(grep -o 'def [A-Za-z0-9_]*=[A-Za-z0-9_]*' $s | sed 's/^def /-D/' | sort -u | tr '\n' ' ')
+  $acc $d -Wl,--defsym=TOHOST=0x10000100 $s -o build/arch/$n.elf
+  $acc $d -Wl,--defsym=BASE=0x80000000 $s -o build/arch/${n}_spike.elf
+  riscv64-unknown-elf-objcopy -O binary build/arch/$n.elf build/arch/$n.bin
+done
 $cc -O2 firmware/start.S firmware/filter.c -o build/filter.elf
 riscv64-unknown-elf-objcopy -O binary build/filter.elf build/filter.bin
+$cc -O2 -DMAC firmware/start.S firmware/filter.c -o build/filter_mac.elf
+riscv64-unknown-elf-objcopy -O binary build/filter_mac.elf build/filter_mac.bin
 riscv64-unknown-elf-gcc -march=rv32i_zicsr -mabi=ilp32 -nostdlib -nostartfiles -Wl,-N,--no-warn-rwx-segments -T firmware/link.ld firmware/interrupts.S -o build/interrupts.elf
 riscv64-unknown-elf-objcopy -O binary build/interrupts.elf build/interrupts.bin
-riscv64-unknown-elf-size build/filter.elf
-echo "built $(ls $out/*_spike.elf build/rv32mi/*_spike.elf | wc -l) tests and the filter"
+riscv64-unknown-elf-size build/filter.elf build/filter_mac.elf
+echo "built $(ls $out/*_spike.elf build/rv32mi/*_spike.elf | wc -l) tests, $(ls build/arch/*_spike.elf | wc -l) arch tests and the filter"

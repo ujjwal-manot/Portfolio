@@ -1,0 +1,21 @@
+Note: Transient op started
+Note: Transient op finished successfully
+
+Note: No compatibility mode selected!
+
+
+Circuit: * failed op test
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+cur op2
+p1 0.499998 p2 0.934483
+ngspice-47 done

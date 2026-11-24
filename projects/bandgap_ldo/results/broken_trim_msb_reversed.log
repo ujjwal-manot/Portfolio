@@ -1,0 +1,58 @@
+dc_ff_3v0 vref_v=1.2062 tc_ppm_per_c=16.53 vref_min_v=1.2029 vref_max_v=1.2062 supply_a=3.7308e-05 line_v_per_v=0.00011798 code=15 untrimmed_v=1.184 untrimmed_tc_ppm_per_c=69.59 step_v=0.0031739
+dc_ff_3v3 vref_v=1.2063 tc_ppm_per_c=16.326 vref_min_v=1.203 vref_max_v=1.2063 supply_a=3.75e-05 line_v_per_v=0.00011798 code=15 untrimmed_v=1.184 untrimmed_tc_ppm_per_c=69.312 step_v=0.0031742
+dc_ff_3v6 vref_v=1.2063 tc_ppm_per_c=16.191 vref_min_v=1.2031 vref_max_v=1.2063 supply_a=3.7705e-05 line_v_per_v=0.00011798 code=15 untrimmed_v=1.1841 untrimmed_tc_ppm_per_c=69.129 step_v=0.0031744
+dc_fs_3v0 vref_v=1.2032 tc_ppm_per_c=15.535 vref_min_v=1.2001 vref_max_v=1.2032 supply_a=3.2634e-05 line_v_per_v=0.00011345 code=15 untrimmed_v=1.1813 untrimmed_tc_ppm_per_c=67.609 step_v=0.0031221
+dc_fs_3v3 vref_v=1.2032 tc_ppm_per_c=15.347 vref_min_v=1.2002 vref_max_v=1.2032 supply_a=3.2812e-05 line_v_per_v=0.00011345 code=15 untrimmed_v=1.1813 untrimmed_tc_ppm_per_c=67.343 step_v=0.0031224
+dc_fs_3v6 vref_v=1.2032 tc_ppm_per_c=15.223 vref_min_v=1.2002 vref_max_v=1.2032 supply_a=3.3002e-05 line_v_per_v=0.00011345 code=15 untrimmed_v=1.1814 untrimmed_tc_ppm_per_c=67.169 step_v=0.0031226
+dc_sf_3v0 vref_v=1.2032 tc_ppm_per_c=15.527 vref_min_v=1.2001 vref_max_v=1.2032 supply_a=3.2696e-05 line_v_per_v=0.00011209 code=15 untrimmed_v=1.1813 untrimmed_tc_ppm_per_c=67.599 step_v=0.0031221
+dc_sf_3v3 vref_v=1.2032 tc_ppm_per_c=15.341 vref_min_v=1.2002 vref_max_v=1.2032 supply_a=3.2883e-05 line_v_per_v=0.00011209 code=15 untrimmed_v=1.1813 untrimmed_tc_ppm_per_c=67.336 step_v=0.0031224
+dc_sf_3v6 vref_v=1.2032 tc_ppm_per_c=15.22 vref_min_v=1.2002 vref_max_v=1.2032 supply_a=3.3083e-05 line_v_per_v=0.00011209 code=15 untrimmed_v=1.1814 untrimmed_tc_ppm_per_c=67.166 step_v=0.0031226
+dc_ss_3v0 vref_v=1.1999 tc_ppm_per_c=12.836 vref_min_v=1.1973 vref_max_v=1.1999 supply_a=2.886e-05 line_v_per_v=0.00010811 code=15 untrimmed_v=1.1783 untrimmed_tc_ppm_per_c=63.305 step_v=0.0030807
+dc_ss_3v3 vref_v=1.1999 tc_ppm_per_c=12.664 vref_min_v=1.1974 vref_max_v=1.1999 supply_a=2.9032e-05 line_v_per_v=0.00010811 code=15 untrimmed_v=1.1783 untrimmed_tc_ppm_per_c=63.05 step_v=0.0030809
+dc_ss_3v6 vref_v=1.1999 tc_ppm_per_c=12.555 vref_min_v=1.1974 vref_max_v=1.1999 supply_a=2.9216e-05 line_v_per_v=0.00010811 code=15 untrimmed_v=1.1783 untrimmed_tc_ppm_per_c=62.889 step_v=0.0030811
+dc_tt_3v0 vref_v=1.2032 tc_ppm_per_c=15.531 vref_min_v=1.2001 vref_max_v=1.2032 supply_a=3.2666e-05 line_v_per_v=0.00011272 code=15 untrimmed_v=1.1813 untrimmed_tc_ppm_per_c=67.604 step_v=0.0031221
+dc_tt_3v3 vref_v=1.2032 tc_ppm_per_c=15.344 vref_min_v=1.2002 vref_max_v=1.2032 supply_a=3.2848e-05 line_v_per_v=0.00011272 code=15 untrimmed_v=1.1813 untrimmed_tc_ppm_per_c=67.339 step_v=0.0031224
+dc_tt_3v6 vref_v=1.2032 tc_ppm_per_c=15.222 vref_min_v=1.2002 vref_max_v=1.2032 supply_a=3.3044e-05 line_v_per_v=0.00011272 code=15 untrimmed_v=1.1814 untrimmed_tc_ppm_per_c=67.167 step_v=0.0031226
+FAIL dc_ff_3v0: trim code 15 at the end of its range
+FAIL dc_ff_3v3: trim code 15 at the end of its range
+FAIL dc_ff_3v6: trim code 15 at the end of its range
+FAIL dc_fs_3v0: trim code 15 at the end of its range
+FAIL dc_fs_3v3: trim code 15 at the end of its range
+FAIL dc_fs_3v6: trim code 15 at the end of its range
+FAIL dc_sf_3v0: trim code 15 at the end of its range
+FAIL dc_sf_3v3: trim code 15 at the end of its range
+FAIL dc_sf_3v6: trim code 15 at the end of its range
+FAIL dc_ss_3v0: trim code 15 at the end of its range
+FAIL dc_ss_3v3: trim code 15 at the end of its range
+FAIL dc_ss_3v6: trim code 15 at the end of its range
+FAIL dc_tt_3v0: trim code 15 at the end of its range
+FAIL dc_tt_3v3: trim code 15 at the end of its range
+FAIL dc_tt_3v6: trim code 15 at the end of its range
+FAIL dc_fs_3v0: trimmed vref 1.2032 V is 1.01 trim steps from 1.2063 V, limit 0.75
+FAIL dc_fs_3v3: trimmed vref 1.2032 V is 0.99 trim steps from 1.2063 V, limit 0.75
+FAIL dc_fs_3v6: trimmed vref 1.2032 V is 0.98 trim steps from 1.2063 V, limit 0.75
+FAIL dc_sf_3v0: trimmed vref 1.2032 V is 1.01 trim steps from 1.2063 V, limit 0.75
+FAIL dc_sf_3v3: trimmed vref 1.2032 V is 0.99 trim steps from 1.2063 V, limit 0.75
+FAIL dc_sf_3v6: trimmed vref 1.2032 V is 0.98 trim steps from 1.2063 V, limit 0.75
+FAIL dc_ss_3v0: trimmed vref 1.1999 V is 2.09 trim steps from 1.2063 V, limit 0.75
+FAIL dc_ss_3v3: trimmed vref 1.1999 V is 2.08 trim steps from 1.2063 V, limit 0.75
+FAIL dc_ss_3v6: trimmed vref 1.1999 V is 2.07 trim steps from 1.2063 V, limit 0.75
+FAIL dc_tt_3v0: trimmed vref 1.2032 V is 1.01 trim steps from 1.2063 V, limit 0.75
+FAIL dc_tt_3v3: trimmed vref 1.2032 V is 0.99 trim steps from 1.2063 V, limit 0.75
+FAIL dc_tt_3v6: trimmed vref 1.2032 V is 0.98 trim steps from 1.2063 V, limit 0.75
+some check fails
+build/corners/tt_3v0/dc.log: ok
+build/corners/tt_3v3/dc.log: ok
+build/corners/tt_3v6/dc.log: ok
+build/corners/ss_3v0/dc.log: ok
+build/corners/ss_3v3/dc.log: ok
+build/corners/ss_3v6/dc.log: ok
+build/corners/ff_3v0/dc.log: ok
+build/corners/ff_3v3/dc.log: ok
+build/corners/ff_3v6/dc.log: ok
+build/corners/sf_3v0/dc.log: ok
+build/corners/sf_3v3/dc.log: ok
+build/corners/sf_3v6/dc.log: ok
+build/corners/fs_3v0/dc.log: ok
+build/corners/fs_3v3/dc.log: ok
+build/corners/fs_3v6/dc.log: ok

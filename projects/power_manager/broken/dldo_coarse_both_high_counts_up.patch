@@ -1,0 +1,14 @@
+Expected failure: AssertionError: drives 18 units with count 10 and kick 0
+Run: ctrl
+Log: results/test_dldo_ctrl.log
+--- a/design/dldo_ctrl.sv
++++ b/design/dldo_ctrl.sv
+@@ -12,7 +12,7 @@
+ );
+   int next_count, next_drive;
+   wire up = lo && !hi, down = hi && !lo;
+-  wire far_up = far_lo && !far_hi, far_dn = far_hi && !far_lo;
++  wire far_up = far_lo, far_dn = far_hi && !far_lo;
+ 
+   always_comb begin
+     next_count = int'(count);

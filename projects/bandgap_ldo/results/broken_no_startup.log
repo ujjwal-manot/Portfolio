@@ -1,0 +1,111 @@
+startup_ff_100u ramp_s=9.999e-05 final_v=0.45818 settle_s=8.679e-05
+startup_ff_10n ramp_s=9.999e-09 final_v=0.45897 settle_s=8.7012e-05
+startup_ff_1m ramp_s=0.0009999 final_v=0.45127 settle_s=8.478e-05
+startup_ff_1u ramp_s=9.999e-07 final_v=0.45895 settle_s=8.7007e-05
+startup_fs_100u ramp_s=9.999e-05 final_v=0.45599 settle_s=8.7901e-05
+startup_fs_10n ramp_s=9.999e-09 final_v=0.45687 settle_s=8.8081e-05
+startup_fs_1m ramp_s=0.0009999 final_v=0.44809 settle_s=8.6291e-05
+startup_fs_1u ramp_s=9.999e-07 final_v=0.45685 settle_s=8.8078e-05
+startup_sf_100u ramp_s=9.999e-05 final_v=0.45645 settle_s=8.7681e-05
+startup_sf_10n ramp_s=9.999e-09 final_v=0.45734 settle_s=8.7875e-05
+startup_sf_1m ramp_s=0.0009999 final_v=0.44847 settle_s=8.5927e-05
+startup_sf_1u ramp_s=9.999e-07 final_v=0.45732 settle_s=8.7872e-05
+startup_ss_100u ramp_s=9.999e-05 final_v=0.45586 settle_s=8.7903e-05
+startup_ss_10n ramp_s=9.999e-09 final_v=0.45678 settle_s=8.8092e-05
+startup_ss_1m ramp_s=0.0009999 final_v=0.44756 settle_s=8.6214e-05
+startup_ss_1u ramp_s=9.999e-07 final_v=0.45677 settle_s=8.8089e-05
+startup_tt_100u ramp_s=9.999e-05 final_v=0.45603 settle_s=8.7861e-05
+startup_tt_10n ramp_s=9.999e-09 final_v=0.45692 settle_s=8.8046e-05
+startup_tt_125_100u ramp_s=9.999e-05 final_v=0.35981 settle_s=9.8714e-05
+startup_tt_125_10n ramp_s=9.999e-09 final_v=0.26694 settle_s=8.4492e-05
+startup_tt_125_1m ramp_s=0.0009999 final_v=1.2042 settle_s=-0.00031411
+startup_tt_125_1u ramp_s=9.999e-07 final_v=0.26988 settle_s=9.2341e-05
+startup_tt_1m ramp_s=0.0009999 final_v=0.44803 settle_s=8.6208e-05
+startup_tt_1u ramp_s=9.999e-07 final_v=0.4569 settle_s=8.8043e-05
+startup_tt_m40_100u ramp_s=9.999e-05 final_v=0.61279 settle_s=8.3805e-05
+startup_tt_m40_10n ramp_s=9.999e-09 final_v=0.61348 settle_s=8.3949e-05
+startup_tt_m40_1m ramp_s=0.0009999 final_v=0.6061 settle_s=8.2514e-05
+startup_tt_m40_1u ramp_s=9.999e-07 final_v=0.61347 settle_s=8.3946e-05
+FAIL startup_ff_100u: vref ends at 0.4582 V
+FAIL startup_ff_10n: vref ends at 0.459 V
+FAIL startup_ff_1m: vref ends at 0.4513 V
+FAIL startup_ff_1u: vref ends at 0.459 V
+FAIL startup_fs_100u: vref ends at 0.456 V
+FAIL startup_fs_10n: vref ends at 0.4569 V
+FAIL startup_fs_1m: vref ends at 0.4481 V
+FAIL startup_fs_1u: vref ends at 0.4568 V
+FAIL startup_sf_100u: vref ends at 0.4565 V
+FAIL startup_sf_10n: vref ends at 0.4573 V
+FAIL startup_sf_1m: vref ends at 0.4485 V
+FAIL startup_sf_1u: vref ends at 0.4573 V
+FAIL startup_ss_100u: vref ends at 0.4559 V
+FAIL startup_ss_10n: vref ends at 0.4568 V
+FAIL startup_ss_1m: vref ends at 0.4476 V
+FAIL startup_ss_1u: vref ends at 0.4568 V
+FAIL startup_tt_100u: vref ends at 0.456 V
+FAIL startup_tt_10n: vref ends at 0.4569 V
+FAIL startup_tt_125_100u: vref ends at 0.3598 V
+FAIL startup_tt_125_10n: vref ends at 0.2669 V
+FAIL startup_tt_125_1u: vref ends at 0.2699 V
+FAIL startup_tt_1m: vref ends at 0.448 V
+FAIL startup_tt_1u: vref ends at 0.4569 V
+FAIL startup_tt_m40_100u: vref ends at 0.6128 V
+FAIL startup_tt_m40_10n: vref ends at 0.6135 V
+FAIL startup_tt_m40_1m: vref ends at 0.6061 V
+FAIL startup_tt_m40_1u: vref ends at 0.6135 V
+FAIL startup_ff_100u: settles 8.68e-05 s after the ramp
+FAIL startup_ff_10n: settles 8.7e-05 s after the ramp
+FAIL startup_ff_1m: settles 8.48e-05 s after the ramp
+FAIL startup_ff_1u: settles 8.7e-05 s after the ramp
+FAIL startup_fs_100u: settles 8.79e-05 s after the ramp
+FAIL startup_fs_10n: settles 8.81e-05 s after the ramp
+FAIL startup_fs_1m: settles 8.63e-05 s after the ramp
+FAIL startup_fs_1u: settles 8.81e-05 s after the ramp
+FAIL startup_sf_100u: settles 8.77e-05 s after the ramp
+FAIL startup_sf_10n: settles 8.79e-05 s after the ramp
+FAIL startup_sf_1m: settles 8.59e-05 s after the ramp
+FAIL startup_sf_1u: settles 8.79e-05 s after the ramp
+FAIL startup_ss_100u: settles 8.79e-05 s after the ramp
+FAIL startup_ss_10n: settles 8.81e-05 s after the ramp
+FAIL startup_ss_1m: settles 8.62e-05 s after the ramp
+FAIL startup_ss_1u: settles 8.81e-05 s after the ramp
+FAIL startup_tt_100u: settles 8.79e-05 s after the ramp
+FAIL startup_tt_10n: settles 8.8e-05 s after the ramp
+FAIL startup_tt_125_100u: settles 9.87e-05 s after the ramp
+FAIL startup_tt_125_10n: settles 8.45e-05 s after the ramp
+FAIL startup_tt_125_1u: settles 9.23e-05 s after the ramp
+FAIL startup_tt_1m: settles 8.62e-05 s after the ramp
+FAIL startup_tt_1u: settles 8.8e-05 s after the ramp
+FAIL startup_tt_m40_100u: settles 8.38e-05 s after the ramp
+FAIL startup_tt_m40_10n: settles 8.39e-05 s after the ramp
+FAIL startup_tt_m40_1m: settles 8.25e-05 s after the ramp
+FAIL startup_tt_m40_1u: settles 8.39e-05 s after the ramp
+some check fails
+build/startup/tt_10n/startup.log: ok
+build/startup/ss_10n/startup.log: ok
+build/startup/ff_10n/startup.log: ok
+build/startup/sf_10n/startup.log: ok
+build/startup/fs_10n/startup.log: ok
+build/startup/tt_m40_10n/startup.log: ok
+build/startup/tt_125_10n/startup.log: ok
+build/startup/tt_1u/startup.log: ok
+build/startup/ss_1u/startup.log: ok
+build/startup/ff_1u/startup.log: ok
+build/startup/sf_1u/startup.log: ok
+build/startup/fs_1u/startup.log: ok
+build/startup/tt_m40_1u/startup.log: ok
+build/startup/tt_125_1u/startup.log: ok
+build/startup/tt_100u/startup.log: ok
+build/startup/ss_100u/startup.log: ok
+build/startup/ff_100u/startup.log: ok
+build/startup/sf_100u/startup.log: ok
+build/startup/fs_100u/startup.log: ok
+build/startup/tt_m40_100u/startup.log: ok
+build/startup/tt_125_100u/startup.log: ok
+build/startup/tt_1m/startup.log: ok
+build/startup/ss_1m/startup.log: ok
+build/startup/ff_1m/startup.log: ok
+build/startup/sf_1m/startup.log: ok
+build/startup/fs_1m/startup.log: ok
+build/startup/tt_m40_1m/startup.log: ok
+build/startup/tt_125_1m/startup.log: ok

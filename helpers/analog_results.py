@@ -1,4 +1,4 @@
-# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and the opamp's error at the peak of the largest sensor signal chip.md allows (-1 dBFS, 0.357 V), twice its input offset (noise gain 2) plus its gain error times that peak, within the headroom left once the ADC's own allowed offset (1 LSB) and gain error (2 LSB over full scale, scaled to the peak) are taken out; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined (pass at 99% or more) with the one-sided 95% lower bound on the combined yield and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
+# Reads the opamp testbench results: in corners mode it lists every corner, names the worst corner for each chip.md spec and fails if any corner misses one or a measurement failed (including settling into the ADC's real capacitor DAC to half an LSB, 0.8 V / 256 / 2, and the opamp's error at the peak of the largest sensor signal chip.md allows (-1 dBFS, 0.357 V), twice its input offset (noise gain 2) plus its gain error times that peak, within the headroom left once the ADC's own allowed offset (1 LSB) and gain error (2 LSB over full scale, scaled to the peak) are taken out; swing is not required at the 1.08 V supply, below the 1.16 V the opamp needs for a 0.2 to 1.0 V output); in mc mode it counts yield per spec and combined with the one-sided 95% lower bound on each yield, passing only when the combined yield's lower bound is 99% or more (300 runs with no failure give 99.0%; 200 give 98.5%), and the offset spread; in model mode it checks the two-pole model's measured loop gain, GBW and phase margin against the arithmetic for that model.
 import cmath, math, sys
 from pathlib import Path
 
@@ -36,13 +36,16 @@ def corners(paths):
     for spec, (op, limit) in SPECS.items():
         checked = {c: m for c, m in data.items() if not (spec in SWING and c.endswith(NO_SWING_AT))}
         missing = [c for c, m in checked.items() if spec not in m or math.isnan(m[spec])]
-        values = [(m[spec], c) for c, m in checked.items() if c not in missing]
+        values = [(m[spec], c) for c, m in checked.items() if c not in missing] or [(math.nan, ", ".join(missing) or "no corner")]
         worst = min(values) if op == ">=" else max(values)
         passed = not missing and (worst[0] >= limit if op == ">=" else worst[0] <= limit)
         rows[spec] = (*worst, limit, op, passed, missing)
         ok &= passed
     for key in REPORT:
-        rows[key] = max((m[key], c) for c, m in data.items()) if "psrr" not in key else min((m[key], c) for c, m in data.items())
+        bad = [c for c, m in data.items() if math.isnan(m.get(key, math.nan))]
+        values = [(m[key], c) for c, m in data.items() if c not in bad] or [(math.nan, ", ".join(bad))]
+        rows[key] = (*(max(values) if "psrr" not in key else min(values)), bad)
+        ok &= not bad
     return ok, rows
 
 def meets(m, spec):
@@ -54,7 +57,7 @@ def montecarlo(paths):
     yields = {spec: sum(meets(m, spec) for m in runs) / len(runs) for spec in SPECS}
     yields["combined"] = sum(all(meets(m, spec) for spec in SPECS) for m in runs) / len(runs)
     offsets = [m["offset_v"] for m in runs if "offset_v" in m]
-    return yields["combined"] >= YIELD, yields, offsets
+    return lower_bound(round(yields["combined"] * len(runs)), len(runs)) >= YIELD, yields, offsets
 
 def lower_bound(passed, runs, confidence=0.95):
     lo, hi = 0.0, 1.0
@@ -94,13 +97,14 @@ if __name__ == "__main__":
     elif mode == "mc":
         ok, yields, offsets = montecarlo(paths)
         for spec, y in yields.items():
-            print(f"{spec:14} yield {y:.1%} of {len(paths)} runs")
+            print(f"{spec:14} yield {y:.1%} of {len(paths)} runs, at least {lower_bound(round(y * len(paths)), len(paths)):.1%} at 95% confidence")
         if offsets:
             mean = sum(offsets) / len(offsets)
             sigma = math.sqrt(sum((o - mean) ** 2 for o in offsets) / (len(offsets) - 1))
             print(f"offset_v       mean {mean:.4g} sigma {sigma:.4g} worst {max(offsets, key=abs):.4g}")
         print(f"combined yield is at least {lower_bound(round(yields['combined'] * len(paths)), len(paths)):.1%} at 95% confidence")
-        print(f"combined yield meets {YIELD:.0%}" if ok else f"combined yield below {YIELD:.0%}")
+        bound = lower_bound(round(yields['combined'] * len(paths)), len(paths))
+        print(f"combined yield point estimate {yields['combined']:.1%}; its 95% lower bound {bound:.1%} {'meets' if ok else 'is below'} {YIELD:.0%}, so the yield verdict {'passes' if ok else 'fails'}")
     else:
         for p in sorted(paths):
             m = measured(parse(p))
@@ -109,13 +113,13 @@ if __name__ == "__main__":
         for spec, (value, corner, limit, op, passed, missing) in ((k, v) for k, v in rows.items() if k in SPECS):
             print(f"{spec:14} worst {value:.4g} at {corner}, spec {op} {limit:g}: {'pass' if passed else 'FAIL'}{' (measurement failed at ' + ', '.join(missing) + ')' if missing else ''}")
         for key in REPORT:
-            print(f"{key:14} worst {rows[key][0]:.4g} at {rows[key][1]}")
+            print(f"{key:14} worst {rows[key][0]:.4g} at {rows[key][1]}" + (": FAIL (measurement failed at " + ", ".join(rows[key][2]) + ")" if rows[key][2] else ""))
         for p in sorted(paths):
             m, name = measured(parse(p)), Path(p).stem.removeprefix("corner_")
             if name.endswith(NO_SWING_AT):
                 print(f"swing at 1.08 V, not required: {name} out_low_v={m.get('out_low_v', float('nan')):.4g} out_high_v={m.get('out_high_v', float('nan')):.4g}")
         for spec, row in rows.items():
-            if spec in SPECS and not row[4]:
+            if (spec in SPECS and not row[4]) or (spec in REPORT and row[2]):
                 print(f"FAIL {spec}")
         print("every corner meets every spec" if ok else "some corner misses a spec")
     sys.exit(0 if ok else 1)

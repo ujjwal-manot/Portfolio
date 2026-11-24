@@ -1,4 +1,4 @@
-* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), and writes time, m_tvalid, the eight m_tdata bits, samp, vin, the DAC top plate, vcm and the supply's energy integral every 50 ns to convert.txt and the average power drawn from the supply and from vref_hi, vref_lo and vcm over the conversions, with the input frequency measured between two rising crossings of vcm, each integrated by the solver at every step into a 1 F capacitor (the transistor parts only; the SAR logic runs as a Verilator model) to measure.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc; every node has 1e13 ohm to ground because the DAC top plate (top) truly floats until the first sample: while the SAR logic is in reset samp is low, so top touches only the off top-plate switch and the comparator gate, and at -40 C that switch leaks too little for the operating point to solve (with 1e12 and 1e13 ohm the solved top lands at 18 and 171 mV, so only the shunt sets it); the first sample sets top and the first two codes are dropped, and a real keeper would leak charge during every conversion, so it stays a solver aid (at most 0.6 V / 1e13 ohm for 1 us on the 2 pF array, 0.01 LSB, and shunt_check finds no code changed at 27 C); it integrates with Gear's method because the default trapezoidal rule stopped the tt 27 C run at 52 us with too small a timestep 2 ns after a sample edge, and gear_check reruns the first 30 us at tt -40, 27 and 125 C under both methods without interpolation and compares the top plate against vcm at every comparator clock rise, and the comparator's decision times.
+* Converts a coherent -0.5 dBFS sine (bin K of N samples at 1 MS/s, both set in tone.inc) with the transistor capacitor DAC and comparator, clocked by the real sar_logic RTL (Verilator through ngspice d_cosim), after the logic's 8 start-up calibration frames (8 us) have set the top-plate trim, and writes time, m_tvalid, the eight m_tdata bits, samp, vin, the DAC top plate, vcm, the supply's energy integral and the seven trim bits every 50 ns to convert.txt and the average power drawn from the supply and from vref_hi, vref_lo and vcm over the conversions after calibration (from 9.3 us), with the input frequency measured between two rising crossings of vcm, each integrated by the solver at every step into a 1 F capacitor (the transistor parts only; the SAR logic runs as a Verilator model) to measure.txt, solved to a relative tolerance of 1e-5 (the default 1e-3 is 0.6 mV on a 0.6 V node, a fifth of an LSB); corner, temperature, supply and mismatch come from corner.inc; every node has 1e13 ohm to ground because the DAC top plate (top) truly floats until the first sample: while the SAR logic is in reset samp is low, so top touches only the off top-plate switch and the comparator gate, and at -40 C that switch leaks too little for the operating point to solve (with 1e12 and 1e13 ohm the solved top lands at 18 and 171 mV, so only the shunt sets it); the first sample sets top and the first two codes are dropped, and a real keeper would leak charge during every conversion, so it stays a solver aid (at most 0.6 V / 1e13 ohm for 1 us on the 2 pF array, 0.01 LSB, and shunt_check finds no code changed at 27 C); it integrates with Gear's method because the default trapezoidal rule stopped the tt 27 C run at 52 us with too small a timestep 2 ns after a sample edge, and gear_check reruns the first 30 us at tt -40, 27 and 125 C under both methods without interpolation and compares the top plate against vcm at every comparator clock rise, and the comparator's decision times.
 .include corner.inc
 .option reltol=1e-5 vntol=1e-8
 .include tone.inc
@@ -17,11 +17,11 @@ VRST rst 0 pwl(0 0 250n 0 251n {vsupply})
 VRDY rdy 0 {vsupply}
 AIN [clk rst cmp rdy] [dclk drst dcmp drdy] tobits
 .model tobits adc_bridge(in_low={vsupply / 3} in_high={2 * vsupply / 3})
-ASAR [dclk drst dcmp drdy] [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dvalid t7 t6 t5 t4 t3 t2 t1 t0 dlast dovf] null sar
+ASAR [dclk drst dcmp drdy] [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dcal dk6 dk5 dk4 dk3 dk2 dk1 dk0 dvalid o7 o6 o5 o4 o3 o2 o1 o0 dlast dovf] null sar
 .model sar d_cosim simulation="./sar_logic.so"
-AOUT [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dvalid t7 t6 t5 t4 t3 t2 t1 t0] [samp cclk a7 a6 a5 a4 a3 a2 a1 a0 valid b7 b6 b5 b4 b3 b2 b1 b0] tovolts
+AOUT [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dcal dk6 dk5 dk4 dk3 dk2 dk1 dk0 dvalid o7 o6 o5 o4 o3 o2 o1 o0] [samp cclk a7 a6 a5 a4 a3 a2 a1 a0 cal t6 t5 t4 t3 t2 t1 t0 valid b7 b6 b5 b4 b3 b2 b1 b0] tovolts
 .model tovolts dac_bridge(out_low=0 out_high={vsupply} t_rise=50p t_fall=50p)
-XDAC top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 vdd 0 cap_dac
+XDAC top vin vcm vref_hi vref_lo samp cal a7 a6 a5 a4 a3 a2 a1 a0 t6 t5 t4 t3 t2 t1 t0 vdd 0 cap_dac_cal
 XCMP vcm top cclk cmp cmpn vdd 0 comparator
 BEVDD 0 e_vdd i = time > 0 ? -v(vdd) * i(VDD) : 0
 CEVDD e_vdd 0 1
@@ -35,15 +35,15 @@ RELO e_lo 0 1e12
 BECM 0 e_cm i = time > 0 ? -v(vcm) * i(VCM) : 0
 CECM e_cm 0 1
 RECM e_cm 0 1e12
-.tran 50n {(n_samples + 3) * 1u + 300n}
+.tran 50n {(n_samples + 11) * 1u + 300n}
 .control
 run
 let span = length(time) - 1
-let window = time[span] - 1.3e-6
-meas tran e0 find v(e_vdd) at=1.3u
-meas tran h0 find v(e_hi) at=1.3u
-meas tran l0 find v(e_lo) at=1.3u
-meas tran c0 find v(e_cm) at=1.3u
+let window = time[span] - 9.3e-6
+meas tran e0 find v(e_vdd) at=9.3u
+meas tran h0 find v(e_hi) at=9.3u
+meas tran l0 find v(e_lo) at=9.3u
+meas tran c0 find v(e_cm) at=9.3u
 let p_vdd = (v(e_vdd)[span] - e0) / window
 let p_hi = (v(e_hi)[span] - h0) / window
 let p_lo = (v(e_lo)[span] - l0) / window
@@ -52,6 +52,7 @@ meas tran first when v(vin)=v(vcm) rise=1
 meas tran second when v(vin)=v(vcm) rise=2
 let fin = 1 / (second - first)
 echo "p_vdd_w $&p_vdd p_hi_w $&p_hi p_lo_w $&p_lo p_cm_w $&p_cm fin_hz $&fin" > measure.txt
-wrdata convert.txt v(valid) v(b7) v(b6) v(b5) v(b4) v(b3) v(b2) v(b1) v(b0) v(samp) v(vin) v(top) v(vcm) v(e_vdd)
+wrdata convert.txt v(valid) v(b7) v(b6) v(b5) v(b4) v(b3) v(b2) v(b1) v(b0) v(samp) v(vin) v(top) v(vcm) v(e_vdd) v(t6) v(t5) v(t4) v(t3) v(t2) v(t1) v(t0)
+quit
 .endc
 .end

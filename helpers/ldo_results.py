@@ -33,7 +33,7 @@ def corner(path):
     if not loops:
         bad.append("no loop-gain run")
     start = runs.get("ldo_startup", {}).get("final_v", 0)
-    if abs(start / 1.2063 - 1) > 0.05:
+    if not abs(start / 1.2063 - 1) <= 0.05:
         bad.append(f"start-up ends at {start:.4g} V")
     return not bad, runs, bad
 

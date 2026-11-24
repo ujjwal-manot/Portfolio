@@ -1,4 +1,4 @@
-# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power, the same conversion with the chip's own supply and references against the ideal-source one (at most a quarter bit lost, supplied): two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate against vcm at every comparator clock rise (each decision, read between solver steps from a run written without interpolation) under two integration methods within 0.1 LSB (top) and comparator decision times under both within 5% (decide_methods): python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert|supplied ...
+# Reads the ADC's ngspice results and checks them against chip.md: comparator decisions (right sign for every input beyond 50 uV, well past the measured hysteresis, and done inside the 50 ns half clock), Monte Carlo offset and hysteresis spread, DAC level errors as DNL and INL (limits +-0.5 and +-1 LSB, endpoint fit), and a co-simulated conversion (which must hold the full record of a tone coherent to 0.001 bin, measured from the simulated input) as ENOB from a coherent FFT (limit 7.5 bits), offset and full-scale gain error from the tone (limits +-1 and +-2 LSB), and power, the same conversion with the chip's own supply and references against the ideal-source one (at most a quarter bit lost, supplied): two DAC level runs that must agree to 0.01 LSB at every code (same), two conversions that must give the same codes (same_codes), the top plate against vcm at every comparator clock rise (each decision, read between solver steps from a run written without interpolation) under two integration methods within 0.1 LSB (top) and comparator decision times under both within 5% (decide_methods); any nan or infinite value in a result file stops it with an error: python3 adc_results.py decide|offset|levels|same|same_codes|top|decide_methods|convert|supplied ...
 import math, statistics, sys
 import numpy as np
 from adc_spectrum import spectrum, coherent_bin
@@ -7,15 +7,21 @@ LSB = 0.8 / 256
 SIGN_FROM, BUDGET = 50e-6, 50e-9
 LIMITS = {"dnl": 0.5, "inl": 1.0, "enob": 7.5, "offset": 1.0, "gain_error": 2.0}
 
+def number(text):
+    v = float(text)
+    if not math.isfinite(v):
+        raise ValueError(f"measured value {text} is not a number")
+    return v
+
 def decisions(paths, supply):
     problems, worst = [], {}
     for path in paths:
         for line in open(path).readlines()[1:]:
             parts = line.split()
-            dv, t, high = float(parts[0]), parts[1] if len(parts) == 3 else "", float(parts[-1]) > supply / 2
+            dv, t, high = number(parts[0]), parts[1] if len(parts) == 3 else "", number(parts[-1]) > supply / 2
             if abs(dv) >= SIGN_FROM and high != (dv > 0):
                 problems.append(f"{path}: {dv:g} V decided {'high' if high else 'low'}")
-            if t and float(t) > BUDGET:
+            if t and number(t) > BUDGET:
                 problems.append(f"{path}: {dv:g} V took {float(t):.3g} s")
             if t:
                 worst[str(path)] = max(worst.get(str(path), 0), float(t))
@@ -23,18 +29,18 @@ def decisions(paths, supply):
 
 def offsets(paths):
     rows = [dict(zip(*[iter(open(p).read().split())] * 2)) for p in paths]
-    off = [float(r["offset_v"]) for r in rows]
-    hyst = [float(r["hysteresis_v"]) for r in rows]
+    off = [number(r["offset_v"]) for r in rows]
+    hyst = [number(r["hysteresis_v"]) for r in rows]
     return {"mean_v": statistics.mean(off), "sigma_v": statistics.stdev(off), "worst_v": max(off, key=abs), "hysteresis_max_v": max(hyst), "runs": len(off)}
 
 def linearity(path):
-    e = [float(l.split()[1]) for l in open(path).readlines()[1:]]
+    e = [number(l.split()[1]) for l in open(path).readlines()[1:] if not l.startswith("zero is real:")]
     dnl = [(e[d] - e[d - 1]) / LSB for d in range(1, len(e))]
     inl = [(e[d] - e[0] - (e[-1] - e[0]) * d / (len(e) - 1)) / LSB for d in range(len(e))]
     return {"dnl_min": min(dnl), "dnl_max": max(dnl), "inl_min": min(inl), "inl_max": max(inl)}
 
 def same(path_a, path_b, limit=0.01):
-    load = lambda p: {int(c): float(v) for c, v in (line.split() for line in open(p).read().splitlines()[1:])}
+    load = lambda p: {int(c): number(v) for c, v in (line.split() for line in open(p).read().splitlines()[1:] if not line.startswith("zero is real:"))}
     a, b = load(path_a), load(path_b)
     worst = max(abs(a[c] - b[c]) for c in a) / LSB
     return worst <= limit and a.keys() == b.keys(), worst
@@ -45,7 +51,7 @@ def same_codes(path_a, path_b, supply):
     return differ == 0, differ
 
 def top_at_decisions(path, supply):
-    rows = [[float(v) for v in l.split()] for l in open(path) if l.strip()]
+    rows = [[number(v) for v in l.split()] for l in open(path) if l.strip()]
     tops = []
     for a, b in zip(rows, rows[1:]):
         if a[1] < supply / 2 <= b[1]:
@@ -60,12 +66,12 @@ def top_difference(path_a, path_b, supply):
     return max(abs(x - y) for x, y in zip(a, b)) / LSB, len(a)
 
 def decide_difference(path_a, path_b):
-    load = lambda p: {l.split()[0]: float(l.split()[1]) for l in open(p).readlines()[1:] if len(l.split()) == 3}
+    load = lambda p: {l.split()[0]: number(l.split()[1]) for l in open(p).readlines()[1:] if len(l.split()) == 3}
     a, b = load(path_a), load(path_b)
     return max(abs(b[k] / a[k] - 1) for k in a if k in b)
 
 def codes_from_run(path, supply):
-    rows = [[float(v) for v in l.split()][1::2] for l in open(path) if l.strip()]
+    rows = [[number(v) for v in l.split()][1::2] for l in open(path) if l.strip()]
     return [sum(1 << (7 - j) for j in range(8) if rows[i][1 + j] > supply / 2) for i in range(1, len(rows)) if rows[i][0] > supply / 2 >= rows[i - 1][0]]
 
 def check_conversion(codes_path, measure_path, supply, n, fs=1e6):
@@ -75,13 +81,13 @@ def check_conversion(codes_path, measure_path, supply, n, fs=1e6):
         return {"problems": [f"{codes_path}: {len(codes)} codes, the record needs {n}"]}
     codes = codes[:n]
     try:
-        k = coherent_bin(fs, n, float(m["fin_hz"]), tolerance=1e-3)
+        k = coherent_bin(fs, n, number(m["fin_hz"]), tolerance=1e-3)
     except ValueError as e:
         return {"problems": [f"{codes_path}: {e}"]}
     r = spectrum(codes, k)
     x = np.asarray(codes, float)
     amplitude = 2 * abs(np.sum(x * np.exp(-2j * np.pi * k * np.arange(n) / n))) / n
-    r.update(offset_lsb=x.mean() - 127.5, gain=amplitude / (0.4 * 10 ** (-0.5 / 20) / LSB), power_w=sum(abs(float(v)) for q, v in m.items() if q.startswith("p_")))
+    r.update(offset_lsb=x.mean() - 127.5, gain=amplitude / (0.4 * 10 ** (-0.5 / 20) / LSB), power_w=sum(abs(number(v)) for q, v in m.items() if q.startswith("p_")))
     r["gain_error_lsb"] = (r["gain"] - 1) * 256
     if r["enob"] < LIMITS["enob"]:
         problems.append(f"{codes_path}: enob below {LIMITS['enob']}")

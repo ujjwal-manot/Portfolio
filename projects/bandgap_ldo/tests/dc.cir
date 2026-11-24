@@ -1,4 +1,4 @@
-* Bandgap DC testbench with a production trim at 27 C: vref at trim code 8 and 9 gives the real step, the code nearest the 1.2063 V target (the nominal design's vref at code 8, where its tempco is lowest) is set, and then vref from -40 to 125 C in 5 C steps (box tempco in ppm/C), vref at 27 C, the supply current and the line regulation (3.0 to 3.6 V) are measured with that code; the box tempco at code 8 is kept too, untrimmed; all written to dc.txt; supply, corner and mismatch from corner.inc, design from bandgap.cir and bandgap_sizes.inc.
+* Bandgap DC testbench with a production trim at 27 C: vref at trim code 8 and 9 gives the real step, the code nearest the 1.2063 V target (the nominal design's vref at code 8, where its tempco is lowest) is set, and then vref from -40 to 125 C in 5 C steps (box tempco in ppm/C), vref at 27 C, the supply current and the line regulation (3.0 to 3.6 V) are measured with that code; the box tempco at code 8 is kept too, untrimmed; all written to dc.txt, every earlier plot is dropped before each analysis, so a value whose analysis or sweep did not finish stays nan, never a stale or preset number; supply, corner and mismatch from corner.inc, design from bandgap.cir and bandgap_sizes.inc.
 .include corner.inc
 .include bandgap_sizes.inc
 .include bandgap.cir
@@ -10,24 +10,32 @@ VT1 t1 0 0
 VT0 t0 0 0
 X1 vref vg vdd 0 t3 t2 t1 t0 bandgap
 .control
+let nan = 1e400 - 1e400
 let target = 1.2063
-let tc = 0
-let tc8 = 0
-let line = 0
-let v27 = 0
-let v8 = 0
-let v9 = 0
-let idd = 0
-let vmin = 0
-let vmax = 0
-let code = 8
-let hi = 0
+let tc = nan
+let tc8 = nan
+let line = nan
+let v27 = nan
+let v8 = nan
+let v9 = nan
+let idd = nan
+let vmin = nan
+let vmax = nan
+let code = nan
+let hi = nan
+let n = nan
+destroy all
 op
 let v8 = v(vref)
 let hi = v(vdd)
+destroy all
 dc temp -40 125 5
-let tc8 = (vecmax(v(vref)) - vecmin(v(vref))) / mean(v(vref)) / 165 * 1e6
+let n = length(v(vref))
+if n = 34
+  let tc8 = (vecmax(v(vref)) - vecmin(v(vref))) / mean(v(vref)) / 165 * 1e6
+end
 alter vt0 = $&hi
+destroy all
 op
 let v9 = v(vref)
 let code = floor(8 + (target - v8) / (v9 - v8) + 0.5)
@@ -49,15 +57,26 @@ alter vt3 = $&x3
 alter vt2 = $&x2
 alter vt1 = $&x1
 alter vt0 = $&x0
+destroy all
 op
 let v27 = v(vref)
 let idd = -i(VDD)
+destroy all
 dc temp -40 125 5
-let tc = (vecmax(v(vref)) - vecmin(v(vref))) / mean(v(vref)) / 165 * 1e6
-let vmin = vecmin(v(vref))
-let vmax = vecmax(v(vref))
+let n = nan
+let n = length(v(vref))
+if n = 34
+  let tc = (vecmax(v(vref)) - vecmin(v(vref))) / mean(v(vref)) / 165 * 1e6
+  let vmin = vecmin(v(vref))
+  let vmax = vecmax(v(vref))
+end
+destroy all
 dc VDD 3.0 3.6 0.6
-let line = (v(vref)[1] - v(vref)[0]) / 0.6
+let n = nan
+let n = length(v(vref))
+if n = 2
+  let line = (v(vref)[1] - v(vref)[0]) / 0.6
+end
 let step = v9 - v8
 echo dc vref_v $&v27 tc_ppm_per_c $&tc vref_min_v $&vmin vref_max_v $&vmax supply_a $&idd line_v_per_v $&line code $&code untrimmed_v $&v8 untrimmed_tc_ppm_per_c $&tc8 step_v $&step > dc.txt
 quit

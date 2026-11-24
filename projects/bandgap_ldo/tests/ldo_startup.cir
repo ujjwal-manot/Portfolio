@@ -1,29 +1,37 @@
-* Bandgap and LDO start-up with a 0.25 mA load: the supply ramps from 0 in {ramp} (from ramp.inc); writes the ramp, the final vout, the highest vout at any time (thin-oxide loads on the rail must never see more than 1.32 V) and the time from the end of the ramp until vout stays within 1% of its final value, to ldo_startup.txt; corner from corner.inc.
+* Bandgap and LDO start-up with a 0.25 mA load, the trim code from trim.inc (0 V sources tie each trim bit to the ramping supply or to ground; code 8 unless a run says otherwise): the supply ramps from 0 in {ramp} (from ramp.inc); writes the ramp, the final vout, the highest vout at any time (thin-oxide loads on the rail must never see more than 1.32 V) and the time from the end of the ramp until vout stays within 1% of its final value, to ldo_startup.txt, every value nan unless the run reached its end and every measurement succeeds; corner from corner.inc; it integrates with Gear's method because the trapezoidal rule stopped the ff 3.0 V -40 C run 2 ns into the 10 ns ramp with too small a timestep at the bandgap's pnp, and ldo_gear_check reruns it at tt 3.3 V 27 C, ss 3.0 V 125 C and ff 3.0 V -40 C with the trapezoidal rule held to a 1 ns step and compares.
 .include corner.inc
 .include ramp.inc
+.include trim.inc
+.csparam rampc = {ramp}
 .include bandgap_sizes.inc
 .include bandgap.cir
 .include ldo_sizes.inc
 .include ldo.cir
 VDD vdd 0 pwl(0 0 {ramp} {vsupply})
-X1 vref vg vdd 0 vdd 0 0 0 bandgap
+X1 vref vg vdd 0 t3 t2 t1 t0 bandgap
 X2 vout vout vref vg vdd 0 ldo
 ILOAD vout 0 0.25m
+.option method=gear
 .tran {(ramp + 200u) / 5000} {ramp + 200u}
 .control
-let final = 0
-let settle = -1
-let rampend = 0
-let top = 0
+let nan = 1e400 - 1e400
+let final = nan
+let settle = nan
+let rampend = nan
+let top = nan
+let tend = nan
 run
-let n = length(v(vout)) - 1
-let final = v(vout)[n]
-let top = vecmax(v(vout))
-let lvl = vecmax(v(vdd)) * 0.9999
-meas tran rampend when v(vdd)=$&lvl rise=1
-let err = abs(v(vout) / final - 1)
-meas tran settled when err=0.01 cross=last
-let settle = settled - rampend
+let n = length(time) - 1
+let tend = time[n]
+if tend > rampc + 199.9u
+  let final = v(vout)[n]
+  let top = vecmax(v(vout))
+  let lvl = vecmax(v(vdd)) * 0.9999
+  meas tran rampend when v(vdd)=$&lvl rise=1
+  let err = abs(v(vout) / final - 1)
+  meas tran settled when err=0.01 cross=last
+  let settle = settled - rampend
+end
 echo ldo_startup ramp_s $&rampend final_v $&final top_v $&top settle_s $&settle > ldo_startup.txt
 quit
 .endc

@@ -9,10 +9,10 @@ XE2 g fb t vss sg13_hv_nmos w={w_ein} l={l_ein} mm_ok={mm}
 XE3 d d vdd vdd sg13_hv_pmos w={w_eld} l={l_eld} mm_ok={mm}
 XE4 g d vdd vdd sg13_hv_pmos w={w_eld} l={l_eld} mm_ok={mm}
 XN vdd g vout vss sg13_hv_nmos w={w_pass} l={l_pass} ng={ng_pass} mm_ok={mm}
-XCL vout vss cap_cmim w={w_cl} l={w_cl} mm_ok={mm}
+XCL vout vss cap_cmim w={w_cl} l={w_cl} m={m_cl} mm_ok={mm}
 XCG g vss cap_cmim w={w_cg} l={w_cg} mm_ok={mm}
 XRF vref vf vss rhigh w=0.5u l={l_rf} mm_ok={mm}
-XCFL vf vss cap_cmim w={w_cfl} l={w_cfl} mm_ok={mm}
+XCFL vf vss cap_cmim w={w_cfl} l={w_cfl} m={m_cfl} mm_ok={mm}
 XRN nb nbf vss rhigh w=0.5u l={l_rn} mm_ok={mm}
 XCN nbf vss cap_cmim w={w_cn} l={w_cn} mm_ok={mm}
 .ends ldo

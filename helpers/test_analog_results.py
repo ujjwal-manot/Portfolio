@@ -36,11 +36,12 @@ def test_swing_is_not_required_at_the_lowest_supply(tmp_path):
     assert not corners([a, write(tmp_path, "corner_ss_125_min.txt", GOOD.replace("out_high_v 1.14", "out_high_v 0.99"))])[0]
 
 def test_montecarlo_yield_per_spec_and_combined(tmp_path):
+    runs = [write(tmp_path, f"mc_{i}.txt", GOOD) for i in range(300)]
+    assert montecarlo(runs)[0], "300 of 300 bounds the yield at 99.0%"
+    assert not montecarlo(runs[:200])[0], "200 of 200 bounds it at only 98.5%"
     runs = [write(tmp_path, f"mc_{i}.txt", GOOD.replace("pm_deg 67", f"pm_deg {59 if i < 1 else 67}")) for i in range(100)]
     ok, yields, offsets = montecarlo(runs)
-    assert yields["pm_deg"] == 0.99 and yields["combined"] == 0.99 and ok
-    runs.append(write(tmp_path, "mc_100.txt", GOOD.replace("gbw_hz 2.8e7", "gbw_hz 1.9e7")))
-    assert not montecarlo(runs)[0]
+    assert yields["pm_deg"] == 0.99 and yields["combined"] == 0.99 and not ok
 
 def test_each_failed_spec_gets_a_line_naming_it(tmp_path):
     bad = write(tmp_path, "corner_tt_27_nom.txt", GOOD.replace("pm_deg 67", "pm_deg 15").replace("a0_db 72", "a0_db 40"))
@@ -64,3 +65,29 @@ def test_edge_error_counts_offset_through_noise_gain_and_gain_error_at_the_peak(
 def test_yield_lower_bound_at_95_percent_confidence():
     assert abs(lower_bound(200, 200) - 0.05 ** (1 / 200)) < 1e-6
     assert lower_bound(199, 200) < lower_bound(200, 200)
+
+def test_a_failed_run_written_as_nan_or_missing_fails_and_is_named(tmp_path):
+    aborted = GOOD.replace("load sampled_v_rms 4.8e-4 settle_load_v 1e-6 error_at_50ns_v 1e-3 kick_v 0.06", "load sampled_v_rms 4.8e-4 settle_load_v nan error_at_50ns_v nan kick_v nan")
+    alone = write(tmp_path, "corner_tt_27_nom.txt", aborted)
+    assert not corners([alone])[0]
+    out = subprocess.run([sys.executable, str(Path(__file__).parent / "analog_results.py"), "corners", str(alone)], capture_output=True, text=True).stdout.splitlines()
+    assert "FAIL settle_load_v" in out and "FAIL kick_v" in out and "FAIL error_at_50ns_v" in out
+    no_noise = write(tmp_path, "corner_ss_125_lo.txt", GOOD.replace("noise band_v_rms 1e-4 total_v_rms 3.4e-4 psrr_1k_db 47 psrr_1m_db 24\n", ""))
+    assert not corners([write(tmp_path, "corner_ff_27_hi.txt", GOOD), no_noise])[0]
+    assert not montecarlo([alone])[0]
+
+def test_every_montecarlo_yield_line_gives_its_lower_bound(tmp_path):
+    runs = [write(tmp_path, f"mc_{i}.txt", GOOD) for i in range(20)]
+    out = subprocess.run([sys.executable, str(Path(__file__).parent / "analog_results.py"), "mc", *map(str, runs)], capture_output=True, text=True).stdout.splitlines()
+    assert all("at 95% confidence" in l for l in out if " yield " in l and "of 20 runs" in l)
+
+def test_a_nan_fails_wherever_it_sits_among_the_corners(tmp_path):
+    failed = GOOD.replace("kick_v 0.06", "kick_v nan")
+    for order in (("corner_aa_27_nom.txt", "corner_zz_27_nom.txt"), ("corner_zz_27_nom.txt", "corner_aa_27_nom.txt")):
+        paths = [write(tmp_path, order[0], failed), write(tmp_path, order[1], GOOD)]
+        assert not corners(paths)[0]
+
+def test_the_verdict_line_states_both_the_point_estimate_and_its_lower_bound(tmp_path):
+    runs = [write(tmp_path, f"mc_{i}.txt", GOOD) for i in range(200)]
+    out = subprocess.run([sys.executable, str(Path(__file__).parent / "analog_results.py"), "mc", *map(str, runs)], capture_output=True, text=True).stdout
+    assert "point estimate 100.0%; its 95% lower bound 98.5% is below 99%, so the yield verdict fails" in out

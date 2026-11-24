@@ -1,0 +1,12 @@
+Expected failure: FAIL settle_load_v
+--- a/tests/load.cir
++++ b/tests/load.cir
+@@ -19,7 +19,7 @@
+ XDAC top out vcmd vref_hi vref_lo samp 0 0 0 0 0 0 0 0 vdd 0 cap_dac
+ .control
+ noise v(xdac.xc.xb7.b) VIN dec 20 1 10g
+-tran 0.1n 2.25u
++tran 0.1n 1.5u
+ let sampled = noise2.onoise_total
+ meas tran target find v(out) at=0.99u
+ meas tran got find v(xdac.xc.xb7.b) at=2.199u

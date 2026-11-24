@@ -1,0 +1,28 @@
+* One switch unit before and after layout: dut.cir holds either the schematic (dldo_unit.cir with its level shifter) or the Magic extraction under the name dldo_unit; the rail is held at 1.0 V, on switches between 0 and the logic rail every 20 ns with 100 ps edges, and unit.txt gets the current the unit sources into the rail when on and off, the delays from on crossing half the logic rail to that current crossing half its on value on both edges, and the current from vin when on and off once settled; nothing is preset, so a failed measurement leaves its value unreadable; corner, temperature, logic supply (vdd_v) and input supply (vin_v) come from corner.inc.
+.include corner.inc
+.include dut.cir
+.param mm=0
+VDD vdd 0 {vdd_v}
+VIN vin 0 {vin_v}
+VR out 0 1.0
+VA on 0 pulse(0 {vdd_v} 5n 100p 100p 19.9n 40n)
+XU on out vin vdd 0 dldo_unit
+.tran 10p 85n
+.control
+run
+let ha = v(vdd)[0] / 2
+meas tran i_on avg i(VR) from=60n to=64n
+meas tran i_off avg i(VR) from=80n to=84n
+meas tran i_vin_on avg i(VIN) from=60n to=64n
+meas tran i_vin_off avg i(VIN) from=80n to=84n
+let hi = i_on / 2
+meas tran a_up when v(on)=$&ha rise=2
+meas tran s_up when i(VR)=$&hi rise=2
+meas tran a_dn when v(on)=$&ha fall=2
+meas tran s_dn when i(VR)=$&hi fall=2
+let t_on = s_up - a_up
+let t_off = s_dn - a_dn
+echo "unit i_on_a $&i_on i_off_a $&i_off t_on_s $&t_on t_off_s $&t_off i_vin_on_a $&i_vin_on i_vin_off_a $&i_vin_off" > unit.txt
+quit
+.endc
+.end

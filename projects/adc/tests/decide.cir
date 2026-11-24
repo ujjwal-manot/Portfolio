@@ -12,6 +12,7 @@ XC inp inn clk outp outn vdd 0 comparator
 CLP outp 0 5f
 CLN outn 0 5f
 .control
+let nan = 1e400 - 1e400
 echo "dv_v t_decide_s outp_v" > decide.txt
 foreach d 10e-3 1e-3 100e-6 10e-6 1e-6 -1e-6 -10e-6 -100e-6 -1e-3 -10e-3
   let up = 0.6 + $d / 2
@@ -19,6 +20,9 @@ foreach d 10e-3 1e-3 100e-6 10e-6 1e-6 -1e-6 -10e-6 -100e-6 -1e-3 -10e-3
   alter VP dc = up
   alter VN dc = down
   tran 5p 40n
+  let tc = nan
+  let td = nan
+  let op = nan
   meas tran tc when v(clk)=v(half) rise=2
   if $d > 0
     meas tran td when v(xc.an)=v(half) fall=1 td=25n
@@ -29,5 +33,6 @@ foreach d 10e-3 1e-3 100e-6 10e-6 1e-6 -1e-6 -10e-6 -100e-6 -1e-3 -10e-3
   let dt = td - tc
   echo "$d $&dt $&op" >> decide.txt
 end
+quit
 .endc
 .end

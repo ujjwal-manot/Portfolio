@@ -1,0 +1,3 @@
+Why: the comparator tail at 4 um, the first size tried, against the 0.5 um it has now
+make convert CONVERT=build/convert/tt_27_nom/convert.txt exit 2
+the run left no log

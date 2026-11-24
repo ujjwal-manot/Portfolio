@@ -1,7 +1,7 @@
 {
  "broken_branch_counter_misses_taken": {
   "logs": {
-   "branch_counter_misses_taken.log": "7a8c12b72a1bd1c288af418ef22d9c0fd164bfba953fe111eff413f2abe93d80"
+   "branch_counter_misses_taken.log": "c5bb85487b5f8cc3a066ec341300d6fd0bca90aae20acea025cc2d4c725c3414"
   },
   "result": "pass",
   "sources": {
@@ -9,7 +9,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -36,7 +36,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -57,15 +57,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:00:05",
+  "time": "2026-11-22 12:50:09",
   "values": {}
  },
  "broken_byte_store_ignores_offset": {
   "logs": {
-   "byte_store_ignores_offset.log": "7cbe44dfea247d512787466dc8d48e130cde13cf49d3a73c75093e260a2a6148"
+   "byte_store_ignores_offset.log": "a35d0c6f32a4ad7bcdc1e0620f1b56fa5135c52f3412fe36ad638ec35345b916"
   },
   "result": "pass",
   "sources": {
@@ -73,7 +73,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -100,7 +100,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -121,15 +121,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:01:31",
+  "time": "2026-11-22 12:50:56",
   "values": {}
  },
  "broken_imem_enable_ignores_redirect": {
   "logs": {
-   "imem_enable_ignores_redirect.log": "6e5b1f9178630b8dc26b4ef514f363b87b0540af81921bb018e4e7e905933818"
+   "imem_enable_ignores_redirect.log": "1b582d01cc998c533e129f393f3bd87f94278e378cf7565549b75295d09d7163"
   },
   "result": "pass",
   "sources": {
@@ -137,7 +137,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -164,7 +164,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -185,15 +185,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:02:02",
+  "time": "2026-11-22 12:51:12",
   "values": {}
  },
  "broken_interrupt_ignores_global_enable": {
   "logs": {
-   "interrupt_ignores_global_enable.log": "1fba7c9fe3bdb56240d43c49a75195002db3abb6699066d97e9af30020d6a4a6"
+   "interrupt_ignores_global_enable.log": "1acf1247b42595644a5982bd03e2d826d86ca91a1331fc9bcffcb5b99280a57b"
   },
   "result": "pass",
   "sources": {
@@ -201,7 +201,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -228,7 +228,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -249,15 +249,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:03:01",
+  "time": "2026-11-22 12:51:20",
   "values": {}
  },
  "broken_interrupt_priority_inverted": {
   "logs": {
-   "interrupt_priority_inverted.log": "65801bb31d57cbf226ae86c29c0d692d90d1b4bafe53bc7db82f126b91e695d6"
+   "interrupt_priority_inverted.log": "7f7ebc7d97660af7b97d4606a1acc537932a8e35b9bf1b725ca661afb673e34b"
   },
   "result": "pass",
   "sources": {
@@ -265,7 +265,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -292,7 +292,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -313,15 +313,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:04:06",
+  "time": "2026-11-22 12:51:29",
   "values": {}
  },
  "broken_mcountinhibit_cycle_ignored": {
   "logs": {
-   "mcountinhibit_cycle_ignored.log": "3aa231556a81f17041f6cd75a68febef4af6576716bc7800dbbf7b155b7d2c49"
+   "mcountinhibit_cycle_ignored.log": "52662c7beb4a3567ffdf32b34e4f427b4f09dcfa2769070c52433819c5ae275c"
   },
   "result": "pass",
   "sources": {
@@ -329,7 +329,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -356,7 +356,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -377,15 +377,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:05:04",
+  "time": "2026-11-22 12:51:38",
   "values": {}
  },
  "broken_mepc_skips_trapped_instruction": {
   "logs": {
-   "mepc_skips_trapped_instruction.log": "0b54dba10068c47648c888069d96a9aeaa4bcf93cfafeef053ea4fc5550d3428"
+   "mepc_skips_trapped_instruction.log": "f8c91ade3afbcc50de63e0b1db5444d7e7d2325effe7346c6ae3e35d7200b20c"
   },
   "result": "pass",
   "sources": {
@@ -393,7 +393,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -420,7 +420,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -441,15 +441,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:06:07",
+  "time": "2026-11-22 12:51:47",
   "values": {}
  },
  "broken_mip_bits_swapped": {
   "logs": {
-   "mip_bits_swapped.log": "e2c0dcde889ae6ccff0666e271f0398dfa84f37754d1703f28bbc486cbbc44a8"
+   "mip_bits_swapped.log": "e79183ebaf5bc1a07ff6700b37af996d632de1e0cd8d4a8c26928b112bdce812"
   },
   "result": "pass",
   "sources": {
@@ -457,7 +457,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -484,7 +484,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -505,15 +505,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:07:14",
+  "time": "2026-11-22 12:51:56",
   "values": {}
  },
  "broken_mispredict_counter_counts_traps": {
   "logs": {
-   "mispredict_counter_counts_traps.log": "f48f1f537d3ffbcdfc3c0dc0110557e35fab51bd54ae8b7f809bc29d19a733f8"
+   "mispredict_counter_counts_traps.log": "ca961ecf04daf21d3c87ad089a921924ba338c3a17a05f5daf569e4c21effe01"
   },
   "result": "pass",
   "sources": {
@@ -521,7 +521,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -548,7 +548,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -569,15 +569,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:08:21",
+  "time": "2026-11-22 12:52:06",
   "values": {}
  },
  "broken_mret_leaves_interrupts_off": {
   "logs": {
-   "mret_leaves_interrupts_off.log": "d625f63ea49175bc0679ca813775fc811f1ce440774db2410c3ffb2a049af298"
+   "mret_leaves_interrupts_off.log": "e018b800f99746fcd5286c5053d3103b0d88201f7984c03e341d1c6f11dc7412"
   },
   "result": "pass",
   "sources": {
@@ -585,7 +585,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -612,7 +612,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -633,15 +633,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:09:26",
+  "time": "2026-11-22 12:52:15",
   "values": {}
  },
  "broken_mtime_read_off_by_64": {
   "logs": {
-   "mtime_read_off_by_64.log": "ec6f7ba48659d9232c84699514729ee1a4bfdff951eb7682ee9c661b31f0873b"
+   "mtime_read_off_by_64.log": "3a53a4abd4223bf0728ed2bc28f362b8e9afd0ef0f4b8c29b66286d6b3ff100b"
   },
   "result": "pass",
   "sources": {
@@ -649,7 +649,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -676,7 +676,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -697,15 +697,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:10:35",
+  "time": "2026-11-22 12:52:26",
   "values": {}
  },
  "broken_no_flush_after_mispredict": {
   "logs": {
-   "no_flush_after_mispredict.log": "68cd948e0de7b17602767166295b2f28f2383f5a4a554624fd820cab36ea8cb5"
+   "no_flush_after_mispredict.log": "f86b69d8b72b341d9ecb9c5f1499b17e7f7e5dfd45f87a08515a144888acad29"
   },
   "result": "pass",
   "sources": {
@@ -713,7 +713,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -740,7 +740,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -761,15 +761,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:11:30",
+  "time": "2026-11-22 12:52:35",
   "values": {}
  },
  "broken_no_forwarding_from_mem": {
   "logs": {
-   "no_forwarding_from_mem.log": "c54c71eb8c4a8214f7b586f39ee18642fb260451727acfb1c1501fc347585873"
+   "no_forwarding_from_mem.log": "1bcbd13d21a5286e0e627acacd134918dce376ae857c45ccb1c9f7ce7fde2128"
   },
   "result": "pass",
   "sources": {
@@ -777,7 +777,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -804,7 +804,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -825,15 +825,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:12:39",
+  "time": "2026-11-22 12:52:43",
   "values": {}
  },
  "broken_no_load_use_stall": {
   "logs": {
-   "no_load_use_stall.log": "c235b2cdd37b38d9241da83bce4507593ca3c13adbb07d67bcbb92761c84a2d9"
+   "no_load_use_stall.log": "06f68bf1edad5602bc608436d94495a6392a5883ed8fa4c691d050d83bab9a4a"
   },
   "result": "pass",
   "sources": {
@@ -841,7 +841,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -868,7 +868,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -889,10 +889,10 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:13:46",
+  "time": "2026-11-22 12:52:51",
   "values": {}
  },
  "broken_reset_not_synchronized": {
@@ -905,7 +905,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -932,7 +932,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -953,15 +953,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:14:33",
+  "time": "2026-11-22 12:53:15",
   "values": {}
  },
  "broken_timer_compares_low_word": {
   "logs": {
-   "timer_compares_low_word.log": "40583399233a13aa4a8444e81d77f2e619d206dcbb6359a1aefc81f52a936cd1"
+   "timer_compares_low_word.log": "b92019e457ed011393646d4cd170f184767d4c4539e9cd930cafbf6817271770"
   },
   "result": "pass",
   "sources": {
@@ -969,7 +969,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -996,7 +996,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1017,15 +1017,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:15:24",
+  "time": "2026-11-22 12:53:25",
   "values": {}
  },
  "broken_wfi_never_sleeps": {
   "logs": {
-   "wfi_never_sleeps.log": "77dafebeece424c9198cadca3e0906adb4c76a962d3f38a95ec3ab54781bc342"
+   "wfi_never_sleeps.log": "0e85b7150ae21bd55446ad355d6abed291962669ef747640c83262cbde828336"
   },
   "result": "pass",
   "sources": {
@@ -1033,7 +1033,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1060,7 +1060,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1081,15 +1081,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:16:25",
+  "time": "2026-11-22 12:53:34",
   "values": {}
  },
  "broken_x0_read_from_register_file": {
   "logs": {
-   "x0_read_from_register_file.log": "ffffaeef15b6733bcc97dd47b70c694a5dd4aa0e9b8e68b0e6ee838a857e2f89"
+   "x0_read_from_register_file.log": "f9d3ed71b0d3511e02fa6ccf772ea6a229db5a890e7891227c577291e764ac2b"
   },
   "result": "pass",
   "sources": {
@@ -1097,7 +1097,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1124,7 +1124,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1145,10 +1145,10 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 09:17:36",
+  "time": "2026-11-22 12:53:42",
   "values": {}
  },
  "cdc": {
@@ -1161,7 +1161,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1188,7 +1188,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1209,10 +1209,10 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:56:31",
+  "time": "2026-11-22 12:47:35",
   "values": {}
  },
  "cdc_cells": {
@@ -1225,7 +1225,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1252,7 +1252,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1273,15 +1273,85 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:56:57",
+  "time": "2026-11-22 12:47:58",
+  "values": {}
+ },
+ "formal": {
+  "logs": {
+   "formal.log": "0a648b1e2fd86c7a47068dd18ad869780e7e7405c548bb356a1c9ff43de721e5"
+  },
+  "result": "fail",
+  "sources": {
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/cpu_model.py": "eeea3b46ee1de49da4f2492d7af851d131ea2069bc1031702186a9b5653686ec",
+   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
+   "projects/cpu/Makefile": "0a1c62b1481a18633e0afd934ccb0a90d3fc2c71836ba47a78b37bae8acfbe23",
+   "projects/cpu/broken/add_carries_in_when_rs1_bit5_set.patch": "2ab3081e59c74121f7a0d62458c62aee58ecf271a3bb946df4a14cdb6c9262e0",
+   "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
+   "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
+   "projects/cpu/broken/imem_enable_ignores_redirect.patch": "6f9b42e5f9b0c33e2e2a587ac49b6882c163478d3d71459a22b0fb5623437c86",
+   "projects/cpu/broken/interrupt_ignores_global_enable.patch": "0dd19fa9c2dc7bb9018d3eb9c20a7a938290359ed59f6733cf28b62e9708b09b",
+   "projects/cpu/broken/interrupt_priority_inverted.patch": "b420653b70612fb9162362bf72f2b52ac55b6cae8f11573cb1c5c2604fe21810",
+   "projects/cpu/broken/mac_left_out.patch": "b6ab1714cf26e7e2131c73031c3c189078df92e7dec1c95b14ab260e0215dc57",
+   "projects/cpu/broken/mcountinhibit_cycle_ignored.patch": "66675b46a8d3bac416d363bcc19d31f4fff543060ce69be78b0d0a3f16944076",
+   "projects/cpu/broken/mepc_skips_trapped_instruction.patch": "536477c6bf2fdbfa0a2efd37a2b5e0ead0327d2d37b861226e6cd9628da39130",
+   "projects/cpu/broken/mip_bits_swapped.patch": "1e731b40f8e4fe7e0d9d692c069189bd1c3b6dbf3bca970291dbd21188716c4a",
+   "projects/cpu/broken/mispredict_counter_counts_traps.patch": "854c5826ed0fd7d44cf6f0603bca1a606e7ecf5c5a3ef9a7ad95c4aadf6717e2",
+   "projects/cpu/broken/mret_leaves_interrupts_off.patch": "03def5a7bd18c96c9df58074a516b6000d4598b7f620bc0ddbea198fd26f13af",
+   "projects/cpu/broken/mtime_read_off_by_64.patch": "7dc8a48a25eb6f3de21d32c9f4f3f4b04fdf7928ae2c63839a2b5abbd648ebf3",
+   "projects/cpu/broken/no_flush_after_mispredict.patch": "9f272df0dec653b4e0180fec1bba284b2bf583bc24f4f44666dfa8e582efc8b9",
+   "projects/cpu/broken/no_forwarding_from_mem.patch": "80f9da6965b40d6273f70a69e9b63f5bbcce3ce81a65822ca2f79ae8a0b32347",
+   "projects/cpu/broken/no_load_use_stall.patch": "836a3b24c4cb487ab4008fb7eb565a891c013a4ee709d58ff0b1c677f5d37480",
+   "projects/cpu/broken/reset_not_synchronized.patch": "b28941155ecd0a75f60b08c7597f75db171153ae70fdbc8f73c1e93ad5d77940",
+   "projects/cpu/broken/timer_compares_low_word.patch": "21860e390027d0eac966c3f02a0bf1434a8790ca4fa8b3894c2b41124e458937",
+   "projects/cpu/broken/wfi_never_sleeps.patch": "b9fef8250dcc45cadc9163b36616f09df32ca8a2d669a465baf3a8c7cf8a161d",
+   "projects/cpu/broken/x0_read_from_register_file.patch": "c3d170fa5b787660f2c6ba24c58b3f22a14d434c281753eef7d56f2488137d19",
+   "projects/cpu/cdc/waivers.txt": "dc793c3fa25bae75a90751e73a4fa649533a18e0eea596520e19bc0797bf4abb",
+   "projects/cpu/design/cpu.sv": "30d00575a06c2c7e6c70bf572c4e3419923c2f3d756c9bd39c62e04c340b46d1",
+   "projects/cpu/firmware/arch/model_test.h": "fd51c7b25d1b067a1ed1785060c38aba7ae0bc925de60ed3c189a8107f432ea3",
+   "projects/cpu/firmware/build.sh": "cdb2bf0616fc11585cd1459648492cf8b2258ac43bb69ceb7b2df175eefccfd9",
+   "projects/cpu/firmware/filter.c": "547ae1c0e8e8090416797d5bcbd09abeef0e034aba859d16c4c0fd8857bb3493",
+   "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
+   "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
+   "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
+   "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
+   "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
+   "projects/cpu/formal/checks.cfg": "44b24bafba820aa48683751a16957e34134c1f357a7331867292b7294ad675dd",
+   "projects/cpu/formal/wrapper.sv": "c4eeea95a6924223173f51a780ef6a59890b60c71c940a805744e2aa07bd296e",
+   "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
+   "projects/cpu/layout/cpu.sdc": "74f06b96aab2a8c40f8a37700a89477b5e367efc10a5688b51f6a768b7b18b04",
+   "projects/cpu/layout/sram_blackbox.v": "da7cf4d040d64ec065f23ff8af31bf5d58ff27c470b5be3147b1b936008ddf56",
+   "projects/cpu/tests/cpu_board.sv": "d110a91ebadaa057198782d3cf7d0a9b1762596b5e1f1890880285afbd4aecc7",
+   "projects/cpu/tests/cpu_top_board.sv": "2dd3949ea395007290caebe72f6e35dfa1270b5c888ea29e0c9203ecf80532d6",
+   "projects/cpu/tests/lockstep.py": "d1ba321224cee9c2ae36d37b8c042cdb99c7cf413a004bdffed39a3781f99907",
+   "projects/cpu/tests/sram_hold.cir": "71806405d0e6a07ddda48653e9521f6f1acbbdd0d0754ec8981048669c73a811",
+   "projects/cpu/tests/test_arch.py": "6c2b783cc898d52fd76b677f0935f0fe93249d9d835e1aef23c77034c7849232",
+   "projects/cpu/tests/test_cpu.py": "a4ea8394b363407657c9c41906a54e5f02c6d5211bedf7bcf5d25010b80f0b4f",
+   "projects/cpu/tests/test_cpu_model.py": "a9b08ff6a4133eb03d8d371b15977b15dffadf32c7682009ad3f5408547c7098",
+   "projects/cpu/tests/test_filter.py": "bdd5e00052fbcb6b4d80a64e031fe8840159daa6e2cc2d8579a535b352639680",
+   "projects/cpu/tests/test_interrupts.py": "6139ab6b57c680e4b46a7f9df071bfe03d95e4fa0b12e1e37535d48b78424c3c",
+   "projects/cpu/tests/test_power.py": "0a448b47c5ecf2f0ffcb913dda6373608e850774d61c06e4d1be9077b67cd9e1",
+   "projects/cpu/timing/cpu_top.v": "584522951873412832986c1ca163e4d5c0842e6233ef835638f449fbbbc95a01",
+   "projects/cpu/timing/power.tcl": "2bf6fde41f20e491645bab2a1771b176159e4995e83f7824f808ce1c172e5302",
+   "projects/cpu/timing/synth.ys": "86f92cc578c2567b02dad95ae12fe99d888dfa0c5cf672b685a4d1c7c1f519ca",
+   "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
+   "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
+   "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
+  },
+  "time": "2026-11-22 18:17:54",
   "values": {}
  },
  "model_vs_spike": {
   "logs": {
-   "model_vs_spike.log": "382368de4d5b1c9f5c55b8cf06a0f702fe371b914be573f9c080deb37de3f4cb"
+   "model_vs_spike.log": "7c0497f22724e2ab4d114461425285570427812737ae1460be4c38ea3473513a"
   },
   "result": "pass",
   "sources": {
@@ -1289,7 +1359,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1316,7 +1386,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1337,10 +1407,10 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:52:11",
+  "time": "2026-11-22 12:55:56",
   "values": {}
  },
  "power": {
@@ -1353,7 +1423,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1380,7 +1450,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1401,15 +1471,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:59:44",
+  "time": "2026-11-22 12:49:56",
   "values": {}
  },
  "sram_hold": {
   "logs": {
-   "sram_hold.log": "4d43de47ecfc1691f9f761710de42194f9bfda5f69e33f8677a9b23ea3c20c3b",
+   "sram_hold.log": "3750aa2d3a66779f65f88ad44052866515c25ca196ec0008951ebcace26d082a",
    "sram_hold_ff_125_1v32.txt": "a4c579bbe7ff684976678d80f77b5731f1834bff7f753eaa9ccbce4671245229",
    "sram_hold_fs_125_1v32.txt": "505f653acb8e4472b1b8dc35cc584cf13faa3a4d1e73b458c46c851f807a9695",
    "sram_hold_sf_125_1v32.txt": "1dd21356b052059691340e483cf4fa535c9b29fec6a7ab51c064e6f2a2e800f8",
@@ -1422,7 +1492,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1449,7 +1519,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1470,23 +1540,23 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:59:47",
+  "time": "2026-11-22 12:49:58",
   "values": {}
  },
  "synth": {
   "logs": {
-   "synth.log": "d842a118f635cc80c1a09017c7fbaca0437f6805a894af280478d9836453b94c"
+   "synth.log": "8be3419ef3330ca4ced6cf6ff39f2fdaca0e2b0b544c968c20cb1023b6c66ae8"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
-   "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
+   "helpers/cpu_model.py": "eeea3b46ee1de49da4f2492d7af851d131ea2069bc1031702186a9b5653686ec",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1507,13 +1577,13 @@
    "projects/cpu/broken/wfi_never_sleeps.patch": "b9fef8250dcc45cadc9163b36616f09df32ca8a2d669a465baf3a8c7cf8a161d",
    "projects/cpu/broken/x0_read_from_register_file.patch": "c3d170fa5b787660f2c6ba24c58b3f22a14d434c281753eef7d56f2488137d19",
    "projects/cpu/cdc/waivers.txt": "dc793c3fa25bae75a90751e73a4fa649533a18e0eea596520e19bc0797bf4abb",
-   "projects/cpu/design/cpu.sv": "c4fa470f17855ebe0bcd3f57133dbd8dcedcc36326cb7f0002c606896e50984d",
-   "projects/cpu/firmware/build.sh": "8a4b3ef40817d3a9f8c7bc2ebc842056807e82bfb257de262e0cc78563cd7ef7",
-   "projects/cpu/firmware/filter.c": "dedeffdc647b00db7f9d5fdd0280ea42e3b43b23279eea678cbd60ed0d6bf518",
+   "projects/cpu/design/cpu.sv": "c71e7ed2e4e08e4bcda5a064c60a0be66982a1e2018699c96ce0d03becf13aa6",
+   "projects/cpu/firmware/build.sh": "55207f21bfa09fab0acb222d24cad7be7b76e801a4f7e5fcc96a8370441710d4",
+   "projects/cpu/firmware/filter.c": "547ae1c0e8e8090416797d5bcbd09abeef0e034aba859d16c4c0fd8857bb3493",
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1521,28 +1591,93 @@
    "projects/cpu/layout/sram_blackbox.v": "da7cf4d040d64ec065f23ff8af31bf5d58ff27c470b5be3147b1b936008ddf56",
    "projects/cpu/tests/cpu_board.sv": "caaa806e86cf4e2ba70c915d7378b2c6d395ba8d93d28094d39c4e45eb623851",
    "projects/cpu/tests/cpu_top_board.sv": "2dd3949ea395007290caebe72f6e35dfa1270b5c888ea29e0c9203ecf80532d6",
-   "projects/cpu/tests/lockstep.py": "b6d8f99783076d5d0924467792f641a5eebca49b7fd2f73a05fea91da0f5fdce",
+   "projects/cpu/tests/lockstep.py": "bd98da53bc34750bfc533d33e571e2ed799590379f22f7ba241b4a37721b788a",
    "projects/cpu/tests/sram_hold.cir": "71806405d0e6a07ddda48653e9521f6f1acbbdd0d0754ec8981048669c73a811",
    "projects/cpu/tests/test_cpu.py": "a4ea8394b363407657c9c41906a54e5f02c6d5211bedf7bcf5d25010b80f0b4f",
-   "projects/cpu/tests/test_cpu_model.py": "2e0ae9d5dd6a46cc4f250b1f3fc3193eff9f256341b4b72597781eb48cc9818c",
-   "projects/cpu/tests/test_filter.py": "60a70aad8b2ad36589e2cc70ba2c23bcd80e0a228e9e6f0fd669b540a6c86b19",
+   "projects/cpu/tests/test_cpu_model.py": "a9b08ff6a4133eb03d8d371b15977b15dffadf32c7682009ad3f5408547c7098",
+   "projects/cpu/tests/test_filter.py": "bdd5e00052fbcb6b4d80a64e031fe8840159daa6e2cc2d8579a535b352639680",
    "projects/cpu/tests/test_interrupts.py": "6139ab6b57c680e4b46a7f9df071bfe03d95e4fa0b12e1e37535d48b78424c3c",
    "projects/cpu/tests/test_power.py": "0a448b47c5ecf2f0ffcb913dda6373608e850774d61c06e4d1be9077b67cd9e1",
-   "projects/cpu/timing/cpu_top.v": "f7457779a91944ebb2e8ab4104d9f9b9524465bf0aadecf6b7a85acb09aba95a",
+   "projects/cpu/timing/cpu_top.v": "584522951873412832986c1ca163e4d5c0842e6233ef835638f449fbbbc95a01",
    "projects/cpu/timing/power.tcl": "2bf6fde41f20e491645bab2a1771b176159e4995e83f7824f808ce1c172e5302",
    "projects/cpu/timing/synth.ys": "86f92cc578c2567b02dad95ae12fe99d888dfa0c5cf672b685a4d1c7c1f519ca",
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:55:40",
+  "time": "2026-11-22 18:04:11",
+  "values": {}
+ },
+ "synth_no_mac": {
+  "logs": {
+   "synth_no_mac.log": "b7efdfe6ac9cea4bae0ce2a334f64bbfed4b53fbc3592cdde9248771895f3bc6"
+  },
+  "result": "pass",
+  "sources": {
+   "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
+   "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
+   "helpers/cpu_model.py": "eeea3b46ee1de49da4f2492d7af851d131ea2069bc1031702186a9b5653686ec",
+   "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
+   "projects/cpu/Makefile": "5e52e9df3073ef20114a310a31d485d851b971642da0790547f2876dc7ced40d",
+   "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
+   "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
+   "projects/cpu/broken/imem_enable_ignores_redirect.patch": "6f9b42e5f9b0c33e2e2a587ac49b6882c163478d3d71459a22b0fb5623437c86",
+   "projects/cpu/broken/interrupt_ignores_global_enable.patch": "0dd19fa9c2dc7bb9018d3eb9c20a7a938290359ed59f6733cf28b62e9708b09b",
+   "projects/cpu/broken/interrupt_priority_inverted.patch": "b420653b70612fb9162362bf72f2b52ac55b6cae8f11573cb1c5c2604fe21810",
+   "projects/cpu/broken/mac_left_out.patch": "b6ab1714cf26e7e2131c73031c3c189078df92e7dec1c95b14ab260e0215dc57",
+   "projects/cpu/broken/mcountinhibit_cycle_ignored.patch": "66675b46a8d3bac416d363bcc19d31f4fff543060ce69be78b0d0a3f16944076",
+   "projects/cpu/broken/mepc_skips_trapped_instruction.patch": "536477c6bf2fdbfa0a2efd37a2b5e0ead0327d2d37b861226e6cd9628da39130",
+   "projects/cpu/broken/mip_bits_swapped.patch": "1e731b40f8e4fe7e0d9d692c069189bd1c3b6dbf3bca970291dbd21188716c4a",
+   "projects/cpu/broken/mispredict_counter_counts_traps.patch": "854c5826ed0fd7d44cf6f0603bca1a606e7ecf5c5a3ef9a7ad95c4aadf6717e2",
+   "projects/cpu/broken/mret_leaves_interrupts_off.patch": "03def5a7bd18c96c9df58074a516b6000d4598b7f620bc0ddbea198fd26f13af",
+   "projects/cpu/broken/mtime_read_off_by_64.patch": "7dc8a48a25eb6f3de21d32c9f4f3f4b04fdf7928ae2c63839a2b5abbd648ebf3",
+   "projects/cpu/broken/no_flush_after_mispredict.patch": "9f272df0dec653b4e0180fec1bba284b2bf583bc24f4f44666dfa8e582efc8b9",
+   "projects/cpu/broken/no_forwarding_from_mem.patch": "80f9da6965b40d6273f70a69e9b63f5bbcce3ce81a65822ca2f79ae8a0b32347",
+   "projects/cpu/broken/no_load_use_stall.patch": "836a3b24c4cb487ab4008fb7eb565a891c013a4ee709d58ff0b1c677f5d37480",
+   "projects/cpu/broken/reset_not_synchronized.patch": "b28941155ecd0a75f60b08c7597f75db171153ae70fdbc8f73c1e93ad5d77940",
+   "projects/cpu/broken/timer_compares_low_word.patch": "21860e390027d0eac966c3f02a0bf1434a8790ca4fa8b3894c2b41124e458937",
+   "projects/cpu/broken/wfi_never_sleeps.patch": "b9fef8250dcc45cadc9163b36616f09df32ca8a2d669a465baf3a8c7cf8a161d",
+   "projects/cpu/broken/x0_read_from_register_file.patch": "c3d170fa5b787660f2c6ba24c58b3f22a14d434c281753eef7d56f2488137d19",
+   "projects/cpu/cdc/waivers.txt": "dc793c3fa25bae75a90751e73a4fa649533a18e0eea596520e19bc0797bf4abb",
+   "projects/cpu/design/cpu.sv": "c71e7ed2e4e08e4bcda5a064c60a0be66982a1e2018699c96ce0d03becf13aa6",
+   "projects/cpu/firmware/build.sh": "55207f21bfa09fab0acb222d24cad7be7b76e801a4f7e5fcc96a8370441710d4",
+   "projects/cpu/firmware/filter.c": "547ae1c0e8e8090416797d5bcbd09abeef0e034aba859d16c4c0fd8857bb3493",
+   "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
+   "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
+   "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
+   "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
+   "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
+   "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
+   "projects/cpu/layout/cpu.sdc": "74f06b96aab2a8c40f8a37700a89477b5e367efc10a5688b51f6a768b7b18b04",
+   "projects/cpu/layout/sram_blackbox.v": "da7cf4d040d64ec065f23ff8af31bf5d58ff27c470b5be3147b1b936008ddf56",
+   "projects/cpu/tests/cpu_board.sv": "caaa806e86cf4e2ba70c915d7378b2c6d395ba8d93d28094d39c4e45eb623851",
+   "projects/cpu/tests/cpu_top_board.sv": "2dd3949ea395007290caebe72f6e35dfa1270b5c888ea29e0c9203ecf80532d6",
+   "projects/cpu/tests/lockstep.py": "bd98da53bc34750bfc533d33e571e2ed799590379f22f7ba241b4a37721b788a",
+   "projects/cpu/tests/sram_hold.cir": "71806405d0e6a07ddda48653e9521f6f1acbbdd0d0754ec8981048669c73a811",
+   "projects/cpu/tests/test_cpu.py": "a4ea8394b363407657c9c41906a54e5f02c6d5211bedf7bcf5d25010b80f0b4f",
+   "projects/cpu/tests/test_cpu_model.py": "a9b08ff6a4133eb03d8d371b15977b15dffadf32c7682009ad3f5408547c7098",
+   "projects/cpu/tests/test_filter.py": "bdd5e00052fbcb6b4d80a64e031fe8840159daa6e2cc2d8579a535b352639680",
+   "projects/cpu/tests/test_interrupts.py": "6139ab6b57c680e4b46a7f9df071bfe03d95e4fa0b12e1e37535d48b78424c3c",
+   "projects/cpu/tests/test_power.py": "0a448b47c5ecf2f0ffcb913dda6373608e850774d61c06e4d1be9077b67cd9e1",
+   "projects/cpu/timing/cpu_top.v": "584522951873412832986c1ca163e4d5c0842e6233ef835638f449fbbbc95a01",
+   "projects/cpu/timing/power.tcl": "2bf6fde41f20e491645bab2a1771b176159e4995e83f7824f808ce1c172e5302",
+   "projects/cpu/timing/synth.ys": "86f92cc578c2567b02dad95ae12fe99d888dfa0c5cf672b685a4d1c7c1f519ca",
+   "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
+   "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
+   "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
+   "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
+  },
+  "time": "2026-11-22 18:05:16",
   "values": {}
  },
  "test_filter": {
   "logs": {
-   "test_filter.log": "04e99d42631c31474e75c28b70dc2cf851a18befa6d0889e89db28573db885dc"
+   "test_filter.log": "571b4e20deac1b15cd0f03d69f743aeba834c7b96ec67f75f5f1c7d4042d3d1f"
   },
   "result": "pass",
   "sources": {
@@ -1550,7 +1685,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1577,7 +1712,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1598,15 +1733,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:55:04",
+  "time": "2026-11-22 12:46:36",
   "values": {}
  },
  "test_interrupts": {
   "logs": {
-   "test_interrupts.log": "9b04fae749c30606723d5fb34d2bc2ef0e0a4149dde64a89f9a01f3df0c60d99"
+   "test_interrupts.log": "472f85495b1e3c95755f6fd0dfce68df4457dc02c58334d404122392e9c09d83"
   },
   "result": "pass",
   "sources": {
@@ -1614,7 +1749,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1641,7 +1776,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1662,15 +1797,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:54:44",
+  "time": "2026-11-22 12:46:25",
   "values": {}
  },
  "test_isa": {
   "logs": {
-   "test_isa.log": "828033720901b7fe94b06a8d9d12841a8c442bf07b8f7098edf646f21ad008c9"
+   "test_isa.log": "22fff637b31393848a2367f1580a7d32bf31d18df418f9668d301cb192200642"
   },
   "result": "pass",
   "sources": {
@@ -1678,7 +1813,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1705,7 +1840,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1726,15 +1861,15 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:54:26",
+  "time": "2026-11-22 12:46:17",
   "values": {}
  },
  "test_power": {
   "logs": {
-   "test_power.log": "208bede1e8ebb178457a08192b829cab332edb98b1c852f4c7bdb91526e33052"
+   "test_power.log": "01f19f0e5ee7d3d6a57251af3e76ca682ff238831f425983ff668cdbf8b33474"
   },
   "result": "pass",
   "sources": {
@@ -1742,7 +1877,7 @@
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1769,7 +1904,7 @@
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1790,23 +1925,23 @@
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "083b0984fa40c72c540f7e2b930925fa97b272b6ecf38825ce8e06792d607c25",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:59:22",
+  "time": "2026-11-22 12:49:42",
   "values": {}
  },
  "timing_fast": {
   "logs": {
-   "timing_fast.log": "3b6b7e2118a800fd35c82fbe7edb858d9d8d52c15028425a23341268a7582dc5"
+   "timing_fast.log": "cd528fab26dd2c6ed3bebafff013f01c549dbabd46bba5c72aedd7880f42851e"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
-   "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
+   "helpers/cpu_model.py": "eeea3b46ee1de49da4f2492d7af851d131ea2069bc1031702186a9b5653686ec",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1827,13 +1962,13 @@
    "projects/cpu/broken/wfi_never_sleeps.patch": "b9fef8250dcc45cadc9163b36616f09df32ca8a2d669a465baf3a8c7cf8a161d",
    "projects/cpu/broken/x0_read_from_register_file.patch": "c3d170fa5b787660f2c6ba24c58b3f22a14d434c281753eef7d56f2488137d19",
    "projects/cpu/cdc/waivers.txt": "dc793c3fa25bae75a90751e73a4fa649533a18e0eea596520e19bc0797bf4abb",
-   "projects/cpu/design/cpu.sv": "c4fa470f17855ebe0bcd3f57133dbd8dcedcc36326cb7f0002c606896e50984d",
-   "projects/cpu/firmware/build.sh": "8a4b3ef40817d3a9f8c7bc2ebc842056807e82bfb257de262e0cc78563cd7ef7",
-   "projects/cpu/firmware/filter.c": "dedeffdc647b00db7f9d5fdd0280ea42e3b43b23279eea678cbd60ed0d6bf518",
+   "projects/cpu/design/cpu.sv": "c71e7ed2e4e08e4bcda5a064c60a0be66982a1e2018699c96ce0d03becf13aa6",
+   "projects/cpu/firmware/build.sh": "55207f21bfa09fab0acb222d24cad7be7b76e801a4f7e5fcc96a8370441710d4",
+   "projects/cpu/firmware/filter.c": "547ae1c0e8e8090416797d5bcbd09abeef0e034aba859d16c4c0fd8857bb3493",
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1841,36 +1976,36 @@
    "projects/cpu/layout/sram_blackbox.v": "da7cf4d040d64ec065f23ff8af31bf5d58ff27c470b5be3147b1b936008ddf56",
    "projects/cpu/tests/cpu_board.sv": "caaa806e86cf4e2ba70c915d7378b2c6d395ba8d93d28094d39c4e45eb623851",
    "projects/cpu/tests/cpu_top_board.sv": "2dd3949ea395007290caebe72f6e35dfa1270b5c888ea29e0c9203ecf80532d6",
-   "projects/cpu/tests/lockstep.py": "b6d8f99783076d5d0924467792f641a5eebca49b7fd2f73a05fea91da0f5fdce",
+   "projects/cpu/tests/lockstep.py": "bd98da53bc34750bfc533d33e571e2ed799590379f22f7ba241b4a37721b788a",
    "projects/cpu/tests/sram_hold.cir": "71806405d0e6a07ddda48653e9521f6f1acbbdd0d0754ec8981048669c73a811",
    "projects/cpu/tests/test_cpu.py": "a4ea8394b363407657c9c41906a54e5f02c6d5211bedf7bcf5d25010b80f0b4f",
-   "projects/cpu/tests/test_cpu_model.py": "2e0ae9d5dd6a46cc4f250b1f3fc3193eff9f256341b4b72597781eb48cc9818c",
-   "projects/cpu/tests/test_filter.py": "60a70aad8b2ad36589e2cc70ba2c23bcd80e0a228e9e6f0fd669b540a6c86b19",
+   "projects/cpu/tests/test_cpu_model.py": "a9b08ff6a4133eb03d8d371b15977b15dffadf32c7682009ad3f5408547c7098",
+   "projects/cpu/tests/test_filter.py": "bdd5e00052fbcb6b4d80a64e031fe8840159daa6e2cc2d8579a535b352639680",
    "projects/cpu/tests/test_interrupts.py": "6139ab6b57c680e4b46a7f9df071bfe03d95e4fa0b12e1e37535d48b78424c3c",
    "projects/cpu/tests/test_power.py": "0a448b47c5ecf2f0ffcb913dda6373608e850774d61c06e4d1be9077b67cd9e1",
-   "projects/cpu/timing/cpu_top.v": "f7457779a91944ebb2e8ab4104d9f9b9524465bf0aadecf6b7a85acb09aba95a",
+   "projects/cpu/timing/cpu_top.v": "584522951873412832986c1ca163e4d5c0842e6233ef835638f449fbbbc95a01",
    "projects/cpu/timing/power.tcl": "2bf6fde41f20e491645bab2a1771b176159e4995e83f7824f808ce1c172e5302",
    "projects/cpu/timing/synth.ys": "86f92cc578c2567b02dad95ae12fe99d888dfa0c5cf672b685a4d1c7c1f519ca",
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:55:55",
+  "time": "2026-11-22 18:04:25",
   "values": {}
  },
  "timing_slow": {
   "logs": {
-   "timing_slow.log": "d71455538a7202cf6caead6a3ae5b83819632c810e29907099b6d5528071ad58"
+   "timing_slow.log": "fbbfae6872ef5a2f9caa616d9a5fcf42f1afee2d0abcea724f7ef1e6e9a1467d"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
-   "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
+   "helpers/cpu_model.py": "eeea3b46ee1de49da4f2492d7af851d131ea2069bc1031702186a9b5653686ec",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1891,13 +2026,13 @@
    "projects/cpu/broken/wfi_never_sleeps.patch": "b9fef8250dcc45cadc9163b36616f09df32ca8a2d669a465baf3a8c7cf8a161d",
    "projects/cpu/broken/x0_read_from_register_file.patch": "c3d170fa5b787660f2c6ba24c58b3f22a14d434c281753eef7d56f2488137d19",
    "projects/cpu/cdc/waivers.txt": "dc793c3fa25bae75a90751e73a4fa649533a18e0eea596520e19bc0797bf4abb",
-   "projects/cpu/design/cpu.sv": "c4fa470f17855ebe0bcd3f57133dbd8dcedcc36326cb7f0002c606896e50984d",
-   "projects/cpu/firmware/build.sh": "8a4b3ef40817d3a9f8c7bc2ebc842056807e82bfb257de262e0cc78563cd7ef7",
-   "projects/cpu/firmware/filter.c": "dedeffdc647b00db7f9d5fdd0280ea42e3b43b23279eea678cbd60ed0d6bf518",
+   "projects/cpu/design/cpu.sv": "c71e7ed2e4e08e4bcda5a064c60a0be66982a1e2018699c96ce0d03becf13aa6",
+   "projects/cpu/firmware/build.sh": "55207f21bfa09fab0acb222d24cad7be7b76e801a4f7e5fcc96a8370441710d4",
+   "projects/cpu/firmware/filter.c": "547ae1c0e8e8090416797d5bcbd09abeef0e034aba859d16c4c0fd8857bb3493",
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1905,36 +2040,36 @@
    "projects/cpu/layout/sram_blackbox.v": "da7cf4d040d64ec065f23ff8af31bf5d58ff27c470b5be3147b1b936008ddf56",
    "projects/cpu/tests/cpu_board.sv": "caaa806e86cf4e2ba70c915d7378b2c6d395ba8d93d28094d39c4e45eb623851",
    "projects/cpu/tests/cpu_top_board.sv": "2dd3949ea395007290caebe72f6e35dfa1270b5c888ea29e0c9203ecf80532d6",
-   "projects/cpu/tests/lockstep.py": "b6d8f99783076d5d0924467792f641a5eebca49b7fd2f73a05fea91da0f5fdce",
+   "projects/cpu/tests/lockstep.py": "bd98da53bc34750bfc533d33e571e2ed799590379f22f7ba241b4a37721b788a",
    "projects/cpu/tests/sram_hold.cir": "71806405d0e6a07ddda48653e9521f6f1acbbdd0d0754ec8981048669c73a811",
    "projects/cpu/tests/test_cpu.py": "a4ea8394b363407657c9c41906a54e5f02c6d5211bedf7bcf5d25010b80f0b4f",
-   "projects/cpu/tests/test_cpu_model.py": "2e0ae9d5dd6a46cc4f250b1f3fc3193eff9f256341b4b72597781eb48cc9818c",
-   "projects/cpu/tests/test_filter.py": "60a70aad8b2ad36589e2cc70ba2c23bcd80e0a228e9e6f0fd669b540a6c86b19",
+   "projects/cpu/tests/test_cpu_model.py": "a9b08ff6a4133eb03d8d371b15977b15dffadf32c7682009ad3f5408547c7098",
+   "projects/cpu/tests/test_filter.py": "bdd5e00052fbcb6b4d80a64e031fe8840159daa6e2cc2d8579a535b352639680",
    "projects/cpu/tests/test_interrupts.py": "6139ab6b57c680e4b46a7f9df071bfe03d95e4fa0b12e1e37535d48b78424c3c",
    "projects/cpu/tests/test_power.py": "0a448b47c5ecf2f0ffcb913dda6373608e850774d61c06e4d1be9077b67cd9e1",
-   "projects/cpu/timing/cpu_top.v": "f7457779a91944ebb2e8ab4104d9f9b9524465bf0aadecf6b7a85acb09aba95a",
+   "projects/cpu/timing/cpu_top.v": "584522951873412832986c1ca163e4d5c0842e6233ef835638f449fbbbc95a01",
    "projects/cpu/timing/power.tcl": "2bf6fde41f20e491645bab2a1771b176159e4995e83f7824f808ce1c172e5302",
    "projects/cpu/timing/synth.ys": "86f92cc578c2567b02dad95ae12fe99d888dfa0c5cf672b685a4d1c7c1f519ca",
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:55:45",
+  "time": "2026-11-22 18:04:17",
   "values": {}
  },
  "timing_typ": {
   "logs": {
-   "timing_typ.log": "86d2adfea3fd59ec70b06e886e9b76c8ac4e3828706782523099cd1404fc0746"
+   "timing_typ.log": "01a030e47886e5a0e4e8a2c28bbf34e76398751ce40d7ee7552a0e8c70b1742b"
   },
   "result": "pass",
   "sources": {
    "helpers/cdc_check.py": "dc3087c9f826618553e6641180d7690205b681cdfd04822b8a51cedc6d79d08a",
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
-   "helpers/cpu_model.py": "26a0c06f7c323efeaa49754d5f966e2ef49dbfad5ccca5efc322a77f0c9e8801",
+   "helpers/cpu_model.py": "eeea3b46ee1de49da4f2492d7af851d131ea2069bc1031702186a9b5653686ec",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "helpers/sram_results.py": "ec02f97c1b42fc476cfc5d4cda295e133653be520ffa0e3bc47b2f70a719d716",
+   "helpers/sram_results.py": "33c2d65dd709fe6c784b6e399cd3c9b16514cff34bd1c33e21e1d60a0d9486db",
    "projects/cpu/Makefile": "1ce6cb73b5ac1d564839c9d3c2262f0f74b8bafdbed6b4476c7e7cb2ae4b1b92",
    "projects/cpu/broken/branch_counter_misses_taken.patch": "d5be2689abac3bb05b2f6a96c6a8ef710171859cbfcc2a8439b959de9fb9e77b",
    "projects/cpu/broken/byte_store_ignores_offset.patch": "f18b9ac289ecbb1fc5e8a89815398fe6622fe3fc2a16e6cb63e40fb8c758aacf",
@@ -1955,13 +2090,13 @@
    "projects/cpu/broken/wfi_never_sleeps.patch": "b9fef8250dcc45cadc9163b36616f09df32ca8a2d669a465baf3a8c7cf8a161d",
    "projects/cpu/broken/x0_read_from_register_file.patch": "c3d170fa5b787660f2c6ba24c58b3f22a14d434c281753eef7d56f2488137d19",
    "projects/cpu/cdc/waivers.txt": "dc793c3fa25bae75a90751e73a4fa649533a18e0eea596520e19bc0797bf4abb",
-   "projects/cpu/design/cpu.sv": "c4fa470f17855ebe0bcd3f57133dbd8dcedcc36326cb7f0002c606896e50984d",
-   "projects/cpu/firmware/build.sh": "8a4b3ef40817d3a9f8c7bc2ebc842056807e82bfb257de262e0cc78563cd7ef7",
-   "projects/cpu/firmware/filter.c": "dedeffdc647b00db7f9d5fdd0280ea42e3b43b23279eea678cbd60ed0d6bf518",
+   "projects/cpu/design/cpu.sv": "c71e7ed2e4e08e4bcda5a064c60a0be66982a1e2018699c96ce0d03becf13aa6",
+   "projects/cpu/firmware/build.sh": "55207f21bfa09fab0acb222d24cad7be7b76e801a4f7e5fcc96a8370441710d4",
+   "projects/cpu/firmware/filter.c": "547ae1c0e8e8090416797d5bcbd09abeef0e034aba859d16c4c0fd8857bb3493",
    "projects/cpu/firmware/interrupts.S": "7fa248ee54b194881d56ef36963aae1988da3a3bfa214b85b09a7f3cafb2480b",
    "projects/cpu/firmware/link.ld": "e8745c3ddba1b09bb903f767444c5ef4a887d9e6102dc512558c66450f526eac",
    "projects/cpu/firmware/link_env.ld": "7ca716523c803ed810b7cbf43663fed365b0d4aaec8bdbefd6f49cc965a828ae",
-   "projects/cpu/firmware/mi/load_trap_use.S": "a9c18b3901a2fe847908d531d983380a85af44129bfef93f1e6407c6ec232cca",
+   "projects/cpu/firmware/mi/load_trap_use.S": "1a807d61a3757236c52b924672c6e495b5f59c021625f3b275106e846977af1b",
    "projects/cpu/firmware/riscv_test.h": "65819bfa86a60f79417f4002b3137e40e7cf8793df7f52c66b916c3c63d7a0cb",
    "projects/cpu/firmware/start.S": "860923f7b636bc63c12ee33743c98c39fc45743e49376aaddc276fa8e4294406",
    "projects/cpu/layout/config.json": "5f80838290ddc0730f98c9089e7e9f9b875569ba3519ac8cfb7180fdcea3c157",
@@ -1969,23 +2104,23 @@
    "projects/cpu/layout/sram_blackbox.v": "da7cf4d040d64ec065f23ff8af31bf5d58ff27c470b5be3147b1b936008ddf56",
    "projects/cpu/tests/cpu_board.sv": "caaa806e86cf4e2ba70c915d7378b2c6d395ba8d93d28094d39c4e45eb623851",
    "projects/cpu/tests/cpu_top_board.sv": "2dd3949ea395007290caebe72f6e35dfa1270b5c888ea29e0c9203ecf80532d6",
-   "projects/cpu/tests/lockstep.py": "b6d8f99783076d5d0924467792f641a5eebca49b7fd2f73a05fea91da0f5fdce",
+   "projects/cpu/tests/lockstep.py": "bd98da53bc34750bfc533d33e571e2ed799590379f22f7ba241b4a37721b788a",
    "projects/cpu/tests/sram_hold.cir": "71806405d0e6a07ddda48653e9521f6f1acbbdd0d0754ec8981048669c73a811",
    "projects/cpu/tests/test_cpu.py": "a4ea8394b363407657c9c41906a54e5f02c6d5211bedf7bcf5d25010b80f0b4f",
-   "projects/cpu/tests/test_cpu_model.py": "2e0ae9d5dd6a46cc4f250b1f3fc3193eff9f256341b4b72597781eb48cc9818c",
-   "projects/cpu/tests/test_filter.py": "60a70aad8b2ad36589e2cc70ba2c23bcd80e0a228e9e6f0fd669b540a6c86b19",
+   "projects/cpu/tests/test_cpu_model.py": "a9b08ff6a4133eb03d8d371b15977b15dffadf32c7682009ad3f5408547c7098",
+   "projects/cpu/tests/test_filter.py": "bdd5e00052fbcb6b4d80a64e031fe8840159daa6e2cc2d8579a535b352639680",
    "projects/cpu/tests/test_interrupts.py": "6139ab6b57c680e4b46a7f9df071bfe03d95e4fa0b12e1e37535d48b78424c3c",
    "projects/cpu/tests/test_power.py": "0a448b47c5ecf2f0ffcb913dda6373608e850774d61c06e4d1be9077b67cd9e1",
-   "projects/cpu/timing/cpu_top.v": "f7457779a91944ebb2e8ab4104d9f9b9524465bf0aadecf6b7a85acb09aba95a",
+   "projects/cpu/timing/cpu_top.v": "584522951873412832986c1ca163e4d5c0842e6233ef835638f449fbbbc95a01",
    "projects/cpu/timing/power.tcl": "2bf6fde41f20e491645bab2a1771b176159e4995e83f7824f808ce1c172e5302",
    "projects/cpu/timing/synth.ys": "86f92cc578c2567b02dad95ae12fe99d888dfa0c5cf672b685a4d1c7c1f519ca",
    "projects/cpu/timing/timing.tcl": "b06582a3eee59900b389b37cf5680b2bfb8bbe62e2036ddca7e7b479833bd83d",
    "projects/cpu/uses.txt": "2a4d61dedbf721ce583bcbfd9a7d170580213bd5dffb0b201d9e415bb84800eb",
    "projects/fifo_bridge/design/reset_sync.sv": "eb19d7b5598dacd49de07ae67e6f8e519ccbe2a27a466b53258dac68a766b63d",
-   "projects/fifo_bridge/timing/timing.tcl": "9bf58560c13a3172b929b69e0311e62be876dcd2f7ffcda32c26d808937261e2",
+   "projects/fifo_bridge/timing/timing.tcl": "715d31c79cf6cd075382c6882ea4c579ff051e96de90480f0545b95364021bd6",
    "projects/power_manager/results/speed.log": "fc61599ff0cfaa8277afced6b527069b00576f816847abaa37eb14d7ad9c33ec"
   },
-  "time": "2026-11-22 08:55:50",
+  "time": "2026-11-22 18:04:21",
   "values": {}
  }
 }

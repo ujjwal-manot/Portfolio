@@ -1,0 +1,62 @@
+Note: Starting dynamic gmin stepping
+
+Note: No compatibility mode selected!
+
+
+Circuit: * steps the input of the real inverting loop from 1.0 to 0.2 v and back (output 0.2 to 1.0 v and back, a 0.8 v step each way, 1 ns edges), and writes the supply current with the output settled low and high (the larger), the 20 to 80% slew rate and the time to settle within half an lsb (1.5625 mv) of the final value for each direction to step.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
+
+Doing analysis at TEMP = -40.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                       1.08
+inp                                        0.6
+in                                           1
+ibias                                 0.308373
+inn                                   0.600251
+xrin.dt                                      0
+out                                   0.200502
+xrf.dt                                       0
+xcl.1                                 0.200502
+xop.vbp                               0.648883
+xop.vbpc                              0.466499
+xop.vbnc                              0.512122
+xop.t                                  0.30016
+xop.f1                                0.905223
+xop.f2                                0.906977
+xop.x                                 0.397847
+xop.o1                                0.563904
+xop.n1                                0.199007
+xop.n2                                0.204527
+xop.cz                                0.563904
+xop.xrz.dt                                   0
+xop.xcc.1                             0.563904
+vin#branch                        -2.01099e-05
+vcm#branch                        -2.58371e-12
+vdd#branch                        -0.000139073
+
+Note: Dynamic gmin stepping completed
+ Reference value :  0.00000e+00 Reference value :  4.04280e-08 Reference value :  8.78500e-08 Reference value :  1.37150e-07 Reference value :  1.92850e-07 Reference value :  2.44350e-07 Reference value :  2.84050e-07 Reference value :  3.36750e-07 Reference value :  3.91950e-07 Reference value :  4.47050e-07 Reference value :  4.82950e-07 Reference value :  5.18250e-07 Reference value :  5.48150e-07 Reference value :  5.92750e-07 Reference value :  6.49650e-07 Reference value :  7.05750e-07 Reference value :  7.60350e-07 Reference value :  8.09650e-07
+No. of Data Rows : 8520
+idd                 =  -1.39073e-04 from=  1.00000e-08 to=  4.50280e-08
+idh                 =  -2.16032e-04 from=  4.00000e-07 to=  4.45050e-07
+lo                  =  2.00502e-01
+hi                  =  9.99799e-01
+dn                  =  2.00502e-01
+r20                 =  6.04939e-08
+r80                 =  7.76744e-08
+f80                 =  4.65988e-07
+f20                 =  4.85741e-07
+
+Error: measure  ub  when(WHEN) : out of interval
+ meas tran ub when v(out)=1.001360e+00 cross=last from=50n to=445n failed!
+
+ua                  =  1.59609e-07
+da                  =  4.94855e-07
+db                  =  5.16717e-07
+ngspice-47 done

@@ -1,4 +1,4 @@
-# Sizes the folded-cascode two-stage opamp from the typical-corner transistor charts and the chip.md spec by arithmetic alone: the chosen design uses Miller compensation with a nulling resistor (output current set by second-pole placement), and an indirect-compensation alternative (capacitor to the NMOS cascode source, output current set by slew into the load plus the feedback current, suffix _i) is sized for the design review; it writes every size as ngspice parameters and prints the predicted gain, GBW, slew, current and active area of both, the Miller phase margin, and the gain of a plain two-stage Miller from the same devices. There is no arithmetic phase margin prediction for indirect compensation; that one is measured.
+# Sizes the folded-cascode two-stage opamp from the typical-corner transistor charts and the chip.md spec by arithmetic alone: the chosen design uses Miller compensation with a nulling resistor (output current set by second-pole placement), and an indirect-compensation alternative (capacitor to the NMOS cascode source, output current set by slew into the load plus the feedback current, suffix _i) is sized for the design review; it writes every size as ngspice parameters and prints the predicted gain, GBW, slew, current and active area of both, the Miller phase margin, and the gain of a plain two-stage Miller from the same devices. There is no arithmetic phase margin prediction for indirect compensation; that one is measured. Resistors are 1 um wide unless that makes them shorter than rhigh's 0.96 um minimum length (the PDK PCell refuses less), then widened to keep the value; every width and length is rounded to what the PCells draw (0.01 um grid, widths in 0.02 um steps per finger so a device split in two units stays on it), so the circuit simulated is the one drawn
 import math, sys
 from transistor_charts import read
 
@@ -6,6 +6,7 @@ VDD, VCM, CL, RF, BETA = 1.2, 0.6, 2.05e-12, 20e3, 0.5
 GBW_SPEC, GAIN_SPEC_DB, SR_SPEC, I_MAX, VSWING = 20e6, 66, 10e6, 500e-6, 0.2
 GBW, P2_OVER_FC, UNIT, FINGER, MARGIN, VSB = 1.8 * GBW_SPEC, 3, 5e-6, 5e-6, 0.06, 0.25
 RSH, REND, CAREA, CPERIM = 1360, 80e-6, 1.5e-15, 40e-18
+RHIGH_LMIN = 0.96e-6
 CHOICE = {"in": ("n", 1e-6, 18), "tail": ("n", 2e-6, 14), "nsrc": ("n", 2e-6, 14), "nbot": ("n", 2e-6, 10), "ncas": ("n", 1e-6, 18),
           "psrc": ("p", 2e-6, 14), "pcas": ("p", 0.5e-6, 18), "out": ("p", 0.5e-6, 8), "out_i": ("p", 0.5e-6, 10)}
 
@@ -29,7 +30,12 @@ def diode_for(data, d, l, vgs):
     return UNIT / (r["ids"] / FINGER)
 
 def resistor(r, w=1e-6):
-    return w, (r - 2 * REND / w) / RSH * w
+    l = (r - 2 * REND / w) / RSH * w
+    return (w, l) if l >= RHIGH_LMIN else ((2 * REND + RSH * RHIGH_LMIN) / r, RHIGH_LMIN)
+
+def drawable(p):
+    step = lambda k: p.get("ng" + k[1:], 1) * 0.02e-6 if k.startswith("w_") else 0.01e-6
+    return {k: max(1, round(v / step(k))) * step(k) if k.startswith(("w_", "l_")) else v for k, v in p.items()}
 
 def mim(c):
     s = (-4 * CPERIM + math.sqrt(16 * CPERIM ** 2 + 4 * CAREA * c)) / (2 * CAREA)
@@ -98,9 +104,10 @@ if __name__ == "__main__":
     p["w_rf"], p["l_rf"] = resistor_rf()
     p["w_cl"] = p["l_cl"] = mim(CL)
     p.update({"ng" + k[1:]: max(1, round(v / FINGER)) for k, v in list(p.items()) if k.startswith("w_") and k not in ("w_cc", "w_cc_i", "w_rz", "w_rf", "w_cl")})
+    p = drawable(p)
     with open(out, "w") as f:
         for k, v in p.items():
-            f.write(f".param {k}={v:.4g}\n")
+            f.write(f".param {k}={v:.6g}\n")
     for k, v in predicted.items():
         print(f"predicted {k} {v:.4g}")
     for k, v in p.items():

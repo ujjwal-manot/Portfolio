@@ -1,0 +1,7 @@
+Technology SG13_dev is loaded.
+GRID : 0.01
+GRID inverse : 100.0
+EPSILON1  : 0.001
+EPSILON2  : 1e-9
+Success.
+wrote dldo_unit.gds (-2.505,-2.025;28.86,17.82)

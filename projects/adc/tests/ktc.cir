@@ -1,0 +1,20 @@
+* Measures the sampled thermal noise of the capacitor DAC (kT/C, the only noise the transient conversions leave out besides the comparator's, since ngspice's transient analysis carries no device noise): with samp held high, the top plate on vcm through its switch, every bottom plate on vin through its own switch and the trim units on vcm, q is the top plate minus the capacitance-weighted mean of all 257 bottom plates (the charge on the whole array over its capacitance, which the top switch freezes when it opens and the comparator later sees as input noise; the trim units' bottoms sit on vcm and are left out), its noise is integrated from 1 Hz to 1 THz, far past every switch's corner, and the rms value is written to ktc.txt; corner, temperature and supply come from corner.inc.
+.include corner.inc
+.include cap_dac_sizes.inc
+.include cap_dac.cir
+VDD vdd 0 {vsupply}
+VHI vref_hi 0 1.0
+VLO vref_lo 0 0.2
+VCM vcm 0 0.6
+VIN vin 0 dc 0.6 ac 1
+VSAMP samp 0 {vsupply}
+BQ q 0 v = v(top) - (128 * v(xdac.xb7.b) + 64 * v(xdac.xb6.b) + 32 * v(xdac.xb5.b) + 16 * v(xdac.xb4.b) + 8 * v(xdac.xb3.b) + 4 * v(xdac.xb2.b) + 2 * v(xdac.xb1.b) + v(xdac.xb0.b) + v(xdac.xbd.b)) / 257
+XDAC top vin vcm vref_hi vref_lo samp 0 vdd 0 0 0 0 0 0 0 0 vdd vdd vdd vdd vdd vdd vdd 0 cap_dac_cal
+.control
+noise v(q) VIN dec 20 1 1e12
+setplot noise2
+let rms = onoise_total
+echo "ktc_rms_v $&rms" > ktc.txt
+quit
+.endc
+.end

@@ -1,0 +1,12 @@
+* Behavioral model of the LDO for whole_chip, the same ports as ldo.cir, its parameters fitted at tt 3.3 V 27 C into model_params.inc by helpers/bandgap_ldo_model.py and checked against the transistor design at the other corners by make models: an error amplifier (ld_gm into ld_r1 and ld_c1, the first pole) drives the gate node around vref + ld_off plus the follower's no-load overdrive, a square-law follower (ld_k) from vdd sources the output, a bleed ld_ib and the output MIM ld_cout load it (the second pole, gm over ld_cout), so the loop's DC gain, crossover and margin at no load are the transistor's and its large-signal swing follows the square law; quiescent current ld_iq; bias and bleed scale with vref and follow the bandgap's fitted PTAT current in temperature (all bias is a copy of its branch current), the follower needs vdd above vout, and the 50 mV tanh widths only smooth the switching for the solver; fb has a 1 Tohm leak only so the loop-gain bench's injected current has a path (the transistor's fb is a gate); vg is not used and the supply path is not modelled, so the model has no PSRR.
+.subckt ldo vout fb vref vg vdd vss
+Bea vss g i = ld_gm * (v(vref,vss) + ld_off - v(fb,vss))
+Bbias bias vss v = v(vref,vss) + ld_off + sqrt(ld_ib / ld_k)
+Rg g bias {ld_r1}
+Cg g vss {ld_c1}
+Bpass vdd vout i = ld_k * pow(max(v(g,vout), 0), 2) * max(tanh(v(vdd,vout) / 0.05), 0)
+Bbl vout vss i = ld_ib * (1 + bg_i1 / bg_i0 * (temper - 27)) * min(max(v(vref,vss), 0) / bg_v0, 1) * max(tanh(v(vout,vss) / 0.05), 0)
+Cout vout vss {ld_cout}
+Rfb fb vss 1e12
+Bq vdd vss i = (ld_iq - ld_ib) * (1 + bg_i1 / bg_i0 * (temper - 27)) * min(max(v(vref,vss), 0) / bg_v0, 1)
+.ends ldo

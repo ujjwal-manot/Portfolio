@@ -1,4 +1,4 @@
-# Checks the cpu against cpu_model.Timed one clock edge at a time: the instruction in WB spent its EX two edges earlier (MEM and WB never stall), so the model is told that cycle and decides on its own whether an interrupt was due there and which one (external before timer): an interrupt the cpu reports must be exactly that one and a retired instruction must have had none due; every retired instruction must match in pc, instruction, destination register and value, and its store (address, byte strobes and stored bytes, driven to the memory during its EX cycle) must match the model's or be absent; the stream inputs are recorded every edge for the model's IO page, and the pc in decode during each instruction's EX cycle (the one fetched after it) for the model's mispredict counter; nothing is taken from the cpu. Every flop and memory starts at a random value (RANDOM_START, RANDOM_SEED), as in silicon, instead of Verilator's zeros.
+# Checks the cpu against cpu_model.Timed one clock edge at a time: the instruction in WB spent its EX two edges earlier (MEM and WB never stall), so the model is told that cycle and decides on its own whether an interrupt was due there and which one (external before timer): an interrupt the cpu reports must be exactly that one and a retired instruction must have had none due; every retired instruction must match in pc, instruction, destination register and value, and its store (address, byte strobes and stored bytes, driven to the memory during its EX cycle) must match the model's or be absent; the stream inputs are recorded every edge for the model's IO page, and the pc in decode during each instruction's EX cycle (the one fetched after it) for the model's mispredict counter; nothing is taken from the cpu. Any further settings go to the model (mac for the custom-0 multiply-accumulate the MAC firmware needs, size for a board with more RAM). Every flop and memory starts at a random value (RANDOM_START, RANDOM_SEED), as in silicon, instead of Verilator's zeros.
 from pathlib import Path
 from cpu_model import Timed
 
@@ -13,10 +13,10 @@ def hex_file(binary):
     return path
 
 class Lockstep:
-    def __init__(self, dut, image, name, mtime0=0):
+    def __init__(self, dut, image, name, mtime0=0, **model):
         self.dut, self.name, self.retired, self.stores, self.decode = dut, name, 0, {}, {}
         self.taken, self.both = {7: 0, 11: 0}, 0
-        self.model = Timed(image, mtime0=mtime0)
+        self.model = Timed(image, mtime0=mtime0, **model)
 
     def tick(self, cycle):
         dut, model = self.dut, self.model

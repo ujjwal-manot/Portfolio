@@ -1,0 +1,36 @@
+* LDO with the analog rail's real loads, bandgap at trim code 8: the opamp's worst supply current (iopamp in load.inc, read from projects/opamp/results/corners.log) flows from the start, and the ADC's measured supply current (the IADC source and its start time t_on and end time t_end in adc.inc, made from the adc project's log) switches on at t_on; writes the rail's lowest and highest point from t_on to t_end and the mean load current over that window to load.txt (nan unless the run reached t_end and every measurement succeeded); supply and corner from corner.inc.
+.include corner.inc
+.include load.inc
+.include adc.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+.include ldo_sizes.inc
+.include ldo.cir
+.csparam ton = {t_on}
+.csparam tstop = {t_end}
+VDD vdd 0 {vsupply}
+X1 vref vg vdd 0 vdd 0 0 0 bandgap
+X2 vout vout vref vg vdd 0 ldo
+VSENSE vout vl 0
+IOPAMP vl 0 {iopamp}
+.tran 1n {t_end}
+.control
+let nan = 1e400 - 1e400
+let lo = nan
+let hi = nan
+let iavg = nan
+let tend = nan
+run
+let tend = time[length(time) - 1]
+if tend > tstop * 0.9999
+  meas tran lo_m min v(vout) from=$&ton to=$&tstop
+  meas tran hi_m max v(vout) from=$&ton to=$&tstop
+  meas tran iavg_m avg i(vsense) from=$&ton to=$&tstop
+  let lo = lo_m
+  let hi = hi_m
+  let iavg = iavg_m
+end
+echo load min_v $&lo max_v $&hi mean_load_a $&iavg > load.txt
+quit
+.endc
+.end

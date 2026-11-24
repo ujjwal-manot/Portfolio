@@ -1,0 +1,15 @@
+build/charts/tt_m40/ngspice.log: ok
+build/charts/tt_27/ngspice.log: ok
+build/charts/tt_125/ngspice.log: ok
+build/charts/ss_m40/ngspice.log: ok
+build/charts/ss_27/ngspice.log: ok
+build/charts/ss_125/ngspice.log: ok
+build/charts/ff_m40/ngspice.log: ok
+build/charts/ff_27/ngspice.log: ok
+build/charts/ff_125/ngspice.log: ok
+build/charts/sf_m40/ngspice.log: ok
+build/charts/sf_27/ngspice.log: ok
+build/charts/sf_125/ngspice.log: ok
+build/charts/fs_m40/ngspice.log: ok
+build/charts/fs_27/ngspice.log: ok
+build/charts/fs_125/ngspice.log: ok

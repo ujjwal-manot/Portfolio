@@ -1,0 +1,6 @@
+tt_27_3v3: analog rail 1.20647 V with the ladder on it, setpoints 0.9004, 1.0004, 1.1004, 1.2005 V, +0.47 mV from the ideal 1.206 V source
+ss_125_3v0: analog rail 1.20203 V with the ladder on it, setpoints 0.8970, 0.9967, 1.0964, 1.1960 V, -3.97 mV from the ideal 1.206 V source
+ff_m40_3v6: analog rail 1.20643 V with the ladder on it, setpoints 0.9003, 1.0004, 1.1004, 1.2004 V, +0.43 mV from the ideal 1.206 V source
+sf_m40_3v6: analog rail 1.20584 V with the ladder on it, setpoints 0.8999, 0.9999, 1.0999, 1.1998 V, -0.16 mV from the ideal 1.206 V source
+fs_125_3v0: analog rail 1.20264 V with the ladder on it, setpoints 0.8975, 0.9972, 1.0969, 1.1967 V, -3.36 mV from the ideal 1.206 V source
+every check passes

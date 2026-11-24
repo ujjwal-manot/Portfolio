@@ -4,8 +4,6 @@ License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
 This is free software, and you are free to change and redistribute it
 under certain conditions; type `show_copying' for details. 
 This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
-gray pointer s_clk to m_clk: 5 bits, skew 0.0319 ns, margin 19.9681 ns to one m_clk period
-gray pointer m_clk to s_clk: 5 bits, skew 0.0418 ns, margin 19.9582 ns to one m_clk period
 clock to output m_tvalid: rise 0.1563 ns, fall 0.1526 ns after the m_clk pin edge
 clock to output m_tlast: rise 0.1592 ns, fall 0.1545 ns after the m_clk pin edge
 clock to output m_tdata[7]: rise 0.1592 ns, fall 0.1545 ns after the m_clk pin edge
@@ -16,6 +14,8 @@ clock to output m_tdata[3]: rise 0.1592 ns, fall 0.1545 ns after the m_clk pin e
 clock to output m_tdata[2]: rise 0.1592 ns, fall 0.1545 ns after the m_clk pin edge
 clock to output m_tdata[1]: rise 0.1592 ns, fall 0.1545 ns after the m_clk pin edge
 clock to output m_tdata[0]: rise 0.1592 ns, fall 0.1545 ns after the m_clk pin edge
+gray pointer s_clk to m_clk: 5 bits, skew 0.0319 ns, margin 19.9681 ns to one m_clk period
+gray pointer m_clk to s_clk: 5 bits, skew 0.0418 ns, margin 19.9582 ns to one m_clk period
 Startpoint: m_reset_meta_sg13g2_dfrbpq_1_D
             (rising edge-triggered flip-flop clocked by m_clk)
 Endpoint: fifo_r_bin_next_sg13g2_dfrbpq_1_D

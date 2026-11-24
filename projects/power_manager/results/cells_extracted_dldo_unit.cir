@@ -1,0 +1,18 @@
+* Extracted by KLayout with SG13G2 LVS runset on : 23/11/2026 10:19
+
+.SUBCKT dldo_unit on out vdd vin vss
+M$1 vss on \$9 vss sg13_lv_nmos L=0.13u W=0.3u AS=0.102p AD=0.102p PS=1.28u
++ PD=1.28u rfmode=0
+M$2 vss \$9 \$2 vss sg13_hv_nmos L=0.45u W=4u AS=1.36p AD=1.36p PS=8.68u
++ PD=8.68u rfmode=0
+M$3 vss on \$3 vss sg13_hv_nmos L=0.45u W=4u AS=1.36p AD=1.36p PS=8.68u
++ PD=8.68u rfmode=0
+M$4 vdd on \$9 vdd sg13_lv_pmos L=0.13u W=0.6u AS=0.204p AD=0.204p PS=1.88u
++ PD=1.88u rfmode=0
+M$5 vin \$3 \$2 vin sg13_hv_pmos L=1u W=0.5u AS=0.17p AD=0.17p PS=1.68u
++ PD=1.68u rfmode=0
+M$6 vin \$2 \$3 vin sg13_hv_pmos L=1u W=0.5u AS=0.17p AD=0.17p PS=1.68u
++ PD=1.68u rfmode=0
+M$7 vin \$3 out vin sg13_hv_pmos L=0.45u W=1u AS=0.34p AD=0.34p PS=2.68u
++ PD=2.68u rfmode=0
+.ENDS dldo_unit

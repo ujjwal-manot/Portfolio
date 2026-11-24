@@ -1,0 +1,18 @@
+* Supervisor power-on bench: the bandgap (trim code 8) and the supervisor from 0 V, vin ramping to 3.3 V in {ramp} (ramp.inc) and vdd_mem following vin up to 1.2 V (the worst case: the 1.2 V logic is powered while the bandgap is still starting), then 50 us more at 3.3 V; every time point of vin, vdd_mem, vin_ok, mem_ok, rst_n, vref, the vin current and the reference-free gate vin_hi is written to sup.txt, so a run that stops early leaves a short file; the 10 ns step resolves the bandgap's start-up, where a 100 ns step stopped with timestep too small; corner from corner.inc.
+.include corner.inc
+.include ramp.inc
+.include bandgap_sizes.inc
+.include bandgap.cir
+.include supervisor_sizes.inc
+.include supervisor.cir
+VIN vin 0 pwl(0 0 {ramp} 3.3)
+BMEM vdd_mem 0 v = min(v(vin), 1.2)
+XBG vref vg vin 0 vin 0 0 0 bandgap
+XS rst_n vin_ok mem_ok vin vdd_mem vref vg 0 supervisor
+.tran 10n {ramp + 50u}
+.control
+run
+wrdata sup.txt v(vin) v(vdd_mem) v(vin_ok) v(mem_ok) v(rst_n) v(vref) i(VIN) v(xs.vin_hi)
+quit
+.endc
+.end

@@ -1,4 +1,4 @@
-# fifo_bridge commands: make test | formal | cdc | timing | layout | equiv | mutants | power | mtbf | broken | all
+# fifo_bridge commands: make test | formal | cdc | timing | layout | equiv | mutants | power | mtbf | broken | atpg | all
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
@@ -10,7 +10,7 @@ LIB := /foss/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell
 LAYOUT := layout/runs/signoff/final
 ROUTED := NETLIST=../$(LAYOUT)/nl/fifo_bridge.nl.v SPEF=../$(LAYOUT)/spef/nom/fifo_bridge.nom.spef
 
-all: test formal cdc timing layout equiv mutants power mtbf broken
+all: test formal cdc timing layout equiv mutants power mtbf broken atpg
 
 test:
 	mkdir -p results
@@ -32,6 +32,14 @@ timing:
 	  if (cd timing && $(RUN) env CORNER=$$k sta -no_init -exit timing.tcl) > results/timing_$$k.log 2>&1; then c=0; else c=$$?; fi; \
 	  python3 timing/sim_sdf.py build/fifo_bridge_$$k.sdf build/fifo_bridge_$${k}_sim.sdf; \
 	  $(SAVE) timing_$$k $$c results/timing_$$k.log; done
+
+atpg: timing
+	rm -rf build/atpg; mkdir -p build/atpg
+	cp build/fifo_bridge_cells.v build/atpg/
+	if (cd build/atpg && $(RUN) bash -c 'v=$$PDK_ROOT/$$PDK/libs.ref/sg13g2_stdcell/verilog; cat $$v/sg13g2_udp.v $$v/sg13g2_stdcell.v | sed "/^\s*specify/,/^\s*endspecify/d" > cells_logic.v; \
+	  fault cut --dff sg13g2_dfrbpq_1 --clock s_clk --bypassing m_clk --reset rst_n --reset-active-low -o cut.v fifo_bridge_cells.v && \
+	  fault atpg -c cells_logic.v --clock s_clk --bypassing m_clk --reset rst_n --reset-active-low -v 100 -r 100 -m 99 --ceiling 1000 -o tv.json cut.v') > results/atpg.log 2>&1 \
+	  && awk '/Simulations concluded: Coverage/ { sub(/%.*/, "", $$NF); if ($$NF + 0 >= 95) ok = 1 } END { exit !ok }' results/atpg.log; then c=0; else c=1; fi; $(SAVE) atpg $$c results/atpg.log
 
 layout: timing
 	echo "flow did not finish" > results/layout.log
@@ -76,9 +84,14 @@ cdc: timing
 CORNER_tt := 1.2 27
 CORNER_ss := 1.08 125
 CORNER_ff := 1.32 -40
+CORNER_sc := 1.08 -40
+MOS_tt := tt
+MOS_ss := ss
+MOS_ff := ff
+MOS_sc := ss
 V0_rise := 0 v1={vsupply}
 V0_fall := {vsupply} v1=0
-EDGES := $(foreach m,tt ss ff,$(foreach e,rise fall,build/mtbf/$(m)_$(e)/edge.txt))
+EDGES := $(foreach m,tt ss sc ff,$(foreach e,rise fall,build/mtbf/$(m)_$(e)/edge.txt))
 
 mtbf: $(EDGES)
 	for f in $(EDGES); do cp $$f results/mtbf_$$(basename $$(dirname $$f)).txt; done
@@ -94,7 +107,7 @@ build/mtbf/dfrbpq_pex.spice: mtbf/extract.tcl
 build/mtbf/%/edge.txt: mtbf/edge.cir build/mtbf/dfrbpq_pex.spice
 	mkdir -p $(@D)
 	cp $^ $(@D)
-	printf '.lib cornerMOSlv.lib mos_%s\n.param vsupply=%s\n.temp %s\n.param v0=%s\n' $(word 1,$(subst _, ,$*)) $(CORNER_$(word 1,$(subst _, ,$*))) "$(V0_$(word 2,$(subst _, ,$*)))" > $(@D)/corner.inc
+	printf '.lib cornerMOSlv.lib mos_%s\n.param vsupply=%s\n.temp %s\n.param v0=%s\n' $(MOS_$(word 1,$(subst _, ,$*))) $(CORNER_$(word 1,$(subst _, ,$*))) "$(V0_$(word 2,$(subst _, ,$*)))" > $(@D)/corner.inc
 	cd $(@D) && $(RUN) ngspice -b edge.cir > edge.log 2>&1
 
 broken:
@@ -106,5 +119,5 @@ broken:
 	  if [ $$caught = 0 ]; then c=1; elif [ -n "$$want" ] && grep -qF -- "$$want" results/$$n.log; then c=0; else c=2; fi; \
 	  $(SAVE) broken_$$n $$c results/$$n.log; done
 
-.PHONY: all test formal cdc timing layout equiv mutants power mtbf broken
+.PHONY: all test formal cdc timing layout equiv mutants power mtbf broken atpg
 .DELETE_ON_ERROR:

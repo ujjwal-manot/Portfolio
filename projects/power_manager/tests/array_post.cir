@@ -1,0 +1,16 @@
+* The 128-unit switch array before and after layout: dut.cir holds either 128 schematic units or the Magic extraction under the name dldo_array; every on input at the logic rail, the rail held at 1.0 V, and the DC operating point gives the total current into the rail and from vin, written to array.txt, so the extracted rails' resistance shows as the current lost against 128 schematic units; corner, temperature, logic supply (vdd_v) and input supply (vin_v) come from corner.inc.
+.include corner.inc
+.include dut.cir
+.include ons.inc
+.param mm=0
+VDD vdd 0 {vdd_v}
+VIN vin 0 {vin_v}
+VR out 0 1.0
+.control
+op
+let i_rail = i(VR)
+let i_vin = i(VIN)
+echo "array i_rail_a $&i_rail i_vin_a $&i_vin" > array.txt
+quit
+.endc
+.end
