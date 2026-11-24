@@ -9,4 +9,4 @@ Expected failure: FAIL settle_load_v
 +tran 0.1n 1.5u
  let sampled = noise2.onoise_total
  meas tran target find v(out) at=0.99u
- meas tran got find v(xdac.xc.xb7.b) at=2.199u
+ let platediff = v(xdac.xc.xb7.b) - target

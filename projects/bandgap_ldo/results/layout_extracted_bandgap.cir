@@ -1,4 +1,4 @@
-* Extracted by KLayout with SG13G2 LVS runset on : 23/11/2026 17:17
+* Extracted by KLayout with SG13G2 LVS runset on : 24/11/2026 05:58
 
 .SUBCKT bandgap a e3 e8 trim0 trim1 trim2 trim3 vdd vg vref vss
 M$1 \$2 \$3 \$3 vss sg13_hv_nmos L=8u W=16u AS=4.24p AD=4.24p PS=25.06u

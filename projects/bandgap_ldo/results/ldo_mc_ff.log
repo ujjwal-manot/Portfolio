@@ -1,0 +1,63 @@
+dip_v: mean 1.1778 sigma 0.00259 min 1.1722 max 1.1843
+pm_deg: mean 48.082 sigma 0.0809 min 47.93 max 48.222
+iq_a: mean 0.00026195 sigma 2.52e-06 min 0.00025708 max 0.00026696
+code: mean 6.82 sigma 1.4 min 5 max 10
+44 of 50 runs meet the limits (current at or below 265 uA at 125 C); yield is at least 0.777 at 95% confidence
+corner.inc of the runs, seed line left out, each line with the number of runs that used it:
+     50 .lib cornerCAP.lib cap_bcs_mismatch
+     50 .lib cornerHBT.lib hbt_bcs_mismatch
+     50 .lib cornerMOShv.lib mos_ff_mismatch
+     50 .lib cornerRES.lib res_bcs_mismatch
+     50 .param mm=1
+     50 .param vsupply=3.6
+     50 .temp 125
+build/ldo_mc/ff_1/mc.log: ok
+build/ldo_mc/ff_10/mc.log: ok
+build/ldo_mc/ff_11/mc.log: ok
+build/ldo_mc/ff_12/mc.log: ok
+build/ldo_mc/ff_13/mc.log: ok
+build/ldo_mc/ff_14/mc.log: ok
+build/ldo_mc/ff_15/mc.log: ok
+build/ldo_mc/ff_16/mc.log: ok
+build/ldo_mc/ff_17/mc.log: ok
+build/ldo_mc/ff_18/mc.log: ok
+build/ldo_mc/ff_19/mc.log: ok
+build/ldo_mc/ff_2/mc.log: ok
+build/ldo_mc/ff_20/mc.log: ok
+build/ldo_mc/ff_21/mc.log: ok
+build/ldo_mc/ff_22/mc.log: ok
+build/ldo_mc/ff_23/mc.log: ok
+build/ldo_mc/ff_24/mc.log: ok
+build/ldo_mc/ff_25/mc.log: ok
+build/ldo_mc/ff_26/mc.log: ok
+build/ldo_mc/ff_27/mc.log: ok
+build/ldo_mc/ff_28/mc.log: ok
+build/ldo_mc/ff_29/mc.log: ok
+build/ldo_mc/ff_3/mc.log: ok
+build/ldo_mc/ff_30/mc.log: ok
+build/ldo_mc/ff_31/mc.log: ok
+build/ldo_mc/ff_32/mc.log: ok
+build/ldo_mc/ff_33/mc.log: ok
+build/ldo_mc/ff_34/mc.log: ok
+build/ldo_mc/ff_35/mc.log: ok
+build/ldo_mc/ff_36/mc.log: ok
+build/ldo_mc/ff_37/mc.log: ok
+build/ldo_mc/ff_38/mc.log: ok
+build/ldo_mc/ff_39/mc.log: ok
+build/ldo_mc/ff_4/mc.log: ok
+build/ldo_mc/ff_40/mc.log: ok
+build/ldo_mc/ff_41/mc.log: ok
+build/ldo_mc/ff_42/mc.log: ok
+build/ldo_mc/ff_43/mc.log: ok
+build/ldo_mc/ff_44/mc.log: ok
+build/ldo_mc/ff_45/mc.log: ok
+build/ldo_mc/ff_46/mc.log: ok
+build/ldo_mc/ff_47/mc.log: ok
+build/ldo_mc/ff_48/mc.log: ok
+build/ldo_mc/ff_49/mc.log: ok
+build/ldo_mc/ff_5/mc.log: ok
+build/ldo_mc/ff_50/mc.log: ok
+build/ldo_mc/ff_6/mc.log: ok
+build/ldo_mc/ff_7/mc.log: ok
+build/ldo_mc/ff_8/mc.log: ok
+build/ldo_mc/ff_9/mc.log: ok

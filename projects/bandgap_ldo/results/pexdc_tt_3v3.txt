@@ -1,0 +1,1 @@
+dc vref_v 1.01983 tc_ppm_per_c -NAN vref_min_v -NAN vref_max_v -NAN supply_a 2.09526E-05 line_v_per_v 0.412099 code 15 untrimmed_v 0.982741 untrimmed_tc_ppm_per_c 527.973 step_v 0.0262842

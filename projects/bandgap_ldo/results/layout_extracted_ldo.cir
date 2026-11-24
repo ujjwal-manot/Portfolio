@@ -1,4 +1,4 @@
-* Extracted by KLayout with SG13G2 LVS runset on : 23/11/2026 17:17
+* Extracted by KLayout with SG13G2 LVS runset on : 24/11/2026 05:59
 
 .SUBCKT ldo fb vdd vg vout vref vss
 M$1 vss \$9 \$9 vss sg13_hv_nmos L=4u W=4u AS=1.36p AD=1.36p PS=8.68u PD=8.68u
