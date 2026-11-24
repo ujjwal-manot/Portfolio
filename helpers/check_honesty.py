@@ -304,7 +304,7 @@ def find_problems(root):
         if path.suffix == ".py":
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
-            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :|\|\|\s*:(?:\s|;|$)", l) or ignores_errors(l)]
+            problems += [("hidden_failure", rel, l.strip()) for l in re.sub(r"\\\n\s*", " ", text).splitlines() if "|| true" in l or re.search(r"\bthen :|\|\|\s*:(?:\s|;|$)", l) or ignores_errors(l)]
             problems += [("unchecked_log", rel, why) for why in unchecked_log(text)]
     return problems
 
