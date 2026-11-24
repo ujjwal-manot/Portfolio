@@ -1,0 +1,1 @@
+mc code 12 vout27_v 1.2052 iq_a 0.000201263 dip_v 1.16795 pm_deg 49.4797

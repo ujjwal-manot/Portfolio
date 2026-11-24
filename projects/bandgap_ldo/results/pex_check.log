@@ -1,0 +1,22 @@
+build/layout/bandgap_post.cir
+  rppd w=1u l=2u: 15
+  rppd w=1u l=36.25u: 8
+  rppd w=1u l=40u: 1
+build/layout/ldo_post.cir
+  rhigh w=0.5u l=36.8u: 15
+every check passes
+lines left out of the post-layout netlists (bandgap, then ldo):
+dropped C1661 a_29882_1600# vss 0.17656p ; **FLOATING
+dropped C302 vout vss 0.64607p
+dropped C303 a_1366_800# vss 0.12778p ; **FLOATING
+dropped C306 a_24878_2000# vss 82.59206f ; **FLOATING
+dropped C307 a_27518_2000# vss 0.15181p ; **FLOATING
+element lines by first letter in the extracted netlists (bandgap, then ldo):
+      1 
+   1704 C
+    690 R
+    142 X
+      1 
+    315 C
+    163 R
+    131 X

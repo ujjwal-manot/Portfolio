@@ -1,9 +1,9 @@
-ldo_dc vout_v 1.20333 vout_2ma_v 1.2027 load_reg_v 0.000625597 line_v_per_v 0.00478762 iq_a 0.000139143
-psrr psrr_1k_db 46.5569 psrr_1m_db 36.4866
+ldo_dc vout_v 1.20333 vout_2ma_v 1.2027 load_reg_v 0.000625597 line_v_per_v 0.00478855 iq_a 0.00013916
+psrr psrr_1k_db 46.5555 psrr_1m_db 36.442
 step_0p5m istep_a 0.0005 before_v 1.20333 dip_v 1.17566 high_v 1.20303 peak_v 1.22999
-step_2m istep_a 0.002 before_v 1.20333 dip_v 1.14263 high_v 1.2027 peak_v 1.2632
-loop_0 gain_db 46.1391 fc_hz 3.70029E+06 pm_deg 49.4032
-loop_1m gain_db 46.2175 fc_hz 4.51186E+06 pm_deg 75.1798
-loop_250u gain_db 46.1847 fc_hz 4.34732E+06 pm_deg 66.5259
-loop_2m gain_db 46.224 fc_hz 4.5391E+06 pm_deg 78.0149
-ldo_startup ramp_s 9.999E-09 final_v 1.20313 top_v 1.20313 settle_s 6.5047E-05
+step_2m istep_a 0.002 before_v 1.20333 dip_v 1.14262 high_v 1.2027 peak_v 1.26319
+loop_0 gain_db 46.1391 fc_hz 3.6993E+06 pm_deg 49.3759
+loop_1m gain_db 46.2175 fc_hz 4.51185E+06 pm_deg 75.1685
+loop_250u gain_db 46.1846 fc_hz 4.34706E+06 pm_deg 66.5057
+loop_2m gain_db 46.224 fc_hz 4.53914E+06 pm_deg 78.007
+ldo_startup ramp_s 9.999E-09 final_v 1.20313 top_v 1.20313 settle_s 6.61175E-05

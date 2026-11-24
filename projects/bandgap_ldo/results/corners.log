@@ -14,3 +14,18 @@ dc_tt_3v0 vref_v=1.2063 tc_ppm_per_c=10.873 vref_min_v=1.2042 vref_max_v=1.2063 
 dc_tt_3v3 vref_v=1.2063 tc_ppm_per_c=10.708 vref_min_v=1.2042 vref_max_v=1.2064 supply_a=3.2848e-05 line_v_per_v=0.00011356 code=8 untrimmed_v=1.2063 untrimmed_tc_ppm_per_c=10.708 step_v=0.0031224
 dc_tt_3v6 vref_v=1.2064 tc_ppm_per_c=10.601 vref_min_v=1.2043 vref_max_v=1.2064 supply_a=3.3044e-05 line_v_per_v=0.00011356 code=8 untrimmed_v=1.2064 untrimmed_tc_ppm_per_c=10.601 step_v=0.0031226
 every check passes
+build/corners/tt_3v0/dc.log: ok
+build/corners/tt_3v3/dc.log: ok
+build/corners/tt_3v6/dc.log: ok
+build/corners/ss_3v0/dc.log: ok
+build/corners/ss_3v3/dc.log: ok
+build/corners/ss_3v6/dc.log: ok
+build/corners/ff_3v0/dc.log: ok
+build/corners/ff_3v3/dc.log: ok
+build/corners/ff_3v6/dc.log: ok
+build/corners/sf_3v0/dc.log: ok
+build/corners/sf_3v3/dc.log: ok
+build/corners/sf_3v6/dc.log: ok
+build/corners/fs_3v0/dc.log: ok
+build/corners/fs_3v3/dc.log: ok
+build/corners/fs_3v6/dc.log: ok

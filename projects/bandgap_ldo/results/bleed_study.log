@@ -1,3 +1,30 @@
 ldo_tt_3v3_27: design 176.7 uA, dip 1.1777 V, no-load margin 48.6 deg; variant 169.5 uA, dip 1.1771 V, no-load margin 48.8 deg
-ldo_ff_3v6_125: design 261.7 uA, dip 1.1820 V, no-load margin 48.1 deg; variant 211.3 uA, dip 1.1773 V, no-load margin 44.4 deg
+ldo_ff_3v6_125: design 261.7 uA, dip 1.1820 V, no-load margin 48.1 deg; variant 211.3 uA, dip 1.1772 V, no-load margin 44.4 deg
 ldo_ss_3v0_125: design 201.4 uA, dip 1.1613 V, no-load margin 49.5 deg; variant 161.9 uA, dip 1.1554 V, no-load margin 45.4 deg
+build/study/build/ldo/tt_3v3_27/ldo_dc.log: ok
+build/study/build/ldo/tt_3v3_27/ldo_psrr.log: ok
+build/study/build/ldo/tt_3v3_27/ldo_startup.log: ok
+build/study/build/ldo/tt_3v3_27/step_0p5m.log: ok
+build/study/build/ldo/tt_3v3_27/step_2m.log: ok
+build/study/build/ldo/tt_3v3_27/loop_0.log: ok
+build/study/build/ldo/tt_3v3_27/loop_250u.log: ok
+build/study/build/ldo/tt_3v3_27/loop_1m.log: ok
+build/study/build/ldo/tt_3v3_27/loop_2m.log: ok
+build/study/build/ldo/ff_3v6_125/ldo_dc.log: ok
+build/study/build/ldo/ff_3v6_125/ldo_psrr.log: ok
+build/study/build/ldo/ff_3v6_125/ldo_startup.log: ok
+build/study/build/ldo/ff_3v6_125/step_0p5m.log: ok
+build/study/build/ldo/ff_3v6_125/step_2m.log: ok
+build/study/build/ldo/ff_3v6_125/loop_0.log: ok
+build/study/build/ldo/ff_3v6_125/loop_250u.log: ok
+build/study/build/ldo/ff_3v6_125/loop_1m.log: ok
+build/study/build/ldo/ff_3v6_125/loop_2m.log: ok
+build/study/build/ldo/ss_3v0_125/ldo_dc.log: ok
+build/study/build/ldo/ss_3v0_125/ldo_psrr.log: ok
+build/study/build/ldo/ss_3v0_125/ldo_startup.log: ok
+build/study/build/ldo/ss_3v0_125/step_0p5m.log: ok
+build/study/build/ldo/ss_3v0_125/step_2m.log: ok
+build/study/build/ldo/ss_3v0_125/loop_0.log: ok
+build/study/build/ldo/ss_3v0_125/loop_250u.log: ok
+build/study/build/ldo/ss_3v0_125/loop_1m.log: ok
+build/study/build/ldo/ss_3v0_125/loop_2m.log: ok

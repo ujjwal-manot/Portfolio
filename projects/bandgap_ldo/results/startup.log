@@ -27,3 +27,31 @@ startup_tt_m40_10n ramp_s=9.999e-09 final_v=1.2043 settle_s=2.0454e-05
 startup_tt_m40_1m ramp_s=0.0009999 final_v=1.2043 settle_s=-0.00043115
 startup_tt_m40_1u ramp_s=9.999e-07 final_v=1.2043 settle_s=2.1464e-05
 every check passes
+build/startup/tt_10n/startup.log: ok
+build/startup/ss_10n/startup.log: ok
+build/startup/ff_10n/startup.log: ok
+build/startup/sf_10n/startup.log: ok
+build/startup/fs_10n/startup.log: ok
+build/startup/tt_m40_10n/startup.log: ok
+build/startup/tt_125_10n/startup.log: ok
+build/startup/tt_1u/startup.log: ok
+build/startup/ss_1u/startup.log: ok
+build/startup/ff_1u/startup.log: ok
+build/startup/sf_1u/startup.log: ok
+build/startup/fs_1u/startup.log: ok
+build/startup/tt_m40_1u/startup.log: ok
+build/startup/tt_125_1u/startup.log: ok
+build/startup/tt_100u/startup.log: ok
+build/startup/ss_100u/startup.log: ok
+build/startup/ff_100u/startup.log: ok
+build/startup/sf_100u/startup.log: ok
+build/startup/fs_100u/startup.log: ok
+build/startup/tt_m40_100u/startup.log: ok
+build/startup/tt_125_100u/startup.log: ok
+build/startup/tt_1m/startup.log: ok
+build/startup/ss_1m/startup.log: ok
+build/startup/ff_1m/startup.log: ok
+build/startup/sf_1m/startup.log: ok
+build/startup/fs_1m/startup.log: ok
+build/startup/tt_m40_1m/startup.log: ok
+build/startup/tt_125_1m/startup.log: ok

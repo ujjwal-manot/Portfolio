@@ -4,4 +4,4 @@ GRID inverse : 100.0
 EPSILON1  : 0.001
 EPSILON2  : 1e-9
 Success.
-wrote bandgap.gds (-2,-2.14;554.08,95.675)
+wrote bandgap.gds (-2,-2.14;558.46,95.675)

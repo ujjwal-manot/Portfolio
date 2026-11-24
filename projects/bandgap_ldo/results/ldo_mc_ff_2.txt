@@ -1,0 +1,1 @@
+mc code 5 vout27_v 1.21072 iq_a 0.000263452 dip_v 1.1786 pm_deg 48.1224

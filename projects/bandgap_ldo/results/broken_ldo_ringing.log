@@ -1,0 +1,15 @@
+ldo_tt_3v3_27 ldo_dc.vout_v=1.206 ldo_dc.vout_2ma_v=1.206 ldo_dc.load_reg_v=0.0006776 ldo_dc.line_v_per_v=0.004446 ldo_dc.iq_a=0.0001767 psrr.psrr_1k_db=47.11 psrr.psrr_1m_db=39.59 step_0p5m.istep_a=0.0005 step_0p5m.before_v=1.206 step_0p5m.dip_v=1.193 step_0p5m.high_v=1.206 step_0p5m.peak_v=1.216 step_2m.istep_a=0.002 step_2m.before_v=1.206 step_2m.dip_v=1.167 step_2m.high_v=1.206 step_2m.peak_v=1.227 loop_0.gain_db=46.17 loop_0.fc_hz=1.108e+07 loop_0.pm_deg=2.365 loop_1m.gain_db=46.32 loop_1m.fc_hz=1.958e+07 loop_1m.pm_deg=9.953 loop_250u.gain_db=46.24 loop_250u.fc_hz=1.526e+07 loop_250u.pm_deg=4.924 loop_2m.gain_db=46.36 loop_2m.fc_hz=2.21e+07 loop_2m.pm_deg=14.26 ldo_startup.ramp_s=9.999e-09 ldo_startup.final_v=1.206 ldo_startup.top_v=1.206 ldo_startup.settle_s=5.797e-05
+FAIL ldo_tt_3v3_27: loop_0 phase margin 2.36 deg, limit 45
+FAIL ldo_tt_3v3_27: loop_1m phase margin 9.95 deg, limit 45
+FAIL ldo_tt_3v3_27: loop_250u phase margin 4.92 deg, limit 45
+FAIL ldo_tt_3v3_27: loop_2m phase margin 14.3 deg, limit 45
+some corner misses a limit
+build/ldo/tt_3v3_27/ldo_dc.log: ok
+build/ldo/tt_3v3_27/ldo_psrr.log: ok
+build/ldo/tt_3v3_27/ldo_startup.log: ok
+build/ldo/tt_3v3_27/step_0p5m.log: ok
+build/ldo/tt_3v3_27/step_2m.log: ok
+build/ldo/tt_3v3_27/loop_0.log: ok
+build/ldo/tt_3v3_27/loop_250u.log: ok
+build/ldo/tt_3v3_27/loop_1m.log: ok
+build/ldo/tt_3v3_27/loop_2m.log: ok

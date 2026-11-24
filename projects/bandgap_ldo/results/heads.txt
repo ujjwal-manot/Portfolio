@@ -1,0 +1,1 @@
+heads r1_ohm 10408 r2_schematic_ohm 75020.4 r2_layout_ohm 75510.4 r2_over_r1_change 0.00653155 rf_schematic_ohm 1.08832E+06 rf_layout_ohm 1.0912E+06 rn_schematic_ohm 544321 rn_layout_ohm 545601
