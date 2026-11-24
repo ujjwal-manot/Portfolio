@@ -212,3 +212,26 @@ def test_the_wrapper_fails_when_the_log_check_fails(tmp_path):
     bad = subprocess.run([str(wrapper), "killed.log", str(tmp_path / "b.log")], capture_output=True, text=True)
     assert good.returncode == 0 and bad.returncode != 0
     assert "ngspice-47 done" in (tmp_path / "a.log").read_text()
+
+def test_an_exact_zero_in_a_result_is_flagged_unless_the_bench_says_why(tmp_path):
+    write(tmp_path, "p/results/pairs.txt", "load settle_load_v 0 kick_v 1.2e-3\n")
+    write(tmp_path, "p/results/table.txt", "dv_v t_decide_s\n10e-3 0.0\n")
+    write(tmp_path, "p/results/negative.txt", "load err_v -0.0e+00\n")
+    write(tmp_path, "p/results/real.txt", "bias vsb 0 id_a 1e-5\nzero is real: vsb (the source is tied to the bulk)\n")
+    write(tmp_path, "p/results/noreason.txt", "bias vsb 0\nzero is real: vsb\n")
+    write(tmp_path, "p/results/small.txt", "load settle_load_v 1e-300 code 10\n")
+    found = {str(path).split("/")[-1] for rule, path, _ in find_problems(tmp_path) if rule == "exact_zero"}
+    assert found == {"pairs.txt", "table.txt", "negative.txt", "noreason.txt"}
+
+def test_every_way_make_can_ignore_an_error_is_a_hidden_failure(tmp_path):
+    bad = {
+        "spaced": "a:\n\t @ - false\n", "dashspace": "a:\n\t- false\n", "plus": "a:\n\t+-false\n",
+        "sameline": "b: ; -false\n", "long": "MAKEFLAGS += --ignore-errors\na:\n\tfalse\n",
+        "keep": "MAKEFLAGS += --keep-going\na:\n\tfalse\n", "letter": "MAKEFLAGS += i\na:\n\tfalse\n",
+        "colon": "a:\n\t$(PY) check.py x.log || :\n",
+    }
+    good = {"plain": "a:\n\t@echo -n x\n", "flags": "MAKEFLAGS += --no-print-directory\na:\n\tfalse\n", "rule": "a: b ; @echo -x\n"}
+    for name, body in {**bad, **good}.items():
+        write(tmp_path, f"{name}/Makefile", "# Runs a bench.\n" + body)
+    found = {str(path).split("/")[0] for rule, path, _ in find_problems(tmp_path) if rule == "hidden_failure"}
+    assert found == set(bad)

@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), reports a result that is exactly zero without the bench's own 'zero is real: <key> (<reason>)' line beside it, or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -234,6 +234,28 @@ def unchecked_log(text):
             found.append(f"appends failed runs to {name} but never reads it, so they never reach a verdict")
     return found
 
+ZERO = re.compile(r"-?0(?:\.0*)?(?:e[+-]?\d+)?$", re.I)
+NAME = re.compile(r"[A-Za-z_]\w*$")
+
+def exact_zeros(text):
+    lines = [l.split() for l in text.splitlines()]
+    real = {m.group(1) for m in map(re.compile(r"^zero is real: (\w+) \(\S.*\)\s*$").match, text.splitlines()) if m}
+    zeros = set()
+    for i, words in enumerate(lines):
+        for j in range(len(words) - 1):
+            if NAME.match(words[j]) and ZERO.match(words[j + 1]):
+                zeros.add(words[j])
+        header = lines[i - 1] if i else []
+        if header and len(header) == len(words) and all(NAME.match(w) for w in header) and not any(NAME.match(w) for w in words):
+            zeros |= {h for h, w in zip(header, words) if ZERO.match(w)}
+    return sorted(zeros - real)
+
+def ignores_errors(line):
+    flags = re.match(r"\s*MAKEFLAGS\s*[+:?]?=(.*)", line)
+    if flags:
+        return any("ignore-errors" in w or "keep-going" in w or re.fullmatch(r"-?[A-Za-z]*[ik][A-Za-z]*", w) for w in flags.group(1).split())
+    return bool(re.match(r"\t[@+\s]*-", line) or re.match(r"[^\t#=]*:[^=]*;\s*[@+\s]*-", line) or line.startswith(".IGNORE"))
+
 def find_problems(root):
     root = Path(root)
     problems = []
@@ -245,6 +267,8 @@ def find_problems(root):
             problems += [(rule, rel, why) for rule, why in summary_problems(path, root)]
             continue
         if "results" in rel.parts:
+            if path.suffix == ".txt":
+                problems += [("exact_zero", rel, f"{key} is exactly 0, which a failed or preset measure gives; if 0 is real the bench writes 'zero is real: {key} (<reason>)'") for key in exact_zeros(path.read_text(errors="replace"))]
             continue
         try:
             text = path.read_text()
@@ -260,7 +284,7 @@ def find_problems(root):
         if path.suffix == ".py":
             problems += [(rule, rel, why) for rule, why in python_problems(path, text)]
         if path.name == "Makefile" or path.suffix == ".mk":
-            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :", l) or re.match(r"\t@?-\S", l) or l.startswith(".IGNORE") or re.match(r"\s*MAKEFLAGS\s*[+:?]?=.*(?<!\S)-\w*[ik]", l)]
+            problems += [("hidden_failure", rel, l.strip()) for l in text.splitlines() if "|| true" in l or re.search(r"\bthen :|\|\|\s*:(?:\s|;|$)", l) or ignores_errors(l)]
             problems += [("unchecked_log", rel, why) for why in unchecked_log(text)]
     return problems
 
