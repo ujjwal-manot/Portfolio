@@ -9,8 +9,8 @@ LOGS := $(PY) $(ROOT)/helpers/spice_log_check.py
 SPICE := $(ROOT)/helpers/ngspice.sh
 CHARTS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,build/charts/$(c)_$(t)/charts.txt))
 CORNERS := $(foreach c,tt ss ff sf fs,$(foreach t,m40 27 125,$(foreach v,lo min nom hi,build/corners/$(c)_$(t)_$(v)/result.txt)))
-MC := $(foreach n,$(shell seq 1 200),build/mc/$(n)/result.txt)
-MC_HOT := $(foreach n,$(shell seq 1 100),build/mc_hot/$(n)/result.txt)
+MC := $(foreach n,$(shell seq 1 300),build/mc/$(n)/result.txt)
+MC_HOT := $(foreach n,$(shell seq 1 300),build/mc_hot/$(n)/result.txt)
 TESTS := loop step noise swing load
 DAC := $(ROOT)/projects/adc/design/cap_dac.cir $(ROOT)/projects/adc/design/cap_dac_sizes.inc
 PASSIVE_tt := typ
@@ -72,6 +72,7 @@ broken: build/sizes.inc
 	  if $(PY) $(ROOT)/helpers/analog_results.py corners results/broken_$$n.txt > results/broken_$$n.log 2>&1; then c=1; \
 	  elif [ -n "$$want" ] && grep -qxF -- "$$want" results/broken_$$n.log; then c=0; else c=2; fi; \
 	  $(LOGS) $(addprefix $$d/,$(addsuffix .log,$(TESTS))) >> results/broken_$$n.log 2>&1 || s=1; echo "ngspice runs failed: $$s" >> results/broken_$$n.log; \
+	  if [ $$s = 1 ] && ! grep -q "^$${want#FAIL } .*measurement failed" results/broken_$$n.log; then c=3; echo "a run failed, but not as the measurement the patch names" >> results/broken_$$n.log; fi; \
 	  $(SAVE) broken_$$n $$c results/broken_$$n.log results/broken_$$n.txt; done
 
 REVIEW := tt_27_nom ss_125_lo sf_125_lo ff_m40_lo ff_125_hi ss_125_min

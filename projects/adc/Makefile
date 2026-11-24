@@ -1,4 +1,4 @@
-# adc commands: make sar | logic | decide | offset | levels | trim | uic_check | convert | supply_corners | ramp | supplied | refs | supply_wave | shunt_check | gear_check | ktc | model | supply_current | fom | broken | review | layout | post_layout | all
+# adc commands: make sar | logic | decide | offset | levels | trim | uic_check | convert | supply_corners | ramp | supplied | refs | supply_wave | shunt_check | gear_check | ktc | model | supply_current | fom | broken | review | layout | post_layout | all | mc_convert (not in all: MC_RUNS transistor Monte Carlo conversions)
 SHELL := /bin/bash
 .SHELLFLAGS := -eo pipefail -c
 ROOT := $(shell git rev-parse --show-toplevel)
