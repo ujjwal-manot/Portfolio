@@ -42,7 +42,7 @@ def values(path):
     out = {}
     for line in Path(path).read_text().splitlines():
         f = line.split()
-        if f and f[0] != "*":
+        if f and f[0] != "*" and not line.startswith("zero is real:"):
             out.update({f"{f[0]}.{k}": float(v) for k, v in zip(f[1::2], f[2::2])})
     return out
 
@@ -51,8 +51,8 @@ if __name__ == "__main__":
     f, d, l, a, b = values(fitbench), values(dc), values(ldo), values(s10n), values(s1m)
     ibleed = float(re.search(r"^@n\.x2\.xbl\.\w+\[ids\]\s*=\s*(\S+)", Path(em).read_text(), re.M).group(1))
     lines = Path(fitbench).read_text().splitlines()
-    m = {"curve": [(float(w[1]), float(w[2])) for w in (x.split() for x in lines) if w[0] == "curve"],
-         "ibg": [(float(w[1]), float(w[2])) for w in (x.split() for x in lines) if w[0] == "ibg"],
+    m = {"curve": [(float(w[2]), float(w[4])) for w in (x.split() for x in lines) if w[:1] == ["curve"]],
+         "ibg": [(float(w[1]), float(w[2])) for w in (x.split() for x in lines) if w[:1] == ["ibg"]],
          "vsg_v": f["fit.vsg_v"], "cout_f": f["fit.cout_f"], "step_v": d["dc.step_v"], "line_v_per_v": d["dc.line_v_per_v"],
          "settle_10n_s": a["startup.settle_s"], "settle_1m_s": b["startup.settle_s"], "ramp_1m_s": b["startup.ramp_s"],
          "gain_db": l["loop_0.gain_db"], "fc_hz": l["loop_0.fc_hz"], "pm_deg": l["loop_0.pm_deg"], "vout_v": l["ldo_dc.vout_v"],

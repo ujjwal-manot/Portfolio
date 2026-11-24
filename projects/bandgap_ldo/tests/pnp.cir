@@ -17,6 +17,7 @@ foreach t -40 -20 0 27 50 75 100 125
   let ve8 = v(e8)
   echo "$t $&ve $&ve8" >> pnp.txt
 end
+echo "zero is real: temp_c (the 0 C point of the sweep)" >> pnp.txt
 quit
 .endc
 .end
