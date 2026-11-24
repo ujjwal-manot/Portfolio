@@ -246,3 +246,8 @@ def test_exact_zero_reads_every_row_and_each_separator(tmp_path):
 def test_makeflags_with_a_prefix_or_an_option_argument(tmp_path):
     assert ignores_errors("export MAKEFLAGS += i") and ignores_errors("override MAKEFLAGS += -i")
     assert not ignores_errors("MAKEFLAGS += -I include") and not ignores_errors("MAKEFLAGS += -C dir -W file")
+
+def test_a_text_line_does_not_reset_the_header_and_sentinels_count(tmp_path):
+    assert exact_zeros("a b\n1 2\nnote text here\n3 0\n") == ["b"]
+    assert exact_zeros("settle_v 1e30 kick_v 2e-3\n") == ["settle_v"] and exact_zeros("x y\n1 -1e+30\n") == ["y"]
+    assert exact_zeros("c_f 1e-12 r_ohm 1e9\n") == []

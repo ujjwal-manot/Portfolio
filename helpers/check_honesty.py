@@ -1,4 +1,4 @@
-# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), reports a result that is exactly zero without the bench's own 'zero is real: <key> (<reason>)' line beside it (in key/value pairs separated by space, =, : or comma, or in any row under a header; every exemption is listed for review), or breaks the one-comment-per-file rule.
+# Fails if the repo fakes results, keeps results older than their sources, names a file in a uses.txt that does not exist, quotes README numbers its logs never show, hides failures, presets a measured or run-derived value to a constant in a SPICE bench however it is spelled or chained (a failed run would keep it; counters, clamps, search brackets and nan presets are fine), measures inside a loop without a nan reset (a real overflow nan defined before the first analysis) or destroy all in the innermost loop (a failed meas keeps the last pass's value), runs ngspice from a Makefile other than through helpers/ngspice.sh (which fails the run unless spice_log_check passes its log) or lets a failed wrapper run pass (a leading -, .IGNORE, make -i or -k, a result recorded as zero or only echoed, or an if with no branch that sets a nonzero flag, exits nonzero or appends to a failed file that the Makefile then reads; whether the recorded failure then reaches the saved verdict is left to save_result and summary.json), uses toy models, simulates a circuit in Python (a solver import, or a loop stepping a capacitor voltage through time), reports a result that is exactly zero (or a 1e30-size sentinel) without the bench's own 'zero is real: <key> (<reason>)' line beside it (in key/value pairs separated by space, =, : or comma, or in any row under a header; every exemption is listed for review), or breaks the one-comment-per-file rule.
 import ast, hashlib, io, json, re, sys, tokenize
 from pathlib import Path
 from save_result import sources
@@ -239,20 +239,27 @@ NAME = re.compile(r"[A-Za-z_]\w*$")
 
 REAL_ZERO = re.compile(r"^zero is real: (\w+) \(\S.*\)\s*$")
 
+def preset_like(word):
+    try:
+        x = float(word)
+    except ValueError:
+        return False
+    return x == 0 or abs(x) >= 1e30
+
 def exact_zeros(text):
     real = {m.group(1) for m in map(REAL_ZERO.match, text.splitlines()) if m}
+    rows = [re.sub(r"[=,]|:(?=\s)", " ", l).split() for l in text.splitlines() if not l.startswith("zero is real:")]
     zeros, header = set(), None
-    for line in text.splitlines():
-        if line.startswith("zero is real:"):
-            continue
-        words = re.sub(r"[=,]|:(?=\s)", " ", line).split()
+    for i, words in enumerate(rows):
         for a, b in zip(words, words[1:]):
-            if NAME.match(a) and ZERO.match(b):
+            if NAME.match(a) and preset_like(b):
                 zeros.add(a)
         if words and all(NAME.match(w) for w in words):
-            header = words
+            after = rows[i + 1] if i + 1 < len(rows) else []
+            if len(after) == len(words) and not any(NAME.match(w) for w in after):
+                header = words
         elif header and len(words) == len(header) and not any(NAME.match(w) for w in words):
-            zeros |= {h for h, w in zip(header, words) if ZERO.match(w)}
+            zeros |= {h for h, w in zip(header, words) if preset_like(w)}
     return sorted(zeros - real)
 
 def zero_exemptions(text):
@@ -281,7 +288,7 @@ def find_problems(root):
             continue
         if "results" in rel.parts:
             if path.suffix == ".txt":
-                problems += [("exact_zero", rel, f"{key} is exactly 0, which a failed or preset measure gives; if 0 is real the bench writes 'zero is real: {key} (<reason>)'") for key in exact_zeros(path.read_text(errors="replace"))]
+                problems += [("exact_zero", rel, f"{key} is exactly 0 or a 1e30-size sentinel, which a failed or preset measure gives; if 0 is real the bench writes 'zero is real: {key} (<reason>)'") for key in exact_zeros(path.read_text(errors="replace"))]
             continue
         try:
             text = path.read_text()
