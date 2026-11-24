@@ -34,13 +34,13 @@ def offsets(paths):
     return {"mean_v": statistics.mean(off), "sigma_v": statistics.stdev(off), "worst_v": max(off, key=abs), "hysteresis_max_v": max(hyst), "runs": len(off)}
 
 def linearity(path):
-    e = [number(l.split()[1]) for l in open(path).readlines()[1:]]
+    e = [number(l.split()[1]) for l in open(path).readlines()[1:] if not l.startswith("zero is real:")]
     dnl = [(e[d] - e[d - 1]) / LSB for d in range(1, len(e))]
     inl = [(e[d] - e[0] - (e[-1] - e[0]) * d / (len(e) - 1)) / LSB for d in range(len(e))]
     return {"dnl_min": min(dnl), "dnl_max": max(dnl), "inl_min": min(inl), "inl_max": max(inl)}
 
 def same(path_a, path_b, limit=0.01):
-    load = lambda p: {int(c): number(v) for c, v in (line.split() for line in open(p).read().splitlines()[1:])}
+    load = lambda p: {int(c): number(v) for c, v in (line.split() for line in open(p).read().splitlines()[1:] if not line.startswith("zero is real:"))}
     a, b = load(path_a), load(path_b)
     worst = max(abs(a[c] - b[c]) for c in a) / LSB
     return worst <= limit and a.keys() == b.keys(), worst
