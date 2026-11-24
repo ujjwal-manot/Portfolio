@@ -134,3 +134,16 @@ def test_unit_inc(tmp_path):
     with pytest.raises(ValueError):
         d.unit_inc(iv, dl, 4e-8)
     assert math.isfinite(d.setpoint(120, VREF))
+
+def test_sense(tmp_path):
+    p = tmp_path / "sense.txt"
+    row = lambda tap, k: "sense %d " % tap + " ".join(f"{c}_{e} {0.5 + k if c == 'fl' else 0.5} ideal_{c} 0.5" for c in ("fl", "fh", "cl", "ch") for e in "ab") + " fb_a 0.601 fb_b 0.601 ideal_fb 0.6"
+    p.write_text("sensing residues\n" + row(90, 0.001) + "\n")
+    lines, fails = d.sense([p], 3e-3)
+    assert fails == [] and any("90" in l for l in lines)
+    p.write_text("sensing residues\n" + row(90, 0.005) + "\n")
+    lines, fails = d.sense([p], 3e-3)
+    assert any(f.startswith("sensing residue above") for f in fails)
+    p.write_text("sensing residues\n" + row(90, 0.0).replace("fb_b 0.601", "fb_b nan") + "\n")
+    lines, fails = d.sense([p], 3e-3)
+    assert any(f.startswith("not a number") for f in fails)
