@@ -1,4 +1,4 @@
-# Reads digital LDO loop results: per scheduled segment of a loop run (time and rail from wrdata) the mean, ripple, lowest and highest rail and settling time against chip.md's limits (loop), a real-number model run against a transistor run within the allowed errors (compare), ripple and droop across controller gains (gains), the cpu's per-cycle current from OpenSTA window reports (cpu_load), the controller-alone co-simulation with both coarse comparators high (coarse), comparator Monte Carlo offsets against the fine window (offsets), the bandgap-fed ladder reference (ref) and the measured switch unit as a model include (unit): python3 dldo_loop.py loop|compare|gains|cpu_load|coarse|offsets|ref|unit ...
+# Reads digital LDO loop results: per scheduled segment of a loop run (time and rail from wrdata) the mean, ripple, lowest and highest rail and settling time against chip.md's limits (loop), a real-number model run against a transistor run within the allowed errors (compare), ripple and droop across controller gains (gains), the cpu's per-cycle current from OpenSTA window reports (cpu_load), the controller-alone co-simulation with both coarse comparators high (coarse), comparator Monte Carlo offsets against the fine window (offsets), the comparators' input residue at their sampling edge with the real ladder, muxes and divider (sense), the bandgap-fed ladder reference (ref) and the measured switch unit as a model include (unit): python3 dldo_loop.py loop|compare|gains|cpu_load|coarse|offsets|sense|ref|unit ...
 import math, re, statistics, sys
 from pathlib import Path
 
@@ -193,6 +193,24 @@ def unit_inc(iv_path, delay_path, t_end):
     table = ", ".join(f"{v:.6g}, {i:.6g}" for v, i in rows)
     return f".func iunit(x) {{pwl(x, {table})}}\n.param t_on={d['t_on_s']:.6g} t_off={d['t_off_s']:.6g}\n"
 
+def sense(paths, limit):
+    lines, fails = [], []
+    for p in map(Path, paths):
+        rows = [l.split() for l in p.read_text().splitlines() if l.startswith("sense ")]
+        if len(rows) != 4:
+            fails.append(f"{p}: {len(rows)} setpoints instead of 4")
+        for w in rows:
+            v = {k: float(x) for k, x in zip(w[2::2], w[3::2])}
+            if any(math.isnan(x) for x in v.values()) or len(v) < 15:
+                fails.append(f"not a number or a missing measure in {p} at tap {w[1]}")
+                continue
+            res = {f"{c}_{e}": (v[f"{c}_{e}"] - v[f"ideal_{c}"]) - (v[f"fb_{e}"] - v["ideal_fb"]) for c in ("fl", "fh", "cl", "ch") for e in "ab"}
+            worst = max(res, key=lambda k: abs(res[k]))
+            lines.append(f"{p.parent.name} tap {w[1]}: worst differential residue {res[worst] * 1e3:+.2f} mV ({worst}), common mode on fb {(v['fb_a'] - v['ideal_fb']) * 1e3:+.1f} and {(v['fb_b'] - v['ideal_fb']) * 1e3:+.1f} mV")
+            if abs(res[worst]) > limit:
+                fails.append(f"sensing residue above {limit * 1e3:.1f} mV: {res[worst] * 1e3:+.2f} mV at {p.parent.name} tap {w[1]} ({worst})")
+    return lines, fails
+
 def finish(lines, fails):
     for l in lines:
         print(l)
@@ -223,6 +241,8 @@ if __name__ == "__main__":
         finish([], [] if len(w) > 8 and [x["cycle"] for x in w] == list(range(len(w))) else ["windows missing"])
     elif mode == "coarse":
         finish(*coarse(args[0], int(args[1]), float(args[2])))
+    elif mode == "sense":
+        finish(*sense(args[1:], float(args[0])))
     elif mode == "offsets":
         finish(*offsets(args[1:], float(args[0])))
     elif mode == "ref":
