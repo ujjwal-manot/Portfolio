@@ -1,4 +1,4 @@
-* Steps one IHP low-voltage NMOS and one PMOS (W = 5 um, source at 0 V, PMOS biased with negated voltages) through gate voltage 0 to 1.2 V in 10 mV operating points at drain voltages 0.05 and 0.6 V and source-to-bulk voltages 0 and 0.25 V, for lengths 0.13 to 2 um, writing current, gm, gds, cgg, vth, vdsat, unity-gain frequency and noise at each point to charts.txt; corner and temperature come from corner.inc in the run folder.
+* Steps one IHP low-voltage NMOS and one PMOS (W = 5 um, source at 0 V, PMOS biased with negated voltages) through gate voltage 0 to 1.2 V in 10 mV operating points at drain voltages 0.05 and 0.6 V and source-to-bulk voltages 0 and 0.25 V, for lengths 0.13 to 2 um, writing (after a line saying the zero source-to-bulk voltage is real) current, gm, gds, cgg, vth, vdsat, unity-gain frequency and noise at each point to charts.txt; corner and temperature come from corner.inc in the run folder.
 .include corner.inc
 .param lval=0.13u vds=0.6 vsb=0
 VG g 0 0
@@ -10,6 +10,7 @@ VBP bp 0 {vsb}
 XN dn g 0 bn sg13_lv_nmos w=5u l={lval}
 XP dp gp 0 bp sg13_lv_pmos w=5u l={lval}
 .control
+echo zero is real: vsb (the source sits on the bulk in the zero source-to-bulk half of the sweep) >> charts.txt
 let vg = 0
 foreach len 0.13u 0.18u 0.25u 0.5u 1u 2u
   foreach v 0.05 0.6

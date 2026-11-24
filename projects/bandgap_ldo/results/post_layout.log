@@ -1,0 +1,92 @@
+pexdc_ff_3v6 vref_v=1.3745 tc_ppm_per_c=195.09 vref_min_v=1.1769 vref_max_v=1.216 supply_a=5.4212e-05 line_v_per_v=0.27022 code=9 untrimmed_v=1.0021 untrimmed_tc_ppm_per_c=618.12 step_v=0.37232
+pexdc_ss_3v0 vref_v=1.0832 tc_ppm_per_c=27.293 vref_min_v=1.2054 vref_max_v=1.2108 supply_a=2.0799e-05 line_v_per_v=0.20855 code=9 untrimmed_v=1.35 untrimmed_tc_ppm_per_c=577.08 step_v=-0.26675
+pexdc_tt_3v3 vref_v=1.0198 tc_ppm_per_c=nan vref_min_v=nan vref_max_v=nan supply_a=2.0953e-05 line_v_per_v=0.4121 code=15 untrimmed_v=0.98274 untrimmed_tc_ppm_per_c=527.97 step_v=0.026284
+FAIL pexdc_tt_3v3: tempco nan ppm/C over 30
+FAIL pexdc_ff_3v6: tempco 195 ppm/C over 30
+FAIL pexdc_tt_3v3: trim code 15 at the end of its range
+FAIL pexdc_tt_3v3: trimmed vref 1.0198 V is 7.09 trim steps from 1.2063 V, limit 0.75
+some check fails
+tt_3v3: post-layout bandgap at code 8, before trim, against the schematic (allowed shift: seven trim steps, the room above code 8)
+untrimmed_v      1.20633 and 0.982741, differ by 0.224, tolerance 0.0218: DIFFERENT
+the two runs differ
+ss_3v0: post-layout bandgap at code 8, before trim, against the schematic (allowed shift: seven trim steps, the room above code 8)
+untrimmed_v      1.20293 and 1.34998, differ by 0.147, tolerance 0.0218: DIFFERENT
+the two runs differ
+ff_3v6: post-layout bandgap at code 8, before trim, against the schematic (allowed shift: seven trim steps, the room above code 8)
+untrimmed_v      1.20946 and 1.00214, differ by 0.207, tolerance 0.0218: DIFFERENT
+the two runs differ
+build/post_layout/dc_tt_3v3/dc.log: FAIL
+  OSDI(debug) n.x1.x1.xError: Transient op failed, timestep too small
+  Error: The operating point could not be simulated successfully.
+  doAnalyses: DC:  Timestep too small;  temp = -40: trouble with x1.x1.xqq1:pnpmpa_mod-instance q.x1.x1.xqq1.qpnpmpa
+  dc simulation(s) aborted
+  Error: RHS "length(v(vref))" invalid
+build/post_layout/dc_ss_3v0/dc.log: ok
+build/post_layout/dc_ff_3v6/dc.log: ok
+build/post_layout/ldo_tt_3v3_27/ldo_dc.log: ok
+build/post_layout/ldo_tt_3v3_27/ldo_psrr.log: ok
+build/post_layout/ldo_tt_3v3_27/ldo_startup.log: ok
+build/post_layout/ldo_tt_3v3_27/step_0p5m.log: ok
+build/post_layout/ldo_tt_3v3_27/step_2m.log: ok
+build/post_layout/ldo_tt_3v3_27/loop_0.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_tt_3v3_27/loop_250u.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_tt_3v3_27/loop_1m.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_tt_3v3_27/loop_2m.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_ss_3v0_125/ldo_dc.log: ok
+build/post_layout/ldo_ss_3v0_125/ldo_psrr.log: ok
+build/post_layout/ldo_ss_3v0_125/ldo_startup.log: ok
+build/post_layout/ldo_ss_3v0_125/step_0p5m.log: ok
+build/post_layout/ldo_ss_3v0_125/step_2m.log: ok
+build/post_layout/ldo_ss_3v0_125/loop_0.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_ss_3v0_125/loop_250u.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_ss_3v0_125/loop_1m.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_ss_3v0_125/loop_2m.log: FAIL
+  Error: measure  fc  when(WHEN) : out of interval
+  meas ac fc when mag=1 fall=1 failed!
+  Error: measure  phc  find(FIND) : bad syntax of WHEN
+  meas ac phc find ph at=nan failed!
+  Error: RHS "180 + phc" invalid
+build/post_layout/ldo_ff_3v6_m40/ldo_dc.log: ok
+build/post_layout/ldo_ff_3v6_m40/ldo_psrr.log: ok
+build/post_layout/ldo_ff_3v6_m40/ldo_startup.log: ok
+build/post_layout/ldo_ff_3v6_m40/step_0p5m.log: ok
+build/post_layout/ldo_ff_3v6_m40/step_2m.log: ok
+build/post_layout/ldo_ff_3v6_m40/loop_0.log: ok
+build/post_layout/ldo_ff_3v6_m40/loop_250u.log: ok
+build/post_layout/ldo_ff_3v6_m40/loop_1m.log: ok
+build/post_layout/ldo_ff_3v6_m40/loop_2m.log: ok

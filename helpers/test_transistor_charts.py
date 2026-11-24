@@ -33,3 +33,10 @@ def test_reader_splits_devices_lengths_and_drain_voltages(tmp_path):
     data = read(f)
     assert sorted(data) == [("n", 1.3e-07, 0.05, 0.0), ("n", 2e-06, 0.6, 0.25), ("p", 1.3e-07, 0.05, 0.0), ("p", 2e-06, 0.6, 0.25)]
     assert data[("p", 2e-06, 0.6, 0.25)][0] == {"vgs": 0.6, "ids": 31, "gm": 32, "gds": 33, "cgg": 34, "vth": 35, "vdss": 36, "fug": 37, "sid": 38, "sfl": 39}
+
+def test_reader_skips_the_bench_line_that_says_vsb_zero_is_real(tmp_path):
+    line = " ".join(map(str, [0.5, *range(1, 10), *range(11, 20)]))
+    plain, marked = tmp_path / "a.txt", tmp_path / "b.txt"
+    plain.write_text("l 0.13u vds 0.6 vsb 0\n" + line + "\n")
+    marked.write_text("zero is real: vsb (the source-on-bulk half of the sweep)\n" + plain.read_text())
+    assert read(marked) == read(plain)

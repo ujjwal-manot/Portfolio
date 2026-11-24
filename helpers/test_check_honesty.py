@@ -251,3 +251,9 @@ def test_a_text_line_does_not_reset_the_header_and_sentinels_count(tmp_path):
     assert exact_zeros("a b\n1 2\nnote text here\n3 0\n") == ["b"]
     assert exact_zeros("settle_v 1e30 kick_v 2e-3\n") == ["settle_v"] and exact_zeros("x y\n1 -1e+30\n") == ["y"]
     assert exact_zeros("c_f 1e-12 r_ohm 1e9\n") == []
+
+def test_a_continued_line_starting_with_an_option_is_not_an_ignored_error(tmp_path):
+    write(tmp_path, "a/Makefile", "# Runs a bench.\nrun:\n\tsed -i \\\n\t  -e 's/x/y/' f.cir\n")
+    write(tmp_path, "b/Makefile", "# Runs a bench.\nrun:\n\techo a \\\n\t  && false\n\t-false\n")
+    found = {str(path).split("/")[0] for rule, path, _ in find_problems(tmp_path) if rule == "hidden_failure"}
+    assert found == {"b"}

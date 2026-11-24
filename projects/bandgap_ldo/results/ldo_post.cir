@@ -1,0 +1,612 @@
+* NGSPICE file created from ldo_pex.ext - technology: ihp-sg13g2
+
+.subckt ldo_pex vss vout fb vdd vref vg
+X0 vout vss cap_cmim l=64.5u w=64.5u
+X1 m1_21815_531# a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=1.36p ps=8.68u w=4u l=4u
+X2 m1_21815_531# a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X3 vss a_1366_800# m1_21815_531# vss sg13_hv_nmos ad=1.36p pd=8.68u as=0.76p ps=4.38u w=4u l=4u
+X4 vss a_1366_800# m1_21815_531# vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X5 vout vss cap_cmim l=64.5u w=64.5u
+X6 vout vss cap_cmim l=64.5u w=64.5u
+X7 vout vss cap_cmim l=64.5u w=64.5u
+X8 vout vss cap_cmim l=64.5u w=64.5u
+X9 a_1366_800# vss cap_cmim l=52u w=52u
+X10 vout vss cap_cmim l=64.5u w=64.5u
+X11 vout vss cap_cmim l=64.5u w=64.5u
+X12 vout vss cap_cmim l=64.5u w=64.5u
+X13 vout vss cap_cmim l=64.5u w=64.5u
+X14 a_27518_2000# vss cap_cmim l=44u w=44u
+X15 vout vss cap_cmim l=64.5u w=64.5u
+X16 m1_39288_7390# m1_38908_7390# vss rhigh l=36.8u w=0.5u
+X17 m1_38908_7390# m1_38528_7390# vss rhigh l=36.8u w=0.5u
+X18 vout vss cap_cmim l=64.5u w=64.5u
+X19 m1_38528_7390# m1_38148_7390# vss rhigh l=36.8u w=0.5u
+X20 vout vss cap_cmim l=64.5u w=64.5u
+X21 m1_38148_7390# m1_37768_7390# vss rhigh l=36.8u w=0.5u
+X22 m1_37768_7390# vref vss rhigh l=36.8u w=0.5u
+X23 m1_21815_531# fb a_27518_2000# vss sg13_hv_nmos ad=3.4p pd=20.68u as=1.9p ps=10.38u w=10u l=2u
+X24 a_27518_2000# fb m1_21815_531# vss sg13_hv_nmos ad=1.9p pd=10.38u as=3.4p ps=20.68u w=10u l=2u
+X25 m1_21815_531# a_24878_2000# a_2376_12744# vss sg13_hv_nmos ad=7.90622p pd=99.485u as=5.03542p ps=54.205u w=10u l=2u
+X26 a_2376_12744# a_24878_2000# m1_21815_531# vss sg13_hv_nmos ad=0 pd=0 as=0 ps=0 w=10u l=2u
+X27 a_122_800# a_122_800# vss vss sg13_hv_nmos ad=1.36p pd=8.68u as=1.36p ps=8.68u w=4u l=4u
+X28 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X29 vss a_1366_800# vout vss sg13_hv_nmos ad=1.36p pd=8.68u as=0.76p ps=4.38u w=4u l=4u
+X30 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X31 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X32 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X33 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X34 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X35 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X36 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X37 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X38 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X39 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X40 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=1.36p ps=8.68u w=4u l=4u
+X41 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X42 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X43 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X44 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X45 vout a_1366_800# vss vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X46 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X47 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X48 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X49 vss a_1366_800# vout vss sg13_hv_nmos ad=0.76p pd=4.38u as=0.76p ps=4.38u w=4u l=4u
+X50 a_24878_2000# vss cap_cmim l=41u w=41u
+X51 a_24878_2000# vss cap_cmim l=41u w=41u
+X52 a_24878_2000# vss cap_cmim l=41u w=41u
+X53 a_1366_800# m1_42708_7390# vss rhigh l=36.8u w=0.5u
+X54 a_24878_2000# vss cap_cmim l=41u w=41u
+X55 m1_42708_7390# m1_42328_7390# vss rhigh l=36.8u w=0.5u
+X56 m1_42328_7390# m1_41948_7390# vss rhigh l=36.8u w=0.5u
+X57 m1_41948_7390# m1_41568_7390# vss rhigh l=36.8u w=0.5u
+X58 m1_41568_7390# a_122_800# vss rhigh l=36.8u w=0.5u
+X59 a_24878_2000# m1_40808_7390# vss rhigh l=36.8u w=0.5u
+X60 m1_40808_7390# m1_40428_7390# vss rhigh l=36.8u w=0.5u
+X61 m1_40428_7390# m1_40048_7390# vss rhigh l=36.8u w=0.5u
+X62 vout vss cap_cmim l=64.5u w=64.5u
+X63 m1_40048_7390# m1_39668_7390# vss rhigh l=36.8u w=0.5u
+X64 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X65 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X66 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X67 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X68 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X69 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X70 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X71 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X72 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X73 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X74 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X75 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X76 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X77 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X78 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X79 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X80 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X81 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X82 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X83 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X84 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X85 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X86 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X87 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X88 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X89 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X90 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X91 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X92 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X93 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X94 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=3.4p ps=20.68u w=10u l=0.45u
+X95 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X96 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X97 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X98 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X99 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X100 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X101 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X102 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X103 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X104 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X105 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X106 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X107 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X108 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X109 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X110 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X111 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X112 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X113 vout a_27518_2000# vdd vss sg13_hv_nmos ad=3.4p pd=20.68u as=1.9p ps=10.38u w=10u l=0.45u
+X114 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X115 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X116 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X117 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X118 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X119 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X120 vdd a_27518_2000# vout vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X121 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X122 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X123 vout a_27518_2000# vdd vss sg13_hv_nmos ad=1.9p pd=10.38u as=1.9p ps=10.38u w=10u l=0.45u
+X124 a_122_800# vg vdd vdd sg13_hv_pmos ad=2.72p pd=16.68u as=2.72p ps=16.68u w=8u l=8u
+X125 vout vss cap_cmim l=64.5u w=64.5u
+X126 vout vss cap_cmim l=64.5u w=64.5u
+X127 m1_39668_7390# m1_39288_7390# vss rhigh l=36.8u w=0.5u
+X128 a_27518_2000# a_2376_12744# vdd vdd sg13_hv_pmos ad=2.72p pd=16.68u as=2.72p ps=16.68u w=8u l=4u
+X129 vout vss cap_cmim l=64.5u w=64.5u
+X130 a_2376_12744# a_2376_12744# vdd vdd sg13_hv_pmos ad=0 pd=0 as=76.20812p ps=0.8213m w=8u l=4u
+C0 rhigh_14/a_0_0# rhigh_13/a_0_0# 0.15629f
+C1 vref a_1366_800# 0.02228f
+C2 m1_38908_7390# a_27518_2000# 0.05397f
+C3 rhigh_6/a_0_0# rhigh_7/a_0_0# 0.15629f
+C4 vref vout 0.09962f
+C5 m1_40048_7390# a_122_800# 0.03067f
+C6 m1_38528_7390# m1_40048_7390# 0
+C7 m1_38148_7390# rhigh_11/a_0_0# 0.02771f
+C8 rhigh_6/a_0_0# m1_40808_7390# 0.04672f
+C9 m1_40048_7390# a_24878_2000# 0.03904f
+C10 rhigh_0/a_0_0# m1_42328_7390# 0.02771f
+C11 m1_41948_7390# rhigh_1/a_0_0# 0.02771f
+C12 rhigh_2/a_0_0# m1_42328_7390# 0.04672f
+C13 rhigh_4/a_0_0# rhigh_3/a_0_0# 0.15629f
+C14 m1_39288_7390# rhigh_8/a_0_0# 0.02771f
+C15 m1_38148_7390# m1_37768_7390# 0.84012f
+C16 vout rhigh_13/a_0_0# 0.01032f
+C17 m1_40048_7390# a_27518_2000# 0.05134f
+C18 a_122_800# rhigh_5/a_0_0# 0.02771f
+C19 a_1366_800# m1_40428_7390# 0.03906f
+C20 m1_38528_7390# rhigh_11/a_0_0# 0.20777f
+C21 m1_42708_7390# m1_42328_7390# 1.06537f
+C22 a_24878_2000# rhigh_5/a_0_0# 0.01901f
+C23 m1_40428_7390# vout 0.03065f
+C24 rhigh_12/a_0_0# rhigh_13/a_0_0# 0.15629f
+C25 m1_21815_531# fb 1.3715f
+C26 a_122_800# m1_37768_7390# 0.03067f
+C27 m1_38528_7390# m1_37768_7390# 0
+C28 vref rhigh_13/a_0_0# 0.02771f
+C29 a_24878_2000# m1_37768_7390# 0.03904f
+C30 rhigh_0/a_0_0# a_1366_800# 0.01901f
+C31 a_27518_2000# rhigh_11/a_0_0# 0
+C32 rhigh_7/a_0_0# m1_39668_7390# 0.02771f
+C33 m1_40048_7390# rhigh_8/a_0_0# 0.04672f
+C34 rhigh_4/a_0_0# m1_40808_7390# 0.02771f
+C35 a_27518_2000# m1_37768_7390# 0.05503f
+C36 a_122_800# m1_38148_7390# 0.03067f
+C37 m1_42708_7390# a_1366_800# 0.27798f
+C38 m1_38528_7390# m1_38148_7390# 0.8606f
+C39 m1_39668_7390# m1_40808_7390# 0
+C40 m1_42708_7390# vout 0.04696f
+C41 m1_38148_7390# a_24878_2000# 0.03904f
+C42 m1_41948_7390# a_122_800# 0
+C43 m1_40048_7390# m1_41568_7390# 0
+C44 rhigh_9/a_0_0# m1_39668_7390# 0.04672f
+C45 m1_41948_7390# a_24878_2000# 0.03904f
+C46 m1_21815_531# a_1366_800# 2.63843f
+C47 m1_38148_7390# a_27518_2000# 0.05772f
+C48 m1_21815_531# vout 0.22943f
+C49 m1_38528_7390# a_122_800# 0.03067f
+C50 a_122_800# a_24878_2000# 0.11794f
+C51 m1_38528_7390# a_24878_2000# 0.03904f
+C52 m1_41948_7390# a_27518_2000# 0.04964f
+C53 a_122_800# a_2376_12744# 0.03354f
+C54 rhigh_6/a_0_0# m1_40428_7390# 0.20777f
+C55 vdd fb 0.12219f
+C56 a_1366_800# m1_39668_7390# 0.03906f
+C57 a_24878_2000# a_2376_12744# 1.61921f
+C58 m1_39288_7390# m1_40808_7390# 0
+C59 a_122_800# a_27518_2000# 0.04006f
+C60 m1_39668_7390# vout 0.03065f
+C61 m1_38528_7390# a_27518_2000# 0.05551f
+C62 a_24878_2000# a_27518_2000# 35.06959f
+C63 rhigh_9/a_0_0# m1_39288_7390# 0.20777f
+C64 a_27518_2000# a_2376_12744# 3.75477f
+C65 rhigh_14/a_0_0# vdd 0.00444f
+C66 m1_39288_7390# rhigh_10/a_0_0# 0.04672f
+C67 rhigh_9/a_0_0# m1_38908_7390# 0.02771f
+C68 m1_42708_7390# rhigh_0/a_0_0# 0.20777f
+C69 rhigh_10/a_0_0# m1_38908_7390# 0.20777f
+C70 rhigh_7/a_0_0# m1_40048_7390# 0.20777f
+C71 m1_41948_7390# m1_41568_7390# 1.02442f
+C72 m1_39288_7390# a_1366_800# 0.03906f
+C73 m1_39288_7390# vout 0.03065f
+C74 vdd a_1366_800# 0.0719f
+C75 m1_40048_7390# m1_40808_7390# 0
+C76 vdd vout 26.28804f
+C77 m1_41568_7390# a_122_800# 0.61792f
+C78 a_1366_800# m1_38908_7390# 0.03906f
+C79 m1_40428_7390# m1_39668_7390# 0
+C80 m1_41568_7390# a_24878_2000# 0.08747f
+C81 m1_38908_7390# vout 0.03065f
+C82 vdd rhigh_12/a_0_0# 0.00186f
+C83 m1_39288_7390# vref 0
+C84 m1_41948_7390# rhigh_3/a_0_0# 0.04672f
+C85 rhigh_5/a_0_0# m1_40808_7390# 0.20777f
+C86 vdd vref 0.05428f
+C87 rhigh_1/a_0_0# m1_42328_7390# 0.20777f
+C88 m1_41568_7390# a_27518_2000# 0.05343f
+C89 vref m1_38908_7390# 0
+C90 a_122_800# rhigh_3/a_0_0# 0.02771f
+C91 m1_40048_7390# a_1366_800# 0.03906f
+C92 m1_40048_7390# vout 0.03065f
+C93 rhigh_10/a_0_0# rhigh_11/a_0_0# 0.15629f
+C94 vdd rhigh_13/a_0_0# 0.00267f
+C95 rhigh_14/a_0_0# m1_37768_7390# 0.04672f
+C96 m1_39288_7390# m1_40428_7390# 0
+C97 vout rhigh_11/a_0_0# 0.00331f
+C98 m1_40428_7390# m1_38908_7390# 0
+C99 m1_41948_7390# m1_40808_7390# 0
+C100 m1_41948_7390# m1_42328_7390# 1.0449f
+C101 a_122_800# fb 0.01894f
+C102 a_1366_800# m1_37768_7390# 0.03906f
+C103 rhigh_12/a_0_0# rhigh_11/a_0_0# 0.15629f
+C104 fb a_24878_2000# 0.03069f
+C105 vout m1_37768_7390# 0.03541f
+C106 a_122_800# m1_40808_7390# 0.46649f
+C107 m1_42328_7390# a_122_800# 0
+C108 fb a_2376_12744# 0.00315f
+C109 a_24878_2000# m1_40808_7390# 0.33939f
+C110 m1_42328_7390# a_24878_2000# 0.03904f
+C111 rhigh_12/a_0_0# m1_37768_7390# 0.02771f
+C112 m1_40048_7390# m1_40428_7390# 0.96299f
+C113 fb a_27518_2000# 1.61286f
+C114 a_1366_800# m1_38148_7390# 0.03906f
+C115 vref m1_37768_7390# 0.84988f
+C116 m1_38148_7390# vout 0.03303f
+C117 m1_38528_7390# rhigh_10/a_0_0# 0.02771f
+C118 a_27518_2000# m1_40808_7390# 0.0538f
+C119 m1_42328_7390# a_27518_2000# 0.04936f
+C120 m1_41568_7390# rhigh_3/a_0_0# 0.20777f
+C121 m1_41948_7390# a_1366_800# 0.03906f
+C122 m1_41948_7390# vout 0.03618f
+C123 rhigh_6/a_0_0# m1_40048_7390# 0.02771f
+C124 m1_21815_531# vdd 0.05018f
+C125 rhigh_12/a_0_0# m1_38148_7390# 0.20777f
+C126 m1_40428_7390# rhigh_5/a_0_0# 0.02771f
+C127 rhigh_14/a_0_0# a_27518_2000# 0.00237f
+C128 a_122_800# a_1366_800# 1.72459f
+C129 m1_38528_7390# a_1366_800# 0.03906f
+C130 rhigh_13/a_0_0# m1_37768_7390# 0.20777f
+C131 vref m1_38148_7390# 0
+C132 a_122_800# vout 12.71824f
+C133 m1_38528_7390# vout 0.03205f
+C134 a_1366_800# a_24878_2000# 10.86661f
+C135 a_24878_2000# vout 0.09053f
+C136 m1_39288_7390# m1_39668_7390# 0.92204f
+C137 rhigh_7/a_0_0# rhigh_8/a_0_0# 0.15629f
+C138 rhigh_6/a_0_0# rhigh_5/a_0_0# 0.15629f
+C139 a_1366_800# a_2376_12744# 3.2443f
+C140 vout a_2376_12744# 0.01889f
+C141 rhigh_0/a_0_0# rhigh_1/a_0_0# 0.15629f
+C142 m1_38528_7390# rhigh_12/a_0_0# 0.04672f
+C143 rhigh_2/a_0_0# rhigh_1/a_0_0# 0.15629f
+C144 a_1366_800# a_27518_2000# 0.10711f
+C145 vdd vg 7.71604f
+C146 m1_38908_7390# m1_39668_7390# 0
+C147 a_27518_2000# vout 16.47289f
+C148 a_122_800# vref 0.01807f
+C149 m1_38148_7390# rhigh_13/a_0_0# 0.04672f
+C150 rhigh_9/a_0_0# rhigh_8/a_0_0# 0.15629f
+C151 m1_38528_7390# vref 0
+C152 vref a_24878_2000# 0.02228f
+C153 m1_41568_7390# m1_40808_7390# 0.05223f
+C154 m1_42328_7390# m1_41568_7390# 0
+C155 m1_42708_7390# rhigh_1/a_0_0# 0.04672f
+C156 rhigh_12/a_0_0# a_27518_2000# 0
+C157 m1_41948_7390# m1_40428_7390# 0
+C158 vref a_27518_2000# 0.11901f
+C159 m1_40048_7390# m1_39668_7390# 0.94251f
+C160 a_122_800# m1_40428_7390# 0.03067f
+C161 m1_40428_7390# a_24878_2000# 0.03914f
+C162 rhigh_2/a_0_0# m1_41948_7390# 0.20777f
+C163 m1_39288_7390# m1_38908_7390# 0.90156f
+C164 rhigh_4/a_0_0# rhigh_5/a_0_0# 0.15629f
+C165 a_27518_2000# rhigh_13/a_0_0# 0
+C166 m1_41568_7390# a_1366_800# 0.04196f
+C167 m1_41568_7390# vout 0.03908f
+C168 m1_40428_7390# a_27518_2000# 0.05079f
+C169 m1_42708_7390# m1_41948_7390# 0
+C170 m1_39288_7390# m1_40048_7390# 0
+C171 m1_42708_7390# a_122_800# 0
+C172 m1_42708_7390# a_24878_2000# 0.04356f
+C173 m1_40048_7390# m1_38908_7390# 0
+C174 m1_42328_7390# m1_40808_7390# 0
+C175 m1_38148_7390# m1_39668_7390# 0
+C176 m1_21815_531# a_122_800# 0.06317f
+C177 m1_42708_7390# a_27518_2000# 0.05364f
+C178 vdd rhigh_11/a_0_0# 0
+C179 m1_21815_531# a_24878_2000# 1.4616f
+C180 m1_21815_531# a_2376_12744# 1.28329f
+C181 m1_41568_7390# m1_40428_7390# 0
+C182 a_122_800# rhigh_4/a_0_0# 0.20777f
+C183 m1_39288_7390# m1_37768_7390# 0
+C184 m1_38908_7390# rhigh_11/a_0_0# 0.04672f
+C185 vdd m1_37768_7390# 0.00153f
+C186 a_122_800# m1_39668_7390# 0.03067f
+C187 m1_21815_531# a_27518_2000# 0.92502f
+C188 m1_38528_7390# m1_39668_7390# 0
+C189 rhigh_9/a_0_0# rhigh_10/a_0_0# 0.15629f
+C190 fb a_1366_800# 0.01894f
+C191 m1_39668_7390# a_24878_2000# 0.03904f
+C192 fb vout 0.04875f
+C193 a_122_800# vg 0.4639f
+C194 m1_38908_7390# m1_37768_7390# 0
+C195 a_1366_800# m1_40808_7390# 0.03906f
+C196 m1_42328_7390# a_1366_800# 0.03916f
+C197 vout m1_40808_7390# 0.03065f
+C198 rhigh_2/a_0_0# m1_41568_7390# 0.02771f
+C199 m1_42328_7390# vout 0.03984f
+C200 m1_39288_7390# m1_38148_7390# 0
+C201 m1_39668_7390# a_27518_2000# 0.05201f
+C202 vdd m1_38148_7390# 0
+C203 vg a_2376_12744# 0.0353f
+C204 rhigh_14/a_0_0# vout 0.03901f
+C205 m1_42708_7390# m1_41568_7390# 0
+C206 m1_38908_7390# m1_38148_7390# 0
+C207 m1_39288_7390# a_122_800# 0.03067f
+C208 m1_39288_7390# m1_38528_7390# 0
+C209 rhigh_2/a_0_0# rhigh_3/a_0_0# 0.15629f
+C210 vdd a_122_800# 0.77329f
+C211 m1_39288_7390# a_24878_2000# 0.03904f
+C212 vdd a_24878_2000# 0.02712f
+C213 rhigh_14/a_0_0# vref 0.20777f
+C214 a_1366_800# vout 42.95695f
+C215 a_122_800# m1_38908_7390# 0.03067f
+C216 rhigh_8/a_0_0# m1_39668_7390# 0.20777f
+C217 m1_38528_7390# m1_38908_7390# 0.88108f
+C218 vdd a_2376_12744# 9.46811f
+C219 m1_38908_7390# a_24878_2000# 0.03904f
+C220 m1_39288_7390# a_27518_2000# 0.05286f
+C221 rhigh_7/a_0_0# m1_40428_7390# 0.04672f
+C222 vdd a_27518_2000# 20.0793f
+C223 m1_41568_7390# rhigh_4/a_0_0# 0.04672f
+C224 rhigh_12/a_0_0# vout 0.00534f
+C225 m1_40428_7390# m1_40808_7390# 0.98347f
+R0 vout vout.n29 148.316
+R1 vout.n29 vout 47.2917
+R2 vout.n29 vout.n0 25.7249
+R3 vout.n11 vout.n6 2.00022
+R4 vout.n3 vout.n2 1.34527
+R5 vout.n13 vout.n4 2.16232
+R6 vout.n15 vout.n4 2.16232
+R7 vout.n0 vout.n17 4.45581
+R8 vout.n20 vout.n0 4.45581
+R9 vout.n0 vout.n21 2.16232
+R10 vout.n7 vout.n23 2.16232
+R11 vout.n10 vout.n23 0.532221
+R12 vout.n4 vout.n5 0.695035
+R13 vout.n1 vout.n0 0.695019
+R14 vout.n8 vout.n7 0.884248
+R15 vout.n28 vout.n12 1.69629
+R16 vout.n14 vout.n27 2.16232
+R17 vout.n16 vout.n26 2.16232
+R18 vout.n19 vout.n17 0.0913831
+R19 vout.n25 vout.n19 4.45581
+R20 vout.n20 vout.n18 0.0913831
+R21 vout.n25 vout.n18 4.45581
+R22 vout.n24 vout.n22 2.16232
+R23 vout.n10 vout.n6 1.98129
+R24 vout vout.n3 4.84163
+R25 vout.n9 vout.n5 2.32777
+R26 vout.n1 vout.n8 2.81051
+R27 vout.n8 vout.n11 2.20279
+R28 vout vout.n11 0.625157
+R29 vout.n1 vout.n5 2.93165
+R30 vout vout.n9 0.6362
+R31 vout.n22 vout.n23 0.407153
+R32 vout.n22 vout.n21 0.315436
+R33 vout.n18 vout.n21 0.273983
+R34 vout.n20 vout.n19 0.273983
+R35 vout.n16 vout.n17 0.407153
+R36 vout.n15 vout.n16 0.315436
+R37 vout.n14 vout.n15 0.407153
+R38 vout.n13 vout.n14 0.315436
+R39 vout.n12 vout.n13 0.466976
+R40 vout.n3 vout.n12 0.413754
+R41 vout vout.n28 0.195273
+R42 vout.n28 vout.n27 0.195273
+R43 vout.n27 vout.n26 0.195273
+R44 vout.n26 vout.n25 0.195273
+R45 vout.n24 vout.n25 0.195273
+R46 vout.n10 vout.n24 1.24987
+R47 vout.n2 vout.n9 1.99638
+R48 vout.n4 vout.n0 1.58399
+R49 vout.n0 vout.n7 1.31051
+R50 vout.n2 vout.n4 1.31051
+R51 vout.n7 vout.n6 1.04311
+R52 vdd.n19 vdd.n2 89.0937
+R53 vdd vdd.n19 42.5345
+R54 vdd.n18 vdd 42.5345
+R55 vdd.n2 vdd.n5 1.13606
+R56 vdd.n6 vdd.n2 1.42892
+R57 vdd.n10 vdd.n6 0.71635
+R58 vdd.n3 vdd.n10 2.02418
+R59 vdd.n11 vdd.n10 0.518229
+R60 vdd vdd.n5 0.341213
+R61 vdd.n4 vdd 0.81475
+R62 vdd.n4 vdd.n3 1.48316
+R63 vdd vdd.n7 9.0005
+R64 vdd vdd.n7 4.38944
+R65 vdd.n7 vdd 9.09184
+R66 vdd vdd.n8 4.38944
+R67 vdd.n8 vdd 9.0005
+R68 vdd.n18 vdd 5.5401
+R69 vdd vdd.n8 4.38944
+R70 vdd.n0 vdd.n9 2.80839
+R71 vdd vdd.n1 4.38944
+R72 vdd.n1 vdd 2.82192
+R73 vdd.n15 vdd.n16 0.326346
+R74 vdd.n0 vdd.n15 2.06598
+R75 vdd.n14 vdd.n8 2.92171
+R76 vdd.n8 vdd.n12 2.92171
+R77 vdd vdd.n8 4.50128
+R78 vdd.n16 vdd.n1 1.86464
+R79 vdd vdd.n16 1.33752
+R80 vdd.n14 vdd.n15 0.501872
+R81 vdd.n13 vdd.n14 0.419843
+R82 vdd.n13 vdd.n12 0.39198
+R83 vdd.n13 vdd.n17 0.684794
+R84 vdd.n6 vdd.n12 0.663926
+R85 vdd.n11 vdd.n17 0.508389
+R86 vdd.n11 vdd.n7 2.0419
+R87 vdd.n19 vdd.n18 3.0453
+R88 vdd vdd.n9 2.02283
+R89 vdd vdd.n17 1.12045
+R90 vdd.n8 vdd.n0 0.996285
+R91 vdd vdd.n9 1.11835
+R92 vdd vdd.n5 1.43261
+R93 vdd.n3 vdd.n2 1.27537
+R94 vdd.n4 vdd 1.27229
+R95 vdd.n1 vdd.n0 1.2004
+R96 vdd.n7 vdd.n3 1.18342
+R97 a_27518_2000# a_27518_2000.n1 181.284
+R98 a_27518_2000.n0 a_27518_2000# 91.4581
+R99 a_27518_2000.n1 a_27518_2000# 43.8999
+R100 a_27518_2000.n0 a_27518_2000# 43.2445
+R101 a_27518_2000.n1 a_27518_2000.n0 2.0399
+R102 a_2376_12744.n1 a_2376_12744# 89.3477
+R103 a_2376_12744.n0 a_2376_12744# 70.2965
+R104 a_2376_12744# a_2376_12744.n1 69.3329
+R105 a_2376_12744.n0 a_2376_12744# 43.4145
+R106 a_2376_12744.n1 a_2376_12744.n0 2.0817
+R107 w_n400_n448.n15 w_n400_n448.n16 118.594
+R108 vss w_n400_n448.n15 98.3889
+R109 w_n400_n448.n14 vss 42.6065
+R110 w_n400_n448.n11 vss 13.9865
+R111 w_n400_n448.n11 vss 31.1075
+R112 vss w_n400_n448.n11 30.4741
+R113 w_n400_n448.n16 w_n400_n448.n14 22.256
+R114 vss w_n400_n448.n11 9.73255
+R115 w_n400_n448.n11 w_n400_n448.n12 0.146973
+R116 w_n400_n448.n8 vss 6.67162
+R117 vss w_n400_n448.n0 6.4799
+R118 w_n400_n448.n3 vss 6.47502
+R119 w_n400_n448.n11 vss 2.74934
+R120 vss w_n400_n448.n5 6.28331
+R121 vss w_n400_n448.n11 2.76851
+R122 vss w_n400_n448.n10 6.08672
+R123 w_n400_n448.n10 vss 6.08184
+R124 w_n400_n448.n11 vss 2.90442
+R125 w_n400_n448.n5 vss 5.88525
+R126 vss w_n400_n448.n3 5.69353
+R127 w_n400_n448.n0 vss 5.68865
+R128 w_n400_n448.n7 vss 5.5147
+R129 vss w_n400_n448.n8 5.49694
+R130 vss w_n400_n448.n1 5.32486
+R131 w_n400_n448.n2 vss 5.31811
+R132 vss w_n400_n448.n6 5.12827
+R133 vss w_n400_n448.n12 2.59869
+R134 w_n400_n448.n9 vss 4.92493
+R135 vss w_n400_n448.n13 4.84494
+R136 w_n400_n448.n4 vss 4.72834
+R137 vss w_n400_n448.n4 4.53849
+R138 w_n400_n448.n13 vss 2.63456
+R139 w_n400_n448.n11 vss 2.68772
+R140 vss w_n400_n448.n9 4.3419
+R141 w_n400_n448.n6 vss 4.13856
+R142 w_n400_n448.n11 vss 2.38941
+R143 vss w_n400_n448.n2 3.94871
+R144 w_n400_n448.n1 vss 3.94197
+R145 vss w_n400_n448.n7 3.75212
+R146 w_n400_n448.n16 vss 2.9066
+R147 vss w_n400_n448.n14 2.90586
+R148 vss w_n400_n448.n15 2.90586
+R149 vss w_n400_n448.n11 0.788897
+R150 w_n400_n448.n11 w_n400_n448.n0 0.513384
+R151 w_n400_n448.n11 w_n400_n448.n3 0.513384
+R152 w_n400_n448.n11 w_n400_n448.n5 0.513384
+R153 w_n400_n448.n11 w_n400_n448.n8 0.513384
+R154 w_n400_n448.n11 w_n400_n448.n10 0.513384
+R155 w_n400_n448.n13 w_n400_n448.n11 0.360744
+R156 w_n400_n448.n11 w_n400_n448.n1 0.2776
+R157 w_n400_n448.n11 w_n400_n448.n2 0.2776
+R158 w_n400_n448.n11 w_n400_n448.n4 0.2776
+R159 w_n400_n448.n11 w_n400_n448.n6 0.2776
+R160 w_n400_n448.n11 w_n400_n448.n7 0.2776
+R161 w_n400_n448.n11 w_n400_n448.n9 0.2776
+R162 w_n400_n448.n12 vss 4.4598
+C226 w_n400_n448.n0 vss 0.00233f ; **FLOATING
+C227 w_n400_n448.n1 vss 0.00226f ; **FLOATING
+C228 w_n400_n448.n2 vss 0.00226f ; **FLOATING
+C229 w_n400_n448.n3 vss 0.00233f ; **FLOATING
+C230 w_n400_n448.n4 vss 0.00228f ; **FLOATING
+C231 w_n400_n448.n5 vss 0.00233f ; **FLOATING
+C232 w_n400_n448.n6 vss 0.00227f ; **FLOATING
+C233 w_n400_n448.n7 vss 0.00224f ; **FLOATING
+C234 w_n400_n448.n8 vss 0.00233f ; **FLOATING
+C235 w_n400_n448.n9 vss 0.00228f ; **FLOATING
+C236 w_n400_n448.n10 vss 0.00233f ; **FLOATING
+C237 w_n400_n448.n11 vss 0.43057f ; **FLOATING
+C238 w_n400_n448.n12 vss 0.00221f ; **FLOATING
+C239 w_n400_n448.n13 vss 0.00223f ; **FLOATING
+C240 w_n400_n448.n14 vss 0 ; **FLOATING
+C241 w_n400_n448.n15 vss 0 ; **FLOATING
+C242 w_n400_n448.n16 vss 0 ; **FLOATING
+C243 a_2376_12744.n0 vss 0.68832f ; **FLOATING
+C244 a_2376_12744.n1 vss 2.08603f ; **FLOATING
+C245 a_27518_2000.n0 vss 0.38682f ; **FLOATING
+C246 a_27518_2000.n1 vss 0.8017f ; **FLOATING
+C247 vdd.n0 vss 0.05234f ; **FLOATING
+C248 vdd.n1 vss 0.08992f ; **FLOATING
+C249 vdd.n2 vss 0.3265f ; **FLOATING
+C250 vdd.n3 vss 0.08723f ; **FLOATING
+C251 vdd.n4 vss 0.01683f ; **FLOATING
+C252 vdd.n5 vss 0.09873f ; **FLOATING
+C253 vdd.n6 vss 0.10707f ; **FLOATING
+C254 vdd.n7 vss 0.077f ; **FLOATING
+C255 vdd.n8 vss 0.11768f ; **FLOATING
+C256 vdd.n9 vss 0.06354f ; **FLOATING
+C257 vdd.n10 vss 0.03306f ; **FLOATING
+C258 vdd.n11 vss 0.1091f ; **FLOATING
+C259 vdd.n12 vss 0.06145f ; **FLOATING
+C260 vdd.n14 vss 0.07501f ; **FLOATING
+C261 vdd.n15 vss 0.01221f ; **FLOATING
+C262 vdd.n16 vss 0.10603f ; **FLOATING
+C263 vdd.n17 vss 1.528f ; **FLOATING
+C264 vdd.n18 vss 0.05303f ; **FLOATING
+C265 vdd.n19 vss 0.29219f ; **FLOATING
+C266 vout.n0 vss 0.03589f ; **FLOATING
+C267 vout.n1 vss 0.10577f ; **FLOATING
+C268 vout.n2 vss 0.01093f ; **FLOATING
+C269 vout.n3 vss 0.0118f ; **FLOATING
+C270 vout.n4 vss 0.02419f ; **FLOATING
+C271 vout.n5 vss 0.09472f ; **FLOATING
+C272 vout.n6 vss 0.01302f ; **FLOATING
+C273 vout.n7 vss 0.02116f ; **FLOATING
+C274 vout.n8 vss 0.08721f ; **FLOATING
+C275 vout.n9 vss 0.04609f ; **FLOATING
+C276 vout.n10 vss 0.02705f ; **FLOATING
+C277 vout.n11 vss 0.04288f ; **FLOATING
+C278 vout.n12 vss 0.00485f ; **FLOATING
+C279 vout.n13 vss 0.01209f ; **FLOATING
+C280 vout.n15 vss 0.01209f ; **FLOATING
+C281 vout.n17 vss 0.00605f ; **FLOATING
+C282 vout.n20 vss 0.00605f ; **FLOATING
+C283 vout.n21 vss 0.01209f ; **FLOATING
+C284 vout.n23 vss 0.01292f ; **FLOATING
+C285 vout.n24 vss 0.11575f ; **FLOATING
+C286 vout.n25 vss 0.04535f ; **FLOATING
+C287 vout.n26 vss 0.04535f ; **FLOATING
+C288 vout.n27 vss 0.04535f ; **FLOATING
+C289 vout.n28 vss 0.05668f ; **FLOATING
+C290 vout.n29 vss 0.10708f ; **FLOATING
+C291 m1_39288_7390# vss 8.49982f ; **FLOATING
+C292 vg vss 0.36988f
+C293 vdd vss 21.98866f
+C294 m1_39668_7390# vss 8.51103f ; **FLOATING
+C295 m1_40048_7390# vss 8.50396f ; **FLOATING
+C296 m1_40428_7390# vss 8.51486f ; **FLOATING
+C297 m1_40808_7390# vss 8.57791f ; **FLOATING
+C298 m1_41568_7390# vss 8.61384f ; **FLOATING
+C299 m1_41948_7390# vss 8.56741f ; **FLOATING
+C300 m1_42328_7390# vss 8.59732f ; **FLOATING
+C301 m1_42708_7390# vss 9.83975f ; **FLOATING
+C304 a_122_800# vss 27.70227f ; **FLOATING
+C305 a_2376_12744# vss 11.48008f ; **FLOATING
+C308 fb vss 5.20567f
+C309 vref vss 5.20677f
+C310 m1_37768_7390# vss 8.61577f ; **FLOATING
+C311 m1_38148_7390# vss 8.47826f ; **FLOATING
+C312 m1_38528_7390# vss 8.42619f ; **FLOATING
+C313 m1_38908_7390# vss 8.48858f ; **FLOATING
+C314 m1_21815_531# vss 6.18089f ; **FLOATING
+.ends
+.subckt ldo vout fb vref vg vdd vss
+X1 vss vout fb vdd vref vg ldo_pex
+.ends

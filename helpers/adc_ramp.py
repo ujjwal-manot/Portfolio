@@ -1,4 +1,4 @@
-# Writes and reads the ADC's transistor ramp around its major code transitions: pwl writes ramp.inc, a staircase vin that holds each level through its sample (samples at 8.45 us plus whole microseconds, after the 8 calibration frames) and steps 1/8 LSB halfway through the bit trials, two settling samples at mid scale and then 41 levels from 2.5 LSB below to 2.5 LSB above each of codes 64, 128 and 192; transitions reads ramp.txt, checks every scheduled sample came back and that vin at each sampling edge is the level scheduled for it, and gives each code edge it crossed (between the last level coded below it and the first coded at or above it, in LSB of 3.125 mV from vref_lo, against the ideal edge at the code number), refusing a code that goes back down on a rising ramp: python3 adc_ramp.py pwl ramp.inc | transitions supply ramp.txt.
+# Writes and reads the ADC's transistor ramp around its major code transitions: pwl writes ramp.inc, a staircase vin that holds each level through its sample (samples at 8.45 us plus whole microseconds, after the 8 calibration frames) and steps 1/8 LSB over 200 ns halfway through the bit trials (sharper steps aborted the transient at 24 us), two settling samples at mid scale and then 41 levels from 2.5 LSB below to 2.5 LSB above each of codes 64, 128 and 192; transitions reads ramp.txt, checks every scheduled sample came back and that vin at each sampling edge is the level scheduled for it, and gives each code edge it crossed (between the last level coded below it and the first coded at or above it, in LSB of 3.125 mV from vref_lo, against the ideal edge at the code number), refusing a code that goes back down on a rising ramp: python3 adc_ramp.py pwl ramp.inc | transitions supply ramp.txt.
 import sys
 from adc_results import codes_from_run
 
@@ -15,7 +15,7 @@ def pwl():
     xs, points = levels(), []
     for m, x in enumerate(xs):
         v = LO + x * LSB
-        start, end = FIRST + (m - 0.5) * 1e-6 + 5e-9, FIRST + (m + 0.5) * 1e-6 - 5e-9
+        start, end = FIRST + (m - 0.5) * 1e-6 + 100e-9, FIRST + (m + 0.5) * 1e-6 - 100e-9
         points += [(0.0 if m == 0 else start, v), (end, v)]
     body = " ".join(f"{t:.9g} {v:.9g}" for t, v in points)
     return f".param ramp_end={FIRST + len(xs) * 1e-6 + 1e-6:.9g}\nVIN vin 0 pwl({body})\n"

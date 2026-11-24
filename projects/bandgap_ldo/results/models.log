@@ -1,0 +1,711 @@
+bandgap dc.cir at tt_3v0 (validation), transistor then model:
+vref_v           1.20628 and 1.20628, differ by 0, tolerance 0.003: same
+untrimmed_v      1.20628 and 1.20628, differ by 0, tolerance 0.005: same
+tc_ppm_per_c     10.8726 and 10.9593, differ by 0.0867, tolerance 10: same
+supply_a         3.26655e-05 and 3.27412e-05, differ by 7.57e-08, tolerance 1e-05: same
+line_v_per_v     0.000113561 and 0.000113561, differ by 0, tolerance 0.001: same
+step_v           0.00312211 and 0.0031224, differ by 2.9e-07, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at tt_3v3 (fit), transistor then model:
+vref_v           1.20633 and 1.20631, differ by 2e-05, tolerance 0.003: same
+untrimmed_v      1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+tc_ppm_per_c     10.7084 and 10.959, differ by 0.251, tolerance 10: same
+supply_a         3.28481e-05 and 3.27412e-05, differ by 1.07e-07, tolerance 1e-05: same
+line_v_per_v     0.000113561 and 0.000113561, differ by 0, tolerance 0.001: same
+step_v           0.0031224 and 0.0031224, differ by 0, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at tt_3v6 (validation), transistor then model:
+vref_v           1.20635 and 1.20634, differ by 1e-05, tolerance 0.003: same
+untrimmed_v      1.20635 and 1.20634, differ by 1e-05, tolerance 0.005: same
+tc_ppm_per_c     10.6008 and 10.9587, differ by 0.358, tolerance 10: same
+supply_a         3.30438e-05 and 3.27412e-05, differ by 3.03e-07, tolerance 1e-05: same
+line_v_per_v     0.000113561 and 0.000113561, differ by 0, tolerance 0.001: same
+step_v           0.00312258 and 0.0031224, differ by 1.8e-07, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at ss_3v0 (validation), transistor then model:
+vref_v           1.20601 and 1.20628, differ by 0.00027, tolerance 0.003: same
+untrimmed_v      1.20293 and 1.20628, differ by 0.00335, tolerance 0.005: same
+tc_ppm_per_c     16.4923 and 10.9593, differ by 5.53, tolerance 10: same
+supply_a         2.886e-05 and 3.27412e-05, differ by 3.88e-06, tolerance 1e-05: same
+line_v_per_v     0.000109631 and 0.000113561, differ by 3.93e-06, tolerance 0.001: same
+step_v           0.00308067 and 0.0031224, differ by 4.17e-05, tolerance 0.0003: same
+code             9 and 8, differ by 1, tolerance 2: same
+the two runs agree
+bandgap dc.cir at ss_3v3 (validation), transistor then model:
+vref_v           1.20605 and 1.20631, differ by 0.00026, tolerance 0.003: same
+untrimmed_v      1.20297 and 1.20631, differ by 0.00334, tolerance 0.005: same
+tc_ppm_per_c     16.6375 and 10.959, differ by 5.68, tolerance 10: same
+supply_a         2.90317e-05 and 3.27412e-05, differ by 3.71e-06, tolerance 1e-05: same
+line_v_per_v     0.000109631 and 0.000113561, differ by 3.93e-06, tolerance 0.001: same
+step_v           0.00308095 and 0.0031224, differ by 4.15e-05, tolerance 0.0003: same
+code             9 and 8, differ by 1, tolerance 2: same
+the two runs agree
+bandgap dc.cir at ss_3v6 (validation), transistor then model:
+vref_v           1.20607 and 1.20634, differ by 0.00027, tolerance 0.003: same
+untrimmed_v      1.20299 and 1.20634, differ by 0.00335, tolerance 0.005: same
+tc_ppm_per_c     16.7279 and 10.9587, differ by 5.77, tolerance 10: same
+supply_a         2.9216e-05 and 3.27412e-05, differ by 3.53e-06, tolerance 1e-05: same
+line_v_per_v     0.000109631 and 0.000113561, differ by 3.93e-06, tolerance 0.001: same
+step_v           0.00308111 and 0.0031224, differ by 4.13e-05, tolerance 0.0003: same
+code             9 and 8, differ by 1, tolerance 2: same
+the two runs agree
+bandgap dc.cir at ff_3v0 (validation), transistor then model:
+vref_v           1.20622 and 1.20628, differ by 6e-05, tolerance 0.003: same
+untrimmed_v      1.20939 and 1.20628, differ by 0.00311, tolerance 0.005: same
+tc_ppm_per_c     16.5302 and 10.9593, differ by 5.57, tolerance 10: same
+supply_a         3.7308e-05 and 3.27412e-05, differ by 4.57e-06, tolerance 1e-05: same
+line_v_per_v     0.000117986 and 0.000113561, differ by 4.42e-06, tolerance 0.001: same
+step_v           0.00317389 and 0.0031224, differ by 5.15e-05, tolerance 0.0003: same
+code             7 and 8, differ by 1, tolerance 2: same
+the two runs agree
+bandgap dc.cir at ff_3v3 (validation), transistor then model:
+vref_v           1.20626 and 1.20631, differ by 5e-05, tolerance 0.003: same
+untrimmed_v      1.20943 and 1.20631, differ by 0.00312, tolerance 0.005: same
+tc_ppm_per_c     16.3261 and 10.959, differ by 5.37, tolerance 10: same
+supply_a         3.75e-05 and 3.27412e-05, differ by 4.76e-06, tolerance 1e-05: same
+line_v_per_v     0.000117986 and 0.000113561, differ by 4.42e-06, tolerance 0.001: same
+step_v           0.0031742 and 0.0031224, differ by 5.18e-05, tolerance 0.0003: same
+code             7 and 8, differ by 1, tolerance 2: same
+the two runs agree
+bandgap dc.cir at ff_3v6 (validation), transistor then model:
+vref_v           1.20629 and 1.20634, differ by 5e-05, tolerance 0.003: same
+untrimmed_v      1.20946 and 1.20634, differ by 0.00312, tolerance 0.005: same
+tc_ppm_per_c     16.1905 and 10.9587, differ by 5.23, tolerance 10: same
+supply_a         3.77053e-05 and 3.27412e-05, differ by 4.96e-06, tolerance 1e-05: same
+line_v_per_v     0.000117986 and 0.000113561, differ by 4.42e-06, tolerance 0.001: same
+step_v           0.00317439 and 0.0031224, differ by 5.2e-05, tolerance 0.0003: same
+code             7 and 8, differ by 1, tolerance 2: same
+the two runs agree
+bandgap dc.cir at sf_3v0 (validation), transistor then model:
+vref_v           1.20628 and 1.20628, differ by 0, tolerance 0.003: same
+untrimmed_v      1.20628 and 1.20628, differ by 0, tolerance 0.005: same
+tc_ppm_per_c     10.8692 and 10.9593, differ by 0.0901, tolerance 10: same
+supply_a         3.26956e-05 and 3.27412e-05, differ by 4.56e-08, tolerance 1e-05: same
+line_v_per_v     0.00011293 and 0.000113561, differ by 6.31e-07, tolerance 0.001: same
+step_v           0.00312211 and 0.0031224, differ by 2.9e-07, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at sf_3v3 (validation), transistor then model:
+vref_v           1.20633 and 1.20631, differ by 2e-05, tolerance 0.003: same
+untrimmed_v      1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+tc_ppm_per_c     10.7062 and 10.959, differ by 0.253, tolerance 10: same
+supply_a         3.28828e-05 and 3.27412e-05, differ by 1.42e-07, tolerance 1e-05: same
+line_v_per_v     0.00011293 and 0.000113561, differ by 6.31e-07, tolerance 0.001: same
+step_v           0.0031224 and 0.0031224, differ by 0, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at sf_3v6 (validation), transistor then model:
+vref_v           1.20635 and 1.20634, differ by 1e-05, tolerance 0.003: same
+untrimmed_v      1.20635 and 1.20634, differ by 1e-05, tolerance 0.005: same
+tc_ppm_per_c     10.6 and 10.9587, differ by 0.359, tolerance 10: same
+supply_a         3.30833e-05 and 3.27412e-05, differ by 3.42e-07, tolerance 1e-05: same
+line_v_per_v     0.00011293 and 0.000113561, differ by 6.31e-07, tolerance 0.001: same
+step_v           0.00312258 and 0.0031224, differ by 1.8e-07, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at fs_3v0 (validation), transistor then model:
+vref_v           1.20628 and 1.20628, differ by 0, tolerance 0.003: same
+untrimmed_v      1.20628 and 1.20628, differ by 0, tolerance 0.005: same
+tc_ppm_per_c     10.8763 and 10.9593, differ by 0.083, tolerance 10: same
+supply_a         3.26343e-05 and 3.27412e-05, differ by 1.07e-07, tolerance 1e-05: same
+line_v_per_v     0.000114285 and 0.000113561, differ by 7.24e-07, tolerance 0.001: same
+step_v           0.0031221 and 0.0031224, differ by 3e-07, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at fs_3v3 (validation), transistor then model:
+vref_v           1.20632 and 1.20631, differ by 1e-05, tolerance 0.003: same
+untrimmed_v      1.20632 and 1.20631, differ by 1e-05, tolerance 0.005: same
+tc_ppm_per_c     10.7109 and 10.959, differ by 0.248, tolerance 10: same
+supply_a         3.28117e-05 and 3.27412e-05, differ by 7.05e-08, tolerance 1e-05: same
+line_v_per_v     0.000114285 and 0.000113561, differ by 7.24e-07, tolerance 0.001: same
+step_v           0.0031224 and 0.0031224, differ by 0, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap dc.cir at fs_3v6 (validation), transistor then model:
+vref_v           1.20635 and 1.20634, differ by 1e-05, tolerance 0.003: same
+untrimmed_v      1.20635 and 1.20634, differ by 1e-05, tolerance 0.005: same
+tc_ppm_per_c     10.6021 and 10.9587, differ by 0.357, tolerance 10: same
+supply_a         3.30019e-05 and 3.27412e-05, differ by 2.61e-07, tolerance 1e-05: same
+line_v_per_v     0.000114285 and 0.000113561, differ by 7.24e-07, tolerance 0.001: same
+step_v           0.00312258 and 0.0031224, differ by 1.8e-07, tolerance 0.0003: same
+code             8 and 8, differ by 0, tolerance 2: same
+the two runs agree
+bandgap startup.cir at tt_10n (fit), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         2.23767e-05 and 2.23715e-05, differ by 5.2e-09, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ss_10n (validation), transistor then model:
+final_v          1.20297 and 1.20631, differ by 0.00334, tolerance 0.005: same
+settle_s         2.21114e-05 and 2.23715e-05, differ by 2.6e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ff_10n (validation), transistor then model:
+final_v          1.20943 and 1.20631, differ by 0.00312, tolerance 0.005: same
+settle_s         2.21641e-05 and 2.23715e-05, differ by 2.07e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at sf_10n (validation), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         2.20959e-05 and 2.23715e-05, differ by 2.76e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at fs_10n (validation), transistor then model:
+final_v          1.20632 and 1.20631, differ by 1e-05, tolerance 0.005: same
+settle_s         2.23343e-05 and 2.23715e-05, differ by 3.72e-08, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_m40_10n (validation), transistor then model:
+final_v          1.20433 and 1.20435, differ by 2e-05, tolerance 0.005: same
+settle_s         2.04538e-05 and 2.23715e-05, differ by 1.92e-06, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_125_10n (validation), transistor then model:
+final_v          1.20424 and 1.20419, differ by 5e-05, tolerance 0.005: same
+settle_s         2.45797e-05 and 2.23715e-05, differ by 2.21e-06, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_1u (validation), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         2.21103e-05 and 2.18988e-05, differ by 2.11e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ss_1u (validation), transistor then model:
+final_v          1.20297 and 1.20631, differ by 0.00334, tolerance 0.005: same
+settle_s         2.23059e-05 and 2.18988e-05, differ by 4.07e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ff_1u (validation), transistor then model:
+final_v          1.20943 and 1.20631, differ by 0.00312, tolerance 0.005: same
+settle_s         2.2304e-05 and 2.18988e-05, differ by 4.05e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at sf_1u (validation), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         2.21136e-05 and 2.18988e-05, differ by 2.15e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at fs_1u (validation), transistor then model:
+final_v          1.20632 and 1.20631, differ by 1e-05, tolerance 0.005: same
+settle_s         2.22859e-05 and 2.18988e-05, differ by 3.87e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_m40_1u (validation), transistor then model:
+final_v          1.20433 and 1.20435, differ by 2e-05, tolerance 0.005: same
+settle_s         2.14639e-05 and 2.18988e-05, differ by 4.35e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_125_1u (validation), transistor then model:
+final_v          1.20424 and 1.20419, differ by 5e-05, tolerance 0.005: same
+settle_s         2.4609e-05 and 2.18988e-05, differ by 2.71e-06, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_100u (validation), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         -3.97995e-05 and -2.51775e-05, differ by 1.46e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ss_100u (validation), transistor then model:
+final_v          1.20297 and 1.20631, differ by 0.00334, tolerance 0.005: same
+settle_s         -3.60312e-05 and -2.51775e-05, differ by 1.09e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ff_100u (validation), transistor then model:
+final_v          1.20943 and 1.20631, differ by 0.00312, tolerance 0.005: same
+settle_s         -4.25087e-05 and -2.51775e-05, differ by 1.73e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at sf_100u (validation), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         -4.04011e-05 and -2.51775e-05, differ by 1.52e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at fs_100u (validation), transistor then model:
+final_v          1.20632 and 1.20631, differ by 1e-05, tolerance 0.005: same
+settle_s         -3.92911e-05 and -2.51775e-05, differ by 1.41e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_m40_100u (validation), transistor then model:
+final_v          1.20433 and 1.20435, differ by 2e-05, tolerance 0.005: same
+settle_s         -3.71849e-05 and -2.51774e-05, differ by 1.2e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_125_100u (validation), transistor then model:
+final_v          1.20424 and 1.20419, differ by 5e-05, tolerance 0.005: same
+settle_s         -4.00736e-05 and -2.51774e-05, differ by 1.49e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_1m (fit), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         -0.000455621 and -0.000435777, differ by 1.98e-05, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ss_1m (validation), transistor then model:
+final_v          1.20297 and 1.20631, differ by 0.00334, tolerance 0.005: same
+settle_s         -0.000436162 and -0.000435777, differ by 3.85e-07, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at ff_1m (validation), transistor then model:
+final_v          1.20943 and 1.20631, differ by 0.00312, tolerance 0.005: same
+settle_s         -0.000475031 and -0.000435777, differ by 3.93e-05, tolerance 2e-05: DIFFERENT
+the two runs differ
+bandgap startup.cir at sf_1m (validation), transistor then model:
+final_v          1.20633 and 1.20631, differ by 2e-05, tolerance 0.005: same
+settle_s         -0.000445227 and -0.000435777, differ by 9.45e-06, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at fs_1m (validation), transistor then model:
+final_v          1.20632 and 1.20631, differ by 1e-05, tolerance 0.005: same
+settle_s         -0.000466166 and -0.000435777, differ by 3.04e-05, tolerance 2e-05: DIFFERENT
+the two runs differ
+bandgap startup.cir at tt_m40_1m (validation), transistor then model:
+final_v          1.20433 and 1.20435, differ by 2e-05, tolerance 0.005: same
+settle_s         -0.000431152 and -0.000435776, differ by 4.62e-06, tolerance 2e-05: same
+the two runs agree
+bandgap startup.cir at tt_125_1m (validation), transistor then model:
+final_v          1.20424 and 1.20419, differ by 5e-05, tolerance 0.005: same
+settle_s         -0.000471418 and -0.000435776, differ by 3.56e-05, tolerance 2e-05: DIFFERENT
+the two runs differ
+LDO suite at tt_3v3_27 (fit), transistor then model:
+ldo_dc.vout_v    1.20647 and 1.20645, differ by 2e-05, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000677614 and 0.00137877, differ by 0.000701, tolerance 0.002: same
+ldo_dc.iq_a      0.00017674 and 0.000176633, differ by 1.07e-07, tolerance 4e-05: same
+step_0p5m.dip_v  1.17773 and 1.16686, differ by 0.0109, tolerance 0.015: same
+step_2m.peak_v   1.26917 and 1.30245, differ by 0.0333, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.597 and 48.5898, differ by 0.0072, tolerance 10: same
+loop_2m.pm_deg   76.7503 and 75.0446, differ by 1.71, tolerance 15: same
+ldo_startup.final_v 1.20627 and 1.20612, differ by 0.00015, tolerance 0.005: same
+ldo_startup.top_v 1.20627 and 1.20612, differ by 0.00015, tolerance 0.015: same
+the two runs differ
+LDO suite at tt_3v0_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20333 and 1.2045, differ by 0.00117, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000625597 and 0.00141331, differ by 0.000788, tolerance 0.002: same
+ldo_dc.iq_a      0.00013916 and 0.000141635, differ by 2.48e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17566 and 1.16257, differ by 0.0131, tolerance 0.015: same
+step_2m.peak_v   1.26319 and 1.30257, differ by 0.0394, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.3759 and 46.4426, differ by 2.93, tolerance 10: same
+loop_2m.pm_deg   78.007 and 74.9691, differ by 3.04, tolerance 15: same
+ldo_startup.final_v 1.20313 and 1.20415, differ by 0.00102, tolerance 0.005: same
+ldo_startup.top_v 1.20313 and 1.20415, differ by 0.00102, tolerance 0.015: same
+the two runs differ
+LDO suite at tt_3v0_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20266 and 1.20424, differ by 0.00158, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000894775 and 0.00133606, differ by 0.000441, tolerance 0.002: same
+ldo_dc.iq_a      0.000228314 and 0.000227214, differ by 1.1e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17022 and 1.16739, differ by 0.00283, tolerance 0.015: same
+step_2m.peak_v   1.27478 and 1.29756, differ by 0.0228, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.9624 and 51.0816, differ by 2.12, tolerance 10: same
+loop_2m.pm_deg   75.8087 and 75.1516, differ by 0.657, tolerance 15: same
+ldo_startup.final_v 1.20241 and 1.20394, differ by 0.00153, tolerance 0.005: same
+ldo_startup.top_v 1.20241 and 1.20394, differ by 0.00153, tolerance 0.015: same
+the two runs differ
+LDO suite at tt_3v6_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20588 and 1.20457, differ by 0.00131, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000598865 and 0.0014133, differ by 0.000814, tolerance 0.002: same
+ldo_dc.iq_a      0.000139699 and 0.000141641, differ by 1.94e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17841 and 1.16264, differ by 0.0158, tolerance 0.015: DIFFERENT
+step_2m.peak_v   1.2653 and 1.30264, differ by 0.0373, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.1896 and 46.4431, differ by 2.75, tolerance 10: same
+loop_2m.pm_deg   77.8916 and 74.9691, differ by 2.92, tolerance 15: same
+ldo_startup.final_v 1.20569 and 1.20422, differ by 0.00147, tolerance 0.005: same
+ldo_startup.top_v 1.20569 and 1.20422, differ by 0.00147, tolerance 0.015: same
+the two runs differ
+LDO suite at tt_3v6_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20553 and 1.20431, differ by 0.00122, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000802802 and 0.00133605, differ by 0.000533, tolerance 0.002: same
+ldo_dc.iq_a      0.000228737 and 0.000227224, differ by 1.51e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17329 and 1.16746, differ by 0.00583, tolerance 0.015: same
+step_2m.peak_v   1.2772 and 1.29762, differ by 0.0204, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.7142 and 51.0822, differ by 2.37, tolerance 10: same
+loop_2m.pm_deg   75.6082 and 75.1516, differ by 0.457, tolerance 15: same
+ldo_startup.final_v 1.2053 and 1.204, differ by 0.0013, tolerance 0.005: same
+ldo_startup.top_v 1.2053 and 1.204, differ by 0.0013, tolerance 0.015: same
+the two runs differ
+LDO suite at ss_3v0_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.19936 and 1.2045, differ by 0.00514, tolerance 0.005: DIFFERENT
+ldo_dc.load_reg_v 0.000636532 and 0.00141331, differ by 0.000777, tolerance 0.002: same
+ldo_dc.iq_a      0.000122704 and 0.000141635, differ by 1.89e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.1673 and 1.16257, differ by 0.00473, tolerance 0.015: same
+step_2m.peak_v   1.2667 and 1.30257, differ by 0.0359, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.8555 and 46.4426, differ by 3.41, tolerance 10: same
+loop_2m.pm_deg   79.2348 and 74.9691, differ by 4.27, tolerance 15: same
+ldo_startup.final_v 1.19913 and 1.20415, differ by 0.00502, tolerance 0.005: DIFFERENT
+ldo_startup.top_v 1.19913 and 1.20415, differ by 0.00502, tolerance 0.015: same
+the two runs differ
+LDO suite at ss_3v0_125 (validation), transistor then model:
+ldo_dc.vout_v    1.19954 and 1.20424, differ by 0.0047, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000925898 and 0.00133606, differ by 0.00041, tolerance 0.002: same
+ldo_dc.iq_a      0.000201364 and 0.000227214, differ by 2.59e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.16131 and 1.16739, differ by 0.00608, tolerance 0.015: same
+step_2m.peak_v   1.28142 and 1.29756, differ by 0.0161, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.479 and 51.0816, differ by 1.6, tolerance 10: same
+loop_2m.pm_deg   77.2557 and 75.1516, differ by 2.1, tolerance 15: same
+ldo_startup.final_v 1.19927 and 1.20394, differ by 0.00467, tolerance 0.005: same
+ldo_startup.top_v 1.19927 and 1.20394, differ by 0.00467, tolerance 0.015: same
+the two runs differ
+LDO suite at ss_3v6_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20189 and 1.20457, differ by 0.00268, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000605198 and 0.0014133, differ by 0.000808, tolerance 0.002: same
+ldo_dc.iq_a      0.00012321 and 0.000141641, differ by 1.84e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.17005 and 1.16264, differ by 0.00741, tolerance 0.015: same
+step_2m.peak_v   1.26877 and 1.30264, differ by 0.0339, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.6766 and 46.4431, differ by 3.23, tolerance 10: same
+loop_2m.pm_deg   79.1327 and 74.9691, differ by 4.16, tolerance 15: same
+ldo_startup.final_v 1.20166 and 1.20422, differ by 0.00256, tolerance 0.005: same
+ldo_startup.top_v 1.20166 and 1.20422, differ by 0.00256, tolerance 0.015: same
+the two runs differ
+LDO suite at ss_3v6_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20236 and 1.20431, differ by 0.00195, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000812898 and 0.00133605, differ by 0.000523, tolerance 0.002: same
+ldo_dc.iq_a      0.00020176 and 0.000227224, differ by 2.55e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.16436 and 1.16746, differ by 0.0031, tolerance 0.015: same
+step_2m.peak_v   1.28381 and 1.29762, differ by 0.0138, tolerance 0.015: same
+loop_0.pm_deg    49.2381 and 51.0822, differ by 1.84, tolerance 10: same
+loop_2m.pm_deg   77.0557 and 75.1516, differ by 1.9, tolerance 15: same
+ldo_startup.final_v 1.20212 and 1.204, differ by 0.00188, tolerance 0.005: same
+ldo_startup.top_v 1.20212 and 1.204, differ by 0.00188, tolerance 0.015: same
+the two runs agree
+LDO suite at ff_3v0_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20692 and 1.2045, differ by 0.00242, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000616576 and 0.00141331, differ by 0.000797, tolerance 0.002: same
+ldo_dc.iq_a      0.000159272 and 0.000141635, differ by 1.76e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.18348 and 1.16257, differ by 0.0209, tolerance 0.015: DIFFERENT
+step_2m.peak_v   1.25915 and 1.30257, differ by 0.0434, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.7795 and 46.4426, differ by 2.34, tolerance 10: same
+loop_2m.pm_deg   76.529 and 74.9691, differ by 1.56, tolerance 15: same
+ldo_startup.final_v 1.20673 and 1.20415, differ by 0.00258, tolerance 0.005: same
+ldo_startup.top_v 1.20673 and 1.20415, differ by 0.00258, tolerance 0.015: same
+the two runs differ
+LDO suite at ff_3v0_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20587 and 1.20424, differ by 0.00163, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000871702 and 0.00133606, differ by 0.000464, tolerance 0.002: same
+ldo_dc.iq_a      0.000261291 and 0.000227214, differ by 3.41e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.17891 and 1.16739, differ by 0.0115, tolerance 0.015: same
+step_2m.peak_v   1.26796 and 1.29756, differ by 0.0296, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.337 and 51.0816, differ by 2.74, tolerance 10: same
+loop_2m.pm_deg   74.1104 and 75.1516, differ by 1.04, tolerance 15: same
+ldo_startup.final_v 1.20563 and 1.20394, differ by 0.00169, tolerance 0.005: same
+ldo_startup.top_v 1.20563 and 1.20394, differ by 0.00169, tolerance 0.015: same
+the two runs differ
+LDO suite at ff_3v6_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.2095 and 1.20457, differ by 0.00493, tolerance 0.005: same
+ldo_dc.load_reg_v 0.0005935 and 0.0014133, differ by 0.00082, tolerance 0.002: same
+ldo_dc.iq_a      0.000159841 and 0.000141641, differ by 1.82e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.18624 and 1.16264, differ by 0.0236, tolerance 0.015: DIFFERENT
+step_2m.peak_v   1.2613 and 1.30264, differ by 0.0413, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.5858 and 46.4431, differ by 2.14, tolerance 10: same
+loop_2m.pm_deg   76.3915 and 74.9691, differ by 1.42, tolerance 15: same
+ldo_startup.final_v 1.20932 and 1.20422, differ by 0.0051, tolerance 0.005: DIFFERENT
+ldo_startup.top_v 1.20932 and 1.20422, differ by 0.0051, tolerance 0.015: same
+the two runs differ
+LDO suite at ff_3v6_125 (validation), transistor then model:
+ldo_dc.vout_v    1.2088 and 1.20431, differ by 0.00449, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000793593 and 0.00133605, differ by 0.000542, tolerance 0.002: same
+ldo_dc.iq_a      0.000261742 and 0.000227224, differ by 3.45e-05, tolerance 4e-05: same
+step_0p5m.dip_v  1.18202 and 1.16746, differ by 0.0146, tolerance 0.015: same
+step_2m.peak_v   1.27045 and 1.29762, differ by 0.0272, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.0629 and 51.0822, differ by 3.02, tolerance 10: same
+loop_2m.pm_deg   73.8995 and 75.1516, differ by 1.25, tolerance 15: same
+ldo_startup.final_v 1.20857 and 1.204, differ by 0.00457, tolerance 0.005: same
+ldo_startup.top_v 1.20857 and 1.204, differ by 0.00457, tolerance 0.015: same
+the two runs differ
+LDO suite at sf_3v0_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20332 and 1.2045, differ by 0.00118, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000627617 and 0.00141331, differ by 0.000786, tolerance 0.002: same
+ldo_dc.iq_a      0.000139095 and 0.000141635, differ by 2.54e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17535 and 1.16257, differ by 0.0128, tolerance 0.015: same
+step_2m.peak_v   1.26393 and 1.30257, differ by 0.0386, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.6193 and 46.4426, differ by 3.18, tolerance 10: same
+loop_2m.pm_deg   78.0916 and 74.9691, differ by 3.12, tolerance 15: same
+ldo_startup.final_v 1.20312 and 1.20415, differ by 0.00103, tolerance 0.005: same
+ldo_startup.top_v 1.20312 and 1.20415, differ by 0.00103, tolerance 0.015: same
+the two runs differ
+LDO suite at sf_3v0_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20267 and 1.20424, differ by 0.00157, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000910071 and 0.00133606, differ by 0.000426, tolerance 0.002: same
+ldo_dc.iq_a      0.000228115 and 0.000227214, differ by 9.01e-07, tolerance 4e-05: same
+step_0p5m.dip_v  1.16985 and 1.16739, differ by 0.00246, tolerance 0.015: same
+step_2m.peak_v   1.27574 and 1.29756, differ by 0.0218, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.2733 and 51.0816, differ by 1.81, tolerance 10: same
+loop_2m.pm_deg   75.98 and 75.1516, differ by 0.828, tolerance 15: same
+ldo_startup.final_v 1.20242 and 1.20394, differ by 0.00152, tolerance 0.005: same
+ldo_startup.top_v 1.20242 and 1.20394, differ by 0.00152, tolerance 0.015: same
+the two runs differ
+LDO suite at sf_3v6_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20584 and 1.20457, differ by 0.00127, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000597811 and 0.0014133, differ by 0.000815, tolerance 0.002: same
+ldo_dc.iq_a      0.000139647 and 0.000141641, differ by 1.99e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17808 and 1.16264, differ by 0.0154, tolerance 0.015: DIFFERENT
+step_2m.peak_v   1.26602 and 1.30264, differ by 0.0366, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.4335 and 46.4431, differ by 2.99, tolerance 10: same
+loop_2m.pm_deg   77.9769 and 74.9691, differ by 3.01, tolerance 15: same
+ldo_startup.final_v 1.20566 and 1.20422, differ by 0.00144, tolerance 0.005: same
+ldo_startup.top_v 1.20566 and 1.20422, differ by 0.00144, tolerance 0.015: same
+the two runs differ
+LDO suite at sf_3v6_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20552 and 1.20431, differ by 0.00121, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000800933 and 0.00133605, differ by 0.000535, tolerance 0.002: same
+ldo_dc.iq_a      0.00022855 and 0.000227224, differ by 1.33e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17289 and 1.16746, differ by 0.00543, tolerance 0.015: same
+step_2m.peak_v   1.27815 and 1.29762, differ by 0.0195, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.0219 and 51.0822, differ by 2.06, tolerance 10: same
+loop_2m.pm_deg   75.775 and 75.1516, differ by 0.623, tolerance 15: same
+ldo_startup.final_v 1.20528 and 1.204, differ by 0.00128, tolerance 0.005: same
+ldo_startup.top_v 1.20528 and 1.204, differ by 0.00128, tolerance 0.015: same
+the two runs differ
+LDO suite at fs_3v0_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20334 and 1.2045, differ by 0.00116, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000624764 and 0.00141331, differ by 0.000789, tolerance 0.002: same
+ldo_dc.iq_a      0.000139227 and 0.000141635, differ by 2.41e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17596 and 1.16257, differ by 0.0134, tolerance 0.015: same
+step_2m.peak_v   1.26245 and 1.30257, differ by 0.0401, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    49.1299 and 46.4426, differ by 2.69, tolerance 10: same
+loop_2m.pm_deg   77.9096 and 74.9691, differ by 2.94, tolerance 15: same
+ldo_startup.final_v 1.20314 and 1.20415, differ by 0.00101, tolerance 0.005: same
+ldo_startup.top_v 1.20314 and 1.20415, differ by 0.00101, tolerance 0.015: same
+the two runs differ
+LDO suite at fs_3v0_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20264 and 1.20424, differ by 0.0016, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000884244 and 0.00133606, differ by 0.000452, tolerance 0.002: same
+ldo_dc.iq_a      0.000228494 and 0.000227214, differ by 1.28e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17059 and 1.16739, differ by 0.0032, tolerance 0.015: same
+step_2m.peak_v   1.27381 and 1.29756, differ by 0.0237, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.6665 and 51.0816, differ by 2.42, tolerance 10: same
+loop_2m.pm_deg   75.6388 and 75.1516, differ by 0.487, tolerance 15: same
+ldo_startup.final_v 1.20239 and 1.20394, differ by 0.00155, tolerance 0.005: same
+ldo_startup.top_v 1.20239 and 1.20394, differ by 0.00155, tolerance 0.015: same
+the two runs differ
+LDO suite at fs_3v6_m40 (validation), transistor then model:
+ldo_dc.vout_v    1.20591 and 1.20457, differ by 0.00134, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000600709 and 0.0014133, differ by 0.000813, tolerance 0.002: same
+ldo_dc.iq_a      0.000139752 and 0.000141641, differ by 1.89e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17874 and 1.16264, differ by 0.0161, tolerance 0.015: DIFFERENT
+step_2m.peak_v   1.26458 and 1.30264, differ by 0.0381, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.9426 and 46.4431, differ by 2.5, tolerance 10: same
+loop_2m.pm_deg   77.7874 and 74.9691, differ by 2.82, tolerance 15: same
+ldo_startup.final_v 1.20573 and 1.20422, differ by 0.00151, tolerance 0.005: same
+ldo_startup.top_v 1.20573 and 1.20422, differ by 0.00151, tolerance 0.015: same
+the two runs differ
+LDO suite at fs_3v6_125 (validation), transistor then model:
+ldo_dc.vout_v    1.20555 and 1.20431, differ by 0.00124, tolerance 0.005: same
+ldo_dc.load_reg_v 0.000805588 and 0.00133605, differ by 0.00053, tolerance 0.002: same
+ldo_dc.iq_a      0.000228904 and 0.000227224, differ by 1.68e-06, tolerance 4e-05: same
+step_0p5m.dip_v  1.17369 and 1.16746, differ by 0.00623, tolerance 0.015: same
+step_2m.peak_v   1.27625 and 1.29762, differ by 0.0214, tolerance 0.015: DIFFERENT
+loop_0.pm_deg    48.4077 and 51.0822, differ by 2.67, tolerance 10: same
+loop_2m.pm_deg   75.4495 and 75.1516, differ by 0.298, tolerance 15: same
+ldo_startup.final_v 1.20531 and 1.204, differ by 0.00131, tolerance 0.005: same
+ldo_startup.top_v 1.20531 and 1.204, differ by 0.00131, tolerance 0.015: same
+the two runs differ
+build/model/fit/model_fit.log: ok
+build/model/dc_tt_3v0/dc.log: ok
+build/model/dc_tt_3v3/dc.log: ok
+build/model/dc_tt_3v6/dc.log: ok
+build/model/dc_ss_3v0/dc.log: ok
+build/model/dc_ss_3v3/dc.log: ok
+build/model/dc_ss_3v6/dc.log: ok
+build/model/dc_ff_3v0/dc.log: ok
+build/model/dc_ff_3v3/dc.log: ok
+build/model/dc_ff_3v6/dc.log: ok
+build/model/dc_sf_3v0/dc.log: ok
+build/model/dc_sf_3v3/dc.log: ok
+build/model/dc_sf_3v6/dc.log: ok
+build/model/dc_fs_3v0/dc.log: ok
+build/model/dc_fs_3v3/dc.log: ok
+build/model/dc_fs_3v6/dc.log: ok
+build/model/startup_tt_10n/startup.log: ok
+build/model/startup_ss_10n/startup.log: ok
+build/model/startup_ff_10n/startup.log: ok
+build/model/startup_sf_10n/startup.log: ok
+build/model/startup_fs_10n/startup.log: ok
+build/model/startup_tt_m40_10n/startup.log: ok
+build/model/startup_tt_125_10n/startup.log: ok
+build/model/startup_tt_1u/startup.log: ok
+build/model/startup_ss_1u/startup.log: ok
+build/model/startup_ff_1u/startup.log: ok
+build/model/startup_sf_1u/startup.log: ok
+build/model/startup_fs_1u/startup.log: ok
+build/model/startup_tt_m40_1u/startup.log: ok
+build/model/startup_tt_125_1u/startup.log: ok
+build/model/startup_tt_100u/startup.log: ok
+build/model/startup_ss_100u/startup.log: ok
+build/model/startup_ff_100u/startup.log: ok
+build/model/startup_sf_100u/startup.log: ok
+build/model/startup_fs_100u/startup.log: ok
+build/model/startup_tt_m40_100u/startup.log: ok
+build/model/startup_tt_125_100u/startup.log: ok
+build/model/startup_tt_1m/startup.log: ok
+build/model/startup_ss_1m/startup.log: ok
+build/model/startup_ff_1m/startup.log: ok
+build/model/startup_sf_1m/startup.log: ok
+build/model/startup_fs_1m/startup.log: ok
+build/model/startup_tt_m40_1m/startup.log: ok
+build/model/startup_tt_125_1m/startup.log: ok
+build/model/ldo_tt_3v3_27/ldo_dc.log: ok
+build/model/ldo_tt_3v3_27/ldo_psrr.log: ok
+build/model/ldo_tt_3v3_27/ldo_startup.log: ok
+build/model/ldo_tt_3v3_27/step_0p5m.log: ok
+build/model/ldo_tt_3v3_27/step_2m.log: ok
+build/model/ldo_tt_3v3_27/loop_0.log: ok
+build/model/ldo_tt_3v3_27/loop_250u.log: ok
+build/model/ldo_tt_3v3_27/loop_1m.log: ok
+build/model/ldo_tt_3v3_27/loop_2m.log: ok
+build/model/ldo_tt_3v0_m40/ldo_dc.log: ok
+build/model/ldo_tt_3v0_m40/ldo_psrr.log: ok
+build/model/ldo_tt_3v0_m40/ldo_startup.log: ok
+build/model/ldo_tt_3v0_m40/step_0p5m.log: ok
+build/model/ldo_tt_3v0_m40/step_2m.log: ok
+build/model/ldo_tt_3v0_m40/loop_0.log: ok
+build/model/ldo_tt_3v0_m40/loop_250u.log: ok
+build/model/ldo_tt_3v0_m40/loop_1m.log: ok
+build/model/ldo_tt_3v0_m40/loop_2m.log: ok
+build/model/ldo_tt_3v0_125/ldo_dc.log: ok
+build/model/ldo_tt_3v0_125/ldo_psrr.log: ok
+build/model/ldo_tt_3v0_125/ldo_startup.log: ok
+build/model/ldo_tt_3v0_125/step_0p5m.log: ok
+build/model/ldo_tt_3v0_125/step_2m.log: ok
+build/model/ldo_tt_3v0_125/loop_0.log: ok
+build/model/ldo_tt_3v0_125/loop_250u.log: ok
+build/model/ldo_tt_3v0_125/loop_1m.log: ok
+build/model/ldo_tt_3v0_125/loop_2m.log: ok
+build/model/ldo_tt_3v6_m40/ldo_dc.log: ok
+build/model/ldo_tt_3v6_m40/ldo_psrr.log: ok
+build/model/ldo_tt_3v6_m40/ldo_startup.log: ok
+build/model/ldo_tt_3v6_m40/step_0p5m.log: ok
+build/model/ldo_tt_3v6_m40/step_2m.log: ok
+build/model/ldo_tt_3v6_m40/loop_0.log: ok
+build/model/ldo_tt_3v6_m40/loop_250u.log: ok
+build/model/ldo_tt_3v6_m40/loop_1m.log: ok
+build/model/ldo_tt_3v6_m40/loop_2m.log: ok
+build/model/ldo_tt_3v6_125/ldo_dc.log: ok
+build/model/ldo_tt_3v6_125/ldo_psrr.log: ok
+build/model/ldo_tt_3v6_125/ldo_startup.log: ok
+build/model/ldo_tt_3v6_125/step_0p5m.log: ok
+build/model/ldo_tt_3v6_125/step_2m.log: ok
+build/model/ldo_tt_3v6_125/loop_0.log: ok
+build/model/ldo_tt_3v6_125/loop_250u.log: ok
+build/model/ldo_tt_3v6_125/loop_1m.log: ok
+build/model/ldo_tt_3v6_125/loop_2m.log: ok
+build/model/ldo_ss_3v0_m40/ldo_dc.log: ok
+build/model/ldo_ss_3v0_m40/ldo_psrr.log: ok
+build/model/ldo_ss_3v0_m40/ldo_startup.log: ok
+build/model/ldo_ss_3v0_m40/step_0p5m.log: ok
+build/model/ldo_ss_3v0_m40/step_2m.log: ok
+build/model/ldo_ss_3v0_m40/loop_0.log: ok
+build/model/ldo_ss_3v0_m40/loop_250u.log: ok
+build/model/ldo_ss_3v0_m40/loop_1m.log: ok
+build/model/ldo_ss_3v0_m40/loop_2m.log: ok
+build/model/ldo_ss_3v0_125/ldo_dc.log: ok
+build/model/ldo_ss_3v0_125/ldo_psrr.log: ok
+build/model/ldo_ss_3v0_125/ldo_startup.log: ok
+build/model/ldo_ss_3v0_125/step_0p5m.log: ok
+build/model/ldo_ss_3v0_125/step_2m.log: ok
+build/model/ldo_ss_3v0_125/loop_0.log: ok
+build/model/ldo_ss_3v0_125/loop_250u.log: ok
+build/model/ldo_ss_3v0_125/loop_1m.log: ok
+build/model/ldo_ss_3v0_125/loop_2m.log: ok
+build/model/ldo_ss_3v6_m40/ldo_dc.log: ok
+build/model/ldo_ss_3v6_m40/ldo_psrr.log: ok
+build/model/ldo_ss_3v6_m40/ldo_startup.log: ok
+build/model/ldo_ss_3v6_m40/step_0p5m.log: ok
+build/model/ldo_ss_3v6_m40/step_2m.log: ok
+build/model/ldo_ss_3v6_m40/loop_0.log: ok
+build/model/ldo_ss_3v6_m40/loop_250u.log: ok
+build/model/ldo_ss_3v6_m40/loop_1m.log: ok
+build/model/ldo_ss_3v6_m40/loop_2m.log: ok
+build/model/ldo_ss_3v6_125/ldo_dc.log: ok
+build/model/ldo_ss_3v6_125/ldo_psrr.log: ok
+build/model/ldo_ss_3v6_125/ldo_startup.log: ok
+build/model/ldo_ss_3v6_125/step_0p5m.log: ok
+build/model/ldo_ss_3v6_125/step_2m.log: ok
+build/model/ldo_ss_3v6_125/loop_0.log: ok
+build/model/ldo_ss_3v6_125/loop_250u.log: ok
+build/model/ldo_ss_3v6_125/loop_1m.log: ok
+build/model/ldo_ss_3v6_125/loop_2m.log: ok
+build/model/ldo_ff_3v0_m40/ldo_dc.log: ok
+build/model/ldo_ff_3v0_m40/ldo_psrr.log: ok
+build/model/ldo_ff_3v0_m40/ldo_startup.log: ok
+build/model/ldo_ff_3v0_m40/step_0p5m.log: ok
+build/model/ldo_ff_3v0_m40/step_2m.log: ok
+build/model/ldo_ff_3v0_m40/loop_0.log: ok
+build/model/ldo_ff_3v0_m40/loop_250u.log: ok
+build/model/ldo_ff_3v0_m40/loop_1m.log: ok
+build/model/ldo_ff_3v0_m40/loop_2m.log: ok
+build/model/ldo_ff_3v0_125/ldo_dc.log: ok
+build/model/ldo_ff_3v0_125/ldo_psrr.log: ok
+build/model/ldo_ff_3v0_125/ldo_startup.log: ok
+build/model/ldo_ff_3v0_125/step_0p5m.log: ok
+build/model/ldo_ff_3v0_125/step_2m.log: ok
+build/model/ldo_ff_3v0_125/loop_0.log: ok
+build/model/ldo_ff_3v0_125/loop_250u.log: ok
+build/model/ldo_ff_3v0_125/loop_1m.log: ok
+build/model/ldo_ff_3v0_125/loop_2m.log: ok
+build/model/ldo_ff_3v6_m40/ldo_dc.log: ok
+build/model/ldo_ff_3v6_m40/ldo_psrr.log: ok
+build/model/ldo_ff_3v6_m40/ldo_startup.log: ok
+build/model/ldo_ff_3v6_m40/step_0p5m.log: ok
+build/model/ldo_ff_3v6_m40/step_2m.log: ok
+build/model/ldo_ff_3v6_m40/loop_0.log: ok
+build/model/ldo_ff_3v6_m40/loop_250u.log: ok
+build/model/ldo_ff_3v6_m40/loop_1m.log: ok
+build/model/ldo_ff_3v6_m40/loop_2m.log: ok
+build/model/ldo_ff_3v6_125/ldo_dc.log: ok
+build/model/ldo_ff_3v6_125/ldo_psrr.log: ok
+build/model/ldo_ff_3v6_125/ldo_startup.log: ok
+build/model/ldo_ff_3v6_125/step_0p5m.log: ok
+build/model/ldo_ff_3v6_125/step_2m.log: ok
+build/model/ldo_ff_3v6_125/loop_0.log: ok
+build/model/ldo_ff_3v6_125/loop_250u.log: ok
+build/model/ldo_ff_3v6_125/loop_1m.log: ok
+build/model/ldo_ff_3v6_125/loop_2m.log: ok
+build/model/ldo_sf_3v0_m40/ldo_dc.log: ok
+build/model/ldo_sf_3v0_m40/ldo_psrr.log: ok
+build/model/ldo_sf_3v0_m40/ldo_startup.log: ok
+build/model/ldo_sf_3v0_m40/step_0p5m.log: ok
+build/model/ldo_sf_3v0_m40/step_2m.log: ok
+build/model/ldo_sf_3v0_m40/loop_0.log: ok
+build/model/ldo_sf_3v0_m40/loop_250u.log: ok
+build/model/ldo_sf_3v0_m40/loop_1m.log: ok
+build/model/ldo_sf_3v0_m40/loop_2m.log: ok
+build/model/ldo_sf_3v0_125/ldo_dc.log: ok
+build/model/ldo_sf_3v0_125/ldo_psrr.log: ok
+build/model/ldo_sf_3v0_125/ldo_startup.log: ok
+build/model/ldo_sf_3v0_125/step_0p5m.log: ok
+build/model/ldo_sf_3v0_125/step_2m.log: ok
+build/model/ldo_sf_3v0_125/loop_0.log: ok
+build/model/ldo_sf_3v0_125/loop_250u.log: ok
+build/model/ldo_sf_3v0_125/loop_1m.log: ok
+build/model/ldo_sf_3v0_125/loop_2m.log: ok
+build/model/ldo_sf_3v6_m40/ldo_dc.log: ok
+build/model/ldo_sf_3v6_m40/ldo_psrr.log: ok
+build/model/ldo_sf_3v6_m40/ldo_startup.log: ok
+build/model/ldo_sf_3v6_m40/step_0p5m.log: ok
+build/model/ldo_sf_3v6_m40/step_2m.log: ok
+build/model/ldo_sf_3v6_m40/loop_0.log: ok
+build/model/ldo_sf_3v6_m40/loop_250u.log: ok
+build/model/ldo_sf_3v6_m40/loop_1m.log: ok
+build/model/ldo_sf_3v6_m40/loop_2m.log: ok
+build/model/ldo_sf_3v6_125/ldo_dc.log: ok
+build/model/ldo_sf_3v6_125/ldo_psrr.log: ok
+build/model/ldo_sf_3v6_125/ldo_startup.log: ok
+build/model/ldo_sf_3v6_125/step_0p5m.log: ok
+build/model/ldo_sf_3v6_125/step_2m.log: ok
+build/model/ldo_sf_3v6_125/loop_0.log: ok
+build/model/ldo_sf_3v6_125/loop_250u.log: ok
+build/model/ldo_sf_3v6_125/loop_1m.log: ok
+build/model/ldo_sf_3v6_125/loop_2m.log: ok
+build/model/ldo_fs_3v0_m40/ldo_dc.log: ok
+build/model/ldo_fs_3v0_m40/ldo_psrr.log: ok
+build/model/ldo_fs_3v0_m40/ldo_startup.log: ok
+build/model/ldo_fs_3v0_m40/step_0p5m.log: ok
+build/model/ldo_fs_3v0_m40/step_2m.log: ok
+build/model/ldo_fs_3v0_m40/loop_0.log: ok
+build/model/ldo_fs_3v0_m40/loop_250u.log: ok
+build/model/ldo_fs_3v0_m40/loop_1m.log: ok
+build/model/ldo_fs_3v0_m40/loop_2m.log: ok
+build/model/ldo_fs_3v0_125/ldo_dc.log: ok
+build/model/ldo_fs_3v0_125/ldo_psrr.log: ok
+build/model/ldo_fs_3v0_125/ldo_startup.log: ok
+build/model/ldo_fs_3v0_125/step_0p5m.log: ok
+build/model/ldo_fs_3v0_125/step_2m.log: ok
+build/model/ldo_fs_3v0_125/loop_0.log: ok
+build/model/ldo_fs_3v0_125/loop_250u.log: ok
+build/model/ldo_fs_3v0_125/loop_1m.log: ok
+build/model/ldo_fs_3v0_125/loop_2m.log: ok
+build/model/ldo_fs_3v6_m40/ldo_dc.log: ok
+build/model/ldo_fs_3v6_m40/ldo_psrr.log: ok
+build/model/ldo_fs_3v6_m40/ldo_startup.log: ok
+build/model/ldo_fs_3v6_m40/step_0p5m.log: ok
+build/model/ldo_fs_3v6_m40/step_2m.log: ok
+build/model/ldo_fs_3v6_m40/loop_0.log: ok
+build/model/ldo_fs_3v6_m40/loop_250u.log: ok
+build/model/ldo_fs_3v6_m40/loop_1m.log: ok
+build/model/ldo_fs_3v6_m40/loop_2m.log: ok
+build/model/ldo_fs_3v6_125/ldo_dc.log: ok
+build/model/ldo_fs_3v6_125/ldo_psrr.log: ok
+build/model/ldo_fs_3v6_125/ldo_startup.log: ok
+build/model/ldo_fs_3v6_125/step_0p5m.log: ok
+build/model/ldo_fs_3v6_125/step_2m.log: ok
+build/model/ldo_fs_3v6_125/loop_0.log: ok
+build/model/ldo_fs_3v6_125/loop_250u.log: ok
+build/model/ldo_fs_3v6_125/loop_1m.log: ok
+build/model/ldo_fs_3v6_125/loop_2m.log: ok
