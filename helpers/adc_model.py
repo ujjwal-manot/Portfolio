@@ -21,7 +21,7 @@ def gain(trim_path):
     return shifts, step * 257 / 0.8
 
 def table(levels_path, trim_path, offset_v, offset_cal_v, out):
-    err = [float(l.split()[1]) for l in open(levels_path).read().splitlines()[1:]]
+    err = [float(l.split()[1]) for l in open(levels_path).read().splitlines()[1:] if not l.startswith("zero is real:")]
     if len(err) != 256 or any(not math.isfinite(e) for e in err):
         raise ValueError(f"{levels_path}: needs 256 finite DAC levels")
     shifts, g = gain(trim_path)

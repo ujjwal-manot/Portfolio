@@ -4,7 +4,7 @@ from adc_trim import levels, settled_code
 
 def write_levels(tmp_path, shifts, dac_step=3e-3, name="t.txt"):
     p = tmp_path / name
-    p.write_text("code shift_v\n" + "".join(f"{c} {v}\n" for c, v in enumerate(shifts)) + ("".join(f"pair_{k} {2e-4} {2e-4 + dac_step}\n" for k in range(8)) if dac_step else ""))
+    p.write_text("code shift_v\nzero is real: code (numbered from 0)\n" + "".join(f"{c} {v}\n" for c, v in enumerate(shifts)) + ("".join(f"pair_{k} {2e-4} {2e-4 + dac_step}\n" for k in range(8)) if dac_step else ""))
     return p
 
 def even(step):

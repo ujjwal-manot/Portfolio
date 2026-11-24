@@ -5,7 +5,7 @@ from adc_model import table, metrics, LO, LSB, N, K, AMP
 
 def levels(tmp_path, n=256):
     p = tmp_path / "levels.txt"
-    p.write_text("code error_v\n" + "".join(f"{c} 2e-4\n" for c in range(n)))
+    p.write_text("code error_v\nzero is real: code (numbered from 0)\n" + "".join(f"{c} 2e-4\n" for c in range(n)))
     return p
 
 def trim(tmp_path, step=2.9e-3):

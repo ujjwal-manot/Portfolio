@@ -6,6 +6,8 @@ ZERO, STEP_MAX, REACH = 63, 0.25, 7.0
 def read_levels(path):
     shifts, pairs = {}, {}
     for line in open(path).read().splitlines()[1:]:
+        if line.startswith("zero is real:"):
+            continue
         key, *values = line.split()
         values = [float(v) for v in values]
         if any(not math.isfinite(v) for v in values):
