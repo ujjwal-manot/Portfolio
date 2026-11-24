@@ -1,1 +1,0 @@
-ldo_startup ramp_s 9.999E-09 final_v 1.16724 top_v 1.16724 settle_s 6.57369E-05

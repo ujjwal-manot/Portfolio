@@ -1,6 +1,6 @@
-ff 125 C 1.32 V: every case holds for 1 ms
-fs 125 C 1.32 V: every case holds for 1 ms
-sf 125 C 1.32 V: every case holds for 1 ms
-ss -40 C 1.08 V: every case holds for 1 ms
-tt 27 C 1.2 V: every case holds for 1 ms
+results/sram_hold_ff_125_1v32.txt: every case holds for 1 ms
+results/sram_hold_fs_125_1v32.txt: every case holds for 1 ms
+results/sram_hold_sf_125_1v32.txt: every case holds for 1 ms
+results/sram_hold_ss_m40_1v08.txt: every case holds for 1 ms
+results/sram_hold_tt_27_1v2.txt: every case holds for 1 ms
 every check passes

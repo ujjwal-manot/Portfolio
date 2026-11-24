@@ -1,4 +1,0 @@
-Error: Could not find include file no_such_corner.inc
-    While reading inc.cir
-
-ERROR: fatal error in ngspice, exit(1)

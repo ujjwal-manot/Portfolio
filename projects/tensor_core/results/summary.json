@@ -19,20 +19,18 @@
  },
  "test_fma": {
   "logs": {
-   "test_fma.log": "7675de049587112ee286a966c02f5aa27fcc13e94724a145ca58edbb4d9ff38a"
+   "test_fma.log": "837ae3710558bfd8295ae16cb8cf7cb3e2bb1675b463a791aa0f64f85374bc54"
   },
   "result": "pass",
   "sources": {
    "helpers/cocotb_run.py": "0a110ca7ba635588ae930912ffe0680f64f1af5ed14afee80d790ca6cd994610",
    "helpers/fp_ref.py": "855c2522bf2c37f8b1084946e5da8c1f590f4cbbbc7b19276742331189c4a9b8",
    "helpers/save_result.py": "625ebd31509c6c498380be7bcd0464a5de44c6e22b4b3bab44649a094ada99b1",
-   "projects/tensor_core/Makefile": "77425a86f9818dbdf7596aa87af438a9e1e8f16fdc586a1b94d09140c910d162",
+   "projects/tensor_core/Makefile": "0c34f027c62fea2d4d40a79430c6ea9fbf3198ae1d1d8d8c0e5df0322acc4bc7",
    "projects/tensor_core/design/fma.sv": "a02e1bea83596fcc77bc4103ef4ac2a7bdc39d321c8d34a3c6c7e9da112ef92a",
-   "projects/tensor_core/design/tensor_core.sv": "8335b7158c38926f2a3ab61a63cafb2bd75bc46582a51e6f2860faf1f65a679c",
-   "projects/tensor_core/tests/test_array.py": "6c245f549fe3b8bb7732ff098f822bde2b5d8846c88f533da5c468e527add88b",
    "projects/tensor_core/tests/test_fma.py": "80d4676d7907164e36c5c2f7a7f0bad9333f793c5ee70cb7ac5de22b2d0d6955"
   },
-  "time": "2026-11-22 09:40:36",
+  "time": "2026-11-22 09:20:44",
   "values": {}
  }
 }

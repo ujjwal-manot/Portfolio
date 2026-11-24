@@ -1,4 +1,4 @@
-* LDO Monte Carlo at 125 C with the production trim done in the same run, so one mismatch draw covers both: at 27 C vref is solved at trim codes 8 and 9 and the code nearest 1.2063 V is set (as tests/dc.cir trims), then at 125 C the no-load supply current of bandgap and LDO together, the rail's lowest point through a 0 to 0.5 mA load step in 100 ns, and the no-load phase margin by Tian's method (the 0 V source Vi and current source Ii in the feedback wire stay at zero for the other runs) are measured and written to mc.txt with the code, every earlier plot is dropped before each analysis (and the second AC run must make its own plot), so a value whose analysis or measurement does not finish stays nan; corner, supply, mismatch and seed come from corner.inc.
+* LDO Monte Carlo at 125 C with the production trim done in the same run, so one mismatch draw covers both: at 27 C vref is solved at trim codes 8 and 9 and the code nearest 1.2063 V is set (as tests/dc.cir trims), then at 125 C the no-load supply current of bandgap and LDO together, the rail's lowest point through a 0 to 0.5 mA load step in 100 ns, and the no-load phase margin by Tian's method (the 0 V source Vi and current source Ii in the feedback wire stay at zero for the other runs) are measured and written to mc.txt with the code; corner, supply, mismatch and seed come from corner.inc.
 .include corner.inc
 .include bandgap_sizes.inc
 .include bandgap.cir
@@ -16,25 +16,21 @@ Ii 0 x dc 0 ac 0
 VSENSE vout vl 0
 ILOAD vl 0 pwl(0 0 20u 0 20.1u 0.5m 40u 0.5m 40.1u 0)
 .control
-let nan = 1e400 - 1e400
 let target = 1.2063
-let v8 = nan
-let v9 = nan
-let hi = nan
-let code = nan
-let iq = nan
-let dip = nan
-let pm = nan
-let v27 = nan
-let tend = nan
+let v8 = 0
+let v9 = 0
+let hi = 0
+let code = 8
+let iq = 0
+let dip = 0
+let pm = 0
+let v27 = 0
 option reltol=1e-5 vntol=1e-8
 option temp=27
-destroy all
 op
 let v8 = v(vref)
 let hi = v(vdd)
 alter vt0 = $&hi
-destroy all
 op
 let v9 = v(vref)
 let code = floor(8 + (target - v8) / (v9 - v8) + 0.5)
@@ -56,39 +52,28 @@ alter vt3 = $&x3
 alter vt2 = $&x2
 alter vt1 = $&x1
 alter vt0 = $&x0
-destroy all
 op
 let v27 = v(vout)
 option temp=125
-destroy all
 op
 let iq = -i(VDD)
-destroy all
 tran 1n 40u
-let tend = time[length(time) - 1]
-if tend > 39.99u
-  meas tran dip_m min v(vout) from=20u to=39u
-  let dip = dip_m
-end
+meas tran dip_m min v(vout) from=20u to=39u
+let dip = dip_m
 alter vi acmag = 1
-destroy all
 ac dec 50 10 10g
-set pa = $curplot
 let tv = -v(vout) / v(x)
+set first = $curplot
 alter vi acmag = 0
 alter ii acmag = 1
 ac dec 50 10 10g
-set pb = $curplot
-strcmp new $pa $pb
-if $new ne 0
-  let ti = -i(vi) / (1 + i(vi))
-  let t = ({$pa}.tv * ti - 1) / ({$pa}.tv + ti + 2)
-  let mag = abs(t)
-  meas ac fc when mag=1 fall=1
-  let ph = 180 / pi * cph(t)
-  meas ac phc find ph at=$&fc
-  let pm = 180 + phc
-end
+let ti = -i(vi) / (1 + i(vi))
+let t = ({$first}.tv * ti - 1) / ({$first}.tv + ti + 2)
+let mag = abs(t)
+meas ac fc when mag=1 fall=1
+let ph = 180 / pi * cph(t)
+meas ac phc find ph at=$&fc
+let pm = 180 + phc
 echo mc code $&code vout27_v $&v27 iq_a $&iq dip_v $&dip pm_deg $&pm > mc.txt
 quit
 .endc

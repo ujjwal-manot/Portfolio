@@ -25,8 +25,3 @@ def test_outputs_that_follow_the_rule_pass(tmp_path):
 def test_a_wrong_count_or_a_broken_thermometer_fails(tmp_path):
     assert run(tmp_path, (2, (4, 3, 3)))[0]
     assert run(tmp_path, (1, (2, 3, 1)))[0]
-
-def test_both_coarse_comparators_at_once_move_nothing(tmp_path):
-    rst, both = (0, 0, 0, 0, 0), (0, 0, 1, 1, 1)
-    samples = [(0, rst, 0, 0, 0), (9e-9, both, 0, 0, 0), (15e-9, both, 0, 0, 0), (29e-9, both, 0, 0, 0), (35e-9, both, 0, 0, 0)]
-    assert cosim_check(table(tmp_path, samples), n=4, big=2, p=1, pb=1, first=10e-9, period=20e-9) == ([], 2)

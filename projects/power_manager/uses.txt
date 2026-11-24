@@ -1,11 +1,2 @@
 projects/adc/design/comparator.cir
 projects/adc/tests/offset.cir
-projects/bandgap_ldo/design/bandgap.cir
-projects/bandgap_ldo/design/bandgap_sizes.inc
-projects/bandgap_ldo/design/ldo.cir
-projects/bandgap_ldo/design/ldo_sizes.inc
-projects/cpu/build/cpu_cells.v
-projects/cpu/build/cpu_gates.vcd
-projects/cpu/results/timing_slow.log
-projects/cpu/results/timing_typ.log
-projects/cpu/results/timing_fast.log

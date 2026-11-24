@@ -1,5 +1,5 @@
 #!/bin/bash
-# Fetches every pinned extra from plan.md into third_party/ at its exact tag or commit, the two binary releases checked against the SHA-256 recorded on their first download, and the Python packages in setup/pydeps.txt (PIP_CERT passed through for a proxy that re-signs TLS); stops on anything that cannot be fetched or does not match.
+# Fetches every pinned extra from plan.md into third_party/ at its exact tag or commit, and the two binary releases checked against the SHA-256 recorded on their first download; stops on anything that cannot be fetched or does not match.
 set -eo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p third_party
@@ -39,5 +39,3 @@ done <<'EOF'
 arm-gnu-toolchain 8f6903f8ceb084d9227b9ef991490413014d991874a1e34074443c2a72b14dbd https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz
 node 60e3b0a8500819514aca603487c254298cd776de0698d3cd08f11dba5b8289a8 https://nodejs.org/dist/v24.11.1/node-v24.11.1-linux-x64.tar.xz
 EOF
-[ -d third_party/pydeps/vsc ] || setup/run.sh env ${PIP_CERT:+PIP_CERT=$PIP_CERT} python3 -m pip install -q --no-deps --target third_party/pydeps -r setup/pydeps.txt
-echo "pydeps $(grep -c '==' setup/pydeps.txt) packages"

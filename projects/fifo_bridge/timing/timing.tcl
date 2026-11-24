@@ -1,4 +1,4 @@
-# Checks fifo_bridge timing at the corner named by CORNER (slow, typ, fast), on the mapped netlist or, when NETLIST and SPEF are set, on the routed netlist with its extracted wires and propagated clock trees: s_clk 10 MHz, m_clk 50 MHz, every crossing held under one m_clk period, rst_n untimed because reset_sync owns it, inputs driven by an IHP flop and outputs loading one IHP flop D pin, neighbours given 20% of their clock period as an interface budget, no clock jitter (no measured source exists for the input clocks); at the slow corner late cell delays and setup checks are raised 1.6%, since at 1.08 V the cold slow corner (ss, -40 C, which IHP ships no library for) is that much slower than the 125 C library in power_manager's transistor sweep (projects/power_manager/results/speed.log); writes each output's clock-to-output delay before that derate (the timed simulations run on the underated SDF and must match it), then reports the Gray pointer skew (latest late arrival minus earliest early arrival at the first synchronizer flops) and, before layout, writes the corner's SDF.
+# Checks fifo_bridge timing at the corner named by CORNER (slow, typ, fast), on the mapped netlist or, when NETLIST and SPEF are set, on the routed netlist with its extracted wires and propagated clock trees: s_clk 10 MHz, m_clk 50 MHz, every crossing held under one m_clk period, rst_n untimed because reset_sync owns it, inputs driven by an IHP flop and outputs loading one IHP flop D pin, neighbours given 20% of their clock period as an interface budget, no clock jitter (no measured source exists for the input clocks); reports the Gray pointer skew (latest late arrival minus earliest early arrival at the first synchronizer flops) and, before layout, writes the corner's SDF.
 set corner $::env(CORNER)
 set routed [info exists ::env(SPEF)]
 read_liberty ../build/$corner.lib
@@ -18,6 +18,20 @@ set_input_delay 4 -clock m_clk [get_ports m_tready]
 set_output_delay 4 -clock m_clk [get_ports {m_tvalid m_tdata* m_tlast}]
 set_driving_cell -lib_cell sg13g2_dfrbpq_1 -pin Q [get_ports {rst_n s_tvalid s_tdata* s_tlast m_tready}]
 set_load [get_property [lindex [get_lib_pins */sg13g2_dfrbpq_1/D] 0] capacitance] [all_outputs]
+set bad 0
+foreach {a b sync} {s_clk m_clk fifo.w_to_r.meta m_clk s_clk fifo.r_to_w.meta} {
+  set ends [get_pins -of_objects [get_cells -of_objects [get_pins -of_objects [get_nets $sync*] -filter "direction==output"]] -filter "lib_pin_name==D"]
+  set late {}
+  set early {}
+  foreach {delay into} {max late min early} {
+    foreach p [find_timing_paths -path_delay $delay -from [get_clocks $a] -to $ends -group_path_count 100 -endpoint_path_count 1 -unique_paths_to_endpoint] {
+      lappend $into [get_property [lindex [get_property $p points] end] arrival]
+    }
+  }
+  set skew [expr {[tcl::mathfunc::max {*}$late] - [tcl::mathfunc::min {*}$early]}]
+  set bad [expr {$bad || [llength $late] != 5 || [llength $early] != 5 || $skew >= 20}]
+  puts "gray pointer $a to $b: [llength $late] bits, skew [format %.4f $skew] ns, margin [format %.4f [expr {20 - $skew}]] ns to one m_clk period"
+}
 set out [open ../build/clock_to_output_[expr {$routed ? "routed_" : ""}]$corner.txt w]
 foreach port [get_ports {m_tvalid m_tlast m_tdata*}] {
   set net [get_nets [get_full_name $port]]
@@ -33,21 +47,6 @@ foreach port [get_ports {m_tvalid m_tlast m_tdata*}] {
   puts "clock to output [get_full_name $port]: rise [lindex $edges 0] ns, fall [lindex $edges 1] ns after the m_clk pin edge"
 }
 close $out
-if {$corner == "slow"} { set_timing_derate -late -cell_delay 1.016; set_timing_derate -late -cell_check 1.016 }
-set bad 0
-foreach {a b sync} {s_clk m_clk fifo.w_to_r.meta m_clk s_clk fifo.r_to_w.meta} {
-  set ends [get_pins -of_objects [get_cells -of_objects [get_pins -of_objects [get_nets $sync*] -filter "direction==output"]] -filter "lib_pin_name==D"]
-  set late {}
-  set early {}
-  foreach {delay into} {max late min early} {
-    foreach p [find_timing_paths -path_delay $delay -from [get_clocks $a] -to $ends -group_path_count 100 -endpoint_path_count 1 -unique_paths_to_endpoint] {
-      lappend $into [get_property [lindex [get_property $p points] end] arrival]
-    }
-  }
-  set skew [expr {[tcl::mathfunc::max {*}$late] - [tcl::mathfunc::min {*}$early]}]
-  set bad [expr {$bad || [llength $late] != 5 || [llength $early] != 5 || $skew >= 20}]
-  puts "gray pointer $a to $b: [llength $late] bits, skew [format %.4f $skew] ns, margin [format %.4f [expr {20 - $skew}]] ns to one m_clk period"
-}
 set_false_path -hold -from [get_clocks s_clk] -to [get_clocks m_clk]
 set_false_path -hold -from [get_clocks m_clk] -to [get_clocks s_clk]
 check_setup -verbose

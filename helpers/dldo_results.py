@@ -8,10 +8,10 @@ def cosim_check(path, n, big, p, pb, first=10e-9, period=20e-9):
     count, problems, edges, edge = 0, [], 0, first
     while edge + 5e-9 <= rows[-1][0]:
         lo, hi, far_lo, far_hi, rst_n = (v > 0.6 for v in at(edge - 1e-9)[:5])
-        up, down, far_up, far_down = lo and not hi, hi and not lo, far_lo and not far_hi, far_hi and not far_lo
-        step = big if far_up else -big if far_down else 1 if up else -1 if down else 0
+        up, down = lo and not hi, hi and not lo
+        step = big if far_lo else -big if far_hi else 1 if up else -1 if down else 0
         count = min(max(count + step, 0), n) if rst_n else 0
-        drive = min(max(count + (pb if far_up else -pb if far_down else p if up else -p if down else 0), 0), n) if rst_n else 0
+        drive = min(max(count + (pb if far_lo else -pb if far_hi else p if up else -p if down else 0), 0), n) if rst_n else 0
         out = at(edge + 5e-9)
         got_count, got_drive, on = word(out[5:13]), word(out[13:21]), [v > 0.6 for v in out[21:21 + n]]
         if (got_count, got_drive) != (count, drive) or on != [i < drive for i in range(n)]:

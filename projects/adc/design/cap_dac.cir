@@ -1,58 +1,22 @@
-* 8-bit charge-redistribution DAC with bottom-plate sampling and a top-plate offset trim on IHP SG13G2: 256 unit MIM capacitors of 2.26 um square (7.95 fF from the PDK's 1.5 fF/um2 plus 40 aF/um edge), each its own instance so each draws its own mismatch, grouped 128, 64 ... 1 plus one dummy unit; while samp is high the top plate is held at vcm and every bottom plate follows vin through a transmission gate (or, while cal is high, sits on vref_hi or vref_lo as its bit dk says, so the array samples its own level and vin sees no switch closing), the bottom plates letting go about 0.2 ns after the top plate (four inverters) so the sampled charge does not depend on vin; afterwards bottom plate k goes to vref_hi when dk is 1 and to vref_lo when it is 0, and the dummy always to vref_lo; the trim is 64 minimum MIM units (1.15 um square, the smallest the PDK allows) on the same top plate, bit 0 one unit and bit j 2^(j-1) units, whose bottom plates sample vcm and then go to vref_hi when tj is 1, and otherwise to vref_lo (bits 1 to 6) or back to vcm (bit 0), so code t moves the top plate by (t - 63) steps of 0.4 V times one unit over the whole plate capacitance, about 0.14 LSB, from -63 to +64 steps; cap_dac is the same DAC with cal low and the trim at its zero code 63, for benches that only load vin; every device carries mm_ok={mm}; switch widths come from w_sw_* in cap_dac_sizes.inc.
+* 8-bit charge-redistribution DAC with bottom-plate sampling on IHP SG13G2: 256 unit MIM capacitors of 2.26 um square (7.95 fF from the PDK's 1.5 fF/um2 plus 40 aF/um edge), each its own instance so each draws its own mismatch, grouped 128, 64 ... 1 plus one dummy unit; while samp is high the top plate is held at vcm and every bottom plate follows vin through a transmission gate, the bottom plates letting go about 0.2 ns after the top plate (four inverters) so the sampled charge does not depend on vin; afterwards bottom plate k goes to vref_hi when dk is 1 and to vref_lo when it is 0, and the dummy always to vref_lo; every device carries mm_ok={mm}; switch widths come from w_sw_* in cap_dac_sizes.inc.
 .subckt cap_dac top vin vcm vref_hi vref_lo samp d7 d6 d5 d4 d3 d2 d1 d0 vdd vss
-XC top vin vcm vref_hi vref_lo samp vss d7 d6 d5 d4 d3 d2 d1 d0 vss vdd vdd vdd vdd vdd vdd vdd vss cap_dac_cal
-.ends cap_dac
-.subckt cap_dac_cal top vin vcm vref_hi vref_lo samp cal d7 d6 d5 d4 d3 d2 d1 d0 t6 t5 t4 t3 t2 t1 t0 vdd vss
 XS1 s1 samp vdd vss dinv
 XS2 s2 s1 vdd vss dinv
 XS3 s3 s2 vdd vss dinv
 XS4 sl s3 vdd vss dinv
 XSB sb samp vdd vss dinv
 XLB slb sl vdd vss dinv
-XSV sv slb cal vdd vss dnor
-XSVB svb sv vdd vss dinv
 XTOP top vcm samp sb vdd vss tgate w={w_sw_top}
-XB7 top vin vref_hi vref_lo sv svb d7 vdd vss dacbit7
-XB6 top vin vref_hi vref_lo sv svb d6 vdd vss dacbit6
-XB5 top vin vref_hi vref_lo sv svb d5 vdd vss dacbit5
-XB4 top vin vref_hi vref_lo sv svb d4 vdd vss dacbit4
-XB3 top vin vref_hi vref_lo sv svb d3 vdd vss dacbit3
-XB2 top vin vref_hi vref_lo sv svb d2 vdd vss dacbit2
-XB1 top vin vref_hi vref_lo sv svb d1 vdd vss dacbit1
-XB0 top vin vref_hi vref_lo sv svb d0 vdd vss dacbit0
-XBD top vin vref_hi vref_lo sv svb vss vdd vss dacbit0
-XT6 top vcm vref_hi vref_lo sl slb t6 vdd vss trimbit6
-XT5 top vcm vref_hi vref_lo sl slb t5 vdd vss trimbit5
-XT4 top vcm vref_hi vref_lo sl slb t4 vdd vss trimbit4
-XT3 top vcm vref_hi vref_lo sl slb t3 vdd vss trimbit3
-XT2 top vcm vref_hi vref_lo sl slb t2 vdd vss trimbit2
-XT1 top vcm vref_hi vref_lo sl slb t1 vdd vss trimbit1
-XT0 top vcm vref_hi vcm sl slb t0 vdd vss trimbit1
-.ends cap_dac_cal
-.subckt trimbit6 top vcm hi lo sl slb d vdd vss
-XU top b tu32
-XSW b vcm hi lo sl slb d vdd vss switches w={w_sw_trim}
-.ends trimbit6
-.subckt trimbit5 top vcm hi lo sl slb d vdd vss
-XU top b tu16
-XSW b vcm hi lo sl slb d vdd vss switches w={w_sw_trim}
-.ends trimbit5
-.subckt trimbit4 top vcm hi lo sl slb d vdd vss
-XU top b tu8
-XSW b vcm hi lo sl slb d vdd vss switches w={w_sw_trim}
-.ends trimbit4
-.subckt trimbit3 top vcm hi lo sl slb d vdd vss
-XU top b tu4
-XSW b vcm hi lo sl slb d vdd vss switches w={w_sw_trim}
-.ends trimbit3
-.subckt trimbit2 top vcm hi lo sl slb d vdd vss
-XU top b tu2
-XSW b vcm hi lo sl slb d vdd vss switches w={w_sw_trim}
-.ends trimbit2
-.subckt trimbit1 top vcm hi lo sl slb d vdd vss
-XU top b tu1
-XSW b vcm hi lo sl slb d vdd vss switches w={w_sw_trim}
-.ends trimbit1
+XB7 top vin vref_hi vref_lo sl slb d7 vdd vss dacbit7
+XB6 top vin vref_hi vref_lo sl slb d6 vdd vss dacbit6
+XB5 top vin vref_hi vref_lo sl slb d5 vdd vss dacbit5
+XB4 top vin vref_hi vref_lo sl slb d4 vdd vss dacbit4
+XB3 top vin vref_hi vref_lo sl slb d3 vdd vss dacbit3
+XB2 top vin vref_hi vref_lo sl slb d2 vdd vss dacbit2
+XB1 top vin vref_hi vref_lo sl slb d1 vdd vss dacbit1
+XB0 top vin vref_hi vref_lo sl slb d0 vdd vss dacbit0
+XBD top vin vref_hi vref_lo sl slb vss vdd vss dacbit0
+.ends cap_dac
 .subckt dacbit7 top vin hi lo sl slb d vdd vss
 XU top b u128
 XSW b vin hi lo sl slb d vdd vss switches w={w_sw_7}
@@ -140,26 +104,3 @@ XB t b u32
 XA t b u64
 XB t b u64
 .ends u128
-.subckt tu1 t b
-XC t b cap_cmim w={w_trim} l={w_trim} mm_ok={mm}
-.ends tu1
-.subckt tu2 t b
-XA t b tu1
-XB t b tu1
-.ends tu2
-.subckt tu4 t b
-XA t b tu2
-XB t b tu2
-.ends tu4
-.subckt tu8 t b
-XA t b tu4
-XB t b tu4
-.ends tu8
-.subckt tu16 t b
-XA t b tu8
-XB t b tu8
-.ends tu16
-.subckt tu32 t b
-XA t b tu16
-XB t b tu16
-.ends tu32

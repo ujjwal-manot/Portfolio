@@ -1,3 +1,0 @@
-vdd 1.08 V: bitcell read current at ss -40 C gives 0.973 x the bit line time at ss 125 C
-vdd 1.20 V: bitcell read current at ss -40 C gives 0.897 x the bit line time at ss 125 C
-vdd 1.32 V: bitcell read current at ss -40 C gives 0.850 x the bit line time at ss 125 C

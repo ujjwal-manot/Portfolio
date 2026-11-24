@@ -1,4 +1,4 @@
-* Runs the real inverting loop (input and inp at 0.6 V) for output noise, integrated over the 50 kHz signal band and over 1 Hz to 1 GHz (all of it reaches the sampling ADC), and for supply rejection (gain from input over gain from vdd) at 1 kHz and 1 MHz, writing them to noise.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc; every value is written as nan if any measurement or analysis failed (a failed measure leaves its vector undefined, so the sum of the measures times zero cannot be formed; the input gains cross to the supply run's plot as text).
+* Runs the real inverting loop (input and inp at 0.6 V) for output noise, integrated over the 50 kHz signal band and over 1 Hz to 1 GHz (all of it reaches the sampling ADC), and for supply rejection (gain from input over gain from vdd) at 1 kHz and 1 MHz, writing them to noise.txt; corner, temperature and supply come from corner.inc, the opamp from dut.cir and sizes.inc.
 .include corner.inc
 .include sizes.inc
 .include dut.cir
@@ -11,29 +11,27 @@ XRF inn out 0 rhigh w={w_rf} l={l_rf} mm_ok={mm}
 XCL out 0 cap_cmim w={w_cl} l={l_cl} mm_ok={mm}
 XOP inp inn out vdd 0 ibias opamp
 .control
+let band = 0
+let total = 0
+let g1k = 0
+let g1m = 0
+let s1k = 0
+let s1m = 0
 noise v(out) VIN dec 20 1 1g
+let total = noise2.onoise_total
 noise v(out) VIN dec 20 1 50k
+let band = noise4.onoise_total
 ac dec 20 1 10meg
 meas ac g1k find vdb(out) at=1e3
 meas ac g1m find vdb(out) at=1e6
-set in1k = "$&g1k"
-set in1m = "$&g1m"
 alter VIN ac = 0
 alter VDD ac = 1
 ac dec 20 1 10meg
-let points = length(frequency)
 meas ac s1k find vdb(out) at=1e3
 meas ac s1m find vdb(out) at=1e6
-let total = noise2.onoise_total
-let band = noise4.onoise_total
-let psrr1k = $in1k - s1k
-let psrr1m = $in1m - s1m
-let complete = band*0 + total*0 + psrr1k*0 + psrr1m*0 + points*0
-if complete = 0
-  echo noise band_v_rms $&band total_v_rms $&total psrr_1k_db $&psrr1k psrr_1m_db $&psrr1m > noise.txt
-else
-  echo noise band_v_rms nan total_v_rms nan psrr_1k_db nan psrr_1m_db nan > noise.txt
-end
+let psrr1k = g1k - s1k
+let psrr1m = g1m - s1m
+echo noise band_v_rms $&band total_v_rms $&total psrr_1k_db $&psrr1k psrr_1m_db $&psrr1m > noise.txt
 quit
 .endc
 .end

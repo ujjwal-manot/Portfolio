@@ -1,1 +1,0 @@
-mc code 9 vout27_v 1.20684 iq_a 0.000202742 dip_v 1.16925 pm_deg 49.5621

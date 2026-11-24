@@ -21,19 +21,15 @@ BVIN vin 0 v = 0.2 + 0.8 / 256 * (v(a0) + 2 * v(a1) + 4 * v(a2) + 8 * v(a3) + 16
 XDAC top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 vdd 0 cap_dac
 .tran 1n {t0 + 256 * dwell} uic
 .control
-let nan = 1e400 - 1e400
 run
 echo "code error_v" > dac_levels.txt
-echo "zero is real: code (codes are numbered from 0, the first with every bottom plate on vref_lo)" >> dac_levels.txt
 let code = 0
 while code < 256
   let at = 300e-9 + (code + 0.95) * 300e-9
-  let level = nan
   meas tran level find v(top) at=$&at
   let err = level - 0.6
   echo "$&code $&err" >> dac_levels.txt
   let code = code + 1
 end
-quit
 .endc
 .end

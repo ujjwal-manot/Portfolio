@@ -1,1 +1,0 @@
-offset_v 0.00833923 hysteresis_v 4.88281E-06 up_v 0.00834167 down_v 0.00833679

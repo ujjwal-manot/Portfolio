@@ -1,1 +1,0 @@
-vref_v 1.20647 bandgap_v 1.20633

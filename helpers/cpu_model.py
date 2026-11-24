@@ -1,4 +1,4 @@
-# Reference RV32I model, with mac=True also the custom-0 multiply-accumulate (mac rs1, rs2 adds the signed product of their low halves to an accumulator, macr rd reads it into rd and clears it), with machine mode (Zicsr, the machine CSRs Spike has with --priv=m and no PMP or triggers, mcountinhibit stopping mcycle and minstret, traps for illegal instructions, ecall, ebreak and misaligned accesses and jump targets, mret, wfi as a hint, and interrupts taken when the caller says the hardware took one): runs one retired instruction per step, carrying on into the handler when an instruction traps, and reports what it retired, for lockstep checks against the cpu and Spike; Timed adds the cpu's clocked parts for lockstep against the RTL, given now, the cycle the next instruction spends in EX: mcycle with its writes and mcountinhibit, mtime, mtimecmp from its own stores, mip from those and the registered stream valid, every IO-page read by address (the stream as the testbench records it at the edge that ends the read, since it changes on falling edges), the branch counter and the mispredict counter (given fetched_next, the pc the cpu fetched after each instruction), mtime from any start value, and due(), the interrupt the hardware must take at now, external before timer, all as chip.md's cycle timing states it.
+# Reference RV32I model with machine mode (Zicsr, the machine CSRs Spike has with --priv=m and no PMP or triggers, mcountinhibit stopping mcycle and minstret, traps for illegal instructions, ecall, ebreak and misaligned accesses and jump targets, mret, wfi as a hint, and interrupts taken when the caller says the hardware took one): runs one retired instruction per step, carrying on into the handler when an instruction traps, and reports what it retired, for lockstep checks against the cpu and Spike; Timed adds the cpu's clocked parts for lockstep against the RTL, given now, the cycle the next instruction spends in EX: mcycle with its writes and mcountinhibit, mtime, mtimecmp from its own stores, mip from those and the registered stream valid, every IO-page read by address (the stream as the testbench records it at the edge that ends the read, since it changes on falling edges), the branch counter and the mispredict counter (given fetched_next, the pc the cpu fetched after each instruction), mtime from any start value, and due(), the interrupt the hardware must take at now, external before timer, all as chip.md's cycle timing states it.
 M = 0xFFFFFFFF
 MSTATUS, MISA, MIE, MTVEC, MSCRATCH, MEPC, MCAUSE, MTVAL, MIP = 0x300, 0x301, 0x304, 0x305, 0x340, 0x341, 0x342, 0x343, 0x344
 MCYCLE, MINSTRET, MCYCLEH, MINSTRETH, MCOUNTINHIBIT = 0xB00, 0xB02, 0xB80, 0xB82, 0x320
@@ -19,13 +19,13 @@ class Trap(Exception):
 class Cpu:
     COUNTED = ((1, (MCYCLE, MCYCLEH)), (4, (MINSTRET, MINSTRETH)))
 
-    def __init__(self, image, base=0, size=0x10000, io_read=lambda addr: 0, ids=None, mac=False):
+    def __init__(self, image, base=0, size=0x10000, io_read=lambda addr: 0, ids=None):
         self.ram = bytearray(size)
         self.ram[:len(image)] = image
         self.base, self.pc, self.x, self.io_read = base, base, [0] * 32, io_read
         self.csr = {MSTATUS: 0x1800, MISA: 0x40000100, MIE: 0, MTVEC: 0, MSCRATCH: 0, MEPC: 0, MCAUSE: 0, MTVAL: 0, MIP: 0,
                     MCYCLE: 0, MINSTRET: 0, MCYCLEH: 0, MINSTRETH: 0, MCOUNTINHIBIT: 0, 0xF11: 0, 0xF12: 0, 0xF13: 0, 0xF14: 0, 0xF15: 0, **(ids or {})}
-        self.count, self.mac, self.acc = 0, mac, 0
+        self.count = 0
 
     def load(self, addr, n):
         off = addr - self.base
@@ -132,11 +132,6 @@ class Cpu:
             sh, alt = y & 31, f7 == 0x20
             value = [a - y if op == 0x33 and alt else a + y, a << sh, int(sx(a, 32) < sx(y, 32)), int(a < y),
                      a ^ y, sx(a, 32) >> sh if alt else a >> sh, a | y, a & y][f3]
-        elif self.mac and op == 0x0B and f7 == 0 and (f3 == 0 and rd == 0 or f3 == 1 and rs1 == 0 and rs2 == 0):
-            if f3 == 0:
-                self.acc = (self.acc + sx(a & 0xFFFF, 16) * sx(b & 0xFFFF, 16)) & M
-            else:
-                value, self.acc = self.acc, 0
         elif op == 0x0F:
             pass
         elif op == 0x73 and f3 == 0:

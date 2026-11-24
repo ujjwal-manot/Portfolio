@@ -1,5 +1,0 @@
-# CVC supply ranges for shifter_hv: vss 0 V, the logic rail vdd 1.08 to 1.32 V, the input in anywhere from 0 V to 1.32 V, vin from 3.0 V up to VIN_MAX, which cells.mk sets to 3.6 V (the chip's input range in chip.md) or 3.3 V (the thick oxide's VGS rating).
-vss power 0.0
-vdd power min@1.08 sim@1.2 max@1.32
-vin power min@3.0 sim@3.3 max@VIN_MAX
-in input min@0.0 max@1.32

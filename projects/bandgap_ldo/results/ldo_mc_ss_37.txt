@@ -1,1 +1,0 @@
-mc code 10 vout27_v 1.20654 iq_a 0.000200658 dip_v 1.1682 pm_deg 49.5166

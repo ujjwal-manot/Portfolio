@@ -1,1 +1,0 @@
-mc code 6 vout27_v 1.2098 iq_a 0.00026269 dip_v 1.17928 pm_deg 48.101

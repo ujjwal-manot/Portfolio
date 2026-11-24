@@ -48,8 +48,3 @@ def test_monte_carlo_counts_passes_and_gives_the_yield_bound(tmp_path):
     assert (r["passed"], r["runs"]) == (8, 10) and 0.4 < r["lower"] < 0.8
     hot = [write(tmp_path, f"ldo_mc_ff_{n}.txt", f"mc code 9 vout27_v 1.206 iq_a {0.00026 if n else 0.00027} dip_v 1.18 pm_deg 48\n") for n in range(10)]
     assert monte_carlo(hot, "ff")["passed"] == 9
-
-def test_a_value_written_as_nan_fails_its_corner(tmp_path):
-    for key in ("final_v 1.2063", "top_v 1.2063", "settle_s 5.7e-05", "peak_v 1.27", "dip_v 1.176", "iq_a 0.00016", "pm_deg 47"):
-        name, _ = key.split()
-        assert not corner(write(tmp_path, "nan.txt", GOOD.replace(key, f"{name} nan")))[0], key

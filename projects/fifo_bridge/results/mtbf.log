@@ -1,4 +1,7 @@
 ff_fall: tau 36.5 ps (fit 1.00e-11 to 1.00e-13 s gap, worst residual 1.96 ps, solver floor below 1.00e-14 s), flip 61.6 ps before CLK (liberty setup 75.8 ps), bridge MTBF 10^224 years
 ff_rise: tau 37.5 ps (fit 4.64e-12 to 2.15e-13 s gap, worst residual 2.27 ps, solver floor below 1.00e-14 s), flip 70.4 ps before CLK (liberty setup 75.8 ps), bridge MTBF 10^218 years
-sc_fall: tau 338.7 ps (fit 4.64e-12 to 4.64e-14 s gap, worst residual 20.26 ps, solver floor below 1.00e-14 s), flip 166.5 ps before CLK (liberty setup 190.7 ps), bridge MTBF 10^13 years
-sc_rise: 69 sweep rows, expected 72
+ss_fall: tau 125.6 ps (fit 4.64e-11 to 1.00e-13 s gap, worst residual 13.72 ps, solver floor below 1.00e-14 s), flip 160.6 ps before CLK (liberty setup 190.7 ps), bridge MTBF 10^55 years
+ss_rise: tau 133.8 ps (fit 1.00e-11 to 1.00e-13 s gap, worst residual 8.55 ps, solver floor below 1.00e-14 s), flip 177.0 ps before CLK (liberty setup 190.7 ps), bridge MTBF 10^51 years
+tt_fall: tau 66.8 ps (fit 2.15e-11 to 1.00e-13 s gap, worst residual 4.81 ps, solver floor below 1.00e-14 s), flip 100.5 ps before CLK (liberty setup 112.5 ps), bridge MTBF 10^116 years
+tt_rise: tau 71.1 ps (fit 4.64e-12 to 1.00e-13 s gap, worst residual 3.19 ps, solver floor below 1.00e-14 s), flip 104.6 ps before CLK (liberty setup 112.5 ps), bridge MTBF 10^109 years
+capture window: data older than 0.1771 ns is taken, younger than 0.0616 ns is missed, between is either; worst bridge MTBF 10^51 years

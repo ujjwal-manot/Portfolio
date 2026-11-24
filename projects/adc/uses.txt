@@ -3,5 +3,3 @@ projects/bandgap_ldo/design/bandgap_sizes.inc
 projects/bandgap_ldo/design/ldo.cir
 projects/bandgap_ldo/design/ldo_sizes.inc
 projects/bandgap_ldo/results/corners.log
-projects/fifo_bridge/timing/sim_sdf.py
-projects/power_manager/results/speed.log

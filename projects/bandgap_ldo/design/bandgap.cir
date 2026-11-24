@@ -1,11 +1,11 @@
-* Bandgap reference on the 3.3 V supply, IHP SG13G2 thick-oxide devices and vertical PNPs: three equal PMOS mirror branches feed a 1x PNP (node a), R1 into an 8x PNP (node b) and R2 into a 1x PNP, the top of R2 split into 15 equal units so vref is one of 16 taps chosen by trim3..trim0 (3.3 V logic) through a four-level tree of thick-oxide pass switches that carry no DC current, a PMOS-input stage holds a and b equal through an NMOS (twice its load, so both see the same gate voltage at balance and the systematic offset cancels) that sinks the current of a diode-connected PMOS setting the mirror gate, so the branch current is VT ln 8 / R1 and vref = VBE + (R2/R1) VT ln 8; a start-up pulls the mirror gate down until a copy of the branch current overpowers its weak pull-up (sensing current, not a voltage, so it cannot let go in a half-started state); vg, the mirror gate, is brought out so other blocks can copy the PTAT branch current with a matching PMOS; the release device S2 is twice its S5 mirror, so once the core runs it always overpowers the start-up pull S1 (with S1 drawn as a five-device stack and S2 equal to S5, tt -40 C with a 1 ms supply ramp stayed half started at 0.78 V); channels longer than 10 um (the longest IHP's thick-oxide devices can be drawn) are stacks of equal devices in series sharing one gate (pstack2, nstack4, pstack5), each its own mismatch draw, which is how the layout draws them; each pnp states the model's own default emitter (a=2p p=6u, 1 x 2 um), so LVS checks that the layout draws the device that was simulated (the PCell's default is a smaller 1.4 um2 emitter); every device carries mm_ok={mm}, sizes come from bandgap_sizes.inc.
+* Bandgap reference on the 3.3 V supply, IHP SG13G2 thick-oxide devices and vertical PNPs: three equal PMOS mirror branches feed a 1x PNP (node a), R1 into an 8x PNP (node b) and R2 into a 1x PNP, the top of R2 split into 15 equal units so vref is one of 16 taps chosen by trim3..trim0 (3.3 V logic) through a four-level tree of thick-oxide pass switches that carry no DC current, a PMOS-input stage holds a and b equal through an NMOS (twice its load, so both see the same gate voltage at balance and the systematic offset cancels) that sinks the current of a diode-connected PMOS setting the mirror gate, so the branch current is VT ln 8 / R1 and vref = VBE + (R2/R1) VT ln 8; a start-up pulls the mirror gate down until a copy of the branch current overpowers its weak pull-up (sensing current, not a voltage, so it cannot let go in a half-started state); vg, the mirror gate, is brought out so other blocks can copy the PTAT branch current with a matching PMOS; every device carries mm_ok={mm}, sizes come from bandgap_sizes.inc.
 .subckt bandgap vref vg vdd vss trim3 trim2 trim1 trim0
 XP1 a vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
 XP2 b vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
 XP3 tap15 vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
-XQ1 vss vss a pnpMPA a=2p p=6u
+XQ1 vss vss a pnpMPA
 XR1 b e8 vss rppd w={w_r} l={l_r1} mm_ok={mm}
-XQ8 vss vss e8 pnpMPA a=2p p=6u m=8
+XQ8 vss vss e8 pnpMPA m=8
 XR2 tap0 e3 vss rppd w={w_r} l={l_r2a} mm_ok={mm}
 XU0 tap1 tap0 vss rppd w={w_r} l={l_unit} mm_ok={mm}
 XU1 tap2 tap1 vss rppd w={w_r} l={l_unit} mm_ok={mm}
@@ -22,19 +22,19 @@ XU11 tap12 tap11 vss rppd w={w_r} l={l_unit} mm_ok={mm}
 XU12 tap13 tap12 vss rppd w={w_r} l={l_unit} mm_ok={mm}
 XU13 tap14 tap13 vss rppd w={w_r} l={l_unit} mm_ok={mm}
 XU14 tap15 tap14 vss rppd w={w_r} l={l_unit} mm_ok={mm}
-XQ3 vss vss e3 pnpMPA a=2p p=6u
+XQ3 vss vss e3 pnpMPA
 XPT t vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
-XA1 x a t vdd pstack2 w={w_in} l={l_in}
-XA2 y b t vdd pstack2 w={w_in} l={l_in}
-XA3 x x vss vss nstack4 w={w_ld} l={l_ld}
-XA4 y x vss vss nstack4 w={w_ld} l={l_ld}
-XB vg y vss vss nstack4 w={w_ld} l={l_ld} m=2
+XA1 x a t vdd sg13_hv_pmos w={w_in} l={l_in} mm_ok={mm}
+XA2 y b t vdd sg13_hv_pmos w={w_in} l={l_in} mm_ok={mm}
+XA3 x x vss vss sg13_hv_nmos w={w_ld} l={l_ld} mm_ok={mm}
+XA4 y x vss vss sg13_hv_nmos w={w_ld} l={l_ld} mm_ok={mm}
+XB vg y vss vss sg13_hv_nmos w={w_ld} l={l_ld} m=2 mm_ok={mm}
 XBP vg vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
 XC y vss cap_cmim w={w_c} l={w_c} mm_ok={mm}
-XS1 st vss vdd vdd pstack5 w={w_su} l={l_su}
+XS1 st vss vdd vdd sg13_hv_pmos w={w_su} l={l_su} mm_ok={mm}
 XS4 sd vg vdd vdd sg13_hv_pmos w={w_mir} l={l_mir} m=1 mm_ok={mm}
 XS5 sd sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
-XS2 st sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} m=2 mm_ok={mm}
+XS2 st sd vss vss sg13_hv_nmos w={w_sd} l={l_sd} mm_ok={mm}
 XS3 vg st vss vss sg13_hv_nmos w={w_sk} l={l_sk} mm_ok={mm}
 XI0 n0 trim0 vdd vss inv
 XI1 n1 trim1 vdd vss inv
@@ -71,23 +71,6 @@ XM3_1b m3_1 trim2 m2_3 vss pass
 XM4a vref n3 m3_0 vss pass
 XM4b vref trim3 m3_1 vss pass
 .ends bandgap
-.subckt pstack2 d g s b w=1u l=1u
-XA d g m b sg13_hv_pmos w={w} l={l/2} mm_ok={mm}
-XB m g s b sg13_hv_pmos w={w} l={l/2} mm_ok={mm}
-.ends pstack2
-.subckt nstack4 d g s b w=1u l=1u
-XA d g m1 b sg13_hv_nmos w={w} l={l/4} mm_ok={mm}
-XB m1 g m2 b sg13_hv_nmos w={w} l={l/4} mm_ok={mm}
-XC m2 g m3 b sg13_hv_nmos w={w} l={l/4} mm_ok={mm}
-XD m3 g s b sg13_hv_nmos w={w} l={l/4} mm_ok={mm}
-.ends nstack4
-.subckt pstack5 d g s b w=1u l=1u
-XA d g m1 b sg13_hv_pmos w={w} l={l/5} mm_ok={mm}
-XB m1 g m2 b sg13_hv_pmos w={w} l={l/5} mm_ok={mm}
-XC m2 g m3 b sg13_hv_pmos w={w} l={l/5} mm_ok={mm}
-XD m3 g m4 b sg13_hv_pmos w={w} l={l/5} mm_ok={mm}
-XE m4 g s b sg13_hv_pmos w={w} l={l/5} mm_ok={mm}
-.ends pstack5
 .subckt pass d g s vss
 XN d g s vss sg13_hv_nmos w={w_sw} l={l_sw} mm_ok={mm}
 .ends pass

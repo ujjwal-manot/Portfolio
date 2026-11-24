@@ -51,24 +51,10 @@ X6 o6 o5 vdd nor4
 .ends
 .tran 1p 8.5n
 .control
-let nan = 1e400 - 1e400
 let v = 0.8
 echo "vdd inv_s nand_s nor_s" > speed.txt
 while v < 1.3299
   alter VDD dc = v
-  destroy all
-  let ir = nan
-  let ir4 = nan
-  let fi = nan
-  let fi4 = nan
-  let nr = nan
-  let nr4 = nan
-  let nf = nan
-  let nf4 = nan
-  let orr = nan
-  let or4 = nan
-  let of = nan
-  let of4 = nan
   run
   let h = v / 2
   meas tran ir when v(inv2)=$&h rise=1
@@ -89,6 +75,5 @@ while v < 1.3299
   echo "$&v $&tinv $&tnand $&tnor" >> speed.txt
   let v = v + 0.02
 end
-quit
 .endc
 .end

@@ -1,1 +1,0 @@
-mc code 8 vout27_v 1.20322 iq_a 0.00019985 dip_v 1.16205 pm_deg 49.4688

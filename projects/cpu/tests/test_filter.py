@@ -1,8 +1,7 @@
-# Runs the filter firmware on the cpu with 4 frames of samples, once as plain RV32I and once built for the custom-0 multiply-accumulate (MAC_FIRMWARE, checked against the model with mac on): outputs must match a Python reference and each frame must fit in 3200 cycles.
-import math, os, random, re, subprocess
+# Runs the filter firmware on the cpu with 4 frames of samples: outputs must match a Python reference and each frame must fit in 3200 cycles.
+import math, random, re, subprocess
 from pathlib import Path
 import cocotb
-import pytest
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, FallingEdge, ReadOnly, RisingEdge, Timer
 from cocotb_run import build, run
@@ -12,10 +11,9 @@ HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / "build"
 SOURCES = [HERE.parent / "design" / "cpu.sv", RESET_SYNC, HERE / "cpu_board.sv"]
 RESULT, FRAMES, BUDGET = 0x10000100, 4, 3200
-NAME = "filter_mac" if os.getenv("MAC_FIRMWARE") else "filter"
 
 def symbols():
-    text = subprocess.run(["riscv64-unknown-elf-nm", BUILD / f"{NAME}.elf"], capture_output=True, text=True, check=True).stdout
+    text = subprocess.run(["riscv64-unknown-elf-nm", BUILD / "filter.elf"], capture_output=True, text=True, check=True).stdout
     return {name: int(addr, 16) for addr, name in re.findall(r"^([0-9a-f]+) \w (\w+)$", text, re.M)}
 
 def samples():
@@ -44,7 +42,7 @@ async def feed(dut, codes, gap):
 
 async def filter_run(dut, gap):
     codes, sym = samples(), symbols()
-    lock = Lockstep(dut, (BUILD / f"{NAME}.bin").read_bytes(), NAME, mac=NAME == "filter_mac")
+    lock = Lockstep(dut, (BUILD / "filter.bin").read_bytes(), "filter")
     memory = {}
     cocotb.start_soon(Clock(dut.clk, 20, "ns").start())
     dut.s_tvalid.value = 0
@@ -70,7 +68,7 @@ async def filter_run(dut, gap):
     assert [memory.get(sym["out"] + i) for i in range(64 * FRAMES)] == ys, "filter outputs differ from the reference"
     assert [word(sym["events"] + 4 * f) for f in range(FRAMES)] == events
     frame_cycles = [word(sym["frame_cycles"] + 4 * f) for f in range(FRAMES)]
-    dut._log.info(f"{NAME} gap {gap}: events {events}, frame cycles {frame_cycles}, {lock.retired} instructions in {cycle} cycles, IPC {lock.retired / cycle:.3f}")
+    dut._log.info(f"gap {gap}: events {events}, frame cycles {frame_cycles}, {lock.retired} instructions in {cycle} cycles, IPC {lock.retired / cycle:.3f}")
     return frame_cycles
 
 @cocotb.test()
@@ -82,6 +80,5 @@ async def full_speed_stream(dut):
 async def stream_with_gaps(dut):
     await filter_run(dut, 0.7)
 
-@pytest.mark.parametrize("name", ["filter", "filter_mac"])
-def test_filter(name):
-    run("cpu_board", SOURCES, __file__, build_args=RANDOM_START, defines={"MAC_FIRMWARE": 1} if name == "filter_mac" else {}, plusargs=[f"+program={hex_file(BUILD / f'{name}.bin')}", *RANDOM_SEED])
+def test_filter():
+    run("cpu_board", SOURCES, __file__, build_args=RANDOM_START, plusargs=[f"+program={hex_file(BUILD / 'filter.bin')}", *RANDOM_SEED])

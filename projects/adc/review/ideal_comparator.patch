@@ -1,11 +1,11 @@
 Why: an ideal comparator in place of the transistor one, to separate its offset from the DAC
 Run: convert CONVERT=build/convert/tt_27_nom/convert.txt
---- a/tests/convert.cir	2026-11-23 03:36:13.702182476 +0000
-+++ b/tests/convert.cir	2026-11-23 14:26:04.859925831 +0000
+--- a/tests/convert.cir
++++ b/tests/convert.cir
 @@ -22,7 +22,7 @@
- AOUT [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dcal dk6 dk5 dk4 dk3 dk2 dk1 dk0 dvalid o7 o6 o5 o4 o3 o2 o1 o0] [samp cclk a7 a6 a5 a4 a3 a2 a1 a0 cal t6 t5 t4 t3 t2 t1 t0 valid b7 b6 b5 b4 b3 b2 b1 b0] tovolts
+ AOUT [dsamp dcclk d7 d6 d5 d4 d3 d2 d1 d0 dvalid t7 t6 t5 t4 t3 t2 t1 t0] [samp cclk a7 a6 a5 a4 a3 a2 a1 a0 valid b7 b6 b5 b4 b3 b2 b1 b0] tovolts
  .model tovolts dac_bridge(out_low=0 out_high={vsupply} t_rise=50p t_fall=50p)
- XDAC top vin vcm vref_hi vref_lo samp cal a7 a6 a5 a4 a3 a2 a1 a0 t6 t5 t4 t3 t2 t1 t0 vdd 0 cap_dac_cal
+ XDAC top vin vcm vref_hi vref_lo samp a7 a6 a5 a4 a3 a2 a1 a0 vdd 0 cap_dac
 -XCMP vcm top cclk cmp cmpn vdd 0 comparator
 +BCMP cmp 0 v = v(vcm) > v(top) ? 1.2 : 0
  BEVDD 0 e_vdd i = time > 0 ? -v(vdd) * i(VDD) : 0

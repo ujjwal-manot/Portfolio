@@ -1,20 +1,0 @@
-
-Note: No compatibility mode selected!
-
-
-Circuit: * long run to be killed
-
-Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
-
-Using SPARSE 1.3 as Direct Linear Solver
-
-Initial Transient Solution
---------------------------
-
-Node                                   Voltage
-----                                   -------
-a                                            0
-b                                            0
-v1#branch                                    0
-
- Reference value :  5.30913e-05 Reference value :  1.32031e-04 Reference value :  2.15822e-04 Reference value :  3.22857e-04 Reference value :  4.30990e-04 Reference value :  5.38643e-04 Reference value :  6.33997e-04 Reference value :  7.05506e-04 Reference value :  7.91507e-04 Reference value :  8.51349e-04 Reference value :  9.14443e-04 Reference value :  9.72997e-04 Reference value :  1.04459e-03 Reference value :  1.11643e-03 Reference value :  1.19260e-03 Reference value :  1.26820e-03 Reference value :  1.34224e-03 Reference value :  1.42186e-03 Reference value :  1.49957e-03 Reference value :  1.57728e-03 Reference value :  1.65697e-03 Reference value :  1.73125e-03 Reference value :  1.82164e-03 Reference value :  1.93140e-03 Reference value :  2.03130e-03 Reference value :  2.14221e-03 Reference value :  2.24126e-03 Reference value :  2.34791e-03 Reference value :  2.43580e-03 Reference value :  2.54390e-03 Reference value :  2.64742e-03 Reference value :  2.75230e-03 Reference value :  2.85830e-03 Reference value :  2.97008e-03 Reference value :  3.07914e-03 Reference value :  3.18722e-03 Reference value :  3.29703e-03 Reference value :  3.40670e-03 Reference value :  3.50677e-03 Reference value :  3.59791e-03 Reference value :  3.68788e-03 Reference value :  3.78400e-03 Reference value :  3.87893e-03 Reference value :  3.96584e-03 Reference value :  4.04012e-03 Reference value :  4.11958e-03 Reference value :  4.20656e-03 Reference value :  4.30313e-03 Reference value :  4.40168e-03 Reference value :  4.47840e-03 Reference value :  4.58824e-03 Reference value :  4.68052e-03 Reference value :  4.79317e-03 Reference value :  4.90525e-03 Reference value :  4.99424e-03 Reference value :  5.07549e-03 Reference value :  5.18253e-03 Reference value :  5.29260e-03 Reference value :  5.37197e-03 Reference value :  5.44141e-03 Reference value :  5.50895e-03 Reference value :  5.58983e-03 Reference value :  5.69245e-03 Reference value :  5.76517e-03 Reference value :  5.84289e-03 Reference value :  5.95018e-03 Reference value :  6.04789e-03 Reference value :  6.15356e-03 Reference value :  6.26434e-03 Reference value :  6.36844e-03 Reference value :  6.46184e-03 Reference value :  6.56712e-03 Reference value :  6.67730e-03 Reference value :  6.78402e-03 Reference value :  6.89350e-03 Reference value :  6.99672e-03 Reference value :  7.10699e-03 Reference value :  7.22067e-03 Reference value :  7.33364e-03 Reference value :  7.44401e-03 Reference value :  7.55749e-03 Reference value :  7.66773e-03 Reference value :  7.77071e-03 Reference value :  7.85676e-03 Reference value :  7.93798e-03 Reference value :  8.01920e-03 Reference value :  8.11724e-03 Reference value :  8.22775e-03 Reference value :  8.33866e-03 Reference value :  8.45013e-03 Reference value :  8.56239e-03 Reference value :  8.67024e-03 Reference value :  8.76568e-03 Reference value :  8.87362e-03 Reference value :  8.98421e-03 Reference value :  9.09010e-03 Reference value :  9.19334e-03 Reference value :  9.30606e-03 Reference value :  9.41242e-03

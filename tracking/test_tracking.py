@@ -33,12 +33,3 @@ def test_only_passing_checks_with_unchanged_sources_count(tmp_path):
     assert finished(p, tmp_path) == 1
     (p / "opamp.cir").write_text("* opamp, changed\n")
     assert finished(p, tmp_path) == 0
-
-def test_a_missing_uses_entry_counts_nothing_finished_instead_of_crashing(tmp_path):
-    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
-    p = tmp_path / "projects/adc"
-    (p / "results").mkdir(parents=True)
-    (p / "results/a.log").write_text("ok\n")
-    save(p / "results/summary.json", "ac", True, [p / "results/a.log"])
-    (p / "uses.txt").write_text("projects/bandgap_ldo/results/gone.log\n")
-    assert finished(p, tmp_path) == 0

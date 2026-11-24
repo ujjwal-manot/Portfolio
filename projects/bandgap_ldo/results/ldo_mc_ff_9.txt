@@ -1,1 +1,0 @@
-mc code 7 vout27_v 1.20814 iq_a 0.000259695 dip_v 1.17853 pm_deg 47.9594

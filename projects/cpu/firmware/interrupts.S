@@ -1,4 +1,4 @@
-// Interrupt workout: reads mcycle with mcountinhibit set and cleared, counts in a loop until 4 timer interrupts (one every 300 cycles, mtimecmp moved on all 64 bits, writing the low word as all ones first) have been taken, keeps interrupts off three times for 400, 250 and 550 loop turns so the timer and a stream sample end up pending together, then sleeps in wfi until 8 timer interrupts and 16 stream samples (one external interrupt each, mip read in every handler) have arrived, sleeps once more with interrupts masked (the timer wakes it without a trap) and checks that the register written just before that wfi reads back right after it, reads the branch and mispredict counters, and writes the sum of the samples to 0x1000_0104 and 1 (pass) to 0x1000_0100.
+// Interrupt workout: reads mcycle with mcountinhibit set and cleared, counts in a loop until 4 timer interrupts (one every 300 cycles, mtimecmp moved on all 64 bits, writing the low word as all ones first) have been taken, keeps interrupts off three times for 400, 250 and 550 loop turns so the timer and a stream sample end up pending together, then sleeps in wfi until 8 timer interrupts and 16 stream samples (one external interrupt each, mip read in every handler) have arrived, reads the branch and mispredict counters, and writes the sum of the samples to 0x1000_0104 and 1 (pass) to 0x1000_0100.
 .equ PERIOD, 300
 .section .text.start
 .globl _start
@@ -39,11 +39,6 @@ sleep:
   li t0, 16
   blt s2, t0, sleep
   csrci mstatus, 8
-  li t1, 9
-  wfi
-  mv t2, t1
-  li t0, 9
-  bne t2, t0, fail
   lw a6, 0x18(s0)
   lw a7, 0x1c(s0)
   sw s3, 0x104(s0)

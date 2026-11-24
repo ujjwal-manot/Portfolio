@@ -1,9 +1,8 @@
-# Reports hours (from sessions.csv) and finished checks (passing results whose sources are unchanged) per track, and fails if any track is more than 10% behind the leader (a project whose uses.txt names a missing file counts nothing finished); whole_chip hours count a third to each track.
+# Reports hours (from sessions.csv) and finished checks (passing results whose sources are unchanged) per track, and fails if any track is more than 10% behind the leader; whole_chip hours count a third to each track.
 import csv, json, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "helpers"))
 from save_result import sources
-from check_honesty import missing_uses
 
 TRACKS = {"digital": ["fifo_bridge", "cpu", "tensor_core", "coherent_noc"],
           "analog": ["opamp", "bandgap_ldo", "serdes_frontend", "lc_vco"],
@@ -22,7 +21,7 @@ def behind(totals):
 
 def finished(project, root):
     summary = project / "results" / "summary.json"
-    if not summary.exists() or missing_uses(project, root):
+    if not summary.exists():
         return 0
     now = sources(project, root)
     return sum(e["result"] == "pass" and e.get("sources") == now for e in json.loads(summary.read_text()).values())

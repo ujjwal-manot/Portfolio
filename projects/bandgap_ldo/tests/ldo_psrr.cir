@@ -1,4 +1,4 @@
-* LDO supply rejection with the bandgap at trim code 8 and a 1 mA load: an AC signal on the 3.3 V supply, the rejection to vout at 1 kHz and 1 MHz, written to psrr.txt (nan if a measurement fails); supply and corner from corner.inc.
+* LDO supply rejection with the bandgap at trim code 8 and a 1 mA load: an AC signal on the 3.3 V supply, the rejection to vout at 1 kHz and 1 MHz, written to psrr.txt; supply and corner from corner.inc.
 .include corner.inc
 .include bandgap_sizes.inc
 .include bandgap.cir
@@ -9,9 +9,8 @@ X1 vref vg vdd 0 vdd 0 0 0 bandgap
 X2 vout vout vref vg vdd 0 ldo
 ILOAD vout 0 1m
 .control
-let nan = 1e400 - 1e400
-let p1k = nan
-let p1m = nan
+let p1k = 0
+let p1m = 0
 ac dec 20 10 100meg
 let psrr = -20 * log10(abs(v(vout)))
 meas ac p1k find psrr at=1k

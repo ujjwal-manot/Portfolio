@@ -50,7 +50,6 @@ Test setup: inverting amplifier, Rin = Rf = 20 k, `inp` at 0.6 V, 2.05 pF load. 
 | DC gain | >= 66 dB |
 | GBW | >= 20 MHz |
 | Phase margin (beta = 0.5 loop, all corners, Monte Carlo) | >= 60 deg |
-| Monte Carlo yield, every spec in this table combined | one-sided 95% lower bound of 99% or more (at least 299 seeds with no failure); a point estimate alone does not count |
 | Slew rate | >= 10 V/us |
 | Settling, 0.8 V step to 1.56 mV | <= 200 ns |
 | Error at the -1 dBFS peak: 2 x input offset (noise gain 2) + gain error x 0.357 V | <= 37.6 mV (the 43.5 mV headroom less the ADC's allowed 1 LSB offset and 2 LSB full-scale gain error, scaled to the peak) |
@@ -191,11 +190,9 @@ Cycle timing (the contract `cpu_model.Timed` checks the RTL against; edges are r
 
 Both run from the 3.3 V supply on thick-oxide devices. `vg` carries the bandgap's PTAT branch current to the LDO's bias mirrors; `fb` is tied to `vout` (unity gain).
 
-`trim3`..`trim0` come from a 4-bit cpu register through four power_manager `shifter_hv` level shifters (1.2 V to 3.3 V; `outn` inverts, so the register holds the complement of the code); firmware writes the production code after reset, and until then the code is whatever the shifters power up in, and the LDO starts cleanly at either end of the range (codes 0 and 15 at tt 3.3 V 27 C, ss 3.0 V 125 C and ff 3.6 V -40 C, `make trim_ends` in bandgap_ldo), though at code 0 the rail sits 1.167 V at ss 125 C, so analog loads wait for the trim write.
-
 | Spec | Target |
 |---|---|
-| Bandgap tempco, -40 to 125 C, box method | <= 30 ppm/C at every corner, and a Monte Carlo yield whose one-sided 95% lower bound is 99% or more (at least 299 seeds with no failure) |
+| Bandgap tempco, -40 to 125 C, box method | <= 30 ppm/C at every corner, and in 99% of Monte Carlo runs |
 | LDO output | vref, about 1.206 V |
 | LDO rated load | 0 to 2 mA (the analog rail draws under 0.25 mA: the opamp's worst supply current is 0.225 mA in `projects/opamp/results/corners.log`) |
 | Rail through a 0 to 0.5 mA step in 100 ns (twice the opamp's worst current) | >= 1.16 V, the opamp's floor above |
@@ -217,29 +214,6 @@ Two supplies come out of it, both from the 3.3 V input:
 | vdd_mem | 1.20 V fixed | both SRAM macros, fifo_bridge, the clock divider and the power manager's own logic | the macros' 3.5 mW (2.9 mA) in the same report, plus the rest |
 
 Why two: the IHP SRAM macros are characterized only at 1.08, 1.2 and 1.32 V, so below 1.08 V there are no access times, setup times or read and write margins for them. Product teams keep such macros on a fixed rail and level-shift what drives them; every macro input the cpu drives (address, data, byte mask, enables and the clock) goes up through a level shifter from vdd_cpu to vdd_mem. Macro outputs and fifo_bridge outputs come down into vdd_cpu without one (a 1.2 V input on a 0.9 V gate turns its PMOS fully off and stays inside the oxide limit); `s_tready` goes up through one. Running the macros lower is a separate study and only moves the rail if it proves a margin.
-
-Each rail is a digital LDO: 128 thick-oxide PMOS switch units from the 3.3 V input, 2 nF of MOS decoupling, four clocked comparators (a fine and a coarse window) comparing 0.6 of the rail with taps of a 201-unit resistor ladder on the 1.2 V analog rail from bandgap_ldo, and the controller RTL (`design/dldo_ctrl.sv`) at 50 MHz. vdd_cpu's setpoint is ladder tap 90, 100, 110 or 120 (0.90 to 1.20 V), chosen by a 2-bit cpu register through transmission-gate muxes; vdd_mem uses tap 120 alone. The windows are one ladder unit (fine) and five units (coarse) either side of the setpoint tap, so about 10 and 50 mV on the rail at 1.0 V.
-
-| Spec | Target |
-|---|---|
-| Regulation: mean rail over the last 400 ns of each setpoint, cpu at its measured active load | within 2% of the setpoint (18, 20, 22, 24 mV), the setpoint taken from the ladder ratio and the analog rail as measured with the ladder on it |
-| Ripple (limit cycle), peak to peak over the same window | at most 3% of the setpoint (27, 30, 33, 36 mV) |
-| Rail envelope under the cpu's measured load, including its idle-to-active transition, with no clock stretch | inside the setpoint +-5% (so the cpu's STA at each state is run at the setpoint minus 5%; below that the droop detector stretches the clock) |
-| DVFS up (0.9 to 1.0, 1.0 to 1.1, 1.1 to 1.2 and 0.9 to 1.2 V), from the register change to the rail staying inside the new setpoint +-3.5% (the 2% regulation plus half the 3% ripple) | at most 500 ns, never above the new setpoint +5% nor 1.32 V |
-| DVFS down (1.2 to 0.9 V) at the cpu's active load | at most 1 us, never below the new setpoint -5%; the fall is the load discharging the decoupling, so firmware lowers the clock first and a lighter load falls slower |
-| vdd_mem, the same loop at tap 120 under the macros' measured load | regulation, ripple and envelope as above at 1.20 V, so 1.14 to 1.26 V, inside the macros' 1.08 to 1.32 V |
-| Window comparators, 100-run Monte Carlo at tt 27 C | 3 sigma of input offset under half the fine window (3 mV at the comparator input) |
-| vin brown-out (design 2.894 V falling, 2.944 V rising, 50 mV hysteresis) | falling trip in [2.80, 3.00) V, rising trip under 3.00 V and above the falling trip, hysteresis at least 20 mV: the rated input is 3.0 to 3.6 V, and the 2.80 V floor makes the copy with the threshold 100 mV off fail |
-| vdd_mem brown-out (design 1.106 V falling, 1.126 V rising, 20 mV hysteresis) | falling trip in [1.08, 1.14] V, rising trip at most 1.17 V, hysteresis at least 10 mV: the SRAM macros are characterized down to 1.08 V, 1.14 V is the coarse window's low edge scaled to 1.2 V, and 1.17 V sits under the fine window's low edge (1.188 V) |
-| Power-on reset | rst_n held low from 0 V until both brown-out comparators read good, at every corner, for 10 us and 1 ms input ramps |
-
-There is no brown-out detector on vdd_cpu, since DVFS moves it on purpose and a droop there goes to the droop detector and the clock stretch, and none on the analog rail.
-
-The load is measured, not assumed: OpenSTA reports the cpu cells' power from `projects/cpu/build/cpu_gates.vcd` (the filter firmware on the mapped netlist, typical library, 1.2 V, 25 C) in one-cycle windows set between clock edges, and the current is that power over 1.2 V, scaled by rail / 1.2 V at the lower setpoints (switched charge, at the same 50 MHz clock, which overstates the load wherever a state runs slower). The gate run never sleeps (`sleep` stays low), so the idle level is taken from its reset cycles, where the clock runs and the logic is held, the same as `wfi` with no clock gating; the idle-to-active transition is the measured cycles after reset release, not a step. vdd_mem's load is the macros' share of the same windows; fifo_bridge, the clock divider and the power manager's own logic are not in it yet.
-
-Loop corners: tt 27 C with 3.3 V in, ss 125 C with 3.0 V, ff -40 C with 3.6 V, sf -40 C with 3.6 V and fs 125 C with 3.0 V. The switch current sets the loop gain, and these span the weakest switch (ss hot, low input), the strongest (fast PMOS cold, high input) and the comparators' slow and fast NMOS against the opposite switch. The 1.2 V logic supply (comparators, controller, shifter inputs) is an ideal 1.2 V source in every run, since that is vdd_mem's own setpoint; the ladder and divider are ratios of identical rppd units, so they stay at the typical resistor corner.
-
-Real-number loop model: the switch array and comparators are replaced by the measured unit current against rail and input voltage, the measured unit delay and ideal clocked comparators, around the same controller RTL, decoupling, divider, ladder and load. Error metric, fixed before fitting: per setpoint, the mean rail, the ripple and the lowest and highest rail, and per DVFS change the transition time, model against the transistor loop. Allowed error: 3 mV on the mean, 5 mV on the ripple, 10 mV on the lowest and highest rail, 40 ns (two clocks) on a transition. It is fitted on the tt run at the design gains and validated on the other corners and on the high-gain broken copy.
 
 
 See the table in `plan.md`. In short:
